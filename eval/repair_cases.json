@@ -1,0 +1,122 @@
+[
+  {
+    "id": "repair_001",
+    "question": "以 2026-09-12 为今天，不同用户等级的退款金额分别是多少？",
+    "fault_type": "wrong_column",
+    "faulty_sql": "SELECT product_title, SUM(item_amount) FROM order_items GROUP BY product_title"
+  },
+  {
+    "id": "repair_002",
+    "question": "以 2026-09-12 为今天，最近三个月退款率最高的商品有哪些？",
+    "fault_type": "wrong_table",
+    "faulty_sql": "SELECT * FROM order_detail LIMIT 5"
+  },
+  {
+    "id": "repair_003",
+    "question": "以 2026-09-12 为今天，各城市销售额排名前十？",
+    "fault_type": "wrong_join",
+    "faulty_sql": "SELECT u.user_level, SUM(r.refund_amount) FROM users u JOIN refunds r ON u.user_id=r.order_id GROUP BY u.user_level"
+  },
+  {
+    "id": "repair_004",
+    "question": "以 2026-09-12 为今天，过去六个月每月销售额趋势怎么样？",
+    "fault_type": "syntax",
+    "faulty_sql": "SELEC product_name FROM products LIMIT 5"
+  },
+  {
+    "id": "repair_005",
+    "question": "以 2026-09-12 为今天，不同用户等级的退款金额分别是多少？",
+    "fault_type": "ambiguous",
+    "faulty_sql": "SELECT order_id, SUM(refund_amount) FROM orders JOIN refunds ON orders.order_id=refunds.order_id GROUP BY order_id"
+  },
+  {
+    "id": "repair_006",
+    "question": "以 2026-09-12 为今天，最近三个月退款率最高的商品有哪些？",
+    "fault_type": "wrong_column",
+    "faulty_sql": "SELECT product_title, SUM(item_amount) FROM order_items GROUP BY product_title"
+  },
+  {
+    "id": "repair_007",
+    "question": "以 2026-09-12 为今天，各城市销售额排名前十？",
+    "fault_type": "wrong_table",
+    "faulty_sql": "SELECT * FROM order_detail LIMIT 5"
+  },
+  {
+    "id": "repair_008",
+    "question": "以 2026-09-12 为今天，过去六个月每月销售额趋势怎么样？",
+    "fault_type": "wrong_join",
+    "faulty_sql": "SELECT u.user_level, SUM(r.refund_amount) FROM users u JOIN refunds r ON u.user_id=r.order_id GROUP BY u.user_level"
+  },
+  {
+    "id": "repair_009",
+    "question": "以 2026-09-12 为今天，不同用户等级的退款金额分别是多少？",
+    "fault_type": "syntax",
+    "faulty_sql": "SELEC product_name FROM products LIMIT 5"
+  },
+  {
+    "id": "repair_010",
+    "question": "以 2026-09-12 为今天，最近三个月退款率最高的商品有哪些？",
+    "fault_type": "ambiguous",
+    "faulty_sql": "SELECT order_id, SUM(refund_amount) FROM orders JOIN refunds ON orders.order_id=refunds.order_id GROUP BY order_id"
+  },
+  {
+    "id": "repair_011",
+    "question": "以 2026-09-12 为今天，各城市销售额排名前十？",
+    "fault_type": "wrong_column",
+    "faulty_sql": "SELECT product_title, SUM(item_amount) FROM order_items GROUP BY product_title"
+  },
+  {
+    "id": "repair_012",
+    "question": "以 2026-09-12 为今天，过去六个月每月销售额趋势怎么样？",
+    "fault_type": "wrong_table",
+    "faulty_sql": "SELECT * FROM order_detail LIMIT 5"
+  },
+  {
+    "id": "repair_013",
+    "question": "以 2026-09-12 为今天，不同用户等级的退款金额分别是多少？",
+    "fault_type": "wrong_join",
+    "faulty_sql": "SELECT u.user_level, SUM(r.refund_amount) FROM users u JOIN refunds r ON u.user_id=r.order_id GROUP BY u.user_level"
+  },
+  {
+    "id": "repair_014",
+    "question": "以 2026-09-12 为今天，最近三个月退款率最高的商品有哪些？",
+    "fault_type": "syntax",
+    "faulty_sql": "SELEC product_name FROM products LIMIT 5"
+  },
+  {
+    "id": "repair_015",
+    "question": "以 2026-09-12 为今天，各城市销售额排名前十？",
+    "fault_type": "ambiguous",
+    "faulty_sql": "SELECT order_id, SUM(refund_amount) FROM orders JOIN refunds ON orders.order_id=refunds.order_id GROUP BY order_id"
+  },
+  {
+    "id": "repair_016",
+    "question": "以 2026-09-12 为今天，过去六个月每月销售额趋势怎么样？",
+    "fault_type": "wrong_column",
+    "faulty_sql": "SELECT product_title, SUM(item_amount) FROM order_items GROUP BY product_title"
+  },
+  {
+    "id": "repair_017",
+    "question": "以 2026-09-12 为今天，不同用户等级的退款金额分别是多少？",
+    "fault_type": "wrong_table",
+    "faulty_sql": "SELECT * FROM order_detail LIMIT 5"
+  },
+  {
+    "id": "repair_018",
+    "question": "以 2026-09-12 为今天，最近三个月退款率最高的商品有哪些？",
+    "fault_type": "wrong_join",
+    "faulty_sql": "SELECT u.user_level, SUM(r.refund_amount) FROM users u JOIN refunds r ON u.user_id=r.order_id GROUP BY u.user_level"
+  },
+  {
+    "id": "repair_019",
+    "question": "以 2026-09-12 为今天，各城市销售额排名前十？",
+    "fault_type": "syntax",
+    "faulty_sql": "SELEC product_name FROM products LIMIT 5"
+  },
+  {
+    "id": "repair_020",
+    "question": "以 2026-09-12 为今天，过去六个月每月销售额趋势怎么样？",
+    "fault_type": "ambiguous",
+    "faulty_sql": "SELECT order_id, SUM(refund_amount) FROM orders JOIN refunds ON orders.order_id=refunds.order_id GROUP BY order_id"
+  }
+]

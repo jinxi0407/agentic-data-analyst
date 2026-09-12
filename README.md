@@ -1,200 +1,252 @@
-# NL2SQL — 自然语言问数助手
+# Agentic Data Analyst
 
-基于 LangGraph + DashScope + ZhipuAI 实现的自然语言转 SQL 查询系统。用户用中文提问，系统自动匹配相关表结构、生成 SQL 并执行返回结果。
+企业智能数据分析 Agent，用中文自然语言提问，系统自动选择分析 Skill、检索相关 Schema、生成安全 MySQL SQL、执行查询、用 Pandas 做确定性分析，并返回业务解释。
 
----
+Based on / adapted from: `woshixiaojunle/NL2SQL-Demo`.
 
-## 功能特性
+本项目保留原仓库 License 和必要 attribution。原始项目的核心思路是：把表结构元数据写入 `core_table` / `core_field`，用 DashScope embedding 做 schema retrieval，再用 LangGraph 编排 NL2SQL 和 retry。本项目在此基础上升级为独立的本地演示项目。
 
-- 自然语言 → SQL 全自动转换
-- 向量相似度匹配表结构，无需手动指定表名
-- SQL 执行失败自动重试（最多 2 次），错误信息反馈给 LLM 自动修正
-- 多轮对话支持，基于 LangGraph MemorySaver 保存会话上下文
-- 未匹配到相关表时提示用户重新描述，不中断会话
+## 项目边界
 
----
+- 当前项目目录：`/Users/jinxi/Documents/agentic-data-analyst`
+- 独立 MySQL：`127.0.0.1:3307 -> Docker MySQL:3306`
+- 独立 database：`agentic_data_analyst`
+- 独立 container：`agentic-data-analyst-mysql`
+- 独立 volume：`agentic_data_analyst_mysql_data`
+- 独立 network：`agentic_data_analyst_net`
+- FastAPI：`http://127.0.0.1:8002`
+- Streamlit UI：`http://localhost:8502`
+- 不使用 Redis、Milvus、Qdrant、Elasticsearch、Neo4j、MCP、A2A、Multi-Agent。
 
-## 技术栈
+## 系统架构
 
-| 组件 | 选型 |
-|------|------|
-| Embedding | DashScope `qwen3-vl-embedding` |
-| LLM | ZhipuAI `glm-4` |
-| 向量相似度 | NumPy 余弦相似度（Python 侧计算） |
-| 数据库 | PostgreSQL + psycopg2 连接池 |
-| 流程编排 | LangGraph `StateGraph` + `MemorySaver` |
-
----
-
-## 项目结构
-
-```
-nl2sql/
-├── 初始化表.sql              # 建表 DDL 及测试数据
-├── db_connection.py          # PostgreSQL 连接池管理
-├── models.py                 # 数据库实体类
-├── repository.py             # 常用查询方法
-├── init_table_embbeding.py   # 表结构向量化初始化（一次性运行）
-├── langGraph_sql_agent.py    # NL2SQL 主流程（LangGraph）
-└── README.md
+```mermaid
+flowchart TD
+    U["User Chinese Question"] --> R["Skill Router"]
+    R --> S["Schema Retrieval"]
+    S --> G["Qwen SQL Generation"]
+    G --> GR["SQL Guardrail"]
+    GR --> V["SQL Validation"]
+    V --> X["MySQL Execution"]
+    X -->|Success| P["Pandas Analysis"]
+    P --> F["Qwen Final Answer"]
+    X -->|Error| RP["SQL Repair"]
+    GR -->|Blocked| RP
+    RP --> GR
 ```
 
----
+## Agent Workflow
 
-## 快速开始
+1. 用户输入中文问题。
+2. `Skill Router` 根据问题选择 `sales_analysis`、`refund_analysis` 或 `trend_analysis`。
+3. 系统读取对应 `skills/*/SKILL.md`，把 Skill 规则放入 SQL prompt。
+4. `Schema Retrieval` 将问题向量和表/字段描述向量做余弦相似度，只给 LLM 相关 schema。
+5. Qwen / DashScope 生成 MySQL SQL。
+6. `sqlglot` 做 deterministic Guardrail，只允许 `SELECT` 或 `WITH ... SELECT`。
+7. 自动补充或收紧 `LIMIT`，最多返回 `SQL_MAX_ROWS`。
+8. MySQL 执行 SQL，失败后把错误交给 Qwen repair，最多 `MAX_RETRY=2`。
+9. Pandas 对返回结果做确定性统计。
+10. Qwen 只负责解释结果，不凭空计算数字。
 
-### 1. 安装依赖
+## Skills
+
+```text
+skills/
+├── sales_analysis/SKILL.md
+├── refund_analysis/SKILL.md
+└── trend_analysis/SKILL.md
+```
+
+Skill 不是简单标签。系统会真正读取 `SKILL.md`，并把其中的分析约束加入 SQL 生成 prompt。
+
+## Guardrail
+
+Guardrail 位于 `app/tools/guardrail.py`：
+
+- 只允许单条 SQL。
+- 只允许 `SELECT` 或 `WITH ... SELECT`。
+- 禁止 `INSERT / UPDATE / DELETE / DROP / ALTER / TRUNCATE / CREATE / GRANT / REVOKE` 等危险操作。
+- 自动添加或收紧 `LIMIT`。
+- 使用 `sqlglot` 解析，不依赖 LLM 自我判断。
+- 数据库用户后续会被脚本收紧为只读权限，作为第二层保护。
+
+## Docker
+
+启动独立 MySQL：
 
 ```bash
-pip install langgraph langchain-community langchain-core numpy psycopg2-binary dashscope
+docker compose up -d mysql
 ```
 
-### 2. 初始化数据库
-
-在 PostgreSQL 中执行建表脚本：
+验证：
 
 ```bash
-psql -U root -d demo01 -f nl2sql/初始化表.sql
+docker exec agentic-data-analyst-mysql mysql -uroot -p -e "SELECT VERSION(); SELECT DATABASE();"
 ```
 
-数据库连接配置在 `db_connection.py` 中修改：
+不要对其他项目执行 `docker stop/rm/down/prune`。
 
-```python
-POSTGRES_SERVER = "localhost"
-POSTGRES_PORT   = 5432
-POSTGRES_DB     = "demo01"
-POSTGRES_USER   = "root"
-POSTGRES_PASSWORD = "Password123@pg"
+## 本地启动
+
+1. 填写 `.env`：
+
+```makefile
+DASHSCOPE_API_KEY=
+QWEN_CHAT_MODEL=
+QWEN_EMBEDDING_MODEL=
+MYSQL_PASSWORD=
+MYSQL_ROOT_PASSWORD=
 ```
 
-### 3. 配置 API Key
-
-在 `langGraph_sql_agent.py` 中填入你的 Key：
-
-```python
-dashscope.api_key = "your-dashscope-api-key"
-os.environ["ZHIPUAI_API_KEY"] = "your-zhipuai-api-key"
-```
-
-### 4. 初始化表结构向量（首次运行必须）
-
-将 `orders`、`order_items` 两张表的结构和注释向量化，写入 `core_table` / `core_field`：
+2. 安装依赖：
 
 ```bash
-python nl2sql/init_table_embbeding.py
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
 ```
 
-输出示例：
-```
->>> 处理表: orders
-[core_table] 插入: orders  id=1
-  [core_field] 插入: order_id
-  [core_field] 插入: customer_name
-  ...
-
->>> 处理表: order_items
-[core_table] 插入: order_items  id=2
-  ...
-
-初始化完成
-```
-
-### 5. 启动问数助手
+3. 启动 MySQL 并初始化数据：
 
 ```bash
-python nl2sql/langGraph_sql_agent.py
+docker compose up -d mysql
+python scripts/init_database.py
+python data/seed_data.py
+python scripts/init_schema_embeddings.py
+python scripts/set_readonly_user.py
 ```
 
-```
-============================================================
-NL2SQL 问数助手（输入 q 退出）
-============================================================
+4. 启动 API：
 
-请输入问题: 查询10月份所有已完成的订单
+```bash
+uvicorn app.main:app --host 127.0.0.1 --port 8002
 ```
 
----
+5. 启动 UI：
 
-## 执行流程
-
-```
-用户提问
-   │
-[1] embed_query       ← 向量化用户问题（DashScope）
-   │
-[2] retrieve_tables   ← 余弦相似度匹配 TopN 表（阈值 0.5）
-   │
-   ├── no_match → 提示用户重新描述（保留会话上下文）
-   │
-[3] build_db_schema   ← 查询 core_field，拼装 CREATE TABLE schema
-   │
-[4] build_prompt      ← 组装 System + Human 消息
-   │
-[5] generate_sql      ← 调用 glm-4 生成 SQL
-   │
-[6] execute_sql       ← 执行 SQL，失败自动重试（≤2次）
-   │    └── 出错 → 带错误信息回到 build_prompt 让 LLM 修正
-   │
-[7] format_result     ← 格式化输出表格结果
+```bash
+streamlit run ui/app.py --server.port 8502 --server.address 127.0.0.1
 ```
 
----
+或使用脚本：
 
-## 元数据表说明
-
-向量初始化后，表结构信息存储在两张元数据表中：
-
-**core_table** — 表级元数据
-
-| 字段 | 说明 |
-|------|------|
-| table_name | 表名 |
-| table_comment | 原始表注释 |
-| custom_comment | 自定义描述（可手动修改以优化匹配效果） |
-| embedding | `custom_comment` 的向量值（text 存储） |
-| checked | 是否参与匹配，默认 true |
-
-**core_field** — 字段级元数据
-
-| 字段 | 说明 |
-|------|------|
-| table_id | 关联 core_table.id |
-| field_name | 字段名 |
-| field_type | 字段类型 |
-| field_comment | 原始字段注释 |
-| custom_comment | 自定义描述（会出现在 schema 中供 LLM 理解） |
-| checked | 是否暴露给 LLM，默认 true |
-
-> 修改 `custom_comment` 可以优化 LLM 对字段含义的理解，无需重新向量化字段（只有表级 `custom_comment` 影响向量匹配）。
-
----
-
-## 关键配置
-
-在 `langGraph_sql_agent.py` 顶部可调整：
-
-```python
-TOP_N         = 3    # 最多匹配几张表
-SIM_THRESHOLD = 0.5  # 余弦相似度阈值，低于此值视为无匹配
-MAX_RETRY     = 2    # SQL 执行失败最大重试次数
+```bash
+bash scripts/start_local.sh
 ```
 
----
+## API
 
-## 示例问题
-
-```
-查询10月份所有已完成的订单
-统计每个客户的订单总金额
-查询购买了手机的订单明细
-本月销售额最高的商品是什么
-查询还未支付的订单列表
+```http
+GET /health
+POST /api/query
 ```
 
----
+请求示例：
 
-## 扩展建议
+```json
+{
+  "question": "最近三个月退款率最高的5个商品是什么？"
+}
+```
 
-- **pgvector**：表数量增多后，将 `embedding` 字段迁移为 `vector` 类型，使用 `<=>` 算子在数据库侧计算相似度，性能更好
-- **Web UI**：在 `run_repl` 外层包一层 FastAPI 或 Streamlit，即可变成 Web 服务
-- **SQL 审计**：在 `execute_sql` 节点前加 `interrupt_before`，让用户确认 SQL 后再执行
+响应包含：
+
+- `skill`
+- `matched_tables`
+- `matched_columns`
+- `sql`
+- `retry_count`
+- `result`
+- `analysis`
+- `latency_ms`
+- `trace`
+
+## Evaluation
+
+Golden Questions 位于 `eval/cases.json`，覆盖 simple、filtering、aggregation、Top-K、time range、JOIN、complex conditions、trend、refund analysis。
+
+运行：
+
+```bash
+python eval/run_eval.py
+```
+
+评估会真实统计：
+
+- Execution Accuracy
+- SQL Execution Rate
+- Repair Success Rate
+- Average Retry
+- Average Latency
+
+如果 API Key、网络或数据库未准备好，评估会失败并记录真实错误，不伪造数字。
+
+## Final Benchmark - Agent v1 Strong Baseline
+
+最终冻结候选评估使用 `eval/final_benchmark.py`，基于固定参考日期 `2026-09-12` 和 seeded MySQL reference SQL 生成 ground truth。
+
+数据规模：
+
+```json
+{
+  "users": 3000,
+  "products": 800,
+  "orders": 12000,
+  "order_items": 27523,
+  "refunds": 3080
+}
+```
+
+评估集：
+
+- Main Set: 240
+- Real-user Paraphrase Set: 40
+- Repair Challenge: 20
+- Safety Set: 30
+
+核心指标：
+
+| Metric | Baseline | Agent |
+|---|---:|---:|
+| Execution Accuracy | 0.1571 | 0.5000 |
+| SQL Execution Rate | 0.9750 | 0.9786 |
+| Average Retry | 0.00 | 0.04 |
+| Average Latency ms | 3742.28 | 7465.85 |
+
+补充指标：
+
+- Schema Retrieval Recall@K: `1.0000`
+- Repair Success Rate: `0.8000`
+- Guardrail Block Rate: `1.0000`
+- Guardrail False Positive Rate: `0.0000`
+- Guardrail False Negative Rate: `0.0000`
+
+详细报告：
+
+- `FINAL_EVALUATION.md`
+- `docs/AGENT_V1_EVALUATION.md`
+- `docs/RESUME_METRICS.md`
+- `eval/final_report.json`
+
+## Demo Questions
+
+```text
+最近30天销售额最高的5个商品是什么？
+最近三个月退款率最高的商品有哪些？
+过去六个月每月销售额趋势怎么样？
+消费金额最高的10位客户是谁？
+```
+
+## 旧文件说明
+
+这些文件来自原始 NL2SQL-Demo，保留作为学习和迁移对照：
+
+- `langGraph_sql_agent.py`
+- `init_table_embbeding.py`
+- `db_connection.py`
+- `repository.py`
+- `models.py`
+- `初始化表.sql`
+- `执行步骤.md`
+
+新项目运行入口使用 `app/`、`data/`、`skills/`、`eval/`、`ui/` 和 `docker-compose.yml`。

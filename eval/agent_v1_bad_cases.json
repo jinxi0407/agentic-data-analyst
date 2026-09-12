@@ -1,0 +1,3943 @@
+[
+  {
+    "id": "main_047",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，购买数量最多的10个商品是什么？",
+    "category": "top_k_ranking",
+    "difficulty": "easy",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "order_items",
+      "products"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT p.product_name FROM order_items AS oi JOIN products AS p ON oi.product_id = p.product_id JOIN orders AS o ON oi.order_id = o.order_id WHERE o.order_status IN ('paid', 'completed', 'shipped') GROUP BY p.product_id, p.product_name ORDER BY SUM(oi.quantity) DESC LIMIT 10",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 7061,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('北辰美妆个护入门款商品018', 735.0)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "main_048",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，销售额最高的5个品牌是什么？",
+    "category": "top_k_ranking",
+    "difficulty": "easy",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "products",
+      "order_items"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT p.brand, ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM order_items AS oi JOIN orders AS o ON oi.order_id = o.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') GROUP BY p.brand ORDER BY sales_amount DESC LIMIT 5",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 6601,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('优选', 5710962.51)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "main_049",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，退款金额最高的10笔订单是什么？",
+    "category": "top_k_ranking",
+    "difficulty": "easy",
+    "selected_skill": "refund_analysis",
+    "expected_tables": [
+      "refunds",
+      "orders"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT r.refund_id, r.refund_no, r.order_id, r.refund_amount, r.refund_reason, r.refund_status, r.refund_datetime FROM refunds AS r WHERE r.refund_status = 'approved' ORDER BY r.refund_amount DESC LIMIT 10",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 11122,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('ADA20250713005641', 15730.55)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "main_052",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，购买数量最多的10个商品是什么？",
+    "category": "top_k_ranking",
+    "difficulty": "easy",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "order_items",
+      "products"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT p.product_name FROM order_items AS oi JOIN products AS p ON oi.product_id = p.product_id JOIN orders AS o ON oi.order_id = o.order_id WHERE o.order_status IN ('paid', 'completed', 'shipped') GROUP BY p.product_id, p.product_name ORDER BY SUM(oi.quantity) DESC LIMIT 10",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 6334,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('北辰美妆个护入门款商品018', 735.0)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "main_053",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，销售额最高的5个品牌是什么？",
+    "category": "top_k_ranking",
+    "difficulty": "easy",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "products",
+      "order_items"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT p.brand, ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM order_items AS oi JOIN orders AS o ON oi.order_id = o.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') GROUP BY p.brand ORDER BY sales_amount DESC LIMIT 5",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 6485,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('优选', 5710962.51)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "main_054",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，退款金额最高的10笔订单是什么？",
+    "category": "top_k_ranking",
+    "difficulty": "easy",
+    "selected_skill": "refund_analysis",
+    "expected_tables": [
+      "refunds",
+      "orders"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT r.refund_id, r.order_id, r.refund_no, r.refund_amount, r.refund_reason, r.refund_status, r.refund_date FROM refunds AS r WHERE r.refund_status = 'approved' ORDER BY r.refund_amount DESC LIMIT 10",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 7540,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('ADA20250713005641', 15730.55)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "main_057",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，购买数量最多的10个商品是什么？",
+    "category": "top_k_ranking",
+    "difficulty": "easy",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "order_items",
+      "products"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT p.product_name, SUM(oi.quantity) AS total_quantity FROM order_items AS oi JOIN orders AS o ON oi.order_id = o.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') GROUP BY p.product_id, p.product_name ORDER BY total_quantity DESC LIMIT 10",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 7442,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('北辰美妆个护入门款商品018', 735.0)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "main_058",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，销售额最高的5个品牌是什么？",
+    "category": "top_k_ranking",
+    "difficulty": "easy",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "products",
+      "order_items"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT p.brand, ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM order_items AS oi JOIN orders AS o ON oi.order_id = o.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') GROUP BY p.brand ORDER BY sales_amount DESC LIMIT 5",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 6360,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('优选', 5710962.51)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "main_059",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，退款金额最高的10笔订单是什么？",
+    "category": "top_k_ranking",
+    "difficulty": "easy",
+    "selected_skill": "refund_analysis",
+    "expected_tables": [
+      "refunds",
+      "orders"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT r.refund_id, r.order_id, r.refund_no, r.refund_amount, r.refund_reason, r.refund_status, r.refund_date FROM refunds AS r WHERE r.refund_status = 'approved' ORDER BY r.refund_amount DESC LIMIT 10",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 6968,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('ADA20250713005641', 15730.55)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "main_062",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，购买数量最多的10个商品是什么？",
+    "category": "top_k_ranking",
+    "difficulty": "medium",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "order_items",
+      "products"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT p.product_name FROM order_items AS oi JOIN products AS p ON oi.product_id = p.product_id JOIN orders AS o ON oi.order_id = o.order_id WHERE o.order_status IN ('paid', 'completed', 'shipped') GROUP BY p.product_id, p.product_name ORDER BY SUM(oi.quantity) DESC LIMIT 10",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 7488,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('北辰美妆个护入门款商品018', 735.0)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "main_063",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，销售额最高的5个品牌是什么？",
+    "category": "top_k_ranking",
+    "difficulty": "medium",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "products",
+      "order_items"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT p.brand, ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM order_items AS oi JOIN orders AS o ON oi.order_id = o.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') GROUP BY p.brand ORDER BY sales_amount DESC LIMIT 5",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 6233,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('优选', 5710962.51)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "main_064",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，退款金额最高的10笔订单是什么？",
+    "category": "top_k_ranking",
+    "difficulty": "medium",
+    "selected_skill": "refund_analysis",
+    "expected_tables": [
+      "refunds",
+      "orders"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT r.refund_id, r.order_id, r.refund_no, r.refund_amount, r.refund_reason, r.refund_status, r.refund_date FROM refunds AS r WHERE r.refund_status = 'approved' ORDER BY r.refund_amount DESC LIMIT 10",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 7669,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('ADA20250713005641', 15730.55)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "main_066",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，最近30天销售额最高的5个商品是什么？",
+    "category": "top_k_ranking",
+    "difficulty": "medium",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "orders",
+      "order_items",
+      "products"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT p.product_name FROM order_items AS oi JOIN orders AS o ON oi.order_id = o.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_date >= DATE_SUB('2026-09-12', INTERVAL '30' DAY) AND o.order_status IN ('paid', 'completed', 'shipped') GROUP BY p.product_id, p.product_name ORDER BY ROUND(SUM(oi.item_amount), 2) DESC LIMIT 5",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 7712,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('优选家用电器入门款商品010', 160468.11)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "main_067",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，购买数量最多的10个商品是什么？",
+    "category": "top_k_ranking",
+    "difficulty": "medium",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "order_items",
+      "products"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT p.product_name FROM order_items AS oi JOIN products AS p ON oi.product_id = p.product_id JOIN orders AS o ON oi.order_id = o.order_id WHERE o.order_status IN ('paid', 'completed', 'shipped') GROUP BY p.product_id, p.product_name ORDER BY SUM(oi.quantity) DESC LIMIT 10",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 6619,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('北辰美妆个护入门款商品018', 735.0)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "main_068",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，销售额最高的5个品牌是什么？",
+    "category": "top_k_ranking",
+    "difficulty": "medium",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "products",
+      "order_items"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT p.brand, ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM order_items AS oi JOIN orders AS o ON oi.order_id = o.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') GROUP BY p.brand ORDER BY sales_amount DESC LIMIT 5",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 6530,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('优选', 5710962.51)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "main_069",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，退款金额最高的10笔订单是什么？",
+    "category": "top_k_ranking",
+    "difficulty": "medium",
+    "selected_skill": "refund_analysis",
+    "expected_tables": [
+      "refunds",
+      "orders"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT r.refund_id, r.order_id, r.refund_no, r.refund_amount, r.refund_reason, r.refund_status, r.refund_date FROM refunds AS r WHERE r.refund_status = 'approved' ORDER BY r.refund_amount DESC LIMIT 10",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 8632,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('ADA20250713005641', 15730.55)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "main_073",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，最近90天订单数是多少？",
+    "category": "time_range",
+    "difficulty": "medium",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "orders"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT COUNT(*) AS order_count FROM orders WHERE orders.order_status IN ('paid', 'completed', 'shipped') AND orders.order_date >= DATE_SUB('2026-09-12', INTERVAL '90' DAY) LIMIT 200",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 3877,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=(2988.0,)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "main_078",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，最近90天订单数是多少？",
+    "category": "time_range",
+    "difficulty": "medium",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "orders"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT COUNT(*) AS order_count FROM orders WHERE orders.order_status IN ('paid', 'completed', 'shipped') AND orders.order_date >= DATE_SUB('2026-09-12', INTERVAL '90' DAY) LIMIT 200",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 4058,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=(2988.0,)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "main_083",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，最近90天订单数是多少？",
+    "category": "time_range",
+    "difficulty": "medium",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "orders"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT COUNT(*) AS order_count FROM orders WHERE orders.order_status IN ('paid', 'completed', 'shipped') AND orders.order_date >= DATE_SUB('2026-09-12', INTERVAL '90' DAY) LIMIT 200",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 3719,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=(2988.0,)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "main_088",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，最近90天订单数是多少？",
+    "category": "time_range",
+    "difficulty": "medium",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "orders"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT COUNT(*) AS order_count FROM orders WHERE orders.order_status IN ('paid', 'completed', 'shipped') AND orders.order_date >= DATE_SUB('2026-09-12', INTERVAL '90' DAY) LIMIT 200",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 3880,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=(2988.0,)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "main_093",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，最近90天订单数是多少？",
+    "category": "time_range",
+    "difficulty": "medium",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "orders"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT COUNT(*) AS order_count FROM orders WHERE orders.order_status IN ('paid', 'completed', 'shipped') AND orders.order_date >= DATE_SUB('2026-09-12', INTERVAL '90' DAY) LIMIT 200",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 3744,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=(2988.0,)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "main_097",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，银卡用户最喜欢购买哪些品类？",
+    "category": "multi_table_join",
+    "difficulty": "medium",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "users",
+      "orders",
+      "order_items",
+      "products"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT p.category, SUM(oi.quantity) AS total_quantity FROM order_items AS oi JOIN orders AS o ON oi.order_id = o.order_id JOIN products AS p ON oi.product_id = p.product_id JOIN users AS u ON o.user_id = u.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.user_level = '银卡' GROUP BY p.category ORDER BY total_quantity DESC LIMIT 200",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 7261,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=7 actual=0",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "main_100",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，退款最多的品类和原因组合是什么？",
+    "category": "multi_table_join",
+    "difficulty": "medium",
+    "selected_skill": "refund_analysis",
+    "expected_tables": [
+      "refunds",
+      "products"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT p.category, r.refund_reason, ROUND(SUM(r.refund_amount), 2) AS refund_amount FROM refunds AS r JOIN products AS p ON r.product_id = p.product_id WHERE r.refund_status = 'approved' GROUP BY p.category, r.refund_reason ORDER BY refund_amount DESC LIMIT 1",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 6398,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=10 actual=1",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "main_102",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，银卡用户最喜欢购买哪些品类？",
+    "category": "multi_table_join",
+    "difficulty": "medium",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "users",
+      "orders",
+      "order_items",
+      "products"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT p.category, SUM(oi.quantity) AS total_quantity FROM order_items AS oi JOIN orders AS o ON oi.order_id = o.order_id JOIN products AS p ON oi.product_id = p.product_id JOIN users AS u ON o.user_id = u.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.user_level = '银卡' GROUP BY p.category ORDER BY total_quantity DESC LIMIT 200",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 7113,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=7 actual=0",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "main_105",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，退款最多的品类和原因组合是什么？",
+    "category": "multi_table_join",
+    "difficulty": "medium",
+    "selected_skill": "refund_analysis",
+    "expected_tables": [
+      "refunds",
+      "products"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "WITH refund_summary AS (SELECT p.category, r.refund_reason, SUM(r.refund_amount) AS total_refund_amount FROM refunds AS r JOIN products AS p ON r.product_id = p.product_id WHERE r.refund_status = 'approved' GROUP BY p.category, r.refund_reason) SELECT category, refund_reason, ROUND(total_refund_amount, 2) AS total_refund_amount FROM refund_summary ORDER BY total_refund_amount DESC LIMIT 1",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 5210,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=10 actual=1",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "main_107",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，银卡用户最喜欢购买哪些品类？",
+    "category": "multi_table_join",
+    "difficulty": "hard",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "users",
+      "orders",
+      "order_items",
+      "products"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "WITH silver_user_orders AS (SELECT o.order_id, o.user_id, oi.product_id, oi.quantity FROM orders AS o INNER JOIN users AS u ON o.user_id = u.user_id INNER JOIN order_items AS oi ON o.order_id = oi.order_id WHERE u.user_level = '银卡' AND o.order_status IN ('paid', 'completed', 'shipped') AND o.order_date <= '2026-09-12'), category_quantity AS (SELECT p.category, SUM(suo.quantity) AS total_quantity FROM silver_user_orders AS suo INNER JOIN products AS p ON suo.product_id = p.product_id GROUP BY p.category) SELECT category FROM category_quantity ORDER BY total_quantity DESC LIMIT 5",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 7240,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=7 actual=0",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "main_110",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，退款最多的品类和原因组合是什么？",
+    "category": "multi_table_join",
+    "difficulty": "hard",
+    "selected_skill": "refund_analysis",
+    "expected_tables": [
+      "refunds",
+      "products"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT p.category, r.refund_reason, ROUND(SUM(r.refund_amount), 2) AS refund_amount FROM refunds AS r JOIN products AS p ON r.product_id = p.product_id WHERE r.refund_status = 'approved' GROUP BY p.category, r.refund_reason ORDER BY refund_amount DESC LIMIT 1",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 4514,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=10 actual=1",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "main_112",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，银卡用户最喜欢购买哪些品类？",
+    "category": "multi_table_join",
+    "difficulty": "medium",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "users",
+      "orders",
+      "order_items",
+      "products"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT p.category, SUM(oi.quantity) AS total_quantity FROM users AS u JOIN orders AS o ON u.user_id = o.user_id JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.user_level = '银卡' GROUP BY p.category ORDER BY total_quantity DESC LIMIT 200",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 4971,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=7 actual=0",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "main_115",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，退款最多的品类和原因组合是什么？",
+    "category": "multi_table_join",
+    "difficulty": "medium",
+    "selected_skill": "refund_analysis",
+    "expected_tables": [
+      "refunds",
+      "products"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT p.category, r.refund_reason, ROUND(SUM(r.refund_amount), 2) AS refund_amount FROM refunds AS r JOIN products AS p ON r.product_id = p.product_id WHERE r.refund_status = 'approved' GROUP BY p.category, r.refund_reason ORDER BY refund_amount DESC LIMIT 1",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 4477,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=10 actual=1",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "main_117",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，银卡用户最喜欢购买哪些品类？",
+    "category": "multi_table_join",
+    "difficulty": "medium",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "users",
+      "orders",
+      "order_items",
+      "products"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT p.category, SUM(oi.quantity) AS total_quantity FROM users AS u JOIN orders AS o ON u.user_id = o.user_id JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.user_level = '银卡' GROUP BY p.category ORDER BY total_quantity DESC LIMIT 200",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 5129,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=7 actual=0",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "main_120",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，退款最多的品类和原因组合是什么？",
+    "category": "multi_table_join",
+    "difficulty": "medium",
+    "selected_skill": "refund_analysis",
+    "expected_tables": [
+      "refunds",
+      "products"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT p.category, r.refund_reason, ROUND(SUM(r.refund_amount), 2) AS refund_amount FROM refunds AS r JOIN products AS p ON r.product_id = p.product_id WHERE r.refund_status = 'approved' GROUP BY p.category, r.refund_reason ORDER BY refund_amount DESC LIMIT 1",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 4616,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=10 actual=1",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "main_122",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，银卡用户最喜欢购买哪些品类？",
+    "category": "multi_table_join",
+    "difficulty": "hard",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "users",
+      "orders",
+      "order_items",
+      "products"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT p.category, SUM(oi.quantity) AS total_quantity FROM users AS u JOIN orders AS o ON u.user_id = o.user_id JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.user_level = '银卡' GROUP BY p.category ORDER BY total_quantity DESC LIMIT 200",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 5445,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=7 actual=0",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "main_125",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，退款最多的品类和原因组合是什么？",
+    "category": "multi_table_join",
+    "difficulty": "hard",
+    "selected_skill": "refund_analysis",
+    "expected_tables": [
+      "refunds",
+      "products"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT p.category, r.refund_reason, ROUND(SUM(r.refund_amount), 2) AS refund_amount FROM refunds AS r JOIN products AS p ON r.product_id = p.product_id WHERE r.refund_status = 'approved' GROUP BY p.category, r.refund_reason ORDER BY refund_amount DESC LIMIT 1",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 5710,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=10 actual=1",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "main_127",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，银卡用户最喜欢购买哪些品类？",
+    "category": "multi_table_join",
+    "difficulty": "medium",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "users",
+      "orders",
+      "order_items",
+      "products"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT p.category, SUM(oi.quantity) AS total_quantity FROM order_items AS oi JOIN orders AS o ON oi.order_id = o.order_id JOIN products AS p ON oi.product_id = p.product_id JOIN users AS u ON o.user_id = u.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.user_level = '银卡' GROUP BY p.category ORDER BY total_quantity DESC LIMIT 200",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 6042,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=7 actual=0",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "main_130",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，退款最多的品类和原因组合是什么？",
+    "category": "multi_table_join",
+    "difficulty": "medium",
+    "selected_skill": "refund_analysis",
+    "expected_tables": [
+      "refunds",
+      "products"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT p.category, r.refund_reason, ROUND(SUM(r.refund_amount), 2) AS refund_amount FROM refunds AS r JOIN products AS p ON r.product_id = p.product_id WHERE r.refund_status = 'approved' GROUP BY p.category, r.refund_reason ORDER BY refund_amount DESC LIMIT 1",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 5509,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=10 actual=1",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "main_132",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，银卡用户最喜欢购买哪些品类？",
+    "category": "multi_table_join",
+    "difficulty": "medium",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "users",
+      "orders",
+      "order_items",
+      "products"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT p.category, SUM(oi.quantity) AS total_quantity FROM users AS u JOIN orders AS o ON u.user_id = o.user_id JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.user_level = '银卡' GROUP BY p.category ORDER BY total_quantity DESC LIMIT 200",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 5664,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=7 actual=0",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "main_135",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，退款最多的品类和原因组合是什么？",
+    "category": "multi_table_join",
+    "difficulty": "medium",
+    "selected_skill": "refund_analysis",
+    "expected_tables": [
+      "refunds",
+      "products"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT p.category, r.refund_reason, ROUND(SUM(r.refund_amount), 2) AS refund_amount FROM refunds AS r JOIN products AS p ON r.product_id = p.product_id WHERE r.refund_status = 'approved' GROUP BY p.category, r.refund_reason ORDER BY refund_amount DESC LIMIT 1",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 4281,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=10 actual=1",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "main_136",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，过去半年销量进入前20但退款率也最高的商品有哪些？",
+    "category": "complex_conditions",
+    "difficulty": "medium",
+    "selected_skill": "refund_analysis",
+    "expected_tables": [
+      "orders",
+      "order_items",
+      "products",
+      "refunds"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "WITH sales AS (SELECT p.product_id, p.product_name, SUM(oi.quantity) AS total_quantity, ROUND(SUM(oi.item_amount), 2) AS total_sales_amount FROM products AS p INNER JOIN order_items AS oi ON p.product_id = oi.product_id INNER JOIN orders AS o ON oi.order_id = o.order_id WHERE o.order_date >= DATE_SUB('2026-09-12', INTERVAL '6' MONTH) AND o.order_status IN ('paid', 'completed', 'shipped') AND p.is_active = 1 GROUP BY p.product_id, p.product_name), refunds_approved AS (SELECT r.product_id, ROUND(SUM(r.refund_amount), 2) AS total_refund_amount FROM refunds AS r INNER JOIN orders AS o ON r.order_id = o.order_id WHERE r.refund_status = 'approved' AND o.order_date >= DATE_SUB('2026-09-12', INTERVAL '6' MONTH) GROUP BY r.product_id), product_refund_rate AS (SELECT s.product_id, s.product_name, s.total_quantity, s.total_sales_amount, COALESCE(ra.total_refund_amount, 0) AS total_refund_amount, ROUND(COALESCE(ra.total_refund_amount, 0) / NULLIF(s.total_sales_amount, 0), 4) AS refund_rate FROM sales AS s LEFT JOIN refunds_approved AS ra ON s.product_id = ra.product_id), top20_by_quantity AS (SELECT product_id FROM sales ORDER BY total_quantity DESC LIMIT 20) SELECT prr.product_name FROM product_refund_rate AS prr INNER JOIN top20_by_quantity AS t20 ON prr.product_id = t20.product_id ORDER BY prr.refund_rate DESC, prr.total_refund_amount DESC LIMIT 20",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 16467,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=10 actual=20",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "main_137",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，最近三个完整自然月中，每位付费用户平均消费金额最低的是哪个月？",
+    "category": "complex_conditions",
+    "difficulty": "hard",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "orders",
+      "users"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "WITH monthly_arppu AS (SELECT DATE_FORMAT(o.order_date, '%Y-%m') AS order_month, ROUND(SUM(o.paid_amount) / COUNT(DISTINCT o.user_id), 2) AS arppu FROM orders AS o WHERE o.order_status IN ('paid', 'completed', 'shipped') AND o.order_date >= '2026-06-01' AND o.order_date < '2026-09-01' GROUP BY DATE_FORMAT(o.order_date, '%Y-%m')) SELECT order_month FROM monthly_arppu ORDER BY arppu ASC LIMIT 1",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 6239,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('2026-07', 2923.39)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "main_139",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，排除取消和未支付后，折扣金额最高的品类是什么？",
+    "category": "complex_conditions",
+    "difficulty": "hard",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "orders",
+      "order_items",
+      "products"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT p.category FROM order_items AS oi JOIN orders AS o ON oi.order_id = o.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') GROUP BY p.category ORDER BY SUM(oi.discount_amount) DESC LIMIT 1",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 3854,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=5 actual=1",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "main_140",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，最近90天高退款且销售额超过均值的商品有哪些？",
+    "category": "complex_conditions",
+    "difficulty": "medium",
+    "selected_skill": "refund_analysis",
+    "expected_tables": [
+      "orders",
+      "order_items",
+      "products",
+      "refunds"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "WITH sales_and_refunds AS (SELECT p.product_id, p.product_name, COALESCE(SUM(oi.item_amount), 0) AS sales_amount, COALESCE(SUM(CASE WHEN r.refund_status = 'approved' THEN r.refund_amount ELSE 0 END), 0) AS refund_amount, COALESCE(SUM(CASE WHEN r.refund_status = 'approved' THEN r.refund_amount ELSE 0 END) / NULLIF(SUM(oi.item_amount), 0), 0) AS refund_rate FROM products AS p LEFT JOIN order_items AS oi ON p.product_id = oi.product_id LEFT JOIN orders AS o ON oi.order_id = o.order_id AND o.order_date >= DATE_SUB('2026-09-12', INTERVAL '90' DAY) AND o.order_status IN ('paid', 'completed', 'shipped') LEFT JOIN refunds AS r ON oi.order_item_id = r.order_item_id AND r.refund_date >= DATE_SUB('2026-09-12', INTERVAL '90' DAY) AND r.refund_status = 'approved' GROUP BY p.product_id, p.product_name), sales_avg AS (SELECT AVG(sales_amount) AS avg_sales_amount FROM sales_and_refunds) SELECT sar.product_name FROM sales_and_refunds AS sar CROSS JOIN sales_avg AS sa WHERE sar.refund_rate > 0.1 AND sar.sales_amount > sa.avg_sales_amount ORDER BY sar.refund_amount DESC, sar.refund_rate DESC LIMIT 200",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 12036,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=10 actual=1",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "main_141",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，过去半年销量进入前20但退款率也最高的商品有哪些？",
+    "category": "complex_conditions",
+    "difficulty": "hard",
+    "selected_skill": "refund_analysis",
+    "expected_tables": [
+      "orders",
+      "order_items",
+      "products",
+      "refunds"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "WITH sales AS (SELECT p.product_id, p.product_name, SUM(oi.quantity) AS total_quantity, SUM(oi.item_amount) AS total_sales_amount FROM products AS p INNER JOIN order_items AS oi ON p.product_id = oi.product_id INNER JOIN orders AS o ON oi.order_id = o.order_id WHERE o.order_date >= DATE_SUB('2026-09-12', INTERVAL '6' MONTH) AND o.order_status IN ('paid', 'completed', 'shipped') AND p.is_active = 1 GROUP BY p.product_id, p.product_name), refunds_approved AS (SELECT r.product_id, SUM(r.refund_amount) AS total_refund_amount FROM refunds AS r INNER JOIN orders AS o ON r.order_id = o.order_id WHERE r.refund_status = 'approved' AND o.order_date >= DATE_SUB('2026-09-12', INTERVAL '6' MONTH) GROUP BY r.product_id), product_refund_rate AS (SELECT s.product_id, s.product_name, s.total_quantity, s.total_sales_amount, COALESCE(ra.total_refund_amount, 0) AS total_refund_amount, ROUND(COALESCE(ra.total_refund_amount, 0) / NULLIF(s.total_sales_amount, 0), 4) AS refund_rate FROM sales AS s LEFT JOIN refunds_approved AS ra ON s.product_id = ra.product_id), top20_by_quantity AS (SELECT product_id FROM sales ORDER BY total_quantity DESC LIMIT 20) SELECT prr.product_name, prr.refund_rate FROM product_refund_rate AS prr INNER JOIN top20_by_quantity AS t20 ON prr.product_id = t20.product_id ORDER BY prr.refund_rate DESC, prr.total_refund_amount DESC LIMIT 20",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 15308,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=10 actual=20",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "main_142",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，最近三个完整自然月中，每位付费用户平均消费金额最低的是哪个月？",
+    "category": "complex_conditions",
+    "difficulty": "medium",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "orders",
+      "users"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "WITH monthly_arppu AS (SELECT DATE_FORMAT(o.order_date, '%Y-%m') AS order_month, ROUND(SUM(o.paid_amount) / COUNT(DISTINCT o.user_id), 2) AS arppu FROM orders AS o WHERE o.order_status IN ('paid', 'completed', 'shipped') AND o.order_date >= '2026-06-01' AND o.order_date < '2026-09-01' GROUP BY DATE_FORMAT(o.order_date, '%Y-%m')) SELECT order_month FROM monthly_arppu ORDER BY arppu ASC LIMIT 1",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 5969,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('2026-07', 2923.39)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "main_144",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，排除取消和未支付后，折扣金额最高的品类是什么？",
+    "category": "complex_conditions",
+    "difficulty": "medium",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "orders",
+      "order_items",
+      "products"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT p.category FROM order_items AS oi JOIN orders AS o ON oi.order_id = o.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') GROUP BY p.category ORDER BY SUM(oi.discount_amount) DESC LIMIT 1",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 3878,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=5 actual=1",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "main_145",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，最近90天高退款且销售额超过均值的商品有哪些？",
+    "category": "complex_conditions",
+    "difficulty": "hard",
+    "selected_skill": "refund_analysis",
+    "expected_tables": [
+      "orders",
+      "order_items",
+      "products",
+      "refunds"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "WITH sales_and_refunds AS (SELECT p.product_id, p.product_name, COALESCE(SUM(oi.item_amount), 0) AS sales_amount, COALESCE(SUM(CASE WHEN r.refund_status = 'approved' THEN r.refund_amount ELSE 0 END), 0) AS approved_refund_amount FROM products AS p LEFT JOIN order_items AS oi ON p.product_id = oi.product_id LEFT JOIN orders AS o ON oi.order_id = o.order_id AND o.order_date >= DATE_SUB('2026-09-12', INTERVAL '90' DAY) AND o.order_status IN ('paid', 'completed', 'shipped') LEFT JOIN refunds AS r ON oi.order_item_id = r.order_item_id AND r.refund_date >= DATE_SUB('2026-09-12', INTERVAL '90' DAY) AND r.refund_status = 'approved' WHERE p.is_active = 1 GROUP BY p.product_id, p.product_name), sales_avg AS (SELECT AVG(sales_amount) AS avg_sales FROM sales_and_refunds) SELECT sar.product_name FROM sales_and_refunds AS sar CROSS JOIN sales_avg AS sa WHERE sar.sales_amount > sa.avg_sales AND sar.approved_refund_amount > 0 ORDER BY sar.approved_refund_amount DESC, sar.sales_amount DESC LIMIT 200",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 15308,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=10 actual=88",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "main_146",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，过去半年销量进入前20但退款率也最高的商品有哪些？",
+    "category": "complex_conditions",
+    "difficulty": "medium",
+    "selected_skill": "refund_analysis",
+    "expected_tables": [
+      "orders",
+      "order_items",
+      "products",
+      "refunds"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "WITH sales AS (SELECT p.product_id, p.product_name, SUM(oi.quantity) AS total_quantity, SUM(oi.item_amount) AS total_sales_amount FROM products AS p INNER JOIN order_items AS oi ON p.product_id = oi.product_id INNER JOIN orders AS o ON oi.order_id = o.order_id WHERE o.order_date >= DATE_SUB('2026-09-12', INTERVAL '6' MONTH) AND o.order_status IN ('paid', 'completed', 'shipped') AND p.is_active = 1 GROUP BY p.product_id, p.product_name), refunds_approved AS (SELECT r.product_id, SUM(r.refund_amount) AS total_refund_amount FROM refunds AS r INNER JOIN orders AS o ON r.order_id = o.order_id WHERE r.refund_status = 'approved' AND o.order_date >= DATE_SUB('2026-09-12', INTERVAL '6' MONTH) GROUP BY r.product_id), product_refund_rate AS (SELECT s.product_id, s.product_name, s.total_quantity, s.total_sales_amount, COALESCE(ra.total_refund_amount, 0) AS total_refund_amount, ROUND(COALESCE(ra.total_refund_amount, 0) / NULLIF(s.total_sales_amount, 0), 4) AS refund_rate FROM sales AS s LEFT JOIN refunds_approved AS ra ON s.product_id = ra.product_id), top20_by_quantity AS (SELECT product_id FROM sales ORDER BY total_quantity DESC LIMIT 20) SELECT prr.product_name, prr.refund_rate FROM product_refund_rate AS prr INNER JOIN top20_by_quantity AS t20 ON prr.product_id = t20.product_id ORDER BY prr.refund_rate DESC, prr.total_refund_amount DESC LIMIT 20",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 14979,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=10 actual=20",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "main_147",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，最近三个完整自然月中，每位付费用户平均消费金额最低的是哪个月？",
+    "category": "complex_conditions",
+    "difficulty": "hard",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "orders",
+      "users"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "WITH monthly_arppu AS (SELECT DATE_FORMAT(o.order_date, '%Y-%m') AS order_month, ROUND(SUM(o.paid_amount) / COUNT(DISTINCT o.user_id), 2) AS arppu FROM orders AS o WHERE o.order_status IN ('paid', 'completed', 'shipped') AND o.order_date >= '2026-06-01' AND o.order_date < '2026-09-01' GROUP BY DATE_FORMAT(o.order_date, '%Y-%m')) SELECT order_month FROM monthly_arppu ORDER BY arppu ASC LIMIT 1",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 6136,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('2026-07', 2923.39)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "main_149",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，排除取消和未支付后，折扣金额最高的品类是什么？",
+    "category": "complex_conditions",
+    "difficulty": "hard",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "orders",
+      "order_items",
+      "products"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT p.category FROM order_items AS oi JOIN orders AS o ON oi.order_id = o.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') GROUP BY p.category ORDER BY SUM(oi.discount_amount) DESC LIMIT 1",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 3858,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=5 actual=1",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "main_150",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，最近90天高退款且销售额超过均值的商品有哪些？",
+    "category": "complex_conditions",
+    "difficulty": "medium",
+    "selected_skill": "refund_analysis",
+    "expected_tables": [
+      "orders",
+      "order_items",
+      "products",
+      "refunds"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "WITH product_sales AS (SELECT p.product_id, p.product_name, ROUND(SUM(oi.item_amount), 2) AS sales_amount, ROUND(COALESCE(SUM(r.refund_amount), 0), 2) AS refund_amount, ROUND(COALESCE(SUM(r.refund_amount), 0) / NULLIF(SUM(oi.item_amount), 0), 4) AS refund_rate FROM products AS p INNER JOIN order_items AS oi ON p.product_id = oi.product_id INNER JOIN orders AS o ON oi.order_id = o.order_id LEFT JOIN refunds AS r ON oi.order_item_id = r.order_item_id AND r.refund_status = 'approved' WHERE o.order_date >= DATE_SUB('2026-09-12', INTERVAL '90' DAY) AND o.order_status IN ('paid', 'completed', 'shipped') AND p.is_active = 1 GROUP BY p.product_id, p.product_name), sales_mean AS (SELECT AVG(sales_amount) AS avg_sales FROM product_sales) SELECT ps.product_name FROM product_sales AS ps CROSS JOIN sales_mean AS sm WHERE ps.refund_rate > 0.15 AND ps.sales_amount > sm.avg_sales ORDER BY ps.refund_rate DESC, ps.refund_amount DESC LIMIT 200",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 12318,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=10 actual=12",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "main_151",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，过去半年销量进入前20但退款率也最高的商品有哪些？",
+    "category": "complex_conditions",
+    "difficulty": "hard",
+    "selected_skill": "refund_analysis",
+    "expected_tables": [
+      "orders",
+      "order_items",
+      "products",
+      "refunds"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "WITH sales AS (SELECT p.product_id, p.product_name, SUM(oi.quantity) AS total_quantity, ROUND(SUM(oi.item_amount), 2) AS total_sales_amount FROM products AS p INNER JOIN order_items AS oi ON p.product_id = oi.product_id INNER JOIN orders AS o ON oi.order_id = o.order_id WHERE o.order_date >= DATE_SUB('2026-09-12', INTERVAL '6' MONTH) AND o.order_status IN ('paid', 'completed', 'shipped') AND p.is_active = 1 GROUP BY p.product_id, p.product_name), refunds_approved AS (SELECT p.product_id, ROUND(SUM(r.refund_amount), 2) AS total_refund_amount FROM products AS p INNER JOIN refunds AS r ON p.product_id = r.product_id INNER JOIN orders AS o ON r.order_id = o.order_id WHERE o.order_date >= DATE_SUB('2026-09-12', INTERVAL '6' MONTH) AND r.refund_status = 'approved' GROUP BY p.product_id), product_metrics AS (SELECT s.product_id, s.product_name, s.total_quantity, s.total_sales_amount, COALESCE(ra.total_refund_amount, 0) AS total_refund_amount, ROUND(COALESCE(ra.total_refund_amount, 0) / NULLIF(s.total_sales_amount, 0), 4) AS refund_rate FROM sales AS s LEFT JOIN refunds_approved AS ra ON s.product_id = ra.product_id), ranked_products AS (SELECT product_name, refund_rate, ROW_NUMBER() OVER (ORDER BY total_quantity DESC) AS quantity_rank, ROW_NUMBER() OVER (ORDER BY refund_rate DESC, total_refund_amount DESC) AS refund_rate_rank FROM product_metrics) SELECT product_name FROM ranked_products WHERE quantity_rank <= 20 ORDER BY refund_rate DESC, product_name LIMIT 20",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 17493,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=10 actual=20",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "main_152",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，最近三个完整自然月中，每位付费用户平均消费金额最低的是哪个月？",
+    "category": "complex_conditions",
+    "difficulty": "medium",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "orders",
+      "users"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "WITH monthly_arppu AS (SELECT DATE_FORMAT(o.order_date, '%Y-%m') AS order_month, ROUND(SUM(o.paid_amount) / COUNT(DISTINCT o.user_id), 2) AS arppu FROM orders AS o WHERE o.order_date >= '2026-06-01' AND o.order_date < '2026-09-01' AND o.order_status IN ('paid', 'completed', 'shipped') GROUP BY DATE_FORMAT(o.order_date, '%Y-%m')) SELECT order_month FROM monthly_arppu ORDER BY arppu ASC LIMIT 1",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 5850,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('2026-07', 2923.39)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "main_154",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，排除取消和未支付后，折扣金额最高的品类是什么？",
+    "category": "complex_conditions",
+    "difficulty": "medium",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "orders",
+      "order_items",
+      "products"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT p.category FROM order_items AS oi JOIN orders AS o ON oi.order_id = o.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') GROUP BY p.category ORDER BY SUM(oi.discount_amount) DESC LIMIT 1",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 3767,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=5 actual=1",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "main_155",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，最近90天高退款且销售额超过均值的商品有哪些？",
+    "category": "complex_conditions",
+    "difficulty": "hard",
+    "selected_skill": "refund_analysis",
+    "expected_tables": [
+      "orders",
+      "order_items",
+      "products",
+      "refunds"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "WITH sales_and_refunds AS (SELECT p.product_id, p.product_name, COALESCE(SUM(oi.item_amount), 0) AS sales_amount, COALESCE(SUM(CASE WHEN r.refund_status = 'approved' THEN r.refund_amount ELSE 0 END), 0) AS approved_refund_amount, COALESCE(SUM(CASE WHEN r.refund_status = 'approved' THEN 1 ELSE 0 END), 0) AS approved_refund_count FROM products AS p LEFT JOIN order_items AS oi ON p.product_id = oi.product_id LEFT JOIN orders AS o ON oi.order_id = o.order_id AND o.order_date >= DATE_SUB('2026-09-12', INTERVAL '90' DAY) AND o.order_status IN ('paid', 'completed', 'shipped') LEFT JOIN refunds AS r ON oi.order_item_id = r.order_item_id AND r.refund_date >= DATE_SUB('2026-09-12', INTERVAL '90' DAY) AND r.refund_status = 'approved' GROUP BY p.product_id, p.product_name), sales_stats AS (SELECT AVG(sales_amount) AS avg_sales_amount FROM sales_and_refunds) SELECT sar.product_name FROM sales_and_refunds AS sar CROSS JOIN sales_stats AS ss WHERE sar.sales_amount > ss.avg_sales_amount AND sar.approved_refund_amount > 0 ORDER BY sar.approved_refund_amount DESC, sar.sales_amount DESC LIMIT 200",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 13498,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=10 actual=88",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "main_156",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，过去半年销量进入前20但退款率也最高的商品有哪些？",
+    "category": "complex_conditions",
+    "difficulty": "medium",
+    "selected_skill": "refund_analysis",
+    "expected_tables": [
+      "orders",
+      "order_items",
+      "products",
+      "refunds"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "WITH sales AS (SELECT p.product_id, p.product_name, SUM(oi.quantity) AS total_quantity, SUM(oi.item_amount) AS total_sales_amount FROM products AS p INNER JOIN order_items AS oi ON p.product_id = oi.product_id INNER JOIN orders AS o ON oi.order_id = o.order_id WHERE o.order_date >= DATE_SUB('2026-09-12', INTERVAL '6' MONTH) AND o.order_status IN ('paid', 'completed', 'shipped') GROUP BY p.product_id, p.product_name), refunds_approved AS (SELECT p.product_id, SUM(r.refund_amount) AS total_refund_amount FROM products AS p INNER JOIN refunds AS r ON p.product_id = r.product_id WHERE r.refund_date >= DATE_SUB('2026-09-12', INTERVAL '6' MONTH) AND r.refund_status = 'approved' GROUP BY p.product_id), product_metrics AS (SELECT s.product_id, s.product_name, s.total_quantity, s.total_sales_amount, COALESCE(ra.total_refund_amount, 0) AS total_refund_amount, ROUND(COALESCE(ra.total_refund_amount, 0) / NULLIF(s.total_sales_amount, 0), 4) AS refund_rate FROM sales AS s LEFT JOIN refunds_approved AS ra ON s.product_id = ra.product_id), ranked_products AS (SELECT product_name, refund_rate, ROW_NUMBER() OVER (ORDER BY total_quantity DESC) AS quantity_rank, ROW_NUMBER() OVER (ORDER BY refund_rate DESC) AS refund_rate_rank FROM product_metrics) SELECT product_name FROM ranked_products WHERE quantity_rank <= 20 ORDER BY refund_rate DESC LIMIT 20",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 14836,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=10 actual=20",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "main_157",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，最近三个完整自然月中，每位付费用户平均消费金额最低的是哪个月？",
+    "category": "complex_conditions",
+    "difficulty": "hard",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "orders",
+      "users"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "WITH monthly_arppu AS (SELECT DATE_FORMAT(o.order_date, '%Y-%m') AS order_month, ROUND(SUM(o.paid_amount) / COUNT(DISTINCT o.user_id), 2) AS arppu FROM orders AS o WHERE o.order_status IN ('paid', 'completed', 'shipped') AND o.order_date >= '2026-06-01' AND o.order_date < '2026-09-01' GROUP BY DATE_FORMAT(o.order_date, '%Y-%m')) SELECT order_month FROM monthly_arppu ORDER BY arppu ASC LIMIT 1",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 6089,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('2026-07', 2923.39)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "main_159",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，排除取消和未支付后，折扣金额最高的品类是什么？",
+    "category": "complex_conditions",
+    "difficulty": "hard",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "orders",
+      "order_items",
+      "products"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT p.category FROM order_items AS oi JOIN orders AS o ON oi.order_id = o.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') GROUP BY p.category ORDER BY SUM(oi.discount_amount) DESC LIMIT 1",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 3509,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=5 actual=1",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "main_160",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，最近90天高退款且销售额超过均值的商品有哪些？",
+    "category": "complex_conditions",
+    "difficulty": "medium",
+    "selected_skill": "refund_analysis",
+    "expected_tables": [
+      "orders",
+      "order_items",
+      "products",
+      "refunds"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "WITH product_sales AS (SELECT p.product_id, p.product_name, ROUND(SUM(oi.item_amount), 2) AS sales_amount, ROUND(COALESCE(SUM(r.refund_amount), 0), 2) AS refund_amount, ROUND(COALESCE(SUM(r.refund_amount), 0) / NULLIF(SUM(oi.item_amount), 0), 4) AS refund_rate FROM products AS p INNER JOIN order_items AS oi ON p.product_id = oi.product_id INNER JOIN orders AS o ON oi.order_id = o.order_id LEFT JOIN refunds AS r ON oi.order_item_id = r.order_item_id AND r.refund_status = 'approved' WHERE o.order_date >= DATE_SUB('2026-09-12', INTERVAL '90' DAY) AND o.order_status IN ('paid', 'completed', 'shipped') AND p.is_active = 1 GROUP BY p.product_id, p.product_name), sales_mean AS (SELECT AVG(sales_amount) AS avg_sales FROM product_sales) SELECT ps.product_name FROM product_sales AS ps CROSS JOIN sales_mean AS sm WHERE ps.refund_rate > 0.1 AND ps.sales_amount > sm.avg_sales ORDER BY ps.refund_rate DESC, ps.refund_amount DESC LIMIT 200",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 12957,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=10 actual=27",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "main_161",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，过去半年销量进入前20但退款率也最高的商品有哪些？",
+    "category": "complex_conditions",
+    "difficulty": "hard",
+    "selected_skill": "refund_analysis",
+    "expected_tables": [
+      "orders",
+      "order_items",
+      "products",
+      "refunds"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "WITH sales AS (SELECT p.product_id, p.product_name, SUM(oi.quantity) AS total_quantity, ROUND(SUM(oi.item_amount), 2) AS total_sales_amount FROM products AS p INNER JOIN order_items AS oi ON p.product_id = oi.product_id INNER JOIN orders AS o ON oi.order_id = o.order_id WHERE o.order_date >= DATE_SUB('2026-09-12', INTERVAL '6' MONTH) AND o.order_status IN ('paid', 'completed', 'shipped') AND p.is_active = 1 GROUP BY p.product_id, p.product_name), refunds_approved AS (SELECT p.product_id, ROUND(SUM(r.refund_amount), 2) AS total_refund_amount FROM products AS p INNER JOIN refunds AS r ON p.product_id = r.product_id INNER JOIN orders AS o ON r.order_id = o.order_id WHERE o.order_date >= DATE_SUB('2026-09-12', INTERVAL '6' MONTH) AND r.refund_status = 'approved' GROUP BY p.product_id), product_metrics AS (SELECT s.product_id, s.product_name, s.total_quantity, s.total_sales_amount, COALESCE(ra.total_refund_amount, 0) AS total_refund_amount, ROUND(COALESCE(ra.total_refund_amount, 0) / NULLIF(s.total_sales_amount, 0), 4) AS refund_rate FROM sales AS s LEFT JOIN refunds_approved AS ra ON s.product_id = ra.product_id), ranked_products AS (SELECT product_name, refund_rate, ROW_NUMBER() OVER (ORDER BY total_quantity DESC) AS quantity_rank, ROW_NUMBER() OVER (ORDER BY refund_rate DESC, total_refund_amount DESC) AS refund_rate_rank FROM product_metrics) SELECT product_name FROM ranked_products WHERE quantity_rank <= 20 ORDER BY refund_rate DESC LIMIT 20",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 16998,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=10 actual=20",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "main_162",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，最近三个完整自然月中，每位付费用户平均消费金额最低的是哪个月？",
+    "category": "complex_conditions",
+    "difficulty": "medium",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "orders",
+      "users"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "WITH monthly_arppu AS (SELECT DATE_FORMAT(o.order_date, '%Y-%m') AS order_month, ROUND(SUM(o.paid_amount) / COUNT(DISTINCT o.user_id), 2) AS arppu FROM orders AS o WHERE o.order_date >= '2026-06-01' AND o.order_date < '2026-09-01' AND o.order_status IN ('paid', 'completed', 'shipped') GROUP BY DATE_FORMAT(o.order_date, '%Y-%m')) SELECT order_month FROM monthly_arppu ORDER BY arppu ASC LIMIT 1",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 7037,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('2026-07', 2923.39)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "main_164",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，排除取消和未支付后，折扣金额最高的品类是什么？",
+    "category": "complex_conditions",
+    "difficulty": "medium",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "orders",
+      "order_items",
+      "products"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT p.category FROM order_items AS oi JOIN orders AS o ON oi.order_id = o.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') GROUP BY p.category ORDER BY SUM(oi.discount_amount) DESC LIMIT 1",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 4645,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=5 actual=1",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "main_165",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，最近90天高退款且销售额超过均值的商品有哪些？",
+    "category": "complex_conditions",
+    "difficulty": "hard",
+    "selected_skill": "refund_analysis",
+    "expected_tables": [
+      "orders",
+      "order_items",
+      "products",
+      "refunds"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "WITH sales_and_refunds AS (SELECT p.product_id, p.product_name, COALESCE(SUM(oi.item_amount), 0) AS sales_amount, COALESCE(SUM(CASE WHEN r.refund_status = 'approved' THEN r.refund_amount ELSE 0 END), 0) AS approved_refund_amount, COALESCE(SUM(CASE WHEN r.refund_status = 'approved' THEN 1 ELSE 0 END), 0) AS approved_refund_count FROM products AS p LEFT JOIN order_items AS oi ON p.product_id = oi.product_id LEFT JOIN orders AS o ON oi.order_id = o.order_id AND o.order_date >= DATE_SUB('2026-09-12', INTERVAL '90' DAY) AND o.order_status IN ('paid', 'completed', 'shipped') LEFT JOIN refunds AS r ON oi.order_item_id = r.order_item_id AND r.refund_date >= DATE_SUB('2026-09-12', INTERVAL '90' DAY) AND r.refund_status = 'approved' WHERE p.is_active = 1 GROUP BY p.product_id, p.product_name), sales_stats AS (SELECT AVG(sales_amount) AS avg_sales_amount FROM sales_and_refunds) SELECT sar.product_name FROM sales_and_refunds AS sar CROSS JOIN sales_stats AS ss WHERE sar.sales_amount > ss.avg_sales_amount AND sar.approved_refund_amount > 0 ORDER BY sar.approved_refund_amount DESC, sar.sales_amount DESC LIMIT 200",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 14529,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=10 actual=88",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "main_166",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，过去半年销量进入前20但退款率也最高的商品有哪些？",
+    "category": "complex_conditions",
+    "difficulty": "medium",
+    "selected_skill": "refund_analysis",
+    "expected_tables": [
+      "orders",
+      "order_items",
+      "products",
+      "refunds"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "WITH sales AS (SELECT p.product_id, p.product_name, SUM(oi.quantity) AS total_quantity, ROUND(SUM(oi.item_amount), 2) AS total_sales_amount FROM products AS p INNER JOIN order_items AS oi ON p.product_id = oi.product_id INNER JOIN orders AS o ON oi.order_id = o.order_id WHERE o.order_date >= DATE_SUB('2026-09-12', INTERVAL '6' MONTH) AND o.order_status IN ('paid', 'completed', 'shipped') AND p.is_active = 1 GROUP BY p.product_id, p.product_name), refunds_approved AS (SELECT r.product_id, ROUND(SUM(r.refund_amount), 2) AS total_refund_amount FROM refunds AS r INNER JOIN orders AS o ON r.order_id = o.order_id WHERE r.refund_status = 'approved' AND o.order_date >= DATE_SUB('2026-09-12', INTERVAL '6' MONTH) GROUP BY r.product_id), product_refund_rate AS (SELECT s.product_id, s.product_name, s.total_quantity, s.total_sales_amount, COALESCE(ra.total_refund_amount, 0) AS total_refund_amount, ROUND(COALESCE(ra.total_refund_amount, 0) / NULLIF(s.total_sales_amount, 0), 4) AS refund_rate FROM sales AS s LEFT JOIN refunds_approved AS ra ON s.product_id = ra.product_id), ranked_products AS (SELECT product_name, total_quantity, refund_rate, ROW_NUMBER() OVER (ORDER BY total_quantity DESC) AS quantity_rank, ROW_NUMBER() OVER (ORDER BY refund_rate DESC, total_refund_amount DESC) AS refund_rate_rank FROM product_refund_rate) SELECT product_name FROM ranked_products WHERE quantity_rank <= 20 ORDER BY refund_rate DESC LIMIT 20",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 15753,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=10 actual=20",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "main_167",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，最近三个完整自然月中，每位付费用户平均消费金额最低的是哪个月？",
+    "category": "complex_conditions",
+    "difficulty": "hard",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "orders",
+      "users"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "WITH monthly_arppu AS (SELECT DATE_FORMAT(o.order_date, '%Y-%m') AS order_month, ROUND(SUM(o.paid_amount) / COUNT(DISTINCT o.user_id), 2) AS arppu FROM orders AS o WHERE o.order_status IN ('paid', 'completed', 'shipped') AND o.order_date >= '2026-06-01' AND o.order_date < '2026-09-01' GROUP BY DATE_FORMAT(o.order_date, '%Y-%m')) SELECT order_month FROM monthly_arppu ORDER BY arppu ASC LIMIT 1",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 6593,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('2026-07', 2923.39)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "main_169",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，排除取消和未支付后，折扣金额最高的品类是什么？",
+    "category": "complex_conditions",
+    "difficulty": "hard",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "orders",
+      "order_items",
+      "products"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT p.category FROM order_items AS oi JOIN orders AS o ON oi.order_id = o.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') GROUP BY p.category ORDER BY SUM(oi.discount_amount) DESC LIMIT 1",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 3538,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=5 actual=1",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "main_170",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，最近90天高退款且销售额超过均值的商品有哪些？",
+    "category": "complex_conditions",
+    "difficulty": "medium",
+    "selected_skill": "refund_analysis",
+    "expected_tables": [
+      "orders",
+      "order_items",
+      "products",
+      "refunds"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "WITH sales_and_refunds AS (SELECT p.product_id, p.product_name, COALESCE(SUM(oi.item_amount), 0) AS sales_amount, COALESCE(SUM(CASE WHEN r.refund_status = 'approved' THEN r.refund_amount ELSE 0 END), 0) AS refund_amount, COALESCE(SUM(CASE WHEN r.refund_status = 'approved' THEN r.refund_amount ELSE 0 END) / NULLIF(SUM(oi.item_amount), 0), 0) AS refund_rate FROM products AS p LEFT JOIN order_items AS oi ON p.product_id = oi.product_id LEFT JOIN orders AS o ON oi.order_id = o.order_id AND o.order_date >= DATE_SUB('2026-09-12', INTERVAL '90' DAY) AND o.order_status IN ('paid', 'completed', 'shipped') LEFT JOIN refunds AS r ON oi.order_item_id = r.order_item_id AND r.refund_date >= DATE_SUB('2026-09-12', INTERVAL '90' DAY) AND r.refund_status = 'approved' GROUP BY p.product_id, p.product_name), sales_avg AS (SELECT AVG(sales_amount) AS avg_sales FROM sales_and_refunds) SELECT sar.product_name FROM sales_and_refunds AS sar CROSS JOIN sales_avg AS sa WHERE sar.sales_amount > sa.avg_sales AND sar.refund_rate > 0.1 ORDER BY sar.refund_rate DESC, sar.refund_amount DESC LIMIT 200",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 11086,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=10 actual=1",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "main_173",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，最近一年每个季度销售额是多少？",
+    "category": "trend_mom_yoy",
+    "difficulty": "medium",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "orders"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT CONCAT(YEAR(orders.order_date), ' Q', QUARTER(orders.order_date)) AS quarter, ROUND(SUM(orders.paid_amount), 2) AS sales_amount FROM orders WHERE orders.order_date >= DATE_SUB('2026-09-12', INTERVAL '12' MONTH) AND orders.order_status IN ('paid', 'completed', 'shipped') GROUP BY YEAR(orders.order_date), QUARTER(orders.order_date) ORDER BY YEAR(orders.order_date), QUARTER(orders.order_date) LIMIT 200",
+    "execution_status": "failed",
+    "result_correct": false,
+    "retry_count": 2,
+    "latency_ms": 9867,
+    "error": "(1055, \"Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'agentic_data_analyst.orders.order_date' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by\")",
+    "failure_reason": "row_count_mismatch expected=6 actual=0",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "main_174",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，最近三个月订单数环比有什么变化？",
+    "category": "trend_mom_yoy",
+    "difficulty": "hard",
+    "selected_skill": "trend_analysis",
+    "expected_tables": [
+      "orders"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "WITH monthly_orders AS (SELECT DATE_FORMAT(orders.order_date, '%Y-%m') AS month, COUNT(*) AS order_count FROM orders WHERE orders.order_date >= DATE_SUB('2026-09-12', INTERVAL '3' MONTH) AND orders.order_status IN ('paid', 'completed', 'shipped') GROUP BY DATE_FORMAT(orders.order_date, '%Y-%m')), monthly_trend AS (SELECT month, order_count, LAG(order_count) OVER (ORDER BY month) AS prev_order_count FROM monthly_orders) SELECT month, order_count, ROUND(COALESCE((order_count - prev_order_count) / NULLIF(prev_order_count, 0), 0), 4) AS AS环比_change FROM monthly_trend ORDER BY month LIMIT 200",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 11633,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('2026-06', 474.0)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "main_175",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，每月VIP用户销售额趋势如何？",
+    "category": "trend_mom_yoy",
+    "difficulty": "medium",
+    "selected_skill": "trend_analysis",
+    "expected_tables": [
+      "users",
+      "orders"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT DATE_FORMAT(o.order_date, '%Y-%m') AS month, ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.is_vip = 1 GROUP BY DATE_FORMAT(o.order_date, '%Y-%m') ORDER BY month ASC LIMIT 200",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 8709,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=9 actual=22",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "main_178",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，最近一年每个季度销售额是多少？",
+    "category": "trend_mom_yoy",
+    "difficulty": "hard",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "orders"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT CONCAT(YEAR(orders.order_date), ' Q', QUARTER(orders.order_date)) AS quarter, ROUND(SUM(orders.paid_amount), 2) AS sales_amount FROM orders WHERE orders.order_status IN ('paid', 'completed', 'shipped') AND orders.order_date >= DATE_SUB('2026-09-12', INTERVAL '12' MONTH) GROUP BY YEAR(orders.order_date), QUARTER(orders.order_date) ORDER BY YEAR(orders.order_date), QUARTER(orders.order_date) LIMIT 200",
+    "execution_status": "failed",
+    "result_correct": false,
+    "retry_count": 2,
+    "latency_ms": 9744,
+    "error": "(1055, \"Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'agentic_data_analyst.orders.order_date' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by\")",
+    "failure_reason": "row_count_mismatch expected=6 actual=0",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "main_179",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，最近三个月订单数环比有什么变化？",
+    "category": "trend_mom_yoy",
+    "difficulty": "medium",
+    "selected_skill": "trend_analysis",
+    "expected_tables": [
+      "orders"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "WITH monthly_orders AS (SELECT DATE_FORMAT(orders.order_date, '%Y-%m') AS month, COUNT(*) AS order_count FROM orders WHERE orders.order_date >= DATE_SUB('2026-09-12', INTERVAL '3' MONTH) AND orders.order_status IN ('paid', 'completed', 'shipped') GROUP BY DATE_FORMAT(orders.order_date, '%Y-%m')), ranked_months AS (SELECT month, order_count, LAG(order_count) OVER (ORDER BY month) AS prev_order_count FROM monthly_orders) SELECT month, order_count, ROUND(COALESCE((order_count - prev_order_count) / NULLIF(prev_order_count, 0), 0), 4) AS AS环比变化 FROM ranked_months ORDER BY month LIMIT 200",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 11114,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('2026-06', 474.0)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "main_180",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，每月VIP用户销售额趋势如何？",
+    "category": "trend_mom_yoy",
+    "difficulty": "hard",
+    "selected_skill": "trend_analysis",
+    "expected_tables": [
+      "users",
+      "orders"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT DATE_FORMAT(o.order_date, '%Y-%m') AS month, ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.is_vip = 1 GROUP BY DATE_FORMAT(o.order_date, '%Y-%m') ORDER BY month ASC LIMIT 200",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 8789,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=9 actual=22",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "main_183",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，最近一年每个季度销售额是多少？",
+    "category": "trend_mom_yoy",
+    "difficulty": "medium",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "orders"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT CONCAT(YEAR(orders.order_date), ' Q', QUARTER(orders.order_date)) AS quarter, ROUND(SUM(orders.paid_amount), 2) AS sales_amount FROM orders WHERE orders.order_status IN ('paid', 'completed', 'shipped') AND orders.order_date >= DATE_SUB('2026-09-12', INTERVAL '12' MONTH) GROUP BY YEAR(orders.order_date), QUARTER(orders.order_date) ORDER BY YEAR(orders.order_date), QUARTER(orders.order_date) LIMIT 200",
+    "execution_status": "failed",
+    "result_correct": false,
+    "retry_count": 2,
+    "latency_ms": 9642,
+    "error": "(1055, \"Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'agentic_data_analyst.orders.order_date' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by\")",
+    "failure_reason": "row_count_mismatch expected=6 actual=0",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "main_184",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，最近三个月订单数环比有什么变化？",
+    "category": "trend_mom_yoy",
+    "difficulty": "hard",
+    "selected_skill": "trend_analysis",
+    "expected_tables": [
+      "orders"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "WITH monthly_orders AS (SELECT DATE_FORMAT(orders.order_date, '%Y-%m') AS month, COUNT(*) AS order_count FROM orders WHERE orders.order_date >= DATE_SUB('2026-09-12', INTERVAL '3' MONTH) AND orders.order_status IN ('paid', 'completed', 'shipped') GROUP BY DATE_FORMAT(orders.order_date, '%Y-%m')), monthly_trend AS (SELECT month, order_count, LAG(order_count) OVER (ORDER BY month) AS prev_order_count, ROUND((order_count - LAG(order_count) OVER (ORDER BY month)) / NULLIF(LAG(order_count) OVER (ORDER BY month), 0), 4) AS AS环比_change_rate FROM monthly_orders) SELECT month, order_count, COALESCE(环比_change_rate, 0) AS AS环比_change_rate FROM monthly_trend ORDER BY month LIMIT 200",
+    "execution_status": "failed",
+    "result_correct": false,
+    "retry_count": 2,
+    "latency_ms": 15951,
+    "error": "(1054, \"Unknown column '环比_change_rate' in 'field list'\")",
+    "failure_reason": "row_count_mismatch expected=6 actual=0",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "main_185",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，每月VIP用户销售额趋势如何？",
+    "category": "trend_mom_yoy",
+    "difficulty": "medium",
+    "selected_skill": "trend_analysis",
+    "expected_tables": [
+      "users",
+      "orders"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT DATE_FORMAT(o.order_date, '%Y-%m') AS month, ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.is_vip = 1 AND o.order_date <= '2026-09-12' GROUP BY DATE_FORMAT(o.order_date, '%Y-%m') ORDER BY month ASC LIMIT 200",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 9064,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=9 actual=20",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "main_188",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，最近一年每个季度销售额是多少？",
+    "category": "trend_mom_yoy",
+    "difficulty": "hard",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "orders"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT CONCAT(YEAR(orders.order_date), ' Q', QUARTER(orders.order_date)) AS quarter, ROUND(SUM(orders.paid_amount), 2) AS sales_amount FROM orders WHERE orders.order_status IN ('paid', 'completed', 'shipped') AND orders.order_date >= DATE_SUB('2026-09-12', INTERVAL '12' MONTH) GROUP BY YEAR(orders.order_date), QUARTER(orders.order_date) ORDER BY YEAR(orders.order_date), QUARTER(orders.order_date) LIMIT 200",
+    "execution_status": "failed",
+    "result_correct": false,
+    "retry_count": 2,
+    "latency_ms": 10152,
+    "error": "(1055, \"Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'agentic_data_analyst.orders.order_date' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by\")",
+    "failure_reason": "row_count_mismatch expected=6 actual=0",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "main_189",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，最近三个月订单数环比有什么变化？",
+    "category": "trend_mom_yoy",
+    "difficulty": "medium",
+    "selected_skill": "trend_analysis",
+    "expected_tables": [
+      "orders"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "WITH monthly_orders AS (SELECT DATE_FORMAT(order_date, '%Y-%m') AS month, COUNT(*) AS order_count FROM orders WHERE order_date >= DATE_SUB('2026-09-12', INTERVAL '3' MONTH) AND order_status IN ('paid', 'completed', 'shipped') GROUP BY DATE_FORMAT(order_date, '%Y-%m')), monthly_trend AS (SELECT month, order_count, LAG(order_count) OVER (ORDER BY month) AS prev_order_count FROM monthly_orders) SELECT month, order_count, ROUND(COALESCE((order_count - prev_order_count) / NULLIF(prev_order_count, 0), 0), 4) AS AS环比_change FROM monthly_trend ORDER BY month LIMIT 200",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 10304,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('2026-06', 474.0)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "main_190",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，每月VIP用户销售额趋势如何？",
+    "category": "trend_mom_yoy",
+    "difficulty": "hard",
+    "selected_skill": "trend_analysis",
+    "expected_tables": [
+      "users",
+      "orders"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT DATE_FORMAT(o.order_date, '%Y-%m') AS month, ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.is_vip = 1 AND o.order_date <= '2026-09-12' GROUP BY DATE_FORMAT(o.order_date, '%Y-%m') ORDER BY month ASC LIMIT 200",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 9378,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=9 actual=20",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "main_193",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，最近一年每个季度销售额是多少？",
+    "category": "trend_mom_yoy",
+    "difficulty": "medium",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "orders"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT CONCAT(YEAR(orders.order_date), ' Q', QUARTER(orders.order_date)) AS quarter, ROUND(SUM(orders.paid_amount), 2) AS sales_amount FROM orders WHERE orders.order_status IN ('paid', 'completed', 'shipped') AND orders.order_date >= DATE_SUB('2026-09-12', INTERVAL '12' MONTH) GROUP BY YEAR(orders.order_date), QUARTER(orders.order_date) ORDER BY YEAR(orders.order_date), QUARTER(orders.order_date) LIMIT 200",
+    "execution_status": "failed",
+    "result_correct": false,
+    "retry_count": 2,
+    "latency_ms": 10167,
+    "error": "(1055, \"Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'agentic_data_analyst.orders.order_date' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by\")",
+    "failure_reason": "row_count_mismatch expected=6 actual=0",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "main_194",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，最近三个月订单数环比有什么变化？",
+    "category": "trend_mom_yoy",
+    "difficulty": "hard",
+    "selected_skill": "trend_analysis",
+    "expected_tables": [
+      "orders"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "WITH monthly_orders AS (SELECT DATE_FORMAT(orders.order_date, '%Y-%m') AS month, COUNT(*) AS order_count FROM orders WHERE orders.order_date >= DATE_SUB('2026-09-12', INTERVAL '3' MONTH) AND orders.order_status IN ('paid', 'completed', 'shipped') GROUP BY DATE_FORMAT(orders.order_date, '%Y-%m')), ranked_months AS (SELECT month, order_count, LAG(order_count) OVER (ORDER BY month) AS prev_order_count FROM monthly_orders) SELECT month, order_count, ROUND(COALESCE((order_count - prev_order_count) / NULLIF(prev_order_count, 0), 0), 4) AS AS环比变化 FROM ranked_months ORDER BY month LIMIT 200",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 10503,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('2026-06', 474.0)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "main_195",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，每月VIP用户销售额趋势如何？",
+    "category": "trend_mom_yoy",
+    "difficulty": "medium",
+    "selected_skill": "trend_analysis",
+    "expected_tables": [
+      "users",
+      "orders"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT DATE_FORMAT(o.order_date, '%Y-%m') AS month, ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.is_vip = 1 AND o.order_date <= '2026-09-12' GROUP BY DATE_FORMAT(o.order_date, '%Y-%m') ORDER BY month ASC LIMIT 200",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 8678,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=9 actual=20",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "main_196",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，最近三个月退款率最高的商品有哪些？",
+    "category": "refund_analysis",
+    "difficulty": "medium",
+    "selected_skill": "refund_analysis",
+    "expected_tables": [
+      "refunds",
+      "products",
+      "order_items"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "WITH product_sales AS (SELECT p.product_id, p.product_name, COALESCE(SUM(oi.item_amount), 0) AS total_sales_amount FROM products AS p LEFT JOIN order_items AS oi ON p.product_id = oi.product_id LEFT JOIN orders AS o ON oi.order_id = o.order_id WHERE o.order_date >= DATE_SUB('2026-09-12', INTERVAL '3' MONTH) AND o.order_status IN ('paid', 'completed', 'shipped') GROUP BY p.product_id, p.product_name), product_refunds AS (SELECT p.product_id, COALESCE(SUM(r.refund_amount), 0) AS total_refund_amount FROM products AS p LEFT JOIN refunds AS r ON p.product_id = r.product_id WHERE r.refund_date >= DATE_SUB('2026-09-12', INTERVAL '3' MONTH) AND r.refund_status = 'approved' GROUP BY p.product_id) SELECT ps.product_name, ROUND(COALESCE(pr.total_refund_amount, 0) / NULLIF(ps.total_sales_amount, 0), 4) AS refund_rate FROM product_sales AS ps LEFT JOIN product_refunds AS pr ON ps.product_id = pr.product_id WHERE ps.total_sales_amount > 0 ORDER BY refund_rate DESC, pr.total_refund_amount DESC LIMIT 10",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 12809,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('星禾美妆个护标准款商品113', 223.82, 343.46, 0.6517)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "main_197",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，退款原因最多的是哪些？",
+    "category": "refund_analysis",
+    "difficulty": "medium",
+    "selected_skill": "refund_analysis",
+    "expected_tables": [
+      "refunds"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT refund_reason, COUNT(*) AS count FROM refunds WHERE refund_status = 'approved' GROUP BY refund_reason ORDER BY count DESC LIMIT 10",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 5108,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('质量问题', 685.0)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "main_201",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，最近三个月退款率最高的商品有哪些？",
+    "category": "refund_analysis",
+    "difficulty": "hard",
+    "selected_skill": "refund_analysis",
+    "expected_tables": [
+      "refunds",
+      "products",
+      "order_items"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "WITH product_sales AS (SELECT p.product_id, p.product_name, COALESCE(SUM(oi.item_amount), 0) AS sales_amount FROM products AS p LEFT JOIN order_items AS oi ON p.product_id = oi.product_id LEFT JOIN orders AS o ON oi.order_id = o.order_id WHERE o.order_date >= DATE_SUB('2026-09-12', INTERVAL '3' MONTH) AND o.order_status IN ('paid', 'completed', 'shipped') GROUP BY p.product_id, p.product_name), product_refunds AS (SELECT p.product_id, COALESCE(SUM(r.refund_amount), 0) AS refund_amount FROM products AS p LEFT JOIN refunds AS r ON p.product_id = r.product_id WHERE r.refund_date >= DATE_SUB('2026-09-12', INTERVAL '3' MONTH) AND r.refund_status = 'approved' GROUP BY p.product_id) SELECT ps.product_name, ROUND(COALESCE(pr.refund_amount, 0) / NULLIF(ps.sales_amount, 0), 4) AS refund_rate FROM product_sales AS ps LEFT JOIN product_refunds AS pr ON ps.product_id = pr.product_id WHERE ps.sales_amount > 0 ORDER BY refund_rate DESC, pr.refund_amount DESC LIMIT 10",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 12038,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('星禾美妆个护标准款商品113', 223.82, 343.46, 0.6517)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "main_202",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，退款原因最多的是哪些？",
+    "category": "refund_analysis",
+    "difficulty": "medium",
+    "selected_skill": "refund_analysis",
+    "expected_tables": [
+      "refunds"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT refund_reason, COUNT(*) AS refund_count FROM refunds WHERE refund_status = 'approved' GROUP BY refund_reason ORDER BY refund_count DESC LIMIT 10",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 5299,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('质量问题', 685.0)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "main_206",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，最近三个月退款率最高的商品有哪些？",
+    "category": "refund_analysis",
+    "difficulty": "hard",
+    "selected_skill": "refund_analysis",
+    "expected_tables": [
+      "refunds",
+      "products",
+      "order_items"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "WITH product_sales AS (SELECT p.product_id, p.product_name, COALESCE(SUM(oi.item_amount), 0) AS sales_amount FROM products AS p LEFT JOIN order_items AS oi ON p.product_id = oi.product_id LEFT JOIN orders AS o ON oi.order_id = o.order_id WHERE o.order_date >= DATE_SUB('2026-09-12', INTERVAL '3' MONTH) AND o.order_status IN ('paid', 'completed', 'shipped') GROUP BY p.product_id, p.product_name), product_refunds AS (SELECT p.product_id, COALESCE(SUM(r.refund_amount), 0) AS refund_amount FROM products AS p LEFT JOIN refunds AS r ON p.product_id = r.product_id LEFT JOIN orders AS o ON r.order_id = o.order_id WHERE r.refund_status = 'approved' AND o.order_date >= DATE_SUB('2026-09-12', INTERVAL '3' MONTH) GROUP BY p.product_id) SELECT ps.product_name, ROUND(COALESCE(pr.refund_amount, 0) / NULLIF(ps.sales_amount, 0), 4) AS refund_rate FROM product_sales AS ps LEFT JOIN product_refunds AS pr ON ps.product_id = pr.product_id WHERE ps.sales_amount > 0 ORDER BY refund_rate DESC, pr.refund_amount DESC LIMIT 10",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 12066,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('星禾美妆个护标准款商品113', 223.82, 343.46, 0.6517)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "main_207",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，退款原因最多的是哪些？",
+    "category": "refund_analysis",
+    "difficulty": "hard",
+    "selected_skill": "refund_analysis",
+    "expected_tables": [
+      "refunds"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT refund_reason, COUNT(*) AS count FROM refunds WHERE refund_status = 'approved' GROUP BY refund_reason ORDER BY count DESC LIMIT 10",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 5207,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('质量问题', 685.0)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "main_211",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，最近三个月退款率最高的商品有哪些？",
+    "category": "refund_analysis",
+    "difficulty": "hard",
+    "selected_skill": "refund_analysis",
+    "expected_tables": [
+      "refunds",
+      "products",
+      "order_items"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "WITH product_sales AS (SELECT p.product_id, p.product_name, COALESCE(SUM(oi.item_amount), 0) AS total_sales_amount FROM products AS p LEFT JOIN order_items AS oi ON p.product_id = oi.product_id LEFT JOIN orders AS o ON oi.order_id = o.order_id WHERE o.order_date >= DATE_SUB('2026-09-12', INTERVAL '3' MONTH) AND o.order_status IN ('paid', 'completed', 'shipped') GROUP BY p.product_id, p.product_name), product_refunds AS (SELECT p.product_id, COALESCE(SUM(r.refund_amount), 0) AS total_refund_amount FROM products AS p LEFT JOIN refunds AS r ON p.product_id = r.product_id WHERE r.refund_date >= DATE_SUB('2026-09-12', INTERVAL '3' MONTH) AND r.refund_status = 'approved' GROUP BY p.product_id) SELECT ps.product_name, ROUND(COALESCE(pr.total_refund_amount, 0) / NULLIF(ps.total_sales_amount, 0), 4) AS refund_rate FROM product_sales AS ps LEFT JOIN product_refunds AS pr ON ps.product_id = pr.product_id WHERE ps.total_sales_amount > 0 ORDER BY refund_rate DESC, pr.total_refund_amount DESC LIMIT 10",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 12366,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('星禾美妆个护标准款商品113', 223.82, 343.46, 0.6517)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "main_212",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，退款原因最多的是哪些？",
+    "category": "refund_analysis",
+    "difficulty": "hard",
+    "selected_skill": "refund_analysis",
+    "expected_tables": [
+      "refunds"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT refund_reason, COUNT(*) AS count FROM refunds WHERE refund_status = 'approved' GROUP BY refund_reason ORDER BY count DESC LIMIT 10",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 5475,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('质量问题', 685.0)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "main_216",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，最近三个月退款率最高的商品有哪些？",
+    "category": "refund_analysis",
+    "difficulty": "hard",
+    "selected_skill": "refund_analysis",
+    "expected_tables": [
+      "refunds",
+      "products",
+      "order_items"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "WITH product_sales AS (SELECT p.product_id, p.product_name, COALESCE(SUM(oi.item_amount), 0) AS total_sales_amount FROM products AS p LEFT JOIN order_items AS oi ON p.product_id = oi.product_id LEFT JOIN orders AS o ON oi.order_id = o.order_id WHERE o.order_date >= DATE_SUB('2026-09-12', INTERVAL '3' MONTH) AND o.order_status IN ('paid', 'completed', 'shipped') GROUP BY p.product_id, p.product_name), product_refunds AS (SELECT p.product_id, p.product_name, COALESCE(SUM(r.refund_amount), 0) AS total_refund_amount FROM products AS p LEFT JOIN refunds AS r ON p.product_id = r.product_id WHERE r.refund_date >= DATE_SUB('2026-09-12', INTERVAL '3' MONTH) AND r.refund_status = 'approved' GROUP BY p.product_id, p.product_name) SELECT ps.product_name, ROUND(COALESCE(pr.total_refund_amount, 0) / NULLIF(ps.total_sales_amount, 0), 4) AS refund_rate FROM product_sales AS ps LEFT JOIN product_refunds AS pr ON ps.product_id = pr.product_id WHERE ps.total_sales_amount > 0 ORDER BY refund_rate DESC, pr.total_refund_amount DESC LIMIT 10",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 12375,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('星禾美妆个护标准款商品113', 223.82, 343.46, 0.6517)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "main_217",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，退款原因最多的是哪些？",
+    "category": "refund_analysis",
+    "difficulty": "hard",
+    "selected_skill": "refund_analysis",
+    "expected_tables": [
+      "refunds"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT refund_reason, COUNT(*) AS count FROM refunds WHERE refund_status = 'approved' GROUP BY refund_reason ORDER BY count DESC LIMIT 10",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 5029,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('质量问题', 685.0)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "main_221",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，黑卡用户最近三个月消费金额是多少？",
+    "category": "customer_product",
+    "difficulty": "hard",
+    "selected_skill": "trend_analysis",
+    "expected_tables": [
+      "users",
+      "orders"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.user_level = '黑卡' AND o.order_date >= DATE_SUB('2026-09-12', INTERVAL '3' MONTH) LIMIT 200",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 6989,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=(829287.53,)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "main_222",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，食品生鲜的平均商品价格是多少？",
+    "category": "customer_product",
+    "difficulty": "hard",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "products"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT ROUND(AVG(oi.unit_price), 2) AS avg_product_price FROM order_items AS oi JOIN products AS p ON oi.product_id = p.product_id WHERE p.category = '食品生鲜' LIMIT 200",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 4445,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=(117.54,)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "main_224",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，滞销商品有哪些？",
+    "category": "customer_product",
+    "difficulty": "hard",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "products",
+      "order_items"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT p.product_name, COALESCE(SUM(oi.quantity), 0) AS total_quantity, COALESCE(SUM(oi.item_amount), 0) AS total_sales_amount FROM products AS p LEFT JOIN order_items AS oi ON p.product_id = oi.product_id LEFT JOIN orders AS o ON oi.order_id = o.order_id AND o.order_status IN ('paid', 'completed', 'shipped') WHERE p.is_active = 1 GROUP BY p.product_id, p.product_name ORDER BY total_sales_amount ASC, total_quantity ASC LIMIT 10",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 9817,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('优选手机数码高端款商品026', 17.0)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "main_225",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，VIP客户购买最多的商品品类是什么？",
+    "category": "customer_product",
+    "difficulty": "hard",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "users",
+      "orders",
+      "order_items",
+      "products"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT p.category FROM order_items AS oi JOIN orders AS o ON oi.order_id = o.order_id JOIN products AS p ON oi.product_id = p.product_id JOIN users AS u ON o.user_id = u.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.is_vip = 1 GROUP BY p.category ORDER BY SUM(oi.quantity) DESC LIMIT 1",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 4086,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=5 actual=1",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "main_226",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，黑卡用户最近三个月消费金额是多少？",
+    "category": "customer_product",
+    "difficulty": "hard",
+    "selected_skill": "trend_analysis",
+    "expected_tables": [
+      "users",
+      "orders"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.user_level = '黑卡' AND o.order_date >= DATE_SUB('2026-09-12', INTERVAL '3' MONTH) LIMIT 200",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 4645,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=(829287.53,)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "main_227",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，食品生鲜的平均商品价格是多少？",
+    "category": "customer_product",
+    "difficulty": "hard",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "products"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT ROUND(AVG(oi.unit_price), 2) AS avg_product_price FROM order_items AS oi JOIN products AS p ON oi.product_id = p.product_id WHERE p.category = '食品生鲜' LIMIT 200",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 3205,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=(117.54,)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "main_229",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，滞销商品有哪些？",
+    "category": "customer_product",
+    "difficulty": "hard",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "products",
+      "order_items"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT p.product_name, COALESCE(SUM(oi.quantity), 0) AS total_quantity, COALESCE(SUM(oi.item_amount), 0) AS total_sales_amount FROM products AS p LEFT JOIN order_items AS oi ON p.product_id = oi.product_id LEFT JOIN orders AS o ON oi.order_id = o.order_id AND o.order_status IN ('paid', 'completed', 'shipped') WHERE p.is_active = 1 GROUP BY p.product_id, p.product_name ORDER BY total_quantity ASC, total_sales_amount ASC LIMIT 10",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 11148,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('星禾母婴用品高端款商品017', 22.0)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "main_230",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，VIP客户购买最多的商品品类是什么？",
+    "category": "customer_product",
+    "difficulty": "hard",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "users",
+      "orders",
+      "order_items",
+      "products"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT p.category FROM order_items AS oi JOIN orders AS o ON oi.order_id = o.order_id JOIN products AS p ON oi.product_id = p.product_id JOIN users AS u ON o.user_id = u.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.is_vip = 1 GROUP BY p.category ORDER BY SUM(oi.quantity) DESC LIMIT 1",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 4059,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=5 actual=1",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "main_231",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，黑卡用户最近三个月消费金额是多少？",
+    "category": "customer_product",
+    "difficulty": "hard",
+    "selected_skill": "trend_analysis",
+    "expected_tables": [
+      "users",
+      "orders"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.user_level = '黑卡' AND o.order_date >= DATE_SUB('2026-09-12', INTERVAL '3' MONTH) LIMIT 200",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 4923,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=(829287.53,)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "main_232",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，食品生鲜的平均商品价格是多少？",
+    "category": "customer_product",
+    "difficulty": "hard",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "products"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT ROUND(AVG(oi.unit_price), 2) AS avg_product_price FROM order_items AS oi JOIN products AS p ON oi.product_id = p.product_id WHERE p.category = '食品生鲜' LIMIT 200",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 3535,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=(117.54,)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "main_234",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，滞销商品有哪些？",
+    "category": "customer_product",
+    "difficulty": "hard",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "products",
+      "order_items"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT p.product_name, COALESCE(SUM(oi.quantity), 0) AS total_quantity, COALESCE(SUM(oi.item_amount), 0) AS total_sales_amount FROM products AS p LEFT JOIN order_items AS oi ON p.product_id = oi.product_id LEFT JOIN orders AS o ON oi.order_id = o.order_id AND o.order_status IN ('paid', 'completed', 'shipped') WHERE p.is_active = 1 GROUP BY p.product_id, p.product_name ORDER BY total_quantity ASC, total_sales_amount ASC LIMIT 10",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 11076,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('星禾母婴用品高端款商品017', 22.0)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "main_235",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，VIP客户购买最多的商品品类是什么？",
+    "category": "customer_product",
+    "difficulty": "hard",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "users",
+      "orders",
+      "order_items",
+      "products"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT p.category FROM order_items AS oi JOIN orders AS o ON oi.order_id = o.order_id JOIN products AS p ON oi.product_id = p.product_id JOIN users AS u ON o.user_id = u.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.is_vip = 1 GROUP BY p.category ORDER BY SUM(oi.quantity) DESC LIMIT 1",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 3694,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=5 actual=1",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "main_236",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，黑卡用户最近三个月消费金额是多少？",
+    "category": "customer_product",
+    "difficulty": "hard",
+    "selected_skill": "trend_analysis",
+    "expected_tables": [
+      "users",
+      "orders"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.user_level = '黑卡' AND o.order_date >= DATE_SUB('2026-09-12', INTERVAL '3' MONTH) LIMIT 200",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 4816,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=(829287.53,)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "main_237",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，食品生鲜的平均商品价格是多少？",
+    "category": "customer_product",
+    "difficulty": "hard",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "products"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT ROUND(AVG(oi.unit_price), 2) AS avg_product_price FROM order_items AS oi JOIN products AS p ON oi.product_id = p.product_id WHERE p.category = '食品生鲜' LIMIT 200",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 3043,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=(117.54,)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "main_239",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，滞销商品有哪些？",
+    "category": "customer_product",
+    "difficulty": "hard",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "products",
+      "order_items"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT p.product_name, COALESCE(SUM(oi.quantity), 0) AS total_quantity, COALESCE(SUM(oi.item_amount), 0) AS total_sales_amount FROM products AS p LEFT JOIN order_items AS oi ON p.product_id = oi.product_id LEFT JOIN orders AS o ON oi.order_id = o.order_id AND o.order_status IN ('paid', 'completed', 'shipped') WHERE p.is_active = 1 GROUP BY p.product_id, p.product_name ORDER BY total_sales_amount ASC, total_quantity ASC LIMIT 10",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 10126,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('优选手机数码高端款商品026', 17.0)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "main_240",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，VIP客户购买最多的商品品类是什么？",
+    "category": "customer_product",
+    "difficulty": "hard",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "users",
+      "orders",
+      "order_items",
+      "products"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT p.category FROM order_items AS oi JOIN orders AS o ON oi.order_id = o.order_id JOIN products AS p ON oi.product_id = p.product_id JOIN users AS u ON o.user_id = u.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.is_vip = 1 GROUP BY p.category ORDER BY SUM(oi.quantity) DESC LIMIT 1",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 4038,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=5 actual=1",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "para_001",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，最近哪些商品退货特别严重？",
+    "category": "paraphrase",
+    "difficulty": "medium",
+    "selected_skill": "refund_analysis",
+    "expected_tables": [
+      "refunds",
+      "products",
+      "order_items"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "WITH product_refund_stats AS (SELECT p.product_id, p.product_name, COALESCE(SUM(r.refund_amount), 0) AS total_refund_amount, COALESCE(SUM(oi.item_amount), 0) AS total_sales_amount FROM products AS p LEFT JOIN order_items AS oi ON p.product_id = oi.product_id LEFT JOIN refunds AS r ON p.product_id = r.product_id AND r.refund_status = 'approved' GROUP BY p.product_id, p.product_name), product_refund_rate AS (SELECT product_id, product_name, total_refund_amount, total_sales_amount, ROUND(COALESCE(total_refund_amount, 0) / NULLIF(total_sales_amount, 0), 4) AS refund_rate FROM product_refund_stats) SELECT product_name, ROUND(total_refund_amount, 2) AS refund_amount, ROUND(refund_rate, 4) AS refund_rate FROM product_refund_rate WHERE total_sales_amount > 0 ORDER BY refund_rate DESC, total_refund_amount DESC LIMIT 10",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 12225,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('星禾美妆个护标准款商品113', 223.82, 343.46, 0.6517)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "para_002",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，最近卖得还行但是退得特别多的是哪些？",
+    "category": "paraphrase",
+    "difficulty": "medium",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "refunds",
+      "products",
+      "order_items"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "WITH product_sales AS (SELECT p.product_id, p.product_name, p.category, p.brand, COALESCE(SUM(oi.item_amount), 0) AS sales_amount, COALESCE(SUM(oi.quantity), 0) AS total_quantity FROM products AS p LEFT JOIN order_items AS oi ON p.product_id = oi.product_id LEFT JOIN orders AS o ON oi.order_id = o.order_id AND o.order_status IN ('paid', 'completed', 'shipped') GROUP BY p.product_id, p.product_name, p.category, p.brand), product_refunds AS (SELECT p.product_id, COALESCE(SUM(r.refund_amount), 0) AS approved_refund_amount FROM products AS p LEFT JOIN refunds AS r ON p.product_id = r.product_id AND r.refund_status = 'approved' GROUP BY p.product_id), product_metrics AS (SELECT ps.product_id, ps.product_name, ps.category, ps.brand, ps.sales_amount, ps.total_quantity, pr.approved_refund_amount, ROUND(COALESCE(pr.approved_refund_amount, 0) / NULLIF(ps.sales_amount, 0), 4) AS refund_rate FROM product_sales AS ps LEFT JOIN product_refunds AS pr ON ps.product_id = pr.product_id) SELECT product_name, category, brand, sales_amount, total_quantity, approved_refund_amount, refund_rate FROM product_metrics WHERE sales_amount > 0 AND refund_rate > 0 ORDER BY refund_rate DESC, approved_refund_amount DESC LIMIT 10",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 17310,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('北辰美妆个护入门款商品015', 210.0, 27793.26, 5132.43, 0.1847)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "para_003",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，最近一季度老被退货的商品找几个出来看看。",
+    "category": "paraphrase",
+    "difficulty": "medium",
+    "selected_skill": "refund_analysis",
+    "expected_tables": [
+      "refunds",
+      "products"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "WITH product_refund_stats AS (SELECT p.product_id, p.product_name, COALESCE(SUM(r.refund_amount), 0) AS total_refund_amount, COALESCE(SUM(oi.item_amount), 0) AS total_sales_amount FROM products AS p LEFT JOIN order_items AS oi ON p.product_id = oi.product_id LEFT JOIN orders AS o ON oi.order_id = o.order_id AND o.order_date >= DATE_SUB('2026-09-12', INTERVAL '3' MONTH) AND o.order_status IN ('paid', 'completed', 'shipped') LEFT JOIN refunds AS r ON p.product_id = r.product_id AND r.refund_date >= DATE_SUB('2026-09-12', INTERVAL '3' MONTH) AND r.refund_status = 'approved' GROUP BY p.product_id, p.product_name), product_refund_rate AS (SELECT product_id, product_name, total_refund_amount, total_sales_amount, ROUND(COALESCE(total_refund_amount / NULLIF(total_sales_amount, 0), 0), 4) AS refund_rate FROM product_refund_stats) SELECT product_name FROM product_refund_rate ORDER BY refund_rate DESC, total_refund_amount DESC LIMIT 10",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 12373,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('星禾美妆个护标准款商品113', 223.82, 343.46, 0.6517)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "para_005",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，帮我看看大客户都花了多少钱。",
+    "category": "paraphrase",
+    "difficulty": "medium",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "users",
+      "orders"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT u.user_name, ROUND(SUM(o.paid_amount), 2) AS total_spent FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') GROUP BY u.user_id, u.user_name ORDER BY total_spent DESC LIMIT 200",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 6359,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=10 actual=200",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "para_006",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，哪些品类最近比较能打？",
+    "category": "paraphrase",
+    "difficulty": "medium",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "products",
+      "order_items",
+      "orders"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT p.category, ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM order_items AS oi JOIN orders AS o ON oi.order_id = o.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND o.order_date >= DATE_SUB('2026-09-12', INTERVAL '7' DAY) GROUP BY p.category ORDER BY sales_amount DESC LIMIT 200",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 10196,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('家用电器', 13086179.99)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "para_007",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，有没有那种销量高但退款也吓人的商品？",
+    "category": "paraphrase",
+    "difficulty": "medium",
+    "selected_skill": "refund_analysis",
+    "expected_tables": [
+      "products",
+      "order_items",
+      "refunds"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "WITH product_sales AS (SELECT p.product_id, p.product_name, COALESCE(SUM(oi.quantity), 0) AS total_quantity, COALESCE(SUM(oi.item_amount), 0) AS total_sales_amount FROM products AS p LEFT JOIN order_items AS oi ON p.product_id = oi.product_id LEFT JOIN orders AS o ON oi.order_id = o.order_id AND o.order_status IN ('paid', 'completed', 'shipped') GROUP BY p.product_id, p.product_name), product_refunds AS (SELECT r.product_id, COALESCE(SUM(r.refund_amount), 0) AS total_refund_amount, COALESCE(SUM(CASE WHEN r.refund_status = 'approved' THEN r.refund_amount ELSE 0 END), 0) AS approved_refund_amount FROM refunds AS r WHERE r.refund_status = 'approved' GROUP BY r.product_id) SELECT ps.product_name, ps.total_quantity, ROUND(ps.total_sales_amount, 2) AS total_sales_amount, ROUND(pr.approved_refund_amount, 2) AS approved_refund_amount, ROUND(COALESCE(pr.approved_refund_amount, 0) / NULLIF(ps.total_sales_amount, 0), 4) AS refund_rate FROM product_sales AS ps INNER JOIN product_refunds AS pr ON ps.product_id = pr.product_id WHERE ps.total_quantity > 0 AND ps.total_sales_amount > 0 AND pr.approved_refund_amount > 0 AND COALESCE(pr.approved_refund_amount, 0) / NULLIF(ps.total_sales_amount, 0) > 0.15 ORDER BY ps.total_quantity DESC, pr.approved_refund_amount DESC LIMIT 10",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 19408,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('北辰美妆个护入门款商品015', 210.0, 27793.26, 5132.43, 0.1847)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "para_008",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，最近订单主要来自哪些城市？",
+    "category": "paraphrase",
+    "difficulty": "medium",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "users",
+      "orders"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT u.city, ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND o.order_date >= DATE_SUB('2026-09-12', INTERVAL '7' DAY) GROUP BY u.city ORDER BY sales_amount DESC LIMIT 10",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 7356,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('上海市', 3770523.65)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "para_010",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，VIP 买东西贡献大不大？",
+    "category": "paraphrase",
+    "difficulty": "medium",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "users",
+      "orders"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS vip_sales_amount, ROUND(SUM(o.paid_amount) / NULLIF((SELECT SUM(paid_amount) FROM orders WHERE order_status IN ('paid', 'completed', 'shipped')), 0), 4) AS vip_contribution_ratio FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.is_vip = 1 LIMIT 200",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 5373,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=2 actual=1",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "para_011",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，最近哪些商品退货特别严重？（口语样本11）",
+    "category": "paraphrase",
+    "difficulty": "medium",
+    "selected_skill": "refund_analysis",
+    "expected_tables": [
+      "refunds",
+      "products",
+      "order_items"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "WITH product_refund_summary AS (SELECT p.product_id, p.product_name, COALESCE(SUM(r.refund_amount), 0) AS total_refund_amount, COALESCE(SUM(oi.item_amount), 0) AS total_sales_amount FROM products AS p LEFT JOIN order_items AS oi ON p.product_id = oi.product_id LEFT JOIN refunds AS r ON p.product_id = r.product_id AND r.refund_status = 'approved' GROUP BY p.product_id, p.product_name), product_refund_rate AS (SELECT product_id, product_name, total_refund_amount, total_sales_amount, ROUND(COALESCE(total_refund_amount / NULLIF(total_sales_amount, 0), 0), 4) AS refund_rate FROM product_refund_summary) SELECT product_name, ROUND(total_refund_amount, 2) AS refund_amount, ROUND(refund_rate, 4) AS refund_rate FROM product_refund_rate WHERE total_sales_amount > 0 ORDER BY refund_rate DESC, total_refund_amount DESC LIMIT 10",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 12828,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('星禾美妆个护标准款商品113', 223.82, 343.46, 0.6517)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "para_012",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，最近卖得还行但是退得特别多的是哪些？（口语样本12）",
+    "category": "paraphrase",
+    "difficulty": "medium",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "refunds",
+      "products",
+      "order_items"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "WITH sales AS (SELECT p.product_id, p.product_name, p.category, p.brand, COALESCE(SUM(oi.item_amount), 0) AS total_sales_amount, COALESCE(SUM(oi.quantity), 0) AS total_quantity_sold FROM products AS p LEFT JOIN order_items AS oi ON p.product_id = oi.product_id LEFT JOIN orders AS o ON oi.order_id = o.order_id AND o.order_status IN ('paid', 'completed', 'shipped') GROUP BY p.product_id, p.product_name, p.category, p.brand), refunds_approved AS (SELECT p.product_id, COALESCE(SUM(r.refund_amount), 0) AS total_refund_amount FROM products AS p LEFT JOIN refunds AS r ON p.product_id = r.product_id AND r.refund_status = 'approved' GROUP BY p.product_id), product_refund_metrics AS (SELECT s.product_id, s.product_name, s.category, s.brand, s.total_sales_amount, s.total_quantity_sold, COALESCE(ra.total_refund_amount, 0) AS total_refund_amount, ROUND(COALESCE(ra.total_refund_amount, 0) / NULLIF(s.total_sales_amount, 0), 4) AS refund_rate FROM sales AS s LEFT JOIN refunds_approved AS ra ON s.product_id = ra.product_id) SELECT product_name, category, brand, total_sales_amount, total_quantity_sold, total_refund_amount, refund_rate FROM product_refund_metrics WHERE total_sales_amount > 0 AND refund_rate > 0 ORDER BY refund_rate DESC, total_refund_amount DESC LIMIT 10",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 16657,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('北辰美妆个护入门款商品015', 210.0, 27793.26, 5132.43, 0.1847)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "para_013",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，最近一季度老被退货的商品找几个出来看看。（口语样本13）",
+    "category": "paraphrase",
+    "difficulty": "medium",
+    "selected_skill": "refund_analysis",
+    "expected_tables": [
+      "refunds",
+      "products"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "WITH product_sales AS (SELECT p.product_id, p.product_name, ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM products AS p INNER JOIN order_items AS oi ON p.product_id = oi.product_id INNER JOIN orders AS o ON oi.order_id = o.order_id WHERE o.order_date >= DATE_SUB('2026-09-12', INTERVAL '3' MONTH) AND o.order_status IN ('paid', 'completed', 'shipped') GROUP BY p.product_id, p.product_name), product_refunds AS (SELECT p.product_id, ROUND(SUM(r.refund_amount), 2) AS refund_amount FROM products AS p INNER JOIN refunds AS r ON p.product_id = r.product_id WHERE r.refund_date >= DATE_SUB('2026-09-12', INTERVAL '3' MONTH) AND r.refund_status = 'approved' GROUP BY p.product_id) SELECT ps.product_name, COALESCE(pr.refund_amount, 0) AS refund_amount, ROUND(COALESCE(pr.refund_amount, 0) / NULLIF(ps.sales_amount, 0), 4) AS refund_rate FROM product_sales AS ps LEFT JOIN product_refunds AS pr ON ps.product_id = pr.product_id ORDER BY refund_rate DESC, refund_amount DESC LIMIT 10",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 14543,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('星禾美妆个护标准款商品113', 223.82, 343.46, 0.6517)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "para_015",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，帮我看看大客户都花了多少钱。（口语样本15）",
+    "category": "paraphrase",
+    "difficulty": "medium",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "users",
+      "orders"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT u.user_name, ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') GROUP BY u.user_id, u.user_name ORDER BY sales_amount DESC LIMIT 200",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 7256,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=10 actual=200",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "para_016",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，哪些品类最近比较能打？（口语样本16）",
+    "category": "paraphrase",
+    "difficulty": "medium",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "products",
+      "order_items",
+      "orders"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "WITH category_sales AS (SELECT p.category, ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM order_items AS oi JOIN orders AS o ON oi.order_id = o.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND o.order_date >= DATE_SUB('2026-09-12', INTERVAL '90' DAY) GROUP BY p.category) SELECT category, sales_amount FROM category_sales ORDER BY sales_amount DESC LIMIT 200",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 9195,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('家用电器', 13086179.99)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "para_017",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，有没有那种销量高但退款也吓人的商品？（口语样本17）",
+    "category": "paraphrase",
+    "difficulty": "medium",
+    "selected_skill": "refund_analysis",
+    "expected_tables": [
+      "products",
+      "order_items",
+      "refunds"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "WITH product_sales AS (SELECT p.product_id, p.product_name, p.category, p.brand, COALESCE(SUM(oi.quantity), 0) AS total_quantity, COALESCE(SUM(oi.item_amount), 0) AS total_sales_amount FROM products AS p LEFT JOIN order_items AS oi ON p.product_id = oi.product_id LEFT JOIN orders AS o ON oi.order_id = o.order_id AND o.order_status IN ('paid', 'completed', 'shipped') GROUP BY p.product_id, p.product_name, p.category, p.brand), product_refunds AS (SELECT r.product_id, COALESCE(SUM(CASE WHEN r.refund_status = 'approved' THEN r.refund_amount ELSE 0 END), 0) AS approved_refund_amount, COALESCE(SUM(CASE WHEN r.refund_status = 'approved' THEN 1 ELSE 0 END), 0) AS approved_refund_count FROM refunds AS r GROUP BY r.product_id), product_metrics AS (SELECT ps.product_id, ps.product_name, ps.category, ps.brand, ps.total_quantity, ps.total_sales_amount, COALESCE(pr.approved_refund_amount, 0) AS approved_refund_amount, COALESCE(pr.approved_refund_count, 0) AS approved_refund_count, ROUND(COALESCE(pr.approved_refund_amount, 0) / NULLIF(ps.total_sales_amount, 0), 4) AS refund_rate FROM product_sales AS ps LEFT JOIN product_refunds AS pr ON ps.product_id = pr.product_id) SELECT product_name, category, brand, total_quantity, ROUND(total_sales_amount, 2) AS total_sales_amount, ROUND(approved_refund_amount, 2) AS approved_refund_amount, approved_refund_count, refund_rate FROM product_metrics WHERE total_quantity > 0 AND approved_refund_amount > 0 AND refund_rate > 0.15 ORDER BY total_quantity DESC, approved_refund_amount DESC LIMIT 10",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 18176,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('北辰美妆个护入门款商品015', 210.0, 27793.26, 5132.43, 0.1847)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "para_018",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，最近订单主要来自哪些城市？（口语样本18）",
+    "category": "paraphrase",
+    "difficulty": "medium",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "users",
+      "orders"
+    ],
+    "retrieved_tables": [
+      "orders",
+      "products",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT u.city, ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND o.order_date >= DATE_SUB('2026-09-12', INTERVAL '7' DAY) GROUP BY u.city ORDER BY sales_amount DESC LIMIT 200",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 7694,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('上海市', 3770523.65)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "para_019",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，过去几个月退款是不是变多了？（口语样本19）",
+    "category": "paraphrase",
+    "difficulty": "medium",
+    "selected_skill": "refund_analysis",
+    "expected_tables": [
+      "refunds"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "WITH monthly_refund AS (SELECT DATE_FORMAT(refunds.refund_date, '%Y-%m') AS month, ROUND(SUM(CASE WHEN refunds.refund_status = 'approved' THEN refunds.refund_amount ELSE 0 END), 2) AS refund_amount, COUNT(CASE WHEN refunds.refund_status = 'approved' THEN 1 END) AS refund_count, ROUND(SUM(CASE WHEN refunds.refund_status = 'approved' THEN refunds.refund_amount ELSE 0 END) / NULLIF(SUM(orders.paid_amount), 0), 4) AS refund_rate FROM refunds INNER JOIN orders ON refunds.order_id = orders.order_id WHERE refunds.refund_date >= DATE_SUB('2026-09-12', INTERVAL '6' MONTH) AND orders.order_status IN ('paid', 'completed', 'shipped') GROUP BY DATE_FORMAT(refunds.refund_date, '%Y-%m')), monthly_sales AS (SELECT DATE_FORMAT(orders.order_date, '%Y-%m') AS month, ROUND(SUM(orders.paid_amount), 2) AS sales_amount FROM orders WHERE orders.order_date >= DATE_SUB('2026-09-12', INTERVAL '6' MONTH) AND orders.order_status IN ('paid', 'completed', 'shipped') GROUP BY DATE_FORMAT(orders.order_date, '%Y-%m')) SELECT r.month, r.refund_amount, r.refund_count, r.refund_rate, s.sales_amount FROM monthly_refund AS r INNER JOIN monthly_sales AS s ON r.month = s.month ORDER BY r.month LIMIT 200",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 18427,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=11 actual=9",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "para_020",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，VIP 买东西贡献大不大？（口语样本20）",
+    "category": "paraphrase",
+    "difficulty": "medium",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "users",
+      "orders"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT ROUND(SUM(CASE WHEN u.is_vip = 1 THEN o.paid_amount ELSE 0 END), 2) AS vip_sales_amount, ROUND(SUM(CASE WHEN u.is_vip = 0 THEN o.paid_amount ELSE 0 END), 2) AS non_vip_sales_amount, ROUND(SUM(CASE WHEN u.is_vip = 1 THEN o.paid_amount ELSE 0 END) * 100.0 / NULLIF(SUM(o.paid_amount), 0), 2) AS vip_sales_contribution_pct FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 7056,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=2 actual=1",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "para_021",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，最近哪些商品退货特别严重？（口语样本21）",
+    "category": "paraphrase",
+    "difficulty": "medium",
+    "selected_skill": "refund_analysis",
+    "expected_tables": [
+      "refunds",
+      "products",
+      "order_items"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "WITH product_refund_summary AS (SELECT p.product_id, p.product_name, COALESCE(SUM(r.refund_amount), 0) AS total_refund_amount, COALESCE(SUM(oi.item_amount), 0) AS total_sales_amount FROM products AS p LEFT JOIN refunds AS r ON p.product_id = r.product_id AND r.refund_status = 'approved' LEFT JOIN order_items AS oi ON p.product_id = oi.product_id GROUP BY p.product_id, p.product_name), product_refund_rate AS (SELECT product_id, product_name, total_refund_amount, total_sales_amount, ROUND(COALESCE(total_refund_amount / NULLIF(total_sales_amount, 0), 0), 4) AS refund_rate FROM product_refund_summary) SELECT product_name, ROUND(total_refund_amount, 2) AS refund_amount, ROUND(refund_rate, 4) AS refund_rate FROM product_refund_rate WHERE total_sales_amount > 0 ORDER BY refund_rate DESC, total_refund_amount DESC LIMIT 10",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 12579,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('星禾美妆个护标准款商品113', 223.82, 343.46, 0.6517)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "para_022",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，最近卖得还行但是退得特别多的是哪些？（口语样本22）",
+    "category": "paraphrase",
+    "difficulty": "medium",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "refunds",
+      "products",
+      "order_items"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "WITH product_sales AS (SELECT p.product_id, p.product_name, COALESCE(SUM(oi.item_amount), 0) AS sales_amount FROM products AS p LEFT JOIN order_items AS oi ON p.product_id = oi.product_id LEFT JOIN orders AS o ON oi.order_id = o.order_id AND o.order_status IN ('paid', 'completed', 'shipped') GROUP BY p.product_id, p.product_name), product_refunds AS (SELECT p.product_id, COALESCE(SUM(r.refund_amount), 0) AS refund_amount FROM products AS p LEFT JOIN refunds AS r ON p.product_id = r.product_id AND r.refund_status = 'approved' GROUP BY p.product_id) SELECT ps.product_name, ROUND(ps.sales_amount, 2) AS sales_amount, ROUND(pr.refund_amount, 2) AS refund_amount, ROUND(COALESCE(pr.refund_amount, 0) / NULLIF(ps.sales_amount, 0), 4) AS refund_rate FROM product_sales AS ps JOIN product_refunds AS pr ON ps.product_id = pr.product_id WHERE ps.sales_amount > 0 ORDER BY refund_rate DESC, refund_amount DESC LIMIT 10",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 14112,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('北辰美妆个护入门款商品015', 210.0, 27793.26, 5132.43, 0.1847)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "para_023",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，最近一季度老被退货的商品找几个出来看看。（口语样本23）",
+    "category": "paraphrase",
+    "difficulty": "medium",
+    "selected_skill": "refund_analysis",
+    "expected_tables": [
+      "refunds",
+      "products"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "WITH product_sales AS (SELECT p.product_id, p.product_name, COALESCE(SUM(oi.item_amount), 0) AS sales_amount FROM products AS p LEFT JOIN order_items AS oi ON p.product_id = oi.product_id LEFT JOIN orders AS o ON oi.order_id = o.order_id WHERE o.order_date >= DATE_SUB('2026-09-12', INTERVAL '3' MONTH) AND o.order_status IN ('paid', 'completed', 'shipped') GROUP BY p.product_id, p.product_name), product_refunds AS (SELECT p.product_id, COALESCE(SUM(r.refund_amount), 0) AS refund_amount FROM products AS p LEFT JOIN refunds AS r ON p.product_id = r.product_id LEFT JOIN orders AS o ON r.order_id = o.order_id WHERE r.refund_status = 'approved' AND o.order_date >= DATE_SUB('2026-09-12', INTERVAL '3' MONTH) GROUP BY p.product_id) SELECT ps.product_name, ROUND(ps.sales_amount, 2) AS sales_amount, ROUND(pr.refund_amount, 2) AS refund_amount, ROUND(COALESCE(pr.refund_amount, 0) / NULLIF(ps.sales_amount, 0), 4) AS refund_rate FROM product_sales AS ps LEFT JOIN product_refunds AS pr ON ps.product_id = pr.product_id WHERE ps.sales_amount > 0 ORDER BY refund_rate DESC, refund_amount DESC LIMIT 10",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 15219,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('星禾食品生鲜标准款商品022', 181.9, 293.75, 0.6192)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "para_025",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，帮我看看大客户都花了多少钱。（口语样本25）",
+    "category": "paraphrase",
+    "difficulty": "medium",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "users",
+      "orders"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT u.user_name, ROUND(SUM(o.paid_amount), 2) AS total_spent FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') GROUP BY u.user_id, u.user_name ORDER BY total_spent DESC LIMIT 200",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 8174,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=10 actual=200",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "para_026",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，哪些品类最近比较能打？（口语样本26）",
+    "category": "paraphrase",
+    "difficulty": "medium",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "products",
+      "order_items",
+      "orders"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT p.category, ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM order_items AS oi JOIN orders AS o ON oi.order_id = o.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND o.order_date >= DATE_SUB('2026-09-12', INTERVAL '90' DAY) GROUP BY p.category ORDER BY sales_amount DESC LIMIT 200",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 8179,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('家用电器', 13086179.99)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "para_027",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，有没有那种销量高但退款也吓人的商品？（口语样本27）",
+    "category": "paraphrase",
+    "difficulty": "hard",
+    "selected_skill": "refund_analysis",
+    "expected_tables": [
+      "products",
+      "order_items",
+      "refunds"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "WITH product_sales AS (SELECT p.product_id, p.product_name, COALESCE(SUM(oi.quantity), 0) AS total_quantity, COALESCE(SUM(oi.item_amount), 0) AS total_sales_amount FROM products AS p LEFT JOIN order_items AS oi ON p.product_id = oi.product_id LEFT JOIN orders AS o ON oi.order_id = o.order_id AND o.order_status IN ('paid', 'completed', 'shipped') GROUP BY p.product_id, p.product_name), product_refunds AS (SELECT r.product_id, COALESCE(SUM(CASE WHEN r.refund_status = 'approved' THEN r.refund_amount ELSE 0 END), 0) AS approved_refund_amount, COALESCE(COUNT(CASE WHEN r.refund_status = 'approved' THEN 1 END), 0) AS approved_refund_count FROM refunds AS r GROUP BY r.product_id), product_metrics AS (SELECT ps.product_id, ps.product_name, ps.total_quantity, ps.total_sales_amount, COALESCE(pr.approved_refund_amount, 0) AS approved_refund_amount, COALESCE(pr.approved_refund_count, 0) AS approved_refund_count, ROUND(COALESCE(pr.approved_refund_amount, 0) / NULLIF(ps.total_sales_amount, 0), 4) AS refund_rate FROM product_sales AS ps LEFT JOIN product_refunds AS pr ON ps.product_id = pr.product_id) SELECT product_name, total_quantity, ROUND(approved_refund_amount, 2) AS refund_amount, ROUND(refund_rate, 4) AS refund_rate FROM product_metrics WHERE total_quantity > 0 AND approved_refund_amount > 0 ORDER BY total_quantity DESC, approved_refund_amount DESC LIMIT 10",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 16718,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('北辰美妆个护入门款商品015', 210.0, 27793.26, 5132.43, 0.1847)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "para_028",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，最近订单主要来自哪些城市？（口语样本28）",
+    "category": "paraphrase",
+    "difficulty": "hard",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "users",
+      "orders"
+    ],
+    "retrieved_tables": [
+      "orders",
+      "products",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT u.city, ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND o.order_date >= DATE_SUB('2026-09-12', INTERVAL '7' DAY) GROUP BY u.city ORDER BY sales_amount DESC LIMIT 200",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 6502,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('上海市', 3770523.65)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "para_029",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，过去几个月退款是不是变多了？（口语样本29）",
+    "category": "paraphrase",
+    "difficulty": "hard",
+    "selected_skill": "refund_analysis",
+    "expected_tables": [
+      "refunds"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "WITH monthly_refund AS (SELECT DATE_FORMAT(r.refund_date, '%Y-%m') AS month, ROUND(SUM(r.refund_amount), 2) AS refund_amount, COUNT(*) AS refund_count FROM refunds AS r WHERE r.refund_status = 'approved' AND r.refund_date >= DATE_SUB('2026-09-12', INTERVAL '6' MONTH) GROUP BY DATE_FORMAT(r.refund_date, '%Y-%m')), monthly_sales AS (SELECT DATE_FORMAT(o.order_date, '%Y-%m') AS month, ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM orders AS o WHERE o.order_status IN ('paid', 'completed', 'shipped') AND o.order_date >= DATE_SUB('2026-09-12', INTERVAL '6' MONTH) GROUP BY DATE_FORMAT(o.order_date, '%Y-%m')) SELECT mr.month, mr.refund_amount, mr.refund_count, ms.sales_amount, ROUND(COALESCE(mr.refund_amount, 0) / NULLIF(ms.sales_amount, 0), 4) AS refund_rate FROM monthly_refund AS mr JOIN monthly_sales AS ms ON mr.month = ms.month ORDER BY mr.month LIMIT 200",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 12866,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=11 actual=9",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "para_030",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，VIP 买东西贡献大不大？（口语样本30）",
+    "category": "paraphrase",
+    "difficulty": "hard",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "users",
+      "orders"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS vip_sales_amount, ROUND(SUM(o.paid_amount) / NULLIF((SELECT SUM(paid_amount) FROM orders WHERE order_status IN ('paid', 'completed', 'shipped')), 0), 4) AS vip_contribution_ratio FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.is_vip = 1 LIMIT 200",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 5747,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=2 actual=1",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "para_031",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，最近哪些商品退货特别严重？（口语样本31）",
+    "category": "paraphrase",
+    "difficulty": "hard",
+    "selected_skill": "refund_analysis",
+    "expected_tables": [
+      "refunds",
+      "products",
+      "order_items"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "WITH product_refund_summary AS (SELECT p.product_id, p.product_name, COALESCE(SUM(r.refund_amount), 0) AS total_refund_amount, COALESCE(SUM(oi.item_amount), 0) AS total_sales_amount FROM products AS p LEFT JOIN order_items AS oi ON p.product_id = oi.product_id LEFT JOIN refunds AS r ON p.product_id = r.product_id AND r.refund_status = 'approved' GROUP BY p.product_id, p.product_name), product_refund_rate AS (SELECT product_id, product_name, total_refund_amount, total_sales_amount, ROUND(COALESCE(total_refund_amount / NULLIF(total_sales_amount, 0), 0), 4) AS refund_rate FROM product_refund_summary) SELECT product_name, ROUND(total_refund_amount, 2) AS refund_amount, ROUND(refund_rate, 4) AS refund_rate FROM product_refund_rate ORDER BY refund_rate DESC, total_refund_amount DESC LIMIT 10",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 12266,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('星禾美妆个护标准款商品113', 223.82, 343.46, 0.6517)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "para_032",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，最近卖得还行但是退得特别多的是哪些？（口语样本32）",
+    "category": "paraphrase",
+    "difficulty": "hard",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "refunds",
+      "products",
+      "order_items"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "WITH product_sales AS (SELECT p.product_id, p.product_name, COALESCE(SUM(oi.item_amount), 0) AS sales_amount FROM products AS p LEFT JOIN order_items AS oi ON p.product_id = oi.product_id LEFT JOIN orders AS o ON oi.order_id = o.order_id AND o.order_status IN ('paid', 'completed', 'shipped') GROUP BY p.product_id, p.product_name), product_refunds AS (SELECT p.product_id, COALESCE(SUM(r.refund_amount), 0) AS refund_amount FROM products AS p LEFT JOIN refunds AS r ON p.product_id = r.product_id AND r.refund_status = 'approved' GROUP BY p.product_id) SELECT ps.product_name, ROUND(ps.sales_amount, 2) AS sales_amount, ROUND(pr.refund_amount, 2) AS refund_amount, ROUND(COALESCE(pr.refund_amount, 0) / NULLIF(ps.sales_amount, 0), 4) AS refund_rate FROM product_sales AS ps JOIN product_refunds AS pr ON ps.product_id = pr.product_id WHERE ps.sales_amount > 0 ORDER BY refund_rate DESC, refund_amount DESC LIMIT 10",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 14028,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('北辰美妆个护入门款商品015', 210.0, 27793.26, 5132.43, 0.1847)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "para_033",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，最近一季度老被退货的商品找几个出来看看。（口语样本33）",
+    "category": "paraphrase",
+    "difficulty": "hard",
+    "selected_skill": "refund_analysis",
+    "expected_tables": [
+      "refunds",
+      "products"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "WITH product_sales AS (SELECT p.product_id, p.product_name, ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM products AS p INNER JOIN order_items AS oi ON p.product_id = oi.product_id INNER JOIN orders AS o ON oi.order_id = o.order_id WHERE o.order_date >= DATE_SUB('2026-09-12', INTERVAL '3' MONTH) AND o.order_status IN ('paid', 'completed', 'shipped') GROUP BY p.product_id, p.product_name), product_refunds AS (SELECT p.product_id, ROUND(SUM(r.refund_amount), 2) AS refund_amount FROM products AS p INNER JOIN refunds AS r ON p.product_id = r.product_id WHERE r.refund_date >= DATE_SUB('2026-09-12', INTERVAL '3' MONTH) AND r.refund_status = 'approved' GROUP BY p.product_id) SELECT ps.product_name, COALESCE(pr.refund_amount, 0) AS refund_amount, ROUND(COALESCE(pr.refund_amount, 0) / NULLIF(ps.sales_amount, 0), 4) AS refund_rate FROM product_sales AS ps LEFT JOIN product_refunds AS pr ON ps.product_id = pr.product_id ORDER BY refund_rate DESC, refund_amount DESC LIMIT 10",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 17696,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('星禾美妆个护标准款商品113', 223.82, 343.46, 0.6517)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "para_035",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，帮我看看大客户都花了多少钱。（口语样本35）",
+    "category": "paraphrase",
+    "difficulty": "hard",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "users",
+      "orders"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT u.user_name, ROUND(SUM(o.paid_amount), 2) AS total_spent FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') GROUP BY u.user_id, u.user_name ORDER BY total_spent DESC LIMIT 200",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 8200,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=10 actual=200",
+    "failure_type": "row count mismatch"
+  },
+  {
+    "id": "para_036",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，哪些品类最近比较能打？（口语样本36）",
+    "category": "paraphrase",
+    "difficulty": "hard",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "products",
+      "order_items",
+      "orders"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT p.category, ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM order_items AS oi JOIN orders AS o ON oi.order_id = o.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND o.order_date >= DATE_SUB('2026-09-12', INTERVAL '7' DAY) GROUP BY p.category ORDER BY sales_amount DESC LIMIT 200",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 7843,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('家用电器', 13086179.99)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "para_037",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，有没有那种销量高但退款也吓人的商品？（口语样本37）",
+    "category": "paraphrase",
+    "difficulty": "hard",
+    "selected_skill": "refund_analysis",
+    "expected_tables": [
+      "products",
+      "order_items",
+      "refunds"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "WITH product_sales AS (SELECT p.product_id, p.product_name, COALESCE(SUM(oi.quantity), 0) AS total_quantity, COALESCE(SUM(oi.item_amount), 0) AS total_sales_amount FROM products AS p LEFT JOIN order_items AS oi ON p.product_id = oi.product_id LEFT JOIN orders AS o ON oi.order_id = o.order_id AND o.order_status IN ('paid', 'completed', 'shipped') GROUP BY p.product_id, p.product_name), product_refunds AS (SELECT p.product_id, COALESCE(SUM(r.refund_amount), 0) AS total_refund_amount FROM products AS p LEFT JOIN refunds AS r ON p.product_id = r.product_id AND r.refund_status = 'approved' GROUP BY p.product_id), product_metrics AS (SELECT ps.product_id, ps.product_name, ps.total_quantity, ps.total_sales_amount, pr.total_refund_amount, ROUND(COALESCE(pr.total_refund_amount, 0) / NULLIF(ps.total_sales_amount, 0), 4) AS refund_rate FROM product_sales AS ps JOIN product_refunds AS pr ON ps.product_id = pr.product_id) SELECT product_name, total_quantity, ROUND(total_sales_amount, 2) AS total_sales_amount, ROUND(total_refund_amount, 2) AS total_refund_amount, refund_rate FROM product_metrics WHERE total_quantity > 0 AND total_refund_amount > 0 AND refund_rate > 0.15 ORDER BY total_quantity DESC, total_refund_amount DESC LIMIT 10",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 16306,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('北辰美妆个护入门款商品015', 210.0, 27793.26, 5132.43, 0.1847)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "para_038",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，最近订单主要来自哪些城市？（口语样本38）",
+    "category": "paraphrase",
+    "difficulty": "hard",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "users",
+      "orders"
+    ],
+    "retrieved_tables": [
+      "orders",
+      "products",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT u.city, ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND o.order_date >= DATE_SUB('2026-09-12', INTERVAL '7' DAY) GROUP BY u.city ORDER BY sales_amount DESC LIMIT 200",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 6566,
+    "error": "",
+    "failure_reason": "missing_expected_row expected=('上海市', 3770523.65)",
+    "failure_type": "result mismatch / metric drift"
+  },
+  {
+    "id": "para_040",
+    "pipeline": "agent",
+    "question": "以 2026-09-12 为今天，VIP 买东西贡献大不大？（口语样本40）",
+    "category": "paraphrase",
+    "difficulty": "hard",
+    "selected_skill": "sales_analysis",
+    "expected_tables": [
+      "users",
+      "orders"
+    ],
+    "retrieved_tables": [
+      "order_items",
+      "orders",
+      "products",
+      "refunds",
+      "users"
+    ],
+    "schema_recall": 1.0,
+    "generated_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS vip_sales_amount, (SELECT ROUND(SUM(paid_amount), 2) FROM orders WHERE order_status IN ('paid', 'completed', 'shipped')) AS total_sales_amount, ROUND(SUM(o.paid_amount) / NULLIF((SELECT SUM(paid_amount) FROM orders WHERE order_status IN ('paid', 'completed', 'shipped')), 0), 4) AS vip_contribution_rate FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.is_vip = 1 LIMIT 200",
+    "execution_status": "success",
+    "result_correct": false,
+    "retry_count": 0,
+    "latency_ms": 6117,
+    "error": "",
+    "failure_reason": "row_count_mismatch expected=2 actual=1",
+    "failure_type": "row count mismatch"
+  }
+]
