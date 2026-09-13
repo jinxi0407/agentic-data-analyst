@@ -15,6 +15,8 @@ class GraphState(TypedDict, total=False):
     db_schema: str
     query_plan: Dict[str, Any]
     query_plan_text: str
+    structured_intent: Dict[str, Any]
+    intent_status: str
 
     sql: str
     validation_error: str

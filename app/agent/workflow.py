@@ -13,6 +13,7 @@ from app.agent.prompts import build_final_answer_messages, build_sql_messages
 from app.agent.query_plan import build_query_plan, format_query_plan
 from app.agent.skill_router import route_skill
 from app.agent.state import GraphState
+from app.agent.structured_intent import parse_intent
 from app.config import settings
 from app.schema.metadata import build_schema_text, retrieve_relevant_schema
 from app.tools.analysis import analyze_rows
@@ -77,10 +78,19 @@ def schema_retrieval_node(state: GraphState) -> Dict[str, Any]:
 @_trace_node("query_planning")
 def query_planning_node(state: GraphState) -> Dict[str, Any]:
     plan = build_query_plan(state["question"], state.get("skill_name", ""))
-    matched_tables = sorted(set(state.get("matched_tables", [])) | set(plan.get("required_tables", [])))
+    intent = {}
+    intent_status = "validated"
+    try:
+        intent = parse_intent(state["question"], state.get("db_schema", ""))
+    except Exception:
+        # Intent is advisory; retain the baseline path if parsing is unavailable.
+        intent_status = "unavailable"
+    matched_tables = sorted(set(state.get("matched_tables", [])) | set(plan.get("required_tables", [])) | set(intent.get("entities", [])))
     db_schema = build_schema_text(matched_tables)
     return {
         "query_plan": plan,
+        "structured_intent": intent,
+        "intent_status": intent_status,
         "query_plan_text": format_query_plan(plan),
         "matched_tables": matched_tables,
         "db_schema": db_schema,

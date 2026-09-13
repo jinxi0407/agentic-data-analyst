@@ -1,0 +1,36 @@
+{
+  "status": "protocol_fixed_cases_not_generated",
+  "baseline_commit": "3d612df",
+  "final_branch": "agent-final-release",
+  "case_count": 250,
+  "difficulty_counts": {"easy": 125, "medium": 100, "hard": 25},
+  "category_counts": {
+    "filtering_aggregation": 75,
+    "top_k_ranking": 50,
+    "time_trend": 50,
+    "one_two_table_join": 38,
+    "refund_customer_product": 25,
+    "complex": 12
+  },
+  "rounding_note": "15% and 5% of 250 are half-integers; assign 38 and 12 respectively.",
+  "paraphrase_count": 30,
+  "chat_model": "qwen-plus",
+  "embedding_model": "text-embedding-v4",
+  "sql_temperature": 0.05,
+  "reference_date": "2026-09-12",
+  "benchmark_seed": 20260913,
+  "exclude_from_main": [
+    "joins_of_more_than_two_tables",
+    "multistage_percentiles",
+    "nested_multilevel_ctes",
+    "complex_yoy_refund_combinations"
+  ],
+  "freeze_requirements": [
+    "Freeze agent code before any benchmark result is revealed.",
+    "Persist all questions, reference SQL, executed ground truth, difficulty and category before either agent runs.",
+    "Record database fingerprint and shared inference configuration.",
+    "Score actual SQL results against frozen ground truth, not execution success.",
+    "Persist per-case results and resume only unfinished cases.",
+    "Do not change agent, questions, labels or ground truth after results are revealed."
+  ]
+}

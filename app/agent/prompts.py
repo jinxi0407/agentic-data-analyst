@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Any, Dict, List
 
 from app.business.metrics import business_context_text
+from app.agent.structured_intent import GRAIN_GUIDANCE, BUSINESS_EXAMPLES
 
 
 SQL_RULES = """
@@ -57,6 +58,15 @@ Lightweight query plan:
 
 Relevant schema:
 {state.get('db_schema', '')}
+
+Structured intent (advisory; the original question remains authoritative):
+{state.get('structured_intent', {})}
+
+Grain-aware JOIN planning:
+{GRAIN_GUIDANCE}
+
+Business examples:
+{BUSINESS_EXAMPLES}
 
 Generate one MySQL query that follows the metric definitions, time semantics, join relationships, ranking rules, and query plan above.
 {repair}
