@@ -21,11 +21,12 @@ env/
 # Local files
 .DS_Store
 *.log
+logs/
+cache/
+.idea/
+.vscode/
 .eval-baseline/
-eval/daily_*.lock
-eval/final_holdout_*.lock
-eval/final_holdout_v2_*.lock
-eval/final_release_holdout_300_*.lock
+eval/*.lock
 
 # Build artifacts
 build/

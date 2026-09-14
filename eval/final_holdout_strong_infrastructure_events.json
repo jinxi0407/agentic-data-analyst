@@ -1,6 +1,0 @@
-[
-  {
-    "id": "final_holdout_195",
-    "infrastructure_error": "ParseError: Invalid expression / Unexpected token. Line 3, Col: 138.\n  nd_status = 'approved' THEN r.refund_amount ELSE 0 END), 0) / NULLIF(SUM(r.refund_amount), 0), 0), 4\u001b[4m)\u001b[0m AS refund_approval_rate\nFROM refunds r\nJOIN order_items oi ON r.order_item_id = oi.order_item_id\nJO"
-  }
-]

@@ -20,7 +20,6 @@ pip install -r requirements.txt
 docker compose up -d mysql
 python scripts/init_database.py
 python data/seed_data.py
-python scripts/init_schema_embeddings.py
 python scripts/set_readonly_user.py
 
 uvicorn app.main:app --host 127.0.0.1 --port 8002 &

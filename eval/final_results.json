@@ -112,7 +112,7 @@
     "retry_count": 1,
     "error": "",
     "latency_ms": 6972.48,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -132,7 +132,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2134.74,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -165,7 +165,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1674.54,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -194,7 +194,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1965.42,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -214,7 +214,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 895.89,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -247,7 +247,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2691.66,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -280,7 +280,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1188.34,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -309,7 +309,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2811.81,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -368,7 +368,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2998.97,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -388,7 +388,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 818.43,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -408,7 +408,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1291.23,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -428,7 +428,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1180.81,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -493,7 +493,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 3328.6,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -534,7 +534,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2686.93,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -713,7 +713,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 5464.83,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -733,7 +733,7 @@
     "retry_count": 1,
     "error": "",
     "latency_ms": 3040.56,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -766,7 +766,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2575.9,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -786,7 +786,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1820.99,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -823,7 +823,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1673.91,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -843,7 +843,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1484.53,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -880,7 +880,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2485.87,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -900,7 +900,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1940.88,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -985,7 +985,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2205.8,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -1044,7 +1044,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2915.5,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -1064,7 +1064,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1035.66,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -1084,7 +1084,7 @@
     "retry_count": 1,
     "error": "",
     "latency_ms": 3562.8,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -1121,7 +1121,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1191.84,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -1310,7 +1310,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2258.49,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -1367,7 +1367,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2865.18,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -1387,7 +1387,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1613.0,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -1407,7 +1407,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1207.35,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -1449,7 +1449,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 3242.5,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -1469,7 +1469,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1759.24,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -1526,7 +1526,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2997.33,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -1546,7 +1546,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1085.22,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -1587,7 +1587,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 8263.61,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -1628,7 +1628,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2190.28,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -1648,7 +1648,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1794.05,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -1713,7 +1713,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2974.39,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -1737,7 +1737,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 7722.89,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -1757,7 +1757,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1852.63,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -1809,7 +1809,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 6907.98,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -1870,7 +1870,7 @@
     "retry_count": 1,
     "error": "",
     "latency_ms": 5446.28,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -1899,7 +1899,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1624.75,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -1940,7 +1940,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 3644.8,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -1977,7 +1977,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2549.33,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -2042,7 +2042,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 3275.0,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -2062,7 +2062,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1042.01,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -2119,7 +2119,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2649.29,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -2139,7 +2139,7 @@
     "retry_count": 1,
     "error": "",
     "latency_ms": 4228.5,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -2159,7 +2159,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 3793.95,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -2292,7 +2292,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2286.27,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -2517,7 +2517,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2082.71,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -2537,7 +2537,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2008.06,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -2557,7 +2557,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1147.96,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -2577,7 +2577,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1288.57,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -2597,7 +2597,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 890.94,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -2630,7 +2630,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1176.64,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -2650,7 +2650,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1483.7,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -2691,7 +2691,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1482.74,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -2804,7 +2804,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2577.19,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -2833,7 +2833,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2811.59,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -2885,7 +2885,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 6502.99,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -2926,7 +2926,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 8289.97,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -2963,7 +2963,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2204.56,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -3964,7 +3964,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 5773.61,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -4021,7 +4021,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 5463.92,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -4086,7 +4086,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2531.81,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -4123,7 +4123,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2705.52,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -4143,7 +4143,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1312.86,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -5360,7 +5360,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 5548.74,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -5425,7 +5425,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1731.86,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -5482,7 +5482,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 3295.52,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -5502,7 +5502,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1271.21,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -5522,7 +5522,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1260.15,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -5731,7 +5731,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2583.25,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -6534,7 +6534,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 5546.07,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -6554,7 +6554,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1010.39,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -6570,7 +6570,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 3301.5,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -6590,7 +6590,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2039.68,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -6667,7 +6667,7 @@
     "retry_count": 1,
     "error": "",
     "latency_ms": 5740.0,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -6700,7 +6700,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2756.36,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -6752,7 +6752,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 6761.38,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -6772,7 +6772,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1916.81,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -6792,7 +6792,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 986.74,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -6893,7 +6893,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2301.35,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -6913,7 +6913,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1782.79,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -6950,7 +6950,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2740.38,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -6970,7 +6970,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1129.95,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -6990,7 +6990,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 913.41,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -7035,7 +7035,7 @@
     "retry_count": 1,
     "error": "",
     "latency_ms": 5526.73,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -7055,7 +7055,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1991.24,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -7092,7 +7092,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1918.47,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -7112,7 +7112,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1165.32,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -7261,7 +7261,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2584.28,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -7281,7 +7281,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1225.84,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -7310,7 +7310,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1283.02,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -7330,7 +7330,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1209.43,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -7367,7 +7367,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2403.78,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -7400,7 +7400,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1226.55,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -7420,7 +7420,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1303.4,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -7440,7 +7440,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1705.72,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -7460,7 +7460,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1166.97,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -7517,7 +7517,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2689.33,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -7630,7 +7630,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2643.53,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -7659,7 +7659,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2832.37,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -7724,7 +7724,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2374.24,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -7744,7 +7744,7 @@
     "retry_count": 1,
     "error": "",
     "latency_ms": 4304.93,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -7764,7 +7764,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1293.62,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -7784,7 +7784,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1841.03,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -7804,7 +7804,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1312.3,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -7841,7 +7841,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1692.25,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -7882,7 +7882,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2683.82,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -7902,7 +7902,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1238.85,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -7939,7 +7939,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2254.5,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -7959,7 +7959,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1270.04,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -7979,7 +7979,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1269.18,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -8008,7 +8008,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1434.62,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -8037,7 +8037,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2779.75,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -8079,7 +8079,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 3131.48,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -8099,7 +8099,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2211.56,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -8119,7 +8119,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2060.63,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -8670,7 +8670,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 6223.27,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -8711,7 +8711,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2521.88,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -8772,7 +8772,7 @@
     "retry_count": 1,
     "error": "",
     "latency_ms": 5529.09,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -8792,7 +8792,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1283.41,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -8905,7 +8905,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2522.05,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -9022,7 +9022,7 @@
     "retry_count": 1,
     "error": "",
     "latency_ms": 6219.13,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -9042,7 +9042,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1123.75,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -9103,7 +9103,7 @@
     "retry_count": 1,
     "error": "",
     "latency_ms": 5106.07,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -9145,7 +9145,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 3739.84,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -9165,7 +9165,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2050.58,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -9206,7 +9206,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 3042.65,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -9247,7 +9247,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1986.96,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -9276,7 +9276,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1328.86,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -9296,7 +9296,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2156.18,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -9348,7 +9348,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 6513.68,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -9407,7 +9407,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2871.26,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -9427,7 +9427,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1952.09,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -9447,7 +9447,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1727.68,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -9463,7 +9463,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1937.36,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -9483,7 +9483,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2024.41,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -9503,7 +9503,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1203.58,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -9523,7 +9523,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2170.43,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -9543,7 +9543,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1518.74,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -9580,7 +9580,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2031.7,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -9600,7 +9600,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 984.32,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -9701,7 +9701,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2129.69,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -9721,7 +9721,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1022.8,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -9838,7 +9838,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2493.64,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -9858,7 +9858,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2315.44,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -10083,7 +10083,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2511.43,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -10103,7 +10103,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1149.91,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -10119,7 +10119,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2236.56,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -10139,7 +10139,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1342.01,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -10204,7 +10204,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 3132.77,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -10224,7 +10224,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1203.92,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -10281,7 +10281,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 4706.42,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -10322,7 +10322,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 8308.08,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -10435,7 +10435,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2568.67,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -10476,7 +10476,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 8254.58,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -10589,7 +10589,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2464.33,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -10654,7 +10654,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2322.28,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -10674,7 +10674,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1176.23,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -10694,7 +10694,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1133.06,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -10727,7 +10727,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2643.72,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -10747,7 +10747,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1548.8,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -10792,7 +10792,7 @@
     "retry_count": 1,
     "error": "",
     "latency_ms": 5761.2,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -10869,7 +10869,7 @@
     "retry_count": 1,
     "error": "",
     "latency_ms": 5815.21,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -10906,7 +10906,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1244.54,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -11223,7 +11223,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 6495.75,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -11260,7 +11260,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1673.45,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -11301,7 +11301,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 3367.34,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -11516,7 +11516,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 6125.94,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -12733,7 +12733,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 6110.35,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -12792,7 +12792,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2818.17,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -12851,7 +12851,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 3447.3,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -12871,7 +12871,7 @@
     "retry_count": 1,
     "error": "",
     "latency_ms": 3942.56,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -12908,7 +12908,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2763.74,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -12965,7 +12965,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 5239.55,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -12998,7 +12998,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1780.59,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -13022,7 +13022,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 7496.37,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -13042,7 +13042,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1654.05,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -13101,7 +13101,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2784.97,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -13138,7 +13138,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1242.18,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -13327,7 +13327,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2307.52,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -13347,7 +13347,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1199.14,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -13572,7 +13572,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2090.26,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -13685,7 +13685,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2623.18,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -13762,7 +13762,7 @@
     "retry_count": 1,
     "error": "",
     "latency_ms": 6268.28,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -13875,7 +13875,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2718.12,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -14056,7 +14056,7 @@
     "retry_count": 1,
     "error": "",
     "latency_ms": 5456.13,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -14076,7 +14076,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1632.69,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -14113,7 +14113,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2820.88,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -14230,7 +14230,7 @@
     "retry_count": 1,
     "error": "",
     "latency_ms": 5423.91,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -14250,7 +14250,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1956.64,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -14307,7 +14307,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2903.37,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -14372,7 +14372,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 5360.36,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -14413,7 +14413,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2611.78,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -14433,7 +14433,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1654.3,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -14453,7 +14453,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 961.0,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -14510,7 +14510,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2793.01,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -14534,7 +14534,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 7857.01,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -14651,7 +14651,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2303.06,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -14710,7 +14710,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2765.4,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -14747,7 +14747,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2550.13,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -14767,7 +14767,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1368.28,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -14800,7 +14800,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1156.67,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -14837,7 +14837,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1315.08,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -14878,7 +14878,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1724.85,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -14898,7 +14898,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2019.22,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -14991,7 +14991,7 @@
     "retry_count": 1,
     "error": "",
     "latency_ms": 5714.41,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -15011,7 +15011,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2208.75,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -15053,7 +15053,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 3063.22,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -15118,7 +15118,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 5948.05,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -15159,7 +15159,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1850.06,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -15179,7 +15179,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1185.54,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -15216,7 +15216,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1384.66,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -15253,7 +15253,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1649.22,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -15370,7 +15370,7 @@
     "retry_count": 1,
     "error": "",
     "latency_ms": 5004.13,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -15463,7 +15463,7 @@
     "retry_count": 1,
     "error": "",
     "latency_ms": 5951.19,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -15500,7 +15500,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2609.72,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -15537,7 +15537,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2643.88,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -15566,7 +15566,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1275.91,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -15603,7 +15603,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1497.95,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -15640,7 +15640,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1227.1,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -15660,7 +15660,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1423.01,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -15680,7 +15680,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1334.93,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -15737,7 +15737,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2610.6,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -15794,7 +15794,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2753.35,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -15853,7 +15853,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2630.49,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -15890,7 +15890,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2593.63,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -15935,7 +15935,7 @@
     "retry_count": 1,
     "error": "",
     "latency_ms": 5721.52,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -15976,7 +15976,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1844.94,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -15996,7 +15996,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1100.32,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -16016,7 +16016,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2239.45,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -16036,7 +16036,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1646.21,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -16081,7 +16081,7 @@
     "retry_count": 1,
     "error": "",
     "latency_ms": 5597.61,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -16101,7 +16101,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1133.69,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -16290,7 +16290,7 @@
     "retry_count": 1,
     "error": "",
     "latency_ms": 4555.3,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -16310,7 +16310,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1461.01,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -16330,7 +16330,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1963.21,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -16371,7 +16371,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2238.42,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -16404,7 +16404,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2655.73,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -16424,7 +16424,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1829.78,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -16444,7 +16444,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1677.97,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -16481,7 +16481,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2506.25,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -16518,7 +16518,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1259.31,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -16559,7 +16559,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2827.5,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -16579,7 +16579,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1308.63,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -16836,7 +16836,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 6735.5,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -16856,7 +16856,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1977.7,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -16893,7 +16893,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2682.82,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -17010,7 +17010,7 @@
     "retry_count": 1,
     "error": "",
     "latency_ms": 6080.62,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -17030,7 +17030,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1313.15,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -17050,7 +17050,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 962.0,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -17070,7 +17070,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1137.58,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -17090,7 +17090,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1936.35,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -17155,7 +17155,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2928.85,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -17175,7 +17175,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1466.24,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -17199,7 +17199,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 7212.73,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -17240,7 +17240,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2697.03,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -17277,7 +17277,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2598.22,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -17297,7 +17297,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2207.03,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -17317,7 +17317,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1104.21,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -17410,7 +17410,7 @@
     "retry_count": 1,
     "error": "",
     "latency_ms": 5408.02,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -17430,7 +17430,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1526.31,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -17450,7 +17450,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1328.57,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -17470,7 +17470,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 932.23,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -17511,7 +17511,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1532.08,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -17624,7 +17624,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2896.68,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -17676,7 +17676,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 6898.23,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -17696,7 +17696,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2153.12,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -17761,7 +17761,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 3064.7,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -17790,7 +17790,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1536.66,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -17810,7 +17810,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1236.44,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -17875,7 +17875,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 3142.92,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -17895,7 +17895,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1024.41,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -17919,7 +17919,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 5844.54,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -17961,7 +17961,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2961.77,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -18026,7 +18026,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2917.28,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -18139,7 +18139,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2635.32,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -18198,7 +18198,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2864.96,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -18239,7 +18239,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 8539.68,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -18268,7 +18268,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2819.17,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -18333,7 +18333,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2914.49,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -18353,7 +18353,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1883.38,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -18394,7 +18394,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2020.7,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -18431,7 +18431,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1858.25,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -18472,7 +18472,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 3425.29,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -18609,7 +18609,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 5652.92,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -18674,7 +18674,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2825.38,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -18711,7 +18711,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2447.84,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -18740,7 +18740,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1437.06,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -18781,7 +18781,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2361.77,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -18874,7 +18874,7 @@
     "retry_count": 1,
     "error": "",
     "latency_ms": 5811.64,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -18894,7 +18894,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 861.24,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -18914,7 +18914,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1691.22,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -19103,7 +19103,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 2207.18,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   },
@@ -19123,7 +19123,7 @@
     "retry_count": 0,
     "error": "",
     "latency_ms": 1055.84,
-    "selected_route": "baseline",
+    "selected_route": "production",
     "complexity_score": 0,
     "routing_reasons": []
   }

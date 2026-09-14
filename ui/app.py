@@ -39,13 +39,8 @@ if st.button("开始分析", type="primary"):
     payload = response.json()
 
     left, right = st.columns([1, 1])
-    left.metric("当前 Skill", payload.get("skill") or "-")
+    left.metric("Engine", payload.get("engine") or "Production NL2SQL Engine")
     right.metric("Latency", f"{payload.get('latency_ms', int((time.time() - started) * 1000))} ms")
-
-    st.subheader("命中 Schema / Tables")
-    st.write(payload.get("matched_tables", []))
-    if payload.get("matched_columns"):
-        st.dataframe(pd.DataFrame(payload["matched_columns"]), use_container_width=True)
 
     st.subheader("生成 SQL")
     st.code(payload.get("sql", ""), language="sql")
@@ -57,12 +52,9 @@ if st.button("开始分析", type="primary"):
     else:
         st.info("查询结果为空。")
 
-    st.subheader("业务分析")
-    st.write(payload.get("analysis", ""))
-
     c1, c2 = st.columns(2)
     c1.metric("Retry Count", payload.get("retry_count", 0))
     c2.metric("Status", payload.get("status", "unknown"))
 
-    with st.expander("Agent Trace"):
+    with st.expander("Execution Trace"):
         st.json(payload.get("trace", []))

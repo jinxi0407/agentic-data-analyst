@@ -1,252 +1,237 @@
 # Agentic Data Analyst
 
-企业智能数据分析 Agent，用中文自然语言提问，系统自动选择分析 Skill、检索相关 Schema、生成安全 MySQL SQL、执行查询、用 Pandas 做确定性分析，并返回业务解释。
+Agentic Data Analyst is a business-oriented natural-language-to-SQL analytics system for structured MySQL data.
 
-Based on / adapted from: `woshixiaojunle/NL2SQL-Demo`.
+It converts Chinese business questions into executable SQL, applies fixed business metric and time semantics, validates every statement through deterministic guardrails, executes queries with a read-only database account, and returns structured analytical results.
 
-本项目保留原仓库 License 和必要 attribution。原始项目的核心思路是：把表结构元数据写入 `core_table` / `core_field`，用 DashScope embedding 做 schema retrieval，再用 LangGraph 编排 NL2SQL 和 retry。本项目在此基础上升级为独立的本地演示项目。
+## Overview
 
-## 项目边界
+Release v1.0 focuses on a compact and explainable production NL2SQL pipeline. The engine uses complete static schema metadata, explicit business definitions, fixed vocabulary normalization, and a small set of general SQL examples. It intentionally avoids adding planning stages when a single well-grounded SQL generation step is sufficient.
 
-- 当前项目目录：`/Users/jinxi/Documents/agentic-data-analyst`
-- 独立 MySQL：`127.0.0.1:3307 -> Docker MySQL:3306`
-- 独立 database：`agentic_data_analyst`
-- 独立 container：`agentic-data-analyst-mysql`
-- 独立 volume：`agentic_data_analyst_mysql_data`
-- 独立 network：`agentic_data_analyst_net`
-- FastAPI：`http://127.0.0.1:8002`
-- Streamlit UI：`http://localhost:8502`
-- 不使用 Redis、Milvus、Qdrant、Elasticsearch、Neo4j、MCP、A2A、Multi-Agent。
+The included e-commerce schema covers users, products, orders, order items, and refunds. All records are synthetic and reproducibly generated for local development and evaluation.
 
-## 系统架构
+## Key Features
+
+- Business Metric Dictionary for sales, quantity, valid orders, paying users, and approved refunds.
+- Explicit time semantics for calendar periods and reference-date-based ranges.
+- Complete table, column, data type, primary key, and foreign key context.
+- Fixed entity and business vocabulary normalization.
+- Five general NL2SQL examples for aggregation, filtering, ranking, joins, and grouping.
+- Qwen-plus SQL generation through DashScope.
+- SQLGlot guardrails that permit only one read-only `SELECT` or `WITH ... SELECT` statement.
+- Automatic row limiting and a read-only MySQL application account.
+- Execution-error retry with a maximum of two retries.
+- FastAPI API, Streamlit interface, Dockerized MySQL, and a frozen evaluation pipeline.
+
+## Architecture
 
 ```mermaid
 flowchart TD
-    U["User Chinese Question"] --> R["Skill Router"]
-    R --> S["Schema Retrieval"]
-    S --> G["Qwen SQL Generation"]
-    G --> GR["SQL Guardrail"]
-    GR --> V["SQL Validation"]
-    V --> X["MySQL Execution"]
-    X -->|Success| P["Pandas Analysis"]
-    P --> F["Qwen Final Answer"]
-    X -->|Error| RP["SQL Repair"]
-    GR -->|Blocked| RP
-    RP --> GR
+    Q[Chinese business question] --> N[Entity and alias normalization]
+    N --> C[Static schema metadata]
+    C --> S[Business metrics, time semantics, PK/FK context]
+    S --> F[Five general NL2SQL examples]
+    F --> L[Qwen-plus SQL generation]
+    L --> G[SQLGlot guardrail]
+    G -->|Valid| D[Read-only MySQL execution]
+    G -->|Syntax or safety error| R[Execution-error repair, max 2]
+    D -->|Database error| R
+    R --> L
+    D --> O[Structured rows via FastAPI / Streamlit]
 ```
 
-## Agent Workflow
+The default application entrypoint is `app.agent.production`, which delegates to the frozen Release v1.0 engine. Historical agentic workflow experiments remain available through Git history and the local pre-release archive tag, but are not the production path.
 
-1. 用户输入中文问题。
-2. `Skill Router` 根据问题选择 `sales_analysis`、`refund_analysis` 或 `trend_analysis`。
-3. 系统读取对应 `skills/*/SKILL.md`，把 Skill 规则放入 SQL prompt。
-4. `Schema Retrieval` 将问题向量和表/字段描述向量做余弦相似度，只给 LLM 相关 schema。
-5. Qwen / DashScope 生成 MySQL SQL。
-6. `sqlglot` 做 deterministic Guardrail，只允许 `SELECT` 或 `WITH ... SELECT`。
-7. 自动补充或收紧 `LIMIT`，最多返回 `SQL_MAX_ROWS`。
-8. MySQL 执行 SQL，失败后把错误交给 Qwen repair，最多 `MAX_RETRY=2`。
-9. Pandas 对返回结果做确定性统计。
-10. Qwen 只负责解释结果，不凭空计算数字。
+## Why This Design
 
-## Skills
+Structured business queries do not always benefit from more reasoning stages. A full agentic workflow and a deterministic complexity router were evaluated, but the compact NL2SQL engine produced the best accuracy and latency trade-off on the final frozen holdout.
+
+The release therefore favors fixed and inspectable semantics, complete schema grounding, deterministic safety controls, and a short execution path that is easier to test and explain.
+
+## Evaluation
+
+Final Release Holdout: 300 previously unseen business queries.
+
+| Metric | Result |
+|---|---:|
+| End-to-End Accuracy | **73.67% (221/300)** |
+| Average Latency | **2.76s** |
+| Easy | 88.67% |
+| Medium | 55.83% |
+| Hard | 70.00% |
+| Filtering / Aggregation | 90.00% |
+| JOIN | 73.33% |
+| Top-K / Ranking | 86.67% |
+| Time / Trend | 41.67% |
+| Refund / Customer / Product | 80.00% |
+| Complex | 40.00% |
+| Paraphrase | 63.89% |
+
+Evaluation discipline:
+
+- The benchmark, Reference SQL, and database-derived Ground Truth were frozen before execution.
+- All 300 questions were unique and the benchmark was executed once for the final score.
+- No failed case was removed or relabeled.
+- No benchmark-specific tuning occurred after results were revealed.
+- Exact result comparison uses a numeric absolute tolerance of 0.005 and preserves ordering when requested.
+
+See [FINAL_EVALUATION.md](FINAL_EVALUATION.md) for the protocol and complete category summary.
+
+## Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Chat model | Qwen-plus via DashScope |
+| Database | MySQL 8.4 |
+| SQL parsing and safety | SQLGlot |
+| API | FastAPI and Uvicorn |
+| UI | Streamlit |
+| Database client | PyMySQL |
+| Testing | pytest |
+| Local infrastructure | Docker Compose |
+
+## Project Structure
 
 ```text
-skills/
-├── sales_analysis/SKILL.md
-├── refund_analysis/SKILL.md
-└── trend_analysis/SKILL.md
+agentic-data-analyst/
+├── app/
+│   ├── agent/production.py
+│   ├── tools/
+│   ├── config.py
+│   └── main.py
+├── data/
+│   ├── init.sql
+│   └── seed_data.py
+├── eval/
+│   ├── final_release_holdout_300.json
+│   ├── final_release_manifest.json
+│   ├── final_results.json
+│   ├── final_report.json
+│   ├── scoring.py
+│   └── run_final_evaluation.py
+├── scripts/
+├── tests/
+├── ui/
+├── docker-compose.yml
+├── requirements.txt
+├── .env.example
+├── FINAL_EVALUATION.md
+├── ATTRIBUTION.md
+└── LICENSE
 ```
 
-Skill 不是简单标签。系统会真正读取 `SKILL.md`，并把其中的分析约束加入 SQL 生成 prompt。
+## Quick Start
 
-## Guardrail
-
-Guardrail 位于 `app/tools/guardrail.py`：
-
-- 只允许单条 SQL。
-- 只允许 `SELECT` 或 `WITH ... SELECT`。
-- 禁止 `INSERT / UPDATE / DELETE / DROP / ALTER / TRUNCATE / CREATE / GRANT / REVOKE` 等危险操作。
-- 自动添加或收紧 `LIMIT`。
-- 使用 `sqlglot` 解析，不依赖 LLM 自我判断。
-- 数据库用户后续会被脚本收紧为只读权限，作为第二层保护。
-
-## Docker
-
-启动独立 MySQL：
+### 1. Clone and install
 
 ```bash
-docker compose up -d mysql
-```
-
-验证：
-
-```bash
-docker exec agentic-data-analyst-mysql mysql -uroot -p -e "SELECT VERSION(); SELECT DATABASE();"
-```
-
-不要对其他项目执行 `docker stop/rm/down/prune`。
-
-## 本地启动
-
-1. 填写 `.env`：
-
-```makefile
-DASHSCOPE_API_KEY=
-QWEN_CHAT_MODEL=
-QWEN_EMBEDDING_MODEL=
-MYSQL_PASSWORD=
-MYSQL_ROOT_PASSWORD=
-```
-
-2. 安装依赖：
-
-```bash
+git clone https://github.com/jinxi0407/agentic-data-analyst.git
+cd agentic-data-analyst
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-3. 启动 MySQL 并初始化数据：
+### 2. Configure the environment
+
+```bash
+cp .env.example .env
+```
+
+Set `DASHSCOPE_API_KEY`, `MYSQL_PASSWORD`, and `MYSQL_ROOT_PASSWORD` in `.env`. The configured models are qwen-plus and text-embedding-v4; the production SQL path uses qwen-plus.
+
+### 3. Start and initialize MySQL
 
 ```bash
 docker compose up -d mysql
 python scripts/init_database.py
 python data/seed_data.py
-python scripts/init_schema_embeddings.py
 python scripts/set_readonly_user.py
 ```
 
-4. 启动 API：
+`data/seed_data.py` replaces data in this project's five business tables. Run it only when you intend to reset the local synthetic dataset.
+
+### 4. Start the API
 
 ```bash
 uvicorn app.main:app --host 127.0.0.1 --port 8002
 ```
 
-5. 启动 UI：
+Endpoints:
+
+```text
+GET  /health
+POST /api/query
+```
+
+Example request:
+
+```bash
+curl -X POST http://127.0.0.1:8002/api/query \
+  -H 'Content-Type: application/json' \
+  -d '{"question":"最近30天有效订单销售额是多少？"}'
+```
+
+### 5. Start the UI
 
 ```bash
 streamlit run ui/app.py --server.port 8502 --server.address 127.0.0.1
 ```
 
-或使用脚本：
+### 6. Run tests and verify the frozen evaluation
 
 ```bash
-bash scripts/start_local.sh
+pytest -q
+python eval/run_final_evaluation.py
 ```
 
-## API
+The repository includes the frozen per-case results. The evaluation command validates the benchmark digest and database fingerprint, then reproduces the aggregate report without making unnecessary model calls when all results are already present.
 
-```http
-GET /health
-POST /api/query
-```
-
-请求示例：
-
-```json
-{
-  "question": "最近三个月退款率最高的5个商品是什么？"
-}
-```
-
-响应包含：
-
-- `skill`
-- `matched_tables`
-- `matched_columns`
-- `sql`
-- `retry_count`
-- `result`
-- `analysis`
-- `latency_ms`
-- `trace`
-
-## Evaluation
-
-Golden Questions 位于 `eval/cases.json`，覆盖 simple、filtering、aggregation、Top-K、time range、JOIN、complex conditions、trend、refund analysis。
-
-运行：
-
-```bash
-python eval/run_eval.py
-```
-
-评估会真实统计：
-
-- Execution Accuracy
-- SQL Execution Rate
-- Repair Success Rate
-- Average Retry
-- Average Latency
-
-如果 API Key、网络或数据库未准备好，评估会失败并记录真实错误，不伪造数字。
-
-## Final Benchmark - Agent v1 Strong Baseline
-
-最终冻结候选评估使用 `eval/final_benchmark.py`，基于固定参考日期 `2026-09-12` 和 seeded MySQL reference SQL 生成 ground truth。
-
-数据规模：
-
-```json
-{
-  "users": 3000,
-  "products": 800,
-  "orders": 12000,
-  "order_items": 27523,
-  "refunds": 3080
-}
-```
-
-评估集：
-
-- Main Set: 240
-- Real-user Paraphrase Set: 40
-- Repair Challenge: 20
-- Safety Set: 30
-
-核心指标：
-
-| Metric | Baseline | Agent |
-|---|---:|---:|
-| Execution Accuracy | 0.1571 | 0.5000 |
-| SQL Execution Rate | 0.9750 | 0.9786 |
-| Average Retry | 0.00 | 0.04 |
-| Average Latency ms | 3742.28 | 7465.85 |
-
-补充指标：
-
-- Schema Retrieval Recall@K: `1.0000`
-- Repair Success Rate: `0.8000`
-- Guardrail Block Rate: `1.0000`
-- Guardrail False Positive Rate: `0.0000`
-- Guardrail False Negative Rate: `0.0000`
-
-详细报告：
-
-- `FINAL_EVALUATION.md`
-- `docs/AGENT_V1_EVALUATION.md`
-- `docs/RESUME_METRICS.md`
-- `eval/final_report.json`
-
-## Demo Questions
+## Example Queries
 
 ```text
-最近30天销售额最高的5个商品是什么？
-最近三个月退款率最高的商品有哪些？
-过去六个月每月销售额趋势怎么样？
-消费金额最高的10位客户是谁？
+近一个月有效订单的成交额是多少？
+列出销量排名前十的商品。
+各城市分别有多少笔有效订单？
+上个自然月哪些商品品类的退款金额最高？
+按月查看近半年的成交趋势。
+累计消费最多的客户有哪些？
 ```
 
-## 旧文件说明
+## Safety
 
-这些文件来自原始 NL2SQL-Demo，保留作为学习和迁移对照：
+- SQL is parsed with SQLGlot before execution.
+- Only a single `SELECT` or `WITH ... SELECT` statement is accepted.
+- Mutating and administrative keywords are blocked.
+- Result size is capped by `SQL_MAX_ROWS`.
+- The application database user receives only `SELECT` privileges.
+- Secrets are loaded from `.env`, which is excluded from Git.
 
-- `langGraph_sql_agent.py`
-- `init_table_embbeding.py`
-- `db_connection.py`
-- `repository.py`
-- `models.py`
-- `初始化表.sql`
-- `执行步骤.md`
+Guardrails reduce risk but are not a substitute for database isolation, least-privilege credentials, query timeouts, and human review in sensitive environments.
 
-新项目运行入口使用 `app/`、`data/`、`skills/`、`eval/`、`ui/` 和 `docker-compose.yml`。
+## Experimental Findings
+
+We also evaluated a full agentic workflow and a complexity-aware hybrid router.
+
+| System | Accuracy | Average latency |
+|---|---:|---:|
+| Production NL2SQL Engine | 73.67% | 2.76s |
+| Complexity-aware Hybrid | 71.33% | 3.65s |
+
+More reasoning steps did not consistently improve structured business query accuracy, so the simpler and faster pipeline was selected for Release v1.0. Historical experiments are retained in Git history rather than presented as additional production versions.
+
+## Limitations
+
+- The included business dataset is synthetic.
+- Evaluation uses one fixed local e-commerce schema with five business tables.
+- Schema scale and cross-database generalization have not been established.
+- Time and trend questions remain the weakest evaluated category.
+- Complex queries still have significant failure cases.
+- Generated SQL must still be treated as untrusted input outside the provided guardrails.
+
+## Open-Source Attribution
+
+This project was developed through substantial secondary development based on [woshixiaojunle/NL2SQL-Demo](https://github.com/woshixiaojunle/NL2SQL-Demo).
+
+The original project is licensed under the Apache License 2.0. Major extensions include business semantics, MySQL schema metadata, vocabulary normalization, SQL safety, reproducible evaluation infrastructure, API/UI integration, and release engineering. See [ATTRIBUTION.md](ATTRIBUTION.md) and [LICENSE](LICENSE).
+

@@ -1,9 +1,0 @@
-{
-  "label": "pure_direct_nl2sql",
-  "total": 250,
-  "accuracy": 0.38,
-  "cases_sha256": "bbee0a6a6d6eb40b46f401aa21284585a90ae7fc4a98be2536e12934219e8294",
-  "workers": 4,
-  "average_latency_ms": 2133.70908,
-  "execution_rate": 1.0
-}
