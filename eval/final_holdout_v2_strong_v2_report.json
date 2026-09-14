@@ -1,0 +1,26 @@
+{
+  "pipeline": "strong_v2",
+  "total": 250,
+  "correct": 181,
+  "accuracy": 0.724,
+  "cases_sha256": "77cd33025e8de00c79258397b77acfa0544f1a6ef19f0602fd052b8a62f054f2",
+  "workers": 4,
+  "average_latency_ms": 2293.96832,
+  "average_retry": 0,
+  "execution_rate": 1.0,
+  "difficulty": {
+    "easy": 0.696,
+    "hard": 0.52,
+    "medium": 0.81
+  },
+  "category": {
+    "complex": 0.4166666666666667,
+    "filtering_aggregation": 0.7466666666666667,
+    "one_two_table_join": 0.8947368421052632,
+    "refund_customer_product": 0.8,
+    "time_trend": 0.78,
+    "top_k_ranking": 0.54
+  },
+  "paraphrase_accuracy": 0.6666666666666666,
+  "infrastructure_rerun_count": 0
+}
