@@ -1,0 +1,22 @@
+{
+  "review_base": "cd101de",
+  "incoming_commits": [
+    "cd101decfee10f4f3f851602cdae87e62b6793c5",
+    "daf5433c6b3990263cecfeb8663be06715b901a1",
+    "f39717564e06a24eac83971b3d3ab475fb08f486",
+    "7cb7afc98d9172846dda825ad6bce4ae9d9c75b3",
+    "02ce1297a9f97ccbb24927faa4ce1354a1f432e9",
+    "9f0967987b5ecb66bdc205143fa9f6398518b5c6",
+    "e4e2e0109d01ec84a76e24d3f9d055209fdcc092",
+    "30e9a08c3216e133f6ea7992fdf3482bd4664c0e",
+    "2af21fc06920e43216d6ffb17db36694f486b47c"
+  ],
+  "unique_historical_blobs_scanned": 164,
+  "working_files_scanned": 156,
+  "secret_findings_paths": [],
+  "forbidden_paths": [],
+  "protected_files_checked": 88,
+  "protected_mismatches": [],
+  "license_matches_origin_main": true,
+  "scope": "Known local secrets and common token/private-key patterns; not a guarantee against every unknown secret format"
+}

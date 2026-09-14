@@ -18,8 +18,9 @@ app = FastAPI(title="Agentic Data Analyst", version="1.1.0")
 
 class QueryRequest(BaseModel):
     question: str = Field(..., min_length=1, max_length=6000)
+    mode: Literal["direct", "clarify"] = "direct"
     clarification_answer: str | None = Field(default=None, min_length=1, max_length=2000)
-    clarification_context: ClarificationContext | None = None
+    clarification_context: ClarificationContext | scoped.Context | None = None
 
     @model_validator(mode="after")
     def complete_followup(self):
@@ -31,6 +32,11 @@ class QueryRequest(BaseModel):
             raise ValueError("Answer cannot be blank")
         if self.clarification_context and self.question != self.clarification_context.original_question:
             raise ValueError("Follow-up question must match original question")
+        if self.clarification_context:
+            if "mode" not in self.model_fields_set:
+                self.mode = "clarify"
+            elif self.mode == "direct":
+                raise ValueError("A follow-up requires clarification mode")
         return self
 
 
@@ -42,8 +48,14 @@ def health():
 
 @app.post("/api/query")
 def query(request: QueryRequest):
-    return run_interactive(request.question, request.clarification_answer,
-                           request.clarification_context)
+    if isinstance(request.clarification_context, ClarificationContext):
+        # Finish an already-issued legacy context without using it for new requests.
+        return run_interactive(request.question, request.clarification_answer,
+                               request.clarification_context)
+    return scoped_query(ScopedQueryRequest(
+        question=request.question, mode=request.mode,
+        clarification_answer=request.clarification_answer,
+        clarification_context=request.clarification_context))
 
 
 class ScopedQueryRequest(BaseModel):
@@ -68,10 +80,12 @@ class ScopedQueryRequest(BaseModel):
 
 @app.post("/api/scoped-query")
 def scoped_query(request: ScopedQueryRequest):
-    if request.mode == "clarify":
-        return scoped.run_interactive(request.question, request.clarification_answer,
-                                      request.clarification_context)
     try:
-        return scoped.direct(request.question)
+        if request.mode == "clarify":
+            result = scoped.run_interactive(request.question, request.clarification_answer,
+                                           request.clarification_context)
+        else:
+            result = scoped.direct(request.question)
+        return {"engine": "Production NL2SQL Engine", **result, "question": request.question}
     except Exception:
         return {"status": "system_error", "error": "查询服务未完成，请稍后重试。", "result": [], "sql": ""}

@@ -29,7 +29,8 @@ def api_online():
 with st.sidebar:
     st.subheader("运行环境")
     st.text("Engine: Production NL2SQL")
-    clarification_enabled = st.toggle("需要时澄清一次", value=False)
+    clarification_enabled = st.toggle("启用一次主动澄清", value=False,
+        help="适合时间、指标或筛选条件尚未明确的问题，可能增加等待时间。")
     st.text("Model: Qwen Plus")
     st.text("Database: MySQL")
     st.text("Safety: SQLGlot + Read-only")
@@ -70,6 +71,7 @@ with st.form("query"):
 if analyze:
     if question.strip():
         st.session_state.pop("payload", None)
+        st.session_state.pop("clarification_answer", None)
         submit({"question": question.strip()})
     else:
         st.warning("请输入业务问题。")
@@ -83,7 +85,7 @@ if state == "needs_clarification":
         st.subheader("确认一个关键信息")
         st.write(payload["clarification_question"])
         with st.form("clarification"):
-            answer = st.text_input("你的回答")
+            answer = st.text_input("你的回答", key="clarification_answer")
             proceed = st.form_submit_button("继续分析", type="primary")
         if proceed:
             if answer.strip():

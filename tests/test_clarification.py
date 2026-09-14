@@ -61,14 +61,14 @@ def test_api_interaction_and_round_limit(monkeypatch):
         return dict(status="success", result=[{"n": 1}], trace=[])
     monkeypatch.setattr(production, "run_question", engine)
     client = TestClient(app)
-    first = client.post("/api/query", json={"question": "最近销售额"}).json()
+    first = production.run_interactive("最近销售额")
     assert first["status"] == "needs_clarification" and not executed
     request = dict(question="最近销售额", clarification_answer="最近30天",
                    clarification_context=first["clarification_context"])
     second = client.post("/api/query", json=request).json()
     assert second["status"] == "success"
     assert "最近30天" in executed[0] and "最近销售额" in executed[0]
-    first = client.post("/api/query", json={"question": "最近销售额"}).json()
+    first = production.run_interactive("最近销售额")
     request["clarification_context"] = first["clarification_context"]
     request["clarification_answer"] = "随便"
     assert client.post("/api/query", json=request).json()["status"] == "needs_rephrase"
@@ -78,6 +78,8 @@ def test_api_interaction_and_round_limit(monkeypatch):
 
 
 def test_clear_compatible_request(monkeypatch):
+    from app.agent import scoped_clarification
+    monkeypatch.setattr(scoped_clarification, "direct", lambda *a: dict(status="success", result=[], trace=[]))
     monkeypatch.setattr(gate, "generate_text", lambda *a, **k: json.dumps(output()))
     monkeypatch.setattr(production, "run_question", lambda *a: dict(status="success", result=[], trace=[]))
     assert TestClient(app).post("/api/query", json={"question": "有效订单数"}).json()["status"] == "success"

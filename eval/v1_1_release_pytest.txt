@@ -1,0 +1,5 @@
+Command: .venv/bin/python -m pytest -q
+Final result: 74 passed, 1 warning in 22.31s
+Warning: starlette/testclient.py:53 DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+Unit tests block unmocked Qwen, database connections and requests HTTP calls.
+Live API smoke was run separately and preserved in v1_1_release_smoke.json.

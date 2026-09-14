@@ -1,0 +1,636 @@
+{
+  "scope": "Single non-holdout release smoke; no tuning or reruns",
+  "database_before": {
+    "users": "b827470388b126a973c77491e8863f6e6e51e7cbfeb7f689923a1b48ac2d55dc",
+    "products": "1a33196738fb59c7ee3d88f68e5ab3c89c94c5ca14864d3976c65337f3aad43e",
+    "orders": "e08ce1622cc57a7ad81b115f96fe1a7012a37b18b49229ae69da3d4c9335dab3",
+    "order_items": "40c992219526ac2fe849d58990769f788d07e4c6b3a83645b8863f65314a8a3e",
+    "refunds": "e8c296d3b783f81b322bc103d5f9eb00823141234155a3250980828af242d6b2",
+    "core_table": "af48658b968e0d6f803c66aebc0e6d9bc7b83030634f6ff2ebd4abc9ab6353d1",
+    "core_field": "bb1c16e9bed8a8ab47c6204cfa55986378340eea6bbb54f92cdefe112b265fdd"
+  },
+  "cases": [
+    {
+      "id": "default_total",
+      "payload": {
+        "question": "请统计所有有效订单的优惠金额总和，只返回金额。"
+      },
+      "reference_sql": "SELECT ROUND(SUM(discount_amount),2) AS amount FROM orders WHERE order_status IN ('paid','completed','shipped')",
+      "expected": [
+        {
+          "amount": 2279620.69
+        }
+      ],
+      "http_status": 200,
+      "response": {
+        "engine": "Production NL2SQL Engine",
+        "question": "请统计所有有效订单的优惠金额总和，只返回金额。",
+        "normalized_question": "Reference date: 2026-09-14; timezone: Asia/Shanghai. An explicit reference date in the question takes precedence.\nVerified city storage values and same-city suffix aliases (not region mappings):\n[{\"field\": \"users.city\", \"value\": \"上海市\", \"province\": \"上海\", \"verified_aliases\": [\"上海\"]}, {\"field\": \"users.city\", \"value\": \"北京市\", \"province\": \"北京\", \"verified_aliases\": [\"北京\"]}, {\"field\": \"users.city\", \"value\": \"南京市\", \"province\": \"江苏\", \"verified_aliases\": [\"南京\"]}, {\"field\": \"users.city\", \"value\": \"广州市\", \"province\": \"广东\", \"verified_aliases\": [\"广州\"]}, {\"field\": \"users.city\", \"value\": \"成都市\", \"province\": \"四川\", \"verified_aliases\": [\"成都\"]}, {\"field\": \"users.city\", \"value\": \"杭州市\", \"province\": \"浙江\", \"verified_aliases\": [\"杭州\"]}, {\"field\": \"users.city\", \"value\": \"武汉市\", \"province\": \"湖北\", \"verified_aliases\": [\"武汉\"]}, {\"field\": \"users.city\", \"value\": \"西安市\", \"province\": \"陕西\", \"verified_aliases\": [\"西安\"]}]\nOnly normalize a city to its uniquely verified same-city value. Do not infer a city from a province/region. An absent named city remains that city; empty results are valid. Do not replace it with an existing city or ask merely because no rows exist.\nOriginal question (preserve all constraints):\n请统计所有有效订单的优惠金额总和，只返回金额。",
+        "sql": "SELECT ROUND(SUM(discount_amount), 2) AS discount_amount FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+        "result": [
+          {
+            "discount_amount": 2279620.69
+          }
+        ],
+        "error": "",
+        "retry_count": 0,
+        "status": "success",
+        "trace": [
+          {
+            "stage": "execute",
+            "status": "success"
+          }
+        ],
+        "latency_ms": 1700.11
+      },
+      "elapsed_seconds": 1.715,
+      "result_matches": true
+    },
+    {
+      "id": "default_join_topk",
+      "payload": {
+        "question": "请列出浙江省客户中累计有效订单实付金额最高的前6人，返回用户ID和金额，同额按ID升序。"
+      },
+      "reference_sql": "SELECT u.user_id,ROUND(SUM(o.paid_amount),2) AS amount FROM users u JOIN orders o ON u.user_id=o.user_id WHERE u.province='浙江' AND o.order_status IN ('paid','completed','shipped') GROUP BY u.user_id ORDER BY amount DESC,u.user_id ASC LIMIT 6",
+      "ordered": true,
+      "expected": [
+        {
+          "user_id": 2341,
+          "amount": 57831.66
+        },
+        {
+          "user_id": 2424,
+          "amount": 49287.56
+        },
+        {
+          "user_id": 1846,
+          "amount": 46731.24
+        },
+        {
+          "user_id": 2798,
+          "amount": 44595.32
+        },
+        {
+          "user_id": 1152,
+          "amount": 44175.05
+        },
+        {
+          "user_id": 1556,
+          "amount": 44068.78
+        }
+      ],
+      "http_status": 200,
+      "response": {
+        "engine": "Production NL2SQL Engine",
+        "question": "请列出浙江省客户中累计有效订单实付金额最高的前6人，返回用户ID和金额，同额按ID升序。",
+        "normalized_question": "Reference date: 2026-09-14; timezone: Asia/Shanghai. An explicit reference date in the question takes precedence.\nVerified city storage values and same-city suffix aliases (not region mappings):\n[{\"field\": \"users.city\", \"value\": \"上海市\", \"province\": \"上海\", \"verified_aliases\": [\"上海\"]}, {\"field\": \"users.city\", \"value\": \"北京市\", \"province\": \"北京\", \"verified_aliases\": [\"北京\"]}, {\"field\": \"users.city\", \"value\": \"南京市\", \"province\": \"江苏\", \"verified_aliases\": [\"南京\"]}, {\"field\": \"users.city\", \"value\": \"广州市\", \"province\": \"广东\", \"verified_aliases\": [\"广州\"]}, {\"field\": \"users.city\", \"value\": \"成都市\", \"province\": \"四川\", \"verified_aliases\": [\"成都\"]}, {\"field\": \"users.city\", \"value\": \"杭州市\", \"province\": \"浙江\", \"verified_aliases\": [\"杭州\"]}, {\"field\": \"users.city\", \"value\": \"武汉市\", \"province\": \"湖北\", \"verified_aliases\": [\"武汉\"]}, {\"field\": \"users.city\", \"value\": \"西安市\", \"province\": \"陕西\", \"verified_aliases\": [\"西安\"]}]\nOnly normalize a city to its uniquely verified same-city value. Do not infer a city from a province/region. An absent named city remains that city; empty results are valid. Do not replace it with an existing city or ask merely because no rows exist.\nOriginal question (preserve all constraints):\n请列出浙江省用户中累计有效订单实付金额最高的前6人，返回用户ID和金额，同额按ID升序。",
+        "sql": "SELECT u.user_id, ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.province = '浙江' AND o.order_status IN ('paid', 'completed', 'shipped') GROUP BY u.user_id ORDER BY sales_amount DESC, u.user_id ASC LIMIT 6",
+        "result": [
+          {
+            "user_id": 2341,
+            "sales_amount": 57831.66
+          },
+          {
+            "user_id": 2424,
+            "sales_amount": 49287.56
+          },
+          {
+            "user_id": 1846,
+            "sales_amount": 46731.24
+          },
+          {
+            "user_id": 2798,
+            "sales_amount": 44595.32
+          },
+          {
+            "user_id": 1152,
+            "sales_amount": 44175.05
+          },
+          {
+            "user_id": 1556,
+            "sales_amount": 44068.78
+          }
+        ],
+        "error": "",
+        "retry_count": 0,
+        "status": "success",
+        "trace": [
+          {
+            "stage": "execute",
+            "status": "success"
+          }
+        ],
+        "latency_ms": 2139.62
+      },
+      "elapsed_seconds": 2.143,
+      "result_matches": true
+    },
+    {
+      "id": "clarify_clear",
+      "payload": {
+        "question": "请按支付方式汇总2026年7月已完成订单的优惠金额，返回支付方式和金额。",
+        "mode": "clarify"
+      },
+      "reference_sql": "SELECT payment_method,ROUND(SUM(discount_amount),2) AS amount FROM orders WHERE order_status='completed' AND order_date>='2026-07-01' AND order_date<'2026-08-01' GROUP BY payment_method",
+      "expected": [
+        {
+          "payment_method": "card",
+          "amount": 9681.13
+        },
+        {
+          "payment_method": "alipay",
+          "amount": 18449.16
+        },
+        {
+          "payment_method": "wechat",
+          "amount": 12875.87
+        },
+        {
+          "payment_method": "cash",
+          "amount": 13339.07
+        }
+      ],
+      "http_status": 200,
+      "response": {
+        "engine": "Production NL2SQL Engine",
+        "question": "请按支付方式汇总2026年7月已完成订单的优惠金额，返回支付方式和金额。",
+        "sql": "SELECT payment_method, ROUND(SUM(discount_amount), 2) AS discount_amount FROM orders WHERE order_status = 'completed' AND order_date >= '2026-07-01' AND order_date <= '2026-07-31' GROUP BY payment_method LIMIT 200",
+        "result": [
+          {
+            "payment_method": "card",
+            "discount_amount": 9681.13
+          },
+          {
+            "payment_method": "alipay",
+            "discount_amount": 18449.16
+          },
+          {
+            "payment_method": "wechat",
+            "discount_amount": 12875.87
+          },
+          {
+            "payment_method": "cash",
+            "discount_amount": 13339.07
+          }
+        ],
+        "trace": [
+          {
+            "stage": "clarification",
+            "status": "proceed"
+          },
+          {
+            "stage": "execute",
+            "status": "success"
+          }
+        ],
+        "retry_count": 0,
+        "needs_clarification": false,
+        "gate_decision": {
+          "decision": "proceed",
+          "ambiguity_type": "none",
+          "known_constraints": [
+            {
+              "slot": "dimension",
+              "quote": "按支付方式汇总"
+            },
+            {
+              "slot": "time",
+              "quote": "2026年7月"
+            },
+            {
+              "slot": "filter",
+              "quote": "已完成订单"
+            },
+            {
+              "slot": "metric",
+              "quote": "优惠金额"
+            },
+            {
+              "slot": "dimension",
+              "quote": "返回支付方式和金额"
+            },
+            {
+              "slot": "metric",
+              "quote": "返回支付方式和金额"
+            }
+          ],
+          "missing_slots": [],
+          "clarification_question": "",
+          "options": [],
+          "resolved_slots": []
+        },
+        "normalized_question": "Reference date: 2026-09-14; timezone: Asia/Shanghai. An explicit reference date in the question takes precedence.\nVerified city storage values and same-city suffix aliases (not region mappings):\n[{\"field\": \"users.city\", \"value\": \"上海市\", \"province\": \"上海\", \"verified_aliases\": [\"上海\"]}, {\"field\": \"users.city\", \"value\": \"北京市\", \"province\": \"北京\", \"verified_aliases\": [\"北京\"]}, {\"field\": \"users.city\", \"value\": \"南京市\", \"province\": \"江苏\", \"verified_aliases\": [\"南京\"]}, {\"field\": \"users.city\", \"value\": \"广州市\", \"province\": \"广东\", \"verified_aliases\": [\"广州\"]}, {\"field\": \"users.city\", \"value\": \"成都市\", \"province\": \"四川\", \"verified_aliases\": [\"成都\"]}, {\"field\": \"users.city\", \"value\": \"杭州市\", \"province\": \"浙江\", \"verified_aliases\": [\"杭州\"]}, {\"field\": \"users.city\", \"value\": \"武汉市\", \"province\": \"湖北\", \"verified_aliases\": [\"武汉\"]}, {\"field\": \"users.city\", \"value\": \"西安市\", \"province\": \"陕西\", \"verified_aliases\": [\"西安\"]}]\nOnly normalize a city to its uniquely verified same-city value. Do not infer a city from a province/region. An absent named city remains that city; empty results are valid. Do not replace it with an existing city or ask merely because no rows exist.\nOriginal question (preserve all constraints):\n请按支付方式汇总2026年7月已完成订单的优惠金额，返回支付方式和金额。",
+        "error": "",
+        "status": "success",
+        "latency_ms": 7363.53,
+        "engine_input": "Reference date: 2026-09-14; timezone: Asia/Shanghai. An explicit reference date in the question takes precedence.\nVerified city storage values and same-city suffix aliases (not region mappings):\n[{\"field\": \"users.city\", \"value\": \"上海市\", \"province\": \"上海\", \"verified_aliases\": [\"上海\"]}, {\"field\": \"users.city\", \"value\": \"北京市\", \"province\": \"北京\", \"verified_aliases\": [\"北京\"]}, {\"field\": \"users.city\", \"value\": \"南京市\", \"province\": \"江苏\", \"verified_aliases\": [\"南京\"]}, {\"field\": \"users.city\", \"value\": \"广州市\", \"province\": \"广东\", \"verified_aliases\": [\"广州\"]}, {\"field\": \"users.city\", \"value\": \"成都市\", \"province\": \"四川\", \"verified_aliases\": [\"成都\"]}, {\"field\": \"users.city\", \"value\": \"杭州市\", \"province\": \"浙江\", \"verified_aliases\": [\"杭州\"]}, {\"field\": \"users.city\", \"value\": \"武汉市\", \"province\": \"湖北\", \"verified_aliases\": [\"武汉\"]}, {\"field\": \"users.city\", \"value\": \"西安市\", \"province\": \"陕西\", \"verified_aliases\": [\"西安\"]}]\nOnly normalize a city to its uniquely verified same-city value. Do not infer a city from a province/region. An absent named city remains that city; empty results are valid. Do not replace it with an existing city or ask merely because no rows exist.\nOriginal question (preserve all constraints):\n请按支付方式汇总2026年7月已完成订单的优惠金额，返回支付方式和金额。",
+        "interaction": {
+          "original_question": "请按支付方式汇总2026年7月已完成订单的优惠金额，返回支付方式和金额。",
+          "known_constraints": [
+            {
+              "slot": "dimension",
+              "quote": "按支付方式汇总"
+            },
+            {
+              "slot": "time",
+              "quote": "2026年7月"
+            },
+            {
+              "slot": "filter",
+              "quote": "已完成订单"
+            },
+            {
+              "slot": "metric",
+              "quote": "优惠金额"
+            },
+            {
+              "slot": "dimension",
+              "quote": "返回支付方式和金额"
+            },
+            {
+              "slot": "metric",
+              "quote": "返回支付方式和金额"
+            }
+          ],
+          "clarification_question": null,
+          "clarification_answer": null,
+          "resolved_slots": []
+        }
+      },
+      "elapsed_seconds": 7.367,
+      "result_matches": true
+    },
+    {
+      "id": "interactive",
+      "payload": {
+        "question": "这次只分析指定付款方式的历史有效订单优惠总额，返回一个金额。",
+        "mode": "clarify"
+      },
+      "http_status": 200,
+      "response": {
+        "engine": "Production NL2SQL Engine",
+        "question": "这次只分析指定付款方式的历史有效订单优惠总额，返回一个金额。",
+        "sql": "",
+        "result": [],
+        "trace": [
+          {
+            "stage": "clarification",
+            "status": "clarify"
+          }
+        ],
+        "retry_count": 0,
+        "needs_clarification": true,
+        "gate_decision": {
+          "decision": "clarify",
+          "ambiguity_type": "multiple",
+          "known_constraints": [
+            {
+              "slot": "filter",
+              "quote": "指定付款方式"
+            },
+            {
+              "slot": "time",
+              "quote": "历史有效订单"
+            },
+            {
+              "slot": "metric",
+              "quote": "优惠总额"
+            }
+          ],
+          "missing_slots": [
+            "filter",
+            "time"
+          ],
+          "clarification_question": "请明确指定的付款方式是什么？历史有效订单的时间范围是全部历史，还是某个具体时间段（例如：最近30天、2026年全年等）？",
+          "options": [
+            "alipay",
+            "wechat",
+            "card",
+            "cash"
+          ],
+          "resolved_slots": []
+        },
+        "status": "needs_clarification",
+        "clarification_question": "请明确指定的付款方式是什么？历史有效订单的时间范围是全部历史，还是某个具体时间段（例如：最近30天、2026年全年等）？",
+        "options": [
+          "alipay",
+          "wechat",
+          "card",
+          "cash"
+        ],
+        "clarification_context": {
+          "original_question": "这次只分析指定付款方式的历史有效订单优惠总额，返回一个金额。",
+          "known_constraints": [
+            {
+              "slot": "filter",
+              "quote": "指定付款方式"
+            },
+            {
+              "slot": "time",
+              "quote": "历史有效订单"
+            },
+            {
+              "slot": "metric",
+              "quote": "优惠总额"
+            }
+          ],
+          "missing_slots": [
+            "filter",
+            "time"
+          ],
+          "clarification_question": "请明确指定的付款方式是什么？历史有效订单的时间范围是全部历史，还是某个具体时间段（例如：最近30天、2026年全年等）？",
+          "reference_date": "2026-09-14",
+          "timezone": "Asia/Shanghai",
+          "rounds": 1
+        },
+        "latency_ms": 5174.3
+      },
+      "elapsed_seconds": 5.178,
+      "followup": {
+        "payload": {
+          "question": "这次只分析指定付款方式的历史有效订单优惠总额，返回一个金额。",
+          "mode": "clarify",
+          "clarification_answer": "付款方式为微信支付（wechat），时间范围为全部历史。",
+          "clarification_context": {
+            "original_question": "这次只分析指定付款方式的历史有效订单优惠总额，返回一个金额。",
+            "known_constraints": [
+              {
+                "slot": "filter",
+                "quote": "指定付款方式"
+              },
+              {
+                "slot": "time",
+                "quote": "历史有效订单"
+              },
+              {
+                "slot": "metric",
+                "quote": "优惠总额"
+              }
+            ],
+            "missing_slots": [
+              "filter",
+              "time"
+            ],
+            "clarification_question": "请明确指定的付款方式是什么？历史有效订单的时间范围是全部历史，还是某个具体时间段（例如：最近30天、2026年全年等）？",
+            "reference_date": "2026-09-14",
+            "timezone": "Asia/Shanghai",
+            "rounds": 1
+          }
+        },
+        "http_status": 200,
+        "response": {
+          "engine": "Production NL2SQL Engine",
+          "question": "这次只分析指定付款方式的历史有效订单优惠总额，返回一个金额。",
+          "sql": "SELECT ROUND(SUM(discount_amount), 2) AS discount_amount FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') AND payment_method = 'wechat' LIMIT 200",
+          "result": [
+            {
+              "discount_amount": 598592.99
+            }
+          ],
+          "trace": [
+            {
+              "stage": "clarification",
+              "status": "proceed"
+            },
+            {
+              "stage": "execute",
+              "status": "success"
+            }
+          ],
+          "retry_count": 0,
+          "needs_clarification": false,
+          "gate_decision": {
+            "decision": "proceed",
+            "ambiguity_type": "none",
+            "known_constraints": [
+              {
+                "slot": "filter",
+                "quote": "指定付款方式"
+              },
+              {
+                "slot": "time",
+                "quote": "历史有效订单"
+              },
+              {
+                "slot": "metric",
+                "quote": "优惠总额"
+              }
+            ],
+            "missing_slots": [],
+            "clarification_question": "",
+            "options": [],
+            "resolved_slots": [
+              {
+                "slot": "filter",
+                "quote": "微信支付（wechat）"
+              },
+              {
+                "slot": "time",
+                "quote": "全部历史"
+              }
+            ]
+          },
+          "normalized_question": "Reference date: 2026-09-14; timezone: Asia/Shanghai. An explicit reference date in the question takes precedence.\nVerified city storage values and same-city suffix aliases (not region mappings):\n[{\"field\": \"users.city\", \"value\": \"上海市\", \"province\": \"上海\", \"verified_aliases\": [\"上海\"]}, {\"field\": \"users.city\", \"value\": \"北京市\", \"province\": \"北京\", \"verified_aliases\": [\"北京\"]}, {\"field\": \"users.city\", \"value\": \"南京市\", \"province\": \"江苏\", \"verified_aliases\": [\"南京\"]}, {\"field\": \"users.city\", \"value\": \"广州市\", \"province\": \"广东\", \"verified_aliases\": [\"广州\"]}, {\"field\": \"users.city\", \"value\": \"成都市\", \"province\": \"四川\", \"verified_aliases\": [\"成都\"]}, {\"field\": \"users.city\", \"value\": \"杭州市\", \"province\": \"浙江\", \"verified_aliases\": [\"杭州\"]}, {\"field\": \"users.city\", \"value\": \"武汉市\", \"province\": \"湖北\", \"verified_aliases\": [\"武汉\"]}, {\"field\": \"users.city\", \"value\": \"西安市\", \"province\": \"陕西\", \"verified_aliases\": [\"西安\"]}]\nOnly normalize a city to its uniquely verified same-city value. Do not infer a city from a province/region. An absent named city remains that city; empty results are valid. Do not replace it with an existing city or ask merely because no rows exist.\nOriginal question (preserve all constraints):\n这次只分析指定付款方式的历史有效订单优惠总额，返回一个金额。\nUser supplied ONLY the following missing fields; preserve all original constraints:\n[{\"slot\": \"filter\", \"quote\": \"微信支付（wechat）\"}, {\"slot\": \"time\", \"quote\": \"全部历史\"}]",
+          "error": "",
+          "status": "success",
+          "latency_ms": 6340.78,
+          "engine_input": "Reference date: 2026-09-14; timezone: Asia/Shanghai. An explicit reference date in the question takes precedence.\nVerified city storage values and same-city suffix aliases (not region mappings):\n[{\"field\": \"users.city\", \"value\": \"上海市\", \"province\": \"上海\", \"verified_aliases\": [\"上海\"]}, {\"field\": \"users.city\", \"value\": \"北京市\", \"province\": \"北京\", \"verified_aliases\": [\"北京\"]}, {\"field\": \"users.city\", \"value\": \"南京市\", \"province\": \"江苏\", \"verified_aliases\": [\"南京\"]}, {\"field\": \"users.city\", \"value\": \"广州市\", \"province\": \"广东\", \"verified_aliases\": [\"广州\"]}, {\"field\": \"users.city\", \"value\": \"成都市\", \"province\": \"四川\", \"verified_aliases\": [\"成都\"]}, {\"field\": \"users.city\", \"value\": \"杭州市\", \"province\": \"浙江\", \"verified_aliases\": [\"杭州\"]}, {\"field\": \"users.city\", \"value\": \"武汉市\", \"province\": \"湖北\", \"verified_aliases\": [\"武汉\"]}, {\"field\": \"users.city\", \"value\": \"西安市\", \"province\": \"陕西\", \"verified_aliases\": [\"西安\"]}]\nOnly normalize a city to its uniquely verified same-city value. Do not infer a city from a province/region. An absent named city remains that city; empty results are valid. Do not replace it with an existing city or ask merely because no rows exist.\nOriginal question (preserve all constraints):\n这次只分析指定付款方式的历史有效订单优惠总额，返回一个金额。\nUser supplied ONLY the following missing fields; preserve all original constraints:\n[{\"slot\": \"filter\", \"quote\": \"微信支付（wechat）\"}, {\"slot\": \"time\", \"quote\": \"全部历史\"}]",
+          "interaction": {
+            "original_question": "这次只分析指定付款方式的历史有效订单优惠总额，返回一个金额。",
+            "known_constraints": [
+              {
+                "slot": "filter",
+                "quote": "指定付款方式"
+              },
+              {
+                "slot": "time",
+                "quote": "历史有效订单"
+              },
+              {
+                "slot": "metric",
+                "quote": "优惠总额"
+              }
+            ],
+            "clarification_question": "请明确指定的付款方式是什么？历史有效订单的时间范围是全部历史，还是某个具体时间段（例如：最近30天、2026年全年等）？",
+            "clarification_answer": "付款方式为微信支付（wechat），时间范围为全部历史。",
+            "resolved_slots": [
+              {
+                "slot": "filter",
+                "quote": "微信支付（wechat）"
+              },
+              {
+                "slot": "time",
+                "quote": "全部历史"
+              }
+            ]
+          }
+        },
+        "elapsed_seconds": 6.347
+      },
+      "reference_sql": "SELECT ROUND(SUM(discount_amount),2) AS amount FROM orders WHERE order_status IN ('paid','completed','shipped') AND payment_method='wechat'",
+      "expected": [
+        {
+          "amount": 598592.99
+        }
+      ],
+      "result_matches": true
+    },
+    {
+      "id": "invalid_answer",
+      "payload": {
+        "question": "请按本次选定的客户等级统计注册人数，只返回一个人数。",
+        "mode": "clarify"
+      },
+      "http_status": 200,
+      "response": {
+        "engine": "Production NL2SQL Engine",
+        "question": "请按本次选定的客户等级统计注册人数，只返回一个人数。",
+        "sql": "",
+        "result": [],
+        "trace": [
+          {
+            "stage": "clarification",
+            "status": "clarify"
+          }
+        ],
+        "retry_count": 0,
+        "needs_clarification": true,
+        "gate_decision": {
+          "decision": "clarify",
+          "ambiguity_type": "multiple",
+          "known_constraints": [
+            {
+              "slot": "metric",
+              "quote": "本次选定的客户等级"
+            }
+          ],
+          "missing_slots": [
+            "metric"
+          ],
+          "clarification_question": "本次选定的客户等级具体是哪一个？请从以下选项中选择：normal、silver、gold、black。",
+          "options": [
+            "normal",
+            "silver",
+            "gold",
+            "black"
+          ],
+          "resolved_slots": []
+        },
+        "status": "needs_clarification",
+        "clarification_question": "本次选定的客户等级具体是哪一个？请从以下选项中选择：normal、silver、gold、black。",
+        "options": [
+          "normal",
+          "silver",
+          "gold",
+          "black"
+        ],
+        "clarification_context": {
+          "original_question": "请按本次选定的客户等级统计注册人数，只返回一个人数。",
+          "known_constraints": [
+            {
+              "slot": "metric",
+              "quote": "本次选定的客户等级"
+            }
+          ],
+          "missing_slots": [
+            "metric"
+          ],
+          "clarification_question": "本次选定的客户等级具体是哪一个？请从以下选项中选择：normal、silver、gold、black。",
+          "reference_date": "2026-09-14",
+          "timezone": "Asia/Shanghai",
+          "rounds": 1
+        },
+        "latency_ms": 4102.6
+      },
+      "elapsed_seconds": 4.107,
+      "followup": {
+        "payload": {
+          "question": "请按本次选定的客户等级统计注册人数，只返回一个人数。",
+          "mode": "clarify",
+          "clarification_answer": "我还没决定，请先不要查询。",
+          "clarification_context": {
+            "original_question": "请按本次选定的客户等级统计注册人数，只返回一个人数。",
+            "known_constraints": [
+              {
+                "slot": "metric",
+                "quote": "本次选定的客户等级"
+              }
+            ],
+            "missing_slots": [
+              "metric"
+            ],
+            "clarification_question": "本次选定的客户等级具体是哪一个？请从以下选项中选择：normal、silver、gold、black。",
+            "reference_date": "2026-09-14",
+            "timezone": "Asia/Shanghai",
+            "rounds": 1
+          }
+        },
+        "http_status": 200,
+        "response": {
+          "engine": "Production NL2SQL Engine",
+          "question": "请按本次选定的客户等级统计注册人数，只返回一个人数。",
+          "sql": "",
+          "result": [],
+          "trace": [
+            {
+              "stage": "clarification",
+              "status": "needs_rephrase"
+            }
+          ],
+          "retry_count": 0,
+          "needs_clarification": false,
+          "gate_decision": {
+            "decision": "needs_rephrase",
+            "ambiguity_type": "multiple",
+            "known_constraints": [
+              {
+                "slot": "metric",
+                "quote": "本次选定的客户等级"
+              }
+            ],
+            "missing_slots": [
+              "metric"
+            ],
+            "clarification_question": "本次选定的客户等级具体是哪一个？请从以下选项中选择：normal、silver、gold、black。",
+            "options": [
+              "normal",
+              "silver",
+              "gold",
+              "black"
+            ],
+            "resolved_slots": []
+          },
+          "status": "needs_rephrase",
+          "error": "请重新提交完整明确的问题。",
+          "latency_ms": 6453.54
+        },
+        "elapsed_seconds": 6.457
+      },
+      "safe_stop": true
+    }
+  ],
+  "safety": {
+    "guardrail_only": true,
+    "blocked": true,
+    "executed_against_database": false
+  },
+  "database_after_first_round": {
+    "users": "b827470388b126a973c77491e8863f6e6e51e7cbfeb7f689923a1b48ac2d55dc",
+    "products": "1a33196738fb59c7ee3d88f68e5ab3c89c94c5ca14864d3976c65337f3aad43e",
+    "orders": "e08ce1622cc57a7ad81b115f96fe1a7012a37b18b49229ae69da3d4c9335dab3",
+    "order_items": "40c992219526ac2fe849d58990769f788d07e4c6b3a83645b8863f65314a8a3e",
+    "refunds": "e8c296d3b783f81b322bc103d5f9eb00823141234155a3250980828af242d6b2",
+    "core_table": "af48658b968e0d6f803c66aebc0e6d9bc7b83030634f6ff2ebd4abc9ab6353d1",
+    "core_field": "bb1c16e9bed8a8ab47c6204cfa55986378340eea6bbb54f92cdefe112b265fdd"
+  },
+  "database_after": {
+    "users": "b827470388b126a973c77491e8863f6e6e51e7cbfeb7f689923a1b48ac2d55dc",
+    "products": "1a33196738fb59c7ee3d88f68e5ab3c89c94c5ca14864d3976c65337f3aad43e",
+    "orders": "e08ce1622cc57a7ad81b115f96fe1a7012a37b18b49229ae69da3d4c9335dab3",
+    "order_items": "40c992219526ac2fe849d58990769f788d07e4c6b3a83645b8863f65314a8a3e",
+    "refunds": "e8c296d3b783f81b322bc103d5f9eb00823141234155a3250980828af242d6b2",
+    "core_table": "af48658b968e0d6f803c66aebc0e6d9bc7b83030634f6ff2ebd4abc9ab6353d1",
+    "core_field": "bb1c16e9bed8a8ab47c6204cfa55986378340eea6bbb54f92cdefe112b265fdd"
+  },
+  "database_unchanged": true
+}

@@ -1,6 +1,7 @@
 """Project-owned API/UI lifecycle. MySQL data is never initialized here."""
 
 import fcntl
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -90,10 +91,12 @@ def healthy(url, process):
 
 
 def start():
-    for name in SERVICES:
-        stop(name)
-    for port, _, _ in SERVICES.values():
-        free_port(port)
+    stamp = runtime_fingerprint()
+    reusable = {name: can_reuse(name, stamp) for name in SERVICES}
+    for name, (port, _, _) in SERVICES.items():
+        if not reusable[name]:
+            stop(name)
+            free_port(port)
     # Resolve only the mysql service belonging to this compose file.
     subprocess.run(["docker", "compose", "up", "-d", "mysql"], cwd=ROOT, check=True)
     container = subprocess.check_output(["docker", "compose", "ps", "-q", "mysql"], cwd=ROOT, text=True).strip()
@@ -109,13 +112,17 @@ def start():
     started = []
     try:
         for name, (port, args, endpoint) in SERVICES.items():
+            if reusable[name]:
+                print(f"{name}: reusing healthy project process", flush=True)
+                continue
             env = os.environ.copy()
             env.update(API_HOST="127.0.0.1", API_PORT="8002", UI_PORT="8502", PYTHONUNBUFFERED="1")
             with (LOGS / f"{name}.log").open("ab") as log:
                 process = subprocess.Popen([str(PYTHON), *args], cwd=ROOT, env=env,
                                            stdout=log, stderr=log, stdin=subprocess.DEVNULL, start_new_session=True)
             time.sleep(.1)
-            record = {"root": str(ROOT), "service": name, "identity": identity(process.pid)}
+            record = {"root": str(ROOT), "service": name, "identity": identity(process.pid),
+                      "runtime_fingerprint": stamp}
             (RUN / f"{name}.json").write_text(json.dumps(record))
             (RUN / f"{name}.pid").write_text(str(process.pid))
             started.append(name)
@@ -131,6 +138,30 @@ def start():
     print(f"UI: http://127.0.0.1:8502\nAPI Docs: http://127.0.0.1:8002/docs\nLogs: {LOGS}")
     if sys.platform == "darwin" and os.getenv("OPEN_BROWSER", "1") == "1":
         subprocess.run(["open", "http://127.0.0.1:8502"], check=False)
+
+
+def runtime_fingerprint():
+    digest = hashlib.sha256()
+    files = sorted((ROOT / "app").rglob("*.py")) + [
+        ROOT / "ui/app.py", ROOT / "eval/strong_baseline.py",
+        ROOT / "eval/strong_baseline_v2.py", ROOT / ".env"]
+    for path in files:
+        digest.update(str(path.relative_to(ROOT)).encode())
+        digest.update(path.read_bytes())
+    return digest.hexdigest()
+
+
+def can_reuse(name, stamp):
+    try:
+        pid = int((RUN / f"{name}.pid").read_text())
+        record = json.loads((RUN / f"{name}.json").read_text())
+        if not owns(name, pid, record) or record.get("runtime_fingerprint") != stamp:
+            return False
+        port, _, endpoint = SERVICES[name]
+        with urlopen(f"http://127.0.0.1:{port}{endpoint}", timeout=2) as response:
+            return response.status == 200
+    except (OSError, ValueError):
+        return False
 
 
 def main():

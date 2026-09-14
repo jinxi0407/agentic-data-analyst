@@ -1,288 +1,158 @@
 # Agentic Data Analyst
 
-Agentic Data Analyst is a business-oriented natural-language-to-SQL analytics system for structured MySQL data.
+面向电商结构化数据的中文自然语言查询项目，基于 NL2SQL-Demo 二次开发。
+将业务问题转换为 MySQL SQL，经过安全校验和只读执行后展示结果。
+**v1.1.0：默认直接查询，可选单轮澄清。** 验收范围与待人工确认项见[验收记录](docs/V1_1_RELEASE_ACCEPTANCE.md)。
 
-It converts Chinese business questions into executable SQL, applies fixed business metric and time semantics, validates every statement through deterministic guardrails, executes queries with a read-only database account, and returns structured analytical results.
+## 默认直接查询，可选一次澄清
 
-## Overview
+API 和 UI 默认关闭主动澄清，直接使用本轮评测的同配置 Baseline 路径，不调用 Gate。
+两版共用生产查询引擎、业务上下文、时间语义、完整 Schema/FK、城市元数据、SQL 安全及执行错误重试。
+Chat 使用环境配置中的 qwen-plus；text-embedding-v4 配置保留，当前静态 Schema 路径不调用 embedding。
 
-Release v1.1 adds one LLM clarification gate in front of the frozen v1.0 production engine. Qwen decides whether existing business definitions and the question are sufficient. A materially ambiguous request receives one concise Chinese clarification question; a clear request proceeds directly to SQL generation. The underlying engine still uses complete static schema metadata, fixed vocabulary normalization, and general SQL examples.
-
-The included e-commerce schema covers users, products, orders, order items, and refunds. All records are synthetic and reproducibly generated for local development and evaluation.
-
-## Key Features
-
-- LLM clarification with strict Pydantic output, temperature 0, and at most one user clarification round.
-- Stateless follow-up requests, safe format/network failure handling, and a Chinese interactive Streamlit UI.
-- One-command local startup with project-owned PID files, health checks, and separate logs.
-- Business Metric Dictionary for sales, quantity, valid orders, paying users, and approved refunds.
-- Explicit time semantics for calendar periods and reference-date-based ranges.
-- Complete table, column, data type, primary key, and foreign key context.
-- Fixed entity and business vocabulary normalization.
-- Five general NL2SQL examples for aggregation, filtering, ranking, joins, and grouping.
-- Qwen-plus SQL generation through DashScope.
-- SQLGlot guardrails that permit only one read-only `SELECT` or `WITH ... SELECT` statement.
-- Automatic row limiting and a read-only MySQL application account.
-- Execution-error retry with a maximum of two retries.
-- FastAPI API, Streamlit interface, Dockerized MySQL, and a frozen evaluation pipeline.
-
-## Architecture
+开启后，Qwen 判断是否缺少关键时间、指标或筛选信息，必要时问一次。
+补充只用于被问字段，保留原问题条件。仍不完整返回 `needs_rephrase`，
+结构或引用校验失败返回 `invalid_output`，服务异常返回 `system_error`，不猜测执行。
+这不是 ReAct、原生 Function Calling 或多智能体方案，也没有公网部署。
 
 ```mermaid
 flowchart TD
-    Q[Chinese business question] --> CG[LLM Clarification Gate]
-    CG -->|Proceed| N[Entity and alias normalization]
-    CG -->|Clarify| U[One user answer]
-    U --> RC[Re-check once]
-    RC -->|Proceed| N
-    RC -->|Still ambiguous| NR[Needs rephrase]
-    N --> C[Static schema metadata]
-    C --> S[Business metrics, time semantics, PK/FK context]
-    S --> F[Five general NL2SQL examples]
-    F --> L[Qwen-plus SQL generation]
-    L --> G[SQLGlot guardrail]
-    G -->|Valid| D[Read-only MySQL execution]
-    G -->|Syntax or safety error| R[Execution-error repair, max 2]
-    D -->|Database error| R
-    R --> L
-    D --> O[Structured rows via FastAPI / Streamlit]
+    U[用户问题] --> M{是否启用澄清}
+    M -->|关闭，默认| Q[生产 SQL 查询引擎]
+    M -->|开启| G[LLM 澄清判断]
+    G -->|明确| Q
+    G -->|缺少关键信息| A[用户补充一次]
+    A --> C[一次完整性和字段检查]
+    C -->|通过| Q
+    C -->|未通过| E[明确提示，不执行]
+    G -->|异常| E
+    Q --> S[SQL 安全校验]
+    S -->|通过| D[MySQL 只读执行]
+    D --> R[返回结果]
+    S -->|失败| X[现有执行错误修复，最多两次]
+    D -->|执行失败| X
+    X --> Q
 ```
 
-The API calls `app.agent.production.run_interactive`. It delegates accepted requests to the unchanged Release v1.0 engine. `run_question` remains the direct v1.0 entrypoint for reproducible comparisons. The gate is not a query-category router, ReAct agent, or function-calling agent.
+入口为 `app/main.py`；公共处理和可选澄清在 `app/agent/scoped_clarification.py`，
+冻结引擎在 `eval/strong_baseline_v2.py`。历史实现保留，不代表额外生产版本。
 
-## Interactive Clarification
+## 日常启动与停止
 
-The gate receives the production business definitions, schema, PK/FK relationships, vocabulary and reference date. Defined metrics such as sales amount, quantity and valid orders do not need to be redefined by the user. Missing optional detail is not a reason to interrupt a query.
+要求 Docker Desktop 已运行，本项目数据库已初始化，`.venv` 与 `.env` 已配置。
 
-Both turns use `POST /api/query`:
+```bash
+cd /Users/jinxi/Documents/agentic-data-analyst
+bash scripts/start_local.sh
+```
+
+- 页面：<http://127.0.0.1:8502/>
+- API：`http://127.0.0.1:8002`；接口文档：<http://127.0.0.1:8002/docs>
+- 健康检查：`GET /health`
+- MySQL：`127.0.0.1:3307` → 本项目容器 `3306`
+
+健康、归属正确且运行文件未改变的 Web 服务可以复用；代码或配置改变时只重启本项目登记服务。
+使用 PID 前核对身份和命令；未知进程占用端口时停止并提示，不自动杀进程。
+`.run` 保存本地进程记录，`logs` 保存本地日志，均不上传 GitHub。
+
+```bash
+bash scripts/stop_local.sh
+```
+
+停止脚本只停止本项目管理的 FastAPI/Streamlit，MySQL 保持运行。
+启动不会重新 seed、清空数据库、重新安装依赖或操作金融/EduRAG 项目。
+
+### 仅首次建立独立环境
+
+新克隆目录才需创建 `.venv` 并安装 `requirements.txt`，已有环境不要重复创建。
+`.env.example` 仅是模板，**不要覆盖已有 `.env`**。填写自己的 DashScope Key 和本项目数据库密码。
+模型名、接口地址、数据库连接从配置读取，真实配置不提交 Git。
+只有新建空数据库时才使用 `scripts/init_database.py`、`data/seed_data.py` 和 `scripts/set_readonly_user.py`。
+**seed 会替换本项目合成业务数据，不属于日常启动，不要在已有评测数据库上随意执行。**
+本机 Documents 可能被 iCloud 卸载文件，依赖应保持本地可用，已有 `.venv.nosync` 方案保留。
+
+## API 示例
+
+默认请求向后兼容，仅提供 question 即可，不调用 Gate：
+
+```bash
+curl http://127.0.0.1:8002/api/query \
+  -H 'Content-Type: application/json' \
+  -d '{"question":"累计有效订单销售额是多少？只返回金额。"}'
+```
+
+显式开启：
 
 ```json
-{"question": "最近销售怎么样？"}
+{"question":"这次选定支付方式的有效订单优惠总额是多少？","mode":"clarify"}
 ```
 
-When `status` is `needs_clarification`, display `clarification_question` and preserve the returned `clarification_context` verbatim. Send the next request with the same original `question`, that context, and `clarification_answer`. The backend merges the original constraints with the answer and rechecks once. Further ambiguity returns `needs_rephrase` without executing SQL. Invalid model JSON gets one format retry; an unresolved format or service error returns `clarification_unavailable` without SQL.
+收到 `needs_clarification` 后展示 `clarification_question`，原样保存返回的 `clarification_context`。
+下一次发送相同原问题，加上 `mode: "clarify"`、该 context 与用户填写的 `clarification_answer`。
+不要自行构造 context 或用模型改写的完整问题替代用户输入。新问题不携带旧 context/answer。
+UI 默认关闭“启用一次主动澄清”，新问题会清理旧补充状态。
 
-The API stores no conversation memory. The one-round limit applies to the submitted interaction context, not to a user starting a new request. Clear-query reference dates default to the server's current date; evaluation supplies a frozen reference date. An explicit reference date in the question remains authoritative.
+`POST /api/scoped-query` 保留显式模式接口；`/api/query` 对新请求使用相同路径。
+以前已返回的旧版 context 可在 `/api/query` 完成兼容补充，但新请求不会默认进入旧 Gate。
+API 没有跨题长期记忆；一次澄清限制由当前交互 context 约束。
 
-The Chinese UI preserves the pending clarification across reruns. Successful queries show status, total request latency and retries, with separate result, SQL and execution tabs. A two-column categorical/numeric result can optionally be shown as a simple bar chart. Transport failures retain the pending question for retry.
+## 本轮冻结评测
 
-## Why This Design
+自建合成冻结120题：明确60、单歧义60，歧义按时间、指标、筛选/实体各20题。
+不是外部独立盲测，也不代表真实线上用户分布。
 
-Structured business queries do not always benefit from more reasoning stages. A full agentic workflow and a deterministic complexity router were evaluated, but the compact NL2SQL engine produced the best accuracy and latency trade-off on the final frozen holdout.
-
-The release therefore favors fixed and inspectable semantics, complete schema grounding, deterministic safety controls, and a short execution path that is easier to test and explain.
-
-## Evaluation
-
-Frozen **v1.0** Final Release Holdout: 300 previously unseen business queries. These results are retained unchanged and are not rerun to evaluate v1.1 clarification.
-
-| Metric | Result |
-|---|---:|
-| End-to-End Accuracy | **73.67% (221/300)** |
-| Average Latency | **2.76s** |
-| Easy | 88.67% |
-| Medium | 55.83% |
-| Hard | 70.00% |
-| Filtering / Aggregation | 90.00% |
-| JOIN | 73.33% |
-| Top-K / Ranking | 86.67% |
-| Time / Trend | 41.67% |
-| Refund / Customer / Product | 80.00% |
-| Complex | 40.00% |
-| Paraphrase | 63.89% |
-
-Evaluation discipline:
-
-- The benchmark, Reference SQL, and database-derived Ground Truth were frozen before execution.
-- All 300 questions were unique and the benchmark was executed once for the final score.
-- No failed case was removed or relabeled.
-- No benchmark-specific tuning occurred after results were revealed.
-- Exact result comparison uses a numeric absolute tolerance of 0.005 and preserves ordering when requested.
-
-See [FINAL_EVALUATION.md](FINAL_EVALUATION.md) for the protocol and complete category summary.
-
-## Tech Stack
-
-| Layer | Technology |
-|---|---|
-| Chat model | Qwen-plus via DashScope |
-| Database | MySQL 8.4 |
-| SQL parsing and safety | SQLGlot |
-| API | FastAPI and Uvicorn |
-| UI | Streamlit |
-| Database client | PyMySQL |
-| Testing | pytest |
-| Local infrastructure | Docker Compose |
-
-## Project Structure
-
-```text
-agentic-data-analyst/
-├── app/
-│   ├── agent/production.py
-│   ├── tools/
-│   ├── config.py
-│   └── main.py
-├── data/
-│   ├── init.sql
-│   └── seed_data.py
-├── eval/
-│   ├── final_release_holdout_300.json
-│   ├── final_release_manifest.json
-│   ├── final_results.json
-│   ├── final_report.json
-│   ├── scoring.py
-│   └── run_final_evaluation.py
-├── scripts/
-├── tests/
-├── ui/
-├── docker-compose.yml
-├── requirements.txt
-├── .env.example
-├── FINAL_EVALUATION.md
-├── ATTRIBUTION.md
-└── LICENSE
-```
-
-## Quick Start
-
-### 1. Clone and install
-
-```bash
-git clone https://github.com/jinxi0407/agentic-data-analyst.git
-cd agentic-data-analyst
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-```
-
-### 2. Configure the environment
-
-```bash
-cp .env.example .env
-```
-
-Set `DASHSCOPE_API_KEY`, `MYSQL_PASSWORD`, and `MYSQL_ROOT_PASSWORD` in `.env`. The configured models are qwen-plus and text-embedding-v4; the production SQL path uses qwen-plus.
-
-### 3. Start and initialize MySQL
-
-```bash
-docker compose up -d mysql
-python scripts/init_database.py
-python data/seed_data.py
-python scripts/set_readonly_user.py
-```
-
-`data/seed_data.py` replaces data in this project's five business tables. Run it only when you intend to reset the local synthetic dataset.
-
-### 4. Start API and UI together
-
-```bash
-./scripts/start_local.sh
-```
-
-This requires an existing `.venv` and configured `.env`. It starts only this project's MySQL service, waits for MySQL, FastAPI and Streamlit health checks, then opens `http://127.0.0.1:8502` on macOS. API documentation is at `http://127.0.0.1:8002/docs`. Startup never seeds or resets your database and does not reinstall packages.
-
-Recorded processes are in `.run/fastapi.pid` and `.run/streamlit.pid`; logs are in `logs/fastapi.log` and `logs/streamlit.log`. A restart verifies PID identity before stopping recorded processes. An unknown process occupying a port causes startup to exit without killing it. To stop only recorded project API/UI processes, leaving MySQL running:
-
-```bash
-./scripts/stop_local.sh
-```
-
-Endpoints:
-
-```text
-GET  /health
-POST /api/query
-```
-
-Example request:
-
-```bash
-curl -X POST http://127.0.0.1:8002/api/query \
-  -H 'Content-Type: application/json' \
-  -d '{"question":"最近30天有效订单销售额是多少？"}'
-```
-
-### 5. Optional separate terminals
-
-```bash
-uvicorn app.main:app --host 127.0.0.1 --port 8002
-# In a second terminal, instead of using the one-command launcher:
-streamlit run ui/app.py --server.port 8502 --server.address 127.0.0.1
-```
-
-Processes started manually are not owned by the launcher. Stop those terminals before switching to one-command startup.
-
-On macOS, an iCloud-synced Documents directory can offload virtual-environment files and make
-Python imports very slow. Keep dependencies local. A project-local `.venv.nosync` with `.venv`
-pointing to it is supported by the launcher; both paths and environment backups are ignored.
-The launcher does not move or recreate environments automatically.
-
-### Clarification evaluation
-
-The dedicated protocol and current evaluation status are in
-[docs/CLARIFICATION_EVALUATION.md](docs/CLARIFICATION_EVALUATION.md). The 80-case development
-set and the independently generated 120-case holdout measure clarification behavior and
-interactive result correctness. They do not replace the frozen v1.0 300-case score.
-
-The first holdout's preflight identified a city-literal mismatch in Reference SQL. It has not
-been run against either model pipeline; final v1.1 scores and release remain pending an audited
-ground-truth resolution. Do not use provisional development E2E scores as resume metrics.
-
-### 6. Run tests and verify the frozen evaluation
-
-```bash
-pytest -q
-python eval/run_final_evaluation.py
-```
-
-The repository includes the frozen per-case results. The evaluation command validates the benchmark digest and database fingerprint, then reproduces the aggregate report without making unnecessary model calls when all results are already present.
-
-## Example Queries
-
-```text
-近一个月有效订单的成交额是多少？
-列出销量排名前十的商品。
-各城市分别有多少笔有效订单？
-上个自然月哪些商品品类的退款金额最高？
-按月查看近半年的成交趋势。
-累计消费最多的客户有哪些？
-```
-
-## Safety
-
-- SQL is parsed with SQLGlot before execution.
-- Only a single `SELECT` or `WITH ... SELECT` statement is accepted.
-- Mutating and administrative keywords are blocked.
-- Result size is capped by `SQL_MAX_ROWS`.
-- The application database user receives only `SELECT` privileges.
-- Secrets are loaded from `.env`, which is excluded from Git.
-
-Guardrails reduce risk but are not a substitute for database isolation, least-privilege credentials, query timeouts, and human review in sensitive environments.
-
-## Experimental Findings
-
-We also evaluated a full agentic workflow and a complexity-aware hybrid router.
-
-| System | Accuracy | Average latency |
+| 指标 | 同配置关闭澄清 Baseline | 开启一次澄清 Final |
 |---|---:|---:|
-| Production NL2SQL Engine | 73.67% | 2.76s |
-| Complexity-aware Hybrid | 71.33% | 3.65s |
+| 结果准确率 | 71/120，59.17% | 88/120，73.33% |
+| 明确问题结果 | 60/60，100% | 53/60，88.33% |
+| 歧义问题结果 | 11/60，18.33% | 35/60，58.33% |
+| 全部歧义题严格交互成功 | 不适用 | 34/60，56.67% |
+| 全集严格交互成功 | 不适用 | 87/120，72.50% |
+| 平均系统耗时 | 1.793秒 | 11.436秒 |
+| 平均模型调用 | 1.042次 | 2.492次 |
 
-More reasoning steps did not consistently improve structured business query accuracy, so the simpler and faster pipeline was selected for Release v1.0. Historical experiments are retained in Git history rather than presented as additional production versions.
+结果净增17题，按原始计数为 +14.17 个百分点。
+Final获得一次模拟用户补充，因此衡量交互价值，不是等信息条件下模型能力。
+澄清判断 Accuracy=107/120（89.17%）、Precision=54/56（96.43%）、Recall=54/60（90%），
+F1=108/116（93.10%，分母2TP+FP+FN）。**F1不是端到端准确率。**
+结果正确与严格交互成功分别报告，未澄清碰巧答对不算歧义题严格成功。
+耗时不含模拟用户思考；一次超时缺失usage，Token统计不能称为完整精确总用量。
+明确题退化、校验失败和耗时增加，是默认关闭澄清的原因。本轮发布不重跑评测或调整核心。
 
-## Limitations
+## 安全与已知限制
 
-- The included business dataset is synthetic.
-- Evaluation uses one fixed local e-commerce schema with five business tables.
-- Schema scale and cross-database generalization have not been established.
-- Time and trend questions remain the weakest evaluated category.
-- Complex queries still have significant failure cases.
-- Generated SQL must still be treated as untrusted input outside the provided guardrails.
+- SQLGlot只允许单条只读SELECT或WITH SELECT，限制返回行数，MySQL业务账号仅有SELECT权限。
+- 危险SQL只在校验层测试，不对业务表执行破坏性语句。
+- 城市仅映射唯一已确认的同城别名；不存在城市允许合法空结果，不偷偷更换城市。
+- Gate有格式/引用校验失败、过度澄清和漏澄清；补充后SQL仍可能业务含义错误。
+- 明确题60/60降到53/60，不能宣称澄清适用于所有问题。
+- 客单价曾误用每位客户消费额；简化业务上下文覆盖仍不完整，冻结后没有继续调参。
+- 单轮与合成数据覆盖有限；安全校验不替代数据隔离、最小权限和敏感场景人工审核。
+- HTTP200不代表业务成功，须检查响应status；UI会显示安全停止和错误提示。
 
-## Open-Source Attribution
+## 文档与测试
 
-This project was developed through substantial secondary development based on [woshixiaojunle/NL2SQL-Demo](https://github.com/woshixiaojunle/NL2SQL-Demo).
+```bash
+.venv/bin/python -m pytest -q
+```
 
-The original project is licensed under the Apache License 2.0. Major extensions include business semantics, MySQL schema metadata, vocabulary normalization, SQL safety, reproducible evaluation infrastructure, API/UI integration, and release engineering. See [ATTRIBUTION.md](ATTRIBUTION.md) and [LICENSE](LICENSE).
+普通测试使用mock并阻止未mock外呼，真实联调独立记录，不批量运行付费评测。
+
+- [最终同集评测](FINAL_SCOPED_CLARIFICATION_EVALUATION.md)
+- [历史指标审计](CLARIFICATION_METRIC_AUDIT.md)
+- [可核验简历事实](docs/CLARIFICATION_RESUME_FACTS.md)
+- [发布验收](docs/V1_1_RELEASE_ACCEPTANCE.md)
+- [预注册协议](eval/SCOPED_CLARIFICATION_PROTOCOL.md)
+- [冻结记录](eval/scoped_clarification_freeze.json)及[逐题结果](eval/scoped_clarification_per_case.json)
+- [城市修正审计](eval/clarification_city_audit.json)
+- [原版历史评测](FINAL_EVALUATION.md)
+
+原v1.0独立300题为221/300（73.67%）、平均2.76秒，原记录与v1.0.0保留。
+不能与本轮120题拼成提升，2.76秒也不是澄清模式延迟。
+
+## 开源来源与许可证
+
+基于 [woshixiaojunle/NL2SQL-Demo](https://github.com/woshixiaojunle/NL2SQL-Demo) 二次开发，
+保留原 [Apache License 2.0](LICENSE) 与[归属说明](ATTRIBUTION.md)。
+正式仓库为私有 jinxi0407/agentic-data-analyst，origin用于自己的仓库，upstream标识原作者，不向其推送。
+代码、文档、测试与正式评测证据可以同步；真实配置、虚拟环境、日志、PID及数据库物理文件不上传。

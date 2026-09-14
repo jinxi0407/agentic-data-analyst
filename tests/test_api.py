@@ -17,8 +17,8 @@ def test_query_endpoint_uses_production_result_shape(monkeypatch):
     import app.main as main
 
     monkeypatch.setattr(
-        main,
-        "run_interactive",
+        main.scoped,
+        "direct",
         lambda *args: {
             "engine": "Production NL2SQL Engine",
             "sql": "SELECT 1 LIMIT 200",
