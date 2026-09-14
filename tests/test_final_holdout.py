@@ -18,3 +18,4 @@ def test_final_holdout_distribution():
 def test_infrastructure_error_classification():
     assert is_infrastructure_error("Qwen chat call failed: service unavailable")
     assert not is_infrastructure_error("Unknown column product_title")
+    assert not is_infrastructure_error("ParseError: invalid expression")

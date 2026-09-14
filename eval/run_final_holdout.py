@@ -84,7 +84,21 @@ def main() -> None:
             state = run_question(case["question"])
         except Exception as exc:
             message = f"{type(exc).__name__}: {exc}"
-            return {"id": case["id"], "infrastructure_error": message}
+            if is_infrastructure_error(message):
+                return {"id": case["id"], "infrastructure_error": message}
+            return {
+                "id": case["id"],
+                "category": case["category"],
+                "difficulty": case["difficulty"],
+                "paraphrase": case["paraphrase"],
+                "status": "failed",
+                "correct": False,
+                "generated_sql": "",
+                "actual_result": [],
+                "retry_count": 0,
+                "error": message,
+                "latency_ms": round((time.perf_counter() - started) * 1000, 2),
+            }
         actual = state.get("result", state.get("query_result", []))
         status = state.get("status", state.get("exec_status", "failed"))
         error = state.get("error") or state.get("execution_error") or state.get("validation_error") or ""
