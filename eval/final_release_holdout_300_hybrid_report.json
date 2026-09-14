@@ -1,0 +1,47 @@
+{
+  "pipeline": "hybrid",
+  "total": 300,
+  "correct": 214,
+  "accuracy": 0.7133333333333334,
+  "cases_sha256": "a4100e72f9965f70888ebb2e9f8974feb3b2520ec7a39fec51744922ea34cbd3",
+  "workers": 4,
+  "average_latency_ms": 3650.213566666667,
+  "average_retry": 0.11,
+  "execution_rate": 1.0,
+  "difficulty": {
+    "easy": 0.88,
+    "hard": 0.43333333333333335,
+    "medium": 0.575
+  },
+  "category": {
+    "complex": 0.4,
+    "filtering_aggregation": 0.8888888888888888,
+    "one_two_table_join": 0.7333333333333333,
+    "refund_customer_product": 0.6666666666666666,
+    "time_trend": 0.38333333333333336,
+    "top_k_ranking": 0.8666666666666667
+  },
+  "paraphrase_accuracy": 0.6111111111111112,
+  "infrastructure_rerun_count": 0,
+  "routing": {
+    "fast": {
+      "count": 272,
+      "percentage": 0.9066666666666666,
+      "accuracy": 0.7389705882352942,
+      "average_latency_ms": 2511.563382352941
+    },
+    "agent": {
+      "count": 28,
+      "percentage": 0.09333333333333334,
+      "accuracy": 0.4642857142857143,
+      "average_latency_ms": 14711.386785714285
+    }
+  },
+  "complexity_score_distribution": {
+    "0": 218,
+    "1": 54,
+    "2": 8,
+    "3": 10,
+    "4": 10
+  }
+}
