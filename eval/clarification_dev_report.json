@@ -1,0 +1,29 @@
+{
+  "count": 80,
+  "decision_accuracy": 88.75,
+  "precision": 100.0,
+  "recall": 80.0,
+  "f1": 88.89,
+  "unnecessary_clarification_rate": 0.0,
+  "missed_clarification_rate": 20.0,
+  "clear_query_e2e_accuracy": 97.5,
+  "post_clarification_e2e_accuracy": 80.0,
+  "overall_interactive_success_rate": 88.75,
+  "overall_result_accuracy": 93.75,
+  "trigger_rate": 40.0,
+  "average_first_turn_latency_s": 6.953,
+  "average_total_latency_s": 9.122,
+  "average_resolved_total_latency_s": 12.099,
+  "baseline_e2e_accuracy": null,
+  "baseline_average_latency_s": null,
+  "baseline_clear_accuracy": 0.0,
+  "baseline_ambiguous_accuracy": 0.0,
+  "confusion": {
+    "tp": 32,
+    "fp": 0,
+    "fn": 8,
+    "tn": 39
+  },
+  "service_failures": 1,
+  "note": "All intended ambiguous cases form the post-clarification denominator. Interactive success requires clarification for ambiguous inputs plus correct final results; lucky guesses are only included in overall_result_accuracy. Clear unexpected clarification has no simulated answer and fails."
+}

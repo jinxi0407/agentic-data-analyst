@@ -1,0 +1,19 @@
+{
+  "cases_sha256": "95a1fac0f5031f31d1dbbe289e3718710b8dead1c5f0dce086720a79a21daf45",
+  "database": {
+    "users": "b827470388b126a973c77491e8863f6e6e51e7cbfeb7f689923a1b48ac2d55dc",
+    "products": "1a33196738fb59c7ee3d88f68e5ab3c89c94c5ca14864d3976c65337f3aad43e",
+    "orders": "e08ce1622cc57a7ad81b115f96fe1a7012a37b18b49229ae69da3d4c9335dab3",
+    "order_items": "40c992219526ac2fe849d58990769f788d07e4c6b3a83645b8863f65314a8a3e",
+    "refunds": "e8c296d3b783f81b322bc103d5f9eb00823141234155a3250980828af242d6b2",
+    "core_table": "af48658b968e0d6f803c66aebc0e6d9bc7b83030634f6ff2ebd4abc9ab6353d1",
+    "core_field": "bb1c16e9bed8a8ab47c6204cfa55986378340eea6bbb54f92cdefe112b265fdd"
+  },
+  "reference_date": "2026-09-12",
+  "gate_code_sha256": "b34a774c92af845a81924bf73549d7340648da09f109c9e48cd19ef919f7538f",
+  "freeze_commit": "d9ba7eadb3a95f657ca391d2865a2b444dc99ae3",
+  "count": 80,
+  "clear": 40,
+  "ambiguous": 40,
+  "protocol": "Decision plus strict result comparison; simulated answers for v1.1 only. Failures retained. No post-holdout tuning."
+}

@@ -1,0 +1,3044 @@
+[
+  {
+    "id": "dev-0-0-c",
+    "first_status": "success",
+    "triggered": false,
+    "first_latency_s": 88.369,
+    "clarification_question": "",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "proceed"
+      },
+      {
+        "stage": "execute",
+        "status": "success"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT ROUND(SUM(paid_amount), 2) AS sales_amount FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') AND order_date >= DATE_SUB('2026-09-12', INTERVAL '11' DAY) AND order_date < '2026-09-12' LIMIT 200",
+    "result": [
+      {
+        "sales_amount": 460580.79
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 88.369
+  },
+  {
+    "id": "dev-0-0-a",
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "first_latency_s": 85.307,
+    "clarification_question": "“最近”指最近几天？请从以下选择：A) 最近7天  B) 最近30天  C) 本周（2026-09-07至2026-09-12）  D) 本月（2026-09-01至2026-09-12）",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "clarify",
+        "ambiguity_type": "time",
+        "reason": "“最近”未定义时间范围（如最近7天、30天），且参考日期2026-09-12为未来日期，无法默认推断合理周期；需明确时间窗口。"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT ROUND(SUM(paid_amount), 2) AS sales_amount FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') AND order_date >= DATE_SUB('2026-09-12', INTERVAL '11' DAY) AND order_date < '2026-09-12' LIMIT 200",
+    "result": [
+      {
+        "sales_amount": 460580.79
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 90.907
+  },
+  {
+    "id": "dev-0-1-c",
+    "first_status": "success",
+    "triggered": false,
+    "first_latency_s": 4.917,
+    "clarification_question": "",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "proceed"
+      },
+      {
+        "stage": "execute",
+        "status": "success"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT SUM(oi.quantity) AS quantity FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '手机数码' LIMIT 200",
+    "result": [
+      {
+        "quantity": 6527.0
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 4.917
+  },
+  {
+    "id": "dev-0-1-a",
+    "first_status": "success",
+    "triggered": false,
+    "first_latency_s": 5.466,
+    "clarification_question": "",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "proceed"
+      },
+      {
+        "stage": "execute",
+        "status": "success"
+      }
+    ],
+    "interactive_correct": false,
+    "final_status": "success",
+    "sql": "SELECT ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM products AS p JOIN order_items AS oi ON p.product_id = oi.product_id JOIN orders AS o ON oi.order_id = o.order_id WHERE p.category = '手机数码' AND o.order_status IN ('paid', 'completed', 'shipped') AND o.order_date <= '2026-09-12' LIMIT 200",
+    "result": [
+      {
+        "sales_amount": 6710924.82
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 5.466
+  },
+  {
+    "id": "dev-0-2-c",
+    "first_status": "success",
+    "triggered": false,
+    "first_latency_s": 5.813,
+    "clarification_question": "",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "proceed"
+      },
+      {
+        "stage": "execute",
+        "status": "success"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT COUNT(*) AS user_count FROM (SELECT user_id FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') GROUP BY user_id HAVING SUM(paid_amount) > 2000) AS high_value_users LIMIT 200",
+    "result": [
+      {
+        "user_count": 2210
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 5.813
+  },
+  {
+    "id": "dev-0-2-a",
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "first_latency_s": 4.951,
+    "clarification_question": "“消费水平较高”是指：A) 历史总销售额前10%的客户；B) 单次订单实收金额≥500元的客户；C) 近30天累计销售额≥2000元的客户；D) VIP客户（is_vip=1）？",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "clarify",
+        "ambiguity_type": "metric",
+        "reason": "消费水平较高缺乏明确定义：未指定是按总消费金额、平均订单金额、最近N期消费、还是其他阈值（如VIP等级、分位数）来界定“较高”。用户级销售金额可计算，但“较高”的判定标准缺失，导致SQL无法唯一确定。"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT COUNT(*) AS user_count FROM (SELECT u.user_id, SUM(o.paid_amount) AS total_paid FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') GROUP BY u.user_id HAVING SUM(o.paid_amount) > 2000) AS high_spenders LIMIT 200",
+    "result": [
+      {
+        "user_count": 2210
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 11.032
+  },
+  {
+    "id": "dev-0-3-c",
+    "first_status": "success",
+    "triggered": false,
+    "first_latency_s": 4.006,
+    "clarification_question": "",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "proceed"
+      },
+      {
+        "stage": "execute",
+        "status": "success"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT COUNT(*) AS product_count FROM products WHERE list_price > 180 AND is_active = 1 LIMIT 200",
+    "result": [
+      {
+        "product_count": 613
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 4.006
+  },
+  {
+    "id": "dev-0-3-a",
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "first_latency_s": 4.519,
+    "clarification_question": "价格偏高是指：① 商品售价（list_price）高于其所在品类平均售价的150%；② list_price > 1000元；③ list_price高于同品牌商品均价的2倍；④ 其他标准？",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "clarify",
+        "ambiguity_type": "metric",
+        "reason": "价格偏高缺乏量化定义：未说明是高于同类商品均值、中位数、行业基准，还是高于某个绝对阈值（如>1000元）或相对阈值（如>同品类平均价150%）。'在售商品'需确认是否等价于products.is_active=1。"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT COUNT(*) AS product_count FROM products WHERE is_active = 1 AND list_price > 180 LIMIT 200",
+    "result": [
+      {
+        "product_count": 613
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 9.206
+  },
+  {
+    "id": "dev-0-4-c",
+    "first_status": "success",
+    "triggered": false,
+    "first_latency_s": 4.297,
+    "clarification_question": "",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "proceed"
+      },
+      {
+        "stage": "execute",
+        "status": "success"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT COUNT(*) AS order_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '上海' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "result": [
+      {
+        "order_count": 0
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 4.297
+  },
+  {
+    "id": "dev-0-4-a",
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "first_latency_s": 4.043,
+    "clarification_question": "‘我们区域’具体指？A. 全国 B. 某个省份（请说明） C. 某个城市（请说明） D. 其他自定义范围",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "clarify",
+        "ambiguity_type": "entity",
+        "reason": "区域未定义：问题中'我们区域'缺乏地理范围指代（如省份、城市、自定义区域），无法映射到users.province或users.city等字段。"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT COUNT(*) AS order_count FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.city = '上海' LIMIT 200",
+    "result": [
+      {
+        "order_count": 0
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 8.961
+  },
+  {
+    "id": "dev-0-5-c",
+    "first_status": "clarification_unavailable",
+    "triggered": false,
+    "first_latency_s": 6.973,
+    "clarification_question": "",
+    "first_trace": [],
+    "interactive_correct": false,
+    "final_status": "clarification_unavailable",
+    "sql": "",
+    "result": [],
+    "retry_count": 0,
+    "total_latency_s": 6.973
+  },
+  {
+    "id": "dev-0-5-a",
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "first_latency_s": 3.904,
+    "clarification_question": "客户‘表现最好’依据哪个指标？选项：A) 总销售额（paid_amount） B) 总订单数 C) 总购买商品数量 D) 近30天复购用户标识",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "clarify",
+        "ambiguity_type": "metric",
+        "reason": "未明确‘表现最好’的具体业务指标（如销售额、订单数、购买频次、复购率、利润贡献等），不同指标会导致完全不同的SQL和结果。"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT u.user_id, ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') GROUP BY u.user_id ORDER BY sales_amount DESC, u.user_id ASC LIMIT 3",
+    "result": [
+      {
+        "user_id": 2525,
+        "sales_amount": 83882.27
+      },
+      {
+        "user_id": 2005,
+        "sales_amount": 80553.99
+      },
+      {
+        "user_id": 2137,
+        "sales_amount": 74838.62
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 9.774
+  },
+  {
+    "id": "dev-0-6-c",
+    "first_status": "success",
+    "triggered": false,
+    "first_latency_s": 6.444,
+    "clarification_question": "",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "proceed"
+      },
+      {
+        "stage": "execute",
+        "status": "success"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT ROUND(SUM(refund_amount), 2) AS refund_amount FROM refunds WHERE refund_status = 'approved' AND refund_date >= DATE_SUB('2026-09-12', INTERVAL '11' DAY) AND refund_date < '2026-09-12' LIMIT 200",
+    "result": [
+      {
+        "refund_amount": 20523.09
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 6.444
+  },
+  {
+    "id": "dev-0-6-a",
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "first_latency_s": 3.627,
+    "clarification_question": "‘近期’具体指最近几天？（选项：7天 / 15天 / 30天 / 90天）",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "clarify",
+        "ambiguity_type": "time",
+        "reason": "问题中'近期'未定义具体时间范围，无法确定是最近7天、30天还是其他周期；reference_date为2026-09-12，但'近期'需明确相对长度才能构造WHERE refund_date条件。"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT ROUND(SUM(refund_amount), 2) AS refund_amount FROM refunds WHERE refund_status = 'approved' AND refund_date >= DATE_SUB('2026-09-12', INTERVAL '11' DAY) AND refund_date < '2026-09-12' LIMIT 200",
+    "result": [
+      {
+        "refund_amount": 20523.09
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 9.41
+  },
+  {
+    "id": "dev-0-7-c",
+    "first_status": "success",
+    "triggered": false,
+    "first_latency_s": 4.641,
+    "clarification_question": "",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "proceed"
+      },
+      {
+        "stage": "execute",
+        "status": "success"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT COUNT(*) AS user_count FROM (SELECT user_id FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') GROUP BY user_id HAVING COUNT(*) >= 3) AS frequent_users LIMIT 200",
+    "result": [
+      {
+        "user_count": 1438
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 4.641
+  },
+  {
+    "id": "dev-0-7-a",
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "first_latency_s": 4.364,
+    "clarification_question": "“经常购买”的定义是？选项：A) 近30天内下单≥3次；B) 历史累计下单≥5次；C) 近90天内下单≥2次；D) 其他（请说明）",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "clarify",
+        "ambiguity_type": "metric",
+        "reason": "“经常购买”缺乏明确定义：未指定购买频次阈值（如近30天≥3单、历史总单数≥5单）、时间范围（是否限定参考日期前的滚动周期）、或订单有效性标准（是否仅计valid orders）。不同定义将导致完全不同的用户筛选逻辑和结果。"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT COUNT(*) AS user_count FROM (SELECT user_id FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') GROUP BY user_id HAVING COUNT(*) >= 3) AS frequent_users LIMIT 200",
+    "result": [
+      {
+        "user_count": 1438
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 8.65
+  },
+  {
+    "id": "dev-0-8-c",
+    "first_status": "success",
+    "triggered": false,
+    "first_latency_s": 4.897,
+    "clarification_question": "",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "proceed"
+      },
+      {
+        "stage": "execute",
+        "status": "success"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT u.city, COUNT(*) AS valid_order_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') GROUP BY u.city HAVING COUNT(*) >= 3 ORDER BY u.city LIMIT 200",
+    "result": [
+      {
+        "city": "上海市",
+        "valid_order_count": 1407
+      },
+      {
+        "city": "北京市",
+        "valid_order_count": 1459
+      },
+      {
+        "city": "南京市",
+        "valid_order_count": 1318
+      },
+      {
+        "city": "广州市",
+        "valid_order_count": 1278
+      },
+      {
+        "city": "成都市",
+        "valid_order_count": 1343
+      },
+      {
+        "city": "杭州市",
+        "valid_order_count": 1275
+      },
+      {
+        "city": "武汉市",
+        "valid_order_count": 1363
+      },
+      {
+        "city": "西安市",
+        "valid_order_count": 1363
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 4.897
+  },
+  {
+    "id": "dev-0-8-a",
+    "first_status": "success",
+    "triggered": false,
+    "first_latency_s": 4.473,
+    "clarification_question": "",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "proceed"
+      },
+      {
+        "stage": "execute",
+        "status": "success"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT u.city, COUNT(*) AS order_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') GROUP BY u.city ORDER BY u.city ASC LIMIT 200",
+    "result": [
+      {
+        "city": "上海市",
+        "order_count": 1407
+      },
+      {
+        "city": "北京市",
+        "order_count": 1459
+      },
+      {
+        "city": "南京市",
+        "order_count": 1318
+      },
+      {
+        "city": "广州市",
+        "order_count": 1278
+      },
+      {
+        "city": "成都市",
+        "order_count": 1343
+      },
+      {
+        "city": "杭州市",
+        "order_count": 1275
+      },
+      {
+        "city": "武汉市",
+        "order_count": 1363
+      },
+      {
+        "city": "西安市",
+        "order_count": 1363
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 4.473
+  },
+  {
+    "id": "dev-0-9-c",
+    "first_status": "success",
+    "triggered": false,
+    "first_latency_s": 5.744,
+    "clarification_question": "",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "proceed"
+      },
+      {
+        "stage": "execute",
+        "status": "success"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT order_date AS date, ROUND(SUM(paid_amount), 2) AS sales_amount FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') AND order_date BETWEEN '2026-09-01' AND '2026-09-11' GROUP BY order_date ORDER BY order_date LIMIT 200",
+    "result": [
+      {
+        "date": "2026-09-01",
+        "sales_amount": 14839.95
+      },
+      {
+        "date": "2026-09-02",
+        "sales_amount": 30220.78
+      },
+      {
+        "date": "2026-09-03",
+        "sales_amount": 45357.7
+      },
+      {
+        "date": "2026-09-04",
+        "sales_amount": 34607.0
+      },
+      {
+        "date": "2026-09-05",
+        "sales_amount": 56016.83
+      },
+      {
+        "date": "2026-09-06",
+        "sales_amount": 46298.18
+      },
+      {
+        "date": "2026-09-07",
+        "sales_amount": 33996.74
+      },
+      {
+        "date": "2026-09-08",
+        "sales_amount": 45984.56
+      },
+      {
+        "date": "2026-09-09",
+        "sales_amount": 87939.71
+      },
+      {
+        "date": "2026-09-10",
+        "sales_amount": 48939.65
+      },
+      {
+        "date": "2026-09-11",
+        "sales_amount": 16379.69
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 5.744
+  },
+  {
+    "id": "dev-0-9-a",
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "first_latency_s": 5.116,
+    "clarification_question": "‘这段时间’具体指哪一段？例如：A) 2026-09-01至2026-09-12；B) 2026-09-06至2026-09-12（最近7天）；C) 2026-09-01至2026-09-11（截至昨日的当月）；D) 其他，请说明。",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "clarify",
+        "ambiguity_type": "time",
+        "reason": "问题中‘这段时间’未明确定义时间范围，既无起止日期也无相对长度（如‘最近7天’），无法确定SQL中WHERE条件的时间窗口。"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT order_date AS date, ROUND(SUM(paid_amount), 2) AS sales_amount FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') AND order_date BETWEEN '2026-09-01' AND '2026-09-11' GROUP BY order_date ORDER BY order_date LIMIT 200",
+    "result": [
+      {
+        "date": "2026-09-01",
+        "sales_amount": 14839.95
+      },
+      {
+        "date": "2026-09-02",
+        "sales_amount": 30220.78
+      },
+      {
+        "date": "2026-09-03",
+        "sales_amount": 45357.7
+      },
+      {
+        "date": "2026-09-04",
+        "sales_amount": 34607.0
+      },
+      {
+        "date": "2026-09-05",
+        "sales_amount": 56016.83
+      },
+      {
+        "date": "2026-09-06",
+        "sales_amount": 46298.18
+      },
+      {
+        "date": "2026-09-07",
+        "sales_amount": 33996.74
+      },
+      {
+        "date": "2026-09-08",
+        "sales_amount": 45984.56
+      },
+      {
+        "date": "2026-09-09",
+        "sales_amount": 87939.71
+      },
+      {
+        "date": "2026-09-10",
+        "sales_amount": 48939.65
+      },
+      {
+        "date": "2026-09-11",
+        "sales_amount": 16379.69
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 11.67
+  },
+  {
+    "id": "dev-1-0-c",
+    "first_status": "success",
+    "triggered": false,
+    "first_latency_s": 6.896,
+    "clarification_question": "",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "proceed"
+      },
+      {
+        "stage": "execute",
+        "status": "success"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT ROUND(SUM(paid_amount), 2) AS sales_amount FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') AND order_date >= DATE_SUB('2026-09-12', INTERVAL '17' DAY) AND order_date < '2026-09-12' LIMIT 200",
+    "result": [
+      {
+        "sales_amount": 775047.83
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 6.896
+  },
+  {
+    "id": "dev-1-0-a",
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "first_latency_s": 3.073,
+    "clarification_question": "“最近”指最近几天？例如：7天、15天、30天，还是其他？",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "clarify",
+        "ambiguity_type": "time",
+        "reason": "“最近”未定义时间范围（如最近7天、30天），且参考日期2026-09-12为未来日期，无法默认推断合理窗口；必须明确天数或周期。"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT ROUND(SUM(paid_amount), 2) AS sales_amount FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') AND order_date >= DATE_SUB('2026-09-12', INTERVAL '17' DAY) AND order_date < '2026-09-12' LIMIT 200",
+    "result": [
+      {
+        "sales_amount": 775047.83
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 9.406
+  },
+  {
+    "id": "dev-1-1-c",
+    "first_status": "success",
+    "triggered": false,
+    "first_latency_s": 4.943,
+    "clarification_question": "",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "proceed"
+      },
+      {
+        "stage": "execute",
+        "status": "success"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT SUM(oi.quantity) AS quantity FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '家用电器' LIMIT 200",
+    "result": [
+      {
+        "quantity": 7420.0
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 4.943
+  },
+  {
+    "id": "dev-1-1-a",
+    "first_status": "success",
+    "triggered": false,
+    "first_latency_s": 5.599,
+    "clarification_question": "",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "proceed"
+      },
+      {
+        "stage": "execute",
+        "status": "success"
+      }
+    ],
+    "interactive_correct": false,
+    "final_status": "success",
+    "sql": "SELECT ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM products AS p JOIN order_items AS oi ON p.product_id = oi.product_id JOIN orders AS o ON oi.order_id = o.order_id WHERE p.category = '家用电器' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "result": [
+      {
+        "sales_amount": 13086179.99
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 5.599
+  },
+  {
+    "id": "dev-1-2-c",
+    "first_status": "success",
+    "triggered": false,
+    "first_latency_s": 7.293,
+    "clarification_question": "",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "proceed"
+      },
+      {
+        "stage": "execute",
+        "status": "success"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT COUNT(*) AS user_count FROM (SELECT user_id FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') GROUP BY user_id HAVING SUM(paid_amount) > 2700) AS high_value_users LIMIT 200",
+    "result": [
+      {
+        "user_count": 2038
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 7.293
+  },
+  {
+    "id": "dev-1-2-a",
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "first_latency_s": 5.265,
+    "clarification_question": "消费水平较高指：A) 总实付金额前20%的客户，B) 历史平均单笔订单实付金额≥500元，C) 过去30天实付金额＞1000元，D) 其他标准？",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "clarify",
+        "ambiguity_type": "metric",
+        "reason": "消费水平较高缺乏明确定义：未指定是按总消费金额、平均订单金额、最近N期消费、还是其他阈值（如高于均值/中位数/固定值）划分；也未说明是否需排除退款影响。"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT COUNT(*) AS user_count FROM (SELECT u.user_id, SUM(o.paid_amount) AS total_paid FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') GROUP BY u.user_id HAVING SUM(o.paid_amount) > 2700) AS high_spenders LIMIT 200",
+    "result": [
+      {
+        "user_count": 2038
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 10.633
+  },
+  {
+    "id": "dev-1-3-c",
+    "first_status": "success",
+    "triggered": false,
+    "first_latency_s": 4.001,
+    "clarification_question": "",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "proceed"
+      },
+      {
+        "stage": "execute",
+        "status": "success"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT COUNT(*) AS product_count FROM products WHERE list_price > 270 AND is_active = 1 LIMIT 200",
+    "result": [
+      {
+        "product_count": 481
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 4.001
+  },
+  {
+    "id": "dev-1-3-a",
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "first_latency_s": 4.206,
+    "clarification_question": "价格偏高是指：A) 类目内价格排名前10%的商品；B) 售价高于同类目平均售价1.5倍；C) 单价超过1000元且is_active=1；D) 其他定义？",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "clarify",
+        "ambiguity_type": "metric",
+        "reason": "价格偏高缺乏明确定义：未说明是相对于类目均价、历史价格、成本加成率，还是绝对阈值（如>1000元）；'在售商品'需确认是否等同于products.is_active=1。"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT COUNT(*) AS product_count FROM products WHERE list_price > 270 AND is_active = 1 LIMIT 200",
+    "result": [
+      {
+        "product_count": 481
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 8.477
+  },
+  {
+    "id": "dev-1-4-c",
+    "first_status": "success",
+    "triggered": false,
+    "first_latency_s": 4.751,
+    "clarification_question": "",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "proceed"
+      },
+      {
+        "stage": "execute",
+        "status": "success"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT COUNT(*) AS order_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '杭州' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "result": [
+      {
+        "order_count": 0
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 4.751
+  },
+  {
+    "id": "dev-1-4-a",
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "first_latency_s": 3.843,
+    "clarification_question": "‘我们区域’具体指哪个地理范围？选项：A. 全国 B. 某个省份（请说明） C. 某个城市（请说明） D. 其他自定义区域",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "clarify",
+        "ambiguity_type": "entity",
+        "reason": "区域未定义：问题中'我们区域'缺乏地理范围指代（如省份、城市或自定义区域），无法映射到users.province/users.city或其他字段，将导致WHERE条件缺失或错误。"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT COUNT(*) AS order_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '杭州' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "result": [
+      {
+        "order_count": 0
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 8.428
+  },
+  {
+    "id": "dev-1-5-c",
+    "first_status": "success",
+    "triggered": false,
+    "first_latency_s": 5.73,
+    "clarification_question": "",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "proceed"
+      },
+      {
+        "stage": "execute",
+        "status": "success"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT u.user_id, ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') GROUP BY u.user_id ORDER BY sales_amount DESC, u.user_id ASC LIMIT 4",
+    "result": [
+      {
+        "user_id": 2525,
+        "sales_amount": 83882.27
+      },
+      {
+        "user_id": 2005,
+        "sales_amount": 80553.99
+      },
+      {
+        "user_id": 2137,
+        "sales_amount": 74838.62
+      },
+      {
+        "user_id": 171,
+        "sales_amount": 72735.82
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 5.73
+  },
+  {
+    "id": "dev-1-5-a",
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "first_latency_s": 4.094,
+    "clarification_question": "客户‘表现最好’依据哪个指标？选项：A) 总销售额（paid_amount） B) 总订单数 C) 购买频次（下单天数） D) 客单价（平均单笔订单金额）",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "clarify",
+        "ambiguity_type": "metric",
+        "reason": "问题未明确‘表现最好’的具体业务指标（如销售额、订单数、购买频次、复购率、客单价、退款率等），不同指标会导致完全不同的SQL逻辑和结果。"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT u.user_id, ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') GROUP BY u.user_id ORDER BY sales_amount DESC, u.user_id ASC LIMIT 4",
+    "result": [
+      {
+        "user_id": 2525,
+        "sales_amount": 83882.27
+      },
+      {
+        "user_id": 2005,
+        "sales_amount": 80553.99
+      },
+      {
+        "user_id": 2137,
+        "sales_amount": 74838.62
+      },
+      {
+        "user_id": 171,
+        "sales_amount": 72735.82
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 10.401
+  },
+  {
+    "id": "dev-1-6-c",
+    "first_status": "success",
+    "triggered": false,
+    "first_latency_s": 6.427,
+    "clarification_question": "",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "proceed"
+      },
+      {
+        "stage": "execute",
+        "status": "success"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT ROUND(SUM(refund_amount), 2) AS refund_amount FROM refunds WHERE refund_status = 'approved' AND refund_date >= DATE_SUB('2026-09-12', INTERVAL '17' DAY) AND refund_date < '2026-09-12' LIMIT 200",
+    "result": [
+      {
+        "refund_amount": 32444.32
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 6.428
+  },
+  {
+    "id": "dev-1-6-a",
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "first_latency_s": 3.364,
+    "clarification_question": "‘近期’具体指哪段时间？例如：近7天、近30天、本周、本月，还是其他？",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "clarify",
+        "ambiguity_type": "time",
+        "reason": "问题中'近期'未定义具体时间范围，无法确定是最近7天、30天还是其他周期；reference_date为2026-09-12，但'近期'需明确相对起止。"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT ROUND(SUM(refund_amount), 2) AS refund_amount FROM refunds WHERE refund_status = 'approved' AND refund_date >= DATE_SUB('2026-09-12', INTERVAL '17' DAY) AND refund_date < '2026-09-12' LIMIT 200",
+    "result": [
+      {
+        "refund_amount": 32444.32
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 9.996
+  },
+  {
+    "id": "dev-1-7-c",
+    "first_status": "success",
+    "triggered": false,
+    "first_latency_s": 4.983,
+    "clarification_question": "",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "proceed"
+      },
+      {
+        "stage": "execute",
+        "status": "success"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT COUNT(*) AS user_count FROM (SELECT user_id FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') GROUP BY user_id HAVING COUNT(*) >= 4) AS frequent_users LIMIT 200",
+    "result": [
+      {
+        "user_count": 957
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 4.983
+  },
+  {
+    "id": "dev-1-7-a",
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "first_latency_s": 4.524,
+    "clarification_question": "“经常购买”的定义是？选项：① 近30天内下单≥3次的有效客户；② 近90天内下单≥5次的有效客户；③ 自注册日起累计下单≥10次的有效客户；④ 其他（请说明）",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "clarify",
+        "ambiguity_type": "metric",
+        "reason": "“经常购买”缺乏明确定义：未指定购买频次阈值（如近30天≥3单、近90天≥5单）、时间范围（是否限定为参考日期前N天/月）、或订单有效性标准（是否仅计valid orders）。不同定义将导致完全不同的用户筛选逻辑和结果。"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT COUNT(*) AS user_count FROM (SELECT user_id FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') GROUP BY user_id HAVING COUNT(*) >= 4) AS frequent_users LIMIT 200",
+    "result": [
+      {
+        "user_count": 957
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 8.731
+  },
+  {
+    "id": "dev-1-8-c",
+    "first_status": "success",
+    "triggered": false,
+    "first_latency_s": 5.237,
+    "clarification_question": "",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "proceed"
+      },
+      {
+        "stage": "execute",
+        "status": "success"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT u.city, COUNT(*) AS order_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') GROUP BY u.city HAVING COUNT(*) >= 4 ORDER BY u.city ASC LIMIT 200",
+    "result": [
+      {
+        "city": "上海市",
+        "order_count": 1407
+      },
+      {
+        "city": "北京市",
+        "order_count": 1459
+      },
+      {
+        "city": "南京市",
+        "order_count": 1318
+      },
+      {
+        "city": "广州市",
+        "order_count": 1278
+      },
+      {
+        "city": "成都市",
+        "order_count": 1343
+      },
+      {
+        "city": "杭州市",
+        "order_count": 1275
+      },
+      {
+        "city": "武汉市",
+        "order_count": 1363
+      },
+      {
+        "city": "西安市",
+        "order_count": 1363
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 5.237
+  },
+  {
+    "id": "dev-1-8-a",
+    "first_status": "success",
+    "triggered": false,
+    "first_latency_s": 5.193,
+    "clarification_question": "",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "proceed"
+      },
+      {
+        "stage": "execute",
+        "status": "success"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT u.city, COUNT(*) AS order_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') GROUP BY u.city ORDER BY u.city ASC LIMIT 200",
+    "result": [
+      {
+        "city": "上海市",
+        "order_count": 1407
+      },
+      {
+        "city": "北京市",
+        "order_count": 1459
+      },
+      {
+        "city": "南京市",
+        "order_count": 1318
+      },
+      {
+        "city": "广州市",
+        "order_count": 1278
+      },
+      {
+        "city": "成都市",
+        "order_count": 1343
+      },
+      {
+        "city": "杭州市",
+        "order_count": 1275
+      },
+      {
+        "city": "武汉市",
+        "order_count": 1363
+      },
+      {
+        "city": "西安市",
+        "order_count": 1363
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 5.193
+  },
+  {
+    "id": "dev-1-9-c",
+    "first_status": "success",
+    "triggered": false,
+    "first_latency_s": 6.261,
+    "clarification_question": "",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "proceed"
+      },
+      {
+        "stage": "execute",
+        "status": "success"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT order_date AS date, ROUND(SUM(paid_amount), 2) AS sales_amount FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') AND order_date BETWEEN '2026-08-26' AND '2026-09-11' GROUP BY order_date ORDER BY order_date LIMIT 200",
+    "result": [
+      {
+        "date": "2026-08-26",
+        "sales_amount": 52834.66
+      },
+      {
+        "date": "2026-08-27",
+        "sales_amount": 75561.4
+      },
+      {
+        "date": "2026-08-28",
+        "sales_amount": 56207.25
+      },
+      {
+        "date": "2026-08-29",
+        "sales_amount": 54850.12
+      },
+      {
+        "date": "2026-08-30",
+        "sales_amount": 22250.99
+      },
+      {
+        "date": "2026-08-31",
+        "sales_amount": 52762.62
+      },
+      {
+        "date": "2026-09-01",
+        "sales_amount": 14839.95
+      },
+      {
+        "date": "2026-09-02",
+        "sales_amount": 30220.78
+      },
+      {
+        "date": "2026-09-03",
+        "sales_amount": 45357.7
+      },
+      {
+        "date": "2026-09-04",
+        "sales_amount": 34607.0
+      },
+      {
+        "date": "2026-09-05",
+        "sales_amount": 56016.83
+      },
+      {
+        "date": "2026-09-06",
+        "sales_amount": 46298.18
+      },
+      {
+        "date": "2026-09-07",
+        "sales_amount": 33996.74
+      },
+      {
+        "date": "2026-09-08",
+        "sales_amount": 45984.56
+      },
+      {
+        "date": "2026-09-09",
+        "sales_amount": 87939.71
+      },
+      {
+        "date": "2026-09-10",
+        "sales_amount": 48939.65
+      },
+      {
+        "date": "2026-09-11",
+        "sales_amount": 16379.69
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 6.261
+  },
+  {
+    "id": "dev-1-9-a",
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "first_latency_s": 5.479,
+    "clarification_question": "请问'这段时间'具体指哪一段？例如：A) 2026-09-01至2026-09-12；B) 最近7天（2026-09-06至2026-09-12）；C) 本月全部日期（2026-09-01至2026-09-12）；D) 其他，请说明。",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "clarify",
+        "ambiguity_type": "time",
+        "reason": "问题中'这段时间'未明确定义时间范围，既无起止日期也无相对长度（如'最近7天'），无法确定SQL中WHERE条件的时间过滤逻辑。"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT order_date AS date, ROUND(SUM(paid_amount), 2) AS sales_amount FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') AND order_date BETWEEN '2026-08-26' AND '2026-09-11' GROUP BY order_date ORDER BY date LIMIT 200",
+    "result": [
+      {
+        "date": "2026-08-26",
+        "sales_amount": 52834.66
+      },
+      {
+        "date": "2026-08-27",
+        "sales_amount": 75561.4
+      },
+      {
+        "date": "2026-08-28",
+        "sales_amount": 56207.25
+      },
+      {
+        "date": "2026-08-29",
+        "sales_amount": 54850.12
+      },
+      {
+        "date": "2026-08-30",
+        "sales_amount": 22250.99
+      },
+      {
+        "date": "2026-08-31",
+        "sales_amount": 52762.62
+      },
+      {
+        "date": "2026-09-01",
+        "sales_amount": 14839.95
+      },
+      {
+        "date": "2026-09-02",
+        "sales_amount": 30220.78
+      },
+      {
+        "date": "2026-09-03",
+        "sales_amount": 45357.7
+      },
+      {
+        "date": "2026-09-04",
+        "sales_amount": 34607.0
+      },
+      {
+        "date": "2026-09-05",
+        "sales_amount": 56016.83
+      },
+      {
+        "date": "2026-09-06",
+        "sales_amount": 46298.18
+      },
+      {
+        "date": "2026-09-07",
+        "sales_amount": 33996.74
+      },
+      {
+        "date": "2026-09-08",
+        "sales_amount": 45984.56
+      },
+      {
+        "date": "2026-09-09",
+        "sales_amount": 87939.71
+      },
+      {
+        "date": "2026-09-10",
+        "sales_amount": 48939.65
+      },
+      {
+        "date": "2026-09-11",
+        "sales_amount": 16379.69
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 11.988
+  },
+  {
+    "id": "dev-2-0-c",
+    "first_status": "success",
+    "triggered": false,
+    "first_latency_s": 6.483,
+    "clarification_question": "",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "proceed"
+      },
+      {
+        "stage": "execute",
+        "status": "success"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT ROUND(SUM(paid_amount), 2) AS sales_amount FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') AND order_date >= DATE_SUB('2026-09-12', INTERVAL '23' DAY) AND order_date < '2026-09-12' LIMIT 200",
+    "result": [
+      {
+        "sales_amount": 1130576.9
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 6.483
+  },
+  {
+    "id": "dev-2-0-a",
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "first_latency_s": 2.559,
+    "clarification_question": "‘最近’指最近7天、30天，还是其他天数？",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "clarify",
+        "ambiguity_type": "time",
+        "reason": "最近有效订单未定义时间范围，'最近'是模糊相对周期，需明确天数或具体区间。"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT ROUND(SUM(paid_amount), 2) AS sales_amount FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') AND order_date >= DATE_SUB('2026-09-12', INTERVAL '23' DAY) AND order_date < '2026-09-12' LIMIT 200",
+    "result": [
+      {
+        "sales_amount": 1130576.9
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 8.918
+  },
+  {
+    "id": "dev-2-1-c",
+    "first_status": "success",
+    "triggered": false,
+    "first_latency_s": 5.834,
+    "clarification_question": "",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "proceed"
+      },
+      {
+        "stage": "execute",
+        "status": "success"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT SUM(oi.quantity) AS quantity FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '服饰鞋包' LIMIT 200",
+    "result": [
+      {
+        "quantity": 5592.0
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 5.834
+  },
+  {
+    "id": "dev-2-1-a",
+    "first_status": "success",
+    "triggered": false,
+    "first_latency_s": 4.775,
+    "clarification_question": "",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "proceed"
+      },
+      {
+        "stage": "execute",
+        "status": "success"
+      }
+    ],
+    "interactive_correct": false,
+    "final_status": "success",
+    "sql": "SELECT ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM products AS p JOIN order_items AS oi ON p.product_id = oi.product_id JOIN orders AS o ON oi.order_id = o.order_id WHERE p.category = '服饰鞋包' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "result": [
+      {
+        "sales_amount": 1775094.12
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 4.775
+  },
+  {
+    "id": "dev-2-2-c",
+    "first_status": "success",
+    "triggered": false,
+    "first_latency_s": 6.352,
+    "clarification_question": "",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "proceed"
+      },
+      {
+        "stage": "execute",
+        "status": "success"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT COUNT(*) AS user_count FROM (SELECT u.user_id FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') GROUP BY u.user_id HAVING SUM(o.paid_amount) > 3400) AS high_value_users LIMIT 200",
+    "result": [
+      {
+        "user_count": 1890
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 6.352
+  },
+  {
+    "id": "dev-2-2-a",
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "first_latency_s": 4.146,
+    "clarification_question": "消费水平较高是指：A) 客单价（总销售额/客户数）高于全量客户均值；B) 总消费额排名前10%；C) 单次订单实收金额≥500元的客户；D) 其他标准？",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "clarify",
+        "ambiguity_type": "metric",
+        "reason": "消费水平较高是定性描述，未定义量化阈值（如人均订单金额、总消费额、客单价等）或参照基准（如全量客户均值/中位数、Top N%），无法唯一确定SQL逻辑。"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT COUNT(*) AS user_count FROM (SELECT o.user_id, SUM(o.paid_amount) AS total_paid FROM orders AS o WHERE o.order_status IN ('paid', 'completed', 'shipped') GROUP BY o.user_id HAVING SUM(o.paid_amount) > 3400) AS high_spend_users LIMIT 200",
+    "result": [
+      {
+        "user_count": 1890
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 10.203
+  },
+  {
+    "id": "dev-2-3-c",
+    "first_status": "success",
+    "triggered": false,
+    "first_latency_s": 4.613,
+    "clarification_question": "",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "proceed"
+      },
+      {
+        "stage": "execute",
+        "status": "success"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT COUNT(*) AS product_count FROM products WHERE list_price > 360 AND is_active = 1 LIMIT 200",
+    "result": [
+      {
+        "product_count": 376
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 4.613
+  },
+  {
+    "id": "dev-2-3-a",
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "first_latency_s": 4.371,
+    "clarification_question": "价格偏高是指：A) 同类目商品平均售价的1.5倍以上；B) 商品标价高于5000元；C) 售价超过成本价200%；D) 其他标准？",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "clarify",
+        "ambiguity_type": "metric",
+        "reason": "价格偏高缺乏明确定义：未说明是相对于类目均价、历史售价、成本加成率，还是绝对阈值（如>5000元）；'在售商品'对应is_active=1，但'偏高'需量化标准。"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT COUNT(*) AS product_count FROM products WHERE list_price > 360 AND is_active = 1 LIMIT 200",
+    "result": [
+      {
+        "product_count": 376
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 8.446
+  },
+  {
+    "id": "dev-2-4-c",
+    "first_status": "success",
+    "triggered": false,
+    "first_latency_s": 4.142,
+    "clarification_question": "",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "proceed"
+      },
+      {
+        "stage": "execute",
+        "status": "success"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT COUNT(*) AS order_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '北京' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "result": [
+      {
+        "order_count": 0
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 4.142
+  },
+  {
+    "id": "dev-2-4-a",
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "first_latency_s": 3.536,
+    "clarification_question": "‘我们区域’具体指哪个地理范围？选项：A. 全国 B. 某个特定省份（请说明） C. 某个特定城市（请说明） D. VIP客户所在区域",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "clarify",
+        "ambiguity_type": "entity",
+        "reason": "区域未定义：问题中'我们区域'缺乏地理范围定义（如具体省份、城市或业务划分），无法确定对应users.province或users.city的过滤条件。"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT COUNT(*) AS order_count FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.city = '北京' LIMIT 200",
+    "result": [
+      {
+        "order_count": 0
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 7.831
+  },
+  {
+    "id": "dev-2-5-c",
+    "first_status": "success",
+    "triggered": false,
+    "first_latency_s": 6.145,
+    "clarification_question": "",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "proceed"
+      },
+      {
+        "stage": "execute",
+        "status": "success"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT u.user_id, ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') GROUP BY u.user_id ORDER BY sales_amount DESC, u.user_id ASC LIMIT 5",
+    "result": [
+      {
+        "user_id": 2525,
+        "sales_amount": 83882.27
+      },
+      {
+        "user_id": 2005,
+        "sales_amount": 80553.99
+      },
+      {
+        "user_id": 2137,
+        "sales_amount": 74838.62
+      },
+      {
+        "user_id": 171,
+        "sales_amount": 72735.82
+      },
+      {
+        "user_id": 2277,
+        "sales_amount": 69422.02
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 6.145
+  },
+  {
+    "id": "dev-2-5-a",
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "first_latency_s": 4.091,
+    "clarification_question": "客户‘表现最好’依据哪个指标？选项：A) 总销售金额（paid_amount） B) 总订单数 C) 购买天数 D) 近30天复购率",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "clarify",
+        "ambiguity_type": "metric",
+        "reason": "‘表现最好’未指定具体业务指标（如销售金额、订单数、购买频次、复购率、退款率等），不同指标会导致完全不同的客户排序。"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT u.user_id, ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') GROUP BY u.user_id ORDER BY sales_amount DESC, u.user_id ASC LIMIT 5",
+    "result": [
+      {
+        "user_id": 2525,
+        "sales_amount": 83882.27
+      },
+      {
+        "user_id": 2005,
+        "sales_amount": 80553.99
+      },
+      {
+        "user_id": 2137,
+        "sales_amount": 74838.62
+      },
+      {
+        "user_id": 171,
+        "sales_amount": 72735.82
+      },
+      {
+        "user_id": 2277,
+        "sales_amount": 69422.02
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 10.206
+  },
+  {
+    "id": "dev-2-6-c",
+    "first_status": "success",
+    "triggered": false,
+    "first_latency_s": 5.126,
+    "clarification_question": "",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "proceed"
+      },
+      {
+        "stage": "execute",
+        "status": "success"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT ROUND(SUM(refund_amount), 2) AS refund_amount FROM refunds WHERE refund_status = 'approved' AND refund_date >= DATE_SUB('2026-09-12', INTERVAL '23' DAY) AND refund_date < '2026-09-12' LIMIT 200",
+    "result": [
+      {
+        "refund_amount": 44863.46
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 5.126
+  },
+  {
+    "id": "dev-2-6-a",
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "first_latency_s": 2.696,
+    "clarification_question": "近期指最近几天？（选项：3天、7天、15天、30天）",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "clarify",
+        "ambiguity_type": "time",
+        "reason": "近期未定义时间范围，无法确定是最近7天、30天还是其他周期，需明确具体天数。"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT ROUND(SUM(refund_amount), 2) AS refund_amount FROM refunds WHERE refund_status = 'approved' AND refund_date >= DATE_SUB('2026-09-12', INTERVAL '23' DAY) AND refund_date < '2026-09-12' LIMIT 200",
+    "result": [
+      {
+        "refund_amount": 44863.46
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 8.122
+  },
+  {
+    "id": "dev-2-7-c",
+    "first_status": "success",
+    "triggered": false,
+    "first_latency_s": 5.141,
+    "clarification_question": "",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "proceed"
+      },
+      {
+        "stage": "execute",
+        "status": "success"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT COUNT(*) AS user_count FROM (SELECT user_id FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') GROUP BY user_id HAVING COUNT(*) >= 5) AS frequent_users LIMIT 200",
+    "result": [
+      {
+        "user_count": 641
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 5.141
+  },
+  {
+    "id": "dev-2-7-a",
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "first_latency_s": 4.393,
+    "clarification_question": "“经常购买”的定义是？A) 近30天内下单≥3次；B) 历史累计有效订单≥5单；C) 近90天内有购买且复购率≥30%；D) 其他（请说明）",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "clarify",
+        "ambiguity_type": "metric",
+        "reason": "“经常购买”缺乏明确定义：未指定购买频次阈值（如近30天≥3单、历史总单数≥5单等），也未说明是否需排除退款订单或限定时间范围。不同定义将导致完全不同的客户筛选逻辑和人数结果。"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT COUNT(*) AS user_count FROM (SELECT user_id FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') GROUP BY user_id HAVING COUNT(*) >= 5) AS frequent_users LIMIT 200",
+    "result": [
+      {
+        "user_count": 641
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 8.73
+  },
+  {
+    "id": "dev-2-8-c",
+    "first_status": "success",
+    "triggered": false,
+    "first_latency_s": 5.637,
+    "clarification_question": "",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "proceed"
+      },
+      {
+        "stage": "execute",
+        "status": "success"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT u.city, COUNT(*) AS order_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND NOT u.city IS NULL GROUP BY u.city HAVING COUNT(*) >= 5 ORDER BY u.city ASC LIMIT 200",
+    "result": [
+      {
+        "city": "上海市",
+        "order_count": 1407
+      },
+      {
+        "city": "北京市",
+        "order_count": 1459
+      },
+      {
+        "city": "南京市",
+        "order_count": 1318
+      },
+      {
+        "city": "广州市",
+        "order_count": 1278
+      },
+      {
+        "city": "成都市",
+        "order_count": 1343
+      },
+      {
+        "city": "杭州市",
+        "order_count": 1275
+      },
+      {
+        "city": "武汉市",
+        "order_count": 1363
+      },
+      {
+        "city": "西安市",
+        "order_count": 1363
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 5.637
+  },
+  {
+    "id": "dev-2-8-a",
+    "first_status": "success",
+    "triggered": false,
+    "first_latency_s": 4.388,
+    "clarification_question": "",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "proceed"
+      },
+      {
+        "stage": "execute",
+        "status": "success"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT u.city, COUNT(*) AS order_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') GROUP BY u.city ORDER BY u.city ASC LIMIT 200",
+    "result": [
+      {
+        "city": "上海市",
+        "order_count": 1407
+      },
+      {
+        "city": "北京市",
+        "order_count": 1459
+      },
+      {
+        "city": "南京市",
+        "order_count": 1318
+      },
+      {
+        "city": "广州市",
+        "order_count": 1278
+      },
+      {
+        "city": "成都市",
+        "order_count": 1343
+      },
+      {
+        "city": "杭州市",
+        "order_count": 1275
+      },
+      {
+        "city": "武汉市",
+        "order_count": 1363
+      },
+      {
+        "city": "西安市",
+        "order_count": 1363
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 4.388
+  },
+  {
+    "id": "dev-2-9-c",
+    "first_status": "success",
+    "triggered": false,
+    "first_latency_s": 6.221,
+    "clarification_question": "",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "proceed"
+      },
+      {
+        "stage": "execute",
+        "status": "success"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT order_date AS date, ROUND(SUM(paid_amount), 2) AS sales_amount FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') AND order_date BETWEEN '2026-08-20' AND '2026-09-11' GROUP BY order_date ORDER BY order_date LIMIT 200",
+    "result": [
+      {
+        "date": "2026-08-20",
+        "sales_amount": 35636.89
+      },
+      {
+        "date": "2026-08-21",
+        "sales_amount": 45029.81
+      },
+      {
+        "date": "2026-08-22",
+        "sales_amount": 65913.44
+      },
+      {
+        "date": "2026-08-23",
+        "sales_amount": 104441.56
+      },
+      {
+        "date": "2026-08-24",
+        "sales_amount": 64355.05
+      },
+      {
+        "date": "2026-08-25",
+        "sales_amount": 40152.32
+      },
+      {
+        "date": "2026-08-26",
+        "sales_amount": 52834.66
+      },
+      {
+        "date": "2026-08-27",
+        "sales_amount": 75561.4
+      },
+      {
+        "date": "2026-08-28",
+        "sales_amount": 56207.25
+      },
+      {
+        "date": "2026-08-29",
+        "sales_amount": 54850.12
+      },
+      {
+        "date": "2026-08-30",
+        "sales_amount": 22250.99
+      },
+      {
+        "date": "2026-08-31",
+        "sales_amount": 52762.62
+      },
+      {
+        "date": "2026-09-01",
+        "sales_amount": 14839.95
+      },
+      {
+        "date": "2026-09-02",
+        "sales_amount": 30220.78
+      },
+      {
+        "date": "2026-09-03",
+        "sales_amount": 45357.7
+      },
+      {
+        "date": "2026-09-04",
+        "sales_amount": 34607.0
+      },
+      {
+        "date": "2026-09-05",
+        "sales_amount": 56016.83
+      },
+      {
+        "date": "2026-09-06",
+        "sales_amount": 46298.18
+      },
+      {
+        "date": "2026-09-07",
+        "sales_amount": 33996.74
+      },
+      {
+        "date": "2026-09-08",
+        "sales_amount": 45984.56
+      },
+      {
+        "date": "2026-09-09",
+        "sales_amount": 87939.71
+      },
+      {
+        "date": "2026-09-10",
+        "sales_amount": 48939.65
+      },
+      {
+        "date": "2026-09-11",
+        "sales_amount": 16379.69
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 6.221
+  },
+  {
+    "id": "dev-2-9-a",
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "first_latency_s": 4.829,
+    "clarification_question": "‘这段时间’具体指哪一段？例如：A) 2026-09-01至2026-09-12；B) 最近7天（2026-09-06至2026-09-12）；C) 本月全部日期（2026-09-01至2026-09-12）；D) 其他，请说明。",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "clarify",
+        "ambiguity_type": "time",
+        "reason": "问题中'这段时间'未明确定义时间范围，既无起止日期也无相对长度（如最近7天），无法确定每日聚合的时间窗口。"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT order_date AS date, ROUND(SUM(paid_amount), 2) AS sales_amount FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') AND order_date BETWEEN '2026-08-20' AND '2026-09-11' GROUP BY order_date ORDER BY order_date LIMIT 200",
+    "result": [
+      {
+        "date": "2026-08-20",
+        "sales_amount": 35636.89
+      },
+      {
+        "date": "2026-08-21",
+        "sales_amount": 45029.81
+      },
+      {
+        "date": "2026-08-22",
+        "sales_amount": 65913.44
+      },
+      {
+        "date": "2026-08-23",
+        "sales_amount": 104441.56
+      },
+      {
+        "date": "2026-08-24",
+        "sales_amount": 64355.05
+      },
+      {
+        "date": "2026-08-25",
+        "sales_amount": 40152.32
+      },
+      {
+        "date": "2026-08-26",
+        "sales_amount": 52834.66
+      },
+      {
+        "date": "2026-08-27",
+        "sales_amount": 75561.4
+      },
+      {
+        "date": "2026-08-28",
+        "sales_amount": 56207.25
+      },
+      {
+        "date": "2026-08-29",
+        "sales_amount": 54850.12
+      },
+      {
+        "date": "2026-08-30",
+        "sales_amount": 22250.99
+      },
+      {
+        "date": "2026-08-31",
+        "sales_amount": 52762.62
+      },
+      {
+        "date": "2026-09-01",
+        "sales_amount": 14839.95
+      },
+      {
+        "date": "2026-09-02",
+        "sales_amount": 30220.78
+      },
+      {
+        "date": "2026-09-03",
+        "sales_amount": 45357.7
+      },
+      {
+        "date": "2026-09-04",
+        "sales_amount": 34607.0
+      },
+      {
+        "date": "2026-09-05",
+        "sales_amount": 56016.83
+      },
+      {
+        "date": "2026-09-06",
+        "sales_amount": 46298.18
+      },
+      {
+        "date": "2026-09-07",
+        "sales_amount": 33996.74
+      },
+      {
+        "date": "2026-09-08",
+        "sales_amount": 45984.56
+      },
+      {
+        "date": "2026-09-09",
+        "sales_amount": 87939.71
+      },
+      {
+        "date": "2026-09-10",
+        "sales_amount": 48939.65
+      },
+      {
+        "date": "2026-09-11",
+        "sales_amount": 16379.69
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 10.732
+  },
+  {
+    "id": "dev-3-0-c",
+    "first_status": "success",
+    "triggered": false,
+    "first_latency_s": 6.203,
+    "clarification_question": "",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "proceed"
+      },
+      {
+        "stage": "execute",
+        "status": "success"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT ROUND(SUM(paid_amount), 2) AS sales_amount FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') AND order_date >= DATE_SUB('2026-09-12', INTERVAL '29' DAY) AND order_date < '2026-09-12' LIMIT 200",
+    "result": [
+      {
+        "sales_amount": 1418586.23
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 6.203
+  },
+  {
+    "id": "dev-3-0-a",
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "first_latency_s": 4.608,
+    "clarification_question": "“最近”指最近几天？选项：A. 最近7天  B. 最近30天  C. 本周（2026-09-07至2026-09-12）  D. 本月（2026-09-01至2026-09-12）",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "clarify",
+        "ambiguity_type": "time",
+        "reason": "“最近”未定义时间范围（如最近7天、30天），且参考日期2026-09-12为未来日期，无法默认推断合理周期；需明确时间窗口。"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT ROUND(SUM(paid_amount), 2) AS sales_amount FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') AND order_date >= DATE_SUB('2026-09-12', INTERVAL '29' DAY) AND order_date < '2026-09-12' LIMIT 200",
+    "result": [
+      {
+        "sales_amount": 1418586.23
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 11.478
+  },
+  {
+    "id": "dev-3-1-c",
+    "first_status": "success",
+    "triggered": false,
+    "first_latency_s": 4.9,
+    "clarification_question": "",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "proceed"
+      },
+      {
+        "stage": "execute",
+        "status": "success"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT SUM(oi.quantity) AS quantity FROM products AS p JOIN order_items AS oi ON p.product_id = oi.product_id JOIN orders AS o ON oi.order_id = o.order_id WHERE p.category = '母婴用品' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "result": [
+      {
+        "quantity": 6566.0
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 4.9
+  },
+  {
+    "id": "dev-3-1-a",
+    "first_status": "success",
+    "triggered": false,
+    "first_latency_s": 5.897,
+    "clarification_question": "",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "proceed"
+      },
+      {
+        "stage": "execute",
+        "status": "success"
+      }
+    ],
+    "interactive_correct": false,
+    "final_status": "success",
+    "sql": "SELECT ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM products AS p JOIN order_items AS oi ON p.product_id = oi.product_id JOIN orders AS o ON oi.order_id = o.order_id WHERE p.category = '母婴用品' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "result": [
+      {
+        "sales_amount": 1627735.6
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 5.897
+  },
+  {
+    "id": "dev-3-2-c",
+    "first_status": "success",
+    "triggered": false,
+    "first_latency_s": 6.541,
+    "clarification_question": "",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "proceed"
+      },
+      {
+        "stage": "execute",
+        "status": "success"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT COUNT(*) AS user_count FROM (SELECT u.user_id FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') GROUP BY u.user_id HAVING SUM(o.paid_amount) > 4100) AS high_value_users LIMIT 200",
+    "result": [
+      {
+        "user_count": 1768
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 6.541
+  },
+  {
+    "id": "dev-3-2-a",
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "first_latency_s": 3.6,
+    "clarification_question": "消费水平较高指：A) 人均订单实收金额前20%；B) 总实收金额超过5000元；C) VIP用户（is_vip=1）；D) 用户等级为gold或black？",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "clarify",
+        "ambiguity_type": "metric",
+        "reason": "消费水平较高是定性描述，未定义量化阈值（如人均订单金额、总支付金额、VIP等级等），无法唯一确定SQL过滤条件。"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT COUNT(*) AS user_count FROM (SELECT u.user_id FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') GROUP BY u.user_id HAVING SUM(o.paid_amount) > 4100) AS high_spend_users LIMIT 200",
+    "result": [
+      {
+        "user_count": 1768
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 8.821
+  },
+  {
+    "id": "dev-3-3-c",
+    "first_status": "success",
+    "triggered": false,
+    "first_latency_s": 4.233,
+    "clarification_question": "",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "proceed"
+      },
+      {
+        "stage": "execute",
+        "status": "success"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT COUNT(*) AS product_count FROM products WHERE list_price > 450 AND is_active = 1 LIMIT 200",
+    "result": [
+      {
+        "product_count": 305
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 4.233
+  },
+  {
+    "id": "dev-3-3-a",
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "first_latency_s": 3.899,
+    "clarification_question": "价格偏高是指：① 商品售价高于同品类平均售价的1.5倍；② 售价超过500元；③ 成本加成率超过200%；④ 其他标准？",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "clarify",
+        "ambiguity_type": "metric",
+        "reason": "价格偏高缺乏明确定义：未说明是相对于同类商品均价、历史价格、成本加成率，还是绝对价格阈值；也未指定'在售商品'是否等同于products.is_active=1。"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT COUNT(*) AS product_count FROM products WHERE list_price > 450 AND is_active = 1 LIMIT 200",
+    "result": [
+      {
+        "product_count": 305
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 7.881
+  },
+  {
+    "id": "dev-3-4-c",
+    "first_status": "success",
+    "triggered": false,
+    "first_latency_s": 4.704,
+    "clarification_question": "",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "proceed"
+      },
+      {
+        "stage": "execute",
+        "status": "success"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT COUNT(*) AS order_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '广州' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "result": [
+      {
+        "order_count": 0
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 4.704
+  },
+  {
+    "id": "dev-3-4-a",
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "first_latency_s": 3.951,
+    "clarification_question": "‘我们区域’具体指哪个地理范围？选项：A. 全国 B. 某个指定省份（请说明） C. 某个指定城市（请说明） D. 其他自定义区域",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "clarify",
+        "ambiguity_type": "entity",
+        "reason": "区域未定义：问题中'我们区域'缺乏地理范围定义（如省份、城市或自定义区域），无法确定对应users.province或users.city的过滤条件。"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT COUNT(*) AS order_count FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.city = '广州' LIMIT 200",
+    "result": [
+      {
+        "order_count": 0
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 9.05
+  },
+  {
+    "id": "dev-3-5-c",
+    "first_status": "success",
+    "triggered": false,
+    "first_latency_s": 5.793,
+    "clarification_question": "",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "proceed"
+      },
+      {
+        "stage": "execute",
+        "status": "success"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT u.user_id, ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') GROUP BY u.user_id ORDER BY sales_amount DESC, u.user_id ASC LIMIT 6",
+    "result": [
+      {
+        "user_id": 2525,
+        "sales_amount": 83882.27
+      },
+      {
+        "user_id": 2005,
+        "sales_amount": 80553.99
+      },
+      {
+        "user_id": 2137,
+        "sales_amount": 74838.62
+      },
+      {
+        "user_id": 171,
+        "sales_amount": 72735.82
+      },
+      {
+        "user_id": 2277,
+        "sales_amount": 69422.02
+      },
+      {
+        "user_id": 1116,
+        "sales_amount": 63019.85
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 5.793
+  },
+  {
+    "id": "dev-3-5-a",
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "first_latency_s": 3.676,
+    "clarification_question": "客户‘表现最好’依据哪个指标？选项：A) 总销售金额（paid_amount） B) 有效订单数 C) 购买商品总数量 D) 近30天复购次数",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "clarify",
+        "ambiguity_type": "metric",
+        "reason": "问题未明确‘表现最好’的具体指标（如销售金额、订单数、购买频次、复购率、退款率等），不同指标会导致完全不同的SQL和结果。"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT u.user_id, ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') GROUP BY u.user_id ORDER BY sales_amount DESC, u.user_id ASC LIMIT 6",
+    "result": [
+      {
+        "user_id": 2525,
+        "sales_amount": 83882.27
+      },
+      {
+        "user_id": 2005,
+        "sales_amount": 80553.99
+      },
+      {
+        "user_id": 2137,
+        "sales_amount": 74838.62
+      },
+      {
+        "user_id": 171,
+        "sales_amount": 72735.82
+      },
+      {
+        "user_id": 2277,
+        "sales_amount": 69422.02
+      },
+      {
+        "user_id": 1116,
+        "sales_amount": 63019.85
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 9.841
+  },
+  {
+    "id": "dev-3-6-c",
+    "first_status": "success",
+    "triggered": false,
+    "first_latency_s": 5.042,
+    "clarification_question": "",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "proceed"
+      },
+      {
+        "stage": "execute",
+        "status": "success"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT ROUND(SUM(refund_amount), 2) AS refund_amount FROM refunds WHERE refund_status = 'approved' AND refund_date >= DATE_SUB('2026-09-12', INTERVAL '29' DAY) AND refund_date < '2026-09-12' LIMIT 200",
+    "result": [
+      {
+        "refund_amount": 62709.04
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 5.042
+  },
+  {
+    "id": "dev-3-6-a",
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "first_latency_s": 4.349,
+    "clarification_question": "‘近期’具体指最近几天？选项：A) 7天  B) 30天  C) 90天  D) 自2026-09-01起",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "clarify",
+        "ambiguity_type": "time",
+        "reason": "问题中'近期'未定义具体时间范围，无法确定是最近7天、30天还是其他周期；reference_date为2026-09-12，但'近期'需明确相对长度才能生成准确SQL。"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT ROUND(SUM(refund_amount), 2) AS refund_amount FROM refunds WHERE refund_status = 'approved' AND refund_date >= DATE_SUB('2026-09-12', INTERVAL '29' DAY) AND refund_date < '2026-09-12' LIMIT 200",
+    "result": [
+      {
+        "refund_amount": 62709.04
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 9.859
+  },
+  {
+    "id": "dev-3-7-c",
+    "first_status": "success",
+    "triggered": false,
+    "first_latency_s": 4.418,
+    "clarification_question": "",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "proceed"
+      },
+      {
+        "stage": "execute",
+        "status": "success"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT COUNT(*) AS user_count FROM (SELECT user_id FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') GROUP BY user_id HAVING COUNT(*) >= 6) AS frequent_users LIMIT 200",
+    "result": [
+      {
+        "user_count": 514
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 4.418
+  },
+  {
+    "id": "dev-3-7-a",
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "first_latency_s": 4.439,
+    "clarification_question": "“经常购买”的定义是？选项：A) 近30天内下单≥3次；B) 历史累计有效订单≥5单；C) 近90天内有购买且复购率≥30%；D) 其他（请说明）",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "clarify",
+        "ambiguity_type": "metric",
+        "reason": "“经常购买”缺乏明确定义：未指定购买频次阈值（如近30天≥3单、历史总单数≥5单等），也未说明是否需排除退款订单或限定时间范围。不同定义将导致完全不同的用户筛选逻辑和结果。"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT COUNT(*) AS user_count FROM (SELECT user_id FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') GROUP BY user_id HAVING COUNT(*) >= 6) AS frequent_users LIMIT 200",
+    "result": [
+      {
+        "user_count": 514
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 8.537
+  },
+  {
+    "id": "dev-3-8-c",
+    "first_status": "success",
+    "triggered": false,
+    "first_latency_s": 5.472,
+    "clarification_question": "",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "proceed"
+      },
+      {
+        "stage": "execute",
+        "status": "success"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT u.city, COUNT(*) AS valid_order_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') GROUP BY u.city HAVING COUNT(*) >= 6 ORDER BY u.city ASC LIMIT 200",
+    "result": [
+      {
+        "city": "上海市",
+        "valid_order_count": 1407
+      },
+      {
+        "city": "北京市",
+        "valid_order_count": 1459
+      },
+      {
+        "city": "南京市",
+        "valid_order_count": 1318
+      },
+      {
+        "city": "广州市",
+        "valid_order_count": 1278
+      },
+      {
+        "city": "成都市",
+        "valid_order_count": 1343
+      },
+      {
+        "city": "杭州市",
+        "valid_order_count": 1275
+      },
+      {
+        "city": "武汉市",
+        "valid_order_count": 1363
+      },
+      {
+        "city": "西安市",
+        "valid_order_count": 1363
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 5.472
+  },
+  {
+    "id": "dev-3-8-a",
+    "first_status": "success",
+    "triggered": false,
+    "first_latency_s": 5.05,
+    "clarification_question": "",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "proceed"
+      },
+      {
+        "stage": "execute",
+        "status": "success"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT u.city, COUNT(*) AS order_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') GROUP BY u.city ORDER BY u.city ASC LIMIT 200",
+    "result": [
+      {
+        "city": "上海市",
+        "order_count": 1407
+      },
+      {
+        "city": "北京市",
+        "order_count": 1459
+      },
+      {
+        "city": "南京市",
+        "order_count": 1318
+      },
+      {
+        "city": "广州市",
+        "order_count": 1278
+      },
+      {
+        "city": "成都市",
+        "order_count": 1343
+      },
+      {
+        "city": "杭州市",
+        "order_count": 1275
+      },
+      {
+        "city": "武汉市",
+        "order_count": 1363
+      },
+      {
+        "city": "西安市",
+        "order_count": 1363
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 5.05
+  },
+  {
+    "id": "dev-3-9-c",
+    "first_status": "success",
+    "triggered": false,
+    "first_latency_s": 6.119,
+    "clarification_question": "",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "proceed"
+      },
+      {
+        "stage": "execute",
+        "status": "success"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT order_date AS date, ROUND(SUM(paid_amount), 2) AS sales_amount FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') AND order_date BETWEEN '2026-08-14' AND '2026-09-11' GROUP BY order_date ORDER BY order_date LIMIT 200",
+    "result": [
+      {
+        "date": "2026-08-14",
+        "sales_amount": 65448.99
+      },
+      {
+        "date": "2026-08-15",
+        "sales_amount": 33743.65
+      },
+      {
+        "date": "2026-08-16",
+        "sales_amount": 58640.66
+      },
+      {
+        "date": "2026-08-17",
+        "sales_amount": 40229.84
+      },
+      {
+        "date": "2026-08-18",
+        "sales_amount": 48064.3
+      },
+      {
+        "date": "2026-08-19",
+        "sales_amount": 41881.89
+      },
+      {
+        "date": "2026-08-20",
+        "sales_amount": 35636.89
+      },
+      {
+        "date": "2026-08-21",
+        "sales_amount": 45029.81
+      },
+      {
+        "date": "2026-08-22",
+        "sales_amount": 65913.44
+      },
+      {
+        "date": "2026-08-23",
+        "sales_amount": 104441.56
+      },
+      {
+        "date": "2026-08-24",
+        "sales_amount": 64355.05
+      },
+      {
+        "date": "2026-08-25",
+        "sales_amount": 40152.32
+      },
+      {
+        "date": "2026-08-26",
+        "sales_amount": 52834.66
+      },
+      {
+        "date": "2026-08-27",
+        "sales_amount": 75561.4
+      },
+      {
+        "date": "2026-08-28",
+        "sales_amount": 56207.25
+      },
+      {
+        "date": "2026-08-29",
+        "sales_amount": 54850.12
+      },
+      {
+        "date": "2026-08-30",
+        "sales_amount": 22250.99
+      },
+      {
+        "date": "2026-08-31",
+        "sales_amount": 52762.62
+      },
+      {
+        "date": "2026-09-01",
+        "sales_amount": 14839.95
+      },
+      {
+        "date": "2026-09-02",
+        "sales_amount": 30220.78
+      },
+      {
+        "date": "2026-09-03",
+        "sales_amount": 45357.7
+      },
+      {
+        "date": "2026-09-04",
+        "sales_amount": 34607.0
+      },
+      {
+        "date": "2026-09-05",
+        "sales_amount": 56016.83
+      },
+      {
+        "date": "2026-09-06",
+        "sales_amount": 46298.18
+      },
+      {
+        "date": "2026-09-07",
+        "sales_amount": 33996.74
+      },
+      {
+        "date": "2026-09-08",
+        "sales_amount": 45984.56
+      },
+      {
+        "date": "2026-09-09",
+        "sales_amount": 87939.71
+      },
+      {
+        "date": "2026-09-10",
+        "sales_amount": 48939.65
+      },
+      {
+        "date": "2026-09-11",
+        "sales_amount": 16379.69
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 6.119
+  },
+  {
+    "id": "dev-3-9-a",
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "first_latency_s": 4.849,
+    "clarification_question": "请问'这段时间'具体指哪一段？例如：A) 2026-09-01至2026-09-12；B) 2026-09-12前7天（即2026-09-06至2026-09-12）；C) 2026年9月全月；D) 其他指定范围？",
+    "first_trace": [
+      {
+        "stage": "clarification",
+        "status": "clarify",
+        "ambiguity_type": "time",
+        "reason": "问题中'这段时间'未明确定义时间范围，既无起止日期也无相对长度（如'最近7天'），无法确定每日聚合的时间窗口。"
+      }
+    ],
+    "interactive_correct": true,
+    "final_status": "success",
+    "sql": "SELECT order_date AS date, ROUND(SUM(paid_amount), 2) AS sales_amount FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') AND order_date BETWEEN '2026-08-14' AND '2026-09-11' GROUP BY order_date ORDER BY date LIMIT 200",
+    "result": [
+      {
+        "date": "2026-08-14",
+        "sales_amount": 65448.99
+      },
+      {
+        "date": "2026-08-15",
+        "sales_amount": 33743.65
+      },
+      {
+        "date": "2026-08-16",
+        "sales_amount": 58640.66
+      },
+      {
+        "date": "2026-08-17",
+        "sales_amount": 40229.84
+      },
+      {
+        "date": "2026-08-18",
+        "sales_amount": 48064.3
+      },
+      {
+        "date": "2026-08-19",
+        "sales_amount": 41881.89
+      },
+      {
+        "date": "2026-08-20",
+        "sales_amount": 35636.89
+      },
+      {
+        "date": "2026-08-21",
+        "sales_amount": 45029.81
+      },
+      {
+        "date": "2026-08-22",
+        "sales_amount": 65913.44
+      },
+      {
+        "date": "2026-08-23",
+        "sales_amount": 104441.56
+      },
+      {
+        "date": "2026-08-24",
+        "sales_amount": 64355.05
+      },
+      {
+        "date": "2026-08-25",
+        "sales_amount": 40152.32
+      },
+      {
+        "date": "2026-08-26",
+        "sales_amount": 52834.66
+      },
+      {
+        "date": "2026-08-27",
+        "sales_amount": 75561.4
+      },
+      {
+        "date": "2026-08-28",
+        "sales_amount": 56207.25
+      },
+      {
+        "date": "2026-08-29",
+        "sales_amount": 54850.12
+      },
+      {
+        "date": "2026-08-30",
+        "sales_amount": 22250.99
+      },
+      {
+        "date": "2026-08-31",
+        "sales_amount": 52762.62
+      },
+      {
+        "date": "2026-09-01",
+        "sales_amount": 14839.95
+      },
+      {
+        "date": "2026-09-02",
+        "sales_amount": 30220.78
+      },
+      {
+        "date": "2026-09-03",
+        "sales_amount": 45357.7
+      },
+      {
+        "date": "2026-09-04",
+        "sales_amount": 34607.0
+      },
+      {
+        "date": "2026-09-05",
+        "sales_amount": 56016.83
+      },
+      {
+        "date": "2026-09-06",
+        "sales_amount": 46298.18
+      },
+      {
+        "date": "2026-09-07",
+        "sales_amount": 33996.74
+      },
+      {
+        "date": "2026-09-08",
+        "sales_amount": 45984.56
+      },
+      {
+        "date": "2026-09-09",
+        "sales_amount": 87939.71
+      },
+      {
+        "date": "2026-09-10",
+        "sales_amount": 48939.65
+      },
+      {
+        "date": "2026-09-11",
+        "sales_amount": 16379.69
+      }
+    ],
+    "retry_count": 0,
+    "total_latency_s": 10.842
+  }
+]

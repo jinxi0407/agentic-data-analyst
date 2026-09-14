@@ -18,8 +18,9 @@ def test_query_endpoint_uses_production_result_shape(monkeypatch):
 
     monkeypatch.setattr(
         main,
-        "run_question",
-        lambda question: {
+        "run_interactive",
+        lambda *args: {
+            "engine": "Production NL2SQL Engine",
             "sql": "SELECT 1 LIMIT 200",
             "result": [{"value": 1}],
             "retry_count": 0,

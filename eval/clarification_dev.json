@@ -1,0 +1,2250 @@
+[
+  {
+    "id": "dev-0-0-c",
+    "question": "最近11天（不含今天）的有效订单销售额是多少？只返回总额。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "最近11天（不含今天）的有效订单销售额是多少？只返回总额。",
+    "reference_sql": "SELECT ROUND(SUM(paid_amount),2) AS total FROM orders WHERE order_status IN ('paid','completed','shipped') AND order_date >= '2026-09-01' AND order_date < '2026-09-12'",
+    "ordered": false,
+    "family": 0,
+    "ground_truth_result": [
+      {
+        "total": 460580.79
+      }
+    ]
+  },
+  {
+    "id": "dev-0-0-a",
+    "question": "运营报表第1组：最近有效订单销售额是多少？只返回总额。",
+    "should_clarify": true,
+    "ambiguity_type": "time",
+    "clarification_answer": "最近11天，不含今天。",
+    "resolved_question": "最近11天（不含今天）的有效订单销售额是多少？只返回总额。",
+    "reference_sql": "SELECT ROUND(SUM(paid_amount),2) AS total FROM orders WHERE order_status IN ('paid','completed','shipped') AND order_date >= '2026-09-01' AND order_date < '2026-09-12'",
+    "ordered": false,
+    "family": 0,
+    "ground_truth_result": [
+      {
+        "total": 460580.79
+      }
+    ]
+  },
+  {
+    "id": "dev-0-1-c",
+    "question": "手机数码商品共卖出多少件？按有效订单统计，只返回数量。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "手机数码商品共卖出多少件？按有效订单统计，只返回数量。",
+    "reference_sql": "SELECT SUM(i.quantity) AS total FROM order_items i JOIN orders o ON i.order_id=o.order_id JOIN products p ON i.product_id=p.product_id WHERE o.order_status IN ('paid','completed','shipped') AND p.category='手机数码'",
+    "ordered": false,
+    "family": 1,
+    "ground_truth_result": [
+      {
+        "total": 6527.0
+      }
+    ]
+  },
+  {
+    "id": "dev-0-1-a",
+    "question": "运营报表第1组：手机数码商品销售表现是多少？只返回一个总计。",
+    "should_clarify": true,
+    "ambiguity_type": "metric",
+    "clarification_answer": "按有效订单的销量，也就是销售数量统计，全部历史。",
+    "resolved_question": "手机数码商品共卖出多少件？按有效订单统计，只返回数量。",
+    "reference_sql": "SELECT SUM(i.quantity) AS total FROM order_items i JOIN orders o ON i.order_id=o.order_id JOIN products p ON i.product_id=p.product_id WHERE o.order_status IN ('paid','completed','shipped') AND p.category='手机数码'",
+    "ordered": false,
+    "family": 1,
+    "ground_truth_result": [
+      {
+        "total": 6527.0
+      }
+    ]
+  },
+  {
+    "id": "dev-0-2-c",
+    "question": "有效订单累计实付金额超过2000元的客户有多少个？只返回人数。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "有效订单累计实付金额超过2000元的客户有多少个？只返回人数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM (SELECT user_id FROM orders WHERE order_status IN ('paid','completed','shipped') GROUP BY user_id HAVING SUM(paid_amount)>2000) t",
+    "ordered": false,
+    "family": 2,
+    "ground_truth_result": [
+      {
+        "total": 2210
+      }
+    ]
+  },
+  {
+    "id": "dev-0-2-a",
+    "question": "运营报表第1组：消费水平较高的客户有多少个？只返回人数。",
+    "should_clarify": true,
+    "ambiguity_type": "business_definition",
+    "clarification_answer": "有效订单累计实付金额超过2000元，全部历史。",
+    "resolved_question": "有效订单累计实付金额超过2000元的客户有多少个？只返回人数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM (SELECT user_id FROM orders WHERE order_status IN ('paid','completed','shipped') GROUP BY user_id HAVING SUM(paid_amount)>2000) t",
+    "ordered": false,
+    "family": 2,
+    "ground_truth_result": [
+      {
+        "total": 2210
+      }
+    ]
+  },
+  {
+    "id": "dev-0-3-c",
+    "question": "标价高于180元的在售商品有多少个？只返回数量。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "标价高于180元的在售商品有多少个？只返回数量。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM products WHERE is_active=1 AND list_price>180",
+    "ordered": false,
+    "family": 3,
+    "ground_truth_result": [
+      {
+        "total": 613
+      }
+    ]
+  },
+  {
+    "id": "dev-0-3-a",
+    "question": "运营报表第1组：价格偏高的在售商品有多少个？只返回数量。",
+    "should_clarify": true,
+    "ambiguity_type": "filter",
+    "clarification_answer": "标价高于180元。",
+    "resolved_question": "标价高于180元的在售商品有多少个？只返回数量。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM products WHERE is_active=1 AND list_price>180",
+    "ordered": false,
+    "family": 3,
+    "ground_truth_result": [
+      {
+        "total": 613
+      }
+    ]
+  },
+  {
+    "id": "dev-0-4-c",
+    "question": "上海客户的有效订单有多少笔？只返回订单数。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "上海客户的有效订单有多少笔？只返回订单数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM users u JOIN orders o ON u.user_id=o.user_id WHERE u.city='上海' AND o.order_status IN ('paid','completed','shipped')",
+    "ordered": false,
+    "family": 4,
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "dev-0-4-a",
+    "question": "运营报表第1组：我们区域的客户有多少笔有效订单？只返回订单数。",
+    "should_clarify": true,
+    "ambiguity_type": "entity",
+    "clarification_answer": "客户城市为上海，统计全部历史。",
+    "resolved_question": "上海客户的有效订单有多少笔？只返回订单数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM users u JOIN orders o ON u.user_id=o.user_id WHERE u.city='上海' AND o.order_status IN ('paid','completed','shipped')",
+    "ordered": false,
+    "family": 4,
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "dev-0-5-c",
+    "question": "按累计有效订单消费金额降序，列出前3位客户的用户ID和消费金额，金额相同时按用户ID升序。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "按累计有效订单消费金额降序，列出前3位客户的用户ID和消费金额，金额相同时按用户ID升序。",
+    "reference_sql": "SELECT user_id,ROUND(SUM(paid_amount),2) AS amount FROM orders WHERE order_status IN ('paid','completed','shipped') GROUP BY user_id ORDER BY amount DESC,user_id ASC LIMIT 3",
+    "ordered": true,
+    "family": 5,
+    "ground_truth_result": [
+      {
+        "user_id": 2525,
+        "amount": 83882.27
+      },
+      {
+        "user_id": 2005,
+        "amount": 80553.99
+      },
+      {
+        "user_id": 2137,
+        "amount": 74838.62
+      }
+    ]
+  },
+  {
+    "id": "dev-0-5-a",
+    "question": "运营报表第1组：列出前3位表现最好的客户，返回用户ID和排名指标，指标相同时按用户ID升序。",
+    "should_clarify": true,
+    "ambiguity_type": "metric",
+    "clarification_answer": "按全部历史有效订单累计实付金额从高到低排名，金额保留两位小数。",
+    "resolved_question": "按累计有效订单消费金额降序，列出前3位客户的用户ID和消费金额，金额相同时按用户ID升序。",
+    "reference_sql": "SELECT user_id,ROUND(SUM(paid_amount),2) AS amount FROM orders WHERE order_status IN ('paid','completed','shipped') GROUP BY user_id ORDER BY amount DESC,user_id ASC LIMIT 3",
+    "ordered": true,
+    "family": 5,
+    "ground_truth_result": [
+      {
+        "user_id": 2525,
+        "amount": 83882.27
+      },
+      {
+        "user_id": 2005,
+        "amount": 80553.99
+      },
+      {
+        "user_id": 2137,
+        "amount": 74838.62
+      }
+    ]
+  },
+  {
+    "id": "dev-0-6-c",
+    "question": "最近11天（不含今天）已批准退款总额是多少？只返回总额。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "最近11天（不含今天）已批准退款总额是多少？只返回总额。",
+    "reference_sql": "SELECT ROUND(SUM(refund_amount),2) AS total FROM refunds WHERE refund_status='approved' AND refund_date>='2026-09-01' AND refund_date<'2026-09-12'",
+    "ordered": false,
+    "family": 6,
+    "ground_truth_result": [
+      {
+        "total": 20523.09
+      }
+    ]
+  },
+  {
+    "id": "dev-0-6-a",
+    "question": "运营报表第1组：近期已批准退款总额是多少？只返回总额。",
+    "should_clarify": true,
+    "ambiguity_type": "time",
+    "clarification_answer": "最近11天，不含今天，使用退款时间。",
+    "resolved_question": "最近11天（不含今天）已批准退款总额是多少？只返回总额。",
+    "reference_sql": "SELECT ROUND(SUM(refund_amount),2) AS total FROM refunds WHERE refund_status='approved' AND refund_date>='2026-09-01' AND refund_date<'2026-09-12'",
+    "ordered": false,
+    "family": 6,
+    "ground_truth_result": [
+      {
+        "total": 20523.09
+      }
+    ]
+  },
+  {
+    "id": "dev-0-7-c",
+    "question": "全部历史有效订单次数至少3次的客户有多少人？只返回人数。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "全部历史有效订单次数至少3次的客户有多少人？只返回人数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM (SELECT user_id FROM orders WHERE order_status IN ('paid','completed','shipped') GROUP BY user_id HAVING COUNT(*)>=3) t",
+    "ordered": false,
+    "family": 7,
+    "ground_truth_result": [
+      {
+        "total": 1438
+      }
+    ]
+  },
+  {
+    "id": "dev-0-7-a",
+    "question": "运营报表第1组：经常购买的客户有多少人？只返回人数。",
+    "should_clarify": true,
+    "ambiguity_type": "business_definition",
+    "clarification_answer": "全部历史有效订单次数至少3次。",
+    "resolved_question": "全部历史有效订单次数至少3次的客户有多少人？只返回人数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM (SELECT user_id FROM orders WHERE order_status IN ('paid','completed','shipped') GROUP BY user_id HAVING COUNT(*)>=3) t",
+    "ordered": false,
+    "family": 7,
+    "ground_truth_result": [
+      {
+        "total": 1438
+      }
+    ]
+  },
+  {
+    "id": "dev-0-8-c",
+    "question": "列出有效订单数至少3的城市及其有效订单数，按城市升序。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "列出有效订单数至少3的城市及其有效订单数，按城市升序。",
+    "reference_sql": "SELECT u.city,COUNT(*) AS total FROM users u JOIN orders o ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') GROUP BY u.city HAVING COUNT(*)>=3 ORDER BY u.city",
+    "ordered": true,
+    "family": 8,
+    "ground_truth_result": [
+      {
+        "city": "上海市",
+        "total": 1407
+      },
+      {
+        "city": "北京市",
+        "total": 1459
+      },
+      {
+        "city": "南京市",
+        "total": 1318
+      },
+      {
+        "city": "广州市",
+        "total": 1278
+      },
+      {
+        "city": "成都市",
+        "total": 1343
+      },
+      {
+        "city": "杭州市",
+        "total": 1275
+      },
+      {
+        "city": "武汉市",
+        "total": 1363
+      },
+      {
+        "city": "西安市",
+        "total": 1363
+      }
+    ]
+  },
+  {
+    "id": "dev-0-8-a",
+    "question": "运营报表第1组：列出订单比较多的城市及其有效订单数，按城市升序。",
+    "should_clarify": true,
+    "ambiguity_type": "filter",
+    "clarification_answer": "全部历史有效订单数至少3。",
+    "resolved_question": "列出有效订单数至少3的城市及其有效订单数，按城市升序。",
+    "reference_sql": "SELECT u.city,COUNT(*) AS total FROM users u JOIN orders o ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') GROUP BY u.city HAVING COUNT(*)>=3 ORDER BY u.city",
+    "ordered": true,
+    "family": 8,
+    "ground_truth_result": [
+      {
+        "city": "上海市",
+        "total": 1407
+      },
+      {
+        "city": "北京市",
+        "total": 1459
+      },
+      {
+        "city": "南京市",
+        "total": 1318
+      },
+      {
+        "city": "广州市",
+        "total": 1278
+      },
+      {
+        "city": "成都市",
+        "total": 1343
+      },
+      {
+        "city": "杭州市",
+        "total": 1275
+      },
+      {
+        "city": "武汉市",
+        "total": 1363
+      },
+      {
+        "city": "西安市",
+        "total": 1363
+      }
+    ]
+  },
+  {
+    "id": "dev-0-9-c",
+    "question": "从2026-09-01到2026-09-11（包含首尾日），每天有效订单销售额是多少？返回日期和金额并按日期升序。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "从2026-09-01到2026-09-11（包含首尾日），每天有效订单销售额是多少？返回日期和金额并按日期升序。",
+    "reference_sql": "SELECT DATE(order_date) AS day,ROUND(SUM(paid_amount),2) AS amount FROM orders WHERE order_status IN ('paid','completed','shipped') AND order_date >= '2026-09-01' AND order_date < '2026-09-12' GROUP BY DATE(order_date) ORDER BY day",
+    "ordered": true,
+    "family": 9,
+    "ground_truth_result": [
+      {
+        "day": "2026-09-01",
+        "amount": 14839.95
+      },
+      {
+        "day": "2026-09-02",
+        "amount": 30220.78
+      },
+      {
+        "day": "2026-09-03",
+        "amount": 45357.7
+      },
+      {
+        "day": "2026-09-04",
+        "amount": 34607.0
+      },
+      {
+        "day": "2026-09-05",
+        "amount": 56016.83
+      },
+      {
+        "day": "2026-09-06",
+        "amount": 46298.18
+      },
+      {
+        "day": "2026-09-07",
+        "amount": 33996.74
+      },
+      {
+        "day": "2026-09-08",
+        "amount": 45984.56
+      },
+      {
+        "day": "2026-09-09",
+        "amount": 87939.71
+      },
+      {
+        "day": "2026-09-10",
+        "amount": 48939.65
+      },
+      {
+        "day": "2026-09-11",
+        "amount": 16379.69
+      }
+    ]
+  },
+  {
+    "id": "dev-0-9-a",
+    "question": "运营报表第1组：这段时间每天有效订单销售额是多少？返回日期和金额并按日期升序。",
+    "should_clarify": true,
+    "ambiguity_type": "time",
+    "clarification_answer": "从2026-09-01到2026-09-11，包含首尾日。",
+    "resolved_question": "从2026-09-01到2026-09-11（包含首尾日），每天有效订单销售额是多少？返回日期和金额并按日期升序。",
+    "reference_sql": "SELECT DATE(order_date) AS day,ROUND(SUM(paid_amount),2) AS amount FROM orders WHERE order_status IN ('paid','completed','shipped') AND order_date >= '2026-09-01' AND order_date < '2026-09-12' GROUP BY DATE(order_date) ORDER BY day",
+    "ordered": true,
+    "family": 9,
+    "ground_truth_result": [
+      {
+        "day": "2026-09-01",
+        "amount": 14839.95
+      },
+      {
+        "day": "2026-09-02",
+        "amount": 30220.78
+      },
+      {
+        "day": "2026-09-03",
+        "amount": 45357.7
+      },
+      {
+        "day": "2026-09-04",
+        "amount": 34607.0
+      },
+      {
+        "day": "2026-09-05",
+        "amount": 56016.83
+      },
+      {
+        "day": "2026-09-06",
+        "amount": 46298.18
+      },
+      {
+        "day": "2026-09-07",
+        "amount": 33996.74
+      },
+      {
+        "day": "2026-09-08",
+        "amount": 45984.56
+      },
+      {
+        "day": "2026-09-09",
+        "amount": 87939.71
+      },
+      {
+        "day": "2026-09-10",
+        "amount": 48939.65
+      },
+      {
+        "day": "2026-09-11",
+        "amount": 16379.69
+      }
+    ]
+  },
+  {
+    "id": "dev-1-0-c",
+    "question": "最近17天（不含今天）的有效订单销售额是多少？只返回总额。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "最近17天（不含今天）的有效订单销售额是多少？只返回总额。",
+    "reference_sql": "SELECT ROUND(SUM(paid_amount),2) AS total FROM orders WHERE order_status IN ('paid','completed','shipped') AND order_date >= '2026-08-26' AND order_date < '2026-09-12'",
+    "ordered": false,
+    "family": 0,
+    "ground_truth_result": [
+      {
+        "total": 775047.83
+      }
+    ]
+  },
+  {
+    "id": "dev-1-0-a",
+    "question": "运营报表第2组：最近有效订单销售额是多少？只返回总额。",
+    "should_clarify": true,
+    "ambiguity_type": "time",
+    "clarification_answer": "最近17天，不含今天。",
+    "resolved_question": "最近17天（不含今天）的有效订单销售额是多少？只返回总额。",
+    "reference_sql": "SELECT ROUND(SUM(paid_amount),2) AS total FROM orders WHERE order_status IN ('paid','completed','shipped') AND order_date >= '2026-08-26' AND order_date < '2026-09-12'",
+    "ordered": false,
+    "family": 0,
+    "ground_truth_result": [
+      {
+        "total": 775047.83
+      }
+    ]
+  },
+  {
+    "id": "dev-1-1-c",
+    "question": "家用电器商品共卖出多少件？按有效订单统计，只返回数量。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "家用电器商品共卖出多少件？按有效订单统计，只返回数量。",
+    "reference_sql": "SELECT SUM(i.quantity) AS total FROM order_items i JOIN orders o ON i.order_id=o.order_id JOIN products p ON i.product_id=p.product_id WHERE o.order_status IN ('paid','completed','shipped') AND p.category='家用电器'",
+    "ordered": false,
+    "family": 1,
+    "ground_truth_result": [
+      {
+        "total": 7420.0
+      }
+    ]
+  },
+  {
+    "id": "dev-1-1-a",
+    "question": "运营报表第2组：家用电器商品销售表现是多少？只返回一个总计。",
+    "should_clarify": true,
+    "ambiguity_type": "metric",
+    "clarification_answer": "按有效订单的销量，也就是销售数量统计，全部历史。",
+    "resolved_question": "家用电器商品共卖出多少件？按有效订单统计，只返回数量。",
+    "reference_sql": "SELECT SUM(i.quantity) AS total FROM order_items i JOIN orders o ON i.order_id=o.order_id JOIN products p ON i.product_id=p.product_id WHERE o.order_status IN ('paid','completed','shipped') AND p.category='家用电器'",
+    "ordered": false,
+    "family": 1,
+    "ground_truth_result": [
+      {
+        "total": 7420.0
+      }
+    ]
+  },
+  {
+    "id": "dev-1-2-c",
+    "question": "有效订单累计实付金额超过2700元的客户有多少个？只返回人数。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "有效订单累计实付金额超过2700元的客户有多少个？只返回人数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM (SELECT user_id FROM orders WHERE order_status IN ('paid','completed','shipped') GROUP BY user_id HAVING SUM(paid_amount)>2700) t",
+    "ordered": false,
+    "family": 2,
+    "ground_truth_result": [
+      {
+        "total": 2038
+      }
+    ]
+  },
+  {
+    "id": "dev-1-2-a",
+    "question": "运营报表第2组：消费水平较高的客户有多少个？只返回人数。",
+    "should_clarify": true,
+    "ambiguity_type": "business_definition",
+    "clarification_answer": "有效订单累计实付金额超过2700元，全部历史。",
+    "resolved_question": "有效订单累计实付金额超过2700元的客户有多少个？只返回人数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM (SELECT user_id FROM orders WHERE order_status IN ('paid','completed','shipped') GROUP BY user_id HAVING SUM(paid_amount)>2700) t",
+    "ordered": false,
+    "family": 2,
+    "ground_truth_result": [
+      {
+        "total": 2038
+      }
+    ]
+  },
+  {
+    "id": "dev-1-3-c",
+    "question": "标价高于270元的在售商品有多少个？只返回数量。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "标价高于270元的在售商品有多少个？只返回数量。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM products WHERE is_active=1 AND list_price>270",
+    "ordered": false,
+    "family": 3,
+    "ground_truth_result": [
+      {
+        "total": 481
+      }
+    ]
+  },
+  {
+    "id": "dev-1-3-a",
+    "question": "运营报表第2组：价格偏高的在售商品有多少个？只返回数量。",
+    "should_clarify": true,
+    "ambiguity_type": "filter",
+    "clarification_answer": "标价高于270元。",
+    "resolved_question": "标价高于270元的在售商品有多少个？只返回数量。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM products WHERE is_active=1 AND list_price>270",
+    "ordered": false,
+    "family": 3,
+    "ground_truth_result": [
+      {
+        "total": 481
+      }
+    ]
+  },
+  {
+    "id": "dev-1-4-c",
+    "question": "杭州客户的有效订单有多少笔？只返回订单数。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "杭州客户的有效订单有多少笔？只返回订单数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM users u JOIN orders o ON u.user_id=o.user_id WHERE u.city='杭州' AND o.order_status IN ('paid','completed','shipped')",
+    "ordered": false,
+    "family": 4,
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "dev-1-4-a",
+    "question": "运营报表第2组：我们区域的客户有多少笔有效订单？只返回订单数。",
+    "should_clarify": true,
+    "ambiguity_type": "entity",
+    "clarification_answer": "客户城市为杭州，统计全部历史。",
+    "resolved_question": "杭州客户的有效订单有多少笔？只返回订单数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM users u JOIN orders o ON u.user_id=o.user_id WHERE u.city='杭州' AND o.order_status IN ('paid','completed','shipped')",
+    "ordered": false,
+    "family": 4,
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "dev-1-5-c",
+    "question": "按累计有效订单消费金额降序，列出前4位客户的用户ID和消费金额，金额相同时按用户ID升序。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "按累计有效订单消费金额降序，列出前4位客户的用户ID和消费金额，金额相同时按用户ID升序。",
+    "reference_sql": "SELECT user_id,ROUND(SUM(paid_amount),2) AS amount FROM orders WHERE order_status IN ('paid','completed','shipped') GROUP BY user_id ORDER BY amount DESC,user_id ASC LIMIT 4",
+    "ordered": true,
+    "family": 5,
+    "ground_truth_result": [
+      {
+        "user_id": 2525,
+        "amount": 83882.27
+      },
+      {
+        "user_id": 2005,
+        "amount": 80553.99
+      },
+      {
+        "user_id": 2137,
+        "amount": 74838.62
+      },
+      {
+        "user_id": 171,
+        "amount": 72735.82
+      }
+    ]
+  },
+  {
+    "id": "dev-1-5-a",
+    "question": "运营报表第2组：列出前4位表现最好的客户，返回用户ID和排名指标，指标相同时按用户ID升序。",
+    "should_clarify": true,
+    "ambiguity_type": "metric",
+    "clarification_answer": "按全部历史有效订单累计实付金额从高到低排名，金额保留两位小数。",
+    "resolved_question": "按累计有效订单消费金额降序，列出前4位客户的用户ID和消费金额，金额相同时按用户ID升序。",
+    "reference_sql": "SELECT user_id,ROUND(SUM(paid_amount),2) AS amount FROM orders WHERE order_status IN ('paid','completed','shipped') GROUP BY user_id ORDER BY amount DESC,user_id ASC LIMIT 4",
+    "ordered": true,
+    "family": 5,
+    "ground_truth_result": [
+      {
+        "user_id": 2525,
+        "amount": 83882.27
+      },
+      {
+        "user_id": 2005,
+        "amount": 80553.99
+      },
+      {
+        "user_id": 2137,
+        "amount": 74838.62
+      },
+      {
+        "user_id": 171,
+        "amount": 72735.82
+      }
+    ]
+  },
+  {
+    "id": "dev-1-6-c",
+    "question": "最近17天（不含今天）已批准退款总额是多少？只返回总额。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "最近17天（不含今天）已批准退款总额是多少？只返回总额。",
+    "reference_sql": "SELECT ROUND(SUM(refund_amount),2) AS total FROM refunds WHERE refund_status='approved' AND refund_date>='2026-08-26' AND refund_date<'2026-09-12'",
+    "ordered": false,
+    "family": 6,
+    "ground_truth_result": [
+      {
+        "total": 32444.32
+      }
+    ]
+  },
+  {
+    "id": "dev-1-6-a",
+    "question": "运营报表第2组：近期已批准退款总额是多少？只返回总额。",
+    "should_clarify": true,
+    "ambiguity_type": "time",
+    "clarification_answer": "最近17天，不含今天，使用退款时间。",
+    "resolved_question": "最近17天（不含今天）已批准退款总额是多少？只返回总额。",
+    "reference_sql": "SELECT ROUND(SUM(refund_amount),2) AS total FROM refunds WHERE refund_status='approved' AND refund_date>='2026-08-26' AND refund_date<'2026-09-12'",
+    "ordered": false,
+    "family": 6,
+    "ground_truth_result": [
+      {
+        "total": 32444.32
+      }
+    ]
+  },
+  {
+    "id": "dev-1-7-c",
+    "question": "全部历史有效订单次数至少4次的客户有多少人？只返回人数。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "全部历史有效订单次数至少4次的客户有多少人？只返回人数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM (SELECT user_id FROM orders WHERE order_status IN ('paid','completed','shipped') GROUP BY user_id HAVING COUNT(*)>=4) t",
+    "ordered": false,
+    "family": 7,
+    "ground_truth_result": [
+      {
+        "total": 957
+      }
+    ]
+  },
+  {
+    "id": "dev-1-7-a",
+    "question": "运营报表第2组：经常购买的客户有多少人？只返回人数。",
+    "should_clarify": true,
+    "ambiguity_type": "business_definition",
+    "clarification_answer": "全部历史有效订单次数至少4次。",
+    "resolved_question": "全部历史有效订单次数至少4次的客户有多少人？只返回人数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM (SELECT user_id FROM orders WHERE order_status IN ('paid','completed','shipped') GROUP BY user_id HAVING COUNT(*)>=4) t",
+    "ordered": false,
+    "family": 7,
+    "ground_truth_result": [
+      {
+        "total": 957
+      }
+    ]
+  },
+  {
+    "id": "dev-1-8-c",
+    "question": "列出有效订单数至少4的城市及其有效订单数，按城市升序。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "列出有效订单数至少4的城市及其有效订单数，按城市升序。",
+    "reference_sql": "SELECT u.city,COUNT(*) AS total FROM users u JOIN orders o ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') GROUP BY u.city HAVING COUNT(*)>=4 ORDER BY u.city",
+    "ordered": true,
+    "family": 8,
+    "ground_truth_result": [
+      {
+        "city": "上海市",
+        "total": 1407
+      },
+      {
+        "city": "北京市",
+        "total": 1459
+      },
+      {
+        "city": "南京市",
+        "total": 1318
+      },
+      {
+        "city": "广州市",
+        "total": 1278
+      },
+      {
+        "city": "成都市",
+        "total": 1343
+      },
+      {
+        "city": "杭州市",
+        "total": 1275
+      },
+      {
+        "city": "武汉市",
+        "total": 1363
+      },
+      {
+        "city": "西安市",
+        "total": 1363
+      }
+    ]
+  },
+  {
+    "id": "dev-1-8-a",
+    "question": "运营报表第2组：列出订单比较多的城市及其有效订单数，按城市升序。",
+    "should_clarify": true,
+    "ambiguity_type": "filter",
+    "clarification_answer": "全部历史有效订单数至少4。",
+    "resolved_question": "列出有效订单数至少4的城市及其有效订单数，按城市升序。",
+    "reference_sql": "SELECT u.city,COUNT(*) AS total FROM users u JOIN orders o ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') GROUP BY u.city HAVING COUNT(*)>=4 ORDER BY u.city",
+    "ordered": true,
+    "family": 8,
+    "ground_truth_result": [
+      {
+        "city": "上海市",
+        "total": 1407
+      },
+      {
+        "city": "北京市",
+        "total": 1459
+      },
+      {
+        "city": "南京市",
+        "total": 1318
+      },
+      {
+        "city": "广州市",
+        "total": 1278
+      },
+      {
+        "city": "成都市",
+        "total": 1343
+      },
+      {
+        "city": "杭州市",
+        "total": 1275
+      },
+      {
+        "city": "武汉市",
+        "total": 1363
+      },
+      {
+        "city": "西安市",
+        "total": 1363
+      }
+    ]
+  },
+  {
+    "id": "dev-1-9-c",
+    "question": "从2026-08-26到2026-09-11（包含首尾日），每天有效订单销售额是多少？返回日期和金额并按日期升序。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "从2026-08-26到2026-09-11（包含首尾日），每天有效订单销售额是多少？返回日期和金额并按日期升序。",
+    "reference_sql": "SELECT DATE(order_date) AS day,ROUND(SUM(paid_amount),2) AS amount FROM orders WHERE order_status IN ('paid','completed','shipped') AND order_date >= '2026-08-26' AND order_date < '2026-09-12' GROUP BY DATE(order_date) ORDER BY day",
+    "ordered": true,
+    "family": 9,
+    "ground_truth_result": [
+      {
+        "day": "2026-08-26",
+        "amount": 52834.66
+      },
+      {
+        "day": "2026-08-27",
+        "amount": 75561.4
+      },
+      {
+        "day": "2026-08-28",
+        "amount": 56207.25
+      },
+      {
+        "day": "2026-08-29",
+        "amount": 54850.12
+      },
+      {
+        "day": "2026-08-30",
+        "amount": 22250.99
+      },
+      {
+        "day": "2026-08-31",
+        "amount": 52762.62
+      },
+      {
+        "day": "2026-09-01",
+        "amount": 14839.95
+      },
+      {
+        "day": "2026-09-02",
+        "amount": 30220.78
+      },
+      {
+        "day": "2026-09-03",
+        "amount": 45357.7
+      },
+      {
+        "day": "2026-09-04",
+        "amount": 34607.0
+      },
+      {
+        "day": "2026-09-05",
+        "amount": 56016.83
+      },
+      {
+        "day": "2026-09-06",
+        "amount": 46298.18
+      },
+      {
+        "day": "2026-09-07",
+        "amount": 33996.74
+      },
+      {
+        "day": "2026-09-08",
+        "amount": 45984.56
+      },
+      {
+        "day": "2026-09-09",
+        "amount": 87939.71
+      },
+      {
+        "day": "2026-09-10",
+        "amount": 48939.65
+      },
+      {
+        "day": "2026-09-11",
+        "amount": 16379.69
+      }
+    ]
+  },
+  {
+    "id": "dev-1-9-a",
+    "question": "运营报表第2组：这段时间每天有效订单销售额是多少？返回日期和金额并按日期升序。",
+    "should_clarify": true,
+    "ambiguity_type": "time",
+    "clarification_answer": "从2026-08-26到2026-09-11，包含首尾日。",
+    "resolved_question": "从2026-08-26到2026-09-11（包含首尾日），每天有效订单销售额是多少？返回日期和金额并按日期升序。",
+    "reference_sql": "SELECT DATE(order_date) AS day,ROUND(SUM(paid_amount),2) AS amount FROM orders WHERE order_status IN ('paid','completed','shipped') AND order_date >= '2026-08-26' AND order_date < '2026-09-12' GROUP BY DATE(order_date) ORDER BY day",
+    "ordered": true,
+    "family": 9,
+    "ground_truth_result": [
+      {
+        "day": "2026-08-26",
+        "amount": 52834.66
+      },
+      {
+        "day": "2026-08-27",
+        "amount": 75561.4
+      },
+      {
+        "day": "2026-08-28",
+        "amount": 56207.25
+      },
+      {
+        "day": "2026-08-29",
+        "amount": 54850.12
+      },
+      {
+        "day": "2026-08-30",
+        "amount": 22250.99
+      },
+      {
+        "day": "2026-08-31",
+        "amount": 52762.62
+      },
+      {
+        "day": "2026-09-01",
+        "amount": 14839.95
+      },
+      {
+        "day": "2026-09-02",
+        "amount": 30220.78
+      },
+      {
+        "day": "2026-09-03",
+        "amount": 45357.7
+      },
+      {
+        "day": "2026-09-04",
+        "amount": 34607.0
+      },
+      {
+        "day": "2026-09-05",
+        "amount": 56016.83
+      },
+      {
+        "day": "2026-09-06",
+        "amount": 46298.18
+      },
+      {
+        "day": "2026-09-07",
+        "amount": 33996.74
+      },
+      {
+        "day": "2026-09-08",
+        "amount": 45984.56
+      },
+      {
+        "day": "2026-09-09",
+        "amount": 87939.71
+      },
+      {
+        "day": "2026-09-10",
+        "amount": 48939.65
+      },
+      {
+        "day": "2026-09-11",
+        "amount": 16379.69
+      }
+    ]
+  },
+  {
+    "id": "dev-2-0-c",
+    "question": "最近23天（不含今天）的有效订单销售额是多少？只返回总额。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "最近23天（不含今天）的有效订单销售额是多少？只返回总额。",
+    "reference_sql": "SELECT ROUND(SUM(paid_amount),2) AS total FROM orders WHERE order_status IN ('paid','completed','shipped') AND order_date >= '2026-08-20' AND order_date < '2026-09-12'",
+    "ordered": false,
+    "family": 0,
+    "ground_truth_result": [
+      {
+        "total": 1130576.9
+      }
+    ]
+  },
+  {
+    "id": "dev-2-0-a",
+    "question": "运营报表第3组：最近有效订单销售额是多少？只返回总额。",
+    "should_clarify": true,
+    "ambiguity_type": "time",
+    "clarification_answer": "最近23天，不含今天。",
+    "resolved_question": "最近23天（不含今天）的有效订单销售额是多少？只返回总额。",
+    "reference_sql": "SELECT ROUND(SUM(paid_amount),2) AS total FROM orders WHERE order_status IN ('paid','completed','shipped') AND order_date >= '2026-08-20' AND order_date < '2026-09-12'",
+    "ordered": false,
+    "family": 0,
+    "ground_truth_result": [
+      {
+        "total": 1130576.9
+      }
+    ]
+  },
+  {
+    "id": "dev-2-1-c",
+    "question": "服饰鞋包商品共卖出多少件？按有效订单统计，只返回数量。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "服饰鞋包商品共卖出多少件？按有效订单统计，只返回数量。",
+    "reference_sql": "SELECT SUM(i.quantity) AS total FROM order_items i JOIN orders o ON i.order_id=o.order_id JOIN products p ON i.product_id=p.product_id WHERE o.order_status IN ('paid','completed','shipped') AND p.category='服饰鞋包'",
+    "ordered": false,
+    "family": 1,
+    "ground_truth_result": [
+      {
+        "total": 5592.0
+      }
+    ]
+  },
+  {
+    "id": "dev-2-1-a",
+    "question": "运营报表第3组：服饰鞋包商品销售表现是多少？只返回一个总计。",
+    "should_clarify": true,
+    "ambiguity_type": "metric",
+    "clarification_answer": "按有效订单的销量，也就是销售数量统计，全部历史。",
+    "resolved_question": "服饰鞋包商品共卖出多少件？按有效订单统计，只返回数量。",
+    "reference_sql": "SELECT SUM(i.quantity) AS total FROM order_items i JOIN orders o ON i.order_id=o.order_id JOIN products p ON i.product_id=p.product_id WHERE o.order_status IN ('paid','completed','shipped') AND p.category='服饰鞋包'",
+    "ordered": false,
+    "family": 1,
+    "ground_truth_result": [
+      {
+        "total": 5592.0
+      }
+    ]
+  },
+  {
+    "id": "dev-2-2-c",
+    "question": "有效订单累计实付金额超过3400元的客户有多少个？只返回人数。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "有效订单累计实付金额超过3400元的客户有多少个？只返回人数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM (SELECT user_id FROM orders WHERE order_status IN ('paid','completed','shipped') GROUP BY user_id HAVING SUM(paid_amount)>3400) t",
+    "ordered": false,
+    "family": 2,
+    "ground_truth_result": [
+      {
+        "total": 1890
+      }
+    ]
+  },
+  {
+    "id": "dev-2-2-a",
+    "question": "运营报表第3组：消费水平较高的客户有多少个？只返回人数。",
+    "should_clarify": true,
+    "ambiguity_type": "business_definition",
+    "clarification_answer": "有效订单累计实付金额超过3400元，全部历史。",
+    "resolved_question": "有效订单累计实付金额超过3400元的客户有多少个？只返回人数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM (SELECT user_id FROM orders WHERE order_status IN ('paid','completed','shipped') GROUP BY user_id HAVING SUM(paid_amount)>3400) t",
+    "ordered": false,
+    "family": 2,
+    "ground_truth_result": [
+      {
+        "total": 1890
+      }
+    ]
+  },
+  {
+    "id": "dev-2-3-c",
+    "question": "标价高于360元的在售商品有多少个？只返回数量。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "标价高于360元的在售商品有多少个？只返回数量。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM products WHERE is_active=1 AND list_price>360",
+    "ordered": false,
+    "family": 3,
+    "ground_truth_result": [
+      {
+        "total": 376
+      }
+    ]
+  },
+  {
+    "id": "dev-2-3-a",
+    "question": "运营报表第3组：价格偏高的在售商品有多少个？只返回数量。",
+    "should_clarify": true,
+    "ambiguity_type": "filter",
+    "clarification_answer": "标价高于360元。",
+    "resolved_question": "标价高于360元的在售商品有多少个？只返回数量。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM products WHERE is_active=1 AND list_price>360",
+    "ordered": false,
+    "family": 3,
+    "ground_truth_result": [
+      {
+        "total": 376
+      }
+    ]
+  },
+  {
+    "id": "dev-2-4-c",
+    "question": "北京客户的有效订单有多少笔？只返回订单数。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "北京客户的有效订单有多少笔？只返回订单数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM users u JOIN orders o ON u.user_id=o.user_id WHERE u.city='北京' AND o.order_status IN ('paid','completed','shipped')",
+    "ordered": false,
+    "family": 4,
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "dev-2-4-a",
+    "question": "运营报表第3组：我们区域的客户有多少笔有效订单？只返回订单数。",
+    "should_clarify": true,
+    "ambiguity_type": "entity",
+    "clarification_answer": "客户城市为北京，统计全部历史。",
+    "resolved_question": "北京客户的有效订单有多少笔？只返回订单数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM users u JOIN orders o ON u.user_id=o.user_id WHERE u.city='北京' AND o.order_status IN ('paid','completed','shipped')",
+    "ordered": false,
+    "family": 4,
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "dev-2-5-c",
+    "question": "按累计有效订单消费金额降序，列出前5位客户的用户ID和消费金额，金额相同时按用户ID升序。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "按累计有效订单消费金额降序，列出前5位客户的用户ID和消费金额，金额相同时按用户ID升序。",
+    "reference_sql": "SELECT user_id,ROUND(SUM(paid_amount),2) AS amount FROM orders WHERE order_status IN ('paid','completed','shipped') GROUP BY user_id ORDER BY amount DESC,user_id ASC LIMIT 5",
+    "ordered": true,
+    "family": 5,
+    "ground_truth_result": [
+      {
+        "user_id": 2525,
+        "amount": 83882.27
+      },
+      {
+        "user_id": 2005,
+        "amount": 80553.99
+      },
+      {
+        "user_id": 2137,
+        "amount": 74838.62
+      },
+      {
+        "user_id": 171,
+        "amount": 72735.82
+      },
+      {
+        "user_id": 2277,
+        "amount": 69422.02
+      }
+    ]
+  },
+  {
+    "id": "dev-2-5-a",
+    "question": "运营报表第3组：列出前5位表现最好的客户，返回用户ID和排名指标，指标相同时按用户ID升序。",
+    "should_clarify": true,
+    "ambiguity_type": "metric",
+    "clarification_answer": "按全部历史有效订单累计实付金额从高到低排名，金额保留两位小数。",
+    "resolved_question": "按累计有效订单消费金额降序，列出前5位客户的用户ID和消费金额，金额相同时按用户ID升序。",
+    "reference_sql": "SELECT user_id,ROUND(SUM(paid_amount),2) AS amount FROM orders WHERE order_status IN ('paid','completed','shipped') GROUP BY user_id ORDER BY amount DESC,user_id ASC LIMIT 5",
+    "ordered": true,
+    "family": 5,
+    "ground_truth_result": [
+      {
+        "user_id": 2525,
+        "amount": 83882.27
+      },
+      {
+        "user_id": 2005,
+        "amount": 80553.99
+      },
+      {
+        "user_id": 2137,
+        "amount": 74838.62
+      },
+      {
+        "user_id": 171,
+        "amount": 72735.82
+      },
+      {
+        "user_id": 2277,
+        "amount": 69422.02
+      }
+    ]
+  },
+  {
+    "id": "dev-2-6-c",
+    "question": "最近23天（不含今天）已批准退款总额是多少？只返回总额。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "最近23天（不含今天）已批准退款总额是多少？只返回总额。",
+    "reference_sql": "SELECT ROUND(SUM(refund_amount),2) AS total FROM refunds WHERE refund_status='approved' AND refund_date>='2026-08-20' AND refund_date<'2026-09-12'",
+    "ordered": false,
+    "family": 6,
+    "ground_truth_result": [
+      {
+        "total": 44863.46
+      }
+    ]
+  },
+  {
+    "id": "dev-2-6-a",
+    "question": "运营报表第3组：近期已批准退款总额是多少？只返回总额。",
+    "should_clarify": true,
+    "ambiguity_type": "time",
+    "clarification_answer": "最近23天，不含今天，使用退款时间。",
+    "resolved_question": "最近23天（不含今天）已批准退款总额是多少？只返回总额。",
+    "reference_sql": "SELECT ROUND(SUM(refund_amount),2) AS total FROM refunds WHERE refund_status='approved' AND refund_date>='2026-08-20' AND refund_date<'2026-09-12'",
+    "ordered": false,
+    "family": 6,
+    "ground_truth_result": [
+      {
+        "total": 44863.46
+      }
+    ]
+  },
+  {
+    "id": "dev-2-7-c",
+    "question": "全部历史有效订单次数至少5次的客户有多少人？只返回人数。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "全部历史有效订单次数至少5次的客户有多少人？只返回人数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM (SELECT user_id FROM orders WHERE order_status IN ('paid','completed','shipped') GROUP BY user_id HAVING COUNT(*)>=5) t",
+    "ordered": false,
+    "family": 7,
+    "ground_truth_result": [
+      {
+        "total": 641
+      }
+    ]
+  },
+  {
+    "id": "dev-2-7-a",
+    "question": "运营报表第3组：经常购买的客户有多少人？只返回人数。",
+    "should_clarify": true,
+    "ambiguity_type": "business_definition",
+    "clarification_answer": "全部历史有效订单次数至少5次。",
+    "resolved_question": "全部历史有效订单次数至少5次的客户有多少人？只返回人数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM (SELECT user_id FROM orders WHERE order_status IN ('paid','completed','shipped') GROUP BY user_id HAVING COUNT(*)>=5) t",
+    "ordered": false,
+    "family": 7,
+    "ground_truth_result": [
+      {
+        "total": 641
+      }
+    ]
+  },
+  {
+    "id": "dev-2-8-c",
+    "question": "列出有效订单数至少5的城市及其有效订单数，按城市升序。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "列出有效订单数至少5的城市及其有效订单数，按城市升序。",
+    "reference_sql": "SELECT u.city,COUNT(*) AS total FROM users u JOIN orders o ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') GROUP BY u.city HAVING COUNT(*)>=5 ORDER BY u.city",
+    "ordered": true,
+    "family": 8,
+    "ground_truth_result": [
+      {
+        "city": "上海市",
+        "total": 1407
+      },
+      {
+        "city": "北京市",
+        "total": 1459
+      },
+      {
+        "city": "南京市",
+        "total": 1318
+      },
+      {
+        "city": "广州市",
+        "total": 1278
+      },
+      {
+        "city": "成都市",
+        "total": 1343
+      },
+      {
+        "city": "杭州市",
+        "total": 1275
+      },
+      {
+        "city": "武汉市",
+        "total": 1363
+      },
+      {
+        "city": "西安市",
+        "total": 1363
+      }
+    ]
+  },
+  {
+    "id": "dev-2-8-a",
+    "question": "运营报表第3组：列出订单比较多的城市及其有效订单数，按城市升序。",
+    "should_clarify": true,
+    "ambiguity_type": "filter",
+    "clarification_answer": "全部历史有效订单数至少5。",
+    "resolved_question": "列出有效订单数至少5的城市及其有效订单数，按城市升序。",
+    "reference_sql": "SELECT u.city,COUNT(*) AS total FROM users u JOIN orders o ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') GROUP BY u.city HAVING COUNT(*)>=5 ORDER BY u.city",
+    "ordered": true,
+    "family": 8,
+    "ground_truth_result": [
+      {
+        "city": "上海市",
+        "total": 1407
+      },
+      {
+        "city": "北京市",
+        "total": 1459
+      },
+      {
+        "city": "南京市",
+        "total": 1318
+      },
+      {
+        "city": "广州市",
+        "total": 1278
+      },
+      {
+        "city": "成都市",
+        "total": 1343
+      },
+      {
+        "city": "杭州市",
+        "total": 1275
+      },
+      {
+        "city": "武汉市",
+        "total": 1363
+      },
+      {
+        "city": "西安市",
+        "total": 1363
+      }
+    ]
+  },
+  {
+    "id": "dev-2-9-c",
+    "question": "从2026-08-20到2026-09-11（包含首尾日），每天有效订单销售额是多少？返回日期和金额并按日期升序。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "从2026-08-20到2026-09-11（包含首尾日），每天有效订单销售额是多少？返回日期和金额并按日期升序。",
+    "reference_sql": "SELECT DATE(order_date) AS day,ROUND(SUM(paid_amount),2) AS amount FROM orders WHERE order_status IN ('paid','completed','shipped') AND order_date >= '2026-08-20' AND order_date < '2026-09-12' GROUP BY DATE(order_date) ORDER BY day",
+    "ordered": true,
+    "family": 9,
+    "ground_truth_result": [
+      {
+        "day": "2026-08-20",
+        "amount": 35636.89
+      },
+      {
+        "day": "2026-08-21",
+        "amount": 45029.81
+      },
+      {
+        "day": "2026-08-22",
+        "amount": 65913.44
+      },
+      {
+        "day": "2026-08-23",
+        "amount": 104441.56
+      },
+      {
+        "day": "2026-08-24",
+        "amount": 64355.05
+      },
+      {
+        "day": "2026-08-25",
+        "amount": 40152.32
+      },
+      {
+        "day": "2026-08-26",
+        "amount": 52834.66
+      },
+      {
+        "day": "2026-08-27",
+        "amount": 75561.4
+      },
+      {
+        "day": "2026-08-28",
+        "amount": 56207.25
+      },
+      {
+        "day": "2026-08-29",
+        "amount": 54850.12
+      },
+      {
+        "day": "2026-08-30",
+        "amount": 22250.99
+      },
+      {
+        "day": "2026-08-31",
+        "amount": 52762.62
+      },
+      {
+        "day": "2026-09-01",
+        "amount": 14839.95
+      },
+      {
+        "day": "2026-09-02",
+        "amount": 30220.78
+      },
+      {
+        "day": "2026-09-03",
+        "amount": 45357.7
+      },
+      {
+        "day": "2026-09-04",
+        "amount": 34607.0
+      },
+      {
+        "day": "2026-09-05",
+        "amount": 56016.83
+      },
+      {
+        "day": "2026-09-06",
+        "amount": 46298.18
+      },
+      {
+        "day": "2026-09-07",
+        "amount": 33996.74
+      },
+      {
+        "day": "2026-09-08",
+        "amount": 45984.56
+      },
+      {
+        "day": "2026-09-09",
+        "amount": 87939.71
+      },
+      {
+        "day": "2026-09-10",
+        "amount": 48939.65
+      },
+      {
+        "day": "2026-09-11",
+        "amount": 16379.69
+      }
+    ]
+  },
+  {
+    "id": "dev-2-9-a",
+    "question": "运营报表第3组：这段时间每天有效订单销售额是多少？返回日期和金额并按日期升序。",
+    "should_clarify": true,
+    "ambiguity_type": "time",
+    "clarification_answer": "从2026-08-20到2026-09-11，包含首尾日。",
+    "resolved_question": "从2026-08-20到2026-09-11（包含首尾日），每天有效订单销售额是多少？返回日期和金额并按日期升序。",
+    "reference_sql": "SELECT DATE(order_date) AS day,ROUND(SUM(paid_amount),2) AS amount FROM orders WHERE order_status IN ('paid','completed','shipped') AND order_date >= '2026-08-20' AND order_date < '2026-09-12' GROUP BY DATE(order_date) ORDER BY day",
+    "ordered": true,
+    "family": 9,
+    "ground_truth_result": [
+      {
+        "day": "2026-08-20",
+        "amount": 35636.89
+      },
+      {
+        "day": "2026-08-21",
+        "amount": 45029.81
+      },
+      {
+        "day": "2026-08-22",
+        "amount": 65913.44
+      },
+      {
+        "day": "2026-08-23",
+        "amount": 104441.56
+      },
+      {
+        "day": "2026-08-24",
+        "amount": 64355.05
+      },
+      {
+        "day": "2026-08-25",
+        "amount": 40152.32
+      },
+      {
+        "day": "2026-08-26",
+        "amount": 52834.66
+      },
+      {
+        "day": "2026-08-27",
+        "amount": 75561.4
+      },
+      {
+        "day": "2026-08-28",
+        "amount": 56207.25
+      },
+      {
+        "day": "2026-08-29",
+        "amount": 54850.12
+      },
+      {
+        "day": "2026-08-30",
+        "amount": 22250.99
+      },
+      {
+        "day": "2026-08-31",
+        "amount": 52762.62
+      },
+      {
+        "day": "2026-09-01",
+        "amount": 14839.95
+      },
+      {
+        "day": "2026-09-02",
+        "amount": 30220.78
+      },
+      {
+        "day": "2026-09-03",
+        "amount": 45357.7
+      },
+      {
+        "day": "2026-09-04",
+        "amount": 34607.0
+      },
+      {
+        "day": "2026-09-05",
+        "amount": 56016.83
+      },
+      {
+        "day": "2026-09-06",
+        "amount": 46298.18
+      },
+      {
+        "day": "2026-09-07",
+        "amount": 33996.74
+      },
+      {
+        "day": "2026-09-08",
+        "amount": 45984.56
+      },
+      {
+        "day": "2026-09-09",
+        "amount": 87939.71
+      },
+      {
+        "day": "2026-09-10",
+        "amount": 48939.65
+      },
+      {
+        "day": "2026-09-11",
+        "amount": 16379.69
+      }
+    ]
+  },
+  {
+    "id": "dev-3-0-c",
+    "question": "最近29天（不含今天）的有效订单销售额是多少？只返回总额。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "最近29天（不含今天）的有效订单销售额是多少？只返回总额。",
+    "reference_sql": "SELECT ROUND(SUM(paid_amount),2) AS total FROM orders WHERE order_status IN ('paid','completed','shipped') AND order_date >= '2026-08-14' AND order_date < '2026-09-12'",
+    "ordered": false,
+    "family": 0,
+    "ground_truth_result": [
+      {
+        "total": 1418586.23
+      }
+    ]
+  },
+  {
+    "id": "dev-3-0-a",
+    "question": "运营报表第4组：最近有效订单销售额是多少？只返回总额。",
+    "should_clarify": true,
+    "ambiguity_type": "time",
+    "clarification_answer": "最近29天，不含今天。",
+    "resolved_question": "最近29天（不含今天）的有效订单销售额是多少？只返回总额。",
+    "reference_sql": "SELECT ROUND(SUM(paid_amount),2) AS total FROM orders WHERE order_status IN ('paid','completed','shipped') AND order_date >= '2026-08-14' AND order_date < '2026-09-12'",
+    "ordered": false,
+    "family": 0,
+    "ground_truth_result": [
+      {
+        "total": 1418586.23
+      }
+    ]
+  },
+  {
+    "id": "dev-3-1-c",
+    "question": "母婴用品商品共卖出多少件？按有效订单统计，只返回数量。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "母婴用品商品共卖出多少件？按有效订单统计，只返回数量。",
+    "reference_sql": "SELECT SUM(i.quantity) AS total FROM order_items i JOIN orders o ON i.order_id=o.order_id JOIN products p ON i.product_id=p.product_id WHERE o.order_status IN ('paid','completed','shipped') AND p.category='母婴用品'",
+    "ordered": false,
+    "family": 1,
+    "ground_truth_result": [
+      {
+        "total": 6566.0
+      }
+    ]
+  },
+  {
+    "id": "dev-3-1-a",
+    "question": "运营报表第4组：母婴用品商品销售表现是多少？只返回一个总计。",
+    "should_clarify": true,
+    "ambiguity_type": "metric",
+    "clarification_answer": "按有效订单的销量，也就是销售数量统计，全部历史。",
+    "resolved_question": "母婴用品商品共卖出多少件？按有效订单统计，只返回数量。",
+    "reference_sql": "SELECT SUM(i.quantity) AS total FROM order_items i JOIN orders o ON i.order_id=o.order_id JOIN products p ON i.product_id=p.product_id WHERE o.order_status IN ('paid','completed','shipped') AND p.category='母婴用品'",
+    "ordered": false,
+    "family": 1,
+    "ground_truth_result": [
+      {
+        "total": 6566.0
+      }
+    ]
+  },
+  {
+    "id": "dev-3-2-c",
+    "question": "有效订单累计实付金额超过4100元的客户有多少个？只返回人数。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "有效订单累计实付金额超过4100元的客户有多少个？只返回人数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM (SELECT user_id FROM orders WHERE order_status IN ('paid','completed','shipped') GROUP BY user_id HAVING SUM(paid_amount)>4100) t",
+    "ordered": false,
+    "family": 2,
+    "ground_truth_result": [
+      {
+        "total": 1768
+      }
+    ]
+  },
+  {
+    "id": "dev-3-2-a",
+    "question": "运营报表第4组：消费水平较高的客户有多少个？只返回人数。",
+    "should_clarify": true,
+    "ambiguity_type": "business_definition",
+    "clarification_answer": "有效订单累计实付金额超过4100元，全部历史。",
+    "resolved_question": "有效订单累计实付金额超过4100元的客户有多少个？只返回人数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM (SELECT user_id FROM orders WHERE order_status IN ('paid','completed','shipped') GROUP BY user_id HAVING SUM(paid_amount)>4100) t",
+    "ordered": false,
+    "family": 2,
+    "ground_truth_result": [
+      {
+        "total": 1768
+      }
+    ]
+  },
+  {
+    "id": "dev-3-3-c",
+    "question": "标价高于450元的在售商品有多少个？只返回数量。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "标价高于450元的在售商品有多少个？只返回数量。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM products WHERE is_active=1 AND list_price>450",
+    "ordered": false,
+    "family": 3,
+    "ground_truth_result": [
+      {
+        "total": 305
+      }
+    ]
+  },
+  {
+    "id": "dev-3-3-a",
+    "question": "运营报表第4组：价格偏高的在售商品有多少个？只返回数量。",
+    "should_clarify": true,
+    "ambiguity_type": "filter",
+    "clarification_answer": "标价高于450元。",
+    "resolved_question": "标价高于450元的在售商品有多少个？只返回数量。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM products WHERE is_active=1 AND list_price>450",
+    "ordered": false,
+    "family": 3,
+    "ground_truth_result": [
+      {
+        "total": 305
+      }
+    ]
+  },
+  {
+    "id": "dev-3-4-c",
+    "question": "广州客户的有效订单有多少笔？只返回订单数。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "广州客户的有效订单有多少笔？只返回订单数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM users u JOIN orders o ON u.user_id=o.user_id WHERE u.city='广州' AND o.order_status IN ('paid','completed','shipped')",
+    "ordered": false,
+    "family": 4,
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "dev-3-4-a",
+    "question": "运营报表第4组：我们区域的客户有多少笔有效订单？只返回订单数。",
+    "should_clarify": true,
+    "ambiguity_type": "entity",
+    "clarification_answer": "客户城市为广州，统计全部历史。",
+    "resolved_question": "广州客户的有效订单有多少笔？只返回订单数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM users u JOIN orders o ON u.user_id=o.user_id WHERE u.city='广州' AND o.order_status IN ('paid','completed','shipped')",
+    "ordered": false,
+    "family": 4,
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "dev-3-5-c",
+    "question": "按累计有效订单消费金额降序，列出前6位客户的用户ID和消费金额，金额相同时按用户ID升序。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "按累计有效订单消费金额降序，列出前6位客户的用户ID和消费金额，金额相同时按用户ID升序。",
+    "reference_sql": "SELECT user_id,ROUND(SUM(paid_amount),2) AS amount FROM orders WHERE order_status IN ('paid','completed','shipped') GROUP BY user_id ORDER BY amount DESC,user_id ASC LIMIT 6",
+    "ordered": true,
+    "family": 5,
+    "ground_truth_result": [
+      {
+        "user_id": 2525,
+        "amount": 83882.27
+      },
+      {
+        "user_id": 2005,
+        "amount": 80553.99
+      },
+      {
+        "user_id": 2137,
+        "amount": 74838.62
+      },
+      {
+        "user_id": 171,
+        "amount": 72735.82
+      },
+      {
+        "user_id": 2277,
+        "amount": 69422.02
+      },
+      {
+        "user_id": 1116,
+        "amount": 63019.85
+      }
+    ]
+  },
+  {
+    "id": "dev-3-5-a",
+    "question": "运营报表第4组：列出前6位表现最好的客户，返回用户ID和排名指标，指标相同时按用户ID升序。",
+    "should_clarify": true,
+    "ambiguity_type": "metric",
+    "clarification_answer": "按全部历史有效订单累计实付金额从高到低排名，金额保留两位小数。",
+    "resolved_question": "按累计有效订单消费金额降序，列出前6位客户的用户ID和消费金额，金额相同时按用户ID升序。",
+    "reference_sql": "SELECT user_id,ROUND(SUM(paid_amount),2) AS amount FROM orders WHERE order_status IN ('paid','completed','shipped') GROUP BY user_id ORDER BY amount DESC,user_id ASC LIMIT 6",
+    "ordered": true,
+    "family": 5,
+    "ground_truth_result": [
+      {
+        "user_id": 2525,
+        "amount": 83882.27
+      },
+      {
+        "user_id": 2005,
+        "amount": 80553.99
+      },
+      {
+        "user_id": 2137,
+        "amount": 74838.62
+      },
+      {
+        "user_id": 171,
+        "amount": 72735.82
+      },
+      {
+        "user_id": 2277,
+        "amount": 69422.02
+      },
+      {
+        "user_id": 1116,
+        "amount": 63019.85
+      }
+    ]
+  },
+  {
+    "id": "dev-3-6-c",
+    "question": "最近29天（不含今天）已批准退款总额是多少？只返回总额。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "最近29天（不含今天）已批准退款总额是多少？只返回总额。",
+    "reference_sql": "SELECT ROUND(SUM(refund_amount),2) AS total FROM refunds WHERE refund_status='approved' AND refund_date>='2026-08-14' AND refund_date<'2026-09-12'",
+    "ordered": false,
+    "family": 6,
+    "ground_truth_result": [
+      {
+        "total": 62709.04
+      }
+    ]
+  },
+  {
+    "id": "dev-3-6-a",
+    "question": "运营报表第4组：近期已批准退款总额是多少？只返回总额。",
+    "should_clarify": true,
+    "ambiguity_type": "time",
+    "clarification_answer": "最近29天，不含今天，使用退款时间。",
+    "resolved_question": "最近29天（不含今天）已批准退款总额是多少？只返回总额。",
+    "reference_sql": "SELECT ROUND(SUM(refund_amount),2) AS total FROM refunds WHERE refund_status='approved' AND refund_date>='2026-08-14' AND refund_date<'2026-09-12'",
+    "ordered": false,
+    "family": 6,
+    "ground_truth_result": [
+      {
+        "total": 62709.04
+      }
+    ]
+  },
+  {
+    "id": "dev-3-7-c",
+    "question": "全部历史有效订单次数至少6次的客户有多少人？只返回人数。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "全部历史有效订单次数至少6次的客户有多少人？只返回人数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM (SELECT user_id FROM orders WHERE order_status IN ('paid','completed','shipped') GROUP BY user_id HAVING COUNT(*)>=6) t",
+    "ordered": false,
+    "family": 7,
+    "ground_truth_result": [
+      {
+        "total": 514
+      }
+    ]
+  },
+  {
+    "id": "dev-3-7-a",
+    "question": "运营报表第4组：经常购买的客户有多少人？只返回人数。",
+    "should_clarify": true,
+    "ambiguity_type": "business_definition",
+    "clarification_answer": "全部历史有效订单次数至少6次。",
+    "resolved_question": "全部历史有效订单次数至少6次的客户有多少人？只返回人数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM (SELECT user_id FROM orders WHERE order_status IN ('paid','completed','shipped') GROUP BY user_id HAVING COUNT(*)>=6) t",
+    "ordered": false,
+    "family": 7,
+    "ground_truth_result": [
+      {
+        "total": 514
+      }
+    ]
+  },
+  {
+    "id": "dev-3-8-c",
+    "question": "列出有效订单数至少6的城市及其有效订单数，按城市升序。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "列出有效订单数至少6的城市及其有效订单数，按城市升序。",
+    "reference_sql": "SELECT u.city,COUNT(*) AS total FROM users u JOIN orders o ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') GROUP BY u.city HAVING COUNT(*)>=6 ORDER BY u.city",
+    "ordered": true,
+    "family": 8,
+    "ground_truth_result": [
+      {
+        "city": "上海市",
+        "total": 1407
+      },
+      {
+        "city": "北京市",
+        "total": 1459
+      },
+      {
+        "city": "南京市",
+        "total": 1318
+      },
+      {
+        "city": "广州市",
+        "total": 1278
+      },
+      {
+        "city": "成都市",
+        "total": 1343
+      },
+      {
+        "city": "杭州市",
+        "total": 1275
+      },
+      {
+        "city": "武汉市",
+        "total": 1363
+      },
+      {
+        "city": "西安市",
+        "total": 1363
+      }
+    ]
+  },
+  {
+    "id": "dev-3-8-a",
+    "question": "运营报表第4组：列出订单比较多的城市及其有效订单数，按城市升序。",
+    "should_clarify": true,
+    "ambiguity_type": "filter",
+    "clarification_answer": "全部历史有效订单数至少6。",
+    "resolved_question": "列出有效订单数至少6的城市及其有效订单数，按城市升序。",
+    "reference_sql": "SELECT u.city,COUNT(*) AS total FROM users u JOIN orders o ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') GROUP BY u.city HAVING COUNT(*)>=6 ORDER BY u.city",
+    "ordered": true,
+    "family": 8,
+    "ground_truth_result": [
+      {
+        "city": "上海市",
+        "total": 1407
+      },
+      {
+        "city": "北京市",
+        "total": 1459
+      },
+      {
+        "city": "南京市",
+        "total": 1318
+      },
+      {
+        "city": "广州市",
+        "total": 1278
+      },
+      {
+        "city": "成都市",
+        "total": 1343
+      },
+      {
+        "city": "杭州市",
+        "total": 1275
+      },
+      {
+        "city": "武汉市",
+        "total": 1363
+      },
+      {
+        "city": "西安市",
+        "total": 1363
+      }
+    ]
+  },
+  {
+    "id": "dev-3-9-c",
+    "question": "从2026-08-14到2026-09-11（包含首尾日），每天有效订单销售额是多少？返回日期和金额并按日期升序。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "从2026-08-14到2026-09-11（包含首尾日），每天有效订单销售额是多少？返回日期和金额并按日期升序。",
+    "reference_sql": "SELECT DATE(order_date) AS day,ROUND(SUM(paid_amount),2) AS amount FROM orders WHERE order_status IN ('paid','completed','shipped') AND order_date >= '2026-08-14' AND order_date < '2026-09-12' GROUP BY DATE(order_date) ORDER BY day",
+    "ordered": true,
+    "family": 9,
+    "ground_truth_result": [
+      {
+        "day": "2026-08-14",
+        "amount": 65448.99
+      },
+      {
+        "day": "2026-08-15",
+        "amount": 33743.65
+      },
+      {
+        "day": "2026-08-16",
+        "amount": 58640.66
+      },
+      {
+        "day": "2026-08-17",
+        "amount": 40229.84
+      },
+      {
+        "day": "2026-08-18",
+        "amount": 48064.3
+      },
+      {
+        "day": "2026-08-19",
+        "amount": 41881.89
+      },
+      {
+        "day": "2026-08-20",
+        "amount": 35636.89
+      },
+      {
+        "day": "2026-08-21",
+        "amount": 45029.81
+      },
+      {
+        "day": "2026-08-22",
+        "amount": 65913.44
+      },
+      {
+        "day": "2026-08-23",
+        "amount": 104441.56
+      },
+      {
+        "day": "2026-08-24",
+        "amount": 64355.05
+      },
+      {
+        "day": "2026-08-25",
+        "amount": 40152.32
+      },
+      {
+        "day": "2026-08-26",
+        "amount": 52834.66
+      },
+      {
+        "day": "2026-08-27",
+        "amount": 75561.4
+      },
+      {
+        "day": "2026-08-28",
+        "amount": 56207.25
+      },
+      {
+        "day": "2026-08-29",
+        "amount": 54850.12
+      },
+      {
+        "day": "2026-08-30",
+        "amount": 22250.99
+      },
+      {
+        "day": "2026-08-31",
+        "amount": 52762.62
+      },
+      {
+        "day": "2026-09-01",
+        "amount": 14839.95
+      },
+      {
+        "day": "2026-09-02",
+        "amount": 30220.78
+      },
+      {
+        "day": "2026-09-03",
+        "amount": 45357.7
+      },
+      {
+        "day": "2026-09-04",
+        "amount": 34607.0
+      },
+      {
+        "day": "2026-09-05",
+        "amount": 56016.83
+      },
+      {
+        "day": "2026-09-06",
+        "amount": 46298.18
+      },
+      {
+        "day": "2026-09-07",
+        "amount": 33996.74
+      },
+      {
+        "day": "2026-09-08",
+        "amount": 45984.56
+      },
+      {
+        "day": "2026-09-09",
+        "amount": 87939.71
+      },
+      {
+        "day": "2026-09-10",
+        "amount": 48939.65
+      },
+      {
+        "day": "2026-09-11",
+        "amount": 16379.69
+      }
+    ]
+  },
+  {
+    "id": "dev-3-9-a",
+    "question": "运营报表第4组：这段时间每天有效订单销售额是多少？返回日期和金额并按日期升序。",
+    "should_clarify": true,
+    "ambiguity_type": "time",
+    "clarification_answer": "从2026-08-14到2026-09-11，包含首尾日。",
+    "resolved_question": "从2026-08-14到2026-09-11（包含首尾日），每天有效订单销售额是多少？返回日期和金额并按日期升序。",
+    "reference_sql": "SELECT DATE(order_date) AS day,ROUND(SUM(paid_amount),2) AS amount FROM orders WHERE order_status IN ('paid','completed','shipped') AND order_date >= '2026-08-14' AND order_date < '2026-09-12' GROUP BY DATE(order_date) ORDER BY day",
+    "ordered": true,
+    "family": 9,
+    "ground_truth_result": [
+      {
+        "day": "2026-08-14",
+        "amount": 65448.99
+      },
+      {
+        "day": "2026-08-15",
+        "amount": 33743.65
+      },
+      {
+        "day": "2026-08-16",
+        "amount": 58640.66
+      },
+      {
+        "day": "2026-08-17",
+        "amount": 40229.84
+      },
+      {
+        "day": "2026-08-18",
+        "amount": 48064.3
+      },
+      {
+        "day": "2026-08-19",
+        "amount": 41881.89
+      },
+      {
+        "day": "2026-08-20",
+        "amount": 35636.89
+      },
+      {
+        "day": "2026-08-21",
+        "amount": 45029.81
+      },
+      {
+        "day": "2026-08-22",
+        "amount": 65913.44
+      },
+      {
+        "day": "2026-08-23",
+        "amount": 104441.56
+      },
+      {
+        "day": "2026-08-24",
+        "amount": 64355.05
+      },
+      {
+        "day": "2026-08-25",
+        "amount": 40152.32
+      },
+      {
+        "day": "2026-08-26",
+        "amount": 52834.66
+      },
+      {
+        "day": "2026-08-27",
+        "amount": 75561.4
+      },
+      {
+        "day": "2026-08-28",
+        "amount": 56207.25
+      },
+      {
+        "day": "2026-08-29",
+        "amount": 54850.12
+      },
+      {
+        "day": "2026-08-30",
+        "amount": 22250.99
+      },
+      {
+        "day": "2026-08-31",
+        "amount": 52762.62
+      },
+      {
+        "day": "2026-09-01",
+        "amount": 14839.95
+      },
+      {
+        "day": "2026-09-02",
+        "amount": 30220.78
+      },
+      {
+        "day": "2026-09-03",
+        "amount": 45357.7
+      },
+      {
+        "day": "2026-09-04",
+        "amount": 34607.0
+      },
+      {
+        "day": "2026-09-05",
+        "amount": 56016.83
+      },
+      {
+        "day": "2026-09-06",
+        "amount": 46298.18
+      },
+      {
+        "day": "2026-09-07",
+        "amount": 33996.74
+      },
+      {
+        "day": "2026-09-08",
+        "amount": 45984.56
+      },
+      {
+        "day": "2026-09-09",
+        "amount": 87939.71
+      },
+      {
+        "day": "2026-09-10",
+        "amount": 48939.65
+      },
+      {
+        "day": "2026-09-11",
+        "amount": 16379.69
+      }
+    ]
+  }
+]
