@@ -1,0 +1,1968 @@
+{
+  "corrections": [
+    {
+      "split": "dev",
+      "case_id": "dev-0-4-c",
+      "mappings": [
+        {
+          "original_city": "上海",
+          "corrected_city": "上海市",
+          "database_evidence": [
+            {
+              "province": "上海",
+              "city": "上海市",
+              "row_count": 377
+            }
+          ],
+          "reason": "上海与上海市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT COUNT(*) AS total FROM users u JOIN orders o ON u.user_id=o.user_id WHERE u.city='上海' AND o.order_status IN ('paid','completed','shipped')",
+      "corrected_reference_sql": "SELECT COUNT(*) AS total FROM users u JOIN orders o ON u.user_id=o.user_id WHERE u.city='上海市' AND o.order_status IN ('paid','completed','shipped')",
+      "original_ground_truth": [
+        {
+          "total": 0
+        }
+      ],
+      "corrected_ground_truth": [
+        {
+          "total": 1407
+        }
+      ]
+    },
+    {
+      "split": "dev",
+      "case_id": "dev-0-4-a",
+      "mappings": [
+        {
+          "original_city": "上海",
+          "corrected_city": "上海市",
+          "database_evidence": [
+            {
+              "province": "上海",
+              "city": "上海市",
+              "row_count": 377
+            }
+          ],
+          "reason": "上海与上海市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT COUNT(*) AS total FROM users u JOIN orders o ON u.user_id=o.user_id WHERE u.city='上海' AND o.order_status IN ('paid','completed','shipped')",
+      "corrected_reference_sql": "SELECT COUNT(*) AS total FROM users u JOIN orders o ON u.user_id=o.user_id WHERE u.city='上海市' AND o.order_status IN ('paid','completed','shipped')",
+      "original_ground_truth": [
+        {
+          "total": 0
+        }
+      ],
+      "corrected_ground_truth": [
+        {
+          "total": 1407
+        }
+      ]
+    },
+    {
+      "split": "dev",
+      "case_id": "dev-1-4-c",
+      "mappings": [
+        {
+          "original_city": "杭州",
+          "corrected_city": "杭州市",
+          "database_evidence": [
+            {
+              "province": "浙江",
+              "city": "杭州市",
+              "row_count": 372
+            }
+          ],
+          "reason": "杭州与杭州市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT COUNT(*) AS total FROM users u JOIN orders o ON u.user_id=o.user_id WHERE u.city='杭州' AND o.order_status IN ('paid','completed','shipped')",
+      "corrected_reference_sql": "SELECT COUNT(*) AS total FROM users u JOIN orders o ON u.user_id=o.user_id WHERE u.city='杭州市' AND o.order_status IN ('paid','completed','shipped')",
+      "original_ground_truth": [
+        {
+          "total": 0
+        }
+      ],
+      "corrected_ground_truth": [
+        {
+          "total": 1275
+        }
+      ]
+    },
+    {
+      "split": "dev",
+      "case_id": "dev-1-4-a",
+      "mappings": [
+        {
+          "original_city": "杭州",
+          "corrected_city": "杭州市",
+          "database_evidence": [
+            {
+              "province": "浙江",
+              "city": "杭州市",
+              "row_count": 372
+            }
+          ],
+          "reason": "杭州与杭州市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT COUNT(*) AS total FROM users u JOIN orders o ON u.user_id=o.user_id WHERE u.city='杭州' AND o.order_status IN ('paid','completed','shipped')",
+      "corrected_reference_sql": "SELECT COUNT(*) AS total FROM users u JOIN orders o ON u.user_id=o.user_id WHERE u.city='杭州市' AND o.order_status IN ('paid','completed','shipped')",
+      "original_ground_truth": [
+        {
+          "total": 0
+        }
+      ],
+      "corrected_ground_truth": [
+        {
+          "total": 1275
+        }
+      ]
+    },
+    {
+      "split": "dev",
+      "case_id": "dev-2-4-c",
+      "mappings": [
+        {
+          "original_city": "北京",
+          "corrected_city": "北京市",
+          "database_evidence": [
+            {
+              "province": "北京",
+              "city": "北京市",
+              "row_count": 392
+            }
+          ],
+          "reason": "北京与北京市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT COUNT(*) AS total FROM users u JOIN orders o ON u.user_id=o.user_id WHERE u.city='北京' AND o.order_status IN ('paid','completed','shipped')",
+      "corrected_reference_sql": "SELECT COUNT(*) AS total FROM users u JOIN orders o ON u.user_id=o.user_id WHERE u.city='北京市' AND o.order_status IN ('paid','completed','shipped')",
+      "original_ground_truth": [
+        {
+          "total": 0
+        }
+      ],
+      "corrected_ground_truth": [
+        {
+          "total": 1459
+        }
+      ]
+    },
+    {
+      "split": "dev",
+      "case_id": "dev-2-4-a",
+      "mappings": [
+        {
+          "original_city": "北京",
+          "corrected_city": "北京市",
+          "database_evidence": [
+            {
+              "province": "北京",
+              "city": "北京市",
+              "row_count": 392
+            }
+          ],
+          "reason": "北京与北京市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT COUNT(*) AS total FROM users u JOIN orders o ON u.user_id=o.user_id WHERE u.city='北京' AND o.order_status IN ('paid','completed','shipped')",
+      "corrected_reference_sql": "SELECT COUNT(*) AS total FROM users u JOIN orders o ON u.user_id=o.user_id WHERE u.city='北京市' AND o.order_status IN ('paid','completed','shipped')",
+      "original_ground_truth": [
+        {
+          "total": 0
+        }
+      ],
+      "corrected_ground_truth": [
+        {
+          "total": 1459
+        }
+      ]
+    },
+    {
+      "split": "dev",
+      "case_id": "dev-3-4-c",
+      "mappings": [
+        {
+          "original_city": "广州",
+          "corrected_city": "广州市",
+          "database_evidence": [
+            {
+              "province": "广东",
+              "city": "广州市",
+              "row_count": 378
+            }
+          ],
+          "reason": "广州与广州市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT COUNT(*) AS total FROM users u JOIN orders o ON u.user_id=o.user_id WHERE u.city='广州' AND o.order_status IN ('paid','completed','shipped')",
+      "corrected_reference_sql": "SELECT COUNT(*) AS total FROM users u JOIN orders o ON u.user_id=o.user_id WHERE u.city='广州市' AND o.order_status IN ('paid','completed','shipped')",
+      "original_ground_truth": [
+        {
+          "total": 0
+        }
+      ],
+      "corrected_ground_truth": [
+        {
+          "total": 1278
+        }
+      ]
+    },
+    {
+      "split": "dev",
+      "case_id": "dev-3-4-a",
+      "mappings": [
+        {
+          "original_city": "广州",
+          "corrected_city": "广州市",
+          "database_evidence": [
+            {
+              "province": "广东",
+              "city": "广州市",
+              "row_count": 378
+            }
+          ],
+          "reason": "广州与广州市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT COUNT(*) AS total FROM users u JOIN orders o ON u.user_id=o.user_id WHERE u.city='广州' AND o.order_status IN ('paid','completed','shipped')",
+      "corrected_reference_sql": "SELECT COUNT(*) AS total FROM users u JOIN orders o ON u.user_id=o.user_id WHERE u.city='广州市' AND o.order_status IN ('paid','completed','shipped')",
+      "original_ground_truth": [
+        {
+          "total": 0
+        }
+      ],
+      "corrected_ground_truth": [
+        {
+          "total": 1278
+        }
+      ]
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-0-0-c",
+      "mappings": [
+        {
+          "original_city": "上海",
+          "corrected_city": "上海市",
+          "database_evidence": [
+            {
+              "province": "上海",
+              "city": "上海市",
+              "row_count": 377
+            }
+          ],
+          "reason": "上海与上海市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='上海' AND register_date>='2026-08-24' AND register_date<'2026-09-12'",
+      "corrected_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='上海市' AND register_date>='2026-08-24' AND register_date<'2026-09-12'",
+      "original_ground_truth": [
+        {
+          "total": 0
+        }
+      ],
+      "corrected_ground_truth": [
+        {
+          "total": 0
+        }
+      ]
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-0-0-a",
+      "mappings": [
+        {
+          "original_city": "上海",
+          "corrected_city": "上海市",
+          "database_evidence": [
+            {
+              "province": "上海",
+              "city": "上海市",
+              "row_count": 377
+            }
+          ],
+          "reason": "上海与上海市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='上海' AND register_date>='2026-08-24' AND register_date<'2026-09-12'",
+      "corrected_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='上海市' AND register_date>='2026-08-24' AND register_date<'2026-09-12'",
+      "original_ground_truth": [
+        {
+          "total": 0
+        }
+      ],
+      "corrected_ground_truth": [
+        {
+          "total": 0
+        }
+      ]
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-0-2-c",
+      "mappings": [
+        {
+          "original_city": "上海",
+          "corrected_city": "上海市",
+          "database_evidence": [
+            {
+              "province": "上海",
+              "city": "上海市",
+              "row_count": 377
+            }
+          ],
+          "reason": "上海与上海市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='上海' AND o.paid_amount>850",
+      "corrected_reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='上海市' AND o.paid_amount>850",
+      "original_ground_truth": [
+        {
+          "total": 0
+        }
+      ],
+      "corrected_ground_truth": [
+        {
+          "total": 987
+        }
+      ]
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-0-2-a",
+      "mappings": [
+        {
+          "original_city": "上海",
+          "corrected_city": "上海市",
+          "database_evidence": [
+            {
+              "province": "上海",
+              "city": "上海市",
+              "row_count": 377
+            }
+          ],
+          "reason": "上海与上海市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='上海' AND o.paid_amount>850",
+      "corrected_reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='上海市' AND o.paid_amount>850",
+      "original_ground_truth": [
+        {
+          "total": 0
+        }
+      ],
+      "corrected_ground_truth": [
+        {
+          "total": 987
+        }
+      ]
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-0-4-c",
+      "mappings": [
+        {
+          "original_city": "上海",
+          "corrected_city": "上海市",
+          "database_evidence": [
+            {
+              "province": "上海",
+              "city": "上海市",
+              "row_count": 377
+            }
+          ],
+          "reason": "上海与上海市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT u.user_id,COUNT(*) AS total FROM users u JOIN orders o ON o.user_id=u.user_id WHERE u.city='上海' AND o.order_status IN ('paid','completed','shipped') GROUP BY u.user_id ORDER BY total DESC,u.user_id ASC LIMIT 4",
+      "corrected_reference_sql": "SELECT u.user_id,COUNT(*) AS total FROM users u JOIN orders o ON o.user_id=u.user_id WHERE u.city='上海市' AND o.order_status IN ('paid','completed','shipped') GROUP BY u.user_id ORDER BY total DESC,u.user_id ASC LIMIT 4",
+      "original_ground_truth": [],
+      "corrected_ground_truth": [
+        {
+          "user_id": 1466,
+          "total": 21
+        },
+        {
+          "user_id": 1187,
+          "total": 19
+        },
+        {
+          "user_id": 313,
+          "total": 18
+        },
+        {
+          "user_id": 2141,
+          "total": 18
+        }
+      ]
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-0-4-a",
+      "mappings": [
+        {
+          "original_city": "上海",
+          "corrected_city": "上海市",
+          "database_evidence": [
+            {
+              "province": "上海",
+              "city": "上海市",
+              "row_count": 377
+            }
+          ],
+          "reason": "上海与上海市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT u.user_id,COUNT(*) AS total FROM users u JOIN orders o ON o.user_id=u.user_id WHERE u.city='上海' AND o.order_status IN ('paid','completed','shipped') GROUP BY u.user_id ORDER BY total DESC,u.user_id ASC LIMIT 4",
+      "corrected_reference_sql": "SELECT u.user_id,COUNT(*) AS total FROM users u JOIN orders o ON o.user_id=u.user_id WHERE u.city='上海市' AND o.order_status IN ('paid','completed','shipped') GROUP BY u.user_id ORDER BY total DESC,u.user_id ASC LIMIT 4",
+      "original_ground_truth": [],
+      "corrected_ground_truth": [
+        {
+          "user_id": 1466,
+          "total": 21
+        },
+        {
+          "user_id": 1187,
+          "total": 19
+        },
+        {
+          "user_id": 313,
+          "total": 18
+        },
+        {
+          "user_id": 2141,
+          "total": 18
+        }
+      ]
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-0-6-c",
+      "mappings": [
+        {
+          "original_city": "上海",
+          "corrected_city": "上海市",
+          "database_evidence": [
+            {
+              "province": "上海",
+              "city": "上海市",
+              "row_count": 377
+            }
+          ],
+          "reason": "上海与上海市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT ROUND(SUM(o.paid_amount),2) AS amount FROM orders o JOIN users u ON o.user_id=u.user_id WHERE u.city='上海' AND o.order_status IN ('paid','completed','shipped')",
+      "corrected_reference_sql": "SELECT ROUND(SUM(o.paid_amount),2) AS amount FROM orders o JOIN users u ON o.user_id=u.user_id WHERE u.city='上海市' AND o.order_status IN ('paid','completed','shipped')",
+      "original_ground_truth": [
+        {
+          "amount": null
+        }
+      ],
+      "corrected_ground_truth": [
+        {
+          "amount": 3770523.65
+        }
+      ]
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-0-6-a",
+      "mappings": [
+        {
+          "original_city": "上海",
+          "corrected_city": "上海市",
+          "database_evidence": [
+            {
+              "province": "上海",
+              "city": "上海市",
+              "row_count": 377
+            }
+          ],
+          "reason": "上海与上海市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT ROUND(SUM(o.paid_amount),2) AS amount FROM orders o JOIN users u ON o.user_id=u.user_id WHERE u.city='上海' AND o.order_status IN ('paid','completed','shipped')",
+      "corrected_reference_sql": "SELECT ROUND(SUM(o.paid_amount),2) AS amount FROM orders o JOIN users u ON o.user_id=u.user_id WHERE u.city='上海市' AND o.order_status IN ('paid','completed','shipped')",
+      "original_ground_truth": [
+        {
+          "amount": null
+        }
+      ],
+      "corrected_ground_truth": [
+        {
+          "amount": 3770523.65
+        }
+      ]
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-0-8-c",
+      "mappings": [
+        {
+          "original_city": "上海",
+          "corrected_city": "上海市",
+          "database_evidence": [
+            {
+              "province": "上海",
+              "city": "上海市",
+              "row_count": 377
+            }
+          ],
+          "reason": "上海与上海市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='上海' AND is_vip=1",
+      "corrected_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='上海市' AND is_vip=1",
+      "original_ground_truth": [
+        {
+          "total": 0
+        }
+      ],
+      "corrected_ground_truth": [
+        {
+          "total": 65
+        }
+      ]
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-0-8-a",
+      "mappings": [
+        {
+          "original_city": "上海",
+          "corrected_city": "上海市",
+          "database_evidence": [
+            {
+              "province": "上海",
+              "city": "上海市",
+              "row_count": 377
+            }
+          ],
+          "reason": "上海与上海市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='上海' AND is_vip=1",
+      "corrected_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='上海市' AND is_vip=1",
+      "original_ground_truth": [
+        {
+          "total": 0
+        }
+      ],
+      "corrected_ground_truth": [
+        {
+          "total": 65
+        }
+      ]
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-0-10-c",
+      "mappings": [
+        {
+          "original_city": "上海",
+          "corrected_city": "上海市",
+          "database_evidence": [
+            {
+              "province": "上海",
+              "city": "上海市",
+              "row_count": 377
+            }
+          ],
+          "reason": "上海与上海市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='上海'",
+      "corrected_reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='上海市'",
+      "original_ground_truth": [
+        {
+          "total": 0
+        }
+      ],
+      "corrected_ground_truth": [
+        {
+          "total": 1407
+        }
+      ]
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-0-10-a",
+      "mappings": [
+        {
+          "original_city": "上海",
+          "corrected_city": "上海市",
+          "database_evidence": [
+            {
+              "province": "上海",
+              "city": "上海市",
+              "row_count": 377
+            }
+          ],
+          "reason": "上海与上海市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='上海'",
+      "corrected_reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='上海市'",
+      "original_ground_truth": [
+        {
+          "total": 0
+        }
+      ],
+      "corrected_ground_truth": [
+        {
+          "total": 1407
+        }
+      ]
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-1-0-c",
+      "mappings": [
+        {
+          "original_city": "北京",
+          "corrected_city": "北京市",
+          "database_evidence": [
+            {
+              "province": "北京",
+              "city": "北京市",
+              "row_count": 392
+            }
+          ],
+          "reason": "北京与北京市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='北京' AND register_date>='2026-08-06' AND register_date<'2026-09-12'",
+      "corrected_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='北京市' AND register_date>='2026-08-06' AND register_date<'2026-09-12'",
+      "original_ground_truth": [
+        {
+          "total": 0
+        }
+      ],
+      "corrected_ground_truth": [
+        {
+          "total": 0
+        }
+      ]
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-1-0-a",
+      "mappings": [
+        {
+          "original_city": "北京",
+          "corrected_city": "北京市",
+          "database_evidence": [
+            {
+              "province": "北京",
+              "city": "北京市",
+              "row_count": 392
+            }
+          ],
+          "reason": "北京与北京市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='北京' AND register_date>='2026-08-06' AND register_date<'2026-09-12'",
+      "corrected_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='北京市' AND register_date>='2026-08-06' AND register_date<'2026-09-12'",
+      "original_ground_truth": [
+        {
+          "total": 0
+        }
+      ],
+      "corrected_ground_truth": [
+        {
+          "total": 0
+        }
+      ]
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-1-2-c",
+      "mappings": [
+        {
+          "original_city": "北京",
+          "corrected_city": "北京市",
+          "database_evidence": [
+            {
+              "province": "北京",
+              "city": "北京市",
+              "row_count": 392
+            }
+          ],
+          "reason": "北京与北京市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='北京' AND o.paid_amount>1280",
+      "corrected_reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='北京市' AND o.paid_amount>1280",
+      "original_ground_truth": [
+        {
+          "total": 0
+        }
+      ],
+      "corrected_ground_truth": [
+        {
+          "total": 844
+        }
+      ]
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-1-2-a",
+      "mappings": [
+        {
+          "original_city": "北京",
+          "corrected_city": "北京市",
+          "database_evidence": [
+            {
+              "province": "北京",
+              "city": "北京市",
+              "row_count": 392
+            }
+          ],
+          "reason": "北京与北京市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='北京' AND o.paid_amount>1280",
+      "corrected_reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='北京市' AND o.paid_amount>1280",
+      "original_ground_truth": [
+        {
+          "total": 0
+        }
+      ],
+      "corrected_ground_truth": [
+        {
+          "total": 844
+        }
+      ]
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-1-4-c",
+      "mappings": [
+        {
+          "original_city": "北京",
+          "corrected_city": "北京市",
+          "database_evidence": [
+            {
+              "province": "北京",
+              "city": "北京市",
+              "row_count": 392
+            }
+          ],
+          "reason": "北京与北京市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT u.user_id,COUNT(*) AS total FROM users u JOIN orders o ON o.user_id=u.user_id WHERE u.city='北京' AND o.order_status IN ('paid','completed','shipped') GROUP BY u.user_id ORDER BY total DESC,u.user_id ASC LIMIT 5",
+      "corrected_reference_sql": "SELECT u.user_id,COUNT(*) AS total FROM users u JOIN orders o ON o.user_id=u.user_id WHERE u.city='北京市' AND o.order_status IN ('paid','completed','shipped') GROUP BY u.user_id ORDER BY total DESC,u.user_id ASC LIMIT 5",
+      "original_ground_truth": [],
+      "corrected_ground_truth": [
+        {
+          "user_id": 2493,
+          "total": 20
+        },
+        {
+          "user_id": 1892,
+          "total": 18
+        },
+        {
+          "user_id": 1923,
+          "total": 18
+        },
+        {
+          "user_id": 1012,
+          "total": 17
+        },
+        {
+          "user_id": 2001,
+          "total": 17
+        }
+      ]
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-1-4-a",
+      "mappings": [
+        {
+          "original_city": "北京",
+          "corrected_city": "北京市",
+          "database_evidence": [
+            {
+              "province": "北京",
+              "city": "北京市",
+              "row_count": 392
+            }
+          ],
+          "reason": "北京与北京市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT u.user_id,COUNT(*) AS total FROM users u JOIN orders o ON o.user_id=u.user_id WHERE u.city='北京' AND o.order_status IN ('paid','completed','shipped') GROUP BY u.user_id ORDER BY total DESC,u.user_id ASC LIMIT 5",
+      "corrected_reference_sql": "SELECT u.user_id,COUNT(*) AS total FROM users u JOIN orders o ON o.user_id=u.user_id WHERE u.city='北京市' AND o.order_status IN ('paid','completed','shipped') GROUP BY u.user_id ORDER BY total DESC,u.user_id ASC LIMIT 5",
+      "original_ground_truth": [],
+      "corrected_ground_truth": [
+        {
+          "user_id": 2493,
+          "total": 20
+        },
+        {
+          "user_id": 1892,
+          "total": 18
+        },
+        {
+          "user_id": 1923,
+          "total": 18
+        },
+        {
+          "user_id": 1012,
+          "total": 17
+        },
+        {
+          "user_id": 2001,
+          "total": 17
+        }
+      ]
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-1-6-c",
+      "mappings": [
+        {
+          "original_city": "北京",
+          "corrected_city": "北京市",
+          "database_evidence": [
+            {
+              "province": "北京",
+              "city": "北京市",
+              "row_count": 392
+            }
+          ],
+          "reason": "北京与北京市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT ROUND(SUM(o.paid_amount),2) AS amount FROM orders o JOIN users u ON o.user_id=u.user_id WHERE u.city='北京' AND o.order_status IN ('paid','completed','shipped')",
+      "corrected_reference_sql": "SELECT ROUND(SUM(o.paid_amount),2) AS amount FROM orders o JOIN users u ON o.user_id=u.user_id WHERE u.city='北京市' AND o.order_status IN ('paid','completed','shipped')",
+      "original_ground_truth": [
+        {
+          "amount": null
+        }
+      ],
+      "corrected_ground_truth": [
+        {
+          "amount": 3715837.07
+        }
+      ]
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-1-6-a",
+      "mappings": [
+        {
+          "original_city": "北京",
+          "corrected_city": "北京市",
+          "database_evidence": [
+            {
+              "province": "北京",
+              "city": "北京市",
+              "row_count": 392
+            }
+          ],
+          "reason": "北京与北京市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT ROUND(SUM(o.paid_amount),2) AS amount FROM orders o JOIN users u ON o.user_id=u.user_id WHERE u.city='北京' AND o.order_status IN ('paid','completed','shipped')",
+      "corrected_reference_sql": "SELECT ROUND(SUM(o.paid_amount),2) AS amount FROM orders o JOIN users u ON o.user_id=u.user_id WHERE u.city='北京市' AND o.order_status IN ('paid','completed','shipped')",
+      "original_ground_truth": [
+        {
+          "amount": null
+        }
+      ],
+      "corrected_ground_truth": [
+        {
+          "amount": 3715837.07
+        }
+      ]
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-1-8-c",
+      "mappings": [
+        {
+          "original_city": "北京",
+          "corrected_city": "北京市",
+          "database_evidence": [
+            {
+              "province": "北京",
+              "city": "北京市",
+              "row_count": 392
+            }
+          ],
+          "reason": "北京与北京市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='北京' AND is_vip=1",
+      "corrected_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='北京市' AND is_vip=1",
+      "original_ground_truth": [
+        {
+          "total": 0
+        }
+      ],
+      "corrected_ground_truth": [
+        {
+          "total": 66
+        }
+      ]
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-1-8-a",
+      "mappings": [
+        {
+          "original_city": "北京",
+          "corrected_city": "北京市",
+          "database_evidence": [
+            {
+              "province": "北京",
+              "city": "北京市",
+              "row_count": 392
+            }
+          ],
+          "reason": "北京与北京市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='北京' AND is_vip=1",
+      "corrected_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='北京市' AND is_vip=1",
+      "original_ground_truth": [
+        {
+          "total": 0
+        }
+      ],
+      "corrected_ground_truth": [
+        {
+          "total": 66
+        }
+      ]
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-1-10-c",
+      "mappings": [
+        {
+          "original_city": "北京",
+          "corrected_city": "北京市",
+          "database_evidence": [
+            {
+              "province": "北京",
+              "city": "北京市",
+              "row_count": 392
+            }
+          ],
+          "reason": "北京与北京市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='北京'",
+      "corrected_reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='北京市'",
+      "original_ground_truth": [
+        {
+          "total": 0
+        }
+      ],
+      "corrected_ground_truth": [
+        {
+          "total": 1459
+        }
+      ]
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-1-10-a",
+      "mappings": [
+        {
+          "original_city": "北京",
+          "corrected_city": "北京市",
+          "database_evidence": [
+            {
+              "province": "北京",
+              "city": "北京市",
+              "row_count": 392
+            }
+          ],
+          "reason": "北京与北京市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='北京'",
+      "corrected_reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='北京市'",
+      "original_ground_truth": [
+        {
+          "total": 0
+        }
+      ],
+      "corrected_ground_truth": [
+        {
+          "total": 1459
+        }
+      ]
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-2-0-c",
+      "mappings": [
+        {
+          "original_city": "广州",
+          "corrected_city": "广州市",
+          "database_evidence": [
+            {
+              "province": "广东",
+              "city": "广州市",
+              "row_count": 378
+            }
+          ],
+          "reason": "广州与广州市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='广州' AND register_date>='2026-07-21' AND register_date<'2026-09-12'",
+      "corrected_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='广州市' AND register_date>='2026-07-21' AND register_date<'2026-09-12'",
+      "original_ground_truth": [
+        {
+          "total": 0
+        }
+      ],
+      "corrected_ground_truth": [
+        {
+          "total": 0
+        }
+      ]
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-2-0-a",
+      "mappings": [
+        {
+          "original_city": "广州",
+          "corrected_city": "广州市",
+          "database_evidence": [
+            {
+              "province": "广东",
+              "city": "广州市",
+              "row_count": 378
+            }
+          ],
+          "reason": "广州与广州市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='广州' AND register_date>='2026-07-21' AND register_date<'2026-09-12'",
+      "corrected_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='广州市' AND register_date>='2026-07-21' AND register_date<'2026-09-12'",
+      "original_ground_truth": [
+        {
+          "total": 0
+        }
+      ],
+      "corrected_ground_truth": [
+        {
+          "total": 0
+        }
+      ]
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-2-2-c",
+      "mappings": [
+        {
+          "original_city": "广州",
+          "corrected_city": "广州市",
+          "database_evidence": [
+            {
+              "province": "广东",
+              "city": "广州市",
+              "row_count": 378
+            }
+          ],
+          "reason": "广州与广州市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='广州' AND o.paid_amount>1710",
+      "corrected_reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='广州市' AND o.paid_amount>1710",
+      "original_ground_truth": [
+        {
+          "total": 0
+        }
+      ],
+      "corrected_ground_truth": [
+        {
+          "total": 627
+        }
+      ]
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-2-2-a",
+      "mappings": [
+        {
+          "original_city": "广州",
+          "corrected_city": "广州市",
+          "database_evidence": [
+            {
+              "province": "广东",
+              "city": "广州市",
+              "row_count": 378
+            }
+          ],
+          "reason": "广州与广州市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='广州' AND o.paid_amount>1710",
+      "corrected_reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='广州市' AND o.paid_amount>1710",
+      "original_ground_truth": [
+        {
+          "total": 0
+        }
+      ],
+      "corrected_ground_truth": [
+        {
+          "total": 627
+        }
+      ]
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-2-4-c",
+      "mappings": [
+        {
+          "original_city": "广州",
+          "corrected_city": "广州市",
+          "database_evidence": [
+            {
+              "province": "广东",
+              "city": "广州市",
+              "row_count": 378
+            }
+          ],
+          "reason": "广州与广州市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT u.user_id,COUNT(*) AS total FROM users u JOIN orders o ON o.user_id=u.user_id WHERE u.city='广州' AND o.order_status IN ('paid','completed','shipped') GROUP BY u.user_id ORDER BY total DESC,u.user_id ASC LIMIT 6",
+      "corrected_reference_sql": "SELECT u.user_id,COUNT(*) AS total FROM users u JOIN orders o ON o.user_id=u.user_id WHERE u.city='广州市' AND o.order_status IN ('paid','completed','shipped') GROUP BY u.user_id ORDER BY total DESC,u.user_id ASC LIMIT 6",
+      "original_ground_truth": [],
+      "corrected_ground_truth": [
+        {
+          "user_id": 2525,
+          "total": 19
+        },
+        {
+          "user_id": 1335,
+          "total": 18
+        },
+        {
+          "user_id": 2901,
+          "total": 18
+        },
+        {
+          "user_id": 336,
+          "total": 16
+        },
+        {
+          "user_id": 460,
+          "total": 16
+        },
+        {
+          "user_id": 2804,
+          "total": 16
+        }
+      ]
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-2-4-a",
+      "mappings": [
+        {
+          "original_city": "广州",
+          "corrected_city": "广州市",
+          "database_evidence": [
+            {
+              "province": "广东",
+              "city": "广州市",
+              "row_count": 378
+            }
+          ],
+          "reason": "广州与广州市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT u.user_id,COUNT(*) AS total FROM users u JOIN orders o ON o.user_id=u.user_id WHERE u.city='广州' AND o.order_status IN ('paid','completed','shipped') GROUP BY u.user_id ORDER BY total DESC,u.user_id ASC LIMIT 6",
+      "corrected_reference_sql": "SELECT u.user_id,COUNT(*) AS total FROM users u JOIN orders o ON o.user_id=u.user_id WHERE u.city='广州市' AND o.order_status IN ('paid','completed','shipped') GROUP BY u.user_id ORDER BY total DESC,u.user_id ASC LIMIT 6",
+      "original_ground_truth": [],
+      "corrected_ground_truth": [
+        {
+          "user_id": 2525,
+          "total": 19
+        },
+        {
+          "user_id": 1335,
+          "total": 18
+        },
+        {
+          "user_id": 2901,
+          "total": 18
+        },
+        {
+          "user_id": 336,
+          "total": 16
+        },
+        {
+          "user_id": 460,
+          "total": 16
+        },
+        {
+          "user_id": 2804,
+          "total": 16
+        }
+      ]
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-2-6-c",
+      "mappings": [
+        {
+          "original_city": "广州",
+          "corrected_city": "广州市",
+          "database_evidence": [
+            {
+              "province": "广东",
+              "city": "广州市",
+              "row_count": 378
+            }
+          ],
+          "reason": "广州与广州市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT ROUND(SUM(o.paid_amount),2) AS amount FROM orders o JOIN users u ON o.user_id=u.user_id WHERE u.city='广州' AND o.order_status IN ('paid','completed','shipped')",
+      "corrected_reference_sql": "SELECT ROUND(SUM(o.paid_amount),2) AS amount FROM orders o JOIN users u ON o.user_id=u.user_id WHERE u.city='广州市' AND o.order_status IN ('paid','completed','shipped')",
+      "original_ground_truth": [
+        {
+          "amount": null
+        }
+      ],
+      "corrected_ground_truth": [
+        {
+          "amount": 3376417.86
+        }
+      ]
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-2-6-a",
+      "mappings": [
+        {
+          "original_city": "广州",
+          "corrected_city": "广州市",
+          "database_evidence": [
+            {
+              "province": "广东",
+              "city": "广州市",
+              "row_count": 378
+            }
+          ],
+          "reason": "广州与广州市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT ROUND(SUM(o.paid_amount),2) AS amount FROM orders o JOIN users u ON o.user_id=u.user_id WHERE u.city='广州' AND o.order_status IN ('paid','completed','shipped')",
+      "corrected_reference_sql": "SELECT ROUND(SUM(o.paid_amount),2) AS amount FROM orders o JOIN users u ON o.user_id=u.user_id WHERE u.city='广州市' AND o.order_status IN ('paid','completed','shipped')",
+      "original_ground_truth": [
+        {
+          "amount": null
+        }
+      ],
+      "corrected_ground_truth": [
+        {
+          "amount": 3376417.86
+        }
+      ]
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-2-8-c",
+      "mappings": [
+        {
+          "original_city": "广州",
+          "corrected_city": "广州市",
+          "database_evidence": [
+            {
+              "province": "广东",
+              "city": "广州市",
+              "row_count": 378
+            }
+          ],
+          "reason": "广州与广州市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='广州' AND is_vip=1",
+      "corrected_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='广州市' AND is_vip=1",
+      "original_ground_truth": [
+        {
+          "total": 0
+        }
+      ],
+      "corrected_ground_truth": [
+        {
+          "total": 47
+        }
+      ]
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-2-8-a",
+      "mappings": [
+        {
+          "original_city": "广州",
+          "corrected_city": "广州市",
+          "database_evidence": [
+            {
+              "province": "广东",
+              "city": "广州市",
+              "row_count": 378
+            }
+          ],
+          "reason": "广州与广州市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='广州' AND is_vip=1",
+      "corrected_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='广州市' AND is_vip=1",
+      "original_ground_truth": [
+        {
+          "total": 0
+        }
+      ],
+      "corrected_ground_truth": [
+        {
+          "total": 47
+        }
+      ]
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-2-10-c",
+      "mappings": [
+        {
+          "original_city": "广州",
+          "corrected_city": "广州市",
+          "database_evidence": [
+            {
+              "province": "广东",
+              "city": "广州市",
+              "row_count": 378
+            }
+          ],
+          "reason": "广州与广州市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='广州'",
+      "corrected_reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='广州市'",
+      "original_ground_truth": [
+        {
+          "total": 0
+        }
+      ],
+      "corrected_ground_truth": [
+        {
+          "total": 1278
+        }
+      ]
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-2-10-a",
+      "mappings": [
+        {
+          "original_city": "广州",
+          "corrected_city": "广州市",
+          "database_evidence": [
+            {
+              "province": "广东",
+              "city": "广州市",
+              "row_count": 378
+            }
+          ],
+          "reason": "广州与广州市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='广州'",
+      "corrected_reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='广州市'",
+      "original_ground_truth": [
+        {
+          "total": 0
+        }
+      ],
+      "corrected_ground_truth": [
+        {
+          "total": 1278
+        }
+      ]
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-4-0-c",
+      "mappings": [
+        {
+          "original_city": "杭州",
+          "corrected_city": "杭州市",
+          "database_evidence": [
+            {
+              "province": "浙江",
+              "city": "杭州市",
+              "row_count": 372
+            }
+          ],
+          "reason": "杭州与杭州市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='杭州' AND register_date>='2026-06-15' AND register_date<'2026-09-12'",
+      "corrected_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='杭州市' AND register_date>='2026-06-15' AND register_date<'2026-09-12'",
+      "original_ground_truth": [
+        {
+          "total": 0
+        }
+      ],
+      "corrected_ground_truth": [
+        {
+          "total": 0
+        }
+      ]
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-4-0-a",
+      "mappings": [
+        {
+          "original_city": "杭州",
+          "corrected_city": "杭州市",
+          "database_evidence": [
+            {
+              "province": "浙江",
+              "city": "杭州市",
+              "row_count": 372
+            }
+          ],
+          "reason": "杭州与杭州市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='杭州' AND register_date>='2026-06-15' AND register_date<'2026-09-12'",
+      "corrected_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='杭州市' AND register_date>='2026-06-15' AND register_date<'2026-09-12'",
+      "original_ground_truth": [
+        {
+          "total": 0
+        }
+      ],
+      "corrected_ground_truth": [
+        {
+          "total": 0
+        }
+      ]
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-4-2-c",
+      "mappings": [
+        {
+          "original_city": "杭州",
+          "corrected_city": "杭州市",
+          "database_evidence": [
+            {
+              "province": "浙江",
+              "city": "杭州市",
+              "row_count": 372
+            }
+          ],
+          "reason": "杭州与杭州市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='杭州' AND o.paid_amount>2570",
+      "corrected_reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='杭州市' AND o.paid_amount>2570",
+      "original_ground_truth": [
+        {
+          "total": 0
+        }
+      ],
+      "corrected_ground_truth": [
+        {
+          "total": 443
+        }
+      ]
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-4-2-a",
+      "mappings": [
+        {
+          "original_city": "杭州",
+          "corrected_city": "杭州市",
+          "database_evidence": [
+            {
+              "province": "浙江",
+              "city": "杭州市",
+              "row_count": 372
+            }
+          ],
+          "reason": "杭州与杭州市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='杭州' AND o.paid_amount>2570",
+      "corrected_reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='杭州市' AND o.paid_amount>2570",
+      "original_ground_truth": [
+        {
+          "total": 0
+        }
+      ],
+      "corrected_ground_truth": [
+        {
+          "total": 443
+        }
+      ]
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-4-4-c",
+      "mappings": [
+        {
+          "original_city": "杭州",
+          "corrected_city": "杭州市",
+          "database_evidence": [
+            {
+              "province": "浙江",
+              "city": "杭州市",
+              "row_count": 372
+            }
+          ],
+          "reason": "杭州与杭州市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT u.user_id,COUNT(*) AS total FROM users u JOIN orders o ON o.user_id=u.user_id WHERE u.city='杭州' AND o.order_status IN ('paid','completed','shipped') GROUP BY u.user_id ORDER BY total DESC,u.user_id ASC LIMIT 8",
+      "corrected_reference_sql": "SELECT u.user_id,COUNT(*) AS total FROM users u JOIN orders o ON o.user_id=u.user_id WHERE u.city='杭州市' AND o.order_status IN ('paid','completed','shipped') GROUP BY u.user_id ORDER BY total DESC,u.user_id ASC LIMIT 8",
+      "original_ground_truth": [],
+      "corrected_ground_truth": [
+        {
+          "user_id": 2341,
+          "total": 21
+        },
+        {
+          "user_id": 2424,
+          "total": 21
+        },
+        {
+          "user_id": 1152,
+          "total": 19
+        },
+        {
+          "user_id": 2166,
+          "total": 17
+        },
+        {
+          "user_id": 1378,
+          "total": 16
+        },
+        {
+          "user_id": 198,
+          "total": 15
+        },
+        {
+          "user_id": 1168,
+          "total": 15
+        },
+        {
+          "user_id": 1488,
+          "total": 15
+        }
+      ]
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-4-4-a",
+      "mappings": [
+        {
+          "original_city": "杭州",
+          "corrected_city": "杭州市",
+          "database_evidence": [
+            {
+              "province": "浙江",
+              "city": "杭州市",
+              "row_count": 372
+            }
+          ],
+          "reason": "杭州与杭州市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT u.user_id,COUNT(*) AS total FROM users u JOIN orders o ON o.user_id=u.user_id WHERE u.city='杭州' AND o.order_status IN ('paid','completed','shipped') GROUP BY u.user_id ORDER BY total DESC,u.user_id ASC LIMIT 8",
+      "corrected_reference_sql": "SELECT u.user_id,COUNT(*) AS total FROM users u JOIN orders o ON o.user_id=u.user_id WHERE u.city='杭州市' AND o.order_status IN ('paid','completed','shipped') GROUP BY u.user_id ORDER BY total DESC,u.user_id ASC LIMIT 8",
+      "original_ground_truth": [],
+      "corrected_ground_truth": [
+        {
+          "user_id": 2341,
+          "total": 21
+        },
+        {
+          "user_id": 2424,
+          "total": 21
+        },
+        {
+          "user_id": 1152,
+          "total": 19
+        },
+        {
+          "user_id": 2166,
+          "total": 17
+        },
+        {
+          "user_id": 1378,
+          "total": 16
+        },
+        {
+          "user_id": 198,
+          "total": 15
+        },
+        {
+          "user_id": 1168,
+          "total": 15
+        },
+        {
+          "user_id": 1488,
+          "total": 15
+        }
+      ]
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-4-6-c",
+      "mappings": [
+        {
+          "original_city": "杭州",
+          "corrected_city": "杭州市",
+          "database_evidence": [
+            {
+              "province": "浙江",
+              "city": "杭州市",
+              "row_count": 372
+            }
+          ],
+          "reason": "杭州与杭州市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT ROUND(SUM(o.paid_amount),2) AS amount FROM orders o JOIN users u ON o.user_id=u.user_id WHERE u.city='杭州' AND o.order_status IN ('paid','completed','shipped')",
+      "corrected_reference_sql": "SELECT ROUND(SUM(o.paid_amount),2) AS amount FROM orders o JOIN users u ON o.user_id=u.user_id WHERE u.city='杭州市' AND o.order_status IN ('paid','completed','shipped')",
+      "original_ground_truth": [
+        {
+          "amount": null
+        }
+      ],
+      "corrected_ground_truth": [
+        {
+          "amount": 3287398.68
+        }
+      ]
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-4-6-a",
+      "mappings": [
+        {
+          "original_city": "杭州",
+          "corrected_city": "杭州市",
+          "database_evidence": [
+            {
+              "province": "浙江",
+              "city": "杭州市",
+              "row_count": 372
+            }
+          ],
+          "reason": "杭州与杭州市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT ROUND(SUM(o.paid_amount),2) AS amount FROM orders o JOIN users u ON o.user_id=u.user_id WHERE u.city='杭州' AND o.order_status IN ('paid','completed','shipped')",
+      "corrected_reference_sql": "SELECT ROUND(SUM(o.paid_amount),2) AS amount FROM orders o JOIN users u ON o.user_id=u.user_id WHERE u.city='杭州市' AND o.order_status IN ('paid','completed','shipped')",
+      "original_ground_truth": [
+        {
+          "amount": null
+        }
+      ],
+      "corrected_ground_truth": [
+        {
+          "amount": 3287398.68
+        }
+      ]
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-4-8-c",
+      "mappings": [
+        {
+          "original_city": "杭州",
+          "corrected_city": "杭州市",
+          "database_evidence": [
+            {
+              "province": "浙江",
+              "city": "杭州市",
+              "row_count": 372
+            }
+          ],
+          "reason": "杭州与杭州市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='杭州' AND is_vip=1",
+      "corrected_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='杭州市' AND is_vip=1",
+      "original_ground_truth": [
+        {
+          "total": 0
+        }
+      ],
+      "corrected_ground_truth": [
+        {
+          "total": 52
+        }
+      ]
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-4-8-a",
+      "mappings": [
+        {
+          "original_city": "杭州",
+          "corrected_city": "杭州市",
+          "database_evidence": [
+            {
+              "province": "浙江",
+              "city": "杭州市",
+              "row_count": 372
+            }
+          ],
+          "reason": "杭州与杭州市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='杭州' AND is_vip=1",
+      "corrected_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='杭州市' AND is_vip=1",
+      "original_ground_truth": [
+        {
+          "total": 0
+        }
+      ],
+      "corrected_ground_truth": [
+        {
+          "total": 52
+        }
+      ]
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-4-10-c",
+      "mappings": [
+        {
+          "original_city": "杭州",
+          "corrected_city": "杭州市",
+          "database_evidence": [
+            {
+              "province": "浙江",
+              "city": "杭州市",
+              "row_count": 372
+            }
+          ],
+          "reason": "杭州与杭州市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='杭州'",
+      "corrected_reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='杭州市'",
+      "original_ground_truth": [
+        {
+          "total": 0
+        }
+      ],
+      "corrected_ground_truth": [
+        {
+          "total": 1275
+        }
+      ]
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-4-10-a",
+      "mappings": [
+        {
+          "original_city": "杭州",
+          "corrected_city": "杭州市",
+          "database_evidence": [
+            {
+              "province": "浙江",
+              "city": "杭州市",
+              "row_count": 372
+            }
+          ],
+          "reason": "杭州与杭州市仅相差行政名称后缀市；数据库只有此唯一同名城市，省份证据如上。不是根据空结果选择替代城市。"
+        }
+      ],
+      "original_reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='杭州'",
+      "corrected_reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='杭州市'",
+      "original_ground_truth": [
+        {
+          "total": 0
+        }
+      ],
+      "corrected_ground_truth": [
+        {
+          "total": 1275
+        }
+      ]
+    }
+  ],
+  "unresolved": [
+    {
+      "split": "holdout",
+      "case_id": "holdout-3-0-c",
+      "city": "深圳",
+      "reason": "City literal absent from current database; preserved. Empty/zero/NULL may be legitimate."
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-3-0-a",
+      "city": "深圳",
+      "reason": "City literal absent from current database; preserved. Empty/zero/NULL may be legitimate."
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-3-2-c",
+      "city": "深圳",
+      "reason": "City literal absent from current database; preserved. Empty/zero/NULL may be legitimate."
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-3-2-a",
+      "city": "深圳",
+      "reason": "City literal absent from current database; preserved. Empty/zero/NULL may be legitimate."
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-3-4-c",
+      "city": "深圳",
+      "reason": "City literal absent from current database; preserved. Empty/zero/NULL may be legitimate."
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-3-4-a",
+      "city": "深圳",
+      "reason": "City literal absent from current database; preserved. Empty/zero/NULL may be legitimate."
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-3-6-c",
+      "city": "深圳",
+      "reason": "City literal absent from current database; preserved. Empty/zero/NULL may be legitimate."
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-3-6-a",
+      "city": "深圳",
+      "reason": "City literal absent from current database; preserved. Empty/zero/NULL may be legitimate."
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-3-8-c",
+      "city": "深圳",
+      "reason": "City literal absent from current database; preserved. Empty/zero/NULL may be legitimate."
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-3-8-a",
+      "city": "深圳",
+      "reason": "City literal absent from current database; preserved. Empty/zero/NULL may be legitimate."
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-3-10-c",
+      "city": "深圳",
+      "reason": "City literal absent from current database; preserved. Empty/zero/NULL may be legitimate."
+    },
+    {
+      "split": "holdout",
+      "case_id": "holdout-3-10-a",
+      "city": "深圳",
+      "reason": "City literal absent from current database; preserved. Empty/zero/NULL may be legitimate."
+    }
+  ],
+  "city_evidence": [
+    {
+      "province": "上海",
+      "city": "上海市",
+      "row_count": 377
+    },
+    {
+      "province": "北京",
+      "city": "北京市",
+      "row_count": 392
+    },
+    {
+      "province": "四川",
+      "city": "成都市",
+      "row_count": 386
+    },
+    {
+      "province": "广东",
+      "city": "广州市",
+      "row_count": 378
+    },
+    {
+      "province": "江苏",
+      "city": "南京市",
+      "row_count": 363
+    },
+    {
+      "province": "浙江",
+      "city": "杭州市",
+      "row_count": 372
+    },
+    {
+      "province": "湖北",
+      "city": "武汉市",
+      "row_count": 378
+    },
+    {
+      "province": "陕西",
+      "city": "西安市",
+      "row_count": 354
+    }
+  ],
+  "original_files_sha256": {
+    "eval/clarification_gt_correction_proposal.json": "b9712ba282b951c0d1e720e75604c80320156a451670fe718cd12b3d9251defc",
+    "eval/clarification_dev.json": "2bb43866da00f98307b7606f0365152b15d75082b2bfad4edd7fba42c3a2f1cc",
+    "eval/clarification_dev_manifest.json": "a476553cc48e1d2e8420f50e6b5042870dbcb814c785225d7ab7ee6c8908b162",
+    "eval/clarification_holdout.json": "ee7d9746ec7c6c06c0ae588611dcaa40f0da07d75b015f3edf38293886a8d30c",
+    "eval/clarification_holdout_manifest.json": "21ca1bc49becb5bee7d678b020cd08de71c6920d8e32d1e94cde4b5f1308d29c"
+  },
+  "corrected_files_sha256": {
+    "eval/clarification_dev_corrected.json": "bf4ce4aefa96a3f1816774e42c3bb1d0bf6f0baa989d556f3bdd8e074447a3dd",
+    "eval/clarification_holdout_corrected.json": "95c2380db2942e606ddfc81ce884a197d33caa57a99d90c41e19d1184d24f8b4"
+  },
+  "database": {
+    "users": "b827470388b126a973c77491e8863f6e6e51e7cbfeb7f689923a1b48ac2d55dc",
+    "products": "1a33196738fb59c7ee3d88f68e5ab3c89c94c5ca14864d3976c65337f3aad43e",
+    "orders": "e08ce1622cc57a7ad81b115f96fe1a7012a37b18b49229ae69da3d4c9335dab3",
+    "order_items": "40c992219526ac2fe849d58990769f788d07e4c6b3a83645b8863f65314a8a3e",
+    "refunds": "e8c296d3b783f81b322bc103d5f9eb00823141234155a3250980828af242d6b2",
+    "core_table": "af48658b968e0d6f803c66aebc0e6d9bc7b83030634f6ff2ebd4abc9ab6353d1",
+    "core_field": "bb1c16e9bed8a8ab47c6204cfa55986378340eea6bbb54f92cdefe112b265fdd"
+  },
+  "reference_date": "2026-09-12",
+  "system_commit": "30e9a08",
+  "baseline_tag": "v1.0.0",
+  "system_files_sha256": {
+    "app/agent/clarification.py": "879cb1d293501b9ae80956743fa36f2d61bb935b8196eb3f41f2e2778c47f09f",
+    "app/agent/production.py": "d8fb8a7cb027da1530309ed2be0faa53a3d8591fac4d698fe7b4c4bfcfb5928a",
+    "app/main.py": "95fd4d9305ace3fe0df2ca236a2461a08fdbc3f1b3e3e2bb8a3327ef2fbb0914",
+    "app/config.py": "e1d51bba8e0b0b755af4083b5617bf726a94b52e3fc669f5106db6a19f3d2b26",
+    "app/tools/qwen.py": "fbc049c275705d63016294fbcab9449c75bc93e0a8faacdb37aebaea193a3f23",
+    "app/tools/guardrail.py": "7673dcb01fdf3f8f7eb43385dad77f08ca81f57909292330ad496147168bd0cc",
+    "app/tools/database.py": "15d111eaf2801f93d16b4c7e50a6a717c819dff7d8c40c86215e4936751e10f4",
+    "eval/strong_baseline.py": "bc8e6abaadd142b4e0a7a0f89e15ce4b6909352268a0f2d45ab6bdade126b5c3",
+    "eval/strong_baseline_v2.py": "d6765bc00740e42d40e06674622f37fbb27b63b3d38c62d2436804ed8b20adc0",
+    "eval/scoring.py": "06f7e99378098fbecd650952dda4a82ea65481f8e197245a0d0e8546952ccac7",
+    "eval/run_clarification.py": "66946d8c22872df38f4c58f76517ca5f066f210f0f6c3e82abf2dc97eefd41aa"
+  },
+  "proposal_count": 56,
+  "model_calls_before_refreeze": 0,
+  "all_reference_sql_validated": true,
+  "unchanged_case_equality_verified": true
+}

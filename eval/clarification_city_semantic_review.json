@@ -1,0 +1,898 @@
+[
+  {
+    "split": "dev",
+    "case_id": "dev-0-4-c",
+    "original_city": "上海",
+    "corrected_city": "上海市",
+    "intent_evidence_field": "question",
+    "intent_evidence": "上海客户的有效订单有多少笔？只返回订单数。",
+    "database_evidence": [
+      {
+        "province": "上海",
+        "city": "上海市",
+        "row_count": 377
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  },
+  {
+    "split": "dev",
+    "case_id": "dev-0-4-a",
+    "original_city": "上海",
+    "corrected_city": "上海市",
+    "intent_evidence_field": "clarification_answer",
+    "intent_evidence": "客户城市为上海，统计全部历史。",
+    "database_evidence": [
+      {
+        "province": "上海",
+        "city": "上海市",
+        "row_count": 377
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  },
+  {
+    "split": "dev",
+    "case_id": "dev-1-4-c",
+    "original_city": "杭州",
+    "corrected_city": "杭州市",
+    "intent_evidence_field": "question",
+    "intent_evidence": "杭州客户的有效订单有多少笔？只返回订单数。",
+    "database_evidence": [
+      {
+        "province": "浙江",
+        "city": "杭州市",
+        "row_count": 372
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  },
+  {
+    "split": "dev",
+    "case_id": "dev-1-4-a",
+    "original_city": "杭州",
+    "corrected_city": "杭州市",
+    "intent_evidence_field": "clarification_answer",
+    "intent_evidence": "客户城市为杭州，统计全部历史。",
+    "database_evidence": [
+      {
+        "province": "浙江",
+        "city": "杭州市",
+        "row_count": 372
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  },
+  {
+    "split": "dev",
+    "case_id": "dev-2-4-c",
+    "original_city": "北京",
+    "corrected_city": "北京市",
+    "intent_evidence_field": "question",
+    "intent_evidence": "北京客户的有效订单有多少笔？只返回订单数。",
+    "database_evidence": [
+      {
+        "province": "北京",
+        "city": "北京市",
+        "row_count": 392
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  },
+  {
+    "split": "dev",
+    "case_id": "dev-2-4-a",
+    "original_city": "北京",
+    "corrected_city": "北京市",
+    "intent_evidence_field": "clarification_answer",
+    "intent_evidence": "客户城市为北京，统计全部历史。",
+    "database_evidence": [
+      {
+        "province": "北京",
+        "city": "北京市",
+        "row_count": 392
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  },
+  {
+    "split": "dev",
+    "case_id": "dev-3-4-c",
+    "original_city": "广州",
+    "corrected_city": "广州市",
+    "intent_evidence_field": "question",
+    "intent_evidence": "广州客户的有效订单有多少笔？只返回订单数。",
+    "database_evidence": [
+      {
+        "province": "广东",
+        "city": "广州市",
+        "row_count": 378
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  },
+  {
+    "split": "dev",
+    "case_id": "dev-3-4-a",
+    "original_city": "广州",
+    "corrected_city": "广州市",
+    "intent_evidence_field": "clarification_answer",
+    "intent_evidence": "客户城市为广州，统计全部历史。",
+    "database_evidence": [
+      {
+        "province": "广东",
+        "city": "广州市",
+        "row_count": 378
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-0-0-c",
+    "original_city": "上海",
+    "corrected_city": "上海市",
+    "intent_evidence_field": "question",
+    "intent_evidence": "上海最近19天新增注册客户有多少人？不含今天，只返回人数。",
+    "database_evidence": [
+      {
+        "province": "上海",
+        "city": "上海市",
+        "row_count": 377
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-0-0-a",
+    "original_city": "上海",
+    "corrected_city": "上海市",
+    "intent_evidence_field": "question",
+    "intent_evidence": "上海最近新注册了多少客户？只返回人数。",
+    "database_evidence": [
+      {
+        "province": "上海",
+        "city": "上海市",
+        "row_count": 377
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-0-2-c",
+    "original_city": "上海",
+    "corrected_city": "上海市",
+    "intent_evidence_field": "question",
+    "intent_evidence": "上海客户的有效订单中，实付金额超过850元的有几笔？只返回笔数。",
+    "database_evidence": [
+      {
+        "province": "上海",
+        "city": "上海市",
+        "row_count": 377
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-0-2-a",
+    "original_city": "上海",
+    "corrected_city": "上海市",
+    "intent_evidence_field": "question",
+    "intent_evidence": "上海客户的有效订单里有多少大额订单？只返回笔数。",
+    "database_evidence": [
+      {
+        "province": "上海",
+        "city": "上海市",
+        "row_count": 377
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-0-4-c",
+    "original_city": "上海",
+    "corrected_city": "上海市",
+    "intent_evidence_field": "question",
+    "intent_evidence": "上海客户按有效订单数量从高到低取前4名，返回用户ID和订单数；相同数量按用户ID升序。",
+    "database_evidence": [
+      {
+        "province": "上海",
+        "city": "上海市",
+        "row_count": 377
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-0-4-a",
+    "original_city": "上海",
+    "corrected_city": "上海市",
+    "intent_evidence_field": "question",
+    "intent_evidence": "找出上海表现最好的前4名客户，返回用户ID和表现指标，指标相同按用户ID升序。",
+    "database_evidence": [
+      {
+        "province": "上海",
+        "city": "上海市",
+        "row_count": 377
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-0-6-c",
+    "original_city": "上海",
+    "corrected_city": "上海市",
+    "intent_evidence_field": "question",
+    "intent_evidence": "统计上海客户的累计有效订单实付金额，只返回总金额。",
+    "database_evidence": [
+      {
+        "province": "上海",
+        "city": "上海市",
+        "row_count": 377
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-0-6-a",
+    "original_city": "上海",
+    "corrected_city": "上海市",
+    "intent_evidence_field": "clarification_answer",
+    "intent_evidence": "这次报表只统计客户城市为上海的记录，不包含其他城市。",
+    "database_evidence": [
+      {
+        "province": "上海",
+        "city": "上海市",
+        "row_count": 377
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-0-8-c",
+    "original_city": "上海",
+    "corrected_city": "上海市",
+    "intent_evidence_field": "question",
+    "intent_evidence": "上海已注册客户中VIP有多少人？只返回人数。",
+    "database_evidence": [
+      {
+        "province": "上海",
+        "city": "上海市",
+        "row_count": 377
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-0-8-a",
+    "original_city": "上海",
+    "corrected_city": "上海市",
+    "intent_evidence_field": "question",
+    "intent_evidence": "上海需要优先维护的客户有多少人？只返回人数。",
+    "database_evidence": [
+      {
+        "province": "上海",
+        "city": "上海市",
+        "row_count": 377
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-0-10-c",
+    "original_city": "上海",
+    "corrected_city": "上海市",
+    "intent_evidence_field": "question",
+    "intent_evidence": "上海所有历史有效订单的订单数是多少？只返回笔数。",
+    "database_evidence": [
+      {
+        "province": "上海",
+        "city": "上海市",
+        "row_count": 377
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-0-10-a",
+    "original_city": "上海",
+    "corrected_city": "上海市",
+    "intent_evidence_field": "question",
+    "intent_evidence": "给我上海的有效订单规模，只返回一个总计数字。",
+    "database_evidence": [
+      {
+        "province": "上海",
+        "city": "上海市",
+        "row_count": 377
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-1-0-c",
+    "original_city": "北京",
+    "corrected_city": "北京市",
+    "intent_evidence_field": "question",
+    "intent_evidence": "北京最近37天新增注册客户有多少人？不含今天，只返回人数。",
+    "database_evidence": [
+      {
+        "province": "北京",
+        "city": "北京市",
+        "row_count": 392
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-1-0-a",
+    "original_city": "北京",
+    "corrected_city": "北京市",
+    "intent_evidence_field": "question",
+    "intent_evidence": "北京最近新注册了多少客户？只返回人数。",
+    "database_evidence": [
+      {
+        "province": "北京",
+        "city": "北京市",
+        "row_count": 392
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-1-2-c",
+    "original_city": "北京",
+    "corrected_city": "北京市",
+    "intent_evidence_field": "question",
+    "intent_evidence": "北京客户的有效订单中，实付金额超过1280元的有几笔？只返回笔数。",
+    "database_evidence": [
+      {
+        "province": "北京",
+        "city": "北京市",
+        "row_count": 392
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-1-2-a",
+    "original_city": "北京",
+    "corrected_city": "北京市",
+    "intent_evidence_field": "question",
+    "intent_evidence": "北京客户的有效订单里有多少大额订单？只返回笔数。",
+    "database_evidence": [
+      {
+        "province": "北京",
+        "city": "北京市",
+        "row_count": 392
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-1-4-c",
+    "original_city": "北京",
+    "corrected_city": "北京市",
+    "intent_evidence_field": "question",
+    "intent_evidence": "北京客户按有效订单数量从高到低取前5名，返回用户ID和订单数；相同数量按用户ID升序。",
+    "database_evidence": [
+      {
+        "province": "北京",
+        "city": "北京市",
+        "row_count": 392
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-1-4-a",
+    "original_city": "北京",
+    "corrected_city": "北京市",
+    "intent_evidence_field": "question",
+    "intent_evidence": "找出北京表现最好的前5名客户，返回用户ID和表现指标，指标相同按用户ID升序。",
+    "database_evidence": [
+      {
+        "province": "北京",
+        "city": "北京市",
+        "row_count": 392
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-1-6-c",
+    "original_city": "北京",
+    "corrected_city": "北京市",
+    "intent_evidence_field": "question",
+    "intent_evidence": "统计北京客户的累计有效订单实付金额，只返回总金额。",
+    "database_evidence": [
+      {
+        "province": "北京",
+        "city": "北京市",
+        "row_count": 392
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-1-6-a",
+    "original_city": "北京",
+    "corrected_city": "北京市",
+    "intent_evidence_field": "clarification_answer",
+    "intent_evidence": "这次报表只统计客户城市为北京的记录，不包含其他城市。",
+    "database_evidence": [
+      {
+        "province": "北京",
+        "city": "北京市",
+        "row_count": 392
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-1-8-c",
+    "original_city": "北京",
+    "corrected_city": "北京市",
+    "intent_evidence_field": "question",
+    "intent_evidence": "北京已注册客户中VIP有多少人？只返回人数。",
+    "database_evidence": [
+      {
+        "province": "北京",
+        "city": "北京市",
+        "row_count": 392
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-1-8-a",
+    "original_city": "北京",
+    "corrected_city": "北京市",
+    "intent_evidence_field": "question",
+    "intent_evidence": "北京需要优先维护的客户有多少人？只返回人数。",
+    "database_evidence": [
+      {
+        "province": "北京",
+        "city": "北京市",
+        "row_count": 392
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-1-10-c",
+    "original_city": "北京",
+    "corrected_city": "北京市",
+    "intent_evidence_field": "question",
+    "intent_evidence": "北京所有历史有效订单的订单数是多少？只返回笔数。",
+    "database_evidence": [
+      {
+        "province": "北京",
+        "city": "北京市",
+        "row_count": 392
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-1-10-a",
+    "original_city": "北京",
+    "corrected_city": "北京市",
+    "intent_evidence_field": "question",
+    "intent_evidence": "给我北京的有效订单规模，只返回一个总计数字。",
+    "database_evidence": [
+      {
+        "province": "北京",
+        "city": "北京市",
+        "row_count": 392
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-2-0-c",
+    "original_city": "广州",
+    "corrected_city": "广州市",
+    "intent_evidence_field": "question",
+    "intent_evidence": "广州最近53天新增注册客户有多少人？不含今天，只返回人数。",
+    "database_evidence": [
+      {
+        "province": "广东",
+        "city": "广州市",
+        "row_count": 378
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-2-0-a",
+    "original_city": "广州",
+    "corrected_city": "广州市",
+    "intent_evidence_field": "question",
+    "intent_evidence": "广州最近新注册了多少客户？只返回人数。",
+    "database_evidence": [
+      {
+        "province": "广东",
+        "city": "广州市",
+        "row_count": 378
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-2-2-c",
+    "original_city": "广州",
+    "corrected_city": "广州市",
+    "intent_evidence_field": "question",
+    "intent_evidence": "广州客户的有效订单中，实付金额超过1710元的有几笔？只返回笔数。",
+    "database_evidence": [
+      {
+        "province": "广东",
+        "city": "广州市",
+        "row_count": 378
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-2-2-a",
+    "original_city": "广州",
+    "corrected_city": "广州市",
+    "intent_evidence_field": "question",
+    "intent_evidence": "广州客户的有效订单里有多少大额订单？只返回笔数。",
+    "database_evidence": [
+      {
+        "province": "广东",
+        "city": "广州市",
+        "row_count": 378
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-2-4-c",
+    "original_city": "广州",
+    "corrected_city": "广州市",
+    "intent_evidence_field": "question",
+    "intent_evidence": "广州客户按有效订单数量从高到低取前6名，返回用户ID和订单数；相同数量按用户ID升序。",
+    "database_evidence": [
+      {
+        "province": "广东",
+        "city": "广州市",
+        "row_count": 378
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-2-4-a",
+    "original_city": "广州",
+    "corrected_city": "广州市",
+    "intent_evidence_field": "question",
+    "intent_evidence": "找出广州表现最好的前6名客户，返回用户ID和表现指标，指标相同按用户ID升序。",
+    "database_evidence": [
+      {
+        "province": "广东",
+        "city": "广州市",
+        "row_count": 378
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-2-6-c",
+    "original_city": "广州",
+    "corrected_city": "广州市",
+    "intent_evidence_field": "question",
+    "intent_evidence": "统计广州客户的累计有效订单实付金额，只返回总金额。",
+    "database_evidence": [
+      {
+        "province": "广东",
+        "city": "广州市",
+        "row_count": 378
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-2-6-a",
+    "original_city": "广州",
+    "corrected_city": "广州市",
+    "intent_evidence_field": "clarification_answer",
+    "intent_evidence": "这次报表只统计客户城市为广州的记录，不包含其他城市。",
+    "database_evidence": [
+      {
+        "province": "广东",
+        "city": "广州市",
+        "row_count": 378
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-2-8-c",
+    "original_city": "广州",
+    "corrected_city": "广州市",
+    "intent_evidence_field": "question",
+    "intent_evidence": "广州已注册客户中VIP有多少人？只返回人数。",
+    "database_evidence": [
+      {
+        "province": "广东",
+        "city": "广州市",
+        "row_count": 378
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-2-8-a",
+    "original_city": "广州",
+    "corrected_city": "广州市",
+    "intent_evidence_field": "question",
+    "intent_evidence": "广州需要优先维护的客户有多少人？只返回人数。",
+    "database_evidence": [
+      {
+        "province": "广东",
+        "city": "广州市",
+        "row_count": 378
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-2-10-c",
+    "original_city": "广州",
+    "corrected_city": "广州市",
+    "intent_evidence_field": "question",
+    "intent_evidence": "广州所有历史有效订单的订单数是多少？只返回笔数。",
+    "database_evidence": [
+      {
+        "province": "广东",
+        "city": "广州市",
+        "row_count": 378
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-2-10-a",
+    "original_city": "广州",
+    "corrected_city": "广州市",
+    "intent_evidence_field": "question",
+    "intent_evidence": "给我广州的有效订单规模，只返回一个总计数字。",
+    "database_evidence": [
+      {
+        "province": "广东",
+        "city": "广州市",
+        "row_count": 378
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-4-0-c",
+    "original_city": "杭州",
+    "corrected_city": "杭州市",
+    "intent_evidence_field": "question",
+    "intent_evidence": "杭州最近89天新增注册客户有多少人？不含今天，只返回人数。",
+    "database_evidence": [
+      {
+        "province": "浙江",
+        "city": "杭州市",
+        "row_count": 372
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-4-0-a",
+    "original_city": "杭州",
+    "corrected_city": "杭州市",
+    "intent_evidence_field": "question",
+    "intent_evidence": "杭州最近新注册了多少客户？只返回人数。",
+    "database_evidence": [
+      {
+        "province": "浙江",
+        "city": "杭州市",
+        "row_count": 372
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-4-2-c",
+    "original_city": "杭州",
+    "corrected_city": "杭州市",
+    "intent_evidence_field": "question",
+    "intent_evidence": "杭州客户的有效订单中，实付金额超过2570元的有几笔？只返回笔数。",
+    "database_evidence": [
+      {
+        "province": "浙江",
+        "city": "杭州市",
+        "row_count": 372
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-4-2-a",
+    "original_city": "杭州",
+    "corrected_city": "杭州市",
+    "intent_evidence_field": "question",
+    "intent_evidence": "杭州客户的有效订单里有多少大额订单？只返回笔数。",
+    "database_evidence": [
+      {
+        "province": "浙江",
+        "city": "杭州市",
+        "row_count": 372
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-4-4-c",
+    "original_city": "杭州",
+    "corrected_city": "杭州市",
+    "intent_evidence_field": "question",
+    "intent_evidence": "杭州客户按有效订单数量从高到低取前8名，返回用户ID和订单数；相同数量按用户ID升序。",
+    "database_evidence": [
+      {
+        "province": "浙江",
+        "city": "杭州市",
+        "row_count": 372
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-4-4-a",
+    "original_city": "杭州",
+    "corrected_city": "杭州市",
+    "intent_evidence_field": "question",
+    "intent_evidence": "找出杭州表现最好的前8名客户，返回用户ID和表现指标，指标相同按用户ID升序。",
+    "database_evidence": [
+      {
+        "province": "浙江",
+        "city": "杭州市",
+        "row_count": 372
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-4-6-c",
+    "original_city": "杭州",
+    "corrected_city": "杭州市",
+    "intent_evidence_field": "question",
+    "intent_evidence": "统计杭州客户的累计有效订单实付金额，只返回总金额。",
+    "database_evidence": [
+      {
+        "province": "浙江",
+        "city": "杭州市",
+        "row_count": 372
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-4-6-a",
+    "original_city": "杭州",
+    "corrected_city": "杭州市",
+    "intent_evidence_field": "clarification_answer",
+    "intent_evidence": "这次报表只统计客户城市为杭州的记录，不包含其他城市。",
+    "database_evidence": [
+      {
+        "province": "浙江",
+        "city": "杭州市",
+        "row_count": 372
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-4-8-c",
+    "original_city": "杭州",
+    "corrected_city": "杭州市",
+    "intent_evidence_field": "question",
+    "intent_evidence": "杭州已注册客户中VIP有多少人？只返回人数。",
+    "database_evidence": [
+      {
+        "province": "浙江",
+        "city": "杭州市",
+        "row_count": 372
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-4-8-a",
+    "original_city": "杭州",
+    "corrected_city": "杭州市",
+    "intent_evidence_field": "question",
+    "intent_evidence": "杭州需要优先维护的客户有多少人？只返回人数。",
+    "database_evidence": [
+      {
+        "province": "浙江",
+        "city": "杭州市",
+        "row_count": 372
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-4-10-c",
+    "original_city": "杭州",
+    "corrected_city": "杭州市",
+    "intent_evidence_field": "question",
+    "intent_evidence": "杭州所有历史有效订单的订单数是多少？只返回笔数。",
+    "database_evidence": [
+      {
+        "province": "浙江",
+        "city": "杭州市",
+        "row_count": 372
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-4-10-a",
+    "original_city": "杭州",
+    "corrected_city": "杭州市",
+    "intent_evidence_field": "question",
+    "intent_evidence": "给我杭州的有效订单规模，只返回一个总计数字。",
+    "database_evidence": [
+      {
+        "province": "浙江",
+        "city": "杭州市",
+        "row_count": 372
+      }
+    ],
+    "review": "同一城市的市后缀存储差异；对地区问题仅依据已固定的模拟用户城市选择，不推断地区范围。"
+  }
+]

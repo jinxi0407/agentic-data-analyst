@@ -1,0 +1,2074 @@
+[
+  {
+    "id": "holdout-0-0-c",
+    "question": "上海最近19天新增注册客户有多少人？不含今天，只返回人数。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "上海最近19天新增注册客户有多少人？不含今天，只返回人数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='上海市' AND register_date>='2026-08-24' AND register_date<'2026-09-12'",
+    "ordered": false,
+    "family": 0,
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "holdout-0-0-a",
+    "question": "上海最近新注册了多少客户？只返回人数。",
+    "should_clarify": true,
+    "ambiguity_type": "time",
+    "clarification_answer": "最近19天，不含今天。",
+    "resolved_question": "上海最近19天新增注册客户有多少人？不含今天，只返回人数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='上海市' AND register_date>='2026-08-24' AND register_date<'2026-09-12'",
+    "ordered": false,
+    "family": 0,
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "holdout-0-1-c",
+    "question": "食品生鲜累计销售额是多少？使用有效订单商品行实付金额，只返回金额。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "食品生鲜累计销售额是多少？使用有效订单商品行实付金额，只返回金额。",
+    "reference_sql": "SELECT ROUND(SUM(i.item_amount),2) AS amount FROM order_items i JOIN orders o ON i.order_id=o.order_id JOIN products p ON p.product_id=i.product_id WHERE o.order_status IN ('paid','completed','shipped') AND p.category='食品生鲜'",
+    "ordered": false,
+    "family": 1,
+    "ground_truth_result": [
+      {
+        "amount": 657430.11
+      }
+    ]
+  },
+  {
+    "id": "holdout-0-1-a",
+    "question": "汇总一下食品生鲜的累计销售表现，只需要一个数字。",
+    "should_clarify": true,
+    "ambiguity_type": "metric",
+    "clarification_answer": "我要有效订单商品行实付销售金额，汇总全部历史。",
+    "resolved_question": "食品生鲜累计销售额是多少？使用有效订单商品行实付金额，只返回金额。",
+    "reference_sql": "SELECT ROUND(SUM(i.item_amount),2) AS amount FROM order_items i JOIN orders o ON i.order_id=o.order_id JOIN products p ON p.product_id=i.product_id WHERE o.order_status IN ('paid','completed','shipped') AND p.category='食品生鲜'",
+    "ordered": false,
+    "family": 1,
+    "ground_truth_result": [
+      {
+        "amount": 657430.11
+      }
+    ]
+  },
+  {
+    "id": "holdout-0-2-c",
+    "question": "上海客户的有效订单中，实付金额超过850元的有几笔？只返回笔数。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "上海客户的有效订单中，实付金额超过850元的有几笔？只返回笔数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='上海市' AND o.paid_amount>850",
+    "ordered": false,
+    "family": 2,
+    "ground_truth_result": [
+      {
+        "total": 987
+      }
+    ]
+  },
+  {
+    "id": "holdout-0-2-a",
+    "question": "上海客户的有效订单里有多少大额订单？只返回笔数。",
+    "should_clarify": true,
+    "ambiguity_type": "business_definition",
+    "clarification_answer": "大额按单笔实付金额超过850元定义，全部历史。",
+    "resolved_question": "上海客户的有效订单中，实付金额超过850元的有几笔？只返回笔数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='上海市' AND o.paid_amount>850",
+    "ordered": false,
+    "family": 2,
+    "ground_truth_result": [
+      {
+        "total": 987
+      }
+    ]
+  },
+  {
+    "id": "holdout-0-3-c",
+    "question": "食品生鲜在售商品中，标价低于120元的有几个？只返回数量。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "食品生鲜在售商品中，标价低于120元的有几个？只返回数量。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM products WHERE category='食品生鲜' AND is_active=1 AND list_price<120",
+    "ordered": false,
+    "family": 3,
+    "ground_truth_result": [
+      {
+        "total": 56
+      }
+    ]
+  },
+  {
+    "id": "holdout-0-3-a",
+    "question": "食品生鲜在售商品里便宜的有几个？只返回数量。",
+    "should_clarify": true,
+    "ambiguity_type": "filter",
+    "clarification_answer": "便宜指商品标价低于120元。",
+    "resolved_question": "食品生鲜在售商品中，标价低于120元的有几个？只返回数量。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM products WHERE category='食品生鲜' AND is_active=1 AND list_price<120",
+    "ordered": false,
+    "family": 3,
+    "ground_truth_result": [
+      {
+        "total": 56
+      }
+    ]
+  },
+  {
+    "id": "holdout-0-4-c",
+    "question": "上海客户按有效订单数量从高到低取前4名，返回用户ID和订单数；相同数量按用户ID升序。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "上海客户按有效订单数量从高到低取前4名，返回用户ID和订单数；相同数量按用户ID升序。",
+    "reference_sql": "SELECT u.user_id,COUNT(*) AS total FROM users u JOIN orders o ON o.user_id=u.user_id WHERE u.city='上海市' AND o.order_status IN ('paid','completed','shipped') GROUP BY u.user_id ORDER BY total DESC,u.user_id ASC LIMIT 4",
+    "ordered": true,
+    "family": 4,
+    "ground_truth_result": [
+      {
+        "user_id": 1466,
+        "total": 21
+      },
+      {
+        "user_id": 1187,
+        "total": 19
+      },
+      {
+        "user_id": 313,
+        "total": 18
+      },
+      {
+        "user_id": 2141,
+        "total": 18
+      }
+    ]
+  },
+  {
+    "id": "holdout-0-4-a",
+    "question": "找出上海表现最好的前4名客户，返回用户ID和表现指标，指标相同按用户ID升序。",
+    "should_clarify": true,
+    "ambiguity_type": "metric",
+    "clarification_answer": "表现按全部历史有效订单笔数衡量，从高到低排名。",
+    "resolved_question": "上海客户按有效订单数量从高到低取前4名，返回用户ID和订单数；相同数量按用户ID升序。",
+    "reference_sql": "SELECT u.user_id,COUNT(*) AS total FROM users u JOIN orders o ON o.user_id=u.user_id WHERE u.city='上海市' AND o.order_status IN ('paid','completed','shipped') GROUP BY u.user_id ORDER BY total DESC,u.user_id ASC LIMIT 4",
+    "ordered": true,
+    "family": 4,
+    "ground_truth_result": [
+      {
+        "user_id": 1466,
+        "total": 21
+      },
+      {
+        "user_id": 1187,
+        "total": 19
+      },
+      {
+        "user_id": 313,
+        "total": 18
+      },
+      {
+        "user_id": 2141,
+        "total": 18
+      }
+    ]
+  },
+  {
+    "id": "holdout-0-5-c",
+    "question": "食品生鲜在2026-08-24到2026-09-11期间的已批准退款金额是多少？包含首尾日期，只返回金额。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "食品生鲜在2026-08-24到2026-09-11期间的已批准退款金额是多少？包含首尾日期，只返回金额。",
+    "reference_sql": "SELECT ROUND(SUM(r.refund_amount),2) AS amount FROM refunds r JOIN products p ON r.product_id=p.product_id WHERE p.category='食品生鲜' AND r.refund_status='approved' AND r.refund_date>='2026-08-24' AND r.refund_date<'2026-09-12'",
+    "ordered": false,
+    "family": 5,
+    "ground_truth_result": [
+      {
+        "amount": 939.52
+      }
+    ]
+  },
+  {
+    "id": "holdout-0-5-a",
+    "question": "食品生鲜近期批准了多少退款金额？只返回金额。",
+    "should_clarify": true,
+    "ambiguity_type": "time",
+    "clarification_answer": "退款日期从2026-08-24到2026-09-11，包含首尾日期。",
+    "resolved_question": "食品生鲜在2026-08-24到2026-09-11期间的已批准退款金额是多少？包含首尾日期，只返回金额。",
+    "reference_sql": "SELECT ROUND(SUM(r.refund_amount),2) AS amount FROM refunds r JOIN products p ON r.product_id=p.product_id WHERE p.category='食品生鲜' AND r.refund_status='approved' AND r.refund_date>='2026-08-24' AND r.refund_date<'2026-09-12'",
+    "ordered": false,
+    "family": 5,
+    "ground_truth_result": [
+      {
+        "amount": 939.52
+      }
+    ]
+  },
+  {
+    "id": "holdout-0-6-c",
+    "question": "统计上海客户的累计有效订单实付金额，只返回总金额。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "统计上海客户的累计有效订单实付金额，只返回总金额。",
+    "reference_sql": "SELECT ROUND(SUM(o.paid_amount),2) AS amount FROM orders o JOIN users u ON o.user_id=u.user_id WHERE u.city='上海市' AND o.order_status IN ('paid','completed','shipped')",
+    "ordered": false,
+    "family": 6,
+    "ground_truth_result": [
+      {
+        "amount": 3770523.65
+      }
+    ]
+  },
+  {
+    "id": "holdout-0-6-a",
+    "question": "统计华东地区客户的累计有效订单实付金额，只返回总金额。",
+    "should_clarify": true,
+    "ambiguity_type": "entity",
+    "clarification_answer": "这次报表只统计客户城市为上海的记录，不包含其他城市。",
+    "resolved_question": "统计上海客户的累计有效订单实付金额，只返回总金额。",
+    "reference_sql": "SELECT ROUND(SUM(o.paid_amount),2) AS amount FROM orders o JOIN users u ON o.user_id=u.user_id WHERE u.city='上海市' AND o.order_status IN ('paid','completed','shipped')",
+    "ordered": false,
+    "family": 6,
+    "ground_truth_result": [
+      {
+        "amount": 3770523.65
+      }
+    ]
+  },
+  {
+    "id": "holdout-0-7-c",
+    "question": "食品生鲜中2026-08-01及以后上架的在售商品有多少个？只返回数量。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "食品生鲜中2026-08-01及以后上架的在售商品有多少个？只返回数量。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM products WHERE category='食品生鲜' AND is_active=1 AND launch_date>='2026-08-01'",
+    "ordered": false,
+    "family": 7,
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "holdout-0-7-a",
+    "question": "食品生鲜目前在售的新品有多少个？只返回数量。",
+    "should_clarify": true,
+    "ambiguity_type": "business_definition",
+    "clarification_answer": "新品指2026-08-01及以后上架的商品。",
+    "resolved_question": "食品生鲜中2026-08-01及以后上架的在售商品有多少个？只返回数量。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM products WHERE category='食品生鲜' AND is_active=1 AND launch_date>='2026-08-01'",
+    "ordered": false,
+    "family": 7,
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "holdout-0-8-c",
+    "question": "上海已注册客户中VIP有多少人？只返回人数。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "上海已注册客户中VIP有多少人？只返回人数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='上海市' AND is_vip=1",
+    "ordered": false,
+    "family": 8,
+    "ground_truth_result": [
+      {
+        "total": 65
+      }
+    ]
+  },
+  {
+    "id": "holdout-0-8-a",
+    "question": "上海需要优先维护的客户有多少人？只返回人数。",
+    "should_clarify": true,
+    "ambiguity_type": "filter",
+    "clarification_answer": "优先维护的客户是is_vip=1的VIP，不加其他条件。",
+    "resolved_question": "上海已注册客户中VIP有多少人？只返回人数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='上海市' AND is_vip=1",
+    "ordered": false,
+    "family": 8,
+    "ground_truth_result": [
+      {
+        "total": 65
+      }
+    ]
+  },
+  {
+    "id": "holdout-0-9-c",
+    "question": "食品生鲜最近19天（不含今天）的有效订单销量是多少？只返回件数。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "食品生鲜最近19天（不含今天）的有效订单销量是多少？只返回件数。",
+    "reference_sql": "SELECT SUM(i.quantity) AS quantity FROM order_items i JOIN orders o ON i.order_id=o.order_id JOIN products p ON p.product_id=i.product_id WHERE o.order_status IN ('paid','completed','shipped') AND p.category='食品生鲜' AND o.order_date >= '2026-08-24' AND o.order_date < '2026-09-12'",
+    "ordered": false,
+    "family": 9,
+    "ground_truth_result": [
+      {
+        "quantity": 206.0
+      }
+    ]
+  },
+  {
+    "id": "holdout-0-9-a",
+    "question": "食品生鲜最近卖得怎么样？只要一个汇总值。",
+    "should_clarify": true,
+    "ambiguity_type": "multiple",
+    "clarification_answer": "统计最近19天、不含今天的有效订单销售数量，单位是件。",
+    "resolved_question": "食品生鲜最近19天（不含今天）的有效订单销量是多少？只返回件数。",
+    "reference_sql": "SELECT SUM(i.quantity) AS quantity FROM order_items i JOIN orders o ON i.order_id=o.order_id JOIN products p ON p.product_id=i.product_id WHERE o.order_status IN ('paid','completed','shipped') AND p.category='食品生鲜' AND o.order_date >= '2026-08-24' AND o.order_date < '2026-09-12'",
+    "ordered": false,
+    "family": 9,
+    "ground_truth_result": [
+      {
+        "quantity": 206.0
+      }
+    ]
+  },
+  {
+    "id": "holdout-0-10-c",
+    "question": "上海所有历史有效订单的订单数是多少？只返回笔数。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "上海所有历史有效订单的订单数是多少？只返回笔数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='上海市'",
+    "ordered": false,
+    "family": 10,
+    "ground_truth_result": [
+      {
+        "total": 1407
+      }
+    ]
+  },
+  {
+    "id": "holdout-0-10-a",
+    "question": "给我上海的有效订单规模，只返回一个总计数字。",
+    "should_clarify": true,
+    "ambiguity_type": "metric",
+    "clarification_answer": "规模指有效订单笔数，全部历史，不是金额或客户数。",
+    "resolved_question": "上海所有历史有效订单的订单数是多少？只返回笔数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='上海市'",
+    "ordered": false,
+    "family": 10,
+    "ground_truth_result": [
+      {
+        "total": 1407
+      }
+    ]
+  },
+  {
+    "id": "holdout-0-11-c",
+    "question": "2026年第二季度食品生鲜有效订单销售额是多少？按商品行实付金额统计，只返回总额。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "2026年第二季度食品生鲜有效订单销售额是多少？按商品行实付金额统计，只返回总额。",
+    "reference_sql": "SELECT ROUND(SUM(i.item_amount),2) AS total FROM order_items i JOIN orders o ON o.order_id=i.order_id JOIN products p ON p.product_id=i.product_id WHERE o.order_status IN ('paid','completed','shipped') AND p.category='食品生鲜' AND o.order_date>='2026-04-01' AND o.order_date<'2026-07-01'",
+    "ordered": false,
+    "family": 11,
+    "ground_truth_result": [
+      {
+        "total": 92585.41
+      }
+    ]
+  },
+  {
+    "id": "holdout-0-11-a",
+    "question": "帮我查下食品生鲜那段时间的有效订单销售额，只返回总额。",
+    "should_clarify": true,
+    "ambiguity_type": "time",
+    "clarification_answer": "那段时间指2026年第二季度，即4月1日到6月30日。",
+    "resolved_question": "2026年第二季度食品生鲜有效订单销售额是多少？按商品行实付金额统计，只返回总额。",
+    "reference_sql": "SELECT ROUND(SUM(i.item_amount),2) AS total FROM order_items i JOIN orders o ON o.order_id=i.order_id JOIN products p ON p.product_id=i.product_id WHERE o.order_status IN ('paid','completed','shipped') AND p.category='食品生鲜' AND o.order_date>='2026-04-01' AND o.order_date<'2026-07-01'",
+    "ordered": false,
+    "family": 11,
+    "ground_truth_result": [
+      {
+        "total": 92585.41
+      }
+    ]
+  },
+  {
+    "id": "holdout-1-0-c",
+    "question": "北京最近37天新增注册客户有多少人？不含今天，只返回人数。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "北京最近37天新增注册客户有多少人？不含今天，只返回人数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='北京市' AND register_date>='2026-08-06' AND register_date<'2026-09-12'",
+    "ordered": false,
+    "family": 0,
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "holdout-1-0-a",
+    "question": "北京最近新注册了多少客户？只返回人数。",
+    "should_clarify": true,
+    "ambiguity_type": "time",
+    "clarification_answer": "最近37天，不含今天。",
+    "resolved_question": "北京最近37天新增注册客户有多少人？不含今天，只返回人数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='北京市' AND register_date>='2026-08-06' AND register_date<'2026-09-12'",
+    "ordered": false,
+    "family": 0,
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "holdout-1-1-c",
+    "question": "运动户外累计销售额是多少？使用有效订单商品行实付金额，只返回金额。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "运动户外累计销售额是多少？使用有效订单商品行实付金额，只返回金额。",
+    "reference_sql": "SELECT ROUND(SUM(i.item_amount),2) AS amount FROM order_items i JOIN orders o ON i.order_id=o.order_id JOIN products p ON p.product_id=i.product_id WHERE o.order_status IN ('paid','completed','shipped') AND p.category='运动户外'",
+    "ordered": false,
+    "family": 1,
+    "ground_truth_result": [
+      {
+        "amount": 2022921.66
+      }
+    ]
+  },
+  {
+    "id": "holdout-1-1-a",
+    "question": "汇总一下运动户外的累计销售表现，只需要一个数字。",
+    "should_clarify": true,
+    "ambiguity_type": "metric",
+    "clarification_answer": "我要有效订单商品行实付销售金额，汇总全部历史。",
+    "resolved_question": "运动户外累计销售额是多少？使用有效订单商品行实付金额，只返回金额。",
+    "reference_sql": "SELECT ROUND(SUM(i.item_amount),2) AS amount FROM order_items i JOIN orders o ON i.order_id=o.order_id JOIN products p ON p.product_id=i.product_id WHERE o.order_status IN ('paid','completed','shipped') AND p.category='运动户外'",
+    "ordered": false,
+    "family": 1,
+    "ground_truth_result": [
+      {
+        "amount": 2022921.66
+      }
+    ]
+  },
+  {
+    "id": "holdout-1-2-c",
+    "question": "北京客户的有效订单中，实付金额超过1280元的有几笔？只返回笔数。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "北京客户的有效订单中，实付金额超过1280元的有几笔？只返回笔数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='北京市' AND o.paid_amount>1280",
+    "ordered": false,
+    "family": 2,
+    "ground_truth_result": [
+      {
+        "total": 844
+      }
+    ]
+  },
+  {
+    "id": "holdout-1-2-a",
+    "question": "北京客户的有效订单里有多少大额订单？只返回笔数。",
+    "should_clarify": true,
+    "ambiguity_type": "business_definition",
+    "clarification_answer": "大额按单笔实付金额超过1280元定义，全部历史。",
+    "resolved_question": "北京客户的有效订单中，实付金额超过1280元的有几笔？只返回笔数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='北京市' AND o.paid_amount>1280",
+    "ordered": false,
+    "family": 2,
+    "ground_truth_result": [
+      {
+        "total": 844
+      }
+    ]
+  },
+  {
+    "id": "holdout-1-3-c",
+    "question": "运动户外在售商品中，标价低于200元的有几个？只返回数量。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "运动户外在售商品中，标价低于200元的有几个？只返回数量。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM products WHERE category='运动户外' AND is_active=1 AND list_price<200",
+    "ordered": false,
+    "family": 3,
+    "ground_truth_result": [
+      {
+        "total": 7
+      }
+    ]
+  },
+  {
+    "id": "holdout-1-3-a",
+    "question": "运动户外在售商品里便宜的有几个？只返回数量。",
+    "should_clarify": true,
+    "ambiguity_type": "filter",
+    "clarification_answer": "便宜指商品标价低于200元。",
+    "resolved_question": "运动户外在售商品中，标价低于200元的有几个？只返回数量。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM products WHERE category='运动户外' AND is_active=1 AND list_price<200",
+    "ordered": false,
+    "family": 3,
+    "ground_truth_result": [
+      {
+        "total": 7
+      }
+    ]
+  },
+  {
+    "id": "holdout-1-4-c",
+    "question": "北京客户按有效订单数量从高到低取前5名，返回用户ID和订单数；相同数量按用户ID升序。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "北京客户按有效订单数量从高到低取前5名，返回用户ID和订单数；相同数量按用户ID升序。",
+    "reference_sql": "SELECT u.user_id,COUNT(*) AS total FROM users u JOIN orders o ON o.user_id=u.user_id WHERE u.city='北京市' AND o.order_status IN ('paid','completed','shipped') GROUP BY u.user_id ORDER BY total DESC,u.user_id ASC LIMIT 5",
+    "ordered": true,
+    "family": 4,
+    "ground_truth_result": [
+      {
+        "user_id": 2493,
+        "total": 20
+      },
+      {
+        "user_id": 1892,
+        "total": 18
+      },
+      {
+        "user_id": 1923,
+        "total": 18
+      },
+      {
+        "user_id": 1012,
+        "total": 17
+      },
+      {
+        "user_id": 2001,
+        "total": 17
+      }
+    ]
+  },
+  {
+    "id": "holdout-1-4-a",
+    "question": "找出北京表现最好的前5名客户，返回用户ID和表现指标，指标相同按用户ID升序。",
+    "should_clarify": true,
+    "ambiguity_type": "metric",
+    "clarification_answer": "表现按全部历史有效订单笔数衡量，从高到低排名。",
+    "resolved_question": "北京客户按有效订单数量从高到低取前5名，返回用户ID和订单数；相同数量按用户ID升序。",
+    "reference_sql": "SELECT u.user_id,COUNT(*) AS total FROM users u JOIN orders o ON o.user_id=u.user_id WHERE u.city='北京市' AND o.order_status IN ('paid','completed','shipped') GROUP BY u.user_id ORDER BY total DESC,u.user_id ASC LIMIT 5",
+    "ordered": true,
+    "family": 4,
+    "ground_truth_result": [
+      {
+        "user_id": 2493,
+        "total": 20
+      },
+      {
+        "user_id": 1892,
+        "total": 18
+      },
+      {
+        "user_id": 1923,
+        "total": 18
+      },
+      {
+        "user_id": 1012,
+        "total": 17
+      },
+      {
+        "user_id": 2001,
+        "total": 17
+      }
+    ]
+  },
+  {
+    "id": "holdout-1-5-c",
+    "question": "运动户外在2026-08-06到2026-09-11期间的已批准退款金额是多少？包含首尾日期，只返回金额。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "运动户外在2026-08-06到2026-09-11期间的已批准退款金额是多少？包含首尾日期，只返回金额。",
+    "reference_sql": "SELECT ROUND(SUM(r.refund_amount),2) AS amount FROM refunds r JOIN products p ON r.product_id=p.product_id WHERE p.category='运动户外' AND r.refund_status='approved' AND r.refund_date>='2026-08-06' AND r.refund_date<'2026-09-12'",
+    "ordered": false,
+    "family": 5,
+    "ground_truth_result": [
+      {
+        "amount": 7018.61
+      }
+    ]
+  },
+  {
+    "id": "holdout-1-5-a",
+    "question": "运动户外近期批准了多少退款金额？只返回金额。",
+    "should_clarify": true,
+    "ambiguity_type": "time",
+    "clarification_answer": "退款日期从2026-08-06到2026-09-11，包含首尾日期。",
+    "resolved_question": "运动户外在2026-08-06到2026-09-11期间的已批准退款金额是多少？包含首尾日期，只返回金额。",
+    "reference_sql": "SELECT ROUND(SUM(r.refund_amount),2) AS amount FROM refunds r JOIN products p ON r.product_id=p.product_id WHERE p.category='运动户外' AND r.refund_status='approved' AND r.refund_date>='2026-08-06' AND r.refund_date<'2026-09-12'",
+    "ordered": false,
+    "family": 5,
+    "ground_truth_result": [
+      {
+        "amount": 7018.61
+      }
+    ]
+  },
+  {
+    "id": "holdout-1-6-c",
+    "question": "统计北京客户的累计有效订单实付金额，只返回总金额。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "统计北京客户的累计有效订单实付金额，只返回总金额。",
+    "reference_sql": "SELECT ROUND(SUM(o.paid_amount),2) AS amount FROM orders o JOIN users u ON o.user_id=u.user_id WHERE u.city='北京市' AND o.order_status IN ('paid','completed','shipped')",
+    "ordered": false,
+    "family": 6,
+    "ground_truth_result": [
+      {
+        "amount": 3715837.07
+      }
+    ]
+  },
+  {
+    "id": "holdout-1-6-a",
+    "question": "统计北方地区客户的累计有效订单实付金额，只返回总金额。",
+    "should_clarify": true,
+    "ambiguity_type": "entity",
+    "clarification_answer": "这次报表只统计客户城市为北京的记录，不包含其他城市。",
+    "resolved_question": "统计北京客户的累计有效订单实付金额，只返回总金额。",
+    "reference_sql": "SELECT ROUND(SUM(o.paid_amount),2) AS amount FROM orders o JOIN users u ON o.user_id=u.user_id WHERE u.city='北京市' AND o.order_status IN ('paid','completed','shipped')",
+    "ordered": false,
+    "family": 6,
+    "ground_truth_result": [
+      {
+        "amount": 3715837.07
+      }
+    ]
+  },
+  {
+    "id": "holdout-1-7-c",
+    "question": "运动户外中2026-08-01及以后上架的在售商品有多少个？只返回数量。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "运动户外中2026-08-01及以后上架的在售商品有多少个？只返回数量。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM products WHERE category='运动户外' AND is_active=1 AND launch_date>='2026-08-01'",
+    "ordered": false,
+    "family": 7,
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "holdout-1-7-a",
+    "question": "运动户外目前在售的新品有多少个？只返回数量。",
+    "should_clarify": true,
+    "ambiguity_type": "business_definition",
+    "clarification_answer": "新品指2026-08-01及以后上架的商品。",
+    "resolved_question": "运动户外中2026-08-01及以后上架的在售商品有多少个？只返回数量。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM products WHERE category='运动户外' AND is_active=1 AND launch_date>='2026-08-01'",
+    "ordered": false,
+    "family": 7,
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "holdout-1-8-c",
+    "question": "北京已注册客户中VIP有多少人？只返回人数。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "北京已注册客户中VIP有多少人？只返回人数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='北京市' AND is_vip=1",
+    "ordered": false,
+    "family": 8,
+    "ground_truth_result": [
+      {
+        "total": 66
+      }
+    ]
+  },
+  {
+    "id": "holdout-1-8-a",
+    "question": "北京需要优先维护的客户有多少人？只返回人数。",
+    "should_clarify": true,
+    "ambiguity_type": "filter",
+    "clarification_answer": "优先维护的客户是is_vip=1的VIP，不加其他条件。",
+    "resolved_question": "北京已注册客户中VIP有多少人？只返回人数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='北京市' AND is_vip=1",
+    "ordered": false,
+    "family": 8,
+    "ground_truth_result": [
+      {
+        "total": 66
+      }
+    ]
+  },
+  {
+    "id": "holdout-1-9-c",
+    "question": "运动户外最近37天（不含今天）的有效订单销量是多少？只返回件数。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "运动户外最近37天（不含今天）的有效订单销量是多少？只返回件数。",
+    "reference_sql": "SELECT SUM(i.quantity) AS quantity FROM order_items i JOIN orders o ON i.order_id=o.order_id JOIN products p ON p.product_id=i.product_id WHERE o.order_status IN ('paid','completed','shipped') AND p.category='运动户外' AND o.order_date >= '2026-08-06' AND o.order_date < '2026-09-12'",
+    "ordered": false,
+    "family": 9,
+    "ground_truth_result": [
+      {
+        "quantity": 355.0
+      }
+    ]
+  },
+  {
+    "id": "holdout-1-9-a",
+    "question": "运动户外最近卖得怎么样？只要一个汇总值。",
+    "should_clarify": true,
+    "ambiguity_type": "multiple",
+    "clarification_answer": "统计最近37天、不含今天的有效订单销售数量，单位是件。",
+    "resolved_question": "运动户外最近37天（不含今天）的有效订单销量是多少？只返回件数。",
+    "reference_sql": "SELECT SUM(i.quantity) AS quantity FROM order_items i JOIN orders o ON i.order_id=o.order_id JOIN products p ON p.product_id=i.product_id WHERE o.order_status IN ('paid','completed','shipped') AND p.category='运动户外' AND o.order_date >= '2026-08-06' AND o.order_date < '2026-09-12'",
+    "ordered": false,
+    "family": 9,
+    "ground_truth_result": [
+      {
+        "quantity": 355.0
+      }
+    ]
+  },
+  {
+    "id": "holdout-1-10-c",
+    "question": "北京所有历史有效订单的订单数是多少？只返回笔数。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "北京所有历史有效订单的订单数是多少？只返回笔数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='北京市'",
+    "ordered": false,
+    "family": 10,
+    "ground_truth_result": [
+      {
+        "total": 1459
+      }
+    ]
+  },
+  {
+    "id": "holdout-1-10-a",
+    "question": "给我北京的有效订单规模，只返回一个总计数字。",
+    "should_clarify": true,
+    "ambiguity_type": "metric",
+    "clarification_answer": "规模指有效订单笔数，全部历史，不是金额或客户数。",
+    "resolved_question": "北京所有历史有效订单的订单数是多少？只返回笔数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='北京市'",
+    "ordered": false,
+    "family": 10,
+    "ground_truth_result": [
+      {
+        "total": 1459
+      }
+    ]
+  },
+  {
+    "id": "holdout-1-11-c",
+    "question": "2026年第二季度运动户外有效订单销售额是多少？按商品行实付金额统计，只返回总额。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "2026年第二季度运动户外有效订单销售额是多少？按商品行实付金额统计，只返回总额。",
+    "reference_sql": "SELECT ROUND(SUM(i.item_amount),2) AS total FROM order_items i JOIN orders o ON o.order_id=i.order_id JOIN products p ON p.product_id=i.product_id WHERE o.order_status IN ('paid','completed','shipped') AND p.category='运动户外' AND o.order_date>='2026-04-01' AND o.order_date<'2026-07-01'",
+    "ordered": false,
+    "family": 11,
+    "ground_truth_result": [
+      {
+        "total": 258998.73
+      }
+    ]
+  },
+  {
+    "id": "holdout-1-11-a",
+    "question": "帮我查下运动户外那段时间的有效订单销售额，只返回总额。",
+    "should_clarify": true,
+    "ambiguity_type": "time",
+    "clarification_answer": "那段时间指2026年第二季度，即4月1日到6月30日。",
+    "resolved_question": "2026年第二季度运动户外有效订单销售额是多少？按商品行实付金额统计，只返回总额。",
+    "reference_sql": "SELECT ROUND(SUM(i.item_amount),2) AS total FROM order_items i JOIN orders o ON o.order_id=i.order_id JOIN products p ON p.product_id=i.product_id WHERE o.order_status IN ('paid','completed','shipped') AND p.category='运动户外' AND o.order_date>='2026-04-01' AND o.order_date<'2026-07-01'",
+    "ordered": false,
+    "family": 11,
+    "ground_truth_result": [
+      {
+        "total": 258998.73
+      }
+    ]
+  },
+  {
+    "id": "holdout-2-0-c",
+    "question": "广州最近53天新增注册客户有多少人？不含今天，只返回人数。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "广州最近53天新增注册客户有多少人？不含今天，只返回人数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='广州市' AND register_date>='2026-07-21' AND register_date<'2026-09-12'",
+    "ordered": false,
+    "family": 0,
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "holdout-2-0-a",
+    "question": "广州最近新注册了多少客户？只返回人数。",
+    "should_clarify": true,
+    "ambiguity_type": "time",
+    "clarification_answer": "最近53天，不含今天。",
+    "resolved_question": "广州最近53天新增注册客户有多少人？不含今天，只返回人数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='广州市' AND register_date>='2026-07-21' AND register_date<'2026-09-12'",
+    "ordered": false,
+    "family": 0,
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "holdout-2-1-c",
+    "question": "美妆个护累计销售额是多少？使用有效订单商品行实付金额，只返回金额。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "美妆个护累计销售额是多少？使用有效订单商品行实付金额，只返回金额。",
+    "reference_sql": "SELECT ROUND(SUM(i.item_amount),2) AS amount FROM order_items i JOIN orders o ON i.order_id=o.order_id JOIN products p ON p.product_id=i.product_id WHERE o.order_status IN ('paid','completed','shipped') AND p.category='美妆个护'",
+    "ordered": false,
+    "family": 1,
+    "ground_truth_result": [
+      {
+        "amount": 1517768.82
+      }
+    ]
+  },
+  {
+    "id": "holdout-2-1-a",
+    "question": "汇总一下美妆个护的累计销售表现，只需要一个数字。",
+    "should_clarify": true,
+    "ambiguity_type": "metric",
+    "clarification_answer": "我要有效订单商品行实付销售金额，汇总全部历史。",
+    "resolved_question": "美妆个护累计销售额是多少？使用有效订单商品行实付金额，只返回金额。",
+    "reference_sql": "SELECT ROUND(SUM(i.item_amount),2) AS amount FROM order_items i JOIN orders o ON i.order_id=o.order_id JOIN products p ON p.product_id=i.product_id WHERE o.order_status IN ('paid','completed','shipped') AND p.category='美妆个护'",
+    "ordered": false,
+    "family": 1,
+    "ground_truth_result": [
+      {
+        "amount": 1517768.82
+      }
+    ]
+  },
+  {
+    "id": "holdout-2-2-c",
+    "question": "广州客户的有效订单中，实付金额超过1710元的有几笔？只返回笔数。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "广州客户的有效订单中，实付金额超过1710元的有几笔？只返回笔数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='广州市' AND o.paid_amount>1710",
+    "ordered": false,
+    "family": 2,
+    "ground_truth_result": [
+      {
+        "total": 627
+      }
+    ]
+  },
+  {
+    "id": "holdout-2-2-a",
+    "question": "广州客户的有效订单里有多少大额订单？只返回笔数。",
+    "should_clarify": true,
+    "ambiguity_type": "business_definition",
+    "clarification_answer": "大额按单笔实付金额超过1710元定义，全部历史。",
+    "resolved_question": "广州客户的有效订单中，实付金额超过1710元的有几笔？只返回笔数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='广州市' AND o.paid_amount>1710",
+    "ordered": false,
+    "family": 2,
+    "ground_truth_result": [
+      {
+        "total": 627
+      }
+    ]
+  },
+  {
+    "id": "holdout-2-3-c",
+    "question": "美妆个护在售商品中，标价低于280元的有几个？只返回数量。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "美妆个护在售商品中，标价低于280元的有几个？只返回数量。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM products WHERE category='美妆个护' AND is_active=1 AND list_price<280",
+    "ordered": false,
+    "family": 3,
+    "ground_truth_result": [
+      {
+        "total": 85
+      }
+    ]
+  },
+  {
+    "id": "holdout-2-3-a",
+    "question": "美妆个护在售商品里便宜的有几个？只返回数量。",
+    "should_clarify": true,
+    "ambiguity_type": "filter",
+    "clarification_answer": "便宜指商品标价低于280元。",
+    "resolved_question": "美妆个护在售商品中，标价低于280元的有几个？只返回数量。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM products WHERE category='美妆个护' AND is_active=1 AND list_price<280",
+    "ordered": false,
+    "family": 3,
+    "ground_truth_result": [
+      {
+        "total": 85
+      }
+    ]
+  },
+  {
+    "id": "holdout-2-4-c",
+    "question": "广州客户按有效订单数量从高到低取前6名，返回用户ID和订单数；相同数量按用户ID升序。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "广州客户按有效订单数量从高到低取前6名，返回用户ID和订单数；相同数量按用户ID升序。",
+    "reference_sql": "SELECT u.user_id,COUNT(*) AS total FROM users u JOIN orders o ON o.user_id=u.user_id WHERE u.city='广州市' AND o.order_status IN ('paid','completed','shipped') GROUP BY u.user_id ORDER BY total DESC,u.user_id ASC LIMIT 6",
+    "ordered": true,
+    "family": 4,
+    "ground_truth_result": [
+      {
+        "user_id": 2525,
+        "total": 19
+      },
+      {
+        "user_id": 1335,
+        "total": 18
+      },
+      {
+        "user_id": 2901,
+        "total": 18
+      },
+      {
+        "user_id": 336,
+        "total": 16
+      },
+      {
+        "user_id": 460,
+        "total": 16
+      },
+      {
+        "user_id": 2804,
+        "total": 16
+      }
+    ]
+  },
+  {
+    "id": "holdout-2-4-a",
+    "question": "找出广州表现最好的前6名客户，返回用户ID和表现指标，指标相同按用户ID升序。",
+    "should_clarify": true,
+    "ambiguity_type": "metric",
+    "clarification_answer": "表现按全部历史有效订单笔数衡量，从高到低排名。",
+    "resolved_question": "广州客户按有效订单数量从高到低取前6名，返回用户ID和订单数；相同数量按用户ID升序。",
+    "reference_sql": "SELECT u.user_id,COUNT(*) AS total FROM users u JOIN orders o ON o.user_id=u.user_id WHERE u.city='广州市' AND o.order_status IN ('paid','completed','shipped') GROUP BY u.user_id ORDER BY total DESC,u.user_id ASC LIMIT 6",
+    "ordered": true,
+    "family": 4,
+    "ground_truth_result": [
+      {
+        "user_id": 2525,
+        "total": 19
+      },
+      {
+        "user_id": 1335,
+        "total": 18
+      },
+      {
+        "user_id": 2901,
+        "total": 18
+      },
+      {
+        "user_id": 336,
+        "total": 16
+      },
+      {
+        "user_id": 460,
+        "total": 16
+      },
+      {
+        "user_id": 2804,
+        "total": 16
+      }
+    ]
+  },
+  {
+    "id": "holdout-2-5-c",
+    "question": "美妆个护在2026-07-21到2026-09-11期间的已批准退款金额是多少？包含首尾日期，只返回金额。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "美妆个护在2026-07-21到2026-09-11期间的已批准退款金额是多少？包含首尾日期，只返回金额。",
+    "reference_sql": "SELECT ROUND(SUM(r.refund_amount),2) AS amount FROM refunds r JOIN products p ON r.product_id=p.product_id WHERE p.category='美妆个护' AND r.refund_status='approved' AND r.refund_date>='2026-07-21' AND r.refund_date<'2026-09-12'",
+    "ordered": false,
+    "family": 5,
+    "ground_truth_result": [
+      {
+        "amount": 11647.04
+      }
+    ]
+  },
+  {
+    "id": "holdout-2-5-a",
+    "question": "美妆个护近期批准了多少退款金额？只返回金额。",
+    "should_clarify": true,
+    "ambiguity_type": "time",
+    "clarification_answer": "退款日期从2026-07-21到2026-09-11，包含首尾日期。",
+    "resolved_question": "美妆个护在2026-07-21到2026-09-11期间的已批准退款金额是多少？包含首尾日期，只返回金额。",
+    "reference_sql": "SELECT ROUND(SUM(r.refund_amount),2) AS amount FROM refunds r JOIN products p ON r.product_id=p.product_id WHERE p.category='美妆个护' AND r.refund_status='approved' AND r.refund_date>='2026-07-21' AND r.refund_date<'2026-09-12'",
+    "ordered": false,
+    "family": 5,
+    "ground_truth_result": [
+      {
+        "amount": 11647.04
+      }
+    ]
+  },
+  {
+    "id": "holdout-2-6-c",
+    "question": "统计广州客户的累计有效订单实付金额，只返回总金额。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "统计广州客户的累计有效订单实付金额，只返回总金额。",
+    "reference_sql": "SELECT ROUND(SUM(o.paid_amount),2) AS amount FROM orders o JOIN users u ON o.user_id=u.user_id WHERE u.city='广州市' AND o.order_status IN ('paid','completed','shipped')",
+    "ordered": false,
+    "family": 6,
+    "ground_truth_result": [
+      {
+        "amount": 3376417.86
+      }
+    ]
+  },
+  {
+    "id": "holdout-2-6-a",
+    "question": "统计华南地区客户的累计有效订单实付金额，只返回总金额。",
+    "should_clarify": true,
+    "ambiguity_type": "entity",
+    "clarification_answer": "这次报表只统计客户城市为广州的记录，不包含其他城市。",
+    "resolved_question": "统计广州客户的累计有效订单实付金额，只返回总金额。",
+    "reference_sql": "SELECT ROUND(SUM(o.paid_amount),2) AS amount FROM orders o JOIN users u ON o.user_id=u.user_id WHERE u.city='广州市' AND o.order_status IN ('paid','completed','shipped')",
+    "ordered": false,
+    "family": 6,
+    "ground_truth_result": [
+      {
+        "amount": 3376417.86
+      }
+    ]
+  },
+  {
+    "id": "holdout-2-7-c",
+    "question": "美妆个护中2026-08-01及以后上架的在售商品有多少个？只返回数量。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "美妆个护中2026-08-01及以后上架的在售商品有多少个？只返回数量。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM products WHERE category='美妆个护' AND is_active=1 AND launch_date>='2026-08-01'",
+    "ordered": false,
+    "family": 7,
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "holdout-2-7-a",
+    "question": "美妆个护目前在售的新品有多少个？只返回数量。",
+    "should_clarify": true,
+    "ambiguity_type": "business_definition",
+    "clarification_answer": "新品指2026-08-01及以后上架的商品。",
+    "resolved_question": "美妆个护中2026-08-01及以后上架的在售商品有多少个？只返回数量。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM products WHERE category='美妆个护' AND is_active=1 AND launch_date>='2026-08-01'",
+    "ordered": false,
+    "family": 7,
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "holdout-2-8-c",
+    "question": "广州已注册客户中VIP有多少人？只返回人数。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "广州已注册客户中VIP有多少人？只返回人数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='广州市' AND is_vip=1",
+    "ordered": false,
+    "family": 8,
+    "ground_truth_result": [
+      {
+        "total": 47
+      }
+    ]
+  },
+  {
+    "id": "holdout-2-8-a",
+    "question": "广州需要优先维护的客户有多少人？只返回人数。",
+    "should_clarify": true,
+    "ambiguity_type": "filter",
+    "clarification_answer": "优先维护的客户是is_vip=1的VIP，不加其他条件。",
+    "resolved_question": "广州已注册客户中VIP有多少人？只返回人数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='广州市' AND is_vip=1",
+    "ordered": false,
+    "family": 8,
+    "ground_truth_result": [
+      {
+        "total": 47
+      }
+    ]
+  },
+  {
+    "id": "holdout-2-9-c",
+    "question": "美妆个护最近53天（不含今天）的有效订单销量是多少？只返回件数。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "美妆个护最近53天（不含今天）的有效订单销量是多少？只返回件数。",
+    "reference_sql": "SELECT SUM(i.quantity) AS quantity FROM order_items i JOIN orders o ON i.order_id=o.order_id JOIN products p ON p.product_id=i.product_id WHERE o.order_status IN ('paid','completed','shipped') AND p.category='美妆个护' AND o.order_date >= '2026-07-21' AND o.order_date < '2026-09-12'",
+    "ordered": false,
+    "family": 9,
+    "ground_truth_result": [
+      {
+        "quantity": 613.0
+      }
+    ]
+  },
+  {
+    "id": "holdout-2-9-a",
+    "question": "美妆个护最近卖得怎么样？只要一个汇总值。",
+    "should_clarify": true,
+    "ambiguity_type": "multiple",
+    "clarification_answer": "统计最近53天、不含今天的有效订单销售数量，单位是件。",
+    "resolved_question": "美妆个护最近53天（不含今天）的有效订单销量是多少？只返回件数。",
+    "reference_sql": "SELECT SUM(i.quantity) AS quantity FROM order_items i JOIN orders o ON i.order_id=o.order_id JOIN products p ON p.product_id=i.product_id WHERE o.order_status IN ('paid','completed','shipped') AND p.category='美妆个护' AND o.order_date >= '2026-07-21' AND o.order_date < '2026-09-12'",
+    "ordered": false,
+    "family": 9,
+    "ground_truth_result": [
+      {
+        "quantity": 613.0
+      }
+    ]
+  },
+  {
+    "id": "holdout-2-10-c",
+    "question": "广州所有历史有效订单的订单数是多少？只返回笔数。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "广州所有历史有效订单的订单数是多少？只返回笔数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='广州市'",
+    "ordered": false,
+    "family": 10,
+    "ground_truth_result": [
+      {
+        "total": 1278
+      }
+    ]
+  },
+  {
+    "id": "holdout-2-10-a",
+    "question": "给我广州的有效订单规模，只返回一个总计数字。",
+    "should_clarify": true,
+    "ambiguity_type": "metric",
+    "clarification_answer": "规模指有效订单笔数，全部历史，不是金额或客户数。",
+    "resolved_question": "广州所有历史有效订单的订单数是多少？只返回笔数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='广州市'",
+    "ordered": false,
+    "family": 10,
+    "ground_truth_result": [
+      {
+        "total": 1278
+      }
+    ]
+  },
+  {
+    "id": "holdout-2-11-c",
+    "question": "2026年第二季度美妆个护有效订单销售额是多少？按商品行实付金额统计，只返回总额。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "2026年第二季度美妆个护有效订单销售额是多少？按商品行实付金额统计，只返回总额。",
+    "reference_sql": "SELECT ROUND(SUM(i.item_amount),2) AS total FROM order_items i JOIN orders o ON o.order_id=i.order_id JOIN products p ON p.product_id=i.product_id WHERE o.order_status IN ('paid','completed','shipped') AND p.category='美妆个护' AND o.order_date>='2026-04-01' AND o.order_date<'2026-07-01'",
+    "ordered": false,
+    "family": 11,
+    "ground_truth_result": [
+      {
+        "total": 197766.27
+      }
+    ]
+  },
+  {
+    "id": "holdout-2-11-a",
+    "question": "帮我查下美妆个护那段时间的有效订单销售额，只返回总额。",
+    "should_clarify": true,
+    "ambiguity_type": "time",
+    "clarification_answer": "那段时间指2026年第二季度，即4月1日到6月30日。",
+    "resolved_question": "2026年第二季度美妆个护有效订单销售额是多少？按商品行实付金额统计，只返回总额。",
+    "reference_sql": "SELECT ROUND(SUM(i.item_amount),2) AS total FROM order_items i JOIN orders o ON o.order_id=i.order_id JOIN products p ON p.product_id=i.product_id WHERE o.order_status IN ('paid','completed','shipped') AND p.category='美妆个护' AND o.order_date>='2026-04-01' AND o.order_date<'2026-07-01'",
+    "ordered": false,
+    "family": 11,
+    "ground_truth_result": [
+      {
+        "total": 197766.27
+      }
+    ]
+  },
+  {
+    "id": "holdout-3-0-c",
+    "question": "深圳最近71天新增注册客户有多少人？不含今天，只返回人数。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "深圳最近71天新增注册客户有多少人？不含今天，只返回人数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='深圳' AND register_date>='2026-07-03' AND register_date<'2026-09-12'",
+    "ordered": false,
+    "family": 0,
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "holdout-3-0-a",
+    "question": "深圳最近新注册了多少客户？只返回人数。",
+    "should_clarify": true,
+    "ambiguity_type": "time",
+    "clarification_answer": "最近71天，不含今天。",
+    "resolved_question": "深圳最近71天新增注册客户有多少人？不含今天，只返回人数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='深圳' AND register_date>='2026-07-03' AND register_date<'2026-09-12'",
+    "ordered": false,
+    "family": 0,
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "holdout-3-1-c",
+    "question": "母婴用品累计销售额是多少？使用有效订单商品行实付金额，只返回金额。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "母婴用品累计销售额是多少？使用有效订单商品行实付金额，只返回金额。",
+    "reference_sql": "SELECT ROUND(SUM(i.item_amount),2) AS amount FROM order_items i JOIN orders o ON i.order_id=o.order_id JOIN products p ON p.product_id=i.product_id WHERE o.order_status IN ('paid','completed','shipped') AND p.category='母婴用品'",
+    "ordered": false,
+    "family": 1,
+    "ground_truth_result": [
+      {
+        "amount": 1627735.6
+      }
+    ]
+  },
+  {
+    "id": "holdout-3-1-a",
+    "question": "汇总一下母婴用品的累计销售表现，只需要一个数字。",
+    "should_clarify": true,
+    "ambiguity_type": "metric",
+    "clarification_answer": "我要有效订单商品行实付销售金额，汇总全部历史。",
+    "resolved_question": "母婴用品累计销售额是多少？使用有效订单商品行实付金额，只返回金额。",
+    "reference_sql": "SELECT ROUND(SUM(i.item_amount),2) AS amount FROM order_items i JOIN orders o ON i.order_id=o.order_id JOIN products p ON p.product_id=i.product_id WHERE o.order_status IN ('paid','completed','shipped') AND p.category='母婴用品'",
+    "ordered": false,
+    "family": 1,
+    "ground_truth_result": [
+      {
+        "amount": 1627735.6
+      }
+    ]
+  },
+  {
+    "id": "holdout-3-2-c",
+    "question": "深圳客户的有效订单中，实付金额超过2140元的有几笔？只返回笔数。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "深圳客户的有效订单中，实付金额超过2140元的有几笔？只返回笔数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='深圳' AND o.paid_amount>2140",
+    "ordered": false,
+    "family": 2,
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "holdout-3-2-a",
+    "question": "深圳客户的有效订单里有多少大额订单？只返回笔数。",
+    "should_clarify": true,
+    "ambiguity_type": "business_definition",
+    "clarification_answer": "大额按单笔实付金额超过2140元定义，全部历史。",
+    "resolved_question": "深圳客户的有效订单中，实付金额超过2140元的有几笔？只返回笔数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='深圳' AND o.paid_amount>2140",
+    "ordered": false,
+    "family": 2,
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "holdout-3-3-c",
+    "question": "母婴用品在售商品中，标价低于360元的有几个？只返回数量。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "母婴用品在售商品中，标价低于360元的有几个？只返回数量。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM products WHERE category='母婴用品' AND is_active=1 AND list_price<360",
+    "ordered": false,
+    "family": 3,
+    "ground_truth_result": [
+      {
+        "total": 89
+      }
+    ]
+  },
+  {
+    "id": "holdout-3-3-a",
+    "question": "母婴用品在售商品里便宜的有几个？只返回数量。",
+    "should_clarify": true,
+    "ambiguity_type": "filter",
+    "clarification_answer": "便宜指商品标价低于360元。",
+    "resolved_question": "母婴用品在售商品中，标价低于360元的有几个？只返回数量。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM products WHERE category='母婴用品' AND is_active=1 AND list_price<360",
+    "ordered": false,
+    "family": 3,
+    "ground_truth_result": [
+      {
+        "total": 89
+      }
+    ]
+  },
+  {
+    "id": "holdout-3-4-c",
+    "question": "深圳客户按有效订单数量从高到低取前7名，返回用户ID和订单数；相同数量按用户ID升序。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "深圳客户按有效订单数量从高到低取前7名，返回用户ID和订单数；相同数量按用户ID升序。",
+    "reference_sql": "SELECT u.user_id,COUNT(*) AS total FROM users u JOIN orders o ON o.user_id=u.user_id WHERE u.city='深圳' AND o.order_status IN ('paid','completed','shipped') GROUP BY u.user_id ORDER BY total DESC,u.user_id ASC LIMIT 7",
+    "ordered": true,
+    "family": 4,
+    "ground_truth_result": []
+  },
+  {
+    "id": "holdout-3-4-a",
+    "question": "找出深圳表现最好的前7名客户，返回用户ID和表现指标，指标相同按用户ID升序。",
+    "should_clarify": true,
+    "ambiguity_type": "metric",
+    "clarification_answer": "表现按全部历史有效订单笔数衡量，从高到低排名。",
+    "resolved_question": "深圳客户按有效订单数量从高到低取前7名，返回用户ID和订单数；相同数量按用户ID升序。",
+    "reference_sql": "SELECT u.user_id,COUNT(*) AS total FROM users u JOIN orders o ON o.user_id=u.user_id WHERE u.city='深圳' AND o.order_status IN ('paid','completed','shipped') GROUP BY u.user_id ORDER BY total DESC,u.user_id ASC LIMIT 7",
+    "ordered": true,
+    "family": 4,
+    "ground_truth_result": []
+  },
+  {
+    "id": "holdout-3-5-c",
+    "question": "母婴用品在2026-07-03到2026-09-11期间的已批准退款金额是多少？包含首尾日期，只返回金额。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "母婴用品在2026-07-03到2026-09-11期间的已批准退款金额是多少？包含首尾日期，只返回金额。",
+    "reference_sql": "SELECT ROUND(SUM(r.refund_amount),2) AS amount FROM refunds r JOIN products p ON r.product_id=p.product_id WHERE p.category='母婴用品' AND r.refund_status='approved' AND r.refund_date>='2026-07-03' AND r.refund_date<'2026-09-12'",
+    "ordered": false,
+    "family": 5,
+    "ground_truth_result": [
+      {
+        "amount": 11146.65
+      }
+    ]
+  },
+  {
+    "id": "holdout-3-5-a",
+    "question": "母婴用品近期批准了多少退款金额？只返回金额。",
+    "should_clarify": true,
+    "ambiguity_type": "time",
+    "clarification_answer": "退款日期从2026-07-03到2026-09-11，包含首尾日期。",
+    "resolved_question": "母婴用品在2026-07-03到2026-09-11期间的已批准退款金额是多少？包含首尾日期，只返回金额。",
+    "reference_sql": "SELECT ROUND(SUM(r.refund_amount),2) AS amount FROM refunds r JOIN products p ON r.product_id=p.product_id WHERE p.category='母婴用品' AND r.refund_status='approved' AND r.refund_date>='2026-07-03' AND r.refund_date<'2026-09-12'",
+    "ordered": false,
+    "family": 5,
+    "ground_truth_result": [
+      {
+        "amount": 11146.65
+      }
+    ]
+  },
+  {
+    "id": "holdout-3-6-c",
+    "question": "统计深圳客户的累计有效订单实付金额，只返回总金额。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "统计深圳客户的累计有效订单实付金额，只返回总金额。",
+    "reference_sql": "SELECT ROUND(SUM(o.paid_amount),2) AS amount FROM orders o JOIN users u ON o.user_id=u.user_id WHERE u.city='深圳' AND o.order_status IN ('paid','completed','shipped')",
+    "ordered": false,
+    "family": 6,
+    "ground_truth_result": [
+      {
+        "amount": null
+      }
+    ]
+  },
+  {
+    "id": "holdout-3-6-a",
+    "question": "统计珠三角地区客户的累计有效订单实付金额，只返回总金额。",
+    "should_clarify": true,
+    "ambiguity_type": "entity",
+    "clarification_answer": "这次报表只统计客户城市为深圳的记录，不包含其他城市。",
+    "resolved_question": "统计深圳客户的累计有效订单实付金额，只返回总金额。",
+    "reference_sql": "SELECT ROUND(SUM(o.paid_amount),2) AS amount FROM orders o JOIN users u ON o.user_id=u.user_id WHERE u.city='深圳' AND o.order_status IN ('paid','completed','shipped')",
+    "ordered": false,
+    "family": 6,
+    "ground_truth_result": [
+      {
+        "amount": null
+      }
+    ]
+  },
+  {
+    "id": "holdout-3-7-c",
+    "question": "母婴用品中2026-08-01及以后上架的在售商品有多少个？只返回数量。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "母婴用品中2026-08-01及以后上架的在售商品有多少个？只返回数量。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM products WHERE category='母婴用品' AND is_active=1 AND launch_date>='2026-08-01'",
+    "ordered": false,
+    "family": 7,
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "holdout-3-7-a",
+    "question": "母婴用品目前在售的新品有多少个？只返回数量。",
+    "should_clarify": true,
+    "ambiguity_type": "business_definition",
+    "clarification_answer": "新品指2026-08-01及以后上架的商品。",
+    "resolved_question": "母婴用品中2026-08-01及以后上架的在售商品有多少个？只返回数量。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM products WHERE category='母婴用品' AND is_active=1 AND launch_date>='2026-08-01'",
+    "ordered": false,
+    "family": 7,
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "holdout-3-8-c",
+    "question": "深圳已注册客户中VIP有多少人？只返回人数。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "深圳已注册客户中VIP有多少人？只返回人数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='深圳' AND is_vip=1",
+    "ordered": false,
+    "family": 8,
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "holdout-3-8-a",
+    "question": "深圳需要优先维护的客户有多少人？只返回人数。",
+    "should_clarify": true,
+    "ambiguity_type": "filter",
+    "clarification_answer": "优先维护的客户是is_vip=1的VIP，不加其他条件。",
+    "resolved_question": "深圳已注册客户中VIP有多少人？只返回人数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='深圳' AND is_vip=1",
+    "ordered": false,
+    "family": 8,
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "holdout-3-9-c",
+    "question": "母婴用品最近71天（不含今天）的有效订单销量是多少？只返回件数。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "母婴用品最近71天（不含今天）的有效订单销量是多少？只返回件数。",
+    "reference_sql": "SELECT SUM(i.quantity) AS quantity FROM order_items i JOIN orders o ON i.order_id=o.order_id JOIN products p ON p.product_id=i.product_id WHERE o.order_status IN ('paid','completed','shipped') AND p.category='母婴用品' AND o.order_date >= '2026-07-03' AND o.order_date < '2026-09-12'",
+    "ordered": false,
+    "family": 9,
+    "ground_truth_result": [
+      {
+        "quantity": 746.0
+      }
+    ]
+  },
+  {
+    "id": "holdout-3-9-a",
+    "question": "母婴用品最近卖得怎么样？只要一个汇总值。",
+    "should_clarify": true,
+    "ambiguity_type": "multiple",
+    "clarification_answer": "统计最近71天、不含今天的有效订单销售数量，单位是件。",
+    "resolved_question": "母婴用品最近71天（不含今天）的有效订单销量是多少？只返回件数。",
+    "reference_sql": "SELECT SUM(i.quantity) AS quantity FROM order_items i JOIN orders o ON i.order_id=o.order_id JOIN products p ON p.product_id=i.product_id WHERE o.order_status IN ('paid','completed','shipped') AND p.category='母婴用品' AND o.order_date >= '2026-07-03' AND o.order_date < '2026-09-12'",
+    "ordered": false,
+    "family": 9,
+    "ground_truth_result": [
+      {
+        "quantity": 746.0
+      }
+    ]
+  },
+  {
+    "id": "holdout-3-10-c",
+    "question": "深圳所有历史有效订单的订单数是多少？只返回笔数。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "深圳所有历史有效订单的订单数是多少？只返回笔数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='深圳'",
+    "ordered": false,
+    "family": 10,
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "holdout-3-10-a",
+    "question": "给我深圳的有效订单规模，只返回一个总计数字。",
+    "should_clarify": true,
+    "ambiguity_type": "metric",
+    "clarification_answer": "规模指有效订单笔数，全部历史，不是金额或客户数。",
+    "resolved_question": "深圳所有历史有效订单的订单数是多少？只返回笔数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='深圳'",
+    "ordered": false,
+    "family": 10,
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "holdout-3-11-c",
+    "question": "2026年第二季度母婴用品有效订单销售额是多少？按商品行实付金额统计，只返回总额。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "2026年第二季度母婴用品有效订单销售额是多少？按商品行实付金额统计，只返回总额。",
+    "reference_sql": "SELECT ROUND(SUM(i.item_amount),2) AS total FROM order_items i JOIN orders o ON o.order_id=i.order_id JOIN products p ON p.product_id=i.product_id WHERE o.order_status IN ('paid','completed','shipped') AND p.category='母婴用品' AND o.order_date>='2026-04-01' AND o.order_date<'2026-07-01'",
+    "ordered": false,
+    "family": 11,
+    "ground_truth_result": [
+      {
+        "total": 234296.23
+      }
+    ]
+  },
+  {
+    "id": "holdout-3-11-a",
+    "question": "帮我查下母婴用品那段时间的有效订单销售额，只返回总额。",
+    "should_clarify": true,
+    "ambiguity_type": "time",
+    "clarification_answer": "那段时间指2026年第二季度，即4月1日到6月30日。",
+    "resolved_question": "2026年第二季度母婴用品有效订单销售额是多少？按商品行实付金额统计，只返回总额。",
+    "reference_sql": "SELECT ROUND(SUM(i.item_amount),2) AS total FROM order_items i JOIN orders o ON o.order_id=i.order_id JOIN products p ON p.product_id=i.product_id WHERE o.order_status IN ('paid','completed','shipped') AND p.category='母婴用品' AND o.order_date>='2026-04-01' AND o.order_date<'2026-07-01'",
+    "ordered": false,
+    "family": 11,
+    "ground_truth_result": [
+      {
+        "total": 234296.23
+      }
+    ]
+  },
+  {
+    "id": "holdout-4-0-c",
+    "question": "杭州最近89天新增注册客户有多少人？不含今天，只返回人数。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "杭州最近89天新增注册客户有多少人？不含今天，只返回人数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='杭州市' AND register_date>='2026-06-15' AND register_date<'2026-09-12'",
+    "ordered": false,
+    "family": 0,
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "holdout-4-0-a",
+    "question": "杭州最近新注册了多少客户？只返回人数。",
+    "should_clarify": true,
+    "ambiguity_type": "time",
+    "clarification_answer": "最近89天，不含今天。",
+    "resolved_question": "杭州最近89天新增注册客户有多少人？不含今天，只返回人数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='杭州市' AND register_date>='2026-06-15' AND register_date<'2026-09-12'",
+    "ordered": false,
+    "family": 0,
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "holdout-4-1-c",
+    "question": "服饰鞋包累计销售额是多少？使用有效订单商品行实付金额，只返回金额。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "服饰鞋包累计销售额是多少？使用有效订单商品行实付金额，只返回金额。",
+    "reference_sql": "SELECT ROUND(SUM(i.item_amount),2) AS amount FROM order_items i JOIN orders o ON i.order_id=o.order_id JOIN products p ON p.product_id=i.product_id WHERE o.order_status IN ('paid','completed','shipped') AND p.category='服饰鞋包'",
+    "ordered": false,
+    "family": 1,
+    "ground_truth_result": [
+      {
+        "amount": 1775094.12
+      }
+    ]
+  },
+  {
+    "id": "holdout-4-1-a",
+    "question": "汇总一下服饰鞋包的累计销售表现，只需要一个数字。",
+    "should_clarify": true,
+    "ambiguity_type": "metric",
+    "clarification_answer": "我要有效订单商品行实付销售金额，汇总全部历史。",
+    "resolved_question": "服饰鞋包累计销售额是多少？使用有效订单商品行实付金额，只返回金额。",
+    "reference_sql": "SELECT ROUND(SUM(i.item_amount),2) AS amount FROM order_items i JOIN orders o ON i.order_id=o.order_id JOIN products p ON p.product_id=i.product_id WHERE o.order_status IN ('paid','completed','shipped') AND p.category='服饰鞋包'",
+    "ordered": false,
+    "family": 1,
+    "ground_truth_result": [
+      {
+        "amount": 1775094.12
+      }
+    ]
+  },
+  {
+    "id": "holdout-4-2-c",
+    "question": "杭州客户的有效订单中，实付金额超过2570元的有几笔？只返回笔数。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "杭州客户的有效订单中，实付金额超过2570元的有几笔？只返回笔数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='杭州市' AND o.paid_amount>2570",
+    "ordered": false,
+    "family": 2,
+    "ground_truth_result": [
+      {
+        "total": 443
+      }
+    ]
+  },
+  {
+    "id": "holdout-4-2-a",
+    "question": "杭州客户的有效订单里有多少大额订单？只返回笔数。",
+    "should_clarify": true,
+    "ambiguity_type": "business_definition",
+    "clarification_answer": "大额按单笔实付金额超过2570元定义，全部历史。",
+    "resolved_question": "杭州客户的有效订单中，实付金额超过2570元的有几笔？只返回笔数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='杭州市' AND o.paid_amount>2570",
+    "ordered": false,
+    "family": 2,
+    "ground_truth_result": [
+      {
+        "total": 443
+      }
+    ]
+  },
+  {
+    "id": "holdout-4-3-c",
+    "question": "服饰鞋包在售商品中，标价低于440元的有几个？只返回数量。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "服饰鞋包在售商品中，标价低于440元的有几个？只返回数量。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM products WHERE category='服饰鞋包' AND is_active=1 AND list_price<440",
+    "ordered": false,
+    "family": 3,
+    "ground_truth_result": [
+      {
+        "total": 92
+      }
+    ]
+  },
+  {
+    "id": "holdout-4-3-a",
+    "question": "服饰鞋包在售商品里便宜的有几个？只返回数量。",
+    "should_clarify": true,
+    "ambiguity_type": "filter",
+    "clarification_answer": "便宜指商品标价低于440元。",
+    "resolved_question": "服饰鞋包在售商品中，标价低于440元的有几个？只返回数量。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM products WHERE category='服饰鞋包' AND is_active=1 AND list_price<440",
+    "ordered": false,
+    "family": 3,
+    "ground_truth_result": [
+      {
+        "total": 92
+      }
+    ]
+  },
+  {
+    "id": "holdout-4-4-c",
+    "question": "杭州客户按有效订单数量从高到低取前8名，返回用户ID和订单数；相同数量按用户ID升序。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "杭州客户按有效订单数量从高到低取前8名，返回用户ID和订单数；相同数量按用户ID升序。",
+    "reference_sql": "SELECT u.user_id,COUNT(*) AS total FROM users u JOIN orders o ON o.user_id=u.user_id WHERE u.city='杭州市' AND o.order_status IN ('paid','completed','shipped') GROUP BY u.user_id ORDER BY total DESC,u.user_id ASC LIMIT 8",
+    "ordered": true,
+    "family": 4,
+    "ground_truth_result": [
+      {
+        "user_id": 2341,
+        "total": 21
+      },
+      {
+        "user_id": 2424,
+        "total": 21
+      },
+      {
+        "user_id": 1152,
+        "total": 19
+      },
+      {
+        "user_id": 2166,
+        "total": 17
+      },
+      {
+        "user_id": 1378,
+        "total": 16
+      },
+      {
+        "user_id": 198,
+        "total": 15
+      },
+      {
+        "user_id": 1168,
+        "total": 15
+      },
+      {
+        "user_id": 1488,
+        "total": 15
+      }
+    ]
+  },
+  {
+    "id": "holdout-4-4-a",
+    "question": "找出杭州表现最好的前8名客户，返回用户ID和表现指标，指标相同按用户ID升序。",
+    "should_clarify": true,
+    "ambiguity_type": "metric",
+    "clarification_answer": "表现按全部历史有效订单笔数衡量，从高到低排名。",
+    "resolved_question": "杭州客户按有效订单数量从高到低取前8名，返回用户ID和订单数；相同数量按用户ID升序。",
+    "reference_sql": "SELECT u.user_id,COUNT(*) AS total FROM users u JOIN orders o ON o.user_id=u.user_id WHERE u.city='杭州市' AND o.order_status IN ('paid','completed','shipped') GROUP BY u.user_id ORDER BY total DESC,u.user_id ASC LIMIT 8",
+    "ordered": true,
+    "family": 4,
+    "ground_truth_result": [
+      {
+        "user_id": 2341,
+        "total": 21
+      },
+      {
+        "user_id": 2424,
+        "total": 21
+      },
+      {
+        "user_id": 1152,
+        "total": 19
+      },
+      {
+        "user_id": 2166,
+        "total": 17
+      },
+      {
+        "user_id": 1378,
+        "total": 16
+      },
+      {
+        "user_id": 198,
+        "total": 15
+      },
+      {
+        "user_id": 1168,
+        "total": 15
+      },
+      {
+        "user_id": 1488,
+        "total": 15
+      }
+    ]
+  },
+  {
+    "id": "holdout-4-5-c",
+    "question": "服饰鞋包在2026-06-15到2026-09-11期间的已批准退款金额是多少？包含首尾日期，只返回金额。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "服饰鞋包在2026-06-15到2026-09-11期间的已批准退款金额是多少？包含首尾日期，只返回金额。",
+    "reference_sql": "SELECT ROUND(SUM(r.refund_amount),2) AS amount FROM refunds r JOIN products p ON r.product_id=p.product_id WHERE p.category='服饰鞋包' AND r.refund_status='approved' AND r.refund_date>='2026-06-15' AND r.refund_date<'2026-09-12'",
+    "ordered": false,
+    "family": 5,
+    "ground_truth_result": [
+      {
+        "amount": 17387.54
+      }
+    ]
+  },
+  {
+    "id": "holdout-4-5-a",
+    "question": "服饰鞋包近期批准了多少退款金额？只返回金额。",
+    "should_clarify": true,
+    "ambiguity_type": "time",
+    "clarification_answer": "退款日期从2026-06-15到2026-09-11，包含首尾日期。",
+    "resolved_question": "服饰鞋包在2026-06-15到2026-09-11期间的已批准退款金额是多少？包含首尾日期，只返回金额。",
+    "reference_sql": "SELECT ROUND(SUM(r.refund_amount),2) AS amount FROM refunds r JOIN products p ON r.product_id=p.product_id WHERE p.category='服饰鞋包' AND r.refund_status='approved' AND r.refund_date>='2026-06-15' AND r.refund_date<'2026-09-12'",
+    "ordered": false,
+    "family": 5,
+    "ground_truth_result": [
+      {
+        "amount": 17387.54
+      }
+    ]
+  },
+  {
+    "id": "holdout-4-6-c",
+    "question": "统计杭州客户的累计有效订单实付金额，只返回总金额。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "统计杭州客户的累计有效订单实付金额，只返回总金额。",
+    "reference_sql": "SELECT ROUND(SUM(o.paid_amount),2) AS amount FROM orders o JOIN users u ON o.user_id=u.user_id WHERE u.city='杭州市' AND o.order_status IN ('paid','completed','shipped')",
+    "ordered": false,
+    "family": 6,
+    "ground_truth_result": [
+      {
+        "amount": 3287398.68
+      }
+    ]
+  },
+  {
+    "id": "holdout-4-6-a",
+    "question": "统计长三角地区客户的累计有效订单实付金额，只返回总金额。",
+    "should_clarify": true,
+    "ambiguity_type": "entity",
+    "clarification_answer": "这次报表只统计客户城市为杭州的记录，不包含其他城市。",
+    "resolved_question": "统计杭州客户的累计有效订单实付金额，只返回总金额。",
+    "reference_sql": "SELECT ROUND(SUM(o.paid_amount),2) AS amount FROM orders o JOIN users u ON o.user_id=u.user_id WHERE u.city='杭州市' AND o.order_status IN ('paid','completed','shipped')",
+    "ordered": false,
+    "family": 6,
+    "ground_truth_result": [
+      {
+        "amount": 3287398.68
+      }
+    ]
+  },
+  {
+    "id": "holdout-4-7-c",
+    "question": "服饰鞋包中2026-08-01及以后上架的在售商品有多少个？只返回数量。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "服饰鞋包中2026-08-01及以后上架的在售商品有多少个？只返回数量。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM products WHERE category='服饰鞋包' AND is_active=1 AND launch_date>='2026-08-01'",
+    "ordered": false,
+    "family": 7,
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "holdout-4-7-a",
+    "question": "服饰鞋包目前在售的新品有多少个？只返回数量。",
+    "should_clarify": true,
+    "ambiguity_type": "business_definition",
+    "clarification_answer": "新品指2026-08-01及以后上架的商品。",
+    "resolved_question": "服饰鞋包中2026-08-01及以后上架的在售商品有多少个？只返回数量。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM products WHERE category='服饰鞋包' AND is_active=1 AND launch_date>='2026-08-01'",
+    "ordered": false,
+    "family": 7,
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "holdout-4-8-c",
+    "question": "杭州已注册客户中VIP有多少人？只返回人数。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "杭州已注册客户中VIP有多少人？只返回人数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='杭州市' AND is_vip=1",
+    "ordered": false,
+    "family": 8,
+    "ground_truth_result": [
+      {
+        "total": 52
+      }
+    ]
+  },
+  {
+    "id": "holdout-4-8-a",
+    "question": "杭州需要优先维护的客户有多少人？只返回人数。",
+    "should_clarify": true,
+    "ambiguity_type": "filter",
+    "clarification_answer": "优先维护的客户是is_vip=1的VIP，不加其他条件。",
+    "resolved_question": "杭州已注册客户中VIP有多少人？只返回人数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='杭州市' AND is_vip=1",
+    "ordered": false,
+    "family": 8,
+    "ground_truth_result": [
+      {
+        "total": 52
+      }
+    ]
+  },
+  {
+    "id": "holdout-4-9-c",
+    "question": "服饰鞋包最近89天（不含今天）的有效订单销量是多少？只返回件数。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "服饰鞋包最近89天（不含今天）的有效订单销量是多少？只返回件数。",
+    "reference_sql": "SELECT SUM(i.quantity) AS quantity FROM order_items i JOIN orders o ON i.order_id=o.order_id JOIN products p ON p.product_id=i.product_id WHERE o.order_status IN ('paid','completed','shipped') AND p.category='服饰鞋包' AND o.order_date >= '2026-06-15' AND o.order_date < '2026-09-12'",
+    "ordered": false,
+    "family": 9,
+    "ground_truth_result": [
+      {
+        "quantity": 728.0
+      }
+    ]
+  },
+  {
+    "id": "holdout-4-9-a",
+    "question": "服饰鞋包最近卖得怎么样？只要一个汇总值。",
+    "should_clarify": true,
+    "ambiguity_type": "multiple",
+    "clarification_answer": "统计最近89天、不含今天的有效订单销售数量，单位是件。",
+    "resolved_question": "服饰鞋包最近89天（不含今天）的有效订单销量是多少？只返回件数。",
+    "reference_sql": "SELECT SUM(i.quantity) AS quantity FROM order_items i JOIN orders o ON i.order_id=o.order_id JOIN products p ON p.product_id=i.product_id WHERE o.order_status IN ('paid','completed','shipped') AND p.category='服饰鞋包' AND o.order_date >= '2026-06-15' AND o.order_date < '2026-09-12'",
+    "ordered": false,
+    "family": 9,
+    "ground_truth_result": [
+      {
+        "quantity": 728.0
+      }
+    ]
+  },
+  {
+    "id": "holdout-4-10-c",
+    "question": "杭州所有历史有效订单的订单数是多少？只返回笔数。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "杭州所有历史有效订单的订单数是多少？只返回笔数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='杭州市'",
+    "ordered": false,
+    "family": 10,
+    "ground_truth_result": [
+      {
+        "total": 1275
+      }
+    ]
+  },
+  {
+    "id": "holdout-4-10-a",
+    "question": "给我杭州的有效订单规模，只返回一个总计数字。",
+    "should_clarify": true,
+    "ambiguity_type": "metric",
+    "clarification_answer": "规模指有效订单笔数，全部历史，不是金额或客户数。",
+    "resolved_question": "杭州所有历史有效订单的订单数是多少？只返回笔数。",
+    "reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='杭州市'",
+    "ordered": false,
+    "family": 10,
+    "ground_truth_result": [
+      {
+        "total": 1275
+      }
+    ]
+  },
+  {
+    "id": "holdout-4-11-c",
+    "question": "2026年第二季度服饰鞋包有效订单销售额是多少？按商品行实付金额统计，只返回总额。",
+    "should_clarify": false,
+    "ambiguity_type": "none",
+    "clarification_answer": null,
+    "resolved_question": "2026年第二季度服饰鞋包有效订单销售额是多少？按商品行实付金额统计，只返回总额。",
+    "reference_sql": "SELECT ROUND(SUM(i.item_amount),2) AS total FROM order_items i JOIN orders o ON o.order_id=i.order_id JOIN products p ON p.product_id=i.product_id WHERE o.order_status IN ('paid','completed','shipped') AND p.category='服饰鞋包' AND o.order_date>='2026-04-01' AND o.order_date<'2026-07-01'",
+    "ordered": false,
+    "family": 11,
+    "ground_truth_result": [
+      {
+        "total": 234717.44
+      }
+    ]
+  },
+  {
+    "id": "holdout-4-11-a",
+    "question": "帮我查下服饰鞋包那段时间的有效订单销售额，只返回总额。",
+    "should_clarify": true,
+    "ambiguity_type": "time",
+    "clarification_answer": "那段时间指2026年第二季度，即4月1日到6月30日。",
+    "resolved_question": "2026年第二季度服饰鞋包有效订单销售额是多少？按商品行实付金额统计，只返回总额。",
+    "reference_sql": "SELECT ROUND(SUM(i.item_amount),2) AS total FROM order_items i JOIN orders o ON o.order_id=i.order_id JOIN products p ON p.product_id=i.product_id WHERE o.order_status IN ('paid','completed','shipped') AND p.category='服饰鞋包' AND o.order_date>='2026-04-01' AND o.order_date<'2026-07-01'",
+    "ordered": false,
+    "family": 11,
+    "ground_truth_result": [
+      {
+        "total": 234717.44
+      }
+    ]
+  }
+]
