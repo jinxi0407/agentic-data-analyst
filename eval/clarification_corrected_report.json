@@ -1,0 +1,52 @@
+{
+  "count": 120,
+  "decision_accuracy": 84.17,
+  "precision": 100.0,
+  "recall": 73.33,
+  "f1": 84.62,
+  "unnecessary_clarification_rate": 0.0,
+  "missed_clarification_rate": 26.67,
+  "clear_query_e2e_accuracy": 61.67,
+  "post_clarification_e2e_accuracy": 31.67,
+  "overall_interactive_success_rate": 46.67,
+  "overall_result_accuracy": 51.67,
+  "trigger_rate": 36.67,
+  "average_first_turn_latency_s": 5.046,
+  "average_total_latency_s": 7.046,
+  "average_resolved_total_latency_s": 8.943,
+  "baseline_e2e_accuracy": 39.17,
+  "baseline_average_latency_s": 2.053,
+  "baseline_clear_accuracy": 58.33,
+  "baseline_ambiguous_accuracy": 20.0,
+  "confusion": {
+    "tp": 44,
+    "fp": 0,
+    "fn": 16,
+    "tn": 57
+  },
+  "service_failures": 3,
+  "note": "All intended ambiguous cases form the post-clarification denominator. Interactive success requires clarification for ambiguous inputs plus correct final results; lucky guesses are only included in overall_result_accuracy. Clear unexpected clarification has no simulated answer and fails.",
+  "answered_ambiguous_subset_result_accuracy": {
+    "numerator": 19,
+    "denominator": 40,
+    "percent": 47.5
+  },
+  "gate_accepted_ambiguous_subset_result_accuracy": {
+    "numerator": 19,
+    "denominator": 40,
+    "percent": 47.5
+  },
+  "gate_accepted_subset_definition": "Originally ambiguous, received a question-scoped simulated answer, second gate returned proceed; SQL failures remain in denominator.",
+  "all_ambiguous_task_success": {
+    "numerator": 19,
+    "denominator": 60,
+    "percent": 31.67
+  },
+  "v1_0_total_correct": 47,
+  "v1_1_total_result_correct": 62,
+  "v1_1_interactive_success_count": 56,
+  "unanswerable_followups": 4,
+  "v1_0_median_latency_s": 2.026,
+  "v1_1_median_total_latency_s": 6.655,
+  "latency_note": "Only system call durations; manual simulated-user review/thinking and time between phases are excluded. Two workers, same host and database."
+}

@@ -95,6 +95,37 @@
         "latency_ms": 2941.59
       },
       "elapsed_s": 2.941603
+    },
+    "v1_1_followup": {
+      "phase_state": "complete",
+      "payload": {
+        "question": "上海最近新注册了多少客户？只返回人数。",
+        "engine": "Production NL2SQL Engine",
+        "sql": "SELECT COUNT(*) AS user_count FROM users WHERE city = '上海' AND register_date >= DATE_SUB('2026-09-12', INTERVAL '19' DAY) AND register_date < '2026-09-12' LIMIT 200",
+        "result": [
+          {
+            "user_count": 0
+          }
+        ],
+        "retry_count": 0,
+        "trace": [
+          {
+            "stage": "clarification",
+            "status": "proceed"
+          },
+          {
+            "stage": "execute",
+            "status": "success"
+          }
+        ],
+        "needs_clarification": false,
+        "normalized_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：上海最近新注册了多少用户？只返回人数。\n澄清问题：上海最近新注册用户的时间范围是指：A) 最近7天 B) 最近30天 C) 本月 D) 其他（请说明）？\n用户澄清回答：最近19天，不含今天",
+        "error": "",
+        "status": "success",
+        "latency_ms": 5896.71,
+        "resolved_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：上海最近新注册了多少客户？只返回人数。\n澄清问题：上海最近新注册客户的时间范围是指：A) 最近7天 B) 最近30天 C) 本月 D) 其他（请说明）？\n用户澄清回答：最近19天，不含今天"
+      },
+      "elapsed_s": 5.900084
     }
   },
   "holdout-0-1-c": {
@@ -322,6 +353,37 @@
         "latency_ms": 3424.85
       },
       "elapsed_s": 3.424872
+    },
+    "v1_1_followup": {
+      "phase_state": "complete",
+      "payload": {
+        "question": "上海客户的有效订单里有多少大额订单？只返回笔数。",
+        "engine": "Production NL2SQL Engine",
+        "sql": "SELECT COUNT(*) AS order_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '上海' AND o.order_status IN ('paid', 'completed', 'shipped') AND o.paid_amount > 850 LIMIT 200",
+        "result": [
+          {
+            "order_count": 0
+          }
+        ],
+        "retry_count": 0,
+        "trace": [
+          {
+            "stage": "clarification",
+            "status": "proceed"
+          },
+          {
+            "stage": "execute",
+            "status": "success"
+          }
+        ],
+        "needs_clarification": false,
+        "normalized_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：上海用户的有效订单里有多少大额订单？只返回笔数。\n澄清问题：‘大额订单’指单笔订单销售额超过多少元？例如：300元、500元、1000元，或其他标准？\n用户澄清回答：单笔实付金额超过850元",
+        "error": "",
+        "status": "success",
+        "latency_ms": 6039.73,
+        "resolved_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：上海客户的有效订单里有多少大额订单？只返回笔数。\n澄清问题：‘大额订单’指单笔订单实收金额超过多少元？例如：300元、500元、1000元，或其他标准？\n用户澄清回答：单笔实付金额超过850元"
+      },
+      "elapsed_s": 6.039747
     }
   },
   "holdout-0-3-c": {
@@ -435,6 +497,37 @@
         "latency_ms": 4054.76
       },
       "elapsed_s": 4.05478
+    },
+    "v1_1_followup": {
+      "phase_state": "complete",
+      "payload": {
+        "question": "食品生鲜在售商品里便宜的有几个？只返回数量。",
+        "engine": "Production NL2SQL Engine",
+        "sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '食品生鲜' AND is_active = 1 AND list_price < 120 LIMIT 200",
+        "result": [
+          {
+            "product_count": 56
+          }
+        ],
+        "retry_count": 0,
+        "trace": [
+          {
+            "stage": "clarification",
+            "status": "proceed"
+          },
+          {
+            "stage": "execute",
+            "status": "success"
+          }
+        ],
+        "needs_clarification": false,
+        "normalized_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：食品生鲜在售商品里便宜的有几个？只返回数量。\n澄清问题：‘便宜的’是指：① 全站价格最低的前10个；② 单价低于食品生鲜类平均价；③ 单价低于30元；④ 其他标准？\n用户澄清回答：商品标价低于120元",
+        "error": "",
+        "status": "success",
+        "latency_ms": 4593.87,
+        "resolved_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：食品生鲜在售商品里便宜的有几个？只返回数量。\n澄清问题：‘便宜的’是指：① 全站价格最低的前10个；② 单价低于食品生鲜类平均价；③ 单价低于30元；④ 其他标准？\n用户澄清回答：商品标价低于120元"
+      },
+      "elapsed_s": 4.5939
     }
   },
   "holdout-0-4-c": {
@@ -536,6 +629,33 @@
         "latency_ms": 3690.15
       },
       "elapsed_s": 3.690163
+    },
+    "v1_1_followup": {
+      "phase_state": "complete",
+      "payload": {
+        "question": "找出上海表现最好的前4名客户，返回用户ID和表现指标，指标相同按用户ID升序。",
+        "engine": "Production NL2SQL Engine",
+        "sql": "SELECT u.user_id, COUNT(o.order_id) AS order_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '上海' AND o.order_status IN ('paid', 'completed', 'shipped') AND o.order_date <= '2026-09-12' GROUP BY u.user_id ORDER BY order_count DESC, u.user_id ASC LIMIT 4",
+        "result": [],
+        "retry_count": 0,
+        "trace": [
+          {
+            "stage": "clarification",
+            "status": "proceed"
+          },
+          {
+            "stage": "execute",
+            "status": "success"
+          }
+        ],
+        "needs_clarification": false,
+        "normalized_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：找出上海表现最好的前4名用户，返回用户ID和表现指标，指标相同按用户ID升序。\n澄清问题：用户‘表现最好’具体指哪项指标？选项：A) 总销售额（paid_amount） B) 总销量（quantity） C) 有效订单数 D) 近30天复购次数\n用户澄清回答：有效订单笔数",
+        "error": "",
+        "status": "success",
+        "latency_ms": 6290.37,
+        "resolved_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：找出上海表现最好的前4名客户，返回用户ID和表现指标，指标相同按用户ID升序。\n澄清问题：客户‘表现最好’具体指哪项指标？选项：A) 总销售额（paid_amount） B) 总销售数量（quantity） C) 有效订单数 D) 近30天复购次数\n用户澄清回答：有效订单笔数"
+      },
+      "elapsed_s": 6.290402
     }
   },
   "holdout-0-5-c": {
@@ -649,6 +769,37 @@
         "latency_ms": 2619.25
       },
       "elapsed_s": 2.619263
+    },
+    "v1_1_followup": {
+      "phase_state": "complete",
+      "payload": {
+        "question": "食品生鲜近期批准了多少退款金额？只返回金额。",
+        "engine": "Production NL2SQL Engine",
+        "sql": "SELECT ROUND(SUM(r.refund_amount), 2) AS refund_amount FROM refunds AS r JOIN order_items AS oi ON r.order_item_id = oi.order_item_id JOIN products AS p ON oi.product_id = p.product_id WHERE r.refund_status = 'approved' AND p.category = '食品生鲜' AND r.refund_date BETWEEN '2026-08-24' AND '2026-09-11' LIMIT 200",
+        "result": [
+          {
+            "refund_amount": 939.52
+          }
+        ],
+        "retry_count": 0,
+        "trace": [
+          {
+            "stage": "clarification",
+            "status": "proceed"
+          },
+          {
+            "stage": "execute",
+            "status": "success"
+          }
+        ],
+        "needs_clarification": false,
+        "normalized_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：食品生鲜近期批准了多少退款金额？只返回金额。\n澄清问题：‘近期’具体指最近几天？例如：3天、7天、15天或30天？\n用户澄清回答：2026-08-24到2026-09-11，包含首尾日期",
+        "error": "",
+        "status": "success",
+        "latency_ms": 6412.14,
+        "resolved_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：食品生鲜近期批准了多少退款金额？只返回金额。\n澄清问题：‘近期’具体指最近几天？例如：3天、7天、15天或30天？\n用户澄清回答：2026-08-24到2026-09-11，包含首尾日期"
+      },
+      "elapsed_s": 6.412193
     }
   },
   "holdout-0-6-c": {
@@ -762,6 +913,14 @@
         "latency_ms": 3701.54
       },
       "elapsed_s": 3.701557
+    },
+    "v1_1_followup": {
+      "phase_state": "complete",
+      "elapsed_s": 0,
+      "payload": {
+        "status": "simulated_answer_unavailable",
+        "result": []
+      }
     }
   },
   "holdout-0-7-c": {
@@ -989,6 +1148,37 @@
         "latency_ms": 4065.21
       },
       "elapsed_s": 4.065235
+    },
+    "v1_1_followup": {
+      "phase_state": "complete",
+      "payload": {
+        "question": "上海需要优先维护的客户有多少人？只返回人数。",
+        "engine": "Production NL2SQL Engine",
+        "sql": "SELECT COUNT(*) AS user_count FROM users WHERE city = '上海' AND is_vip = 1 LIMIT 200",
+        "result": [
+          {
+            "user_count": 0
+          }
+        ],
+        "retry_count": 0,
+        "trace": [
+          {
+            "stage": "clarification",
+            "status": "proceed"
+          },
+          {
+            "stage": "execute",
+            "status": "success"
+          }
+        ],
+        "needs_clarification": false,
+        "normalized_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：上海需要优先维护的用户有多少人？只返回人数。\n澄清问题：‘需要优先维护的用户’依据什么标准判定？例如：① VIP用户（is_vip=1）；② 近30天销售额前10%的用户；③ 有退款记录且退款率>10%的用户；④ 其他标准？\n用户澄清回答：is_vip=1的VIP",
+        "error": "",
+        "status": "success",
+        "latency_ms": 3973.91,
+        "resolved_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：上海需要优先维护的客户有多少人？只返回人数。\n澄清问题：‘需要优先维护的客户’依据什么标准判定？例如：① VIP客户（is_vip=1）；② 近30天销售额前10%的客户；③ 有退款记录且退款率>10%的客户；④ 其他标准？\n用户澄清回答：is_vip=1的VIP"
+      },
+      "elapsed_s": 3.97396
     }
   },
   "holdout-0-9-c": {
@@ -1102,6 +1292,37 @@
         "latency_ms": 2925.32
       },
       "elapsed_s": 2.925339
+    },
+    "v1_1_followup": {
+      "phase_state": "complete",
+      "payload": {
+        "question": "食品生鲜最近卖得怎么样？只要一个汇总值。",
+        "engine": "Production NL2SQL Engine",
+        "sql": "SELECT SUM(oi.quantity) AS sales_quantity FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '食品生鲜' AND o.order_date >= DATE_SUB('2026-09-12', INTERVAL '7' DAY) LIMIT 200",
+        "result": [
+          {
+            "sales_quantity": 688.0
+          }
+        ],
+        "retry_count": 0,
+        "trace": [
+          {
+            "stage": "clarification",
+            "status": "proceed"
+          },
+          {
+            "stage": "execute",
+            "status": "success"
+          }
+        ],
+        "needs_clarification": false,
+        "normalized_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：食品生鲜最近卖得怎么样？只要一个汇总值。\n澄清问题：食品生鲜的‘卖得怎么样’是指：A) 销售额（销售额） B) 销量（销量） C) 有效订单数？\n用户澄清回答：有效订单销量，单位是件",
+        "error": "",
+        "status": "success",
+        "latency_ms": 5747.72,
+        "resolved_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：食品生鲜最近卖得怎么样？只要一个汇总值。\n澄清问题：食品生鲜的‘卖得怎么样’是指：A) 销售额（实收金额） B) 销售数量（销量） C) 有效订单数？\n用户澄清回答：有效订单销售数量，单位是件"
+      },
+      "elapsed_s": 5.747763
     }
   },
   "holdout-0-10-c": {
@@ -1329,6 +1550,37 @@
         "latency_ms": 4305.71
       },
       "elapsed_s": 4.305731
+    },
+    "v1_1_followup": {
+      "phase_state": "complete",
+      "payload": {
+        "question": "帮我查下食品生鲜那段时间的有效订单销售额，只返回总额。",
+        "engine": "Production NL2SQL Engine",
+        "sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '食品生鲜' AND o.order_date BETWEEN '2026-04-01' AND '2026-06-30' LIMIT 200",
+        "result": [
+          {
+            "sales_amount": 1090571.41
+          }
+        ],
+        "retry_count": 0,
+        "trace": [
+          {
+            "stage": "clarification",
+            "status": "proceed"
+          },
+          {
+            "stage": "execute",
+            "status": "success"
+          }
+        ],
+        "needs_clarification": false,
+        "normalized_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：帮我查下食品生鲜那段时间的有效订单销售额，只返回总额。\n澄清问题：‘那段时间’具体指？A) 过去7天（2026-09-06至2026-09-12） B) 过去30天 C) 本月（2026-09-01至2026-09-12） D) 其他指定区间\n用户澄清回答：2026年第二季度，即4月1日到6月30日",
+        "error": "",
+        "status": "success",
+        "latency_ms": 8154.32,
+        "resolved_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：帮我查下食品生鲜那段时间的有效订单销售额，只返回总额。\n澄清问题：‘那段时间’具体指？A) 过去7天（2026-09-06至2026-09-12） B) 过去30天 C) 本月（2026-09-01至2026-09-12） D) 其他指定区间\n用户澄清回答：2026年第二季度，即4月1日到6月30日"
+      },
+      "elapsed_s": 8.154363
     }
   },
   "holdout-1-0-c": {
@@ -1442,6 +1694,37 @@
         "latency_ms": 2638.79
       },
       "elapsed_s": 2.638806
+    },
+    "v1_1_followup": {
+      "phase_state": "complete",
+      "payload": {
+        "question": "北京最近新注册了多少客户？只返回人数。",
+        "engine": "Production NL2SQL Engine",
+        "sql": "SELECT COUNT(*) AS user_count FROM users WHERE city = '北京' AND register_date >= DATE_SUB('2026-09-12', INTERVAL '37' DAY) AND register_date < '2026-09-12' LIMIT 200",
+        "result": [
+          {
+            "user_count": 0
+          }
+        ],
+        "retry_count": 0,
+        "trace": [
+          {
+            "stage": "clarification",
+            "status": "proceed"
+          },
+          {
+            "stage": "execute",
+            "status": "success"
+          }
+        ],
+        "needs_clarification": false,
+        "normalized_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：北京最近新注册了多少用户？只返回人数。\n澄清问题：‘最近’指最近多少天？（例如：7天、15天、30天）\n用户澄清回答：最近37天，不含今天",
+        "error": "",
+        "status": "success",
+        "latency_ms": 5973.99,
+        "resolved_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：北京最近新注册了多少客户？只返回人数。\n澄清问题：‘最近’指最近多少天？（例如：7天、15天、30天）\n用户澄清回答：最近37天，不含今天"
+      },
+      "elapsed_s": 5.974034
     }
   },
   "holdout-1-1-c": {
@@ -1669,6 +1952,37 @@
         "latency_ms": 3265.07
       },
       "elapsed_s": 3.265111
+    },
+    "v1_1_followup": {
+      "phase_state": "complete",
+      "payload": {
+        "question": "北京客户的有效订单里有多少大额订单？只返回笔数。",
+        "engine": "Production NL2SQL Engine",
+        "sql": "SELECT COUNT(*) AS order_count FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.city = '北京' AND o.paid_amount > 1280 LIMIT 200",
+        "result": [
+          {
+            "order_count": 0
+          }
+        ],
+        "retry_count": 0,
+        "trace": [
+          {
+            "stage": "clarification",
+            "status": "proceed"
+          },
+          {
+            "stage": "execute",
+            "status": "success"
+          }
+        ],
+        "needs_clarification": false,
+        "normalized_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：北京用户的有效订单里有多少大额订单？只返回笔数。\n澄清问题：‘大额订单’指单笔订单销售额超过多少元？例如：300元、500元，还是其他数值？\n用户澄清回答：单笔实付金额超过1280元",
+        "error": "",
+        "status": "success",
+        "latency_ms": 8495.83,
+        "resolved_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：北京客户的有效订单里有多少大额订单？只返回笔数。\n澄清问题：‘大额订单’指单笔订单实收金额超过多少元？例如：300元、500元，还是其他数值？\n用户澄清回答：单笔实付金额超过1280元"
+      },
+      "elapsed_s": 8.49587
     }
   },
   "holdout-1-3-c": {
@@ -1782,6 +2096,37 @@
         "latency_ms": 3582.54
       },
       "elapsed_s": 3.582554
+    },
+    "v1_1_followup": {
+      "phase_state": "complete",
+      "payload": {
+        "question": "运动户外在售商品里便宜的有几个？只返回数量。",
+        "engine": "Production NL2SQL Engine",
+        "sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '运动户外' AND is_active = 1 AND list_price < 200 LIMIT 200",
+        "result": [
+          {
+            "product_count": 7
+          }
+        ],
+        "retry_count": 0,
+        "trace": [
+          {
+            "stage": "clarification",
+            "status": "proceed"
+          },
+          {
+            "stage": "execute",
+            "status": "success"
+          }
+        ],
+        "needs_clarification": false,
+        "normalized_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：运动户外在售商品里便宜的有几个？只返回数量。\n澄清问题：便宜的指：A) list_price最低的前N个（请指定N） B) list_price低于某个数值（请指定阈值） C) cost_price最低的前N个 D) 其他标准？\n用户澄清回答：商品标价低于200元",
+        "error": "",
+        "status": "success",
+        "latency_ms": 4272.57,
+        "resolved_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：运动户外在售商品里便宜的有几个？只返回数量。\n澄清问题：便宜的指：A) list_price最低的前N个（请指定N） B) list_price低于某个数值（请指定阈值） C) cost_price最低的前N个 D) 其他标准？\n用户澄清回答：商品标价低于200元"
+      },
+      "elapsed_s": 4.272601
     }
   },
   "holdout-1-4-c": {
@@ -1883,6 +2228,33 @@
         "latency_ms": 3669.53
       },
       "elapsed_s": 3.669554
+    },
+    "v1_1_followup": {
+      "phase_state": "complete",
+      "payload": {
+        "question": "找出北京表现最好的前5名客户，返回用户ID和表现指标，指标相同按用户ID升序。",
+        "engine": "Production NL2SQL Engine",
+        "sql": "SELECT u.user_id, COUNT(o.order_id) AS order_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '北京' AND o.order_status IN ('paid', 'completed', 'shipped') AND o.order_date >= DATE_SUB('2026-09-12', INTERVAL '30' DAY) GROUP BY u.user_id ORDER BY order_count DESC, u.user_id ASC LIMIT 5",
+        "result": [],
+        "retry_count": 0,
+        "trace": [
+          {
+            "stage": "clarification",
+            "status": "proceed"
+          },
+          {
+            "stage": "execute",
+            "status": "success"
+          }
+        ],
+        "needs_clarification": false,
+        "normalized_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：找出北京表现最好的前5名用户，返回用户ID和表现指标，指标相同按用户ID升序。\n澄清问题：用户‘表现最好’具体指：A) 总销售额（paid_amount） B) 总订单数 C) 总购买商品数量 D) 近30天复购次数？\n用户澄清回答：有效订单笔数",
+        "error": "",
+        "status": "success",
+        "latency_ms": 6847.68,
+        "resolved_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：找出北京表现最好的前5名客户，返回用户ID和表现指标，指标相同按用户ID升序。\n澄清问题：客户‘表现最好’具体指：A) 总销售额（paid_amount） B) 总订单数 C) 总购买商品数量 D) 近30天复购次数？\n用户澄清回答：有效订单笔数"
+      },
+      "elapsed_s": 6.847708
     }
   },
   "holdout-1-5-c": {
@@ -1996,6 +2368,37 @@
         "latency_ms": 2267.94
       },
       "elapsed_s": 2.267949
+    },
+    "v1_1_followup": {
+      "phase_state": "complete",
+      "payload": {
+        "question": "运动户外近期批准了多少退款金额？只返回金额。",
+        "engine": "Production NL2SQL Engine",
+        "sql": "SELECT ROUND(SUM(r.refund_amount), 2) AS refund_amount FROM refunds AS r JOIN order_items AS oi ON r.order_item_id = oi.order_item_id JOIN products AS p ON oi.product_id = p.product_id WHERE r.refund_status = 'approved' AND p.category = '运动户外' AND r.refund_date BETWEEN '2026-08-06' AND '2026-09-11' LIMIT 200",
+        "result": [
+          {
+            "refund_amount": 7018.61
+          }
+        ],
+        "retry_count": 0,
+        "trace": [
+          {
+            "stage": "clarification",
+            "status": "proceed"
+          },
+          {
+            "stage": "execute",
+            "status": "success"
+          }
+        ],
+        "needs_clarification": false,
+        "normalized_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：运动户外近期批准了多少退款金额？只返回金额。\n澄清问题：‘近期’指最近7天、15天还是30天？\n用户澄清回答：2026-08-06到2026-09-11，包含首尾日期",
+        "error": "",
+        "status": "success",
+        "latency_ms": 6514.74,
+        "resolved_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：运动户外近期批准了多少退款金额？只返回金额。\n澄清问题：‘近期’指最近7天、15天还是30天？\n用户澄清回答：2026-08-06到2026-09-11，包含首尾日期"
+      },
+      "elapsed_s": 6.514764
     }
   },
   "holdout-1-6-c": {
@@ -2109,6 +2512,14 @@
         "latency_ms": 4205.64
       },
       "elapsed_s": 4.20566
+    },
+    "v1_1_followup": {
+      "phase_state": "complete",
+      "elapsed_s": 0,
+      "payload": {
+        "status": "simulated_answer_unavailable",
+        "result": []
+      }
     }
   },
   "holdout-1-7-c": {
@@ -2336,6 +2747,37 @@
         "latency_ms": 3972.57
       },
       "elapsed_s": 3.972584
+    },
+    "v1_1_followup": {
+      "phase_state": "complete",
+      "payload": {
+        "question": "北京需要优先维护的客户有多少人？只返回人数。",
+        "engine": "Production NL2SQL Engine",
+        "sql": "SELECT COUNT(*) AS user_count FROM users WHERE city = '北京' AND is_vip = 1 LIMIT 200",
+        "result": [
+          {
+            "user_count": 0
+          }
+        ],
+        "retry_count": 0,
+        "trace": [
+          {
+            "stage": "clarification",
+            "status": "proceed"
+          },
+          {
+            "stage": "execute",
+            "status": "success"
+          }
+        ],
+        "needs_clarification": false,
+        "normalized_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：北京需要优先维护的用户有多少人？只返回人数。\n澄清问题：‘需要优先维护的用户’依据什么标准判定？例如：VIP用户、近30天销售额前10%、近30天退款率>15%、注册超1年未下单、或最近一次下单距今>90天？\n用户澄清回答：is_vip=1的VIP",
+        "error": "",
+        "status": "success",
+        "latency_ms": 4598.93,
+        "resolved_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：北京需要优先维护的客户有多少人？只返回人数。\n澄清问题：‘需要优先维护的客户’依据什么标准判定？例如：VIP用户、近30天销售额前10%、近30天退款率>15%、注册超1年未下单、或最近一次下单距今>90天？\n用户澄清回答：is_vip=1的VIP"
+      },
+      "elapsed_s": 4.598978
     }
   },
   "holdout-1-9-c": {
@@ -2434,6 +2876,37 @@
         "latency_ms": 2924.11
       },
       "elapsed_s": 2.924131
+    },
+    "v1_1_followup": {
+      "phase_state": "complete",
+      "payload": {
+        "question": "运动户外最近卖得怎么样？只要一个汇总值。",
+        "engine": "Production NL2SQL Engine",
+        "sql": "SELECT ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '运动户外' AND o.order_date >= DATE_SUB('2026-09-12', INTERVAL '37' DAY) AND o.order_date < '2026-09-12' LIMIT 200",
+        "result": [
+          {
+            "sales_amount": 150448.92
+          }
+        ],
+        "retry_count": 0,
+        "trace": [
+          {
+            "stage": "clarification",
+            "status": "proceed"
+          },
+          {
+            "stage": "execute",
+            "status": "success"
+          }
+        ],
+        "needs_clarification": false,
+        "normalized_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：运动户外最近卖得怎么样？只要一个汇总值。\n澄清问题：运动户外的销售汇总值应统计最近多少天？（选项：7天、15天、30天、90天）\n用户澄清回答：最近37天、不含今天",
+        "error": "",
+        "status": "success",
+        "latency_ms": 6862.78,
+        "resolved_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：运动户外最近卖得怎么样？只要一个汇总值。\n澄清问题：运动户外的销售汇总值应统计最近多少天？（选项：7天、15天、30天、90天）\n用户澄清回答：最近37天、不含今天"
+      },
+      "elapsed_s": 6.862811
     }
   },
   "holdout-1-10-c": {
@@ -2661,6 +3134,37 @@
         "latency_ms": 3348.75
       },
       "elapsed_s": 3.348779
+    },
+    "v1_1_followup": {
+      "phase_state": "complete",
+      "payload": {
+        "question": "帮我查下运动户外那段时间的有效订单销售额，只返回总额。",
+        "engine": "Production NL2SQL Engine",
+        "sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '运动户外' AND o.order_date BETWEEN '2026-04-01' AND '2026-06-30' LIMIT 200",
+        "result": [
+          {
+            "sales_amount": 981286.33
+          }
+        ],
+        "retry_count": 0,
+        "trace": [
+          {
+            "stage": "clarification",
+            "status": "proceed"
+          },
+          {
+            "stage": "execute",
+            "status": "success"
+          }
+        ],
+        "needs_clarification": false,
+        "normalized_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：帮我查下运动户外那段时间的有效订单销售额，只返回总额。\n澄清问题：请问'那段时间'具体指哪一时间段？例如：近7天、近30天、本月、上月，还是其他自定义区间？\n用户澄清回答：2026年第二季度，即4月1日到6月30日",
+        "error": "",
+        "status": "success",
+        "latency_ms": 7442.99,
+        "resolved_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：帮我查下运动户外那段时间的有效订单销售额，只返回总额。\n澄清问题：请问'那段时间'具体指哪一时间段？例如：近7天、近30天、本月、上月，还是其他自定义区间？\n用户澄清回答：2026年第二季度，即4月1日到6月30日"
+      },
+      "elapsed_s": 7.443024
     }
   },
   "holdout-2-0-c": {
@@ -2774,6 +3278,37 @@
         "latency_ms": 3055.63
       },
       "elapsed_s": 3.055638
+    },
+    "v1_1_followup": {
+      "phase_state": "complete",
+      "payload": {
+        "question": "广州最近新注册了多少客户？只返回人数。",
+        "engine": "Production NL2SQL Engine",
+        "sql": "SELECT COUNT(*) AS user_count FROM users WHERE city = '广州' AND register_date >= DATE_SUB('2026-09-12', INTERVAL '53' DAY) AND register_date < '2026-09-12' LIMIT 200",
+        "result": [
+          {
+            "user_count": 0
+          }
+        ],
+        "retry_count": 0,
+        "trace": [
+          {
+            "stage": "clarification",
+            "status": "proceed"
+          },
+          {
+            "stage": "execute",
+            "status": "success"
+          }
+        ],
+        "needs_clarification": false,
+        "normalized_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：广州最近新注册了多少用户？只返回人数。\n澄清问题：广州最近新注册用户的时间范围是？选项：A) 过去7天  B) 过去30天  C) 本月至今  D) 本季度至今\n用户澄清回答：最近53天，不含今天",
+        "error": "",
+        "status": "success",
+        "latency_ms": 6055.63,
+        "resolved_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：广州最近新注册了多少客户？只返回人数。\n澄清问题：广州最近新注册客户的时间范围是？选项：A) 过去7天  B) 过去30天  C) 本月至今  D) 本季度至今\n用户澄清回答：最近53天，不含今天"
+      },
+      "elapsed_s": 6.055689
     }
   },
   "holdout-2-1-c": {
@@ -3001,6 +3536,37 @@
         "latency_ms": 3178.78
       },
       "elapsed_s": 3.178795
+    },
+    "v1_1_followup": {
+      "phase_state": "complete",
+      "payload": {
+        "question": "广州客户的有效订单里有多少大额订单？只返回笔数。",
+        "engine": "Production NL2SQL Engine",
+        "sql": "SELECT COUNT(*) AS order_count FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE u.city = '广州' AND o.order_status IN ('paid', 'completed', 'shipped') AND o.paid_amount > 1710 LIMIT 200",
+        "result": [
+          {
+            "order_count": 0
+          }
+        ],
+        "retry_count": 0,
+        "trace": [
+          {
+            "stage": "clarification",
+            "status": "proceed"
+          },
+          {
+            "stage": "execute",
+            "status": "success"
+          }
+        ],
+        "needs_clarification": false,
+        "normalized_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：广州用户的有效订单里有多少大额订单？只返回笔数。\n澄清问题：‘大额订单’指单笔订单销售额超过多少元？例如：300元、500元，还是其他数值？\n用户澄清回答：单笔实付金额超过1710元",
+        "error": "",
+        "status": "success",
+        "latency_ms": 5101.7,
+        "resolved_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：广州客户的有效订单里有多少大额订单？只返回笔数。\n澄清问题：‘大额订单’指单笔订单实收金额超过多少元？例如：300元、500元，还是其他数值？\n用户澄清回答：单笔实付金额超过1710元"
+      },
+      "elapsed_s": 5.101725
     }
   },
   "holdout-2-3-c": {
@@ -3114,6 +3680,37 @@
         "latency_ms": 3840.69
       },
       "elapsed_s": 3.840702
+    },
+    "v1_1_followup": {
+      "phase_state": "complete",
+      "payload": {
+        "question": "美妆个护在售商品里便宜的有几个？只返回数量。",
+        "engine": "Production NL2SQL Engine",
+        "sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '美妆个护' AND is_active = 1 AND list_price < 280 LIMIT 200",
+        "result": [
+          {
+            "product_count": 85
+          }
+        ],
+        "retry_count": 0,
+        "trace": [
+          {
+            "stage": "clarification",
+            "status": "proceed"
+          },
+          {
+            "stage": "execute",
+            "status": "success"
+          }
+        ],
+        "needs_clarification": false,
+        "normalized_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：美妆个护在售商品里便宜的有几个？只返回数量。\n澄清问题：美妆个护在售商品中‘便宜’的定义是：A) 单价低于品类平均价，B) 单价低于100元，C) 单价处于该品类最低20%分位，D) 其他标准？\n用户澄清回答：商品标价低于280元",
+        "error": "",
+        "status": "success",
+        "latency_ms": 4684.2,
+        "resolved_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：美妆个护在售商品里便宜的有几个？只返回数量。\n澄清问题：美妆个护在售商品中‘便宜’的定义是：A) 单价低于品类平均价，B) 单价低于100元，C) 单价处于该品类最低20%分位，D) 其他标准？\n用户澄清回答：商品标价低于280元"
+      },
+      "elapsed_s": 4.684235
     }
   },
   "holdout-2-4-c": {
@@ -3215,6 +3812,33 @@
         "latency_ms": 3661.31
       },
       "elapsed_s": 3.661321
+    },
+    "v1_1_followup": {
+      "phase_state": "complete",
+      "payload": {
+        "question": "找出广州表现最好的前6名客户，返回用户ID和表现指标，指标相同按用户ID升序。",
+        "engine": "Production NL2SQL Engine",
+        "sql": "SELECT u.user_id, COUNT(o.order_id) AS order_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '广州' AND o.order_status IN ('paid', 'completed', 'shipped') AND o.order_date >= DATE_SUB('2026-09-12', INTERVAL '30' DAY) GROUP BY u.user_id ORDER BY order_count DESC, u.user_id ASC LIMIT 6",
+        "result": [],
+        "retry_count": 0,
+        "trace": [
+          {
+            "stage": "clarification",
+            "status": "proceed"
+          },
+          {
+            "stage": "execute",
+            "status": "success"
+          }
+        ],
+        "needs_clarification": false,
+        "normalized_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：找出广州表现最好的前6名用户，返回用户ID和表现指标，指标相同按用户ID升序。\n澄清问题：用户‘表现最好’是指：A) 总销售额最高；B) 总订单数最多；C) 近30天复购次数最多；D) VIP等级最高（black > gold > silver > normal）？\n用户澄清回答：有效订单笔数",
+        "error": "",
+        "status": "success",
+        "latency_ms": 6221.74,
+        "resolved_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：找出广州表现最好的前6名客户，返回用户ID和表现指标，指标相同按用户ID升序。\n澄清问题：客户‘表现最好’是指：A) 总销售额最高；B) 总订单数最多；C) 近30天复购次数最多；D) VIP等级最高（black > gold > silver > normal）？\n用户澄清回答：有效订单笔数"
+      },
+      "elapsed_s": 6.221761
     }
   },
   "holdout-2-5-c": {
@@ -3328,6 +3952,37 @@
         "latency_ms": 2627.38
       },
       "elapsed_s": 2.627396
+    },
+    "v1_1_followup": {
+      "phase_state": "complete",
+      "payload": {
+        "question": "美妆个护近期批准了多少退款金额？只返回金额。",
+        "engine": "Production NL2SQL Engine",
+        "sql": "SELECT ROUND(SUM(r.refund_amount), 2) AS refund_amount FROM refunds AS r JOIN order_items AS oi ON r.order_item_id = oi.order_item_id JOIN products AS p ON oi.product_id = p.product_id WHERE r.refund_status = 'approved' AND p.category = '美妆个护' AND r.refund_date BETWEEN '2026-07-21' AND '2026-09-11' LIMIT 200",
+        "result": [
+          {
+            "refund_amount": 11647.04
+          }
+        ],
+        "retry_count": 0,
+        "trace": [
+          {
+            "stage": "clarification",
+            "status": "proceed"
+          },
+          {
+            "stage": "execute",
+            "status": "success"
+          }
+        ],
+        "needs_clarification": false,
+        "normalized_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：美妆个护近期批准了多少退款金额？只返回金额。\n澄清问题：‘近期’具体指最近几天？例如：7天、15天、30天？\n用户澄清回答：2026-07-21到2026-09-11，包含首尾日期",
+        "error": "",
+        "status": "success",
+        "latency_ms": 6544.39,
+        "resolved_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：美妆个护近期批准了多少退款金额？只返回金额。\n澄清问题：‘近期’具体指最近几天？例如：7天、15天、30天？\n用户澄清回答：2026-07-21到2026-09-11，包含首尾日期"
+      },
+      "elapsed_s": 6.544421
     }
   },
   "holdout-2-6-c": {
@@ -3441,6 +4096,14 @@
         "latency_ms": 3134.91
       },
       "elapsed_s": 3.13492
+    },
+    "v1_1_followup": {
+      "phase_state": "complete",
+      "elapsed_s": 0,
+      "payload": {
+        "status": "simulated_answer_unavailable",
+        "result": []
+      }
     }
   },
   "holdout-2-7-c": {
@@ -3668,6 +4331,37 @@
         "latency_ms": 4066.87
       },
       "elapsed_s": 4.066891
+    },
+    "v1_1_followup": {
+      "phase_state": "complete",
+      "payload": {
+        "question": "广州需要优先维护的客户有多少人？只返回人数。",
+        "engine": "Production NL2SQL Engine",
+        "sql": "SELECT COUNT(*) AS user_count FROM users WHERE city = '广州' AND is_vip = 1 LIMIT 200",
+        "result": [
+          {
+            "user_count": 0
+          }
+        ],
+        "retry_count": 0,
+        "trace": [
+          {
+            "stage": "clarification",
+            "status": "proceed"
+          },
+          {
+            "stage": "execute",
+            "status": "success"
+          }
+        ],
+        "needs_clarification": false,
+        "normalized_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：广州需要优先维护的用户有多少人？只返回人数。\n澄清问题：‘需要优先维护的用户’具体指哪类用户？例如：1) VIP用户（is_vip=1）；2) 近30天有购买的用户；3) 历史销售额前10%的用户；4) 近期申请过退款的用户。\n用户澄清回答：is_vip=1的VIP",
+        "error": "",
+        "status": "success",
+        "latency_ms": 4141.7,
+        "resolved_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：广州需要优先维护的客户有多少人？只返回人数。\n澄清问题：‘需要优先维护的客户’具体指哪类客户？例如：1) VIP客户（is_vip=1）；2) 近30天有购买的客户；3) 历史成交额前10%的客户；4) 近期申请过退款的客户。\n用户澄清回答：is_vip=1的VIP"
+      },
+      "elapsed_s": 4.141733
     }
   },
   "holdout-2-9-c": {
@@ -3781,6 +4475,37 @@
         "latency_ms": 3440.79
       },
       "elapsed_s": 3.440814
+    },
+    "v1_1_followup": {
+      "phase_state": "complete",
+      "payload": {
+        "question": "美妆个护最近卖得怎么样？只要一个汇总值。",
+        "engine": "Production NL2SQL Engine",
+        "sql": "SELECT ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '美妆个护' AND o.order_date >= DATE_SUB('2026-09-12', INTERVAL '53' DAY) AND o.order_date < '2026-09-12' LIMIT 200",
+        "result": [
+          {
+            "sales_amount": 132955.05
+          }
+        ],
+        "retry_count": 0,
+        "trace": [
+          {
+            "stage": "clarification",
+            "status": "proceed"
+          },
+          {
+            "stage": "execute",
+            "status": "success"
+          }
+        ],
+        "needs_clarification": false,
+        "normalized_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：美妆个护最近卖得怎么样？只要一个汇总值。\n澄清问题：‘最近’具体指多长时间？例如：最近7天、最近30天，还是最近一个自然月？\n用户澄清回答：最近53天、不含今天",
+        "error": "",
+        "status": "success",
+        "latency_ms": 6853.4,
+        "resolved_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：美妆个护最近卖得怎么样？只要一个汇总值。\n澄清问题：‘最近’具体指多长时间？例如：最近7天、最近30天，还是最近一个自然月？\n用户澄清回答：最近53天、不含今天"
+      },
+      "elapsed_s": 6.853435
     }
   },
   "holdout-2-10-c": {
@@ -4008,6 +4733,37 @@
         "latency_ms": 5011.84
       },
       "elapsed_s": 5.011864
+    },
+    "v1_1_followup": {
+      "phase_state": "complete",
+      "payload": {
+        "question": "帮我查下美妆个护那段时间的有效订单销售额，只返回总额。",
+        "engine": "Production NL2SQL Engine",
+        "sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '美妆个护' AND o.order_date BETWEEN '2026-04-01' AND '2026-06-30' LIMIT 200",
+        "result": [
+          {
+            "sales_amount": 1300261.77
+          }
+        ],
+        "retry_count": 0,
+        "trace": [
+          {
+            "stage": "clarification",
+            "status": "proceed"
+          },
+          {
+            "stage": "execute",
+            "status": "success"
+          }
+        ],
+        "needs_clarification": false,
+        "normalized_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：帮我查下美妆个护那段时间的有效订单销售额，只返回总额。\n澄清问题：‘那段时间’具体指？例如：① 2026-09-01至2026-09-12；② 2026-08-01至2026-08-31；③ 最近7天（2026-09-06至2026-09-12）；④ 其他，请说明。\n用户澄清回答：2026年第二季度，即4月1日到6月30日",
+        "error": "",
+        "status": "success",
+        "latency_ms": 7677.29,
+        "resolved_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：帮我查下美妆个护那段时间的有效订单销售额，只返回总额。\n澄清问题：‘那段时间’具体指？例如：① 2026-09-01至2026-09-12；② 2026-08-01至2026-08-31；③ 最近7天（2026-09-06至2026-09-12）；④ 其他，请说明。\n用户澄清回答：2026年第二季度，即4月1日到6月30日"
+      },
+      "elapsed_s": 7.677329
     }
   },
   "holdout-3-0-c": {
@@ -4121,6 +4877,37 @@
         "latency_ms": 4169.04
       },
       "elapsed_s": 4.169043
+    },
+    "v1_1_followup": {
+      "phase_state": "complete",
+      "payload": {
+        "question": "深圳最近新注册了多少客户？只返回人数。",
+        "engine": "Production NL2SQL Engine",
+        "sql": "SELECT COUNT(*) AS user_count FROM users WHERE city = '深圳' AND register_date >= DATE_SUB('2026-09-12', INTERVAL '71' DAY) AND register_date < '2026-09-12' LIMIT 200",
+        "result": [
+          {
+            "user_count": 0
+          }
+        ],
+        "retry_count": 0,
+        "trace": [
+          {
+            "stage": "clarification",
+            "status": "proceed"
+          },
+          {
+            "stage": "execute",
+            "status": "success"
+          }
+        ],
+        "needs_clarification": false,
+        "normalized_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：深圳最近新注册了多少用户？只返回人数。\n澄清问题：深圳新注册用户的时间范围是：A) 过去7天 B) 过去30天 C) 本月（2026-09-01至2026-09-12） D) 自参考日期起倒推1个月完整周期（2026-08-12至2026-09-11）？\n用户澄清回答：最近71天，不含今天",
+        "error": "",
+        "status": "success",
+        "latency_ms": 5577.12,
+        "resolved_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：深圳最近新注册了多少客户？只返回人数。\n澄清问题：深圳新注册客户的时间范围是：A) 过去7天 B) 过去30天 C) 本月（2026-09-01至2026-09-12） D) 自参考日期起倒推1个月完整周期（2026-08-12至2026-09-11）？\n用户澄清回答：最近71天，不含今天"
+      },
+      "elapsed_s": 5.577167
     }
   },
   "holdout-3-1-c": {
@@ -4348,6 +5135,37 @@
         "latency_ms": 3704.59
       },
       "elapsed_s": 3.704593
+    },
+    "v1_1_followup": {
+      "phase_state": "complete",
+      "payload": {
+        "question": "深圳客户的有效订单里有多少大额订单？只返回笔数。",
+        "engine": "Production NL2SQL Engine",
+        "sql": "SELECT COUNT(*) AS order_count FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE u.city = '深圳' AND o.order_status IN ('paid', 'completed', 'shipped') AND o.paid_amount > 2140 LIMIT 200",
+        "result": [
+          {
+            "order_count": 0
+          }
+        ],
+        "retry_count": 0,
+        "trace": [
+          {
+            "stage": "clarification",
+            "status": "proceed"
+          },
+          {
+            "stage": "execute",
+            "status": "success"
+          }
+        ],
+        "needs_clarification": false,
+        "normalized_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：深圳用户的有效订单里有多少大额订单？只返回笔数。\n澄清问题：‘大额订单’指订单销售额超过多少元？例如：A. 500元；B. 1000元；C. 2000元；D. 其他自定义阈值\n用户澄清回答：单笔实付金额超过2140元",
+        "error": "",
+        "status": "success",
+        "latency_ms": 5787.32,
+        "resolved_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：深圳客户的有效订单里有多少大额订单？只返回笔数。\n澄清问题：‘大额订单’指订单实收金额超过多少元？例如：A. 500元；B. 1000元；C. 2000元；D. 其他自定义阈值\n用户澄清回答：单笔实付金额超过2140元"
+      },
+      "elapsed_s": 5.787378
     }
   },
   "holdout-3-3-c": {
@@ -4461,6 +5279,37 @@
         "latency_ms": 3322.13
       },
       "elapsed_s": 3.322134
+    },
+    "v1_1_followup": {
+      "phase_state": "complete",
+      "payload": {
+        "question": "母婴用品在售商品里便宜的有几个？只返回数量。",
+        "engine": "Production NL2SQL Engine",
+        "sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '母婴用品' AND is_active = 1 AND list_price < 360 LIMIT 200",
+        "result": [
+          {
+            "product_count": 89
+          }
+        ],
+        "retry_count": 0,
+        "trace": [
+          {
+            "stage": "clarification",
+            "status": "proceed"
+          },
+          {
+            "stage": "execute",
+            "status": "success"
+          }
+        ],
+        "needs_clarification": false,
+        "normalized_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：母婴用品在售商品里便宜的有几个？只返回数量。\n澄清问题：“便宜的”是指：A) 价格最低的前10个，B) 单价低于50元，C) 单价低于该类目平均售价，D) 其他标准？\n用户澄清回答：商品标价低于360元",
+        "error": "",
+        "status": "success",
+        "latency_ms": 4705.71,
+        "resolved_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：母婴用品在售商品里便宜的有几个？只返回数量。\n澄清问题：“便宜的”是指：A) 价格最低的前10个，B) 单价低于50元，C) 单价低于该类目平均售价，D) 其他标准？\n用户澄清回答：商品标价低于360元"
+      },
+      "elapsed_s": 4.705737
     }
   },
   "holdout-3-4-c": {
@@ -4562,6 +5411,33 @@
         "latency_ms": 3952.12
       },
       "elapsed_s": 3.952138
+    },
+    "v1_1_followup": {
+      "phase_state": "complete",
+      "payload": {
+        "question": "找出深圳表现最好的前7名客户，返回用户ID和表现指标，指标相同按用户ID升序。",
+        "engine": "Production NL2SQL Engine",
+        "sql": "SELECT u.user_id, COUNT(o.order_id) AS order_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '深圳' AND o.order_status IN ('paid', 'completed', 'shipped') GROUP BY u.user_id ORDER BY order_count DESC, u.user_id ASC LIMIT 7",
+        "result": [],
+        "retry_count": 0,
+        "trace": [
+          {
+            "stage": "clarification",
+            "status": "proceed"
+          },
+          {
+            "stage": "execute",
+            "status": "success"
+          }
+        ],
+        "needs_clarification": false,
+        "normalized_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：找出深圳表现最好的前7名用户，返回用户ID和表现指标，指标相同按用户ID升序。\n澄清问题：用户‘表现最好’具体指哪项指标？选项：A) 总销售额（paid_amount） B) 总订单数 C) 购买天数 D) 近30天复购率\n用户澄清回答：有效订单笔数",
+        "error": "",
+        "status": "success",
+        "latency_ms": 6148.59,
+        "resolved_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：找出深圳表现最好的前7名客户，返回用户ID和表现指标，指标相同按用户ID升序。\n澄清问题：客户‘表现最好’具体指哪项指标？选项：A) 总销售额（paid_amount） B) 总订单数 C) 购买天数 D) 近30天复购率\n用户澄清回答：有效订单笔数"
+      },
+      "elapsed_s": 6.148627
     }
   },
   "holdout-3-5-c": {
@@ -4675,6 +5551,37 @@
         "latency_ms": 2865.58
       },
       "elapsed_s": 2.865588
+    },
+    "v1_1_followup": {
+      "phase_state": "complete",
+      "payload": {
+        "question": "母婴用品近期批准了多少退款金额？只返回金额。",
+        "engine": "Production NL2SQL Engine",
+        "sql": "SELECT ROUND(SUM(r.refund_amount), 2) AS refund_amount FROM refunds AS r JOIN order_items AS oi ON r.order_item_id = oi.order_item_id JOIN products AS p ON oi.product_id = p.product_id WHERE r.refund_status = 'approved' AND p.category = '母婴用品' AND r.refund_date BETWEEN '2026-07-03' AND '2026-09-11' LIMIT 200",
+        "result": [
+          {
+            "refund_amount": 11146.65
+          }
+        ],
+        "retry_count": 0,
+        "trace": [
+          {
+            "stage": "clarification",
+            "status": "proceed"
+          },
+          {
+            "stage": "execute",
+            "status": "success"
+          }
+        ],
+        "needs_clarification": false,
+        "normalized_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：母婴用品近期批准了多少退款金额？只返回金额。\n澄清问题：‘近期’具体指最近几天？例如：7天、15天、30天？\n用户澄清回答：2026-07-03到2026-09-11，包含首尾日期",
+        "error": "",
+        "status": "success",
+        "latency_ms": 6763.65,
+        "resolved_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：母婴用品近期批准了多少退款金额？只返回金额。\n澄清问题：‘近期’具体指最近几天？例如：7天、15天、30天？\n用户澄清回答：2026-07-03到2026-09-11，包含首尾日期"
+      },
+      "elapsed_s": 6.763681
     }
   },
   "holdout-3-6-c": {
@@ -4788,6 +5695,37 @@
         "latency_ms": 3589.86
       },
       "elapsed_s": 3.589874
+    },
+    "v1_1_followup": {
+      "phase_state": "complete",
+      "payload": {
+        "question": "统计珠三角地区客户的累计有效订单实付金额，只返回总金额。",
+        "engine": "Production NL2SQL Engine",
+        "sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS total_paid_amount FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '深圳' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+        "result": [
+          {
+            "total_paid_amount": null
+          }
+        ],
+        "retry_count": 0,
+        "trace": [
+          {
+            "stage": "clarification",
+            "status": "proceed"
+          },
+          {
+            "stage": "execute",
+            "status": "success"
+          }
+        ],
+        "needs_clarification": false,
+        "normalized_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：统计珠三角地区用户的累计有效订单实付金额，只返回总金额。\n澄清问题：珠三角地区具体包含哪些城市？（例如：广州、深圳、佛山、东莞、中山、珠海、惠州、江门、肇庆）\n用户澄清回答：只统计用户城市为深圳的记录，不包含其他城市",
+        "error": "",
+        "status": "success",
+        "latency_ms": 4311.71,
+        "resolved_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：统计珠三角地区客户的累计有效订单实付金额，只返回总金额。\n澄清问题：珠三角地区具体包含哪些城市？（例如：广州、深圳、佛山、东莞、中山、珠海、惠州、江门、肇庆）\n用户澄清回答：只统计客户城市为深圳的记录，不包含其他城市"
+      },
+      "elapsed_s": 4.311735
     }
   },
   "holdout-3-7-c": {
@@ -5015,6 +5953,37 @@
         "latency_ms": 4112.32
       },
       "elapsed_s": 4.112347
+    },
+    "v1_1_followup": {
+      "phase_state": "complete",
+      "payload": {
+        "question": "深圳需要优先维护的客户有多少人？只返回人数。",
+        "engine": "Production NL2SQL Engine",
+        "sql": "SELECT COUNT(*) AS user_count FROM users WHERE city = '深圳' AND is_vip = 1 LIMIT 200",
+        "result": [
+          {
+            "user_count": 0
+          }
+        ],
+        "retry_count": 0,
+        "trace": [
+          {
+            "stage": "clarification",
+            "status": "proceed"
+          },
+          {
+            "stage": "execute",
+            "status": "success"
+          }
+        ],
+        "needs_clarification": false,
+        "normalized_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：深圳需要优先维护的用户有多少人？只返回人数。\n澄清问题：‘需要优先维护的用户’具体指哪类用户？例如：① VIP用户（is_vip=1）；② 近30天有订单的用户；③ 历史销售金额前10%的用户；④ 有未处理投诉或高退款率的用户。\n用户澄清回答：is_vip=1的VIP",
+        "error": "",
+        "status": "success",
+        "latency_ms": 4798.68,
+        "resolved_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：深圳需要优先维护的客户有多少人？只返回人数。\n澄清问题：‘需要优先维护的客户’具体指哪类客户？例如：① VIP客户（is_vip=1）；② 近30天有订单的客户；③ 历史销售金额前10%的客户；④ 有未处理投诉或高退款率的客户。\n用户澄清回答：is_vip=1的VIP"
+      },
+      "elapsed_s": 4.79872
     }
   },
   "holdout-3-9-c": {
@@ -5341,6 +6310,37 @@
         "latency_ms": 3448.35
       },
       "elapsed_s": 3.448373
+    },
+    "v1_1_followup": {
+      "phase_state": "complete",
+      "payload": {
+        "question": "帮我查下母婴用品那段时间的有效订单销售额，只返回总额。",
+        "engine": "Production NL2SQL Engine",
+        "sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '母婴用品' AND o.order_date BETWEEN '2026-04-01' AND '2026-06-30' LIMIT 200",
+        "result": [
+          {
+            "sales_amount": 1319479.97
+          }
+        ],
+        "retry_count": 0,
+        "trace": [
+          {
+            "stage": "clarification",
+            "status": "proceed"
+          },
+          {
+            "stage": "execute",
+            "status": "success"
+          }
+        ],
+        "needs_clarification": false,
+        "normalized_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：帮我查下母婴用品那段时间的有效订单销售额，只返回总额。\n澄清问题：请问'那段时间'具体指？A) 过去7天 B) 过去30天 C) 本月 D) 上个月\n用户澄清回答：2026年第二季度，即4月1日到6月30日",
+        "error": "",
+        "status": "success",
+        "latency_ms": 7300.01,
+        "resolved_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：帮我查下母婴用品那段时间的有效订单销售额，只返回总额。\n澄清问题：请问'那段时间'具体指？A) 过去7天 B) 过去30天 C) 本月 D) 上个月\n用户澄清回答：2026年第二季度，即4月1日到6月30日"
+      },
+      "elapsed_s": 7.30004
     }
   },
   "holdout-4-0-c": {
@@ -5454,6 +6454,37 @@
         "latency_ms": 2693.72
       },
       "elapsed_s": 2.693724
+    },
+    "v1_1_followup": {
+      "phase_state": "complete",
+      "payload": {
+        "question": "杭州最近新注册了多少客户？只返回人数。",
+        "engine": "Production NL2SQL Engine",
+        "sql": "SELECT COUNT(*) AS user_count FROM users WHERE city = '杭州' AND register_date >= DATE_SUB('2026-09-12', INTERVAL '89' DAY) AND register_date < '2026-09-12' LIMIT 200",
+        "result": [
+          {
+            "user_count": 0
+          }
+        ],
+        "retry_count": 0,
+        "trace": [
+          {
+            "stage": "clarification",
+            "status": "proceed"
+          },
+          {
+            "stage": "execute",
+            "status": "success"
+          }
+        ],
+        "needs_clarification": false,
+        "normalized_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：杭州最近新注册了多少用户？只返回人数。\n澄清问题：杭州最近新注册用户的时间范围是？（A）最近7天 （B）最近30天 （C）本周 （D）本月\n用户澄清回答：最近89天，不含今天",
+        "error": "",
+        "status": "success",
+        "latency_ms": 4992.82,
+        "resolved_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：杭州最近新注册了多少客户？只返回人数。\n澄清问题：杭州最近新注册客户的时间范围是？（A）最近7天 （B）最近30天 （C）本周 （D）本月\n用户澄清回答：最近89天，不含今天"
+      },
+      "elapsed_s": 4.992847
     }
   },
   "holdout-4-1-c": {
@@ -5681,6 +6712,37 @@
         "latency_ms": 3379.08
       },
       "elapsed_s": 3.379103
+    },
+    "v1_1_followup": {
+      "phase_state": "complete",
+      "payload": {
+        "question": "杭州客户的有效订单里有多少大额订单？只返回笔数。",
+        "engine": "Production NL2SQL Engine",
+        "sql": "SELECT COUNT(*) AS order_count FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE u.city = '杭州' AND o.order_status IN ('paid', 'completed', 'shipped') AND o.paid_amount > 2570 LIMIT 200",
+        "result": [
+          {
+            "order_count": 0
+          }
+        ],
+        "retry_count": 0,
+        "trace": [
+          {
+            "stage": "clarification",
+            "status": "proceed"
+          },
+          {
+            "stage": "execute",
+            "status": "success"
+          }
+        ],
+        "needs_clarification": false,
+        "normalized_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：杭州用户的有效订单里有多少大额订单？只返回笔数。\n澄清问题：‘大额订单’指单笔订单销售额超过多少元？例如：300元、500元，还是其他数值？\n用户澄清回答：单笔实付金额超过2570元",
+        "error": "",
+        "status": "success",
+        "latency_ms": 5595.65,
+        "resolved_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：杭州客户的有效订单里有多少大额订单？只返回笔数。\n澄清问题：‘大额订单’指单笔订单实收金额超过多少元？例如：300元、500元，还是其他数值？\n用户澄清回答：单笔实付金额超过2570元"
+      },
+      "elapsed_s": 5.595684
     }
   },
   "holdout-4-3-c": {
@@ -5794,6 +6856,37 @@
         "latency_ms": 3467.27
       },
       "elapsed_s": 3.467279
+    },
+    "v1_1_followup": {
+      "phase_state": "complete",
+      "payload": {
+        "question": "服饰鞋包在售商品里便宜的有几个？只返回数量。",
+        "engine": "Production NL2SQL Engine",
+        "sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '服饰鞋包' AND is_active = 1 AND list_price < 440 LIMIT 200",
+        "result": [
+          {
+            "product_count": 92
+          }
+        ],
+        "retry_count": 0,
+        "trace": [
+          {
+            "stage": "clarification",
+            "status": "proceed"
+          },
+          {
+            "stage": "execute",
+            "status": "success"
+          }
+        ],
+        "needs_clarification": false,
+        "normalized_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：服饰鞋包在售商品里便宜的有几个？只返回数量。\n澄清问题：“便宜的”是指：A) 价格最低的前10个商品；B) 单价低于50元；C) 单价低于本类目平均售价；D) 其他标准？\n用户澄清回答：商品标价低于440元",
+        "error": "",
+        "status": "success",
+        "latency_ms": 5199.6,
+        "resolved_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：服饰鞋包在售商品里便宜的有几个？只返回数量。\n澄清问题：“便宜的”是指：A) 价格最低的前10个商品；B) 单价低于50元；C) 单价低于本类目平均售价；D) 其他标准？\n用户澄清回答：商品标价低于440元"
+      },
+      "elapsed_s": 5.199624
     }
   },
   "holdout-4-4-c": {
@@ -5895,6 +6988,33 @@
         "latency_ms": 3829.29
       },
       "elapsed_s": 3.8293
+    },
+    "v1_1_followup": {
+      "phase_state": "complete",
+      "payload": {
+        "question": "找出杭州表现最好的前8名客户，返回用户ID和表现指标，指标相同按用户ID升序。",
+        "engine": "Production NL2SQL Engine",
+        "sql": "SELECT u.user_id, COUNT(o.order_id) AS order_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '杭州' AND o.order_status IN ('paid', 'completed', 'shipped') AND o.order_date >= DATE_SUB('2026-09-12', INTERVAL '30' DAY) GROUP BY u.user_id ORDER BY order_count DESC, u.user_id ASC LIMIT 8",
+        "result": [],
+        "retry_count": 0,
+        "trace": [
+          {
+            "stage": "clarification",
+            "status": "proceed"
+          },
+          {
+            "stage": "execute",
+            "status": "success"
+          }
+        ],
+        "needs_clarification": false,
+        "normalized_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：找出杭州表现最好的前8名用户，返回用户ID和表现指标，指标相同按用户ID升序。\n澄清问题：用户‘表现最好’是指：A) 总销售额最高；B) 总订单数最多；C) 近30天复购用户（至少2单）中销售额最高；D) VIP等级最高且销售额前8？\n用户澄清回答：有效订单笔数",
+        "error": "",
+        "status": "success",
+        "latency_ms": 6977.21,
+        "resolved_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：找出杭州表现最好的前8名客户，返回用户ID和表现指标，指标相同按用户ID升序。\n澄清问题：客户‘表现最好’是指：A) 总销售额最高；B) 总订单数最多；C) 近30天复购用户（至少2单）中销售额最高；D) VIP等级最高且销售额前8？\n用户澄清回答：有效订单笔数"
+      },
+      "elapsed_s": 6.977259
     }
   },
   "holdout-4-5-c": {
@@ -6008,6 +7128,37 @@
         "latency_ms": 2177.28
       },
       "elapsed_s": 2.177291
+    },
+    "v1_1_followup": {
+      "phase_state": "complete",
+      "payload": {
+        "question": "服饰鞋包近期批准了多少退款金额？只返回金额。",
+        "engine": "Production NL2SQL Engine",
+        "sql": "SELECT ROUND(SUM(r.refund_amount), 2) AS refund_amount FROM refunds AS r JOIN order_items AS oi ON r.order_item_id = oi.order_item_id JOIN products AS p ON oi.product_id = p.product_id WHERE r.refund_status = 'approved' AND p.category = '服饰鞋包' AND r.refund_date BETWEEN '2026-06-15' AND '2026-09-11' LIMIT 200",
+        "result": [
+          {
+            "refund_amount": 17387.54
+          }
+        ],
+        "retry_count": 0,
+        "trace": [
+          {
+            "stage": "clarification",
+            "status": "proceed"
+          },
+          {
+            "stage": "execute",
+            "status": "success"
+          }
+        ],
+        "needs_clarification": false,
+        "normalized_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：服饰鞋包近期批准了多少退款金额？只返回金额。\n澄清问题：近期指最近几天？选项：3天、7天、30天。\n用户澄清回答：2026-06-15到2026-09-11，包含首尾日期",
+        "error": "",
+        "status": "success",
+        "latency_ms": 6507.81,
+        "resolved_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：服饰鞋包近期批准了多少退款金额？只返回金额。\n澄清问题：近期指最近几天？选项：3天、7天、30天。\n用户澄清回答：2026-06-15到2026-09-11，包含首尾日期"
+      },
+      "elapsed_s": 6.507852
     }
   },
   "holdout-4-6-c": {
@@ -6121,6 +7272,14 @@
         "latency_ms": 3899.02
       },
       "elapsed_s": 3.899043
+    },
+    "v1_1_followup": {
+      "phase_state": "complete",
+      "elapsed_s": 0,
+      "payload": {
+        "status": "simulated_answer_unavailable",
+        "result": []
+      }
     }
   },
   "holdout-4-7-c": {
@@ -6348,6 +7507,37 @@
         "latency_ms": 4113.19
       },
       "elapsed_s": 4.11321
+    },
+    "v1_1_followup": {
+      "phase_state": "complete",
+      "payload": {
+        "question": "杭州需要优先维护的客户有多少人？只返回人数。",
+        "engine": "Production NL2SQL Engine",
+        "sql": "SELECT COUNT(*) AS user_count FROM users WHERE city = '杭州' AND is_vip = 1 LIMIT 200",
+        "result": [
+          {
+            "user_count": 0
+          }
+        ],
+        "retry_count": 0,
+        "trace": [
+          {
+            "stage": "clarification",
+            "status": "proceed"
+          },
+          {
+            "stage": "execute",
+            "status": "success"
+          }
+        ],
+        "needs_clarification": false,
+        "normalized_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：杭州需要优先维护的用户有多少人？只返回人数。\n澄清问题：‘需要优先维护的用户’具体指哪类用户？例如：① VIP用户（is_vip=1）；② 近30天有购买的用户；③ 历史销售金额前10%的用户；④ 退款率高于15%的用户。\n用户澄清回答：is_vip=1的VIP",
+        "error": "",
+        "status": "success",
+        "latency_ms": 4278.39,
+        "resolved_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：杭州需要优先维护的客户有多少人？只返回人数。\n澄清问题：‘需要优先维护的客户’具体指哪类客户？例如：① VIP客户（is_vip=1）；② 近30天有购买的客户；③ 历史销售金额前10%的客户；④ 退款率高于15%的客户。\n用户澄清回答：is_vip=1的VIP"
+      },
+      "elapsed_s": 4.278429
     }
   },
   "holdout-4-9-c": {
@@ -6461,6 +7651,37 @@
         "latency_ms": 3171.66
       },
       "elapsed_s": 3.171679
+    },
+    "v1_1_followup": {
+      "phase_state": "complete",
+      "payload": {
+        "question": "服饰鞋包最近卖得怎么样？只要一个汇总值。",
+        "engine": "Production NL2SQL Engine",
+        "sql": "SELECT ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '服饰鞋包' AND o.order_date >= DATE_SUB('2026-09-12', INTERVAL '89' DAY) AND o.order_date < '2026-09-12' LIMIT 200",
+        "result": [
+          {
+            "sales_amount": 239022.36
+          }
+        ],
+        "retry_count": 0,
+        "trace": [
+          {
+            "stage": "clarification",
+            "status": "proceed"
+          },
+          {
+            "stage": "execute",
+            "status": "success"
+          }
+        ],
+        "needs_clarification": false,
+        "normalized_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：服饰鞋包最近卖得怎么样？只要一个汇总值。\n澄清问题：‘最近’具体指哪段时间？例如：最近7天、最近30天、本周、本月，还是其他？\n用户澄清回答：最近89天、不含今天",
+        "error": "",
+        "status": "success",
+        "latency_ms": 8561.67,
+        "resolved_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：服饰鞋包最近卖得怎么样？只要一个汇总值。\n澄清问题：‘最近’具体指哪段时间？例如：最近7天、最近30天、本周、本月，还是其他？\n用户澄清回答：最近89天、不含今天"
+      },
+      "elapsed_s": 8.561698
     }
   },
   "holdout-4-10-c": {
@@ -6688,6 +7909,37 @@
         "latency_ms": 4042.32
       },
       "elapsed_s": 4.042345
+    },
+    "v1_1_followup": {
+      "phase_state": "complete",
+      "payload": {
+        "question": "帮我查下服饰鞋包那段时间的有效订单销售额，只返回总额。",
+        "engine": "Production NL2SQL Engine",
+        "sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '服饰鞋包' AND o.order_date BETWEEN '2026-04-01' AND '2026-06-30' LIMIT 200",
+        "result": [
+          {
+            "sales_amount": 1001532.1
+          }
+        ],
+        "retry_count": 0,
+        "trace": [
+          {
+            "stage": "clarification",
+            "status": "proceed"
+          },
+          {
+            "stage": "execute",
+            "status": "success"
+          }
+        ],
+        "needs_clarification": false,
+        "normalized_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：帮我查下服饰鞋包那段时间的有效订单销售额，只返回总额。\n澄清问题：请问'那段时间'具体指？A) 近7天 B) 近30天 C) 2026年9月1日至9月12日 D) 其他指定区间\n用户澄清回答：2026年第二季度，即4月1日到6月30日",
+        "error": "",
+        "status": "success",
+        "latency_ms": 7036.12,
+        "resolved_question": "参考日期：2026-09-12（问题内显式参考日期优先）。\n原始问题：帮我查下服饰鞋包那段时间的有效订单销售额，只返回总额。\n澄清问题：请问'那段时间'具体指？A) 近7天 B) 近30天 C) 2026年9月1日至9月12日 D) 其他指定区间\n用户澄清回答：2026年第二季度，即4月1日到6月30日"
+      },
+      "elapsed_s": 7.036155
     }
   }
 }

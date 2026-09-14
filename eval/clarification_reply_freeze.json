@@ -1,0 +1,5 @@
+{
+  "reply_sha256": "5cf7a54c85b2d0d82d58bb04d98cbcae7c747f0073093ad21a2588db468d29f0",
+  "dataset_sha256": "95c2380db2942e606ddfc81ce884a197d33caa57a99d90c41e19d1184d24f8b4",
+  "rule": "Verbatim segments only; relevance reviewed before any follow-up execution"
+}

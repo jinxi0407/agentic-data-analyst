@@ -1,0 +1,4384 @@
+[
+  {
+    "id": "holdout-0-0-c",
+    "question": "上海最近19天新增注册客户有多少人？不含今天，只返回人数。",
+    "should_clarify": false,
+    "first_status": "clarification_unavailable",
+    "triggered": false,
+    "final_status": "clarification_unavailable",
+    "first_latency_s": 8.959224,
+    "total_latency_s": 8.959224,
+    "interactive_correct": false,
+    "baseline_correct": true,
+    "baseline_latency_s": 4.358531,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [
+      "clarification_unavailable"
+    ],
+    "baseline_sql": "SELECT COUNT(*) AS user_count FROM users WHERE city = '上海' AND register_date >= DATE_SUB('2026-09-12', INTERVAL '19' DAY) AND register_date < '2026-09-12' LIMIT 200",
+    "v1_1_sql": "",
+    "baseline_result": [
+      {
+        "user_count": 0
+      }
+    ],
+    "v1_1_result": [],
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "holdout-0-0-a",
+    "question": "上海最近新注册了多少客户？只返回人数。",
+    "should_clarify": true,
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "final_status": "success",
+    "first_latency_s": 2.941603,
+    "total_latency_s": 8.841687,
+    "interactive_correct": true,
+    "baseline_correct": true,
+    "baseline_latency_s": 1.506817,
+    "baseline_status": "success",
+    "actual_clarification_question": "上海最近新注册客户的时间范围是指：A) 最近7天 B) 最近30天 C) 本月 D) 其他（请说明）？",
+    "followup_supplied": true,
+    "gate_accepted_followup": true,
+    "failure_categories": [],
+    "baseline_sql": "SELECT COUNT(*) AS user_count FROM users WHERE city = '上海' AND register_date >= DATE_SUB('2026-09-12', INTERVAL '7' DAY) LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS user_count FROM users WHERE city = '上海' AND register_date >= DATE_SUB('2026-09-12', INTERVAL '19' DAY) AND register_date < '2026-09-12' LIMIT 200",
+    "baseline_result": [
+      {
+        "user_count": 0
+      }
+    ],
+    "v1_1_result": [
+      {
+        "user_count": 0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "holdout-0-1-c",
+    "question": "食品生鲜累计销售额是多少？使用有效订单商品行实付金额，只返回金额。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 6.095819,
+    "total_latency_s": 6.095819,
+    "interactive_correct": true,
+    "baseline_correct": false,
+    "baseline_latency_s": 2.394941,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [],
+    "baseline_sql": "SELECT ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM products AS p JOIN order_items AS oi ON p.product_id = oi.product_id JOIN orders AS o ON oi.order_id = o.order_id WHERE p.category = '食品生鲜' AND o.order_status IN ('paid', 'completed', 'shipped') AND o.order_date <= '2026-09-12' LIMIT 200",
+    "v1_1_sql": "SELECT ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM products AS p JOIN order_items AS oi ON p.product_id = oi.product_id JOIN orders AS o ON oi.order_id = o.order_id WHERE p.category = '食品生鲜' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "baseline_result": [
+      {
+        "sales_amount": 595027.34
+      }
+    ],
+    "v1_1_result": [
+      {
+        "sales_amount": 657430.11
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "amount": 657430.11
+      }
+    ]
+  },
+  {
+    "id": "holdout-0-1-a",
+    "question": "汇总一下食品生鲜的累计销售表现，只需要一个数字。",
+    "should_clarify": true,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 6.181172,
+    "total_latency_s": 6.181172,
+    "interactive_correct": true,
+    "baseline_correct": false,
+    "baseline_latency_s": 2.488525,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [
+      "missed_clarification"
+    ],
+    "baseline_sql": "SELECT ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM products AS p JOIN order_items AS oi ON p.product_id = oi.product_id JOIN orders AS o ON oi.order_id = o.order_id WHERE p.category = '食品生鲜' AND o.order_status IN ('paid', 'completed', 'shipped') AND o.order_date <= '2026-09-12' LIMIT 200",
+    "v1_1_sql": "SELECT ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM products AS p JOIN order_items AS oi ON p.product_id = oi.product_id JOIN orders AS o ON oi.order_id = o.order_id WHERE p.category = '食品生鲜' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "baseline_result": [
+      {
+        "sales_amount": 595027.34
+      }
+    ],
+    "v1_1_result": [
+      {
+        "sales_amount": 657430.11
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "amount": 657430.11
+      }
+    ]
+  },
+  {
+    "id": "holdout-0-2-c",
+    "question": "上海客户的有效订单中，实付金额超过850元的有几笔？只返回笔数。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 4.913164,
+    "total_latency_s": 4.913164,
+    "interactive_correct": false,
+    "baseline_correct": false,
+    "baseline_latency_s": 1.604734,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [
+      "result_mismatch"
+    ],
+    "baseline_sql": "SELECT COUNT(*) AS order_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '上海' AND o.order_status IN ('paid', 'completed', 'shipped') AND o.paid_amount > 850 LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS order_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '上海' AND o.order_status IN ('paid', 'completed', 'shipped') AND o.paid_amount > 850 LIMIT 200",
+    "baseline_result": [
+      {
+        "order_count": 0
+      }
+    ],
+    "v1_1_result": [
+      {
+        "order_count": 0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 987
+      }
+    ]
+  },
+  {
+    "id": "holdout-0-2-a",
+    "question": "上海客户的有效订单里有多少大额订单？只返回笔数。",
+    "should_clarify": true,
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "final_status": "success",
+    "first_latency_s": 3.424872,
+    "total_latency_s": 9.464619,
+    "interactive_correct": false,
+    "baseline_correct": false,
+    "baseline_latency_s": 2.022202,
+    "baseline_status": "success",
+    "actual_clarification_question": "‘大额订单’指单笔订单实收金额超过多少元？例如：300元、500元、1000元，或其他标准？",
+    "followup_supplied": true,
+    "gate_accepted_followup": true,
+    "failure_categories": [
+      "result_mismatch"
+    ],
+    "baseline_sql": "SELECT COUNT(*) AS order_count FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE u.city = '上海' AND o.order_status IN ('paid', 'completed', 'shipped') AND o.paid_amount > 1000 AND o.order_date <= '2026-09-12' LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS order_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '上海' AND o.order_status IN ('paid', 'completed', 'shipped') AND o.paid_amount > 850 LIMIT 200",
+    "baseline_result": [
+      {
+        "order_count": 0
+      }
+    ],
+    "v1_1_result": [
+      {
+        "order_count": 0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 987
+      }
+    ]
+  },
+  {
+    "id": "holdout-0-3-c",
+    "question": "食品生鲜在售商品中，标价低于120元的有几个？只返回数量。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 4.989541,
+    "total_latency_s": 4.989541,
+    "interactive_correct": true,
+    "baseline_correct": true,
+    "baseline_latency_s": 1.173142,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [],
+    "baseline_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '食品生鲜' AND is_active = 1 AND list_price < 120 LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '食品生鲜' AND is_active = 1 AND list_price < 120 LIMIT 200",
+    "baseline_result": [
+      {
+        "product_count": 56
+      }
+    ],
+    "v1_1_result": [
+      {
+        "product_count": 56
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 56
+      }
+    ]
+  },
+  {
+    "id": "holdout-0-3-a",
+    "question": "食品生鲜在售商品里便宜的有几个？只返回数量。",
+    "should_clarify": true,
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "final_status": "success",
+    "first_latency_s": 4.05478,
+    "total_latency_s": 8.648679999999999,
+    "interactive_correct": true,
+    "baseline_correct": false,
+    "baseline_latency_s": 1.139086,
+    "baseline_status": "success",
+    "actual_clarification_question": "‘便宜的’是指：① 全站价格最低的前10个；② 单价低于食品生鲜类平均价；③ 单价低于30元；④ 其他标准？",
+    "followup_supplied": true,
+    "gate_accepted_followup": true,
+    "failure_categories": [],
+    "baseline_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '食品生鲜' AND is_active = 1 AND list_price < 50 LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '食品生鲜' AND is_active = 1 AND list_price < 120 LIMIT 200",
+    "baseline_result": [
+      {
+        "product_count": 4
+      }
+    ],
+    "v1_1_result": [
+      {
+        "product_count": 56
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 56
+      }
+    ]
+  },
+  {
+    "id": "holdout-0-4-c",
+    "question": "上海客户按有效订单数量从高到低取前4名，返回用户ID和订单数；相同数量按用户ID升序。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 5.484918,
+    "total_latency_s": 5.484918,
+    "interactive_correct": false,
+    "baseline_correct": false,
+    "baseline_latency_s": 2.335357,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [
+      "result_mismatch"
+    ],
+    "baseline_sql": "SELECT u.user_id, COUNT(*) AS order_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '上海' AND o.order_status IN ('paid', 'completed', 'shipped') GROUP BY u.user_id ORDER BY order_count DESC, u.user_id ASC LIMIT 4",
+    "v1_1_sql": "SELECT u.user_id, COUNT(*) AS order_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '上海' AND o.order_status IN ('paid', 'completed', 'shipped') GROUP BY u.user_id ORDER BY order_count DESC, u.user_id ASC LIMIT 4",
+    "baseline_result": [],
+    "v1_1_result": [],
+    "ground_truth_result": [
+      {
+        "user_id": 1466,
+        "total": 21
+      },
+      {
+        "user_id": 1187,
+        "total": 19
+      },
+      {
+        "user_id": 313,
+        "total": 18
+      },
+      {
+        "user_id": 2141,
+        "total": 18
+      }
+    ]
+  },
+  {
+    "id": "holdout-0-4-a",
+    "question": "找出上海表现最好的前4名客户，返回用户ID和表现指标，指标相同按用户ID升序。",
+    "should_clarify": true,
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "final_status": "success",
+    "first_latency_s": 3.690163,
+    "total_latency_s": 9.980565,
+    "interactive_correct": false,
+    "baseline_correct": false,
+    "baseline_latency_s": 2.816165,
+    "baseline_status": "success",
+    "actual_clarification_question": "客户‘表现最好’具体指哪项指标？选项：A) 总销售额（paid_amount） B) 总销售数量（quantity） C) 有效订单数 D) 近30天复购次数",
+    "followup_supplied": true,
+    "gate_accepted_followup": true,
+    "failure_categories": [
+      "result_mismatch"
+    ],
+    "baseline_sql": "SELECT u.user_id, ROUND(SUM(o.paid_amount), 2) AS performance_metric FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '上海' AND o.order_status IN ('paid', 'completed', 'shipped') AND o.order_date <= '2026-09-12' GROUP BY u.user_id ORDER BY performance_metric DESC, u.user_id ASC LIMIT 4",
+    "v1_1_sql": "SELECT u.user_id, COUNT(o.order_id) AS order_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '上海' AND o.order_status IN ('paid', 'completed', 'shipped') AND o.order_date <= '2026-09-12' GROUP BY u.user_id ORDER BY order_count DESC, u.user_id ASC LIMIT 4",
+    "baseline_result": [],
+    "v1_1_result": [],
+    "ground_truth_result": [
+      {
+        "user_id": 1466,
+        "total": 21
+      },
+      {
+        "user_id": 1187,
+        "total": 19
+      },
+      {
+        "user_id": 313,
+        "total": 18
+      },
+      {
+        "user_id": 2141,
+        "total": 18
+      }
+    ]
+  },
+  {
+    "id": "holdout-0-5-c",
+    "question": "食品生鲜在2026-08-24到2026-09-11期间的已批准退款金额是多少？包含首尾日期，只返回金额。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 7.355643,
+    "total_latency_s": 7.355643,
+    "interactive_correct": true,
+    "baseline_correct": true,
+    "baseline_latency_s": 2.533246,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [],
+    "baseline_sql": "SELECT ROUND(SUM(r.refund_amount), 2) AS refund_amount FROM refunds AS r JOIN order_items AS oi ON r.order_item_id = oi.order_item_id JOIN products AS p ON oi.product_id = p.product_id WHERE p.category = '食品生鲜' AND r.refund_status = 'approved' AND r.refund_date BETWEEN '2026-08-24' AND '2026-09-11' LIMIT 200",
+    "v1_1_sql": "SELECT ROUND(SUM(r.refund_amount), 2) AS refund_amount FROM refunds AS r JOIN order_items AS oi ON r.order_item_id = oi.order_item_id JOIN products AS p ON oi.product_id = p.product_id WHERE p.category = '食品生鲜' AND r.refund_status = 'approved' AND r.refund_date BETWEEN '2026-08-24' AND '2026-09-11' LIMIT 200",
+    "baseline_result": [
+      {
+        "refund_amount": 939.52
+      }
+    ],
+    "v1_1_result": [
+      {
+        "refund_amount": 939.52
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "amount": 939.52
+      }
+    ]
+  },
+  {
+    "id": "holdout-0-5-a",
+    "question": "食品生鲜近期批准了多少退款金额？只返回金额。",
+    "should_clarify": true,
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "final_status": "success",
+    "first_latency_s": 2.619263,
+    "total_latency_s": 9.031456,
+    "interactive_correct": true,
+    "baseline_correct": false,
+    "baseline_latency_s": 2.486822,
+    "baseline_status": "success",
+    "actual_clarification_question": "‘近期’具体指最近几天？例如：3天、7天、15天或30天？",
+    "followup_supplied": true,
+    "gate_accepted_followup": true,
+    "failure_categories": [],
+    "baseline_sql": "SELECT ROUND(SUM(r.refund_amount), 2) AS refund_amount FROM refunds AS r JOIN order_items AS oi ON r.order_item_id = oi.order_item_id JOIN products AS p ON oi.product_id = p.product_id WHERE r.refund_status = 'approved' AND p.category = '食品生鲜' AND r.refund_date >= DATE_SUB('2026-09-12', INTERVAL '7' DAY) LIMIT 200",
+    "v1_1_sql": "SELECT ROUND(SUM(r.refund_amount), 2) AS refund_amount FROM refunds AS r JOIN order_items AS oi ON r.order_item_id = oi.order_item_id JOIN products AS p ON oi.product_id = p.product_id WHERE r.refund_status = 'approved' AND p.category = '食品生鲜' AND r.refund_date BETWEEN '2026-08-24' AND '2026-09-11' LIMIT 200",
+    "baseline_result": [
+      {
+        "refund_amount": 2225.19
+      }
+    ],
+    "v1_1_result": [
+      {
+        "refund_amount": 939.52
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "amount": 939.52
+      }
+    ]
+  },
+  {
+    "id": "holdout-0-6-c",
+    "question": "统计上海客户的累计有效订单实付金额，只返回总金额。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 4.805699,
+    "total_latency_s": 4.805699,
+    "interactive_correct": false,
+    "baseline_correct": false,
+    "baseline_latency_s": 1.803124,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [
+      "result_mismatch"
+    ],
+    "baseline_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '上海' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "v1_1_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '上海' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "baseline_result": [
+      {
+        "sales_amount": null
+      }
+    ],
+    "v1_1_result": [
+      {
+        "sales_amount": null
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "amount": 3770523.65
+      }
+    ]
+  },
+  {
+    "id": "holdout-0-6-a",
+    "question": "统计华东地区客户的累计有效订单实付金额，只返回总金额。",
+    "should_clarify": true,
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "final_status": "simulated_answer_unavailable",
+    "first_latency_s": 3.701557,
+    "total_latency_s": 3.701557,
+    "interactive_correct": false,
+    "baseline_correct": false,
+    "baseline_latency_s": 2.078201,
+    "baseline_status": "success",
+    "actual_clarification_question": "华东地区具体包含哪些省份？选项：A) 江苏、浙江、安徽、上海；B) 江苏、浙江、上海、山东；C) 江苏、浙江、安徽、上海、江西；D) 其他（请说明）",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [
+      "simulated_answer_unavailable"
+    ],
+    "baseline_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.province IN ('山东', '江苏', '浙江', '安徽', '福建', '上海') LIMIT 200",
+    "v1_1_sql": "",
+    "baseline_result": [
+      {
+        "sales_amount": 10439918.2
+      }
+    ],
+    "v1_1_result": [],
+    "ground_truth_result": [
+      {
+        "amount": 3770523.65
+      }
+    ]
+  },
+  {
+    "id": "holdout-0-7-c",
+    "question": "食品生鲜中2026-08-01及以后上架的在售商品有多少个？只返回数量。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 8.646282,
+    "total_latency_s": 8.646282,
+    "interactive_correct": true,
+    "baseline_correct": true,
+    "baseline_latency_s": 1.435799,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [],
+    "baseline_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '食品生鲜' AND launch_date >= '2026-08-01' AND is_active = 1 LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '食品生鲜' AND launch_date >= '2026-08-01' AND is_active = 1 LIMIT 200",
+    "baseline_result": [
+      {
+        "product_count": 0
+      }
+    ],
+    "v1_1_result": [
+      {
+        "product_count": 0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "holdout-0-7-a",
+    "question": "食品生鲜目前在售的新品有多少个？只返回数量。",
+    "should_clarify": true,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 4.565247,
+    "total_latency_s": 4.565247,
+    "interactive_correct": false,
+    "baseline_correct": false,
+    "baseline_latency_s": 1.440049,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [
+      "missed_clarification",
+      "result_mismatch"
+    ],
+    "baseline_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '食品生鲜' AND is_active = 1 AND launch_date <= '2026-09-12' LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '食品生鲜' AND is_active = 1 AND launch_date <= '2026-09-12' LIMIT 200",
+    "baseline_result": [
+      {
+        "product_count": 109
+      }
+    ],
+    "v1_1_result": [
+      {
+        "product_count": 109
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "holdout-0-8-c",
+    "question": "上海已注册客户中VIP有多少人？只返回人数。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 3.70985,
+    "total_latency_s": 3.70985,
+    "interactive_correct": false,
+    "baseline_correct": false,
+    "baseline_latency_s": 1.014359,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [
+      "result_mismatch"
+    ],
+    "baseline_sql": "SELECT COUNT(*) AS vip_count FROM users WHERE city = '上海' AND is_vip = 1 LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS vip_count FROM users WHERE city = '上海' AND is_vip = 1 LIMIT 200",
+    "baseline_result": [
+      {
+        "vip_count": 0
+      }
+    ],
+    "v1_1_result": [
+      {
+        "vip_count": 0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 65
+      }
+    ]
+  },
+  {
+    "id": "holdout-0-8-a",
+    "question": "上海需要优先维护的客户有多少人？只返回人数。",
+    "should_clarify": true,
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "final_status": "success",
+    "first_latency_s": 4.065235,
+    "total_latency_s": 8.039195,
+    "interactive_correct": false,
+    "baseline_correct": false,
+    "baseline_latency_s": 1.266438,
+    "baseline_status": "success",
+    "actual_clarification_question": "‘需要优先维护的客户’依据什么标准判定？例如：① VIP客户（is_vip=1）；② 近30天销售额前10%的客户；③ 有退款记录且退款率>10%的客户；④ 其他标准？",
+    "followup_supplied": true,
+    "gate_accepted_followup": true,
+    "failure_categories": [
+      "result_mismatch"
+    ],
+    "baseline_sql": "SELECT COUNT(*) AS user_count FROM users WHERE city = '上海' AND register_date <= DATE_SUB('2026-09-12', INTERVAL '30' DAY) LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS user_count FROM users WHERE city = '上海' AND is_vip = 1 LIMIT 200",
+    "baseline_result": [
+      {
+        "user_count": 0
+      }
+    ],
+    "v1_1_result": [
+      {
+        "user_count": 0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 65
+      }
+    ]
+  },
+  {
+    "id": "holdout-0-9-c",
+    "question": "食品生鲜最近19天（不含今天）的有效订单销量是多少？只返回件数。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 6.690659,
+    "total_latency_s": 6.690659,
+    "interactive_correct": true,
+    "baseline_correct": true,
+    "baseline_latency_s": 2.879213,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [],
+    "baseline_sql": "SELECT SUM(oi.quantity) AS quantity FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '食品生鲜' AND o.order_date >= DATE_SUB('2026-09-12', INTERVAL '19' DAY) AND o.order_date < '2026-09-12' LIMIT 200",
+    "v1_1_sql": "SELECT SUM(oi.quantity) AS sales_quantity FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '食品生鲜' AND o.order_date >= DATE_SUB('2026-09-12', INTERVAL '19' DAY) AND o.order_date < '2026-09-12' LIMIT 200",
+    "baseline_result": [
+      {
+        "quantity": 206.0
+      }
+    ],
+    "v1_1_result": [
+      {
+        "sales_quantity": 206.0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "quantity": 206.0
+      }
+    ]
+  },
+  {
+    "id": "holdout-0-9-a",
+    "question": "食品生鲜最近卖得怎么样？只要一个汇总值。",
+    "should_clarify": true,
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "final_status": "success",
+    "first_latency_s": 2.925339,
+    "total_latency_s": 8.673102,
+    "interactive_correct": false,
+    "baseline_correct": false,
+    "baseline_latency_s": 2.560951,
+    "baseline_status": "success",
+    "actual_clarification_question": "食品生鲜的‘卖得怎么样’是指：A) 销售额（实收金额） B) 销售数量（销量） C) 有效订单数？",
+    "followup_supplied": true,
+    "gate_accepted_followup": true,
+    "failure_categories": [
+      "result_mismatch"
+    ],
+    "baseline_sql": "SELECT ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '食品生鲜' AND o.order_date >= DATE_SUB('2026-09-12', INTERVAL '7' DAY) LIMIT 200",
+    "v1_1_sql": "SELECT SUM(oi.quantity) AS sales_quantity FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '食品生鲜' AND o.order_date >= DATE_SUB('2026-09-12', INTERVAL '7' DAY) LIMIT 200",
+    "baseline_result": [
+      {
+        "sales_amount": 71202.28
+      }
+    ],
+    "v1_1_result": [
+      {
+        "sales_quantity": 688.0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "quantity": 206.0
+      }
+    ]
+  },
+  {
+    "id": "holdout-0-10-c",
+    "question": "上海所有历史有效订单的订单数是多少？只返回笔数。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 4.184214,
+    "total_latency_s": 4.184214,
+    "interactive_correct": false,
+    "baseline_correct": false,
+    "baseline_latency_s": 1.38941,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [
+      "result_mismatch"
+    ],
+    "baseline_sql": "SELECT COUNT(*) AS order_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '上海' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS order_count FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.city = '上海' LIMIT 200",
+    "baseline_result": [
+      {
+        "order_count": 0
+      }
+    ],
+    "v1_1_result": [
+      {
+        "order_count": 0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 1407
+      }
+    ]
+  },
+  {
+    "id": "holdout-0-10-a",
+    "question": "给我上海的有效订单规模，只返回一个总计数字。",
+    "should_clarify": true,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 4.564254,
+    "total_latency_s": 4.564254,
+    "interactive_correct": false,
+    "baseline_correct": false,
+    "baseline_latency_s": 1.805353,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [
+      "missed_clarification",
+      "result_mismatch"
+    ],
+    "baseline_sql": "SELECT COUNT(*) AS order_count FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.city = '上海' AND o.order_date <= '2026-09-12' LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS order_count FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.city = '上海' LIMIT 200",
+    "baseline_result": [
+      {
+        "order_count": 0
+      }
+    ],
+    "v1_1_result": [
+      {
+        "order_count": 0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 1407
+      }
+    ]
+  },
+  {
+    "id": "holdout-0-11-c",
+    "question": "2026年第二季度食品生鲜有效订单销售额是多少？按商品行实付金额统计，只返回总额。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 6.798866,
+    "total_latency_s": 6.798866,
+    "interactive_correct": true,
+    "baseline_correct": true,
+    "baseline_latency_s": 2.850453,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [],
+    "baseline_sql": "SELECT ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '食品生鲜' AND o.order_date >= '2026-04-01' AND o.order_date <= '2026-06-30' LIMIT 200",
+    "v1_1_sql": "SELECT ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '食品生鲜' AND o.order_date >= '2026-04-01' AND o.order_date <= '2026-06-30' LIMIT 200",
+    "baseline_result": [
+      {
+        "sales_amount": 92585.41
+      }
+    ],
+    "v1_1_result": [
+      {
+        "sales_amount": 92585.41
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 92585.41
+      }
+    ]
+  },
+  {
+    "id": "holdout-0-11-a",
+    "question": "帮我查下食品生鲜那段时间的有效订单销售额，只返回总额。",
+    "should_clarify": true,
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "final_status": "success",
+    "first_latency_s": 4.305731,
+    "total_latency_s": 12.460094,
+    "interactive_correct": false,
+    "baseline_correct": false,
+    "baseline_latency_s": 2.433968,
+    "baseline_status": "success",
+    "actual_clarification_question": "‘那段时间’具体指？A) 过去7天（2026-09-06至2026-09-12） B) 过去30天 C) 本月（2026-09-01至2026-09-12） D) 其他指定区间",
+    "followup_supplied": true,
+    "gate_accepted_followup": true,
+    "failure_categories": [
+      "result_mismatch"
+    ],
+    "baseline_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '食品生鲜' AND o.order_date = '2026-09-12' LIMIT 200",
+    "v1_1_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '食品生鲜' AND o.order_date BETWEEN '2026-04-01' AND '2026-06-30' LIMIT 200",
+    "baseline_result": [
+      {
+        "sales_amount": 15902.47
+      }
+    ],
+    "v1_1_result": [
+      {
+        "sales_amount": 1090571.41
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 92585.41
+      }
+    ]
+  },
+  {
+    "id": "holdout-1-0-c",
+    "question": "北京最近37天新增注册客户有多少人？不含今天，只返回人数。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 5.669942,
+    "total_latency_s": 5.669942,
+    "interactive_correct": true,
+    "baseline_correct": true,
+    "baseline_latency_s": 1.575996,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [],
+    "baseline_sql": "SELECT COUNT(*) AS user_count FROM users WHERE city = '北京' AND register_date >= DATE_SUB('2026-09-12', INTERVAL '37' DAY) AND register_date < '2026-09-12' LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS user_count FROM users WHERE city = '北京' AND register_date >= DATE_SUB('2026-09-12', INTERVAL '37' DAY) AND register_date < '2026-09-12' LIMIT 200",
+    "baseline_result": [
+      {
+        "user_count": 0
+      }
+    ],
+    "v1_1_result": [
+      {
+        "user_count": 0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "holdout-1-0-a",
+    "question": "北京最近新注册了多少客户？只返回人数。",
+    "should_clarify": true,
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "final_status": "success",
+    "first_latency_s": 2.638806,
+    "total_latency_s": 8.61284,
+    "interactive_correct": true,
+    "baseline_correct": true,
+    "baseline_latency_s": 1.249879,
+    "baseline_status": "success",
+    "actual_clarification_question": "‘最近’指最近多少天？（例如：7天、15天、30天）",
+    "followup_supplied": true,
+    "gate_accepted_followup": true,
+    "failure_categories": [],
+    "baseline_sql": "SELECT COUNT(*) AS user_count FROM users WHERE city = '北京' AND register_date >= DATE_SUB('2026-09-12', INTERVAL '7' DAY) LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS user_count FROM users WHERE city = '北京' AND register_date >= DATE_SUB('2026-09-12', INTERVAL '37' DAY) AND register_date < '2026-09-12' LIMIT 200",
+    "baseline_result": [
+      {
+        "user_count": 0
+      }
+    ],
+    "v1_1_result": [
+      {
+        "user_count": 0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "holdout-1-1-c",
+    "question": "运动户外累计销售额是多少？使用有效订单商品行实付金额，只返回金额。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 5.437197,
+    "total_latency_s": 5.437197,
+    "interactive_correct": true,
+    "baseline_correct": false,
+    "baseline_latency_s": 2.489136,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [],
+    "baseline_sql": "SELECT ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '运动户外' AND o.order_date <= '2026-09-12' LIMIT 200",
+    "v1_1_sql": "SELECT ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '运动户外' LIMIT 200",
+    "baseline_result": [
+      {
+        "sales_amount": 1819431.32
+      }
+    ],
+    "v1_1_result": [
+      {
+        "sales_amount": 2022921.66
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "amount": 2022921.66
+      }
+    ]
+  },
+  {
+    "id": "holdout-1-1-a",
+    "question": "汇总一下运动户外的累计销售表现，只需要一个数字。",
+    "should_clarify": true,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 5.623908,
+    "total_latency_s": 5.623908,
+    "interactive_correct": true,
+    "baseline_correct": false,
+    "baseline_latency_s": 2.452639,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [
+      "missed_clarification"
+    ],
+    "baseline_sql": "SELECT ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '运动户外' AND o.order_date <= '2026-09-12' LIMIT 200",
+    "v1_1_sql": "SELECT ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM products AS p JOIN order_items AS oi ON p.product_id = oi.product_id JOIN orders AS o ON oi.order_id = o.order_id WHERE p.category = '运动户外' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "baseline_result": [
+      {
+        "sales_amount": 1819431.32
+      }
+    ],
+    "v1_1_result": [
+      {
+        "sales_amount": 2022921.66
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "amount": 2022921.66
+      }
+    ]
+  },
+  {
+    "id": "holdout-1-2-c",
+    "question": "北京客户的有效订单中，实付金额超过1280元的有几笔？只返回笔数。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 4.783145,
+    "total_latency_s": 4.783145,
+    "interactive_correct": false,
+    "baseline_correct": false,
+    "baseline_latency_s": 1.68745,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [
+      "result_mismatch"
+    ],
+    "baseline_sql": "SELECT COUNT(*) AS order_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '北京' AND o.order_status IN ('paid', 'completed', 'shipped') AND o.paid_amount > 1280 LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS order_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '北京' AND o.order_status IN ('paid', 'completed', 'shipped') AND o.paid_amount > 1280 LIMIT 200",
+    "baseline_result": [
+      {
+        "order_count": 0
+      }
+    ],
+    "v1_1_result": [
+      {
+        "order_count": 0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 844
+      }
+    ]
+  },
+  {
+    "id": "holdout-1-2-a",
+    "question": "北京客户的有效订单里有多少大额订单？只返回笔数。",
+    "should_clarify": true,
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "final_status": "success",
+    "first_latency_s": 3.265111,
+    "total_latency_s": 11.760981000000001,
+    "interactive_correct": false,
+    "baseline_correct": false,
+    "baseline_latency_s": 1.914267,
+    "baseline_status": "success",
+    "actual_clarification_question": "‘大额订单’指单笔订单实收金额超过多少元？例如：300元、500元，还是其他数值？",
+    "followup_supplied": true,
+    "gate_accepted_followup": true,
+    "failure_categories": [
+      "result_mismatch"
+    ],
+    "baseline_sql": "SELECT COUNT(*) AS order_count FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE u.city = '北京' AND o.order_status IN ('paid', 'completed', 'shipped') AND o.paid_amount > 1000 AND o.order_date <= '2026-09-12' LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS order_count FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.city = '北京' AND o.paid_amount > 1280 LIMIT 200",
+    "baseline_result": [
+      {
+        "order_count": 0
+      }
+    ],
+    "v1_1_result": [
+      {
+        "order_count": 0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 844
+      }
+    ]
+  },
+  {
+    "id": "holdout-1-3-c",
+    "question": "运动户外在售商品中，标价低于200元的有几个？只返回数量。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 4.781902,
+    "total_latency_s": 4.781902,
+    "interactive_correct": true,
+    "baseline_correct": true,
+    "baseline_latency_s": 1.059234,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [],
+    "baseline_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '运动户外' AND is_active = 1 AND list_price < 200 LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '运动户外' AND is_active = 1 AND list_price < 200 LIMIT 200",
+    "baseline_result": [
+      {
+        "product_count": 7
+      }
+    ],
+    "v1_1_result": [
+      {
+        "product_count": 7
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 7
+      }
+    ]
+  },
+  {
+    "id": "holdout-1-3-a",
+    "question": "运动户外在售商品里便宜的有几个？只返回数量。",
+    "should_clarify": true,
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "final_status": "success",
+    "first_latency_s": 3.582554,
+    "total_latency_s": 7.855155,
+    "interactive_correct": true,
+    "baseline_correct": false,
+    "baseline_latency_s": 1.163113,
+    "baseline_status": "success",
+    "actual_clarification_question": "便宜的指：A) list_price最低的前N个（请指定N） B) list_price低于某个数值（请指定阈值） C) cost_price最低的前N个 D) 其他标准？",
+    "followup_supplied": true,
+    "gate_accepted_followup": true,
+    "failure_categories": [],
+    "baseline_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '运动户外' AND is_active = 1 AND list_price < 100 LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '运动户外' AND is_active = 1 AND list_price < 200 LIMIT 200",
+    "baseline_result": [
+      {
+        "product_count": 0
+      }
+    ],
+    "v1_1_result": [
+      {
+        "product_count": 7
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 7
+      }
+    ]
+  },
+  {
+    "id": "holdout-1-4-c",
+    "question": "北京客户按有效订单数量从高到低取前5名，返回用户ID和订单数；相同数量按用户ID升序。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 6.034201,
+    "total_latency_s": 6.034201,
+    "interactive_correct": false,
+    "baseline_correct": false,
+    "baseline_latency_s": 2.030478,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [
+      "result_mismatch"
+    ],
+    "baseline_sql": "SELECT u.user_id, COUNT(*) AS order_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '北京' AND o.order_status IN ('paid', 'completed', 'shipped') GROUP BY u.user_id ORDER BY order_count DESC, u.user_id ASC LIMIT 5",
+    "v1_1_sql": "SELECT u.user_id, COUNT(*) AS order_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '北京' AND o.order_status IN ('paid', 'completed', 'shipped') GROUP BY u.user_id ORDER BY order_count DESC, u.user_id ASC LIMIT 5",
+    "baseline_result": [],
+    "v1_1_result": [],
+    "ground_truth_result": [
+      {
+        "user_id": 2493,
+        "total": 20
+      },
+      {
+        "user_id": 1892,
+        "total": 18
+      },
+      {
+        "user_id": 1923,
+        "total": 18
+      },
+      {
+        "user_id": 1012,
+        "total": 17
+      },
+      {
+        "user_id": 2001,
+        "total": 17
+      }
+    ]
+  },
+  {
+    "id": "holdout-1-4-a",
+    "question": "找出北京表现最好的前5名客户，返回用户ID和表现指标，指标相同按用户ID升序。",
+    "should_clarify": true,
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "final_status": "success",
+    "first_latency_s": 3.669554,
+    "total_latency_s": 10.517262,
+    "interactive_correct": false,
+    "baseline_correct": false,
+    "baseline_latency_s": 2.591403,
+    "baseline_status": "success",
+    "actual_clarification_question": "客户‘表现最好’具体指：A) 总销售额（paid_amount） B) 总订单数 C) 总购买商品数量 D) 近30天复购次数？",
+    "followup_supplied": true,
+    "gate_accepted_followup": true,
+    "failure_categories": [
+      "result_mismatch"
+    ],
+    "baseline_sql": "SELECT u.user_id, ROUND(SUM(o.paid_amount), 2) AS performance_metric FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '北京' AND o.order_status IN ('paid', 'completed', 'shipped') AND o.order_date <= '2026-09-12' GROUP BY u.user_id ORDER BY performance_metric DESC, u.user_id ASC LIMIT 5",
+    "v1_1_sql": "SELECT u.user_id, COUNT(o.order_id) AS order_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '北京' AND o.order_status IN ('paid', 'completed', 'shipped') AND o.order_date >= DATE_SUB('2026-09-12', INTERVAL '30' DAY) GROUP BY u.user_id ORDER BY order_count DESC, u.user_id ASC LIMIT 5",
+    "baseline_result": [],
+    "v1_1_result": [],
+    "ground_truth_result": [
+      {
+        "user_id": 2493,
+        "total": 20
+      },
+      {
+        "user_id": 1892,
+        "total": 18
+      },
+      {
+        "user_id": 1923,
+        "total": 18
+      },
+      {
+        "user_id": 1012,
+        "total": 17
+      },
+      {
+        "user_id": 2001,
+        "total": 17
+      }
+    ]
+  },
+  {
+    "id": "holdout-1-5-c",
+    "question": "运动户外在2026-08-06到2026-09-11期间的已批准退款金额是多少？包含首尾日期，只返回金额。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 6.660359,
+    "total_latency_s": 6.660359,
+    "interactive_correct": true,
+    "baseline_correct": true,
+    "baseline_latency_s": 2.761192,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [],
+    "baseline_sql": "SELECT ROUND(SUM(r.refund_amount), 2) AS refund_amount FROM refunds AS r JOIN order_items AS oi ON r.order_item_id = oi.order_item_id JOIN products AS p ON oi.product_id = p.product_id WHERE p.category = '运动户外' AND r.refund_status = 'approved' AND r.refund_date BETWEEN '2026-08-06' AND '2026-09-11' LIMIT 200",
+    "v1_1_sql": "SELECT ROUND(SUM(r.refund_amount), 2) AS refund_amount FROM refunds AS r JOIN order_items AS oi ON r.order_item_id = oi.order_item_id JOIN products AS p ON oi.product_id = p.product_id WHERE p.category = '运动户外' AND r.refund_status = 'approved' AND r.refund_date BETWEEN '2026-08-06' AND '2026-09-11' LIMIT 200",
+    "baseline_result": [
+      {
+        "refund_amount": 7018.61
+      }
+    ],
+    "v1_1_result": [
+      {
+        "refund_amount": 7018.61
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "amount": 7018.61
+      }
+    ]
+  },
+  {
+    "id": "holdout-1-5-a",
+    "question": "运动户外近期批准了多少退款金额？只返回金额。",
+    "should_clarify": true,
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "final_status": "success",
+    "first_latency_s": 2.267949,
+    "total_latency_s": 8.782713000000001,
+    "interactive_correct": true,
+    "baseline_correct": false,
+    "baseline_latency_s": 2.556911,
+    "baseline_status": "success",
+    "actual_clarification_question": "‘近期’指最近7天、15天还是30天？",
+    "followup_supplied": true,
+    "gate_accepted_followup": true,
+    "failure_categories": [],
+    "baseline_sql": "SELECT ROUND(SUM(r.refund_amount), 2) AS refund_amount FROM refunds AS r JOIN order_items AS oi ON r.order_item_id = oi.order_item_id JOIN products AS p ON oi.product_id = p.product_id WHERE r.refund_status = 'approved' AND p.category = '运动户外' AND r.refund_date >= DATE_SUB('2026-09-12', INTERVAL '7' DAY) LIMIT 200",
+    "v1_1_sql": "SELECT ROUND(SUM(r.refund_amount), 2) AS refund_amount FROM refunds AS r JOIN order_items AS oi ON r.order_item_id = oi.order_item_id JOIN products AS p ON oi.product_id = p.product_id WHERE r.refund_status = 'approved' AND p.category = '运动户外' AND r.refund_date BETWEEN '2026-08-06' AND '2026-09-11' LIMIT 200",
+    "baseline_result": [
+      {
+        "refund_amount": 12536.24
+      }
+    ],
+    "v1_1_result": [
+      {
+        "refund_amount": 7018.61
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "amount": 7018.61
+      }
+    ]
+  },
+  {
+    "id": "holdout-1-6-c",
+    "question": "统计北京客户的累计有效订单实付金额，只返回总金额。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 4.65184,
+    "total_latency_s": 4.65184,
+    "interactive_correct": false,
+    "baseline_correct": false,
+    "baseline_latency_s": 1.788413,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [
+      "result_mismatch"
+    ],
+    "baseline_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '北京' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "v1_1_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS total_paid_amount FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '北京' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "baseline_result": [
+      {
+        "sales_amount": null
+      }
+    ],
+    "v1_1_result": [
+      {
+        "total_paid_amount": null
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "amount": 3715837.07
+      }
+    ]
+  },
+  {
+    "id": "holdout-1-6-a",
+    "question": "统计北方地区客户的累计有效订单实付金额，只返回总金额。",
+    "should_clarify": true,
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "final_status": "simulated_answer_unavailable",
+    "first_latency_s": 4.20566,
+    "total_latency_s": 4.20566,
+    "interactive_correct": false,
+    "baseline_correct": true,
+    "baseline_latency_s": 2.59373,
+    "baseline_status": "success",
+    "actual_clarification_question": "请问‘北方地区’具体包含哪些省份？例如：A. 北京、天津、河北、山西、内蒙古、辽宁、吉林、黑龙江；B. 仅北京、天津、河北、山西、内蒙古；C. 其他自定义范围。",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [
+      "simulated_answer_unavailable"
+    ],
+    "baseline_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS total_paid_amount FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.province IN ('北京', '天津', '河北', '山西', '内蒙古', '辽宁', '吉林', '黑龙江', '山东', '河南') LIMIT 200",
+    "v1_1_sql": "",
+    "baseline_result": [
+      {
+        "total_paid_amount": 3715837.07
+      }
+    ],
+    "v1_1_result": [],
+    "ground_truth_result": [
+      {
+        "amount": 3715837.07
+      }
+    ]
+  },
+  {
+    "id": "holdout-1-7-c",
+    "question": "运动户外中2026-08-01及以后上架的在售商品有多少个？只返回数量。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 5.369389,
+    "total_latency_s": 5.369389,
+    "interactive_correct": true,
+    "baseline_correct": true,
+    "baseline_latency_s": 1.286246,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [],
+    "baseline_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '运动户外' AND launch_date >= '2026-08-01' AND is_active = 1 LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '运动户外' AND launch_date >= '2026-08-01' AND is_active = 1 LIMIT 200",
+    "baseline_result": [
+      {
+        "product_count": 0
+      }
+    ],
+    "v1_1_result": [
+      {
+        "product_count": 0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "holdout-1-7-a",
+    "question": "运动户外目前在售的新品有多少个？只返回数量。",
+    "should_clarify": true,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 4.53431,
+    "total_latency_s": 4.53431,
+    "interactive_correct": false,
+    "baseline_correct": false,
+    "baseline_latency_s": 1.43246,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [
+      "missed_clarification",
+      "result_mismatch"
+    ],
+    "baseline_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '运动户外' AND is_active = 1 AND launch_date <= '2026-09-12' LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '运动户外' AND is_active = 1 AND launch_date <= '2026-09-12' LIMIT 200",
+    "baseline_result": [
+      {
+        "product_count": 100
+      }
+    ],
+    "v1_1_result": [
+      {
+        "product_count": 100
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "holdout-1-8-c",
+    "question": "北京已注册客户中VIP有多少人？只返回人数。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 4.273802,
+    "total_latency_s": 4.273802,
+    "interactive_correct": false,
+    "baseline_correct": false,
+    "baseline_latency_s": 1.134098,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [
+      "result_mismatch"
+    ],
+    "baseline_sql": "SELECT COUNT(*) AS vip_count FROM users WHERE city = '北京' AND is_vip = 1 LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS vip_count FROM users WHERE city = '北京' AND is_vip = 1 LIMIT 200",
+    "baseline_result": [
+      {
+        "vip_count": 0
+      }
+    ],
+    "v1_1_result": [
+      {
+        "vip_count": 0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 66
+      }
+    ]
+  },
+  {
+    "id": "holdout-1-8-a",
+    "question": "北京需要优先维护的客户有多少人？只返回人数。",
+    "should_clarify": true,
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "final_status": "success",
+    "first_latency_s": 3.972584,
+    "total_latency_s": 8.571562,
+    "interactive_correct": false,
+    "baseline_correct": false,
+    "baseline_latency_s": 0.971764,
+    "baseline_status": "success",
+    "actual_clarification_question": "‘需要优先维护的客户’依据什么标准判定？例如：VIP用户、近30天销售额前10%、近30天退款率>15%、注册超1年未下单、或最近一次下单距今>90天？",
+    "followup_supplied": true,
+    "gate_accepted_followup": true,
+    "failure_categories": [
+      "result_mismatch"
+    ],
+    "baseline_sql": "SELECT COUNT(*) AS user_count FROM users WHERE city = '北京' AND user_level IN ('gold', 'black') LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS user_count FROM users WHERE city = '北京' AND is_vip = 1 LIMIT 200",
+    "baseline_result": [
+      {
+        "user_count": 0
+      }
+    ],
+    "v1_1_result": [
+      {
+        "user_count": 0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 66
+      }
+    ]
+  },
+  {
+    "id": "holdout-1-9-c",
+    "question": "运动户外最近37天（不含今天）的有效订单销量是多少？只返回件数。",
+    "should_clarify": false,
+    "first_status": "clarification_unavailable",
+    "triggered": false,
+    "final_status": "clarification_unavailable",
+    "first_latency_s": 8.457408,
+    "total_latency_s": 8.457408,
+    "interactive_correct": false,
+    "baseline_correct": true,
+    "baseline_latency_s": 3.077736,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [
+      "clarification_unavailable"
+    ],
+    "baseline_sql": "SELECT SUM(oi.quantity) AS quantity FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '运动户外' AND o.order_date >= DATE_SUB('2026-09-12', INTERVAL '37' DAY) AND o.order_date < '2026-09-12' LIMIT 200",
+    "v1_1_sql": "",
+    "baseline_result": [
+      {
+        "quantity": 355.0
+      }
+    ],
+    "v1_1_result": [],
+    "ground_truth_result": [
+      {
+        "quantity": 355.0
+      }
+    ]
+  },
+  {
+    "id": "holdout-1-9-a",
+    "question": "运动户外最近卖得怎么样？只要一个汇总值。",
+    "should_clarify": true,
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "final_status": "success",
+    "first_latency_s": 2.924131,
+    "total_latency_s": 9.786942,
+    "interactive_correct": false,
+    "baseline_correct": false,
+    "baseline_latency_s": 2.771364,
+    "baseline_status": "success",
+    "actual_clarification_question": "运动户外的销售汇总值应统计最近多少天？（选项：7天、15天、30天、90天）",
+    "followup_supplied": true,
+    "gate_accepted_followup": true,
+    "failure_categories": [
+      "result_mismatch"
+    ],
+    "baseline_sql": "SELECT ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '运动户外' AND o.order_date >= DATE_SUB('2026-09-12', INTERVAL '7' DAY) LIMIT 200",
+    "v1_1_sql": "SELECT ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '运动户外' AND o.order_date >= DATE_SUB('2026-09-12', INTERVAL '37' DAY) AND o.order_date < '2026-09-12' LIMIT 200",
+    "baseline_result": [
+      {
+        "sales_amount": 231816.49
+      }
+    ],
+    "v1_1_result": [
+      {
+        "sales_amount": 150448.92
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "quantity": 355.0
+      }
+    ]
+  },
+  {
+    "id": "holdout-1-10-c",
+    "question": "北京所有历史有效订单的订单数是多少？只返回笔数。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 4.134094,
+    "total_latency_s": 4.134094,
+    "interactive_correct": false,
+    "baseline_correct": false,
+    "baseline_latency_s": 1.522015,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [
+      "result_mismatch"
+    ],
+    "baseline_sql": "SELECT COUNT(*) AS order_count FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.city = '北京' LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS order_count FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE u.city = '北京' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "baseline_result": [
+      {
+        "order_count": 0
+      }
+    ],
+    "v1_1_result": [
+      {
+        "order_count": 0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 1459
+      }
+    ]
+  },
+  {
+    "id": "holdout-1-10-a",
+    "question": "给我北京的有效订单规模，只返回一个总计数字。",
+    "should_clarify": true,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 4.482998,
+    "total_latency_s": 4.482998,
+    "interactive_correct": false,
+    "baseline_correct": false,
+    "baseline_latency_s": 1.703533,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [
+      "missed_clarification",
+      "result_mismatch"
+    ],
+    "baseline_sql": "SELECT COUNT(*) AS order_count FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.city = '北京' AND o.order_date <= '2026-09-12' LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS order_count FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.city = '北京' LIMIT 200",
+    "baseline_result": [
+      {
+        "order_count": 0
+      }
+    ],
+    "v1_1_result": [
+      {
+        "order_count": 0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 1459
+      }
+    ]
+  },
+  {
+    "id": "holdout-1-11-c",
+    "question": "2026年第二季度运动户外有效订单销售额是多少？按商品行实付金额统计，只返回总额。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 6.704338,
+    "total_latency_s": 6.704338,
+    "interactive_correct": true,
+    "baseline_correct": true,
+    "baseline_latency_s": 2.711235,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [],
+    "baseline_sql": "SELECT ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '运动户外' AND o.order_date >= '2026-04-01' AND o.order_date <= '2026-06-30' LIMIT 200",
+    "v1_1_sql": "SELECT ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '运动户外' AND o.order_date >= '2026-04-01' AND o.order_date <= '2026-06-30' LIMIT 200",
+    "baseline_result": [
+      {
+        "sales_amount": 258998.73
+      }
+    ],
+    "v1_1_result": [
+      {
+        "sales_amount": 258998.73
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 258998.73
+      }
+    ]
+  },
+  {
+    "id": "holdout-1-11-a",
+    "question": "帮我查下运动户外那段时间的有效订单销售额，只返回总额。",
+    "should_clarify": true,
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "final_status": "success",
+    "first_latency_s": 3.348779,
+    "total_latency_s": 10.791803,
+    "interactive_correct": false,
+    "baseline_correct": false,
+    "baseline_latency_s": 2.451059,
+    "baseline_status": "success",
+    "actual_clarification_question": "请问'那段时间'具体指哪一时间段？例如：近7天、近30天、本月、上月，还是其他自定义区间？",
+    "followup_supplied": true,
+    "gate_accepted_followup": true,
+    "failure_categories": [
+      "result_mismatch"
+    ],
+    "baseline_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '运动户外' AND o.order_date = '2026-09-12' LIMIT 200",
+    "v1_1_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '运动户外' AND o.order_date BETWEEN '2026-04-01' AND '2026-06-30' LIMIT 200",
+    "baseline_result": [
+      {
+        "sales_amount": 27401.23
+      }
+    ],
+    "v1_1_result": [
+      {
+        "sales_amount": 981286.33
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 258998.73
+      }
+    ]
+  },
+  {
+    "id": "holdout-2-0-c",
+    "question": "广州最近53天新增注册客户有多少人？不含今天，只返回人数。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 4.907022,
+    "total_latency_s": 4.907022,
+    "interactive_correct": true,
+    "baseline_correct": true,
+    "baseline_latency_s": 2.167933,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [],
+    "baseline_sql": "SELECT COUNT(*) AS user_count FROM users WHERE city = '广州' AND register_date >= DATE_SUB('2026-09-12', INTERVAL '53' DAY) AND register_date < '2026-09-12' LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS user_count FROM users WHERE city = '广州' AND register_date >= DATE_SUB('2026-09-12', INTERVAL '53' DAY) AND register_date < '2026-09-12' LIMIT 200",
+    "baseline_result": [
+      {
+        "user_count": 0
+      }
+    ],
+    "v1_1_result": [
+      {
+        "user_count": 0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "holdout-2-0-a",
+    "question": "广州最近新注册了多少客户？只返回人数。",
+    "should_clarify": true,
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "final_status": "success",
+    "first_latency_s": 3.055638,
+    "total_latency_s": 9.111327,
+    "interactive_correct": true,
+    "baseline_correct": true,
+    "baseline_latency_s": 1.305969,
+    "baseline_status": "success",
+    "actual_clarification_question": "广州最近新注册客户的时间范围是？选项：A) 过去7天  B) 过去30天  C) 本月至今  D) 本季度至今",
+    "followup_supplied": true,
+    "gate_accepted_followup": true,
+    "failure_categories": [],
+    "baseline_sql": "SELECT COUNT(*) AS user_count FROM users WHERE city = '广州' AND register_date >= DATE_SUB('2026-09-12', INTERVAL '7' DAY) LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS user_count FROM users WHERE city = '广州' AND register_date >= DATE_SUB('2026-09-12', INTERVAL '53' DAY) AND register_date < '2026-09-12' LIMIT 200",
+    "baseline_result": [
+      {
+        "user_count": 0
+      }
+    ],
+    "v1_1_result": [
+      {
+        "user_count": 0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "holdout-2-1-c",
+    "question": "美妆个护累计销售额是多少？使用有效订单商品行实付金额，只返回金额。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 5.968721,
+    "total_latency_s": 5.968721,
+    "interactive_correct": true,
+    "baseline_correct": false,
+    "baseline_latency_s": 2.701616,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [],
+    "baseline_sql": "SELECT ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '美妆个护' AND o.order_date <= '2026-09-12' LIMIT 200",
+    "v1_1_sql": "SELECT ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM products AS p JOIN order_items AS oi ON p.product_id = oi.product_id JOIN orders AS o ON oi.order_id = o.order_id WHERE p.category = '美妆个护' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "baseline_result": [
+      {
+        "sales_amount": 1370588.3
+      }
+    ],
+    "v1_1_result": [
+      {
+        "sales_amount": 1517768.82
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "amount": 1517768.82
+      }
+    ]
+  },
+  {
+    "id": "holdout-2-1-a",
+    "question": "汇总一下美妆个护的累计销售表现，只需要一个数字。",
+    "should_clarify": true,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 5.498366,
+    "total_latency_s": 5.498366,
+    "interactive_correct": true,
+    "baseline_correct": false,
+    "baseline_latency_s": 2.654949,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [
+      "missed_clarification"
+    ],
+    "baseline_sql": "SELECT ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM products AS p JOIN order_items AS oi ON p.product_id = oi.product_id JOIN orders AS o ON oi.order_id = o.order_id WHERE p.category = '美妆个护' AND o.order_status IN ('paid', 'completed', 'shipped') AND o.order_date <= '2026-09-12' LIMIT 200",
+    "v1_1_sql": "SELECT ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM products AS p JOIN order_items AS oi ON p.product_id = oi.product_id JOIN orders AS o ON oi.order_id = o.order_id WHERE p.category = '美妆个护' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "baseline_result": [
+      {
+        "sales_amount": 1370588.3
+      }
+    ],
+    "v1_1_result": [
+      {
+        "sales_amount": 1517768.82
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "amount": 1517768.82
+      }
+    ]
+  },
+  {
+    "id": "holdout-2-2-c",
+    "question": "广州客户的有效订单中，实付金额超过1710元的有几笔？只返回笔数。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 5.334547,
+    "total_latency_s": 5.334547,
+    "interactive_correct": false,
+    "baseline_correct": false,
+    "baseline_latency_s": 1.6087,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [
+      "result_mismatch"
+    ],
+    "baseline_sql": "SELECT COUNT(*) AS order_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '广州' AND o.order_status IN ('paid', 'completed', 'shipped') AND o.paid_amount > 1710 LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS order_count FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE u.city = '广州' AND o.order_status IN ('paid', 'completed', 'shipped') AND o.paid_amount > 1710 LIMIT 200",
+    "baseline_result": [
+      {
+        "order_count": 0
+      }
+    ],
+    "v1_1_result": [
+      {
+        "order_count": 0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 627
+      }
+    ]
+  },
+  {
+    "id": "holdout-2-2-a",
+    "question": "广州客户的有效订单里有多少大额订单？只返回笔数。",
+    "should_clarify": true,
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "final_status": "success",
+    "first_latency_s": 3.178795,
+    "total_latency_s": 8.28052,
+    "interactive_correct": false,
+    "baseline_correct": false,
+    "baseline_latency_s": 1.948225,
+    "baseline_status": "success",
+    "actual_clarification_question": "‘大额订单’指单笔订单实收金额超过多少元？例如：300元、500元，还是其他数值？",
+    "followup_supplied": true,
+    "gate_accepted_followup": true,
+    "failure_categories": [
+      "result_mismatch"
+    ],
+    "baseline_sql": "SELECT COUNT(*) AS order_count FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE u.city = '广州' AND o.order_status IN ('paid', 'completed', 'shipped') AND o.paid_amount > 1000 AND o.order_date <= '2026-09-12' LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS order_count FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE u.city = '广州' AND o.order_status IN ('paid', 'completed', 'shipped') AND o.paid_amount > 1710 LIMIT 200",
+    "baseline_result": [
+      {
+        "order_count": 0
+      }
+    ],
+    "v1_1_result": [
+      {
+        "order_count": 0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 627
+      }
+    ]
+  },
+  {
+    "id": "holdout-2-3-c",
+    "question": "美妆个护在售商品中，标价低于280元的有几个？只返回数量。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 4.198085,
+    "total_latency_s": 4.198085,
+    "interactive_correct": true,
+    "baseline_correct": true,
+    "baseline_latency_s": 1.550252,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [],
+    "baseline_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '美妆个护' AND is_active = 1 AND list_price < 280 LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '美妆个护' AND is_active = 1 AND list_price < 280 LIMIT 200",
+    "baseline_result": [
+      {
+        "product_count": 85
+      }
+    ],
+    "v1_1_result": [
+      {
+        "product_count": 85
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 85
+      }
+    ]
+  },
+  {
+    "id": "holdout-2-3-a",
+    "question": "美妆个护在售商品里便宜的有几个？只返回数量。",
+    "should_clarify": true,
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "final_status": "success",
+    "first_latency_s": 3.840702,
+    "total_latency_s": 8.524937,
+    "interactive_correct": true,
+    "baseline_correct": false,
+    "baseline_latency_s": 1.2789,
+    "baseline_status": "success",
+    "actual_clarification_question": "美妆个护在售商品中‘便宜’的定义是：A) 单价低于品类平均价，B) 单价低于100元，C) 单价处于该品类最低20%分位，D) 其他标准？",
+    "followup_supplied": true,
+    "gate_accepted_followup": true,
+    "failure_categories": [],
+    "baseline_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '美妆个护' AND is_active = 1 AND list_price < 100 LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '美妆个护' AND is_active = 1 AND list_price < 280 LIMIT 200",
+    "baseline_result": [
+      {
+        "product_count": 9
+      }
+    ],
+    "v1_1_result": [
+      {
+        "product_count": 85
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 85
+      }
+    ]
+  },
+  {
+    "id": "holdout-2-4-c",
+    "question": "广州客户按有效订单数量从高到低取前6名，返回用户ID和订单数；相同数量按用户ID升序。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 5.670061,
+    "total_latency_s": 5.670061,
+    "interactive_correct": false,
+    "baseline_correct": false,
+    "baseline_latency_s": 2.070331,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [
+      "result_mismatch"
+    ],
+    "baseline_sql": "SELECT u.user_id, COUNT(*) AS order_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '广州' AND o.order_status IN ('paid', 'completed', 'shipped') GROUP BY u.user_id ORDER BY order_count DESC, u.user_id ASC LIMIT 6",
+    "v1_1_sql": "SELECT u.user_id, COUNT(*) AS order_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '广州' AND o.order_status IN ('paid', 'completed', 'shipped') GROUP BY u.user_id ORDER BY order_count DESC, u.user_id ASC LIMIT 6",
+    "baseline_result": [],
+    "v1_1_result": [],
+    "ground_truth_result": [
+      {
+        "user_id": 2525,
+        "total": 19
+      },
+      {
+        "user_id": 1335,
+        "total": 18
+      },
+      {
+        "user_id": 2901,
+        "total": 18
+      },
+      {
+        "user_id": 336,
+        "total": 16
+      },
+      {
+        "user_id": 460,
+        "total": 16
+      },
+      {
+        "user_id": 2804,
+        "total": 16
+      }
+    ]
+  },
+  {
+    "id": "holdout-2-4-a",
+    "question": "找出广州表现最好的前6名客户，返回用户ID和表现指标，指标相同按用户ID升序。",
+    "should_clarify": true,
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "final_status": "success",
+    "first_latency_s": 3.661321,
+    "total_latency_s": 9.883082,
+    "interactive_correct": false,
+    "baseline_correct": false,
+    "baseline_latency_s": 2.680195,
+    "baseline_status": "success",
+    "actual_clarification_question": "客户‘表现最好’是指：A) 总销售额最高；B) 总订单数最多；C) 近30天复购次数最多；D) VIP等级最高（black > gold > silver > normal）？",
+    "followup_supplied": true,
+    "gate_accepted_followup": true,
+    "failure_categories": [
+      "result_mismatch"
+    ],
+    "baseline_sql": "SELECT u.user_id, ROUND(SUM(o.paid_amount), 2) AS performance_metric FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '广州' AND o.order_status IN ('paid', 'completed', 'shipped') AND o.order_date <= '2026-09-12' GROUP BY u.user_id ORDER BY performance_metric DESC, u.user_id ASC LIMIT 6",
+    "v1_1_sql": "SELECT u.user_id, COUNT(o.order_id) AS order_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '广州' AND o.order_status IN ('paid', 'completed', 'shipped') AND o.order_date >= DATE_SUB('2026-09-12', INTERVAL '30' DAY) GROUP BY u.user_id ORDER BY order_count DESC, u.user_id ASC LIMIT 6",
+    "baseline_result": [],
+    "v1_1_result": [],
+    "ground_truth_result": [
+      {
+        "user_id": 2525,
+        "total": 19
+      },
+      {
+        "user_id": 1335,
+        "total": 18
+      },
+      {
+        "user_id": 2901,
+        "total": 18
+      },
+      {
+        "user_id": 336,
+        "total": 16
+      },
+      {
+        "user_id": 460,
+        "total": 16
+      },
+      {
+        "user_id": 2804,
+        "total": 16
+      }
+    ]
+  },
+  {
+    "id": "holdout-2-5-c",
+    "question": "美妆个护在2026-07-21到2026-09-11期间的已批准退款金额是多少？包含首尾日期，只返回金额。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 10.863398,
+    "total_latency_s": 10.863398,
+    "interactive_correct": true,
+    "baseline_correct": true,
+    "baseline_latency_s": 2.794721,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [],
+    "baseline_sql": "SELECT ROUND(SUM(r.refund_amount), 2) AS refund_amount FROM refunds AS r JOIN order_items AS oi ON r.order_item_id = oi.order_item_id JOIN products AS p ON oi.product_id = p.product_id WHERE r.refund_status = 'approved' AND p.category = '美妆个护' AND r.refund_date BETWEEN '2026-07-21' AND '2026-09-11' LIMIT 200",
+    "v1_1_sql": "SELECT ROUND(SUM(r.refund_amount), 2) AS refund_amount FROM refunds AS r JOIN order_items AS oi ON r.order_item_id = oi.order_item_id JOIN products AS p ON oi.product_id = p.product_id WHERE r.refund_status = 'approved' AND p.category = '美妆个护' AND r.refund_date BETWEEN '2026-07-21' AND '2026-09-11' LIMIT 200",
+    "baseline_result": [
+      {
+        "refund_amount": 11647.04
+      }
+    ],
+    "v1_1_result": [
+      {
+        "refund_amount": 11647.04
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "amount": 11647.04
+      }
+    ]
+  },
+  {
+    "id": "holdout-2-5-a",
+    "question": "美妆个护近期批准了多少退款金额？只返回金额。",
+    "should_clarify": true,
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "final_status": "success",
+    "first_latency_s": 2.627396,
+    "total_latency_s": 9.171817,
+    "interactive_correct": true,
+    "baseline_correct": false,
+    "baseline_latency_s": 2.737596,
+    "baseline_status": "success",
+    "actual_clarification_question": "‘近期’具体指最近几天？例如：7天、15天、30天？",
+    "followup_supplied": true,
+    "gate_accepted_followup": true,
+    "failure_categories": [],
+    "baseline_sql": "SELECT ROUND(SUM(r.refund_amount), 2) AS refund_amount FROM refunds AS r JOIN order_items AS oi ON r.order_item_id = oi.order_item_id JOIN products AS p ON oi.product_id = p.product_id WHERE r.refund_status = 'approved' AND p.category = '美妆个护' AND r.refund_date >= DATE_SUB('2026-09-12', INTERVAL '7' DAY) LIMIT 200",
+    "v1_1_sql": "SELECT ROUND(SUM(r.refund_amount), 2) AS refund_amount FROM refunds AS r JOIN order_items AS oi ON r.order_item_id = oi.order_item_id JOIN products AS p ON oi.product_id = p.product_id WHERE r.refund_status = 'approved' AND p.category = '美妆个护' AND r.refund_date BETWEEN '2026-07-21' AND '2026-09-11' LIMIT 200",
+    "baseline_result": [
+      {
+        "refund_amount": 15926.49
+      }
+    ],
+    "v1_1_result": [
+      {
+        "refund_amount": 11647.04
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "amount": 11647.04
+      }
+    ]
+  },
+  {
+    "id": "holdout-2-6-c",
+    "question": "统计广州客户的累计有效订单实付金额，只返回总金额。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 4.887864,
+    "total_latency_s": 4.887864,
+    "interactive_correct": false,
+    "baseline_correct": false,
+    "baseline_latency_s": 1.723067,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [
+      "result_mismatch"
+    ],
+    "baseline_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS total_paid_amount FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '广州' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "v1_1_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS total_paid_amount FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '广州' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "baseline_result": [
+      {
+        "total_paid_amount": null
+      }
+    ],
+    "v1_1_result": [
+      {
+        "total_paid_amount": null
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "amount": 3376417.86
+      }
+    ]
+  },
+  {
+    "id": "holdout-2-6-a",
+    "question": "统计华南地区客户的累计有效订单实付金额，只返回总金额。",
+    "should_clarify": true,
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "final_status": "simulated_answer_unavailable",
+    "first_latency_s": 3.13492,
+    "total_latency_s": 3.13492,
+    "interactive_correct": false,
+    "baseline_correct": true,
+    "baseline_latency_s": 1.817906,
+    "baseline_status": "success",
+    "actual_clarification_question": "华南地区具体包含哪些省份？（A）广东、广西、海南 （B）广东、广西、海南、福建 （C）仅广东省",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [
+      "simulated_answer_unavailable"
+    ],
+    "baseline_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.province IN ('广东', '广西', '海南') LIMIT 200",
+    "v1_1_sql": "",
+    "baseline_result": [
+      {
+        "sales_amount": 3376417.86
+      }
+    ],
+    "v1_1_result": [],
+    "ground_truth_result": [
+      {
+        "amount": 3376417.86
+      }
+    ]
+  },
+  {
+    "id": "holdout-2-7-c",
+    "question": "美妆个护中2026-08-01及以后上架的在售商品有多少个？只返回数量。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 9.116589,
+    "total_latency_s": 9.116589,
+    "interactive_correct": true,
+    "baseline_correct": true,
+    "baseline_latency_s": 1.385707,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [],
+    "baseline_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '美妆个护' AND launch_date >= '2026-08-01' AND is_active = 1 LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '美妆个护' AND launch_date >= '2026-08-01' AND is_active = 1 LIMIT 200",
+    "baseline_result": [
+      {
+        "product_count": 0
+      }
+    ],
+    "v1_1_result": [
+      {
+        "product_count": 0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "holdout-2-7-a",
+    "question": "美妆个护目前在售的新品有多少个？只返回数量。",
+    "should_clarify": true,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 11.372019,
+    "total_latency_s": 11.372019,
+    "interactive_correct": false,
+    "baseline_correct": false,
+    "baseline_latency_s": 1.369231,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [
+      "missed_clarification",
+      "result_mismatch"
+    ],
+    "baseline_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '美妆个护' AND is_active = 1 AND launch_date <= '2026-09-12' LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '美妆个护' AND is_active = 1 AND launch_date <= '2026-09-12' LIMIT 200",
+    "baseline_result": [
+      {
+        "product_count": 123
+      }
+    ],
+    "v1_1_result": [
+      {
+        "product_count": 123
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "holdout-2-8-c",
+    "question": "广州已注册客户中VIP有多少人？只返回人数。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 4.271404,
+    "total_latency_s": 4.271404,
+    "interactive_correct": false,
+    "baseline_correct": false,
+    "baseline_latency_s": 1.590796,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [
+      "result_mismatch"
+    ],
+    "baseline_sql": "SELECT COUNT(*) AS vip_count FROM users WHERE city = '广州' AND is_vip = 1 LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS vip_count FROM users WHERE city = '广州' AND is_vip = 1 LIMIT 200",
+    "baseline_result": [
+      {
+        "vip_count": 0
+      }
+    ],
+    "v1_1_result": [
+      {
+        "vip_count": 0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 47
+      }
+    ]
+  },
+  {
+    "id": "holdout-2-8-a",
+    "question": "广州需要优先维护的客户有多少人？只返回人数。",
+    "should_clarify": true,
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "final_status": "success",
+    "first_latency_s": 4.066891,
+    "total_latency_s": 8.208624,
+    "interactive_correct": false,
+    "baseline_correct": false,
+    "baseline_latency_s": 1.209551,
+    "baseline_status": "success",
+    "actual_clarification_question": "‘需要优先维护的客户’具体指哪类客户？例如：1) VIP客户（is_vip=1）；2) 近30天有购买的客户；3) 历史成交额前10%的客户；4) 近期申请过退款的客户。",
+    "followup_supplied": true,
+    "gate_accepted_followup": true,
+    "failure_categories": [
+      "result_mismatch"
+    ],
+    "baseline_sql": "SELECT COUNT(*) AS user_count FROM users WHERE city = '广州' AND (user_level IN ('gold', 'black') OR is_vip = 1) LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS user_count FROM users WHERE city = '广州' AND is_vip = 1 LIMIT 200",
+    "baseline_result": [
+      {
+        "user_count": 0
+      }
+    ],
+    "v1_1_result": [
+      {
+        "user_count": 0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 47
+      }
+    ]
+  },
+  {
+    "id": "holdout-2-9-c",
+    "question": "美妆个护最近53天（不含今天）的有效订单销量是多少？只返回件数。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 7.457511,
+    "total_latency_s": 7.457511,
+    "interactive_correct": true,
+    "baseline_correct": true,
+    "baseline_latency_s": 2.906234,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [],
+    "baseline_sql": "SELECT SUM(oi.quantity) AS quantity FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '美妆个护' AND o.order_date >= DATE_SUB('2026-09-12', INTERVAL '53' DAY) AND o.order_date < '2026-09-12' LIMIT 200",
+    "v1_1_sql": "SELECT SUM(oi.quantity) AS sales_quantity FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '美妆个护' AND o.order_date >= DATE_SUB('2026-09-12', INTERVAL '53' DAY) AND o.order_date < '2026-09-12' LIMIT 200",
+    "baseline_result": [
+      {
+        "quantity": 613.0
+      }
+    ],
+    "v1_1_result": [
+      {
+        "sales_quantity": 613.0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "quantity": 613.0
+      }
+    ]
+  },
+  {
+    "id": "holdout-2-9-a",
+    "question": "美妆个护最近卖得怎么样？只要一个汇总值。",
+    "should_clarify": true,
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "final_status": "success",
+    "first_latency_s": 3.440814,
+    "total_latency_s": 10.294249,
+    "interactive_correct": false,
+    "baseline_correct": false,
+    "baseline_latency_s": 2.57946,
+    "baseline_status": "success",
+    "actual_clarification_question": "‘最近’具体指多长时间？例如：最近7天、最近30天，还是最近一个自然月？",
+    "followup_supplied": true,
+    "gate_accepted_followup": true,
+    "failure_categories": [
+      "result_mismatch"
+    ],
+    "baseline_sql": "SELECT ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '美妆个护' AND o.order_date >= DATE_SUB('2026-09-12', INTERVAL '7' DAY) LIMIT 200",
+    "v1_1_sql": "SELECT ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '美妆个护' AND o.order_date >= DATE_SUB('2026-09-12', INTERVAL '53' DAY) AND o.order_date < '2026-09-12' LIMIT 200",
+    "baseline_result": [
+      {
+        "sales_amount": 165572.26
+      }
+    ],
+    "v1_1_result": [
+      {
+        "sales_amount": 132955.05
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "quantity": 613.0
+      }
+    ]
+  },
+  {
+    "id": "holdout-2-10-c",
+    "question": "广州所有历史有效订单的订单数是多少？只返回笔数。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 5.090029,
+    "total_latency_s": 5.090029,
+    "interactive_correct": false,
+    "baseline_correct": false,
+    "baseline_latency_s": 1.658679,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [
+      "result_mismatch"
+    ],
+    "baseline_sql": "SELECT COUNT(*) AS order_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '广州' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS order_count FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.city = '广州' LIMIT 200",
+    "baseline_result": [
+      {
+        "order_count": 0
+      }
+    ],
+    "v1_1_result": [
+      {
+        "order_count": 0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 1278
+      }
+    ]
+  },
+  {
+    "id": "holdout-2-10-a",
+    "question": "给我广州的有效订单规模，只返回一个总计数字。",
+    "should_clarify": true,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 4.592583,
+    "total_latency_s": 4.592583,
+    "interactive_correct": false,
+    "baseline_correct": false,
+    "baseline_latency_s": 2.148649,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [
+      "missed_clarification",
+      "result_mismatch"
+    ],
+    "baseline_sql": "SELECT COUNT(*) AS order_count FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.city = '广州' AND o.order_date <= '2026-09-12' LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS order_count FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.city = '广州' LIMIT 200",
+    "baseline_result": [
+      {
+        "order_count": 0
+      }
+    ],
+    "v1_1_result": [
+      {
+        "order_count": 0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 1278
+      }
+    ]
+  },
+  {
+    "id": "holdout-2-11-c",
+    "question": "2026年第二季度美妆个护有效订单销售额是多少？按商品行实付金额统计，只返回总额。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 10.789255,
+    "total_latency_s": 10.789255,
+    "interactive_correct": true,
+    "baseline_correct": true,
+    "baseline_latency_s": 2.943903,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [],
+    "baseline_sql": "SELECT ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '美妆个护' AND o.order_date >= '2026-04-01' AND o.order_date <= '2026-06-30' LIMIT 200",
+    "v1_1_sql": "SELECT ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '美妆个护' AND o.order_date >= '2026-04-01' AND o.order_date <= '2026-06-30' LIMIT 200",
+    "baseline_result": [
+      {
+        "sales_amount": 197766.27
+      }
+    ],
+    "v1_1_result": [
+      {
+        "sales_amount": 197766.27
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 197766.27
+      }
+    ]
+  },
+  {
+    "id": "holdout-2-11-a",
+    "question": "帮我查下美妆个护那段时间的有效订单销售额，只返回总额。",
+    "should_clarify": true,
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "final_status": "success",
+    "first_latency_s": 5.011864,
+    "total_latency_s": 12.689193,
+    "interactive_correct": false,
+    "baseline_correct": false,
+    "baseline_latency_s": 2.740847,
+    "baseline_status": "success",
+    "actual_clarification_question": "‘那段时间’具体指？例如：① 2026-09-01至2026-09-12；② 2026-08-01至2026-08-31；③ 最近7天（2026-09-06至2026-09-12）；④ 其他，请说明。",
+    "followup_supplied": true,
+    "gate_accepted_followup": true,
+    "failure_categories": [
+      "result_mismatch"
+    ],
+    "baseline_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '美妆个护' AND o.order_date = '2026-09-12' LIMIT 200",
+    "v1_1_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '美妆个护' AND o.order_date BETWEEN '2026-04-01' AND '2026-06-30' LIMIT 200",
+    "baseline_result": [
+      {
+        "sales_amount": 21013.63
+      }
+    ],
+    "v1_1_result": [
+      {
+        "sales_amount": 1300261.77
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 197766.27
+      }
+    ]
+  },
+  {
+    "id": "holdout-3-0-c",
+    "question": "深圳最近71天新增注册客户有多少人？不含今天，只返回人数。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 5.349479,
+    "total_latency_s": 5.349479,
+    "interactive_correct": true,
+    "baseline_correct": true,
+    "baseline_latency_s": 1.696998,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [],
+    "baseline_sql": "SELECT COUNT(*) AS user_count FROM users WHERE city = '深圳' AND register_date >= DATE_SUB('2026-09-12', INTERVAL '71' DAY) AND register_date < '2026-09-12' LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS user_count FROM users WHERE city = '深圳' AND register_date >= DATE_SUB('2026-09-12', INTERVAL '71' DAY) AND register_date < '2026-09-12' LIMIT 200",
+    "baseline_result": [
+      {
+        "user_count": 0
+      }
+    ],
+    "v1_1_result": [
+      {
+        "user_count": 0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "holdout-3-0-a",
+    "question": "深圳最近新注册了多少客户？只返回人数。",
+    "should_clarify": true,
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "final_status": "success",
+    "first_latency_s": 4.169043,
+    "total_latency_s": 9.746210000000001,
+    "interactive_correct": true,
+    "baseline_correct": true,
+    "baseline_latency_s": 1.22482,
+    "baseline_status": "success",
+    "actual_clarification_question": "深圳新注册客户的时间范围是：A) 过去7天 B) 过去30天 C) 本月（2026-09-01至2026-09-12） D) 自参考日期起倒推1个月完整周期（2026-08-12至2026-09-11）？",
+    "followup_supplied": true,
+    "gate_accepted_followup": true,
+    "failure_categories": [],
+    "baseline_sql": "SELECT COUNT(*) AS user_count FROM users WHERE city = '深圳' AND register_date >= DATE_SUB('2026-09-12', INTERVAL '7' DAY) LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS user_count FROM users WHERE city = '深圳' AND register_date >= DATE_SUB('2026-09-12', INTERVAL '71' DAY) AND register_date < '2026-09-12' LIMIT 200",
+    "baseline_result": [
+      {
+        "user_count": 0
+      }
+    ],
+    "v1_1_result": [
+      {
+        "user_count": 0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "holdout-3-1-c",
+    "question": "母婴用品累计销售额是多少？使用有效订单商品行实付金额，只返回金额。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 6.423416,
+    "total_latency_s": 6.423416,
+    "interactive_correct": true,
+    "baseline_correct": false,
+    "baseline_latency_s": 2.461516,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [],
+    "baseline_sql": "SELECT ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM products AS p JOIN order_items AS oi ON p.product_id = oi.product_id JOIN orders AS o ON oi.order_id = o.order_id WHERE p.category = '母婴用品' AND o.order_status IN ('paid', 'completed', 'shipped') AND o.order_date <= '2026-09-12' LIMIT 200",
+    "v1_1_sql": "SELECT ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM products AS p JOIN order_items AS oi ON p.product_id = oi.product_id JOIN orders AS o ON oi.order_id = o.order_id WHERE p.category = '母婴用品' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "baseline_result": [
+      {
+        "sales_amount": 1478969.0
+      }
+    ],
+    "v1_1_result": [
+      {
+        "sales_amount": 1627735.6
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "amount": 1627735.6
+      }
+    ]
+  },
+  {
+    "id": "holdout-3-1-a",
+    "question": "汇总一下母婴用品的累计销售表现，只需要一个数字。",
+    "should_clarify": true,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 5.780975,
+    "total_latency_s": 5.780975,
+    "interactive_correct": true,
+    "baseline_correct": false,
+    "baseline_latency_s": 2.47992,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [
+      "missed_clarification"
+    ],
+    "baseline_sql": "SELECT ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM products AS p JOIN order_items AS oi ON p.product_id = oi.product_id JOIN orders AS o ON oi.order_id = o.order_id WHERE p.category = '母婴用品' AND o.order_status IN ('paid', 'completed', 'shipped') AND o.order_date <= '2026-09-12' LIMIT 200",
+    "v1_1_sql": "SELECT ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM products AS p JOIN order_items AS oi ON p.product_id = oi.product_id JOIN orders AS o ON oi.order_id = o.order_id WHERE p.category = '母婴用品' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "baseline_result": [
+      {
+        "sales_amount": 1478969.0
+      }
+    ],
+    "v1_1_result": [
+      {
+        "sales_amount": 1627735.6
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "amount": 1627735.6
+      }
+    ]
+  },
+  {
+    "id": "holdout-3-2-c",
+    "question": "深圳客户的有效订单中，实付金额超过2140元的有几笔？只返回笔数。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 5.354941,
+    "total_latency_s": 5.354941,
+    "interactive_correct": true,
+    "baseline_correct": true,
+    "baseline_latency_s": 1.622901,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [],
+    "baseline_sql": "SELECT COUNT(*) AS order_count FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE u.city = '深圳' AND o.order_status IN ('paid', 'completed', 'shipped') AND o.paid_amount > 2140 LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS order_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '深圳' AND o.order_status IN ('paid', 'completed', 'shipped') AND o.paid_amount > 2140 LIMIT 200",
+    "baseline_result": [
+      {
+        "order_count": 0
+      }
+    ],
+    "v1_1_result": [
+      {
+        "order_count": 0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "holdout-3-2-a",
+    "question": "深圳客户的有效订单里有多少大额订单？只返回笔数。",
+    "should_clarify": true,
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "final_status": "success",
+    "first_latency_s": 3.704593,
+    "total_latency_s": 9.491971,
+    "interactive_correct": true,
+    "baseline_correct": true,
+    "baseline_latency_s": 2.250385,
+    "baseline_status": "success",
+    "actual_clarification_question": "‘大额订单’指订单实收金额超过多少元？例如：A. 500元；B. 1000元；C. 2000元；D. 其他自定义阈值",
+    "followup_supplied": true,
+    "gate_accepted_followup": true,
+    "failure_categories": [],
+    "baseline_sql": "SELECT COUNT(*) AS order_count FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE u.city = '深圳' AND o.order_status IN ('paid', 'completed', 'shipped') AND o.paid_amount > 1000 AND o.order_date <= '2026-09-12' LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS order_count FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE u.city = '深圳' AND o.order_status IN ('paid', 'completed', 'shipped') AND o.paid_amount > 2140 LIMIT 200",
+    "baseline_result": [
+      {
+        "order_count": 0
+      }
+    ],
+    "v1_1_result": [
+      {
+        "order_count": 0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "holdout-3-3-c",
+    "question": "母婴用品在售商品中，标价低于360元的有几个？只返回数量。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 4.696675,
+    "total_latency_s": 4.696675,
+    "interactive_correct": true,
+    "baseline_correct": true,
+    "baseline_latency_s": 1.292106,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [],
+    "baseline_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '母婴用品' AND is_active = 1 AND list_price < 360 LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '母婴用品' AND is_active = 1 AND list_price < 360 LIMIT 200",
+    "baseline_result": [
+      {
+        "product_count": 89
+      }
+    ],
+    "v1_1_result": [
+      {
+        "product_count": 89
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 89
+      }
+    ]
+  },
+  {
+    "id": "holdout-3-3-a",
+    "question": "母婴用品在售商品里便宜的有几个？只返回数量。",
+    "should_clarify": true,
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "final_status": "success",
+    "first_latency_s": 3.322134,
+    "total_latency_s": 8.027871000000001,
+    "interactive_correct": true,
+    "baseline_correct": false,
+    "baseline_latency_s": 1.372551,
+    "baseline_status": "success",
+    "actual_clarification_question": "“便宜的”是指：A) 价格最低的前10个，B) 单价低于50元，C) 单价低于该类目平均售价，D) 其他标准？",
+    "followup_supplied": true,
+    "gate_accepted_followup": true,
+    "failure_categories": [],
+    "baseline_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '母婴用品' AND is_active = 1 AND list_price < 100 LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '母婴用品' AND is_active = 1 AND list_price < 360 LIMIT 200",
+    "baseline_result": [
+      {
+        "product_count": 0
+      }
+    ],
+    "v1_1_result": [
+      {
+        "product_count": 89
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 89
+      }
+    ]
+  },
+  {
+    "id": "holdout-3-4-c",
+    "question": "深圳客户按有效订单数量从高到低取前7名，返回用户ID和订单数；相同数量按用户ID升序。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 5.164885,
+    "total_latency_s": 5.164885,
+    "interactive_correct": true,
+    "baseline_correct": true,
+    "baseline_latency_s": 1.933289,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [],
+    "baseline_sql": "SELECT u.user_id, COUNT(*) AS order_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '深圳' AND o.order_status IN ('paid', 'completed', 'shipped') GROUP BY u.user_id ORDER BY order_count DESC, u.user_id ASC LIMIT 7",
+    "v1_1_sql": "SELECT u.user_id, COUNT(*) AS order_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '深圳' AND o.order_status IN ('paid', 'completed', 'shipped') GROUP BY u.user_id ORDER BY order_count DESC, u.user_id ASC LIMIT 7",
+    "baseline_result": [],
+    "v1_1_result": [],
+    "ground_truth_result": []
+  },
+  {
+    "id": "holdout-3-4-a",
+    "question": "找出深圳表现最好的前7名客户，返回用户ID和表现指标，指标相同按用户ID升序。",
+    "should_clarify": true,
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "final_status": "success",
+    "first_latency_s": 3.952138,
+    "total_latency_s": 10.100765,
+    "interactive_correct": true,
+    "baseline_correct": true,
+    "baseline_latency_s": 2.626105,
+    "baseline_status": "success",
+    "actual_clarification_question": "客户‘表现最好’具体指哪项指标？选项：A) 总销售额（paid_amount） B) 总订单数 C) 购买天数 D) 近30天复购率",
+    "followup_supplied": true,
+    "gate_accepted_followup": true,
+    "failure_categories": [],
+    "baseline_sql": "SELECT u.user_id, ROUND(SUM(o.paid_amount), 2) AS performance_metric FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '深圳' AND o.order_status IN ('paid', 'completed', 'shipped') AND o.order_date <= '2026-09-12' GROUP BY u.user_id ORDER BY performance_metric DESC, u.user_id ASC LIMIT 7",
+    "v1_1_sql": "SELECT u.user_id, COUNT(o.order_id) AS order_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '深圳' AND o.order_status IN ('paid', 'completed', 'shipped') GROUP BY u.user_id ORDER BY order_count DESC, u.user_id ASC LIMIT 7",
+    "baseline_result": [],
+    "v1_1_result": [],
+    "ground_truth_result": []
+  },
+  {
+    "id": "holdout-3-5-c",
+    "question": "母婴用品在2026-07-03到2026-09-11期间的已批准退款金额是多少？包含首尾日期，只返回金额。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 6.650275,
+    "total_latency_s": 6.650275,
+    "interactive_correct": true,
+    "baseline_correct": true,
+    "baseline_latency_s": 2.763329,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [],
+    "baseline_sql": "SELECT ROUND(SUM(r.refund_amount), 2) AS refund_amount FROM refunds AS r JOIN order_items AS oi ON r.order_item_id = oi.order_item_id JOIN products AS p ON oi.product_id = p.product_id WHERE p.category = '母婴用品' AND r.refund_status = 'approved' AND r.refund_date BETWEEN '2026-07-03' AND '2026-09-11' LIMIT 200",
+    "v1_1_sql": "SELECT ROUND(SUM(r.refund_amount), 2) AS refund_amount FROM refunds AS r JOIN products AS p ON r.product_id = p.product_id WHERE p.category = '母婴用品' AND r.refund_status = 'approved' AND r.refund_date BETWEEN '2026-07-03' AND '2026-09-11' LIMIT 200",
+    "baseline_result": [
+      {
+        "refund_amount": 11146.65
+      }
+    ],
+    "v1_1_result": [
+      {
+        "refund_amount": 11146.65
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "amount": 11146.65
+      }
+    ]
+  },
+  {
+    "id": "holdout-3-5-a",
+    "question": "母婴用品近期批准了多少退款金额？只返回金额。",
+    "should_clarify": true,
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "final_status": "success",
+    "first_latency_s": 2.865588,
+    "total_latency_s": 9.629269,
+    "interactive_correct": true,
+    "baseline_correct": false,
+    "baseline_latency_s": 3.013702,
+    "baseline_status": "success",
+    "actual_clarification_question": "‘近期’具体指最近几天？例如：7天、15天、30天？",
+    "followup_supplied": true,
+    "gate_accepted_followup": true,
+    "failure_categories": [],
+    "baseline_sql": "SELECT ROUND(SUM(r.refund_amount), 2) AS refund_amount FROM refunds AS r JOIN order_items AS oi ON r.order_item_id = oi.order_item_id JOIN products AS p ON oi.product_id = p.product_id WHERE r.refund_status = 'approved' AND p.category = '母婴用品' AND r.refund_date >= DATE_SUB('2026-09-12', INTERVAL '7' DAY) LIMIT 200",
+    "v1_1_sql": "SELECT ROUND(SUM(r.refund_amount), 2) AS refund_amount FROM refunds AS r JOIN order_items AS oi ON r.order_item_id = oi.order_item_id JOIN products AS p ON oi.product_id = p.product_id WHERE r.refund_status = 'approved' AND p.category = '母婴用品' AND r.refund_date BETWEEN '2026-07-03' AND '2026-09-11' LIMIT 200",
+    "baseline_result": [
+      {
+        "refund_amount": 7559.09
+      }
+    ],
+    "v1_1_result": [
+      {
+        "refund_amount": 11146.65
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "amount": 11146.65
+      }
+    ]
+  },
+  {
+    "id": "holdout-3-6-c",
+    "question": "统计深圳客户的累计有效订单实付金额，只返回总金额。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 5.213098,
+    "total_latency_s": 5.213098,
+    "interactive_correct": true,
+    "baseline_correct": true,
+    "baseline_latency_s": 1.740682,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [],
+    "baseline_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS total_paid_amount FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '深圳' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "v1_1_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS total_paid_amount FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '深圳' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "baseline_result": [
+      {
+        "total_paid_amount": null
+      }
+    ],
+    "v1_1_result": [
+      {
+        "total_paid_amount": null
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "amount": null
+      }
+    ]
+  },
+  {
+    "id": "holdout-3-6-a",
+    "question": "统计珠三角地区客户的累计有效订单实付金额，只返回总金额。",
+    "should_clarify": true,
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "final_status": "success",
+    "first_latency_s": 3.589874,
+    "total_latency_s": 7.901609,
+    "interactive_correct": true,
+    "baseline_correct": true,
+    "baseline_latency_s": 2.728996,
+    "baseline_status": "success",
+    "actual_clarification_question": "珠三角地区具体包含哪些城市？（例如：广州、深圳、佛山、东莞、中山、珠海、惠州、江门、肇庆）",
+    "followup_supplied": true,
+    "gate_accepted_followup": true,
+    "failure_categories": [],
+    "baseline_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS total_paid_amount FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.province IN ('广东省') AND u.city IN ('广州市', '深圳市', '珠海市', '佛山市', '惠州市', '东莞市', '中山市', '江门市', '肇庆市') LIMIT 200",
+    "v1_1_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS total_paid_amount FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '深圳' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "baseline_result": [
+      {
+        "total_paid_amount": null
+      }
+    ],
+    "v1_1_result": [
+      {
+        "total_paid_amount": null
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "amount": null
+      }
+    ]
+  },
+  {
+    "id": "holdout-3-7-c",
+    "question": "母婴用品中2026-08-01及以后上架的在售商品有多少个？只返回数量。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 5.130763,
+    "total_latency_s": 5.130763,
+    "interactive_correct": true,
+    "baseline_correct": true,
+    "baseline_latency_s": 1.37909,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [],
+    "baseline_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '母婴用品' AND launch_date >= '2026-08-01' AND is_active = 1 LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '母婴用品' AND launch_date >= '2026-08-01' AND is_active = 1 LIMIT 200",
+    "baseline_result": [
+      {
+        "product_count": 0
+      }
+    ],
+    "v1_1_result": [
+      {
+        "product_count": 0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "holdout-3-7-a",
+    "question": "母婴用品目前在售的新品有多少个？只返回数量。",
+    "should_clarify": true,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 5.266254,
+    "total_latency_s": 5.266254,
+    "interactive_correct": false,
+    "baseline_correct": false,
+    "baseline_latency_s": 1.789018,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [
+      "missed_clarification",
+      "result_mismatch"
+    ],
+    "baseline_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '母婴用品' AND is_active = 1 AND launch_date <= '2026-09-12' LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '母婴用品' AND is_active = 1 AND launch_date <= '2026-09-12' LIMIT 200",
+    "baseline_result": [
+      {
+        "product_count": 118
+      }
+    ],
+    "v1_1_result": [
+      {
+        "product_count": 118
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "holdout-3-8-c",
+    "question": "深圳已注册客户中VIP有多少人？只返回人数。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 4.404891,
+    "total_latency_s": 4.404891,
+    "interactive_correct": true,
+    "baseline_correct": true,
+    "baseline_latency_s": 1.07593,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [],
+    "baseline_sql": "SELECT COUNT(*) AS vip_count FROM users WHERE city = '深圳' AND is_vip = 1 LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS vip_count FROM users WHERE city = '深圳' AND is_vip = 1 LIMIT 200",
+    "baseline_result": [
+      {
+        "vip_count": 0
+      }
+    ],
+    "v1_1_result": [
+      {
+        "vip_count": 0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "holdout-3-8-a",
+    "question": "深圳需要优先维护的客户有多少人？只返回人数。",
+    "should_clarify": true,
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "final_status": "success",
+    "first_latency_s": 4.112347,
+    "total_latency_s": 8.911067,
+    "interactive_correct": true,
+    "baseline_correct": true,
+    "baseline_latency_s": 1.258421,
+    "baseline_status": "success",
+    "actual_clarification_question": "‘需要优先维护的客户’具体指哪类客户？例如：① VIP客户（is_vip=1）；② 近30天有订单的客户；③ 历史销售金额前10%的客户；④ 有未处理投诉或高退款率的客户。",
+    "followup_supplied": true,
+    "gate_accepted_followup": true,
+    "failure_categories": [],
+    "baseline_sql": "SELECT COUNT(*) AS user_count FROM users WHERE city = '深圳' AND register_date <= DATE_SUB('2026-09-12', INTERVAL '30' DAY) LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS user_count FROM users WHERE city = '深圳' AND is_vip = 1 LIMIT 200",
+    "baseline_result": [
+      {
+        "user_count": 0
+      }
+    ],
+    "v1_1_result": [
+      {
+        "user_count": 0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "holdout-3-9-c",
+    "question": "母婴用品最近71天（不含今天）的有效订单销量是多少？只返回件数。",
+    "should_clarify": false,
+    "first_status": "clarification_unavailable",
+    "triggered": false,
+    "final_status": "clarification_unavailable",
+    "first_latency_s": 8.582301,
+    "total_latency_s": 8.582301,
+    "interactive_correct": false,
+    "baseline_correct": true,
+    "baseline_latency_s": 2.64241,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [
+      "clarification_unavailable"
+    ],
+    "baseline_sql": "SELECT SUM(oi.quantity) AS quantity FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '母婴用品' AND o.order_date >= DATE_SUB('2026-09-12', INTERVAL '71' DAY) AND o.order_date < '2026-09-12' LIMIT 200",
+    "v1_1_sql": "",
+    "baseline_result": [
+      {
+        "quantity": 746.0
+      }
+    ],
+    "v1_1_result": [],
+    "ground_truth_result": [
+      {
+        "quantity": 746.0
+      }
+    ]
+  },
+  {
+    "id": "holdout-3-9-a",
+    "question": "母婴用品最近卖得怎么样？只要一个汇总值。",
+    "should_clarify": true,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 7.329199,
+    "total_latency_s": 7.329199,
+    "interactive_correct": false,
+    "baseline_correct": false,
+    "baseline_latency_s": 2.55113,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [
+      "missed_clarification",
+      "result_mismatch"
+    ],
+    "baseline_sql": "SELECT ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '母婴用品' AND o.order_date >= DATE_SUB('2026-09-12', INTERVAL '7' DAY) LIMIT 200",
+    "v1_1_sql": "SELECT ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM products AS p JOIN order_items AS oi ON p.product_id = oi.product_id JOIN orders AS o ON oi.order_id = o.order_id WHERE p.category = '母婴用品' AND o.order_status IN ('paid', 'completed', 'shipped') AND o.order_date >= DATE_SUB('2026-09-12', INTERVAL '7' DAY) LIMIT 200",
+    "baseline_result": [
+      {
+        "sales_amount": 167102.26
+      }
+    ],
+    "v1_1_result": [
+      {
+        "sales_amount": 167102.26
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "quantity": 746.0
+      }
+    ]
+  },
+  {
+    "id": "holdout-3-10-c",
+    "question": "深圳所有历史有效订单的订单数是多少？只返回笔数。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 4.337119,
+    "total_latency_s": 4.337119,
+    "interactive_correct": true,
+    "baseline_correct": true,
+    "baseline_latency_s": 1.383549,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [],
+    "baseline_sql": "SELECT COUNT(*) AS order_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '深圳' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS order_count FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE u.city = '深圳' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "baseline_result": [
+      {
+        "order_count": 0
+      }
+    ],
+    "v1_1_result": [
+      {
+        "order_count": 0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "holdout-3-10-a",
+    "question": "给我深圳的有效订单规模，只返回一个总计数字。",
+    "should_clarify": true,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 4.912864,
+    "total_latency_s": 4.912864,
+    "interactive_correct": true,
+    "baseline_correct": true,
+    "baseline_latency_s": 1.923137,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [
+      "missed_clarification"
+    ],
+    "baseline_sql": "SELECT COUNT(*) AS order_count FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.city = '深圳' AND o.order_date <= '2026-09-12' LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS order_count FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.city = '深圳' LIMIT 200",
+    "baseline_result": [
+      {
+        "order_count": 0
+      }
+    ],
+    "v1_1_result": [
+      {
+        "order_count": 0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "holdout-3-11-c",
+    "question": "2026年第二季度母婴用品有效订单销售额是多少？按商品行实付金额统计，只返回总额。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 6.858144,
+    "total_latency_s": 6.858144,
+    "interactive_correct": true,
+    "baseline_correct": true,
+    "baseline_latency_s": 3.268784,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [],
+    "baseline_sql": "SELECT ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '母婴用品' AND o.order_date >= '2026-04-01' AND o.order_date <= '2026-06-30' LIMIT 200",
+    "v1_1_sql": "SELECT ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '母婴用品' AND o.order_date >= '2026-04-01' AND o.order_date <= '2026-06-30' LIMIT 200",
+    "baseline_result": [
+      {
+        "sales_amount": 234296.23
+      }
+    ],
+    "v1_1_result": [
+      {
+        "sales_amount": 234296.23
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 234296.23
+      }
+    ]
+  },
+  {
+    "id": "holdout-3-11-a",
+    "question": "帮我查下母婴用品那段时间的有效订单销售额，只返回总额。",
+    "should_clarify": true,
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "final_status": "success",
+    "first_latency_s": 3.448373,
+    "total_latency_s": 10.748413,
+    "interactive_correct": false,
+    "baseline_correct": false,
+    "baseline_latency_s": 2.464391,
+    "baseline_status": "success",
+    "actual_clarification_question": "请问'那段时间'具体指？A) 过去7天 B) 过去30天 C) 本月 D) 上个月",
+    "followup_supplied": true,
+    "gate_accepted_followup": true,
+    "failure_categories": [
+      "result_mismatch"
+    ],
+    "baseline_sql": "SELECT ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '母婴用品' AND o.order_date <= '2026-09-12' LIMIT 200",
+    "v1_1_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '母婴用品' AND o.order_date BETWEEN '2026-04-01' AND '2026-06-30' LIMIT 200",
+    "baseline_result": [
+      {
+        "sales_amount": 1478969.0
+      }
+    ],
+    "v1_1_result": [
+      {
+        "sales_amount": 1319479.97
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 234296.23
+      }
+    ]
+  },
+  {
+    "id": "holdout-4-0-c",
+    "question": "杭州最近89天新增注册客户有多少人？不含今天，只返回人数。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 5.164731,
+    "total_latency_s": 5.164731,
+    "interactive_correct": true,
+    "baseline_correct": true,
+    "baseline_latency_s": 1.72449,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [],
+    "baseline_sql": "SELECT COUNT(*) AS user_count FROM users WHERE city = '杭州' AND register_date >= DATE_SUB('2026-09-12', INTERVAL '89' DAY) AND register_date < '2026-09-12' LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS user_count FROM users WHERE city = '杭州' AND register_date >= DATE_SUB('2026-09-12', INTERVAL '89' DAY) AND register_date < '2026-09-12' LIMIT 200",
+    "baseline_result": [
+      {
+        "user_count": 0
+      }
+    ],
+    "v1_1_result": [
+      {
+        "user_count": 0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "holdout-4-0-a",
+    "question": "杭州最近新注册了多少客户？只返回人数。",
+    "should_clarify": true,
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "final_status": "success",
+    "first_latency_s": 2.693724,
+    "total_latency_s": 7.686571000000001,
+    "interactive_correct": true,
+    "baseline_correct": true,
+    "baseline_latency_s": 2.116468,
+    "baseline_status": "success",
+    "actual_clarification_question": "杭州最近新注册客户的时间范围是？（A）最近7天 （B）最近30天 （C）本周 （D）本月",
+    "followup_supplied": true,
+    "gate_accepted_followup": true,
+    "failure_categories": [],
+    "baseline_sql": "SELECT COUNT(*) AS user_count FROM users WHERE city = '杭州' AND register_date >= DATE_SUB('2026-09-12', INTERVAL '7' DAY) LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS user_count FROM users WHERE city = '杭州' AND register_date >= DATE_SUB('2026-09-12', INTERVAL '89' DAY) AND register_date < '2026-09-12' LIMIT 200",
+    "baseline_result": [
+      {
+        "user_count": 0
+      }
+    ],
+    "v1_1_result": [
+      {
+        "user_count": 0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "holdout-4-1-c",
+    "question": "服饰鞋包累计销售额是多少？使用有效订单商品行实付金额，只返回金额。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 5.408436,
+    "total_latency_s": 5.408436,
+    "interactive_correct": true,
+    "baseline_correct": false,
+    "baseline_latency_s": 2.376578,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [],
+    "baseline_sql": "SELECT ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '服饰鞋包' AND o.order_date <= '2026-09-12' LIMIT 200",
+    "v1_1_sql": "SELECT ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM products AS p JOIN order_items AS oi ON p.product_id = oi.product_id JOIN orders AS o ON oi.order_id = o.order_id WHERE p.category = '服饰鞋包' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "baseline_result": [
+      {
+        "sales_amount": 1600264.67
+      }
+    ],
+    "v1_1_result": [
+      {
+        "sales_amount": 1775094.12
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "amount": 1775094.12
+      }
+    ]
+  },
+  {
+    "id": "holdout-4-1-a",
+    "question": "汇总一下服饰鞋包的累计销售表现，只需要一个数字。",
+    "should_clarify": true,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 5.745767,
+    "total_latency_s": 5.745767,
+    "interactive_correct": true,
+    "baseline_correct": false,
+    "baseline_latency_s": 2.470345,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [
+      "missed_clarification"
+    ],
+    "baseline_sql": "SELECT ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM products AS p JOIN order_items AS oi ON p.product_id = oi.product_id JOIN orders AS o ON oi.order_id = o.order_id WHERE p.category = '服饰鞋包' AND o.order_status IN ('paid', 'completed', 'shipped') AND o.order_date <= '2026-09-12' LIMIT 200",
+    "v1_1_sql": "SELECT ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM products AS p JOIN order_items AS oi ON p.product_id = oi.product_id JOIN orders AS o ON oi.order_id = o.order_id WHERE p.category = '服饰鞋包' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "baseline_result": [
+      {
+        "sales_amount": 1600264.67
+      }
+    ],
+    "v1_1_result": [
+      {
+        "sales_amount": 1775094.12
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "amount": 1775094.12
+      }
+    ]
+  },
+  {
+    "id": "holdout-4-2-c",
+    "question": "杭州客户的有效订单中，实付金额超过2570元的有几笔？只返回笔数。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 5.597199,
+    "total_latency_s": 5.597199,
+    "interactive_correct": false,
+    "baseline_correct": false,
+    "baseline_latency_s": 1.72038,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [
+      "result_mismatch"
+    ],
+    "baseline_sql": "SELECT COUNT(*) AS order_count FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE u.city = '杭州' AND o.order_status IN ('paid', 'completed', 'shipped') AND o.paid_amount > 2570 LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS order_count FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE u.city = '杭州' AND o.order_status IN ('paid', 'completed', 'shipped') AND o.paid_amount > 2570 LIMIT 200",
+    "baseline_result": [
+      {
+        "order_count": 0
+      }
+    ],
+    "v1_1_result": [
+      {
+        "order_count": 0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 443
+      }
+    ]
+  },
+  {
+    "id": "holdout-4-2-a",
+    "question": "杭州客户的有效订单里有多少大额订单？只返回笔数。",
+    "should_clarify": true,
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "final_status": "success",
+    "first_latency_s": 3.379103,
+    "total_latency_s": 8.974787000000001,
+    "interactive_correct": false,
+    "baseline_correct": false,
+    "baseline_latency_s": 2.081193,
+    "baseline_status": "success",
+    "actual_clarification_question": "‘大额订单’指单笔订单实收金额超过多少元？例如：300元、500元，还是其他数值？",
+    "followup_supplied": true,
+    "gate_accepted_followup": true,
+    "failure_categories": [
+      "result_mismatch"
+    ],
+    "baseline_sql": "SELECT COUNT(*) AS order_count FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE u.city = '杭州' AND o.order_status IN ('paid', 'completed', 'shipped') AND o.paid_amount > 1000 AND o.order_date <= '2026-09-12' LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS order_count FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE u.city = '杭州' AND o.order_status IN ('paid', 'completed', 'shipped') AND o.paid_amount > 2570 LIMIT 200",
+    "baseline_result": [
+      {
+        "order_count": 0
+      }
+    ],
+    "v1_1_result": [
+      {
+        "order_count": 0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 443
+      }
+    ]
+  },
+  {
+    "id": "holdout-4-3-c",
+    "question": "服饰鞋包在售商品中，标价低于440元的有几个？只返回数量。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 5.573514,
+    "total_latency_s": 5.573514,
+    "interactive_correct": true,
+    "baseline_correct": true,
+    "baseline_latency_s": 1.271573,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [],
+    "baseline_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '服饰鞋包' AND is_active = 1 AND list_price < 440 LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '服饰鞋包' AND is_active = 1 AND list_price < 440 LIMIT 200",
+    "baseline_result": [
+      {
+        "product_count": 92
+      }
+    ],
+    "v1_1_result": [
+      {
+        "product_count": 92
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 92
+      }
+    ]
+  },
+  {
+    "id": "holdout-4-3-a",
+    "question": "服饰鞋包在售商品里便宜的有几个？只返回数量。",
+    "should_clarify": true,
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "final_status": "success",
+    "first_latency_s": 3.467279,
+    "total_latency_s": 8.666903,
+    "interactive_correct": true,
+    "baseline_correct": false,
+    "baseline_latency_s": 1.228531,
+    "baseline_status": "success",
+    "actual_clarification_question": "“便宜的”是指：A) 价格最低的前10个商品；B) 单价低于50元；C) 单价低于本类目平均售价；D) 其他标准？",
+    "followup_supplied": true,
+    "gate_accepted_followup": true,
+    "failure_categories": [],
+    "baseline_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '服饰鞋包' AND is_active = 1 AND list_price < 100 LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '服饰鞋包' AND is_active = 1 AND list_price < 440 LIMIT 200",
+    "baseline_result": [
+      {
+        "product_count": 0
+      }
+    ],
+    "v1_1_result": [
+      {
+        "product_count": 92
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 92
+      }
+    ]
+  },
+  {
+    "id": "holdout-4-4-c",
+    "question": "杭州客户按有效订单数量从高到低取前8名，返回用户ID和订单数；相同数量按用户ID升序。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 5.520585,
+    "total_latency_s": 5.520585,
+    "interactive_correct": false,
+    "baseline_correct": false,
+    "baseline_latency_s": 2.113642,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [
+      "result_mismatch"
+    ],
+    "baseline_sql": "SELECT u.user_id, COUNT(*) AS order_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '杭州' AND o.order_status IN ('paid', 'completed', 'shipped') GROUP BY u.user_id ORDER BY order_count DESC, u.user_id ASC LIMIT 8",
+    "v1_1_sql": "SELECT u.user_id, COUNT(*) AS order_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '杭州' AND o.order_status IN ('paid', 'completed', 'shipped') GROUP BY u.user_id ORDER BY order_count DESC, u.user_id ASC LIMIT 8",
+    "baseline_result": [],
+    "v1_1_result": [],
+    "ground_truth_result": [
+      {
+        "user_id": 2341,
+        "total": 21
+      },
+      {
+        "user_id": 2424,
+        "total": 21
+      },
+      {
+        "user_id": 1152,
+        "total": 19
+      },
+      {
+        "user_id": 2166,
+        "total": 17
+      },
+      {
+        "user_id": 1378,
+        "total": 16
+      },
+      {
+        "user_id": 198,
+        "total": 15
+      },
+      {
+        "user_id": 1168,
+        "total": 15
+      },
+      {
+        "user_id": 1488,
+        "total": 15
+      }
+    ]
+  },
+  {
+    "id": "holdout-4-4-a",
+    "question": "找出杭州表现最好的前8名客户，返回用户ID和表现指标，指标相同按用户ID升序。",
+    "should_clarify": true,
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "final_status": "success",
+    "first_latency_s": 3.8293,
+    "total_latency_s": 10.806559,
+    "interactive_correct": false,
+    "baseline_correct": false,
+    "baseline_latency_s": 2.682746,
+    "baseline_status": "success",
+    "actual_clarification_question": "客户‘表现最好’是指：A) 总销售额最高；B) 总订单数最多；C) 近30天复购用户（至少2单）中销售额最高；D) VIP等级最高且销售额前8？",
+    "followup_supplied": true,
+    "gate_accepted_followup": true,
+    "failure_categories": [
+      "result_mismatch"
+    ],
+    "baseline_sql": "SELECT u.user_id, ROUND(SUM(o.paid_amount), 2) AS performance_metric FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '杭州' AND o.order_status IN ('paid', 'completed', 'shipped') AND o.order_date <= '2026-09-12' GROUP BY u.user_id ORDER BY performance_metric DESC, u.user_id ASC LIMIT 8",
+    "v1_1_sql": "SELECT u.user_id, COUNT(o.order_id) AS order_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '杭州' AND o.order_status IN ('paid', 'completed', 'shipped') AND o.order_date >= DATE_SUB('2026-09-12', INTERVAL '30' DAY) GROUP BY u.user_id ORDER BY order_count DESC, u.user_id ASC LIMIT 8",
+    "baseline_result": [],
+    "v1_1_result": [],
+    "ground_truth_result": [
+      {
+        "user_id": 2341,
+        "total": 21
+      },
+      {
+        "user_id": 2424,
+        "total": 21
+      },
+      {
+        "user_id": 1152,
+        "total": 19
+      },
+      {
+        "user_id": 2166,
+        "total": 17
+      },
+      {
+        "user_id": 1378,
+        "total": 16
+      },
+      {
+        "user_id": 198,
+        "total": 15
+      },
+      {
+        "user_id": 1168,
+        "total": 15
+      },
+      {
+        "user_id": 1488,
+        "total": 15
+      }
+    ]
+  },
+  {
+    "id": "holdout-4-5-c",
+    "question": "服饰鞋包在2026-06-15到2026-09-11期间的已批准退款金额是多少？包含首尾日期，只返回金额。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 7.095945,
+    "total_latency_s": 7.095945,
+    "interactive_correct": true,
+    "baseline_correct": true,
+    "baseline_latency_s": 2.854951,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [],
+    "baseline_sql": "SELECT ROUND(SUM(r.refund_amount), 2) AS refund_amount FROM refunds AS r JOIN order_items AS oi ON r.order_item_id = oi.order_item_id JOIN products AS p ON oi.product_id = p.product_id WHERE p.category = '服饰鞋包' AND r.refund_status = 'approved' AND r.refund_date BETWEEN '2026-06-15' AND '2026-09-11' LIMIT 200",
+    "v1_1_sql": "SELECT ROUND(SUM(r.refund_amount), 2) AS refund_amount FROM refunds AS r JOIN order_items AS oi ON r.order_item_id = oi.order_item_id JOIN products AS p ON oi.product_id = p.product_id WHERE p.category = '服饰鞋包' AND r.refund_status = 'approved' AND r.refund_date BETWEEN '2026-06-15' AND '2026-09-11' LIMIT 200",
+    "baseline_result": [
+      {
+        "refund_amount": 17387.54
+      }
+    ],
+    "v1_1_result": [
+      {
+        "refund_amount": 17387.54
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "amount": 17387.54
+      }
+    ]
+  },
+  {
+    "id": "holdout-4-5-a",
+    "question": "服饰鞋包近期批准了多少退款金额？只返回金额。",
+    "should_clarify": true,
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "final_status": "success",
+    "first_latency_s": 2.177291,
+    "total_latency_s": 8.685143,
+    "interactive_correct": true,
+    "baseline_correct": false,
+    "baseline_latency_s": 2.5918,
+    "baseline_status": "success",
+    "actual_clarification_question": "近期指最近几天？选项：3天、7天、30天。",
+    "followup_supplied": true,
+    "gate_accepted_followup": true,
+    "failure_categories": [],
+    "baseline_sql": "SELECT ROUND(SUM(r.refund_amount), 2) AS refund_amount FROM refunds AS r JOIN order_items AS oi ON r.order_item_id = oi.order_item_id JOIN products AS p ON oi.product_id = p.product_id WHERE r.refund_status = 'approved' AND p.category = '服饰鞋包' AND r.refund_date >= DATE_SUB('2026-09-12', INTERVAL '7' DAY) LIMIT 200",
+    "v1_1_sql": "SELECT ROUND(SUM(r.refund_amount), 2) AS refund_amount FROM refunds AS r JOIN order_items AS oi ON r.order_item_id = oi.order_item_id JOIN products AS p ON oi.product_id = p.product_id WHERE r.refund_status = 'approved' AND p.category = '服饰鞋包' AND r.refund_date BETWEEN '2026-06-15' AND '2026-09-11' LIMIT 200",
+    "baseline_result": [
+      {
+        "refund_amount": 16564.19
+      }
+    ],
+    "v1_1_result": [
+      {
+        "refund_amount": 17387.54
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "amount": 17387.54
+      }
+    ]
+  },
+  {
+    "id": "holdout-4-6-c",
+    "question": "统计杭州客户的累计有效订单实付金额，只返回总金额。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 4.782764,
+    "total_latency_s": 4.782764,
+    "interactive_correct": false,
+    "baseline_correct": false,
+    "baseline_latency_s": 1.944297,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [
+      "result_mismatch"
+    ],
+    "baseline_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '杭州' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "v1_1_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS total_paid_amount FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '杭州' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "baseline_result": [
+      {
+        "sales_amount": null
+      }
+    ],
+    "v1_1_result": [
+      {
+        "total_paid_amount": null
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "amount": 3287398.68
+      }
+    ]
+  },
+  {
+    "id": "holdout-4-6-a",
+    "question": "统计长三角地区客户的累计有效订单实付金额，只返回总金额。",
+    "should_clarify": true,
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "final_status": "simulated_answer_unavailable",
+    "first_latency_s": 3.899043,
+    "total_latency_s": 3.899043,
+    "interactive_correct": false,
+    "baseline_correct": false,
+    "baseline_latency_s": 2.796918,
+    "baseline_status": "success",
+    "actual_clarification_question": "长三角地区具体包含哪些省份？选项：A) 江苏、浙江、上海；B) 江苏、浙江、上海、安徽；C) 仅上海市；D) 其他自定义范围",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [
+      "simulated_answer_unavailable"
+    ],
+    "baseline_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS total_paid_amount FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.province IN ('江苏省', '浙江省', '安徽省', '上海市') LIMIT 200",
+    "v1_1_sql": "",
+    "baseline_result": [
+      {
+        "total_paid_amount": null
+      }
+    ],
+    "v1_1_result": [],
+    "ground_truth_result": [
+      {
+        "amount": 3287398.68
+      }
+    ]
+  },
+  {
+    "id": "holdout-4-7-c",
+    "question": "服饰鞋包中2026-08-01及以后上架的在售商品有多少个？只返回数量。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 8.460851,
+    "total_latency_s": 8.460851,
+    "interactive_correct": true,
+    "baseline_correct": true,
+    "baseline_latency_s": 1.251907,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [],
+    "baseline_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '服饰鞋包' AND launch_date >= '2026-08-01' AND is_active = 1 LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '服饰鞋包' AND launch_date >= '2026-08-01' AND is_active = 1 LIMIT 200",
+    "baseline_result": [
+      {
+        "product_count": 0
+      }
+    ],
+    "v1_1_result": [
+      {
+        "product_count": 0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "holdout-4-7-a",
+    "question": "服饰鞋包目前在售的新品有多少个？只返回数量。",
+    "should_clarify": true,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 4.465531,
+    "total_latency_s": 4.465531,
+    "interactive_correct": false,
+    "baseline_correct": false,
+    "baseline_latency_s": 1.83852,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [
+      "missed_clarification",
+      "result_mismatch"
+    ],
+    "baseline_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '服饰鞋包' AND is_active = 1 AND launch_date <= '2026-09-12' LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '服饰鞋包' AND is_active = 1 AND launch_date <= '2026-09-12' LIMIT 200",
+    "baseline_result": [
+      {
+        "product_count": 119
+      }
+    ],
+    "v1_1_result": [
+      {
+        "product_count": 119
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "holdout-4-8-c",
+    "question": "杭州已注册客户中VIP有多少人？只返回人数。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 4.043188,
+    "total_latency_s": 4.043188,
+    "interactive_correct": false,
+    "baseline_correct": false,
+    "baseline_latency_s": 1.074092,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [
+      "result_mismatch"
+    ],
+    "baseline_sql": "SELECT COUNT(*) AS vip_count FROM users WHERE city = '杭州' AND is_vip = 1 LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS vip_count FROM users WHERE city = '杭州' AND is_vip = 1 LIMIT 200",
+    "baseline_result": [
+      {
+        "vip_count": 0
+      }
+    ],
+    "v1_1_result": [
+      {
+        "vip_count": 0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 52
+      }
+    ]
+  },
+  {
+    "id": "holdout-4-8-a",
+    "question": "杭州需要优先维护的客户有多少人？只返回人数。",
+    "should_clarify": true,
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "final_status": "success",
+    "first_latency_s": 4.11321,
+    "total_latency_s": 8.391639,
+    "interactive_correct": false,
+    "baseline_correct": false,
+    "baseline_latency_s": 1.535711,
+    "baseline_status": "success",
+    "actual_clarification_question": "‘需要优先维护的客户’具体指哪类客户？例如：① VIP客户（is_vip=1）；② 近30天有购买的客户；③ 历史销售金额前10%的客户；④ 退款率高于15%的客户。",
+    "followup_supplied": true,
+    "gate_accepted_followup": true,
+    "failure_categories": [
+      "result_mismatch"
+    ],
+    "baseline_sql": "SELECT COUNT(*) AS user_count FROM users WHERE city = '杭州' AND register_date <= DATE_SUB('2026-09-12', INTERVAL '30' DAY) LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS user_count FROM users WHERE city = '杭州' AND is_vip = 1 LIMIT 200",
+    "baseline_result": [
+      {
+        "user_count": 0
+      }
+    ],
+    "v1_1_result": [
+      {
+        "user_count": 0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 52
+      }
+    ]
+  },
+  {
+    "id": "holdout-4-9-c",
+    "question": "服饰鞋包最近89天（不含今天）的有效订单销量是多少？只返回件数。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 7.342229,
+    "total_latency_s": 7.342229,
+    "interactive_correct": true,
+    "baseline_correct": true,
+    "baseline_latency_s": 2.66855,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [],
+    "baseline_sql": "SELECT SUM(oi.quantity) AS quantity FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '服饰鞋包' AND o.order_date >= DATE_SUB('2026-09-12', INTERVAL '89' DAY) AND o.order_date < '2026-09-12' LIMIT 200",
+    "v1_1_sql": "SELECT SUM(oi.quantity) AS sales_quantity FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '服饰鞋包' AND o.order_date >= DATE_SUB('2026-09-12', INTERVAL '89' DAY) AND o.order_date < '2026-09-12' LIMIT 200",
+    "baseline_result": [
+      {
+        "quantity": 728.0
+      }
+    ],
+    "v1_1_result": [
+      {
+        "sales_quantity": 728.0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "quantity": 728.0
+      }
+    ]
+  },
+  {
+    "id": "holdout-4-9-a",
+    "question": "服饰鞋包最近卖得怎么样？只要一个汇总值。",
+    "should_clarify": true,
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "final_status": "success",
+    "first_latency_s": 3.171679,
+    "total_latency_s": 11.733377,
+    "interactive_correct": false,
+    "baseline_correct": false,
+    "baseline_latency_s": 2.729123,
+    "baseline_status": "success",
+    "actual_clarification_question": "‘最近’具体指哪段时间？例如：最近7天、最近30天、本周、本月，还是其他？",
+    "followup_supplied": true,
+    "gate_accepted_followup": true,
+    "failure_categories": [
+      "result_mismatch"
+    ],
+    "baseline_sql": "SELECT ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '服饰鞋包' AND o.order_date >= DATE_SUB('2026-09-12', INTERVAL '7' DAY) LIMIT 200",
+    "v1_1_sql": "SELECT ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '服饰鞋包' AND o.order_date >= DATE_SUB('2026-09-12', INTERVAL '89' DAY) AND o.order_date < '2026-09-12' LIMIT 200",
+    "baseline_result": [
+      {
+        "sales_amount": 192773.14
+      }
+    ],
+    "v1_1_result": [
+      {
+        "sales_amount": 239022.36
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "quantity": 728.0
+      }
+    ]
+  },
+  {
+    "id": "holdout-4-10-c",
+    "question": "杭州所有历史有效订单的订单数是多少？只返回笔数。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 4.192554,
+    "total_latency_s": 4.192554,
+    "interactive_correct": false,
+    "baseline_correct": false,
+    "baseline_latency_s": 2.307966,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [
+      "result_mismatch"
+    ],
+    "baseline_sql": "SELECT COUNT(*) AS order_count FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.city = '杭州' LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS order_count FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.city = '杭州' LIMIT 200",
+    "baseline_result": [
+      {
+        "order_count": 0
+      }
+    ],
+    "v1_1_result": [
+      {
+        "order_count": 0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 1275
+      }
+    ]
+  },
+  {
+    "id": "holdout-4-10-a",
+    "question": "给我杭州的有效订单规模，只返回一个总计数字。",
+    "should_clarify": true,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 5.82014,
+    "total_latency_s": 5.82014,
+    "interactive_correct": false,
+    "baseline_correct": false,
+    "baseline_latency_s": 1.897167,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [
+      "missed_clarification",
+      "result_mismatch"
+    ],
+    "baseline_sql": "SELECT COUNT(*) AS order_count FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.city = '杭州' AND o.order_date <= '2026-09-12' LIMIT 200",
+    "v1_1_sql": "SELECT COUNT(*) AS order_count FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.city = '杭州' LIMIT 200",
+    "baseline_result": [
+      {
+        "order_count": 0
+      }
+    ],
+    "v1_1_result": [
+      {
+        "order_count": 0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 1275
+      }
+    ]
+  },
+  {
+    "id": "holdout-4-11-c",
+    "question": "2026年第二季度服饰鞋包有效订单销售额是多少？按商品行实付金额统计，只返回总额。",
+    "should_clarify": false,
+    "first_status": "success",
+    "triggered": false,
+    "final_status": "success",
+    "first_latency_s": 11.733142,
+    "total_latency_s": 11.733142,
+    "interactive_correct": true,
+    "baseline_correct": true,
+    "baseline_latency_s": 2.899815,
+    "baseline_status": "success",
+    "actual_clarification_question": "",
+    "followup_supplied": false,
+    "gate_accepted_followup": false,
+    "failure_categories": [],
+    "baseline_sql": "SELECT ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '服饰鞋包' AND o.order_date >= '2026-04-01' AND o.order_date <= '2026-06-30' LIMIT 200",
+    "v1_1_sql": "SELECT ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '服饰鞋包' AND o.order_date >= '2026-04-01' AND o.order_date <= '2026-06-30' LIMIT 200",
+    "baseline_result": [
+      {
+        "sales_amount": 234717.44
+      }
+    ],
+    "v1_1_result": [
+      {
+        "sales_amount": 234717.44
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 234717.44
+      }
+    ]
+  },
+  {
+    "id": "holdout-4-11-a",
+    "question": "帮我查下服饰鞋包那段时间的有效订单销售额，只返回总额。",
+    "should_clarify": true,
+    "first_status": "needs_clarification",
+    "triggered": true,
+    "final_status": "success",
+    "first_latency_s": 4.042345,
+    "total_latency_s": 11.0785,
+    "interactive_correct": false,
+    "baseline_correct": false,
+    "baseline_latency_s": 2.853571,
+    "baseline_status": "success",
+    "actual_clarification_question": "请问'那段时间'具体指？A) 近7天 B) 近30天 C) 2026年9月1日至9月12日 D) 其他指定区间",
+    "followup_supplied": true,
+    "gate_accepted_followup": true,
+    "failure_categories": [
+      "result_mismatch"
+    ],
+    "baseline_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '服饰鞋包' AND o.order_date = '2026-09-12' LIMIT 200",
+    "v1_1_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '服饰鞋包' AND o.order_date BETWEEN '2026-04-01' AND '2026-06-30' LIMIT 200",
+    "baseline_result": [
+      {
+        "sales_amount": 3382.46
+      }
+    ],
+    "v1_1_result": [
+      {
+        "sales_amount": 1001532.1
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 234717.44
+      }
+    ]
+  }
+]

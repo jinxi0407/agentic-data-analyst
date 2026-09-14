@@ -1,0 +1,23 @@
+{
+  "original_evidence_unchanged": true,
+  "systems_unchanged_from_30e9a08": true,
+  "scorer_unchanged": true,
+  "database_fingerprint_unchanged": true,
+  "all_240_initial_records_unchanged": true,
+  "actual_secret_value_scan_passed": true,
+  "files_scanned": 117,
+  "result_file_sha256": {
+    "FINAL_CLARIFICATION_EVALUATION.md": "458c7c2ea16000b9a5d13ae7e182581bfe4bcc406de5196912e661ec2d0055ae",
+    "eval/clarification_corrected_report.json": "20ef62f093482bee000689bfab37c81b5d70259d495c834b9505630e9f4d6182",
+    "eval/clarification_corrected_per_case.json": "8073a4f1fdce573b2d20949443e7ca2ce18ba5b2e84b07e967aa4dde58c05228",
+    "eval/clarification_corrected_bad_cases.json": "e807ddf956b2c0b7721d1a4e81b630a0e9aea82faf977cbb137d6e54e4deebba",
+    "eval/clarification_corrected_raw_results.json": "f02e55e90c46780a7dc8cd7d973e4c92433f00a24b5a428968717cfb5f77cd47",
+    "eval/clarification_simulated_replies.json": "5cf7a54c85b2d0d82d58bb04d98cbcae7c747f0073093ad21a2588db468d29f0",
+    "eval/clarification_reply_freeze.json": "f7aca427f0a9612e00a1c2c0b70cea1509ca07ea638c69e9f91e256abb67c5c5"
+  },
+  "production_invocations": 280,
+  "baseline_invocations": 120,
+  "v1_1_first_invocations": 120,
+  "v1_1_followup_invocations": 40,
+  "failed_calls_rerolled": 0
+}
