@@ -24,6 +24,7 @@ env/
 .eval-baseline/
 eval/daily_*.lock
 eval/final_holdout_*.lock
+eval/final_holdout_v2_*.lock
 
 # Build artifacts
 build/
