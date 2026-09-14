@@ -1,0 +1,32 @@
+{
+  "status": "FINAL HOLDOUT FROZEN",
+  "seed": 20260914,
+  "case_count": 250,
+  "cases_sha256": "0242fc15886f4a34ff6803b94446db3a273559124ef8312230ed4f89d6c16649",
+  "database": {
+    "users": "b827470388b126a973c77491e8863f6e6e51e7cbfeb7f689923a1b48ac2d55dc",
+    "products": "1a33196738fb59c7ee3d88f68e5ab3c89c94c5ca14864d3976c65337f3aad43e",
+    "orders": "e08ce1622cc57a7ad81b115f96fe1a7012a37b18b49229ae69da3d4c9335dab3",
+    "order_items": "40c992219526ac2fe849d58990769f788d07e4c6b3a83645b8863f65314a8a3e",
+    "refunds": "e8c296d3b783f81b322bc103d5f9eb00823141234155a3250980828af242d6b2",
+    "core_table": "af48658b968e0d6f803c66aebc0e6d9bc7b83030634f6ff2ebd4abc9ab6353d1",
+    "core_field": "bb1c16e9bed8a8ab47c6204cfa55986378340eea6bbb54f92cdefe112b265fdd"
+  },
+  "reference_date": "2026-09-12",
+  "difficulty_counts": {
+    "easy": 125,
+    "hard": 25,
+    "medium": 100
+  },
+  "category_counts": {
+    "filtering_aggregation": 75,
+    "time_trend": 50,
+    "top_k_ranking": 50,
+    "refund_customer_product": 25,
+    "one_two_table_join": 38,
+    "complex": 12
+  },
+  "paraphrase_count": 30,
+  "empty_result_count": 0,
+  "scoring": "Same strict comparator as Daily Business Benchmark: exact rows/columns, numeric abs_tol 0.005, ordered cases enforce order."
+}
