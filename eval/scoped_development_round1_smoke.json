@@ -1,0 +1,423 @@
+[
+  {
+    "question": "上海客户的有效订单中，实付金额超过850元的有几笔？只返回笔数。",
+    "first": {
+      "question": "上海客户的有效订单中，实付金额超过850元的有几笔？只返回笔数。",
+      "sql": "SELECT COUNT(*) AS order_count FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE u.city = '上海市' AND o.order_status IN ('paid', 'completed', 'shipped') AND o.paid_amount > 850 LIMIT 200",
+      "result": [
+        {
+          "order_count": 987
+        }
+      ],
+      "trace": [
+        {
+          "stage": "clarification",
+          "status": "proceed"
+        },
+        {
+          "stage": "execute",
+          "status": "success"
+        }
+      ],
+      "retry_count": 0,
+      "needs_clarification": false,
+      "gate_decision": {
+        "decision": "proceed",
+        "ambiguity_type": "none",
+        "known_constraints": [
+          {
+            "slot": "entity",
+            "quote": "上海客户"
+          },
+          {
+            "slot": "metric",
+            "quote": "有效订单"
+          },
+          {
+            "slot": "filter",
+            "quote": "实付金额超过850元"
+          },
+          {
+            "slot": "metric",
+            "quote": "有几笔"
+          }
+        ],
+        "missing_slots": [],
+        "clarification_question": "",
+        "options": [],
+        "resolved_slots": []
+      },
+      "normalized_question": "Reference date: 2026-09-12; timezone: Asia/Shanghai. An explicit reference date in the question takes precedence.\nVerified city storage values and same-city suffix aliases (not region mappings):\n[{\"field\": \"users.city\", \"value\": \"上海市\", \"province\": \"上海\", \"verified_aliases\": [\"上海\"]}, {\"field\": \"users.city\", \"value\": \"北京市\", \"province\": \"北京\", \"verified_aliases\": [\"北京\"]}, {\"field\": \"users.city\", \"value\": \"南京市\", \"province\": \"江苏\", \"verified_aliases\": [\"南京\"]}, {\"field\": \"users.city\", \"value\": \"广州市\", \"province\": \"广东\", \"verified_aliases\": [\"广州\"]}, {\"field\": \"users.city\", \"value\": \"成都市\", \"province\": \"四川\", \"verified_aliases\": [\"成都\"]}, {\"field\": \"users.city\", \"value\": \"杭州市\", \"province\": \"浙江\", \"verified_aliases\": [\"杭州\"]}, {\"field\": \"users.city\", \"value\": \"武汉市\", \"province\": \"湖北\", \"verified_aliases\": [\"武汉\"]}, {\"field\": \"users.city\", \"value\": \"西安市\", \"province\": \"陕西\", \"verified_aliases\": [\"西安\"]}]\nOnly normalize a city to its uniquely verified same-city value. Do not infer a city from a province/region. An absent named city remains that city; empty results are valid. Do not replace it with an existing city or ask merely because no rows exist.\nOriginal question (preserve all constraints):\n上海用户的有效订单中，实付金额超过850元的有几笔？只返回笔数。",
+      "error": "",
+      "status": "success",
+      "latency_ms": 5637.57,
+      "interaction": {
+        "original_question": "上海客户的有效订单中，实付金额超过850元的有几笔？只返回笔数。",
+        "known_constraints": [
+          {
+            "slot": "entity",
+            "quote": "上海客户"
+          },
+          {
+            "slot": "metric",
+            "quote": "有效订单"
+          },
+          {
+            "slot": "filter",
+            "quote": "实付金额超过850元"
+          },
+          {
+            "slot": "metric",
+            "quote": "有几笔"
+          }
+        ],
+        "clarification_question": null,
+        "clarification_answer": null,
+        "resolved_slots": []
+      }
+    },
+    "usage": [
+      {
+        "input_tokens": 2006,
+        "output_tokens": 115,
+        "status": "ok"
+      },
+      {
+        "input_tokens": 2224,
+        "output_tokens": 51,
+        "status": "ok"
+      }
+    ]
+  },
+  {
+    "question": "上个月销售额是多少？",
+    "first": {
+      "question": "上个月销售额是多少？",
+      "sql": "SELECT ROUND(SUM(paid_amount), 2) AS sales_amount FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') AND order_date >= '2026-08-01' AND order_date <= '2026-08-31' LIMIT 200",
+      "result": [
+        {
+          "sales_amount": 1736198.89
+        }
+      ],
+      "trace": [
+        {
+          "stage": "clarification",
+          "status": "proceed"
+        },
+        {
+          "stage": "execute",
+          "status": "success"
+        }
+      ],
+      "retry_count": 0,
+      "needs_clarification": false,
+      "gate_decision": {
+        "decision": "proceed",
+        "ambiguity_type": "none",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "上个月"
+          },
+          {
+            "slot": "metric",
+            "quote": "销售额"
+          }
+        ],
+        "missing_slots": [],
+        "clarification_question": "",
+        "options": [],
+        "resolved_slots": []
+      },
+      "normalized_question": "Reference date: 2026-09-12; timezone: Asia/Shanghai. An explicit reference date in the question takes precedence.\nVerified city storage values and same-city suffix aliases (not region mappings):\n[{\"field\": \"users.city\", \"value\": \"上海市\", \"province\": \"上海\", \"verified_aliases\": [\"上海\"]}, {\"field\": \"users.city\", \"value\": \"北京市\", \"province\": \"北京\", \"verified_aliases\": [\"北京\"]}, {\"field\": \"users.city\", \"value\": \"南京市\", \"province\": \"江苏\", \"verified_aliases\": [\"南京\"]}, {\"field\": \"users.city\", \"value\": \"广州市\", \"province\": \"广东\", \"verified_aliases\": [\"广州\"]}, {\"field\": \"users.city\", \"value\": \"成都市\", \"province\": \"四川\", \"verified_aliases\": [\"成都\"]}, {\"field\": \"users.city\", \"value\": \"杭州市\", \"province\": \"浙江\", \"verified_aliases\": [\"杭州\"]}, {\"field\": \"users.city\", \"value\": \"武汉市\", \"province\": \"湖北\", \"verified_aliases\": [\"武汉\"]}, {\"field\": \"users.city\", \"value\": \"西安市\", \"province\": \"陕西\", \"verified_aliases\": [\"西安\"]}]\nOnly normalize a city to its uniquely verified same-city value. Do not infer a city from a province/region. An absent named city remains that city; empty results are valid. Do not replace it with an existing city or ask merely because no rows exist.\nOriginal question (preserve all constraints):\n上个月销售额是多少？",
+      "error": "",
+      "status": "success",
+      "latency_ms": 4458.59,
+      "interaction": {
+        "original_question": "上个月销售额是多少？",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "上个月"
+          },
+          {
+            "slot": "metric",
+            "quote": "销售额"
+          }
+        ],
+        "clarification_question": null,
+        "clarification_answer": null,
+        "resolved_slots": []
+      }
+    },
+    "usage": [
+      {
+        "input_tokens": 1987,
+        "output_tokens": 79,
+        "status": "ok"
+      },
+      {
+        "input_tokens": 2186,
+        "output_tokens": 60,
+        "status": "ok"
+      }
+    ]
+  },
+  {
+    "question": "食品生鲜近期批准了多少退款金额？只返回金额。",
+    "first": {
+      "question": "食品生鲜近期批准了多少退款金额？只返回金额。",
+      "sql": "",
+      "result": [],
+      "trace": [
+        {
+          "stage": "clarification",
+          "status": "clarify"
+        }
+      ],
+      "retry_count": 0,
+      "needs_clarification": true,
+      "gate_decision": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "entity",
+            "quote": "食品生鲜"
+          },
+          {
+            "slot": "metric",
+            "quote": "批准了多少退款金额"
+          },
+          {
+            "slot": "dimension",
+            "quote": "只返回金额"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "请问‘近期’具体指最近多少天？例如：7天、30天，或其他天数？",
+        "options": [
+          "7天",
+          "30天",
+          "90天"
+        ],
+        "resolved_slots": []
+      },
+      "status": "needs_clarification",
+      "clarification_question": "请问‘近期’具体指最近多少天？例如：7天、30天，或其他天数？",
+      "options": [
+        "7天",
+        "30天",
+        "90天"
+      ],
+      "clarification_context": {
+        "original_question": "食品生鲜近期批准了多少退款金额？只返回金额。",
+        "known_constraints": [
+          {
+            "slot": "entity",
+            "quote": "食品生鲜"
+          },
+          {
+            "slot": "metric",
+            "quote": "批准了多少退款金额"
+          },
+          {
+            "slot": "dimension",
+            "quote": "只返回金额"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "请问‘近期’具体指最近多少天？例如：7天、30天，或其他天数？",
+        "reference_date": "2026-09-12",
+        "timezone": "Asia/Shanghai",
+        "rounds": 1
+      },
+      "latency_ms": 3971.61
+    },
+    "followup": {
+      "question": "食品生鲜近期批准了多少退款金额？只返回金额。",
+      "sql": "",
+      "result": [],
+      "trace": [
+        {
+          "stage": "clarification",
+          "status": "needs_rephrase"
+        }
+      ],
+      "retry_count": 0,
+      "needs_clarification": false,
+      "gate_decision": {
+        "decision": "needs_rephrase",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "entity",
+            "quote": "食品生鲜"
+          },
+          {
+            "slot": "metric",
+            "quote": "批准了多少退款金额"
+          },
+          {
+            "slot": "dimension",
+            "quote": "只返回金额"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "请问‘近期’具体指最近多少天？例如：7天、30天，或其他天数？",
+        "options": [],
+        "resolved_slots": []
+      },
+      "status": "needs_rephrase",
+      "error": "请重新提交完整明确的问题。",
+      "latency_ms": 8811.99
+    },
+    "usage": [
+      {
+        "input_tokens": 1994,
+        "output_tokens": 138,
+        "status": "ok"
+      },
+      {
+        "input_tokens": 2155,
+        "output_tokens": 187,
+        "status": "ok"
+      },
+      {
+        "input_tokens": 2203,
+        "output_tokens": 124,
+        "status": "ok"
+      }
+    ]
+  },
+  {
+    "question": "食品生鲜最近卖得怎么样？只要一个汇总值。",
+    "first": {
+      "question": "食品生鲜最近卖得怎么样？只要一个汇总值。",
+      "sql": "",
+      "result": [],
+      "trace": [
+        {
+          "stage": "clarification",
+          "status": "clarify"
+        }
+      ],
+      "retry_count": 0,
+      "needs_clarification": true,
+      "gate_decision": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "entity",
+            "quote": "食品生鲜"
+          },
+          {
+            "slot": "metric",
+            "quote": "只要一个汇总值"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "请问‘最近’具体指多长时间范围？例如：最近7天、最近30天，还是其他时间段？",
+        "options": [
+          "最近7天",
+          "最近30天",
+          "最近90天"
+        ],
+        "resolved_slots": []
+      },
+      "status": "needs_clarification",
+      "clarification_question": "请问‘最近’具体指多长时间范围？例如：最近7天、最近30天，还是其他时间段？",
+      "options": [
+        "最近7天",
+        "最近30天",
+        "最近90天"
+      ],
+      "clarification_context": {
+        "original_question": "食品生鲜最近卖得怎么样？只要一个汇总值。",
+        "known_constraints": [
+          {
+            "slot": "entity",
+            "quote": "食品生鲜"
+          },
+          {
+            "slot": "metric",
+            "quote": "只要一个汇总值"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "请问‘最近’具体指多长时间范围？例如：最近7天、最近30天，还是其他时间段？",
+        "reference_date": "2026-09-12",
+        "timezone": "Asia/Shanghai",
+        "rounds": 1
+      },
+      "latency_ms": 3725.37
+    },
+    "followup": {
+      "question": "食品生鲜最近卖得怎么样？只要一个汇总值。",
+      "sql": "",
+      "result": [],
+      "trace": [
+        {
+          "stage": "clarification",
+          "status": "needs_rephrase"
+        }
+      ],
+      "retry_count": 0,
+      "needs_clarification": false,
+      "gate_decision": {
+        "decision": "needs_rephrase",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "entity",
+            "quote": "食品生鲜"
+          },
+          {
+            "slot": "metric",
+            "quote": "只要一个汇总值"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "请问‘最近’具体指多长时间范围？例如：最近7天、最近30天，还是其他时间段？",
+        "options": [
+          "最近7天",
+          "最近30天",
+          "最近90天",
+          "本月",
+          "上个月",
+          "本季度",
+          "上季度"
+        ],
+        "resolved_slots": []
+      },
+      "status": "needs_rephrase",
+      "error": "请重新提交完整明确的问题。",
+      "latency_ms": 4195.67
+    },
+    "usage": [
+      {
+        "input_tokens": 1994,
+        "output_tokens": 126,
+        "status": "ok"
+      },
+      {
+        "input_tokens": 2114,
+        "output_tokens": 130,
+        "status": "ok"
+      }
+    ]
+  }
+]

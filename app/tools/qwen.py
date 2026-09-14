@@ -6,12 +6,27 @@ All API keys and model names come from environment variables through app.config.
 from __future__ import annotations
 
 from typing import Dict, List, Optional
+from contextlib import contextmanager
+from contextvars import ContextVar
 
 from app.config import settings
 
 
 class QwenConfigError(RuntimeError):
     pass
+
+
+_usage = ContextVar("qwen_usage", default=None)
+
+
+@contextmanager
+def capture_usage():
+    records = []
+    token = _usage.set(records)
+    try:
+        yield records
+    finally:
+        _usage.reset(token)
 
 
 def _require_dashscope():
@@ -29,14 +44,24 @@ def _require_dashscope():
     return dashscope
 
 
-def generate_text(messages: List[Dict[str, str]], temperature: float = 0.1) -> str:
+def generate_text(messages: List[Dict[str, str]], temperature: float = 0.1,
+                  response_format: dict | None = None) -> str:
     dashscope = _require_dashscope()
+    records = _usage.get()
+    record = {"input_tokens": None, "output_tokens": None, "status": "transport_error"}
+    if records is not None:
+        records.append(record)
+    kwargs = {"response_format": response_format} if response_format is not None else {}
     response = dashscope.Generation.call(
         model=settings.qwen_chat_model,
         messages=messages,
         temperature=temperature,
         result_format="message",
+        **kwargs,
     )
+    usage = response.get("usage") or {}
+    record.update(input_tokens=usage.get("input_tokens"), output_tokens=usage.get("output_tokens"),
+                  status="ok" if getattr(response, "status_code", 200) == 200 else "api_error")
     if getattr(response, "status_code", 200) != 200:
         raise RuntimeError(f"Qwen chat call failed: {getattr(response, 'message', response)}")
 

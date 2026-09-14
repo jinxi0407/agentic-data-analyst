@@ -1,0 +1,556 @@
+[
+  {
+    "question": "食品生鲜近期批准了多少退款金额？只返回金额。",
+    "first": {
+      "question": "食品生鲜近期批准了多少退款金额？只返回金额。",
+      "sql": "",
+      "result": [],
+      "trace": [
+        {
+          "stage": "clarification",
+          "status": "clarify"
+        }
+      ],
+      "retry_count": 0,
+      "needs_clarification": true,
+      "gate_decision": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "filter",
+            "quote": "食品生鲜"
+          },
+          {
+            "slot": "metric",
+            "quote": "批准了多少退款金额"
+          },
+          {
+            "slot": "dimension",
+            "quote": "只返回金额"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "请问‘近期’具体指多长时间范围？例如：最近7天、最近30天，或指定起止日期？",
+        "options": [
+          "最近7天",
+          "最近30天",
+          "最近90天",
+          "自定义起止日期"
+        ],
+        "resolved_slots": []
+      },
+      "status": "needs_clarification",
+      "clarification_question": "请问‘近期’具体指多长时间范围？例如：最近7天、最近30天，或指定起止日期？",
+      "options": [
+        "最近7天",
+        "最近30天",
+        "最近90天",
+        "自定义起止日期"
+      ],
+      "clarification_context": {
+        "original_question": "食品生鲜近期批准了多少退款金额？只返回金额。",
+        "known_constraints": [
+          {
+            "slot": "filter",
+            "quote": "食品生鲜"
+          },
+          {
+            "slot": "metric",
+            "quote": "批准了多少退款金额"
+          },
+          {
+            "slot": "dimension",
+            "quote": "只返回金额"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "请问‘近期’具体指多长时间范围？例如：最近7天、最近30天，或指定起止日期？",
+        "reference_date": "2026-09-12",
+        "timezone": "Asia/Shanghai",
+        "rounds": 1
+      },
+      "latency_ms": 4743.44
+    },
+    "followup": {
+      "question": "食品生鲜近期批准了多少退款金额？只返回金额。",
+      "sql": "SELECT ROUND(SUM(r.refund_amount), 2) AS refund_amount FROM refunds AS r JOIN order_items AS oi ON r.order_item_id = oi.order_item_id JOIN products AS p ON oi.product_id = p.product_id WHERE r.refund_status = 'approved' AND p.category = '食品生鲜' AND r.refund_date BETWEEN '2026-08-24' AND '2026-09-11' LIMIT 200",
+      "result": [
+        {
+          "refund_amount": 939.52
+        }
+      ],
+      "trace": [
+        {
+          "stage": "clarification",
+          "status": "proceed"
+        },
+        {
+          "stage": "execute",
+          "status": "success"
+        }
+      ],
+      "retry_count": 0,
+      "needs_clarification": false,
+      "gate_decision": {
+        "decision": "proceed",
+        "ambiguity_type": "none",
+        "known_constraints": [
+          {
+            "slot": "filter",
+            "quote": "食品生鲜"
+          },
+          {
+            "slot": "metric",
+            "quote": "批准了多少退款金额"
+          },
+          {
+            "slot": "dimension",
+            "quote": "只返回金额"
+          }
+        ],
+        "missing_slots": [],
+        "clarification_question": "",
+        "options": [],
+        "resolved_slots": [
+          {
+            "slot": "time",
+            "quote": "退款日期从2026-08-24到2026-09-11，包含首尾日期。"
+          }
+        ]
+      },
+      "normalized_question": "Reference date: 2026-09-12; timezone: Asia/Shanghai. An explicit reference date in the question takes precedence.\nVerified city storage values and same-city suffix aliases (not region mappings):\n[{\"field\": \"users.city\", \"value\": \"上海市\", \"province\": \"上海\", \"verified_aliases\": [\"上海\"]}, {\"field\": \"users.city\", \"value\": \"北京市\", \"province\": \"北京\", \"verified_aliases\": [\"北京\"]}, {\"field\": \"users.city\", \"value\": \"南京市\", \"province\": \"江苏\", \"verified_aliases\": [\"南京\"]}, {\"field\": \"users.city\", \"value\": \"广州市\", \"province\": \"广东\", \"verified_aliases\": [\"广州\"]}, {\"field\": \"users.city\", \"value\": \"成都市\", \"province\": \"四川\", \"verified_aliases\": [\"成都\"]}, {\"field\": \"users.city\", \"value\": \"杭州市\", \"province\": \"浙江\", \"verified_aliases\": [\"杭州\"]}, {\"field\": \"users.city\", \"value\": \"武汉市\", \"province\": \"湖北\", \"verified_aliases\": [\"武汉\"]}, {\"field\": \"users.city\", \"value\": \"西安市\", \"province\": \"陕西\", \"verified_aliases\": [\"西安\"]}]\nOnly normalize a city to its uniquely verified same-city value. Do not infer a city from a province/region. An absent named city remains that city; empty results are valid. Do not replace it with an existing city or ask merely because no rows exist.\nOriginal question (preserve all constraints):\n食品生鲜近期批准了多少退款金额？只返回金额。\nUser supplied ONLY the following missing fields; preserve all original constraints:\n[{\"slot\": \"time\", \"quote\": \"退款日期从2026-08-24到2026-09-11，包含首尾日期。\"}]",
+      "error": "",
+      "status": "success",
+      "latency_ms": 7930.33,
+      "interaction": {
+        "original_question": "食品生鲜近期批准了多少退款金额？只返回金额。",
+        "known_constraints": [
+          {
+            "slot": "filter",
+            "quote": "食品生鲜"
+          },
+          {
+            "slot": "metric",
+            "quote": "批准了多少退款金额"
+          },
+          {
+            "slot": "dimension",
+            "quote": "只返回金额"
+          }
+        ],
+        "clarification_question": "请问‘近期’具体指多长时间范围？例如：最近7天、最近30天，或指定起止日期？",
+        "clarification_answer": "退款日期从2026-08-24到2026-09-11，包含首尾日期。",
+        "resolved_slots": [
+          {
+            "slot": "time",
+            "quote": "退款日期从2026-08-24到2026-09-11，包含首尾日期。"
+          }
+        ]
+      }
+    },
+    "usage": [
+      {
+        "input_tokens": 2083,
+        "output_tokens": 152,
+        "status": "ok"
+      },
+      {
+        "input_tokens": 2349,
+        "output_tokens": 161,
+        "status": "ok"
+      },
+      {
+        "input_tokens": 2312,
+        "output_tokens": 97,
+        "status": "ok"
+      }
+    ]
+  },
+  {
+    "question": "食品生鲜最近卖得怎么样？只要一个汇总值。",
+    "first": {
+      "question": "食品生鲜最近卖得怎么样？只要一个汇总值。",
+      "sql": "",
+      "result": [],
+      "trace": [
+        {
+          "stage": "clarification",
+          "status": "clarify"
+        }
+      ],
+      "retry_count": 0,
+      "needs_clarification": true,
+      "gate_decision": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "entity",
+            "quote": "食品生鲜"
+          },
+          {
+            "slot": "limit",
+            "quote": "只要一个汇总值"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "请问‘最近’具体指多长时间范围？例如：最近7天、最近30天，还是其他时间段？",
+        "options": [
+          "最近7天",
+          "最近30天",
+          "最近90天"
+        ],
+        "resolved_slots": []
+      },
+      "status": "needs_clarification",
+      "clarification_question": "请问‘最近’具体指多长时间范围？例如：最近7天、最近30天，还是其他时间段？",
+      "options": [
+        "最近7天",
+        "最近30天",
+        "最近90天"
+      ],
+      "clarification_context": {
+        "original_question": "食品生鲜最近卖得怎么样？只要一个汇总值。",
+        "known_constraints": [
+          {
+            "slot": "entity",
+            "quote": "食品生鲜"
+          },
+          {
+            "slot": "limit",
+            "quote": "只要一个汇总值"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "请问‘最近’具体指多长时间范围？例如：最近7天、最近30天，还是其他时间段？",
+        "reference_date": "2026-09-12",
+        "timezone": "Asia/Shanghai",
+        "rounds": 1
+      },
+      "latency_ms": 4186.85
+    },
+    "followup": {
+      "question": "食品生鲜最近卖得怎么样？只要一个汇总值。",
+      "sql": "",
+      "result": [],
+      "trace": [
+        {
+          "stage": "clarification",
+          "status": "needs_rephrase"
+        }
+      ],
+      "retry_count": 0,
+      "needs_clarification": false,
+      "gate_decision": {
+        "decision": "needs_rephrase",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "entity",
+            "quote": "食品生鲜"
+          },
+          {
+            "slot": "limit",
+            "quote": "只要一个汇总值"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "请问‘最近’具体指多长时间范围？例如：最近7天、最近30天，还是其他时间段？",
+        "options": [
+          "最近7天",
+          "最近30天",
+          "最近90天",
+          "本月",
+          "上月",
+          "本季度",
+          "上季度"
+        ],
+        "resolved_slots": []
+      },
+      "status": "needs_rephrase",
+      "error": "请重新提交完整明确的问题。",
+      "latency_ms": 4140.1
+    },
+    "usage": [
+      {
+        "input_tokens": 2083,
+        "output_tokens": 126,
+        "status": "ok"
+      },
+      {
+        "input_tokens": 2276,
+        "output_tokens": 131,
+        "status": "ok"
+      }
+    ]
+  },
+  {
+    "question": "上海客户的有效订单里有多少大额订单？只返回笔数。",
+    "first": {
+      "question": "上海客户的有效订单里有多少大额订单？只返回笔数。",
+      "sql": "",
+      "result": [],
+      "trace": [
+        {
+          "stage": "clarification",
+          "status": "needs_rephrase"
+        }
+      ],
+      "retry_count": 0,
+      "needs_clarification": false,
+      "gate_decision": {
+        "decision": "needs_rephrase",
+        "ambiguity_type": "metric",
+        "known_constraints": [
+          {
+            "slot": "filter",
+            "quote": "上海客户的有效订单"
+          },
+          {
+            "slot": "metric",
+            "quote": "有多少"
+          },
+          {
+            "slot": "metric",
+            "quote": "只返回笔数"
+          }
+        ],
+        "missing_slots": [
+          "metric"
+        ],
+        "clarification_question": "请问‘大额订单’的具体金额阈值是多少？",
+        "options": [],
+        "resolved_slots": []
+      },
+      "status": "needs_rephrase",
+      "error": "请重新提交完整明确的问题。",
+      "latency_ms": 3458.35
+    },
+    "usage": [
+      {
+        "input_tokens": 2086,
+        "output_tokens": 113,
+        "status": "ok"
+      }
+    ]
+  },
+  {
+    "question": "找出上海表现最好的前4名客户，返回用户ID和表现指标，指标相同按用户ID升序。",
+    "first": {
+      "question": "找出上海表现最好的前4名客户，返回用户ID和表现指标，指标相同按用户ID升序。",
+      "sql": "",
+      "result": [],
+      "trace": [
+        {
+          "stage": "clarification",
+          "status": "clarify"
+        }
+      ],
+      "retry_count": 0,
+      "needs_clarification": true,
+      "gate_decision": {
+        "decision": "clarify",
+        "ambiguity_type": "metric",
+        "known_constraints": [
+          {
+            "slot": "filter",
+            "quote": "上海"
+          },
+          {
+            "slot": "limit",
+            "quote": "前4名"
+          },
+          {
+            "slot": "dimension",
+            "quote": "用户ID和表现指标"
+          },
+          {
+            "slot": "ranking",
+            "quote": "指标相同按用户ID升序"
+          }
+        ],
+        "missing_slots": [
+          "metric"
+        ],
+        "clarification_question": "请问‘表现’具体指哪个业务指标？例如：销售金额、购买用户数、订单数量、退款率、复购次数等。",
+        "options": [
+          "销售金额",
+          "购买用户数",
+          "订单数量",
+          "退款率",
+          "复购次数"
+        ],
+        "resolved_slots": []
+      },
+      "status": "needs_clarification",
+      "clarification_question": "请问‘表现’具体指哪个业务指标？例如：销售金额、购买用户数、订单数量、退款率、复购次数等。",
+      "options": [
+        "销售金额",
+        "购买用户数",
+        "订单数量",
+        "退款率",
+        "复购次数"
+      ],
+      "clarification_context": {
+        "original_question": "找出上海表现最好的前4名客户，返回用户ID和表现指标，指标相同按用户ID升序。",
+        "known_constraints": [
+          {
+            "slot": "filter",
+            "quote": "上海"
+          },
+          {
+            "slot": "limit",
+            "quote": "前4名"
+          },
+          {
+            "slot": "dimension",
+            "quote": "用户ID和表现指标"
+          },
+          {
+            "slot": "ranking",
+            "quote": "指标相同按用户ID升序"
+          }
+        ],
+        "missing_slots": [
+          "metric"
+        ],
+        "clarification_question": "请问‘表现’具体指哪个业务指标？例如：销售金额、购买用户数、订单数量、退款率、复购次数等。",
+        "reference_date": "2026-09-12",
+        "timezone": "Asia/Shanghai",
+        "rounds": 1
+      },
+      "latency_ms": 4710.66
+    },
+    "followup": {
+      "question": "找出上海表现最好的前4名客户，返回用户ID和表现指标，指标相同按用户ID升序。",
+      "sql": "SELECT u.user_id, COUNT(o.order_id) AS metric_value FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '上海市' AND o.order_status IN ('paid', 'completed', 'shipped') GROUP BY u.user_id ORDER BY metric_value DESC, u.user_id ASC LIMIT 4",
+      "result": [
+        {
+          "user_id": 1466,
+          "metric_value": 21
+        },
+        {
+          "user_id": 1187,
+          "metric_value": 19
+        },
+        {
+          "user_id": 313,
+          "metric_value": 18
+        },
+        {
+          "user_id": 2141,
+          "metric_value": 18
+        }
+      ],
+      "trace": [
+        {
+          "stage": "clarification",
+          "status": "proceed"
+        },
+        {
+          "stage": "execute",
+          "status": "success"
+        }
+      ],
+      "retry_count": 0,
+      "needs_clarification": false,
+      "gate_decision": {
+        "decision": "proceed",
+        "ambiguity_type": "none",
+        "known_constraints": [
+          {
+            "slot": "filter",
+            "quote": "上海"
+          },
+          {
+            "slot": "limit",
+            "quote": "前4名"
+          },
+          {
+            "slot": "dimension",
+            "quote": "用户ID和表现指标"
+          },
+          {
+            "slot": "ranking",
+            "quote": "指标相同按用户ID升序"
+          }
+        ],
+        "missing_slots": [],
+        "clarification_question": "",
+        "options": [],
+        "resolved_slots": [
+          {
+            "slot": "metric",
+            "quote": "全部历史有效订单笔数"
+          }
+        ]
+      },
+      "normalized_question": "Reference date: 2026-09-12; timezone: Asia/Shanghai. An explicit reference date in the question takes precedence.\nVerified city storage values and same-city suffix aliases (not region mappings):\n[{\"field\": \"users.city\", \"value\": \"上海市\", \"province\": \"上海\", \"verified_aliases\": [\"上海\"]}, {\"field\": \"users.city\", \"value\": \"北京市\", \"province\": \"北京\", \"verified_aliases\": [\"北京\"]}, {\"field\": \"users.city\", \"value\": \"南京市\", \"province\": \"江苏\", \"verified_aliases\": [\"南京\"]}, {\"field\": \"users.city\", \"value\": \"广州市\", \"province\": \"广东\", \"verified_aliases\": [\"广州\"]}, {\"field\": \"users.city\", \"value\": \"成都市\", \"province\": \"四川\", \"verified_aliases\": [\"成都\"]}, {\"field\": \"users.city\", \"value\": \"杭州市\", \"province\": \"浙江\", \"verified_aliases\": [\"杭州\"]}, {\"field\": \"users.city\", \"value\": \"武汉市\", \"province\": \"湖北\", \"verified_aliases\": [\"武汉\"]}, {\"field\": \"users.city\", \"value\": \"西安市\", \"province\": \"陕西\", \"verified_aliases\": [\"西安\"]}]\nOnly normalize a city to its uniquely verified same-city value. Do not infer a city from a province/region. An absent named city remains that city; empty results are valid. Do not replace it with an existing city or ask merely because no rows exist.\nOriginal question (preserve all constraints):\n找出上海表现最好的前4名用户，返回用户ID和表现指标，指标相同按用户ID升序。\nUser supplied ONLY the following missing fields; preserve all original constraints:\n[{\"slot\": \"metric\", \"quote\": \"全部历史有效订单笔数\"}]",
+      "error": "",
+      "status": "success",
+      "latency_ms": 11899.12,
+      "interaction": {
+        "original_question": "找出上海表现最好的前4名客户，返回用户ID和表现指标，指标相同按用户ID升序。",
+        "known_constraints": [
+          {
+            "slot": "filter",
+            "quote": "上海"
+          },
+          {
+            "slot": "limit",
+            "quote": "前4名"
+          },
+          {
+            "slot": "dimension",
+            "quote": "用户ID和表现指标"
+          },
+          {
+            "slot": "ranking",
+            "quote": "指标相同按用户ID升序"
+          }
+        ],
+        "clarification_question": "请问‘表现’具体指哪个业务指标？例如：销售金额、购买用户数、订单数量、退款率、复购次数等。",
+        "clarification_answer": "表现按全部历史有效订单笔数衡量，从高到低排名。",
+        "resolved_slots": [
+          {
+            "slot": "metric",
+            "quote": "全部历史有效订单笔数"
+          }
+        ]
+      }
+    },
+    "usage": [
+      {
+        "input_tokens": 2095,
+        "output_tokens": 171,
+        "status": "ok"
+      },
+      {
+        "input_tokens": 2370,
+        "output_tokens": 192,
+        "status": "ok"
+      },
+      {
+        "input_tokens": 2418,
+        "output_tokens": 162,
+        "status": "ok"
+      },
+      {
+        "input_tokens": 2288,
+        "output_tokens": 66,
+        "status": "ok"
+      }
+    ]
+  }
+]

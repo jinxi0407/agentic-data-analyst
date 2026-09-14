@@ -28,7 +28,8 @@ def api_online():
 
 with st.sidebar:
     st.subheader("运行环境")
-    st.text("Engine: Production NL2SQL v1.1")
+    st.text("Engine: Production NL2SQL")
+    clarification_enabled = st.toggle("需要时澄清一次", value=False)
     st.text("Model: Qwen Plus")
     st.text("Database: MySQL")
     st.text("Safety: SQLGlot + Read-only")
@@ -41,7 +42,8 @@ with st.sidebar:
 def submit(body):
     try:
         with st.status("正在分析…", expanded=False) as status:
-            response = requests.post(f"{API_URL}/api/query", json=body, timeout=120)
+            body.setdefault("mode", "clarify" if clarification_enabled else "direct")
+            response = requests.post(f"{API_URL}/api/scoped-query", json=body, timeout=120)
             response.raise_for_status()
             st.session_state.payload = response.json()
             status.update(label="分析完成", state="complete")
@@ -87,6 +89,7 @@ if state == "needs_clarification":
             if answer.strip():
                 context = payload["clarification_context"]
                 submit({"question": context["original_question"],
+                        "mode": "clarify",
                         "clarification_context": context, "clarification_answer": answer.strip()})
             else:
                 st.warning("请填写澄清回答。")
@@ -113,5 +116,7 @@ elif state == "success":
             st.json(payload.get("trace", []))
 elif state:
     messages = {"needs_rephrase": "信息仍不足，请在上方重新提交完整、明确的问题。",
-                "clarification_unavailable": "澄清服务暂时不可用，请稍后重试。"}
+                "clarification_unavailable": "澄清服务暂时不可用，请稍后重试。",
+                "invalid_output": "澄清输出未通过校验，未执行查询。",
+                "system_error": "服务暂时不可用，请稍后重试。"}
     st.warning(messages.get(state, "查询未成功，请检查问题后重试。"))

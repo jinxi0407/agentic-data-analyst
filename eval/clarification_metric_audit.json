@@ -1,0 +1,114 @@
+{
+  "source_commit": "02ce1297a9f97ccbb24927faa4ce1354a1f432e9",
+  "decision_counts": [
+    {
+      "label": "clear",
+      "decision": "invalid_output",
+      "count": 3
+    },
+    {
+      "label": "ambiguous",
+      "decision": "clarify",
+      "count": 44
+    },
+    {
+      "label": "clear",
+      "decision": "proceed",
+      "count": 57
+    },
+    {
+      "label": "ambiguous",
+      "decision": "proceed",
+      "count": 16
+    }
+  ],
+  "result_vs_interaction_difference": [
+    {
+      "id": "holdout-0-1-a",
+      "question": "汇总一下食品生鲜的累计销售表现，只需要一个数字。",
+      "unmet_conditions": [
+        "no valid clarification",
+        "no user answer obtained or used"
+      ],
+      "note": "Result equality alone does not establish intended semantics; an empty result can also coincide."
+    },
+    {
+      "id": "holdout-1-1-a",
+      "question": "汇总一下运动户外的累计销售表现，只需要一个数字。",
+      "unmet_conditions": [
+        "no valid clarification",
+        "no user answer obtained or used"
+      ],
+      "note": "Result equality alone does not establish intended semantics; an empty result can also coincide."
+    },
+    {
+      "id": "holdout-2-1-a",
+      "question": "汇总一下美妆个护的累计销售表现，只需要一个数字。",
+      "unmet_conditions": [
+        "no valid clarification",
+        "no user answer obtained or used"
+      ],
+      "note": "Result equality alone does not establish intended semantics; an empty result can also coincide."
+    },
+    {
+      "id": "holdout-3-1-a",
+      "question": "汇总一下母婴用品的累计销售表现，只需要一个数字。",
+      "unmet_conditions": [
+        "no valid clarification",
+        "no user answer obtained or used"
+      ],
+      "note": "Result equality alone does not establish intended semantics; an empty result can also coincide."
+    },
+    {
+      "id": "holdout-3-10-a",
+      "question": "给我深圳的有效订单规模，只返回一个总计数字。",
+      "unmet_conditions": [
+        "no valid clarification",
+        "no user answer obtained or used"
+      ],
+      "note": "Result equality alone does not establish intended semantics; an empty result can also coincide."
+    },
+    {
+      "id": "holdout-4-1-a",
+      "question": "汇总一下服饰鞋包的累计销售表现，只需要一个数字。",
+      "unmet_conditions": [
+        "no valid clarification",
+        "no user answer obtained or used"
+      ],
+      "note": "Result equality alone does not establish intended semantics; an empty result can also coincide."
+    }
+  ],
+  "failure_examples": [
+    {
+      "id": "holdout-0-1-a",
+      "stage": "missed_clarification",
+      "evidence": "Undefined sales performance proceeded without choosing amount vs quantity."
+    },
+    {
+      "id": "holdout-0-6-a",
+      "stage": "wrong_clarification_scope",
+      "evidence": "Asked province; fixed persona specified city. Strict simulator could not answer; not an SQL error."
+    },
+    {
+      "id": "holdout-0-9-a",
+      "stage": "incomplete_followup_passed",
+      "evidence": "Asked metric only, accepted quantity, invented seven-day period; intended 19 days was never supplied."
+    },
+    {
+      "id": "holdout-1-9-a",
+      "stage": "incomplete_followup_passed",
+      "evidence": "Asked time only, then inferred amount without asking unresolved metric."
+    },
+    {
+      "id": "holdout-0-2-a",
+      "stage": "entity_storage_mismatch",
+      "evidence": "Threshold supplied, but city='上海' instead of stored 上海市."
+    },
+    {
+      "id": "holdout-0-7-a",
+      "stage": "missing_business_definition",
+      "evidence": "No clarification of launch-date threshold; SQL used an invented broad launch range."
+    }
+  ],
+  "caution": "Failure stages overlap. Saved traces cannot prove every internal merge error or uniquely attribute all result mismatches. No GT/scorer change is justified by result mismatch alone."
+}
