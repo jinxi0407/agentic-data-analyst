@@ -21,6 +21,8 @@ env/
 # Local files
 .DS_Store
 *.log
+.eval-baseline/
+eval/daily_*.lock
 
 # Build artifacts
 build/

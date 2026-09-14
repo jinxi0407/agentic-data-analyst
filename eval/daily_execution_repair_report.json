@@ -1,0 +1,12 @@
+{
+  "baseline": {
+    "triggered": 1,
+    "execution_recovered": 1,
+    "result_correct": 0
+  },
+  "final": {
+    "triggered": 1,
+    "execution_recovered": 1,
+    "result_correct": 0
+  }
+}

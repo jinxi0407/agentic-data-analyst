@@ -1,0 +1,27 @@
+{
+  "label": "baseline",
+  "total": 250,
+  "accuracy": 0.928,
+  "commit": "3d612dfc725e3654094c51aa542aa88d2a55c856",
+  "cases_sha256": "bbee0a6a6d6eb40b46f401aa21284585a90ae7fc4a98be2536e12934219e8294",
+  "workers": 4,
+  "average_latency_ms": 7755.92752,
+  "average_retry": 0.004,
+  "category": {
+    "complex": 1.0,
+    "filtering_aggregation": 0.9866666666666667,
+    "one_two_table_join": 0.8947368421052632,
+    "refund_customer_product": 1.0,
+    "time_trend": 0.74,
+    "top_k_ranking": 1.0
+  },
+  "difficulty": {
+    "easy": 0.944,
+    "medium": 0.94,
+    "hard": 0.8
+  },
+  "paraphrase_accuracy": 0.8666666666666667,
+  "execution_repair_triggered": 1,
+  "repaired_result_correct": 0,
+  "repaired_workflow_success": 1
+}
