@@ -19,6 +19,7 @@ def test_clarification_form_preserves_context(monkeypatch):
         return SimpleNamespace(raise_for_status=lambda: None, json=lambda: payload)
     monkeypatch.setattr(requests, "post", post)
     view = AppTest.from_file(str(Path(__file__).resolve().parents[1] / "ui/app.py")).run(timeout=30)
+    next(toggle for toggle in view.toggle if toggle.label == "需要时澄清一次").set_value(True).run()
     view.text_area[0].set_value("最近销售额").run()
     next(button for button in view.button if button.label == "开始分析").click().run(timeout=30)
     assert not view.exception
@@ -26,5 +27,6 @@ def test_clarification_form_preserves_context(monkeypatch):
     next(button for button in view.button if button.label == "继续分析").click().run(timeout=30)
     assert not view.exception
     assert sent[1]["clarification_answer"] == "30天"
+    assert sent[0]["mode"] == sent[1]["mode"] == "clarify"
     assert sent[1]["question"] == "最近销售额"
     assert len(view.dataframe) == 1

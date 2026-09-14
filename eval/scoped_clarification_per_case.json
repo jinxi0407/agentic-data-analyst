@@ -1,0 +1,5962 @@
+[
+  {
+    "id": "scoped-001",
+    "question": "按支付方式汇总全部历史有效订单的优惠总额，返回支付方式和金额。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "proceed",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 1.74779,
+    "first_latency_s": 5.571263,
+    "total_latency_s": 5.571263,
+    "baseline_sql": "SELECT payment_method, ROUND(SUM(discount_amount), 2) AS discount_amount FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') GROUP BY payment_method LIMIT 200",
+    "final_sql": "SELECT payment_method, ROUND(SUM(discount_amount), 2) AS discount_amount FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') GROUP BY payment_method LIMIT 200",
+    "baseline_result": [
+      {
+        "payment_method": "cash",
+        "discount_amount": 567332.85
+      },
+      {
+        "payment_method": "wechat",
+        "discount_amount": 598592.99
+      },
+      {
+        "payment_method": "card",
+        "discount_amount": 579411.15
+      },
+      {
+        "payment_method": "alipay",
+        "discount_amount": 534283.7
+      }
+    ],
+    "final_result": [
+      {
+        "payment_method": "cash",
+        "discount_amount": 567332.85
+      },
+      {
+        "payment_method": "wechat",
+        "discount_amount": 598592.99
+      },
+      {
+        "payment_method": "card",
+        "discount_amount": 579411.15
+      },
+      {
+        "payment_method": "alipay",
+        "discount_amount": 534283.7
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "payment_method": "cash",
+        "total": 567332.85
+      },
+      {
+        "payment_method": "wechat",
+        "total": 598592.99
+      },
+      {
+        "payment_method": "card",
+        "total": 579411.15
+      },
+      {
+        "payment_method": "alipay",
+        "total": 534283.7
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-002",
+    "question": "gold等级客户的全部历史有效订单销售额是多少？只要金额。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "proceed",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 1.699397,
+    "first_latency_s": 5.356773,
+    "total_latency_s": 5.356773,
+    "baseline_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.user_level = 'gold' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "final_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.user_level = 'gold' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "baseline_result": [
+      {
+        "sales_amount": 7889415.23
+      }
+    ],
+    "final_result": [
+      {
+        "sales_amount": 7889415.23
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 7889415.23
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-003",
+    "question": "家用电器里每个品牌有多少款商品？包含上下架商品，返回品牌和款数。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "proceed",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 1.102931,
+    "first_latency_s": 4.565757,
+    "total_latency_s": 4.565757,
+    "baseline_sql": "SELECT brand, COUNT(*) AS product_count FROM products WHERE category = '家用电器' GROUP BY brand LIMIT 200",
+    "final_sql": "SELECT brand, COUNT(*) AS product_count FROM products WHERE category = '家用电器' GROUP BY brand LIMIT 200",
+    "baseline_result": [
+      {
+        "brand": "森活",
+        "product_count": 14
+      },
+      {
+        "brand": "青橙",
+        "product_count": 15
+      },
+      {
+        "brand": "优选",
+        "product_count": 18
+      },
+      {
+        "brand": "澜庭",
+        "product_count": 15
+      },
+      {
+        "brand": "星禾",
+        "product_count": 23
+      },
+      {
+        "brand": "松果",
+        "product_count": 13
+      },
+      {
+        "brand": "云栖",
+        "product_count": 12
+      },
+      {
+        "brand": "北辰",
+        "product_count": 8
+      }
+    ],
+    "final_result": [
+      {
+        "brand": "森活",
+        "product_count": 14
+      },
+      {
+        "brand": "青橙",
+        "product_count": 15
+      },
+      {
+        "brand": "优选",
+        "product_count": 18
+      },
+      {
+        "brand": "澜庭",
+        "product_count": 15
+      },
+      {
+        "brand": "星禾",
+        "product_count": 23
+      },
+      {
+        "brand": "松果",
+        "product_count": 13
+      },
+      {
+        "brand": "云栖",
+        "product_count": 12
+      },
+      {
+        "brand": "北辰",
+        "product_count": 8
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "brand": "森活",
+        "n": 14
+      },
+      {
+        "brand": "青橙",
+        "n": 15
+      },
+      {
+        "brand": "优选",
+        "n": 18
+      },
+      {
+        "brand": "澜庭",
+        "n": 15
+      },
+      {
+        "brand": "星禾",
+        "n": 23
+      },
+      {
+        "brand": "松果",
+        "n": 13
+      },
+      {
+        "brand": "云栖",
+        "n": 12
+      },
+      {
+        "brand": "北辰",
+        "n": 8
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-004",
+    "question": "帮我算一下家用电器在售商品的平均标价，只要金额，保留两位小数。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "proceed",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 1.53461,
+    "first_latency_s": 5.276397,
+    "total_latency_s": 5.276397,
+    "baseline_sql": "SELECT ROUND(AVG(list_price), 2) AS avg_list_price FROM products WHERE category = '家用电器' AND is_active = 1 LIMIT 200",
+    "final_sql": "SELECT ROUND(AVG(list_price), 2) AS avg_list_price FROM products WHERE category = '家用电器' AND is_active = 1 LIMIT 200",
+    "baseline_result": [
+      {
+        "avg_list_price": 2230.14
+      }
+    ],
+    "final_result": [
+      {
+        "avg_list_price": 2230.14
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "value": 2230.14
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-005",
+    "question": "南京客户用微信支付的全部历史有效订单有几笔？只要笔数。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "proceed",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 1.90009,
+    "first_latency_s": 5.455721,
+    "total_latency_s": 5.455721,
+    "baseline_sql": "SELECT COUNT(*) AS order_count FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE u.city = '南京市' AND o.payment_method = 'wechat' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "final_sql": "SELECT COUNT(*) AS order_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '南京市' AND o.payment_method = 'wechat' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "baseline_result": [
+      {
+        "order_count": 339
+      }
+    ],
+    "final_result": [
+      {
+        "order_count": 339
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "n": 339
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-006",
+    "question": "已批准退款按退款原因分组，每种原因有几条退款记录？全部历史，返回原因和条数。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "proceed",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 1.989149,
+    "first_latency_s": 5.056376,
+    "total_latency_s": 5.056376,
+    "baseline_sql": "SELECT refund_reason, COUNT(*) AS record_count FROM refunds WHERE refund_status = 'approved' GROUP BY refund_reason LIMIT 200",
+    "final_sql": "SELECT refund_reason, COUNT(*) AS record_count FROM refunds WHERE refund_status = 'approved' GROUP BY refund_reason LIMIT 200",
+    "baseline_result": [
+      {
+        "refund_reason": "七天无理由",
+        "record_count": 513
+      },
+      {
+        "refund_reason": "物流破损",
+        "record_count": 491
+      },
+      {
+        "refund_reason": "描述不符",
+        "record_count": 473
+      },
+      {
+        "refund_reason": "尺码不合适",
+        "record_count": 479
+      },
+      {
+        "refund_reason": "质量问题",
+        "record_count": 551
+      }
+    ],
+    "final_result": [
+      {
+        "refund_reason": "七天无理由",
+        "record_count": 513
+      },
+      {
+        "refund_reason": "物流破损",
+        "record_count": 491
+      },
+      {
+        "refund_reason": "描述不符",
+        "record_count": 473
+      },
+      {
+        "refund_reason": "尺码不合适",
+        "record_count": 479
+      },
+      {
+        "refund_reason": "质量问题",
+        "record_count": 551
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "refund_reason": "七天无理由",
+        "n": 513
+      },
+      {
+        "refund_reason": "物流破损",
+        "n": 491
+      },
+      {
+        "refund_reason": "描述不符",
+        "n": 473
+      },
+      {
+        "refund_reason": "尺码不合适",
+        "n": 479
+      },
+      {
+        "refund_reason": "质量问题",
+        "n": 551
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-007",
+    "question": "全部历史有效订单销售额最高的前2种支付方式是什么？返回支付方式和销售额，同额按支付方式升序。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "proceed",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 3.33974,
+    "first_latency_s": 5.880805,
+    "total_latency_s": 5.880805,
+    "baseline_sql": "SELECT payment_method, ROUND(SUM(paid_amount), 2) AS sales_amount FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') GROUP BY payment_method ORDER BY sales_amount DESC, payment_method ASC LIMIT 2",
+    "final_sql": "SELECT payment_method, ROUND(SUM(paid_amount), 2) AS sales_amount FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') GROUP BY payment_method ORDER BY sales_amount DESC, payment_method ASC LIMIT 2",
+    "baseline_result": [
+      {
+        "payment_method": "wechat",
+        "sales_amount": 7265271.24
+      },
+      {
+        "payment_method": "card",
+        "sales_amount": 7212441.63
+      }
+    ],
+    "final_result": [
+      {
+        "payment_method": "wechat",
+        "sales_amount": 7265271.24
+      },
+      {
+        "payment_method": "card",
+        "sales_amount": 7212441.63
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "payment_method": "wechat",
+        "total": 7265271.24
+      },
+      {
+        "payment_method": "card",
+        "total": 7212441.63
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-008",
+    "question": "家用电器标价最高的前3款商品，返回商品ID和标价，同价按商品ID升序。包含上下架商品。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "proceed",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 1.359343,
+    "first_latency_s": 5.235724,
+    "total_latency_s": 5.235724,
+    "baseline_sql": "SELECT product_id, list_price FROM products WHERE category = '家用电器' ORDER BY list_price DESC, product_id ASC LIMIT 3",
+    "final_sql": "SELECT product_id, list_price FROM products WHERE category = '家用电器' ORDER BY list_price DESC, product_id ASC LIMIT 3",
+    "baseline_result": [
+      {
+        "product_id": 170,
+        "list_price": 3759.49
+      },
+      {
+        "product_id": 148,
+        "list_price": 3732.78
+      },
+      {
+        "product_id": 655,
+        "list_price": 3648.33
+      }
+    ],
+    "final_result": [
+      {
+        "product_id": 170,
+        "list_price": 3759.49
+      },
+      {
+        "product_id": 148,
+        "list_price": 3732.78
+      },
+      {
+        "product_id": 655,
+        "list_price": 3648.33
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "product_id": 170,
+        "list_price": 3759.49
+      },
+      {
+        "product_id": 148,
+        "list_price": 3732.78
+      },
+      {
+        "product_id": 655,
+        "list_price": 3648.33
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-009",
+    "question": "2026年5月每种支付方式的有效订单笔数，返回支付方式和笔数。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "proceed",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 1.921517,
+    "first_latency_s": 5.827887,
+    "total_latency_s": 5.827887,
+    "baseline_sql": "SELECT payment_method, COUNT(*) AS order_count FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') AND order_date >= '2026-05-01' AND order_date <= '2026-05-31' GROUP BY payment_method LIMIT 200",
+    "final_sql": "SELECT payment_method, COUNT(*) AS order_count FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') AND order_date >= '2026-05-01' AND order_date <= '2026-05-31' GROUP BY payment_method LIMIT 200",
+    "baseline_result": [
+      {
+        "payment_method": "card",
+        "order_count": 133
+      },
+      {
+        "payment_method": "cash",
+        "order_count": 99
+      },
+      {
+        "payment_method": "wechat",
+        "order_count": 94
+      },
+      {
+        "payment_method": "alipay",
+        "order_count": 107
+      }
+    ],
+    "final_result": [
+      {
+        "payment_method": "card",
+        "order_count": 133
+      },
+      {
+        "payment_method": "cash",
+        "order_count": 99
+      },
+      {
+        "payment_method": "wechat",
+        "order_count": 94
+      },
+      {
+        "payment_method": "alipay",
+        "order_count": 107
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "payment_method": "card",
+        "n": 133
+      },
+      {
+        "payment_method": "cash",
+        "n": 99
+      },
+      {
+        "payment_method": "wechat",
+        "n": 94
+      },
+      {
+        "payment_method": "alipay",
+        "n": 107
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-010",
+    "question": "家用电器因质量问题产生的已批准退款总金额是多少？全部历史，只返回金额。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "proceed",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 2.366199,
+    "first_latency_s": 6.392172,
+    "total_latency_s": 6.392172,
+    "baseline_sql": "SELECT ROUND(SUM(r.refund_amount), 2) AS refund_amount FROM refunds AS r JOIN order_items AS oi ON r.order_item_id = oi.order_item_id JOIN products AS p ON oi.product_id = p.product_id WHERE p.category = '家用电器' AND r.refund_reason = '质量问题' AND r.refund_status = 'approved' LIMIT 200",
+    "final_sql": "SELECT ROUND(SUM(r.refund_amount), 2) AS refund_amount FROM refunds AS r JOIN products AS p ON r.product_id = p.product_id WHERE p.category = '家用电器' AND r.refund_reason = '质量问题' AND r.refund_status = 'approved' LIMIT 200",
+    "baseline_result": [
+      {
+        "refund_amount": 127098.9
+      }
+    ],
+    "final_result": [
+      {
+        "refund_amount": 127098.9
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 127098.9
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-011",
+    "question": "全部历史中使用银行卡支付过有效订单的VIP客户一共有多少人？去重，只返回人数。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "proceed",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 2.434698,
+    "first_latency_s": 5.977728,
+    "total_latency_s": 5.977728,
+    "baseline_sql": "SELECT COUNT(DISTINCT u.user_id) AS user_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.is_vip = 1 AND o.order_status IN ('paid', 'completed', 'shipped') AND o.payment_method = 'card' LIMIT 200",
+    "final_sql": "SELECT COUNT(DISTINCT u.user_id) AS user_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.is_vip = 1 AND o.order_status IN ('paid', 'completed', 'shipped') AND o.payment_method = 'card' LIMIT 200",
+    "baseline_result": [
+      {
+        "user_count": 444
+      }
+    ],
+    "final_result": [
+      {
+        "user_count": 444
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "n": 444
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-012",
+    "question": "gold等级客户的有效订单客单价是多少？全部历史，只要金额。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "proceed",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 1.798865,
+    "first_latency_s": 6.247202,
+    "total_latency_s": 6.247202,
+    "baseline_sql": "SELECT ROUND(AVG(o.paid_amount), 2) AS avg_order_value FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.user_level = 'gold' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "final_sql": "SELECT ROUND(AVG(o.paid_amount), 2) AS avg_order_value FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.user_level = 'gold' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "baseline_result": [
+      {
+        "avg_order_value": 2612.39
+      }
+    ],
+    "final_result": [
+      {
+        "avg_order_value": 2612.39
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 2612.39
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-013",
+    "question": "统计家用电器已经下架的商品款数，只返回数量。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "invalid_output",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": false,
+    "strict_success": false,
+    "pair": "baseline_right_final_wrong",
+    "baseline_latency_s": 1.422081,
+    "first_latency_s": 8.46676,
+    "total_latency_s": 8.46676,
+    "baseline_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '家用电器' AND is_active = 0 LIMIT 200",
+    "final_sql": "",
+    "baseline_result": [
+      {
+        "product_count": 0
+      }
+    ],
+    "final_result": [],
+    "ground_truth_result": [
+      {
+        "n": 0
+      }
+    ],
+    "final_status": "invalid_output"
+  },
+  {
+    "id": "scoped-014",
+    "question": "家用电器商品里标价小于0元的有多少款？只要数量。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "proceed",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 1.535139,
+    "first_latency_s": 4.751146,
+    "total_latency_s": 4.751146,
+    "baseline_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '家用电器' AND list_price < 0 LIMIT 200",
+    "final_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '家用电器' AND list_price < 0 LIMIT 200",
+    "baseline_result": [
+      {
+        "product_count": 0
+      }
+    ],
+    "final_result": [
+      {
+        "product_count": 0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "n": 0
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-015",
+    "question": "拉萨客户中各等级分别有多少人？只返回等级和人数。没有记录也正常。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "invalid_output",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": false,
+    "strict_success": false,
+    "pair": "baseline_right_final_wrong",
+    "baseline_latency_s": 1.223926,
+    "first_latency_s": 9.905557,
+    "total_latency_s": 9.905557,
+    "baseline_sql": "SELECT user_level, COUNT(*) AS user_count FROM users WHERE city = '拉萨' GROUP BY user_level LIMIT 200",
+    "final_sql": "",
+    "baseline_result": [],
+    "final_result": [],
+    "ground_truth_result": [],
+    "final_status": "invalid_output"
+  },
+  {
+    "id": "scoped-016",
+    "question": "2026年08月10日各支付方式的有效订单销售额，返回支付方式和金额。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "proceed",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 1.982446,
+    "first_latency_s": 5.997379,
+    "total_latency_s": 5.997379,
+    "baseline_sql": "SELECT payment_method, ROUND(SUM(paid_amount), 2) AS sales_amount FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') AND order_date = '2026-08-10' GROUP BY payment_method LIMIT 200",
+    "final_sql": "SELECT payment_method, ROUND(SUM(paid_amount), 2) AS sales_amount FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') AND order_date = '2026-08-10' GROUP BY payment_method LIMIT 200",
+    "baseline_result": [
+      {
+        "payment_method": "alipay",
+        "sales_amount": 7028.64
+      },
+      {
+        "payment_method": "card",
+        "sales_amount": 12329.18
+      },
+      {
+        "payment_method": "wechat",
+        "sales_amount": 5287.61
+      },
+      {
+        "payment_method": "cash",
+        "sales_amount": 1758.61
+      }
+    ],
+    "final_result": [
+      {
+        "payment_method": "alipay",
+        "sales_amount": 7028.64
+      },
+      {
+        "payment_method": "card",
+        "sales_amount": 12329.18
+      },
+      {
+        "payment_method": "wechat",
+        "sales_amount": 5287.61
+      },
+      {
+        "payment_method": "cash",
+        "sales_amount": 1758.61
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "payment_method": "alipay",
+        "total": 7028.64
+      },
+      {
+        "payment_method": "card",
+        "total": 12329.18
+      },
+      {
+        "payment_method": "wechat",
+        "total": 5287.61
+      },
+      {
+        "payment_method": "cash",
+        "total": 1758.61
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-017",
+    "question": "按已批准退款金额从高到低列出前2个退款原因及金额，同额按原因升序。全部历史。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "proceed",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 1.809973,
+    "first_latency_s": 5.783314,
+    "total_latency_s": 5.783314,
+    "baseline_sql": "SELECT refund_reason, ROUND(SUM(refund_amount), 2) AS refund_amount FROM refunds WHERE refund_status = 'approved' GROUP BY refund_reason ORDER BY refund_amount DESC, refund_reason ASC LIMIT 2",
+    "final_sql": "SELECT refund_reason, ROUND(SUM(refund_amount), 2) AS refund_amount FROM refunds WHERE refund_status = 'approved' GROUP BY refund_reason ORDER BY refund_amount DESC, refund_reason ASC LIMIT 2",
+    "baseline_result": [
+      {
+        "refund_reason": "质量问题",
+        "refund_amount": 321952.17
+      },
+      {
+        "refund_reason": "物流破损",
+        "refund_amount": 307210.27
+      }
+    ],
+    "final_result": [
+      {
+        "refund_reason": "质量问题",
+        "refund_amount": 321952.17
+      },
+      {
+        "refund_reason": "物流破损",
+        "refund_amount": 307210.27
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "refund_reason": "质量问题",
+        "total": 321952.17
+      },
+      {
+        "refund_reason": "物流破损",
+        "total": 307210.27
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-018",
+    "question": "列出2026年第一季度每月已批准退款记录数，返回月份YYYY-MM和条数，按月份升序。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "proceed",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 2.225728,
+    "first_latency_s": 6.471118,
+    "total_latency_s": 6.471118,
+    "baseline_sql": "SELECT DATE_FORMAT(refund_date, '%Y-%m') AS month, COUNT(*) AS record_count FROM refunds WHERE refund_status = 'approved' AND refund_date >= '2026-01-01' AND refund_date <= '2026-03-31' GROUP BY month ORDER BY month LIMIT 200",
+    "final_sql": "SELECT DATE_FORMAT(refund_date, '%Y-%m') AS month, COUNT(*) AS record_count FROM refunds WHERE refund_status = 'approved' AND refund_date >= '2026-01-01' AND refund_date <= '2026-03-31' GROUP BY month ORDER BY month LIMIT 200",
+    "baseline_result": [
+      {
+        "month": "2026-01",
+        "record_count": 99
+      },
+      {
+        "month": "2026-02",
+        "record_count": 110
+      },
+      {
+        "month": "2026-03",
+        "record_count": 107
+      }
+    ],
+    "final_result": [
+      {
+        "month": "2026-01",
+        "record_count": 99
+      },
+      {
+        "month": "2026-02",
+        "record_count": 110
+      },
+      {
+        "month": "2026-03",
+        "record_count": 107
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "month": "2026-01",
+        "n": 99
+      },
+      {
+        "month": "2026-02",
+        "n": 110
+      },
+      {
+        "month": "2026-03",
+        "n": 107
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-019",
+    "question": "家用电器全部历史有效订单按支付方式分别卖了多少件？返回支付方式和销量。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "proceed",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 2.243512,
+    "first_latency_s": 6.459468,
+    "total_latency_s": 6.459468,
+    "baseline_sql": "SELECT o.payment_method, SUM(oi.quantity) AS sales_quantity FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '家用电器' GROUP BY o.payment_method LIMIT 200",
+    "final_sql": "SELECT o.payment_method, SUM(oi.quantity) AS sales_quantity FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '家用电器' GROUP BY o.payment_method LIMIT 200",
+    "baseline_result": [
+      {
+        "payment_method": "cash",
+        "sales_quantity": 1772.0
+      },
+      {
+        "payment_method": "wechat",
+        "sales_quantity": 1928.0
+      },
+      {
+        "payment_method": "card",
+        "sales_quantity": 1934.0
+      },
+      {
+        "payment_method": "alipay",
+        "sales_quantity": 1786.0
+      }
+    ],
+    "final_result": [
+      {
+        "payment_method": "cash",
+        "sales_quantity": 1772.0
+      },
+      {
+        "payment_method": "wechat",
+        "sales_quantity": 1928.0
+      },
+      {
+        "payment_method": "card",
+        "sales_quantity": 1934.0
+      },
+      {
+        "payment_method": "alipay",
+        "sales_quantity": 1786.0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "payment_method": "cash",
+        "n": 1772.0
+      },
+      {
+        "payment_method": "wechat",
+        "n": 1928.0
+      },
+      {
+        "payment_method": "card",
+        "n": 1934.0
+      },
+      {
+        "payment_method": "alipay",
+        "n": 1786.0
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-020",
+    "question": "南京每个客户等级的VIP人数分别是多少？只统计VIP，返回等级和人数。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "invalid_output",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": false,
+    "strict_success": false,
+    "pair": "baseline_right_final_wrong",
+    "baseline_latency_s": 1.555555,
+    "first_latency_s": 10.423914,
+    "total_latency_s": 10.423914,
+    "baseline_sql": "SELECT user_level, COUNT(*) AS vip_count FROM users WHERE city = '南京市' AND is_vip = 1 GROUP BY user_level LIMIT 200",
+    "final_sql": "",
+    "baseline_result": [
+      {
+        "user_level": "black",
+        "vip_count": 13
+      },
+      {
+        "user_level": "silver",
+        "vip_count": 14
+      },
+      {
+        "user_level": "gold",
+        "vip_count": 25
+      },
+      {
+        "user_level": "normal",
+        "vip_count": 5
+      }
+    ],
+    "final_result": [],
+    "ground_truth_result": [
+      {
+        "user_level": "black",
+        "n": 13
+      },
+      {
+        "user_level": "silver",
+        "n": 14
+      },
+      {
+        "user_level": "gold",
+        "n": 25
+      },
+      {
+        "user_level": "normal",
+        "n": 5
+      }
+    ],
+    "final_status": "invalid_output"
+  },
+  {
+    "id": "scoped-021",
+    "question": "2026年5月按支付方式统计有效订单优惠总额，返回支付方式和金额。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "proceed",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 1.940725,
+    "first_latency_s": 6.502433,
+    "total_latency_s": 6.502433,
+    "baseline_sql": "SELECT payment_method, ROUND(SUM(discount_amount), 2) AS discount_amount FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') AND order_date >= '2026-05-01' AND order_date <= '2026-05-31' GROUP BY payment_method LIMIT 200",
+    "final_sql": "SELECT payment_method, ROUND(SUM(discount_amount), 2) AS discount_amount FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') AND order_date >= '2026-05-01' AND order_date <= '2026-05-31' GROUP BY payment_method LIMIT 200",
+    "baseline_result": [
+      {
+        "payment_method": "card",
+        "discount_amount": 25980.31
+      },
+      {
+        "payment_method": "cash",
+        "discount_amount": 23450.92
+      },
+      {
+        "payment_method": "wechat",
+        "discount_amount": 20723.56
+      },
+      {
+        "payment_method": "alipay",
+        "discount_amount": 19710.65
+      }
+    ],
+    "final_result": [
+      {
+        "payment_method": "card",
+        "discount_amount": 25980.31
+      },
+      {
+        "payment_method": "cash",
+        "discount_amount": 23450.92
+      },
+      {
+        "payment_method": "wechat",
+        "discount_amount": 20723.56
+      },
+      {
+        "payment_method": "alipay",
+        "discount_amount": 19710.65
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "payment_method": "card",
+        "total": 25980.31
+      },
+      {
+        "payment_method": "cash",
+        "total": 23450.92
+      },
+      {
+        "payment_method": "wechat",
+        "total": 20723.56
+      },
+      {
+        "payment_method": "alipay",
+        "total": 19710.65
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-022",
+    "question": "silver等级客户的全部历史有效订单销售额是多少？只要金额。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "proceed",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 1.798735,
+    "first_latency_s": 5.997694,
+    "total_latency_s": 5.997694,
+    "baseline_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.user_level = 'silver' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "final_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.user_level = 'silver' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "baseline_result": [
+      {
+        "sales_amount": 7614010.46
+      }
+    ],
+    "final_result": [
+      {
+        "sales_amount": 7614010.46
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 7614010.46
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-023",
+    "question": "手机数码里每个品牌有多少款商品？包含上下架商品，返回品牌和款数。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "proceed",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 1.058285,
+    "first_latency_s": 4.809254,
+    "total_latency_s": 4.809254,
+    "baseline_sql": "SELECT brand, COUNT(*) AS product_count FROM products WHERE category = '手机数码' GROUP BY brand LIMIT 200",
+    "final_sql": "SELECT brand, COUNT(*) AS product_count FROM products WHERE category = '手机数码' GROUP BY brand LIMIT 200",
+    "baseline_result": [
+      {
+        "brand": "森活",
+        "product_count": 8
+      },
+      {
+        "brand": "澜庭",
+        "product_count": 15
+      },
+      {
+        "brand": "优选",
+        "product_count": 20
+      },
+      {
+        "brand": "云栖",
+        "product_count": 16
+      },
+      {
+        "brand": "青橙",
+        "product_count": 11
+      },
+      {
+        "brand": "松果",
+        "product_count": 13
+      },
+      {
+        "brand": "星禾",
+        "product_count": 18
+      },
+      {
+        "brand": "北辰",
+        "product_count": 12
+      }
+    ],
+    "final_result": [
+      {
+        "brand": "森活",
+        "product_count": 8
+      },
+      {
+        "brand": "澜庭",
+        "product_count": 15
+      },
+      {
+        "brand": "优选",
+        "product_count": 20
+      },
+      {
+        "brand": "云栖",
+        "product_count": 16
+      },
+      {
+        "brand": "青橙",
+        "product_count": 11
+      },
+      {
+        "brand": "松果",
+        "product_count": 13
+      },
+      {
+        "brand": "星禾",
+        "product_count": 18
+      },
+      {
+        "brand": "北辰",
+        "product_count": 12
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "brand": "森活",
+        "n": 8
+      },
+      {
+        "brand": "澜庭",
+        "n": 15
+      },
+      {
+        "brand": "优选",
+        "n": 20
+      },
+      {
+        "brand": "云栖",
+        "n": 16
+      },
+      {
+        "brand": "青橙",
+        "n": 11
+      },
+      {
+        "brand": "松果",
+        "n": 13
+      },
+      {
+        "brand": "星禾",
+        "n": 18
+      },
+      {
+        "brand": "北辰",
+        "n": 12
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-024",
+    "question": "帮我算一下手机数码在售商品的平均标价，只要金额，保留两位小数。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "proceed",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 1.2876,
+    "first_latency_s": 5.310531,
+    "total_latency_s": 5.310531,
+    "baseline_sql": "SELECT ROUND(AVG(list_price), 2) AS avg_list_price FROM products WHERE category = '手机数码' AND is_active = 1 LIMIT 200",
+    "final_sql": "SELECT ROUND(AVG(list_price), 2) AS avg_list_price FROM products WHERE category = '手机数码' AND is_active = 1 LIMIT 200",
+    "baseline_result": [
+      {
+        "avg_list_price": 1433.63
+      }
+    ],
+    "final_result": [
+      {
+        "avg_list_price": 1433.63
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "value": 1433.63
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-025",
+    "question": "武汉客户用微信支付的全部历史有效订单有几笔？只要笔数。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "proceed",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 1.863656,
+    "first_latency_s": 5.871044,
+    "total_latency_s": 5.871044,
+    "baseline_sql": "SELECT COUNT(*) AS order_count FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE u.city = '武汉市' AND o.payment_method = 'wechat' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "final_sql": "SELECT COUNT(*) AS order_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '武汉市' AND o.payment_method = 'wechat' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "baseline_result": [
+      {
+        "order_count": 339
+      }
+    ],
+    "final_result": [
+      {
+        "order_count": 339
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "n": 339
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-026",
+    "question": "全部历史退款状态为pending的记录，按原因统计条数，返回原因和条数。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "proceed",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 1.018736,
+    "first_latency_s": 4.372913,
+    "total_latency_s": 4.372913,
+    "baseline_sql": "SELECT refund_reason, COUNT(*) AS count FROM refunds WHERE refund_status = 'pending' GROUP BY refund_reason LIMIT 200",
+    "final_sql": "SELECT refund_reason, COUNT(*) AS count FROM refunds WHERE refund_status = 'pending' GROUP BY refund_reason LIMIT 200",
+    "baseline_result": [
+      {
+        "refund_reason": "物流破损",
+        "count": 59
+      },
+      {
+        "refund_reason": "质量问题",
+        "count": 65
+      },
+      {
+        "refund_reason": "七天无理由",
+        "count": 64
+      },
+      {
+        "refund_reason": "描述不符",
+        "count": 69
+      },
+      {
+        "refund_reason": "尺码不合适",
+        "count": 51
+      }
+    ],
+    "final_result": [
+      {
+        "refund_reason": "物流破损",
+        "count": 59
+      },
+      {
+        "refund_reason": "质量问题",
+        "count": 65
+      },
+      {
+        "refund_reason": "七天无理由",
+        "count": 64
+      },
+      {
+        "refund_reason": "描述不符",
+        "count": 69
+      },
+      {
+        "refund_reason": "尺码不合适",
+        "count": 51
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "refund_reason": "物流破损",
+        "n": 59
+      },
+      {
+        "refund_reason": "质量问题",
+        "n": 65
+      },
+      {
+        "refund_reason": "七天无理由",
+        "n": 64
+      },
+      {
+        "refund_reason": "描述不符",
+        "n": 69
+      },
+      {
+        "refund_reason": "尺码不合适",
+        "n": 51
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-027",
+    "question": "全部历史有效订单销售额最高的前3种支付方式是什么？返回支付方式和销售额，同额按支付方式升序。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "proceed",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 1.654519,
+    "first_latency_s": 5.86797,
+    "total_latency_s": 5.86797,
+    "baseline_sql": "SELECT payment_method, ROUND(SUM(paid_amount), 2) AS sales_amount FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') GROUP BY payment_method ORDER BY sales_amount DESC, payment_method ASC LIMIT 3",
+    "final_sql": "SELECT payment_method, ROUND(SUM(paid_amount), 2) AS sales_amount FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') GROUP BY payment_method ORDER BY sales_amount DESC, payment_method ASC LIMIT 3",
+    "baseline_result": [
+      {
+        "payment_method": "wechat",
+        "sales_amount": 7265271.24
+      },
+      {
+        "payment_method": "card",
+        "sales_amount": 7212441.63
+      },
+      {
+        "payment_method": "cash",
+        "sales_amount": 6944100.86
+      }
+    ],
+    "final_result": [
+      {
+        "payment_method": "wechat",
+        "sales_amount": 7265271.24
+      },
+      {
+        "payment_method": "card",
+        "sales_amount": 7212441.63
+      },
+      {
+        "payment_method": "cash",
+        "sales_amount": 6944100.86
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "payment_method": "wechat",
+        "total": 7265271.24
+      },
+      {
+        "payment_method": "card",
+        "total": 7212441.63
+      },
+      {
+        "payment_method": "cash",
+        "total": 6944100.86
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-028",
+    "question": "手机数码标价最高的前4款商品，返回商品ID和标价，同价按商品ID升序。包含上下架商品。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "proceed",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 1.101842,
+    "first_latency_s": 5.466555,
+    "total_latency_s": 5.466555,
+    "baseline_sql": "SELECT product_id, list_price FROM products WHERE category = '手机数码' ORDER BY list_price DESC, product_id ASC LIMIT 4",
+    "final_sql": "SELECT product_id, list_price FROM products WHERE category = '手机数码' ORDER BY list_price DESC, product_id ASC LIMIT 4",
+    "baseline_result": [
+      {
+        "product_id": 150,
+        "list_price": 2509.1
+      },
+      {
+        "product_id": 714,
+        "list_price": 2505.4
+      },
+      {
+        "product_id": 61,
+        "list_price": 2461.37
+      },
+      {
+        "product_id": 284,
+        "list_price": 2372.63
+      }
+    ],
+    "final_result": [
+      {
+        "product_id": 150,
+        "list_price": 2509.1
+      },
+      {
+        "product_id": 714,
+        "list_price": 2505.4
+      },
+      {
+        "product_id": 61,
+        "list_price": 2461.37
+      },
+      {
+        "product_id": 284,
+        "list_price": 2372.63
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "product_id": 150,
+        "list_price": 2509.1
+      },
+      {
+        "product_id": 714,
+        "list_price": 2505.4
+      },
+      {
+        "product_id": 61,
+        "list_price": 2461.37
+      },
+      {
+        "product_id": 284,
+        "list_price": 2372.63
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-029",
+    "question": "2026年6月每种支付方式的有效订单笔数，返回支付方式和笔数。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "proceed",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 1.847925,
+    "first_latency_s": 5.625296,
+    "total_latency_s": 5.625296,
+    "baseline_sql": "SELECT payment_method, COUNT(*) AS order_count FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') AND order_date >= '2026-06-01' AND order_date <= '2026-06-30' GROUP BY payment_method LIMIT 200",
+    "final_sql": "SELECT payment_method, COUNT(*) AS order_count FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') AND order_date >= '2026-06-01' AND order_date <= '2026-06-30' GROUP BY payment_method LIMIT 200",
+    "baseline_result": [
+      {
+        "payment_method": "cash",
+        "order_count": 186
+      },
+      {
+        "payment_method": "card",
+        "order_count": 163
+      },
+      {
+        "payment_method": "wechat",
+        "order_count": 169
+      },
+      {
+        "payment_method": "alipay",
+        "order_count": 184
+      }
+    ],
+    "final_result": [
+      {
+        "payment_method": "cash",
+        "order_count": 186
+      },
+      {
+        "payment_method": "card",
+        "order_count": 163
+      },
+      {
+        "payment_method": "wechat",
+        "order_count": 169
+      },
+      {
+        "payment_method": "alipay",
+        "order_count": 184
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "payment_method": "cash",
+        "n": 186
+      },
+      {
+        "payment_method": "card",
+        "n": 163
+      },
+      {
+        "payment_method": "wechat",
+        "n": 169
+      },
+      {
+        "payment_method": "alipay",
+        "n": 184
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-030",
+    "question": "手机数码因质量问题产生的已批准退款总金额是多少？全部历史，只返回金额。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "proceed",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 2.172778,
+    "first_latency_s": 6.364071,
+    "total_latency_s": 6.364071,
+    "baseline_sql": "SELECT ROUND(SUM(r.refund_amount), 2) AS refund_amount FROM refunds AS r JOIN order_items AS oi ON r.order_item_id = oi.order_item_id JOIN products AS p ON oi.product_id = p.product_id WHERE p.category = '手机数码' AND r.refund_reason = '质量问题' AND r.refund_status = 'approved' LIMIT 200",
+    "final_sql": "SELECT ROUND(SUM(r.refund_amount), 2) AS refund_amount FROM refunds AS r JOIN order_items AS oi ON r.order_item_id = oi.order_item_id JOIN products AS p ON oi.product_id = p.product_id WHERE p.category = '手机数码' AND r.refund_reason = '质量问题' AND r.refund_status = 'approved' LIMIT 200",
+    "baseline_result": [
+      {
+        "refund_amount": 90023.52
+      }
+    ],
+    "final_result": [
+      {
+        "refund_amount": 90023.52
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 90023.52
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-031",
+    "question": "全部历史中以cash支付过有效订单的VIP客户一共有多少人？只要去重人数。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "proceed",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 2.103611,
+    "first_latency_s": 5.961476,
+    "total_latency_s": 5.961476,
+    "baseline_sql": "SELECT COUNT(DISTINCT u.user_id) AS user_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.is_vip = 1 AND o.payment_method = 'cash' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "final_sql": "SELECT COUNT(DISTINCT u.user_id) AS user_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.is_vip = 1 AND o.payment_method = 'cash' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "baseline_result": [
+      {
+        "user_count": 450
+      }
+    ],
+    "final_result": [
+      {
+        "user_count": 450
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "n": 450
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-032",
+    "question": "silver等级客户的有效订单客单价是多少？全部历史，只要金额。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "proceed",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 1.739362,
+    "first_latency_s": 5.577057,
+    "total_latency_s": 5.577057,
+    "baseline_sql": "SELECT ROUND(AVG(o.paid_amount), 2) AS avg_order_value FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.user_level = 'silver' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "final_sql": "SELECT ROUND(AVG(o.paid_amount), 2) AS avg_order_value FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.user_level = 'silver' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "baseline_result": [
+      {
+        "avg_order_value": 2603.08
+      }
+    ],
+    "final_result": [
+      {
+        "avg_order_value": 2603.08
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 2603.08
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-033",
+    "question": "统计手机数码已经下架的商品款数，只返回数量。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "proceed",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 1.208262,
+    "first_latency_s": 4.401907,
+    "total_latency_s": 4.401907,
+    "baseline_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '手机数码' AND is_active = 0 LIMIT 200",
+    "final_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '手机数码' AND is_active = 0 LIMIT 200",
+    "baseline_result": [
+      {
+        "product_count": 0
+      }
+    ],
+    "final_result": [
+      {
+        "product_count": 0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "n": 0
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-034",
+    "question": "手机数码商品里标价小于0元的有多少款？只要数量。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "proceed",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 1.160425,
+    "first_latency_s": 4.197926,
+    "total_latency_s": 4.197926,
+    "baseline_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '手机数码' AND list_price < 0 LIMIT 200",
+    "final_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '手机数码' AND list_price < 0 LIMIT 200",
+    "baseline_result": [
+      {
+        "product_count": 0
+      }
+    ],
+    "final_result": [
+      {
+        "product_count": 0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "n": 0
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-035",
+    "question": "厦门客户各等级分别有多少人？只返回等级和人数。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": false,
+    "strict_success": false,
+    "pair": "baseline_right_final_wrong",
+    "baseline_latency_s": 1.160732,
+    "first_latency_s": 10.958082,
+    "total_latency_s": 10.958093,
+    "baseline_sql": "SELECT user_level, COUNT(*) AS user_count FROM users WHERE city = '厦门' GROUP BY user_level LIMIT 200",
+    "final_sql": "",
+    "baseline_result": [],
+    "final_result": [],
+    "ground_truth_result": [],
+    "final_status": "simulated_answer_unavailable"
+  },
+  {
+    "id": "scoped-036",
+    "question": "2026年08月11日各支付方式的有效订单销售额，返回支付方式和金额。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "proceed",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 1.853978,
+    "first_latency_s": 5.604457,
+    "total_latency_s": 5.604457,
+    "baseline_sql": "SELECT payment_method, ROUND(SUM(paid_amount), 2) AS sales_amount FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') AND order_date = '2026-08-11' GROUP BY payment_method LIMIT 200",
+    "final_sql": "SELECT payment_method, ROUND(SUM(paid_amount), 2) AS sales_amount FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') AND order_date = '2026-08-11' GROUP BY payment_method LIMIT 200",
+    "baseline_result": [
+      {
+        "payment_method": "alipay",
+        "sales_amount": 18345.09
+      },
+      {
+        "payment_method": "card",
+        "sales_amount": 15017.14
+      },
+      {
+        "payment_method": "wechat",
+        "sales_amount": 7276.66
+      },
+      {
+        "payment_method": "cash",
+        "sales_amount": 10316.02
+      }
+    ],
+    "final_result": [
+      {
+        "payment_method": "alipay",
+        "sales_amount": 18345.09
+      },
+      {
+        "payment_method": "card",
+        "sales_amount": 15017.14
+      },
+      {
+        "payment_method": "wechat",
+        "sales_amount": 7276.66
+      },
+      {
+        "payment_method": "cash",
+        "sales_amount": 10316.02
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "payment_method": "alipay",
+        "total": 18345.09
+      },
+      {
+        "payment_method": "card",
+        "total": 15017.14
+      },
+      {
+        "payment_method": "wechat",
+        "total": 7276.66
+      },
+      {
+        "payment_method": "cash",
+        "total": 10316.02
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-037",
+    "question": "按已批准退款金额从高到低列出前3个退款原因及金额，同额按原因升序。全部历史。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "proceed",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 1.490672,
+    "first_latency_s": 5.756989,
+    "total_latency_s": 5.756989,
+    "baseline_sql": "SELECT refund_reason, ROUND(SUM(refund_amount), 2) AS refund_amount FROM refunds WHERE refund_status = 'approved' GROUP BY refund_reason ORDER BY refund_amount DESC, refund_reason ASC LIMIT 3",
+    "final_sql": "SELECT refund_reason, ROUND(SUM(refund_amount), 2) AS refund_amount FROM refunds WHERE refund_status = 'approved' GROUP BY refund_reason ORDER BY refund_amount DESC, refund_reason ASC LIMIT 3",
+    "baseline_result": [
+      {
+        "refund_reason": "质量问题",
+        "refund_amount": 321952.17
+      },
+      {
+        "refund_reason": "物流破损",
+        "refund_amount": 307210.27
+      },
+      {
+        "refund_reason": "尺码不合适",
+        "refund_amount": 298048.6
+      }
+    ],
+    "final_result": [
+      {
+        "refund_reason": "质量问题",
+        "refund_amount": 321952.17
+      },
+      {
+        "refund_reason": "物流破损",
+        "refund_amount": 307210.27
+      },
+      {
+        "refund_reason": "尺码不合适",
+        "refund_amount": 298048.6
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "refund_reason": "质量问题",
+        "total": 321952.17
+      },
+      {
+        "refund_reason": "物流破损",
+        "total": 307210.27
+      },
+      {
+        "refund_reason": "尺码不合适",
+        "total": 298048.6
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-038",
+    "question": "列出2026年第2季度每月已批准退款记录数，返回月份YYYY-MM和条数，按月份升序。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "proceed",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 2.415864,
+    "first_latency_s": 6.248367,
+    "total_latency_s": 6.248367,
+    "baseline_sql": "SELECT DATE_FORMAT(refund_date, '%Y-%m') AS month, COUNT(*) AS record_count FROM refunds WHERE refund_status = 'approved' AND refund_date >= '2026-04-01' AND refund_date <= '2026-06-30' GROUP BY month ORDER BY month LIMIT 200",
+    "final_sql": "SELECT DATE_FORMAT(refund_date, '%Y-%m') AS month, COUNT(*) AS refund_count FROM refunds WHERE refund_status = 'approved' AND refund_date >= '2026-04-01' AND refund_date <= '2026-06-30' GROUP BY month ORDER BY month LIMIT 200",
+    "baseline_result": [
+      {
+        "month": "2026-04",
+        "record_count": 88
+      },
+      {
+        "month": "2026-05",
+        "record_count": 82
+      },
+      {
+        "month": "2026-06",
+        "record_count": 157
+      }
+    ],
+    "final_result": [
+      {
+        "month": "2026-04",
+        "refund_count": 88
+      },
+      {
+        "month": "2026-05",
+        "refund_count": 82
+      },
+      {
+        "month": "2026-06",
+        "refund_count": 157
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "month": "2026-04",
+        "n": 88
+      },
+      {
+        "month": "2026-05",
+        "n": 82
+      },
+      {
+        "month": "2026-06",
+        "n": 157
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-039",
+    "question": "手机数码全部历史有效订单按支付方式分别卖了多少件？返回支付方式和销量。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "proceed",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 2.162194,
+    "first_latency_s": 6.447142,
+    "total_latency_s": 6.447142,
+    "baseline_sql": "SELECT o.payment_method, SUM(oi.quantity) AS sales_quantity FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '手机数码' GROUP BY o.payment_method LIMIT 200",
+    "final_sql": "SELECT o.payment_method, SUM(oi.quantity) AS sales_quantity FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '手机数码' GROUP BY o.payment_method LIMIT 200",
+    "baseline_result": [
+      {
+        "payment_method": "cash",
+        "sales_quantity": 1676.0
+      },
+      {
+        "payment_method": "wechat",
+        "sales_quantity": 1688.0
+      },
+      {
+        "payment_method": "card",
+        "sales_quantity": 1577.0
+      },
+      {
+        "payment_method": "alipay",
+        "sales_quantity": 1586.0
+      }
+    ],
+    "final_result": [
+      {
+        "payment_method": "cash",
+        "sales_quantity": 1676.0
+      },
+      {
+        "payment_method": "wechat",
+        "sales_quantity": 1688.0
+      },
+      {
+        "payment_method": "card",
+        "sales_quantity": 1577.0
+      },
+      {
+        "payment_method": "alipay",
+        "sales_quantity": 1586.0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "payment_method": "cash",
+        "n": 1676.0
+      },
+      {
+        "payment_method": "wechat",
+        "n": 1688.0
+      },
+      {
+        "payment_method": "card",
+        "n": 1577.0
+      },
+      {
+        "payment_method": "alipay",
+        "n": 1586.0
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-040",
+    "question": "武汉每个客户等级的VIP人数分别是多少？只统计VIP，返回等级和人数。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "invalid_output",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": false,
+    "strict_success": false,
+    "pair": "baseline_right_final_wrong",
+    "baseline_latency_s": 1.782335,
+    "first_latency_s": 9.657377,
+    "total_latency_s": 9.657377,
+    "baseline_sql": "SELECT user_level, COUNT(*) AS vip_count FROM users WHERE city = '武汉市' AND is_vip = 1 GROUP BY user_level LIMIT 200",
+    "final_sql": "",
+    "baseline_result": [
+      {
+        "user_level": "silver",
+        "vip_count": 20
+      },
+      {
+        "user_level": "black",
+        "vip_count": 13
+      },
+      {
+        "user_level": "gold",
+        "vip_count": 23
+      },
+      {
+        "user_level": "normal",
+        "vip_count": 7
+      }
+    ],
+    "final_result": [],
+    "ground_truth_result": [
+      {
+        "user_level": "silver",
+        "n": 20
+      },
+      {
+        "user_level": "black",
+        "n": 13
+      },
+      {
+        "user_level": "gold",
+        "n": 23
+      },
+      {
+        "user_level": "normal",
+        "n": 7
+      }
+    ],
+    "final_status": "invalid_output"
+  },
+  {
+    "id": "scoped-041",
+    "question": "2026年6月按支付方式统计有效订单优惠总额，返回支付方式和金额。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "proceed",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 2.156547,
+    "first_latency_s": 6.309592,
+    "total_latency_s": 6.309592,
+    "baseline_sql": "SELECT payment_method, ROUND(SUM(discount_amount), 2) AS discount_amount FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') AND order_date >= '2026-06-01' AND order_date <= '2026-06-30' GROUP BY payment_method LIMIT 200",
+    "final_sql": "SELECT payment_method, ROUND(SUM(discount_amount), 2) AS discount_amount FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') AND order_date >= '2026-06-01' AND order_date <= '2026-06-30' GROUP BY payment_method LIMIT 200",
+    "baseline_result": [
+      {
+        "payment_method": "cash",
+        "discount_amount": 36227.45
+      },
+      {
+        "payment_method": "card",
+        "discount_amount": 34258.85
+      },
+      {
+        "payment_method": "wechat",
+        "discount_amount": 32625.93
+      },
+      {
+        "payment_method": "alipay",
+        "discount_amount": 40534.46
+      }
+    ],
+    "final_result": [
+      {
+        "payment_method": "cash",
+        "discount_amount": 36227.45
+      },
+      {
+        "payment_method": "card",
+        "discount_amount": 34258.85
+      },
+      {
+        "payment_method": "wechat",
+        "discount_amount": 32625.93
+      },
+      {
+        "payment_method": "alipay",
+        "discount_amount": 40534.46
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "payment_method": "cash",
+        "total": 36227.45
+      },
+      {
+        "payment_method": "card",
+        "total": 34258.85
+      },
+      {
+        "payment_method": "wechat",
+        "total": 32625.93
+      },
+      {
+        "payment_method": "alipay",
+        "total": 40534.46
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-042",
+    "question": "black等级客户的全部历史有效订单销售额是多少？只要金额。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "proceed",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 1.627786,
+    "first_latency_s": 5.591791,
+    "total_latency_s": 5.591791,
+    "baseline_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.user_level = 'black' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "final_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.user_level = 'black' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "baseline_result": [
+      {
+        "sales_amount": 3177863.41
+      }
+    ],
+    "final_result": [
+      {
+        "sales_amount": 3177863.41
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 3177863.41
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-043",
+    "question": "美妆个护里每个品牌有多少款商品？包含上下架商品，返回品牌和款数。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "proceed",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 1.178778,
+    "first_latency_s": 4.893031,
+    "total_latency_s": 4.893031,
+    "baseline_sql": "SELECT brand, COUNT(*) AS product_count FROM products WHERE category = '美妆个护' GROUP BY brand LIMIT 200",
+    "final_sql": "SELECT brand, COUNT(*) AS product_count FROM products WHERE category = '美妆个护' GROUP BY brand LIMIT 200",
+    "baseline_result": [
+      {
+        "brand": "松果",
+        "product_count": 13
+      },
+      {
+        "brand": "北辰",
+        "product_count": 21
+      },
+      {
+        "brand": "青橙",
+        "product_count": 18
+      },
+      {
+        "brand": "澜庭",
+        "product_count": 15
+      },
+      {
+        "brand": "森活",
+        "product_count": 20
+      },
+      {
+        "brand": "云栖",
+        "product_count": 12
+      },
+      {
+        "brand": "星禾",
+        "product_count": 10
+      },
+      {
+        "brand": "优选",
+        "product_count": 14
+      }
+    ],
+    "final_result": [
+      {
+        "brand": "松果",
+        "product_count": 13
+      },
+      {
+        "brand": "北辰",
+        "product_count": 21
+      },
+      {
+        "brand": "青橙",
+        "product_count": 18
+      },
+      {
+        "brand": "澜庭",
+        "product_count": 15
+      },
+      {
+        "brand": "森活",
+        "product_count": 20
+      },
+      {
+        "brand": "云栖",
+        "product_count": 12
+      },
+      {
+        "brand": "星禾",
+        "product_count": 10
+      },
+      {
+        "brand": "优选",
+        "product_count": 14
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "brand": "松果",
+        "n": 13
+      },
+      {
+        "brand": "北辰",
+        "n": 21
+      },
+      {
+        "brand": "青橙",
+        "n": 18
+      },
+      {
+        "brand": "澜庭",
+        "n": 15
+      },
+      {
+        "brand": "森活",
+        "n": 20
+      },
+      {
+        "brand": "云栖",
+        "n": 12
+      },
+      {
+        "brand": "星禾",
+        "n": 10
+      },
+      {
+        "brand": "优选",
+        "n": 14
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-044",
+    "question": "帮我算一下美妆个护在售商品的平均标价，只要金额，保留两位小数。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "proceed",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 1.151747,
+    "first_latency_s": 4.797615,
+    "total_latency_s": 4.797615,
+    "baseline_sql": "SELECT ROUND(AVG(list_price), 2) AS avg_list_price FROM products WHERE category = '美妆个护' AND is_active = 1 LIMIT 200",
+    "final_sql": "SELECT ROUND(AVG(list_price), 2) AS avg_list_price FROM products WHERE category = '美妆个护' AND is_active = 1 LIMIT 200",
+    "baseline_result": [
+      {
+        "avg_list_price": 228.72
+      }
+    ],
+    "final_result": [
+      {
+        "avg_list_price": 228.72
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "value": 228.72
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-045",
+    "question": "西安客户用微信支付的全部历史有效订单有几笔？只要笔数。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "proceed",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 1.667633,
+    "first_latency_s": 5.648639,
+    "total_latency_s": 5.648639,
+    "baseline_sql": "SELECT COUNT(*) AS order_count FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE u.city = '西安市' AND o.payment_method = 'wechat' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "final_sql": "SELECT COUNT(*) AS order_count FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE u.city = '西安市' AND o.payment_method = 'wechat' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "baseline_result": [
+      {
+        "order_count": 353
+      }
+    ],
+    "final_result": [
+      {
+        "order_count": 353
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "n": 353
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-046",
+    "question": "全部历史退款状态为rejected的记录，按原因统计条数，返回原因和条数。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "proceed",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 1.151041,
+    "first_latency_s": 4.587942,
+    "total_latency_s": 4.587942,
+    "baseline_sql": "SELECT refund_reason, COUNT(*) AS count FROM refunds WHERE refund_status = 'rejected' GROUP BY refund_reason LIMIT 200",
+    "final_sql": "SELECT refund_reason, COUNT(*) AS count FROM refunds WHERE refund_status = 'rejected' GROUP BY refund_reason LIMIT 200",
+    "baseline_result": [
+      {
+        "refund_reason": "尺码不合适",
+        "count": 47
+      },
+      {
+        "refund_reason": "七天无理由",
+        "count": 54
+      },
+      {
+        "refund_reason": "描述不符",
+        "count": 48
+      },
+      {
+        "refund_reason": "质量问题",
+        "count": 69
+      },
+      {
+        "refund_reason": "物流破损",
+        "count": 47
+      }
+    ],
+    "final_result": [
+      {
+        "refund_reason": "尺码不合适",
+        "count": 47
+      },
+      {
+        "refund_reason": "七天无理由",
+        "count": 54
+      },
+      {
+        "refund_reason": "描述不符",
+        "count": 48
+      },
+      {
+        "refund_reason": "质量问题",
+        "count": 69
+      },
+      {
+        "refund_reason": "物流破损",
+        "count": 47
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "refund_reason": "尺码不合适",
+        "n": 47
+      },
+      {
+        "refund_reason": "七天无理由",
+        "n": 54
+      },
+      {
+        "refund_reason": "描述不符",
+        "n": 48
+      },
+      {
+        "refund_reason": "质量问题",
+        "n": 69
+      },
+      {
+        "refund_reason": "物流破损",
+        "n": 47
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-047",
+    "question": "全部历史有效订单销售额最高的前4种支付方式是什么？返回支付方式和销售额，同额按支付方式升序。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "proceed",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 1.570992,
+    "first_latency_s": 6.335953,
+    "total_latency_s": 6.335953,
+    "baseline_sql": "SELECT payment_method, ROUND(SUM(paid_amount), 2) AS sales_amount FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') GROUP BY payment_method ORDER BY sales_amount DESC, payment_method ASC LIMIT 4",
+    "final_sql": "SELECT payment_method, ROUND(SUM(paid_amount), 2) AS sales_amount FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') GROUP BY payment_method ORDER BY sales_amount DESC, payment_method ASC LIMIT 4",
+    "baseline_result": [
+      {
+        "payment_method": "wechat",
+        "sales_amount": 7265271.24
+      },
+      {
+        "payment_method": "card",
+        "sales_amount": 7212441.63
+      },
+      {
+        "payment_method": "cash",
+        "sales_amount": 6944100.86
+      },
+      {
+        "payment_method": "alipay",
+        "sales_amount": 6702907.38
+      }
+    ],
+    "final_result": [
+      {
+        "payment_method": "wechat",
+        "sales_amount": 7265271.24
+      },
+      {
+        "payment_method": "card",
+        "sales_amount": 7212441.63
+      },
+      {
+        "payment_method": "cash",
+        "sales_amount": 6944100.86
+      },
+      {
+        "payment_method": "alipay",
+        "sales_amount": 6702907.38
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "payment_method": "wechat",
+        "total": 7265271.24
+      },
+      {
+        "payment_method": "card",
+        "total": 7212441.63
+      },
+      {
+        "payment_method": "cash",
+        "total": 6944100.86
+      },
+      {
+        "payment_method": "alipay",
+        "total": 6702907.38
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-048",
+    "question": "美妆个护标价最高的前5款商品，返回商品ID和标价，同价按商品ID升序。包含上下架商品。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "proceed",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 1.606818,
+    "first_latency_s": 5.230887,
+    "total_latency_s": 5.230887,
+    "baseline_sql": "SELECT product_id, list_price FROM products WHERE category = '美妆个护' ORDER BY list_price DESC, product_id ASC LIMIT 5",
+    "final_sql": "SELECT product_id, list_price FROM products WHERE category = '美妆个护' ORDER BY list_price DESC, product_id ASC LIMIT 5",
+    "baseline_result": [
+      {
+        "product_id": 258,
+        "list_price": 376.42
+      },
+      {
+        "product_id": 571,
+        "list_price": 371.35
+      },
+      {
+        "product_id": 124,
+        "list_price": 369.66
+      },
+      {
+        "product_id": 573,
+        "list_price": 366.52
+      },
+      {
+        "product_id": 581,
+        "list_price": 363.3
+      }
+    ],
+    "final_result": [
+      {
+        "product_id": 258,
+        "list_price": 376.42
+      },
+      {
+        "product_id": 571,
+        "list_price": 371.35
+      },
+      {
+        "product_id": 124,
+        "list_price": 369.66
+      },
+      {
+        "product_id": 573,
+        "list_price": 366.52
+      },
+      {
+        "product_id": 581,
+        "list_price": 363.3
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "product_id": 258,
+        "list_price": 376.42
+      },
+      {
+        "product_id": 571,
+        "list_price": 371.35
+      },
+      {
+        "product_id": 124,
+        "list_price": 369.66
+      },
+      {
+        "product_id": 573,
+        "list_price": 366.52
+      },
+      {
+        "product_id": 581,
+        "list_price": 363.3
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-049",
+    "question": "2026年7月每种支付方式的有效订单笔数，返回支付方式和笔数。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "proceed",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 1.914508,
+    "first_latency_s": 6.044964,
+    "total_latency_s": 6.044964,
+    "baseline_sql": "SELECT payment_method, COUNT(*) AS order_count FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') AND order_date >= '2026-07-01' AND order_date <= '2026-07-31' GROUP BY payment_method LIMIT 200",
+    "final_sql": "SELECT payment_method, COUNT(*) AS order_count FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') AND order_date >= '2026-07-01' AND order_date <= '2026-07-31' GROUP BY payment_method LIMIT 200",
+    "baseline_result": [
+      {
+        "payment_method": "card",
+        "order_count": 91
+      },
+      {
+        "payment_method": "alipay",
+        "order_count": 109
+      },
+      {
+        "payment_method": "wechat",
+        "order_count": 109
+      },
+      {
+        "payment_method": "cash",
+        "order_count": 100
+      }
+    ],
+    "final_result": [
+      {
+        "payment_method": "card",
+        "order_count": 91
+      },
+      {
+        "payment_method": "alipay",
+        "order_count": 109
+      },
+      {
+        "payment_method": "wechat",
+        "order_count": 109
+      },
+      {
+        "payment_method": "cash",
+        "order_count": 100
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "payment_method": "card",
+        "n": 91
+      },
+      {
+        "payment_method": "alipay",
+        "n": 109
+      },
+      {
+        "payment_method": "wechat",
+        "n": 109
+      },
+      {
+        "payment_method": "cash",
+        "n": 100
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-050",
+    "question": "美妆个护因质量问题产生的已批准退款总金额是多少？全部历史，只返回金额。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "proceed",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 2.332589,
+    "first_latency_s": 6.046983,
+    "total_latency_s": 6.046983,
+    "baseline_sql": "SELECT ROUND(SUM(r.refund_amount), 2) AS refund_amount FROM refunds AS r JOIN order_items AS oi ON r.order_item_id = oi.order_item_id JOIN products AS p ON oi.product_id = p.product_id WHERE p.category = '美妆个护' AND r.refund_reason = '质量问题' AND r.refund_status = 'approved' LIMIT 200",
+    "final_sql": "SELECT ROUND(SUM(r.refund_amount), 2) AS refund_amount FROM refunds AS r JOIN order_items AS oi ON r.order_item_id = oi.order_item_id JOIN products AS p ON oi.product_id = p.product_id WHERE p.category = '美妆个护' AND r.refund_reason = '质量问题' AND r.refund_status = 'approved' LIMIT 200",
+    "baseline_result": [
+      {
+        "refund_amount": 24632.71
+      }
+    ],
+    "final_result": [
+      {
+        "refund_amount": 24632.71
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 24632.71
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-051",
+    "question": "全部历史中以alipay支付过有效订单的VIP客户一共有多少人？只要去重人数。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "proceed",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 2.110057,
+    "first_latency_s": 5.871284,
+    "total_latency_s": 5.871284,
+    "baseline_sql": "SELECT COUNT(DISTINCT u.user_id) AS vip_alipay_user_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.is_vip = 1 AND o.payment_method = 'alipay' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "final_sql": "SELECT COUNT(DISTINCT u.user_id) AS vip_alipay_user_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.is_vip = 1 AND o.payment_method = 'alipay' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "baseline_result": [
+      {
+        "vip_alipay_user_count": 442
+      }
+    ],
+    "final_result": [
+      {
+        "vip_alipay_user_count": 442
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "n": 442
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-052",
+    "question": "black等级客户的有效订单客单价是多少？全部历史，只要金额。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "proceed",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 1.814438,
+    "first_latency_s": 5.297921,
+    "total_latency_s": 5.297921,
+    "baseline_sql": "SELECT ROUND(AVG(o.paid_amount), 2) AS avg_order_value FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.user_level = 'black' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "final_sql": "SELECT ROUND(AVG(o.paid_amount), 2) AS avg_order_value FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.user_level = 'black' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "baseline_result": [
+      {
+        "avg_order_value": 2674.97
+      }
+    ],
+    "final_result": [
+      {
+        "avg_order_value": 2674.97
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "total": 2674.97
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-053",
+    "question": "统计美妆个护已经下架的商品款数，只返回数量。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "proceed",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 1.130478,
+    "first_latency_s": 4.569475,
+    "total_latency_s": 4.569475,
+    "baseline_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '美妆个护' AND is_active = 0 LIMIT 200",
+    "final_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '美妆个护' AND is_active = 0 LIMIT 200",
+    "baseline_result": [
+      {
+        "product_count": 0
+      }
+    ],
+    "final_result": [
+      {
+        "product_count": 0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "n": 0
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-054",
+    "question": "美妆个护商品里标价小于0元的有多少款？只要数量。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "proceed",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 1.297952,
+    "first_latency_s": 5.268424,
+    "total_latency_s": 5.268424,
+    "baseline_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '美妆个护' AND list_price < 0 LIMIT 200",
+    "final_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '美妆个护' AND list_price < 0 LIMIT 200",
+    "baseline_result": [
+      {
+        "product_count": 0
+      }
+    ],
+    "final_result": [
+      {
+        "product_count": 0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "n": 0
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-055",
+    "question": "青岛客户各等级分别有多少人？只返回等级和人数。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": false,
+    "strict_success": false,
+    "pair": "baseline_right_final_wrong",
+    "baseline_latency_s": 2.414691,
+    "first_latency_s": 4.495547,
+    "total_latency_s": 4.495557,
+    "baseline_sql": "SELECT user_level AS level, COUNT(*) AS count FROM users WHERE city = '青岛市' GROUP BY user_level LIMIT 200",
+    "final_sql": "",
+    "baseline_result": [],
+    "final_result": [],
+    "ground_truth_result": [],
+    "final_status": "simulated_answer_unavailable"
+  },
+  {
+    "id": "scoped-056",
+    "question": "2026年08月12日各支付方式的有效订单销售额，返回支付方式和金额。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "proceed",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 2.064504,
+    "first_latency_s": 5.671838,
+    "total_latency_s": 5.671838,
+    "baseline_sql": "SELECT payment_method, ROUND(SUM(paid_amount), 2) AS sales_amount FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') AND order_date = '2026-08-12' GROUP BY payment_method LIMIT 200",
+    "final_sql": "SELECT payment_method, ROUND(SUM(paid_amount), 2) AS sales_amount FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') AND order_date = '2026-08-12' GROUP BY payment_method LIMIT 200",
+    "baseline_result": [
+      {
+        "payment_method": "cash",
+        "sales_amount": 11699.43
+      },
+      {
+        "payment_method": "wechat",
+        "sales_amount": 8720.6
+      },
+      {
+        "payment_method": "card",
+        "sales_amount": 32306.75
+      },
+      {
+        "payment_method": "alipay",
+        "sales_amount": 8205.13
+      }
+    ],
+    "final_result": [
+      {
+        "payment_method": "cash",
+        "sales_amount": 11699.43
+      },
+      {
+        "payment_method": "wechat",
+        "sales_amount": 8720.6
+      },
+      {
+        "payment_method": "card",
+        "sales_amount": 32306.75
+      },
+      {
+        "payment_method": "alipay",
+        "sales_amount": 8205.13
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "payment_method": "cash",
+        "total": 11699.43
+      },
+      {
+        "payment_method": "wechat",
+        "total": 8720.6
+      },
+      {
+        "payment_method": "card",
+        "total": 32306.75
+      },
+      {
+        "payment_method": "alipay",
+        "total": 8205.13
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-057",
+    "question": "按已批准退款金额从高到低列出前4个退款原因及金额，同额按原因升序。全部历史。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "proceed",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 1.526477,
+    "first_latency_s": 6.259312,
+    "total_latency_s": 6.259312,
+    "baseline_sql": "SELECT refund_reason, ROUND(SUM(refund_amount), 2) AS refund_amount FROM refunds WHERE refund_status = 'approved' GROUP BY refund_reason ORDER BY refund_amount DESC, refund_reason ASC LIMIT 4",
+    "final_sql": "SELECT refund_reason, ROUND(SUM(refund_amount), 2) AS refund_amount FROM refunds WHERE refund_status = 'approved' GROUP BY refund_reason ORDER BY refund_amount DESC, refund_reason ASC LIMIT 4",
+    "baseline_result": [
+      {
+        "refund_reason": "质量问题",
+        "refund_amount": 321952.17
+      },
+      {
+        "refund_reason": "物流破损",
+        "refund_amount": 307210.27
+      },
+      {
+        "refund_reason": "尺码不合适",
+        "refund_amount": 298048.6
+      },
+      {
+        "refund_reason": "七天无理由",
+        "refund_amount": 293175.06
+      }
+    ],
+    "final_result": [
+      {
+        "refund_reason": "质量问题",
+        "refund_amount": 321952.17
+      },
+      {
+        "refund_reason": "物流破损",
+        "refund_amount": 307210.27
+      },
+      {
+        "refund_reason": "尺码不合适",
+        "refund_amount": 298048.6
+      },
+      {
+        "refund_reason": "七天无理由",
+        "refund_amount": 293175.06
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "refund_reason": "质量问题",
+        "total": 321952.17
+      },
+      {
+        "refund_reason": "物流破损",
+        "total": 307210.27
+      },
+      {
+        "refund_reason": "尺码不合适",
+        "total": 298048.6
+      },
+      {
+        "refund_reason": "七天无理由",
+        "total": 293175.06
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-058",
+    "question": "列出2026年第3季度每月已批准退款记录数，返回月份YYYY-MM和条数，按月份升序。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "proceed",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 2.288727,
+    "first_latency_s": 5.940875,
+    "total_latency_s": 5.940875,
+    "baseline_sql": "SELECT DATE_FORMAT(refund_date, '%Y-%m') AS month, COUNT(*) AS record_count FROM refunds WHERE refund_status = 'approved' AND refund_date >= '2026-07-01' AND refund_date <= '2026-09-30' GROUP BY month ORDER BY month LIMIT 200",
+    "final_sql": "SELECT DATE_FORMAT(refund_date, '%Y-%m') AS month, COUNT(*) AS record_count FROM refunds WHERE refund_status = 'approved' AND refund_date >= '2026-07-01' AND refund_date <= '2026-09-30' GROUP BY month ORDER BY month LIMIT 200",
+    "baseline_result": [
+      {
+        "month": "2026-07",
+        "record_count": 132
+      },
+      {
+        "month": "2026-08",
+        "record_count": 143
+      },
+      {
+        "month": "2026-09",
+        "record_count": 85
+      }
+    ],
+    "final_result": [
+      {
+        "month": "2026-07",
+        "record_count": 132
+      },
+      {
+        "month": "2026-08",
+        "record_count": 143
+      },
+      {
+        "month": "2026-09",
+        "record_count": 85
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "month": "2026-07",
+        "n": 132
+      },
+      {
+        "month": "2026-08",
+        "n": 143
+      },
+      {
+        "month": "2026-09",
+        "n": 85
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-059",
+    "question": "美妆个护全部历史有效订单按支付方式分别卖了多少件？返回支付方式和销量。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "proceed",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 2.430512,
+    "first_latency_s": 6.649239,
+    "total_latency_s": 6.649239,
+    "baseline_sql": "SELECT o.payment_method, SUM(oi.quantity) AS sales_quantity FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '美妆个护' GROUP BY o.payment_method LIMIT 200",
+    "final_sql": "SELECT o.payment_method, SUM(oi.quantity) AS sales_quantity FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '美妆个护' GROUP BY o.payment_method LIMIT 200",
+    "baseline_result": [
+      {
+        "payment_method": "alipay",
+        "sales_quantity": 1668.0
+      },
+      {
+        "payment_method": "wechat",
+        "sales_quantity": 1863.0
+      },
+      {
+        "payment_method": "cash",
+        "sales_quantity": 1843.0
+      },
+      {
+        "payment_method": "card",
+        "sales_quantity": 1697.0
+      }
+    ],
+    "final_result": [
+      {
+        "payment_method": "alipay",
+        "sales_quantity": 1668.0
+      },
+      {
+        "payment_method": "wechat",
+        "sales_quantity": 1863.0
+      },
+      {
+        "payment_method": "cash",
+        "sales_quantity": 1843.0
+      },
+      {
+        "payment_method": "card",
+        "sales_quantity": 1697.0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "payment_method": "alipay",
+        "n": 1668.0
+      },
+      {
+        "payment_method": "wechat",
+        "n": 1863.0
+      },
+      {
+        "payment_method": "cash",
+        "n": 1843.0
+      },
+      {
+        "payment_method": "card",
+        "n": 1697.0
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-060",
+    "question": "西安每个客户等级的VIP人数分别是多少？只统计VIP，返回等级和人数。",
+    "ambiguous": false,
+    "missing_slot": null,
+    "decision": "invalid_output",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": false,
+    "strict_success": false,
+    "pair": "baseline_right_final_wrong",
+    "baseline_latency_s": 1.283836,
+    "first_latency_s": 9.502489,
+    "total_latency_s": 9.502489,
+    "baseline_sql": "SELECT user_level, COUNT(*) AS vip_count FROM users WHERE city = '西安市' AND is_vip = 1 GROUP BY user_level LIMIT 200",
+    "final_sql": "",
+    "baseline_result": [
+      {
+        "user_level": "silver",
+        "vip_count": 19
+      },
+      {
+        "user_level": "black",
+        "vip_count": 14
+      },
+      {
+        "user_level": "gold",
+        "vip_count": 26
+      },
+      {
+        "user_level": "normal",
+        "vip_count": 3
+      }
+    ],
+    "final_result": [],
+    "ground_truth_result": [
+      {
+        "user_level": "silver",
+        "n": 19
+      },
+      {
+        "user_level": "black",
+        "n": 14
+      },
+      {
+        "user_level": "gold",
+        "n": 26
+      },
+      {
+        "user_level": "normal",
+        "n": 3
+      }
+    ],
+    "final_status": "invalid_output"
+  },
+  {
+    "id": "scoped-061",
+    "question": "报表这段时间里，每种支付方式的有效订单有几笔？返回支付方式和笔数。",
+    "ambiguous": true,
+    "missing_slot": "time",
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": true,
+    "answer_used": true,
+    "baseline_correct": false,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "baseline_wrong_final_right",
+    "baseline_latency_s": 1.594384,
+    "first_latency_s": 5.479266,
+    "total_latency_s": 12.864749,
+    "baseline_sql": "SELECT payment_method, COUNT(*) AS order_count FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') AND order_date <= '2026-09-12' GROUP BY payment_method LIMIT 200",
+    "final_sql": "SELECT payment_method, COUNT(*) AS order_count FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') AND order_date >= '2026-02-01' AND order_date < '2026-03-01' GROUP BY payment_method LIMIT 200",
+    "baseline_result": [
+      {
+        "payment_method": "alipay",
+        "order_count": 2397
+      },
+      {
+        "payment_method": "cash",
+        "order_count": 2455
+      },
+      {
+        "payment_method": "card",
+        "order_count": 2410
+      },
+      {
+        "payment_method": "wechat",
+        "order_count": 2480
+      }
+    ],
+    "final_result": [
+      {
+        "payment_method": "cash",
+        "order_count": 148
+      },
+      {
+        "payment_method": "wechat",
+        "order_count": 146
+      },
+      {
+        "payment_method": "card",
+        "order_count": 127
+      },
+      {
+        "payment_method": "alipay",
+        "order_count": 148
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "payment_method": "cash",
+        "n": 148
+      },
+      {
+        "payment_method": "wechat",
+        "n": 146
+      },
+      {
+        "payment_method": "card",
+        "n": 127
+      },
+      {
+        "payment_method": "alipay",
+        "n": 148
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-062",
+    "question": "活动期间有效订单总共优惠了多少元？只要总额。",
+    "ambiguous": true,
+    "missing_slot": "time",
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": true,
+    "answer_used": true,
+    "baseline_correct": false,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "baseline_wrong_final_right",
+    "baseline_latency_s": 1.167306,
+    "first_latency_s": 3.495358,
+    "total_latency_s": 10.40836,
+    "baseline_sql": "SELECT ROUND(SUM(discount_amount), 2) AS total_discount FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "final_sql": "SELECT ROUND(SUM(discount_amount), 2) AS total_discount FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') AND order_date >= '2026-03-01' AND order_date < '2026-04-01' LIMIT 200",
+    "baseline_result": [
+      {
+        "total_discount": 2279620.69
+      }
+    ],
+    "final_result": [
+      {
+        "total_discount": 93163.37
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "n": 93163.37
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-063",
+    "question": "近期有效订单客单价是多少？只要金额。",
+    "ambiguous": true,
+    "missing_slot": "time",
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": true,
+    "answer_used": false,
+    "baseline_correct": false,
+    "final_correct": false,
+    "strict_success": false,
+    "pair": "both_wrong",
+    "baseline_latency_s": 2.170032,
+    "first_latency_s": 4.607101,
+    "total_latency_s": 15.784666,
+    "baseline_sql": "SELECT ROUND(AVG(paid_amount), 2) AS avg_order_value FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') AND order_date >= DATE_SUB('2026-09-12', INTERVAL '7' DAY) LIMIT 200",
+    "final_sql": "",
+    "baseline_result": [
+      {
+        "avg_order_value": 2638.58
+      }
+    ],
+    "final_result": [],
+    "ground_truth_result": [
+      {
+        "n": 2625.94
+      }
+    ],
+    "final_status": "invalid_output"
+  },
+  {
+    "id": "scoped-064",
+    "question": "这一期有多少VIP客户买过东西？按有效订单统计去重人数。",
+    "ambiguous": true,
+    "missing_slot": "time",
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": true,
+    "answer_used": true,
+    "baseline_correct": false,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "baseline_wrong_final_right",
+    "baseline_latency_s": 1.811013,
+    "first_latency_s": 5.460934,
+    "total_latency_s": 18.978317,
+    "baseline_sql": "SELECT COUNT(DISTINCT u.user_id) AS vip_buying_users FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.is_vip = 1 AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "final_sql": "SELECT COUNT(DISTINCT o.user_id) AS vip_buyer_count FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.is_vip = 1 AND o.order_date >= '2026-05-01' AND o.order_date < '2026-06-01' LIMIT 200",
+    "baseline_result": [
+      {
+        "vip_buying_users": 468
+      }
+    ],
+    "final_result": [
+      {
+        "vip_buyer_count": 172
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "n": 172
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-065",
+    "question": "最近销售额最高的两种支付方式，返回支付方式和有效订单销售额，同额按支付方式升序。",
+    "ambiguous": true,
+    "missing_slot": "time",
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": true,
+    "answer_used": false,
+    "baseline_correct": false,
+    "final_correct": false,
+    "strict_success": false,
+    "pair": "both_wrong",
+    "baseline_latency_s": 2.107367,
+    "first_latency_s": 4.524392,
+    "total_latency_s": 15.580400999999998,
+    "baseline_sql": "SELECT payment_method, ROUND(SUM(paid_amount), 2) AS sales_amount FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') AND order_date >= DATE_SUB('2026-09-12', INTERVAL '7' DAY) GROUP BY payment_method ORDER BY sales_amount DESC, payment_method ASC LIMIT 2",
+    "final_sql": "",
+    "baseline_result": [
+      {
+        "payment_method": "wechat",
+        "sales_amount": 861437.85
+      },
+      {
+        "payment_method": "cash",
+        "sales_amount": 826131.36
+      }
+    ],
+    "final_result": [],
+    "ground_truth_result": [
+      {
+        "payment_method": "alipay",
+        "n": 524648.16
+      },
+      {
+        "payment_method": "card",
+        "n": 476972.47
+      }
+    ],
+    "final_status": "invalid_output"
+  },
+  {
+    "id": "scoped-066",
+    "question": "活动期各城市贡献的有效订单销售额，返回城市和金额。",
+    "ambiguous": true,
+    "missing_slot": "time",
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": true,
+    "answer_used": true,
+    "baseline_correct": false,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "baseline_wrong_final_right",
+    "baseline_latency_s": 1.942526,
+    "first_latency_s": 3.438698,
+    "total_latency_s": 10.026492,
+    "baseline_sql": "SELECT u.city, ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') GROUP BY u.city ORDER BY sales_amount DESC LIMIT 200",
+    "final_sql": "SELECT u.city, ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND o.order_date >= '2026-02-01' AND o.order_date < '2026-03-01' GROUP BY u.city LIMIT 200",
+    "baseline_result": [
+      {
+        "city": "上海市",
+        "sales_amount": 3770523.65
+      },
+      {
+        "city": "西安市",
+        "sales_amount": 3730908.67
+      },
+      {
+        "city": "北京市",
+        "sales_amount": 3715837.07
+      },
+      {
+        "city": "成都市",
+        "sales_amount": 3462594.81
+      },
+      {
+        "city": "武汉市",
+        "sales_amount": 3399044.5
+      },
+      {
+        "city": "南京市",
+        "sales_amount": 3381995.87
+      },
+      {
+        "city": "广州市",
+        "sales_amount": 3376417.86
+      },
+      {
+        "city": "杭州市",
+        "sales_amount": 3287398.68
+      }
+    ],
+    "final_result": [
+      {
+        "city": "武汉市",
+        "sales_amount": 173128.31
+      },
+      {
+        "city": "北京市",
+        "sales_amount": 150413.85
+      },
+      {
+        "city": "上海市",
+        "sales_amount": 189501.96
+      },
+      {
+        "city": "西安市",
+        "sales_amount": 211452.86
+      },
+      {
+        "city": "杭州市",
+        "sales_amount": 173947.73
+      },
+      {
+        "city": "成都市",
+        "sales_amount": 195807.55
+      },
+      {
+        "city": "广州市",
+        "sales_amount": 222116.91
+      },
+      {
+        "city": "南京市",
+        "sales_amount": 180971.42
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "city": "武汉市",
+        "n": 173128.31
+      },
+      {
+        "city": "北京市",
+        "n": 150413.85
+      },
+      {
+        "city": "上海市",
+        "n": 189501.96
+      },
+      {
+        "city": "西安市",
+        "n": 211452.86
+      },
+      {
+        "city": "杭州市",
+        "n": 173947.73
+      },
+      {
+        "city": "成都市",
+        "n": 195807.55
+      },
+      {
+        "city": "广州市",
+        "n": 222116.91
+      },
+      {
+        "city": "南京市",
+        "n": 180971.42
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-067",
+    "question": "近期因物流破损批准退款的记录有几条？只要条数。",
+    "ambiguous": true,
+    "missing_slot": "time",
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": true,
+    "answer_used": true,
+    "baseline_correct": false,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "baseline_wrong_final_right",
+    "baseline_latency_s": 1.477737,
+    "first_latency_s": 4.65785,
+    "total_latency_s": 11.503157,
+    "baseline_sql": "SELECT COUNT(*) AS refund_count FROM refunds WHERE refund_status = 'approved' AND refund_reason = '物流破损' AND refund_date >= DATE_SUB('2026-09-12', INTERVAL '7' DAY) LIMIT 200",
+    "final_sql": "SELECT COUNT(*) AS refund_count FROM refunds WHERE refund_status = 'approved' AND refund_reason = '物流破损' AND refund_date >= '2026-03-01' AND refund_date < '2026-04-01' LIMIT 200",
+    "baseline_result": [
+      {
+        "refund_count": 54
+      }
+    ],
+    "final_result": [
+      {
+        "refund_count": 16
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "n": 16
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-068",
+    "question": "报表期按原因统计已批准退款金额，返回原因和金额。",
+    "ambiguous": true,
+    "missing_slot": "time",
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": true,
+    "answer_used": true,
+    "baseline_correct": false,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "baseline_wrong_final_right",
+    "baseline_latency_s": 1.439125,
+    "first_latency_s": 4.105062,
+    "total_latency_s": 14.768484,
+    "baseline_sql": "SELECT refund_reason, ROUND(SUM(refund_amount), 2) AS refund_amount FROM refunds WHERE refund_status = 'approved' GROUP BY refund_reason LIMIT 200",
+    "final_sql": "SELECT refund_reason, ROUND(SUM(refund_amount), 2) AS refund_amount FROM refunds WHERE refund_status = 'approved' AND refund_date >= '2026-04-01' AND refund_date < '2026-05-01' GROUP BY refund_reason LIMIT 200",
+    "baseline_result": [
+      {
+        "refund_reason": "七天无理由",
+        "refund_amount": 293175.06
+      },
+      {
+        "refund_reason": "物流破损",
+        "refund_amount": 307210.27
+      },
+      {
+        "refund_reason": "描述不符",
+        "refund_amount": 261226.13
+      },
+      {
+        "refund_reason": "尺码不合适",
+        "refund_amount": 298048.6
+      },
+      {
+        "refund_reason": "质量问题",
+        "refund_amount": 321952.17
+      }
+    ],
+    "final_result": [
+      {
+        "refund_reason": "尺码不合适",
+        "refund_amount": 17473.89
+      },
+      {
+        "refund_reason": "质量问题",
+        "refund_amount": 8816.06
+      },
+      {
+        "refund_reason": "七天无理由",
+        "refund_amount": 16761.4
+      },
+      {
+        "refund_reason": "物流破损",
+        "refund_amount": 12935.42
+      },
+      {
+        "refund_reason": "描述不符",
+        "refund_amount": 10337.61
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "refund_reason": "尺码不合适",
+        "n": 17473.89
+      },
+      {
+        "refund_reason": "质量问题",
+        "n": 8816.06
+      },
+      {
+        "refund_reason": "七天无理由",
+        "n": 16761.4
+      },
+      {
+        "refund_reason": "物流破损",
+        "n": 12935.42
+      },
+      {
+        "refund_reason": "描述不符",
+        "n": 10337.61
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-069",
+    "question": "近期银行卡支付的有效订单销售额是多少？只返回金额。",
+    "ambiguous": true,
+    "missing_slot": "time",
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": true,
+    "answer_used": false,
+    "baseline_correct": false,
+    "final_correct": false,
+    "strict_success": false,
+    "pair": "both_wrong",
+    "baseline_latency_s": 2.162861,
+    "first_latency_s": 4.813881,
+    "total_latency_s": 15.904631,
+    "baseline_sql": "SELECT ROUND(SUM(paid_amount), 2) AS sales_amount FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') AND payment_method = 'card' AND order_date >= DATE_SUB('2026-09-12', INTERVAL '7' DAY) LIMIT 200",
+    "final_sql": "",
+    "baseline_result": [
+      {
+        "sales_amount": 761004.58
+      }
+    ],
+    "final_result": [],
+    "ground_truth_result": [
+      {
+        "n": 333612.93
+      }
+    ],
+    "final_status": "invalid_output"
+  },
+  {
+    "id": "scoped-070",
+    "question": "这次活动期间gold客户的有效订单优惠总额是多少？只返回金额。",
+    "ambiguous": true,
+    "missing_slot": "time",
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": true,
+    "answer_used": true,
+    "baseline_correct": false,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "baseline_wrong_final_right",
+    "baseline_latency_s": 1.837213,
+    "first_latency_s": 3.842635,
+    "total_latency_s": 10.813219,
+    "baseline_sql": "SELECT ROUND(SUM(o.discount_amount), 2) AS discount_amount FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.user_level = 'gold' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "final_sql": "SELECT ROUND(SUM(o.discount_amount), 2) AS discount_amount FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.user_level = 'gold' AND o.order_status IN ('paid', 'completed', 'shipped') AND o.order_date >= '2026-06-01' AND o.order_date < '2026-07-01' LIMIT 200",
+    "baseline_result": [
+      {
+        "discount_amount": 625808.44
+      }
+    ],
+    "final_result": [
+      {
+        "discount_amount": 42984.48
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "n": 42984.48
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-071",
+    "question": "这段统计时间里silver客户下了多少笔有效订单？只返回笔数。",
+    "ambiguous": true,
+    "missing_slot": "time",
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": true,
+    "answer_used": true,
+    "baseline_correct": false,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "baseline_wrong_final_right",
+    "baseline_latency_s": 1.445246,
+    "first_latency_s": 5.678429,
+    "total_latency_s": 12.902016,
+    "baseline_sql": "SELECT COUNT(*) AS order_count FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE u.user_level = 'silver' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "final_sql": "SELECT COUNT(*) AS order_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.user_level = 'silver' AND o.order_status IN ('paid', 'completed', 'shipped') AND o.order_date >= '2026-02-01' AND o.order_date < '2026-03-01' LIMIT 200",
+    "baseline_result": [
+      {
+        "order_count": 2925
+      }
+    ],
+    "final_result": [
+      {
+        "order_count": 170
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "n": 170
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-072",
+    "question": "近期购买手机数码的有效订单客户有多少人？去重，只返回人数。",
+    "ambiguous": true,
+    "missing_slot": "time",
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": true,
+    "answer_used": false,
+    "baseline_correct": false,
+    "final_correct": false,
+    "strict_success": false,
+    "pair": "both_wrong",
+    "baseline_latency_s": 3.232271,
+    "first_latency_s": 4.781692,
+    "total_latency_s": 16.096957,
+    "baseline_sql": "SELECT COUNT(DISTINCT u.user_id) AS user_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '手机数码' AND o.order_date >= DATE_SUB('2026-09-12', INTERVAL '30' DAY) LIMIT 200",
+    "final_sql": "",
+    "baseline_result": [
+      {
+        "user_count": 397
+      }
+    ],
+    "final_result": [],
+    "ground_truth_result": [
+      {
+        "n": 128
+      }
+    ],
+    "final_status": "invalid_output"
+  },
+  {
+    "id": "scoped-073",
+    "question": "促销那几天家用电器卖出了多少件？按有效订单销量统计，只要件数。",
+    "ambiguous": true,
+    "missing_slot": "time",
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": true,
+    "answer_used": false,
+    "baseline_correct": false,
+    "final_correct": false,
+    "strict_success": false,
+    "pair": "both_wrong",
+    "baseline_latency_s": 2.117942,
+    "first_latency_s": 4.761098,
+    "total_latency_s": 22.555752000000002,
+    "baseline_sql": "SELECT SUM(oi.quantity) AS quantity FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.category = '家用电器' LIMIT 200",
+    "final_sql": "",
+    "baseline_result": [
+      {
+        "quantity": 7420.0
+      }
+    ],
+    "final_result": [],
+    "ground_truth_result": [
+      {
+        "n": 273.0
+      }
+    ],
+    "final_status": "invalid_output"
+  },
+  {
+    "id": "scoped-074",
+    "question": "近期下单最多的3位客户，按有效订单笔数排名，返回用户ID和笔数，同数按用户ID升序。",
+    "ambiguous": true,
+    "missing_slot": "time",
+    "decision": "needs_rephrase",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": false,
+    "final_correct": false,
+    "strict_success": false,
+    "pair": "both_wrong",
+    "baseline_latency_s": 2.578455,
+    "first_latency_s": 5.398414,
+    "total_latency_s": 5.398414,
+    "baseline_sql": "SELECT o.user_id, COUNT(*) AS order_count FROM orders AS o WHERE o.order_status IN ('paid', 'completed', 'shipped') AND o.order_date >= DATE_SUB('2026-09-12', INTERVAL '7' DAY) GROUP BY o.user_id ORDER BY order_count DESC, o.user_id ASC LIMIT 3",
+    "final_sql": "",
+    "baseline_result": [
+      {
+        "user_id": 1472,
+        "order_count": 6
+      },
+      {
+        "user_id": 790,
+        "order_count": 5
+      },
+      {
+        "user_id": 1337,
+        "order_count": 5
+      }
+    ],
+    "final_result": [],
+    "ground_truth_result": [
+      {
+        "user_id": 2844,
+        "n": 4
+      },
+      {
+        "user_id": 2277,
+        "n": 3
+      },
+      {
+        "user_id": 2386,
+        "n": 3
+      }
+    ],
+    "final_status": "needs_rephrase"
+  },
+  {
+    "id": "scoped-075",
+    "question": "活动期取消的订单有多少笔？只返回笔数。",
+    "ambiguous": true,
+    "missing_slot": "time",
+    "decision": "system_error",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": false,
+    "final_correct": false,
+    "strict_success": false,
+    "pair": "both_wrong",
+    "baseline_latency_s": 1.51478,
+    "first_latency_s": 300.041294,
+    "total_latency_s": 300.041294,
+    "baseline_sql": "SELECT COUNT(*) AS order_count FROM orders WHERE order_status = 'cancelled' AND order_date = '2026-09-12' LIMIT 200",
+    "final_sql": "",
+    "baseline_result": [
+      {
+        "order_count": 1
+      }
+    ],
+    "final_result": [],
+    "ground_truth_result": [
+      {
+        "n": 41
+      }
+    ],
+    "final_status": "system_error"
+  },
+  {
+    "id": "scoped-076",
+    "question": "最近新提交且状态仍为pending的退款申请有多少条？以refund_date为时间，只返回条数。",
+    "ambiguous": true,
+    "missing_slot": "time",
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": true,
+    "answer_used": false,
+    "baseline_correct": false,
+    "final_correct": false,
+    "strict_success": false,
+    "pair": "both_wrong",
+    "baseline_latency_s": 1.39794,
+    "first_latency_s": 4.408279,
+    "total_latency_s": 14.821213,
+    "baseline_sql": "SELECT COUNT(*) AS refund_count FROM refunds WHERE refund_status = 'pending' AND refund_date >= DATE_SUB('2026-09-12', INTERVAL '7' DAY) LIMIT 200",
+    "final_sql": "",
+    "baseline_result": [
+      {
+        "refund_count": 36
+      }
+    ],
+    "final_result": [],
+    "ground_truth_result": [
+      {
+        "n": 18
+      }
+    ],
+    "final_status": "invalid_output"
+  },
+  {
+    "id": "scoped-077",
+    "question": "这段时间已批准的质量问题退款平均每条多少元？只返回金额。",
+    "ambiguous": true,
+    "missing_slot": "time",
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": true,
+    "answer_used": false,
+    "baseline_correct": false,
+    "final_correct": false,
+    "strict_success": false,
+    "pair": "both_wrong",
+    "baseline_latency_s": 1.723761,
+    "first_latency_s": 4.096432,
+    "total_latency_s": 12.586804,
+    "baseline_sql": "SELECT ROUND(AVG(refund_amount), 2) AS avg_refund_per_item FROM refunds WHERE refund_status = 'approved' AND refund_reason = '质量问题' AND refund_date <= '2026-09-12' LIMIT 200",
+    "final_sql": "",
+    "baseline_result": [
+      {
+        "avg_refund_per_item": 594.83
+      }
+    ],
+    "final_result": [],
+    "ground_truth_result": [
+      {
+        "n": 878.37
+      }
+    ],
+    "final_status": "invalid_output"
+  },
+  {
+    "id": "scoped-078",
+    "question": "报表期内各客户等级的有效订单笔数，返回等级和笔数。",
+    "ambiguous": true,
+    "missing_slot": "time",
+    "decision": "needs_rephrase",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": false,
+    "final_correct": false,
+    "strict_success": false,
+    "pair": "both_wrong",
+    "baseline_latency_s": 1.55826,
+    "first_latency_s": 5.580385,
+    "total_latency_s": 5.580385,
+    "baseline_sql": "SELECT u.user_level, COUNT(*) AS order_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') GROUP BY u.user_level LIMIT 200",
+    "final_sql": "",
+    "baseline_result": [
+      {
+        "user_level": "gold",
+        "order_count": 3020
+      },
+      {
+        "user_level": "normal",
+        "order_count": 3673
+      },
+      {
+        "user_level": "black",
+        "order_count": 1188
+      },
+      {
+        "user_level": "silver",
+        "order_count": 2925
+      }
+    ],
+    "final_result": [],
+    "ground_truth_result": [
+      {
+        "user_level": "gold",
+        "n": 114
+      },
+      {
+        "user_level": "normal",
+        "n": 127
+      },
+      {
+        "user_level": "silver",
+        "n": 107
+      },
+      {
+        "user_level": "black",
+        "n": 35
+      }
+    ],
+    "final_status": "needs_rephrase"
+  },
+  {
+    "id": "scoped-079",
+    "question": "那段招募期间注册的VIP一共有多少人？只返回人数。",
+    "ambiguous": true,
+    "missing_slot": "time",
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": true,
+    "answer_used": false,
+    "baseline_correct": false,
+    "final_correct": false,
+    "strict_success": false,
+    "pair": "both_wrong",
+    "baseline_latency_s": 1.280516,
+    "first_latency_s": 2.83478,
+    "total_latency_s": 9.81334,
+    "baseline_sql": "SELECT COUNT(*) AS user_count FROM users WHERE is_vip = 1 AND register_date <= '2026-09-12' LIMIT 200",
+    "final_sql": "",
+    "baseline_result": [
+      {
+        "user_count": 468
+      }
+    ],
+    "final_result": [],
+    "ground_truth_result": [
+      {
+        "n": 15
+      }
+    ],
+    "final_status": "invalid_output"
+  },
+  {
+    "id": "scoped-080",
+    "question": "活动期间上架的家用电器一共有多少款？包含现在下架的，只返回数量。",
+    "ambiguous": true,
+    "missing_slot": "time",
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": true,
+    "answer_used": true,
+    "baseline_correct": false,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "baseline_wrong_final_right",
+    "baseline_latency_s": 1.217027,
+    "first_latency_s": 3.507321,
+    "total_latency_s": 9.802247000000001,
+    "baseline_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '家用电器' AND launch_date <= '2026-09-12' LIMIT 200",
+    "final_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '家用电器' AND launch_date >= '2025-06-01' AND launch_date < '2025-07-01' LIMIT 200",
+    "baseline_result": [
+      {
+        "product_count": 118
+      }
+    ],
+    "final_result": [
+      {
+        "product_count": 8
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "n": 8
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-081",
+    "question": "全部历史按支付方式展示成交表现，返回支付方式和一个指标值。",
+    "ambiguous": true,
+    "missing_slot": "metric",
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": true,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": false,
+    "strict_success": false,
+    "pair": "baseline_right_final_wrong",
+    "baseline_latency_s": 1.345902,
+    "first_latency_s": 4.160654,
+    "total_latency_s": 13.510326,
+    "baseline_sql": "SELECT payment_method, ROUND(SUM(paid_amount), 2) AS metric_value FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') GROUP BY payment_method LIMIT 200",
+    "final_sql": "",
+    "baseline_result": [
+      {
+        "payment_method": "cash",
+        "metric_value": 6944100.86
+      },
+      {
+        "payment_method": "wechat",
+        "metric_value": 7265271.24
+      },
+      {
+        "payment_method": "card",
+        "metric_value": 7212441.63
+      },
+      {
+        "payment_method": "alipay",
+        "metric_value": 6702907.38
+      }
+    ],
+    "final_result": [],
+    "ground_truth_result": [
+      {
+        "payment_method": "cash",
+        "n": 6944100.86
+      },
+      {
+        "payment_method": "wechat",
+        "n": 7265271.24
+      },
+      {
+        "payment_method": "card",
+        "n": 7212441.63
+      },
+      {
+        "payment_method": "alipay",
+        "n": 6702907.38
+      }
+    ],
+    "final_status": "invalid_output"
+  },
+  {
+    "id": "scoped-082",
+    "question": "比较各客户等级的全部历史购买表现，返回等级和一个指标值。",
+    "ambiguous": true,
+    "missing_slot": "metric",
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": true,
+    "answer_used": true,
+    "baseline_correct": false,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "baseline_wrong_final_right",
+    "baseline_latency_s": 1.719831,
+    "first_latency_s": 3.511293,
+    "total_latency_s": 8.343975,
+    "baseline_sql": "SELECT u.user_level, ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') GROUP BY u.user_level LIMIT 200",
+    "final_sql": "SELECT u.user_level, COUNT(*) AS order_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') GROUP BY u.user_level ORDER BY order_count DESC LIMIT 200",
+    "baseline_result": [
+      {
+        "user_level": "gold",
+        "sales_amount": 7889415.23
+      },
+      {
+        "user_level": "normal",
+        "sales_amount": 9443432.01
+      },
+      {
+        "user_level": "black",
+        "sales_amount": 3177863.41
+      },
+      {
+        "user_level": "silver",
+        "sales_amount": 7614010.46
+      }
+    ],
+    "final_result": [
+      {
+        "user_level": "normal",
+        "order_count": 3673
+      },
+      {
+        "user_level": "gold",
+        "order_count": 3020
+      },
+      {
+        "user_level": "silver",
+        "order_count": 2925
+      },
+      {
+        "user_level": "black",
+        "order_count": 1188
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "user_level": "normal",
+        "n": 3673
+      },
+      {
+        "user_level": "silver",
+        "n": 2925
+      },
+      {
+        "user_level": "gold",
+        "n": 3020
+      },
+      {
+        "user_level": "black",
+        "n": 1188
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-083",
+    "question": "按商品类别汇总全部历史销售成绩，返回类别和一个指标值。",
+    "ambiguous": true,
+    "missing_slot": "metric",
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": true,
+    "answer_used": false,
+    "baseline_correct": false,
+    "final_correct": false,
+    "strict_success": false,
+    "pair": "both_wrong",
+    "baseline_latency_s": 2.842679,
+    "first_latency_s": 3.739451,
+    "total_latency_s": 12.992172,
+    "baseline_sql": "SELECT p.category, ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM products AS p JOIN order_items AS oi ON p.product_id = oi.product_id JOIN orders AS o ON oi.order_id = o.order_id WHERE o.order_status IN ('paid', 'completed', 'shipped') GROUP BY p.category LIMIT 200",
+    "final_sql": "",
+    "baseline_result": [
+      {
+        "category": "家用电器",
+        "sales_amount": 13086179.99
+      },
+      {
+        "category": "手机数码",
+        "sales_amount": 7437590.81
+      },
+      {
+        "category": "服饰鞋包",
+        "sales_amount": 1775094.12
+      },
+      {
+        "category": "母婴用品",
+        "sales_amount": 1627735.6
+      },
+      {
+        "category": "美妆个护",
+        "sales_amount": 1517768.82
+      },
+      {
+        "category": "运动户外",
+        "sales_amount": 2022921.66
+      },
+      {
+        "category": "食品生鲜",
+        "sales_amount": 657430.11
+      }
+    ],
+    "final_result": [],
+    "ground_truth_result": [
+      {
+        "category": "手机数码",
+        "n": 6527.0
+      },
+      {
+        "category": "美妆个护",
+        "n": 7071.0
+      },
+      {
+        "category": "运动户外",
+        "n": 4826.0
+      },
+      {
+        "category": "母婴用品",
+        "n": 6566.0
+      },
+      {
+        "category": "服饰鞋包",
+        "n": 5592.0
+      },
+      {
+        "category": "食品生鲜",
+        "n": 6387.0
+      },
+      {
+        "category": "家用电器",
+        "n": 7420.0
+      }
+    ],
+    "final_status": "invalid_output"
+  },
+  {
+    "id": "scoped-084",
+    "question": "全部历史已批准退款按原因看规模，返回原因和一个指标值。",
+    "ambiguous": true,
+    "missing_slot": "metric",
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": true,
+    "answer_used": true,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 2.202528,
+    "first_latency_s": 4.410183,
+    "total_latency_s": 11.429388,
+    "baseline_sql": "SELECT refund_reason, ROUND(SUM(refund_amount), 2) AS refund_amount FROM refunds WHERE refund_status = 'approved' GROUP BY refund_reason LIMIT 200",
+    "final_sql": "SELECT refund_reason, ROUND(SUM(refund_amount), 2) AS refund_amount FROM refunds WHERE refund_status = 'approved' GROUP BY refund_reason LIMIT 200",
+    "baseline_result": [
+      {
+        "refund_reason": "七天无理由",
+        "refund_amount": 293175.06
+      },
+      {
+        "refund_reason": "物流破损",
+        "refund_amount": 307210.27
+      },
+      {
+        "refund_reason": "描述不符",
+        "refund_amount": 261226.13
+      },
+      {
+        "refund_reason": "尺码不合适",
+        "refund_amount": 298048.6
+      },
+      {
+        "refund_reason": "质量问题",
+        "refund_amount": 321952.17
+      }
+    ],
+    "final_result": [
+      {
+        "refund_reason": "七天无理由",
+        "refund_amount": 293175.06
+      },
+      {
+        "refund_reason": "物流破损",
+        "refund_amount": 307210.27
+      },
+      {
+        "refund_reason": "描述不符",
+        "refund_amount": 261226.13
+      },
+      {
+        "refund_reason": "尺码不合适",
+        "refund_amount": 298048.6
+      },
+      {
+        "refund_reason": "质量问题",
+        "refund_amount": 321952.17
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "refund_reason": "七天无理由",
+        "n": 293175.06
+      },
+      {
+        "refund_reason": "物流破损",
+        "n": 307210.27
+      },
+      {
+        "refund_reason": "描述不符",
+        "n": 261226.13
+      },
+      {
+        "refund_reason": "尺码不合适",
+        "n": 298048.6
+      },
+      {
+        "refund_reason": "质量问题",
+        "n": 321952.17
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-085",
+    "question": "VIP客户全部历史的有效订单成交表现是多少？只返回一个数。",
+    "ambiguous": true,
+    "missing_slot": "metric",
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": true,
+    "answer_used": true,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 1.65359,
+    "first_latency_s": 4.86314,
+    "total_latency_s": 10.284882,
+    "baseline_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.is_vip = 1 AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "final_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.is_vip = 1 AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "baseline_result": [
+      {
+        "sales_amount": 13359342.28
+      }
+    ],
+    "final_result": [
+      {
+        "sales_amount": 13359342.28
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "n": 13359342.28
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-086",
+    "question": "银行卡支付的全部历史有效订单，规模是多少？只返回一个数。",
+    "ambiguous": true,
+    "missing_slot": "metric",
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": true,
+    "answer_used": true,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 1.129378,
+    "first_latency_s": 4.110993,
+    "total_latency_s": 14.684473999999998,
+    "baseline_sql": "SELECT COUNT(*) AS order_count FROM orders WHERE payment_method = 'card' AND order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "final_sql": "SELECT COUNT(*) AS order_count FROM orders WHERE payment_method = 'card' AND order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "baseline_result": [
+      {
+        "order_count": 2657
+      }
+    ],
+    "final_result": [
+      {
+        "order_count": 2657
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "n": 2657
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-087",
+    "question": "微信渠道全部历史的客户成交情况给我一个汇总数。只考虑有效订单。",
+    "ambiguous": true,
+    "missing_slot": "metric",
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": true,
+    "answer_used": true,
+    "baseline_correct": false,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "baseline_wrong_final_right",
+    "baseline_latency_s": 2.209245,
+    "first_latency_s": 4.035615,
+    "total_latency_s": 9.491845999999999,
+    "baseline_sql": "SELECT COUNT(DISTINCT o.user_id) AS paying_users, ROUND(SUM(o.paid_amount), 2) AS sales_amount, SUM(oi.quantity) AS sales_quantity FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND o.payment_method = 'wechat' LIMIT 200",
+    "final_sql": "SELECT COUNT(DISTINCT o.user_id) AS paying_users FROM orders AS o WHERE o.order_status IN ('paid', 'completed', 'shipped') AND o.payment_method = 'wechat' LIMIT 200",
+    "baseline_result": [
+      {
+        "paying_users": 1531,
+        "sales_amount": 20506775.65,
+        "sales_quantity": 11333.0
+      }
+    ],
+    "final_result": [
+      {
+        "paying_users": 1531
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "n": 1531
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-088",
+    "question": "gold客户全部历史有效订单的消费水平给我一个数。",
+    "ambiguous": true,
+    "missing_slot": "metric",
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": true,
+    "answer_used": false,
+    "baseline_correct": false,
+    "final_correct": false,
+    "strict_success": false,
+    "pair": "both_wrong",
+    "baseline_latency_s": 1.72231,
+    "first_latency_s": 4.646505,
+    "total_latency_s": 14.787336,
+    "baseline_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.user_level = 'gold' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "final_sql": "",
+    "baseline_result": [
+      {
+        "sales_amount": 7889415.23
+      }
+    ],
+    "final_result": [],
+    "ground_truth_result": [
+      {
+        "n": 2612.39
+      }
+    ],
+    "final_status": "invalid_output"
+  },
+  {
+    "id": "scoped-089",
+    "question": "家用电器各品牌全部历史销售表现，返回品牌和一个指标值。",
+    "ambiguous": true,
+    "missing_slot": "metric",
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": true,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": false,
+    "strict_success": false,
+    "pair": "baseline_right_final_wrong",
+    "baseline_latency_s": 2.071124,
+    "first_latency_s": 3.984663,
+    "total_latency_s": 13.000069,
+    "baseline_sql": "SELECT p.brand, ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM products AS p JOIN order_items AS oi ON p.product_id = oi.product_id JOIN orders AS o ON oi.order_id = o.order_id WHERE p.category = '家用电器' AND o.order_status IN ('paid', 'completed', 'shipped') GROUP BY p.brand LIMIT 200",
+    "final_sql": "",
+    "baseline_result": [
+      {
+        "brand": "云栖",
+        "sales_amount": 930947.87
+      },
+      {
+        "brand": "优选",
+        "sales_amount": 2499156.91
+      },
+      {
+        "brand": "北辰",
+        "sales_amount": 661589.39
+      },
+      {
+        "brand": "星禾",
+        "sales_amount": 1818097.64
+      },
+      {
+        "brand": "松果",
+        "sales_amount": 942873.49
+      },
+      {
+        "brand": "森活",
+        "sales_amount": 1771764.47
+      },
+      {
+        "brand": "澜庭",
+        "sales_amount": 1642836.26
+      },
+      {
+        "brand": "青橙",
+        "sales_amount": 2818913.96
+      }
+    ],
+    "final_result": [],
+    "ground_truth_result": [
+      {
+        "brand": "森活",
+        "n": 1771764.47
+      },
+      {
+        "brand": "青橙",
+        "n": 2818913.96
+      },
+      {
+        "brand": "优选",
+        "n": 2499156.91
+      },
+      {
+        "brand": "澜庭",
+        "n": 1642836.26
+      },
+      {
+        "brand": "星禾",
+        "n": 1818097.64
+      },
+      {
+        "brand": "松果",
+        "n": 942873.49
+      },
+      {
+        "brand": "云栖",
+        "n": 930947.87
+      },
+      {
+        "brand": "北辰",
+        "n": 661589.39
+      }
+    ],
+    "final_status": "invalid_output"
+  },
+  {
+    "id": "scoped-090",
+    "question": "全部历史因质量问题批准的退款规模是多少？只返回一个数。",
+    "ambiguous": true,
+    "missing_slot": "metric",
+    "decision": "proceed",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": false,
+    "final_correct": false,
+    "strict_success": false,
+    "pair": "both_wrong",
+    "baseline_latency_s": 1.101815,
+    "first_latency_s": 3.701018,
+    "total_latency_s": 3.701018,
+    "baseline_sql": "SELECT ROUND(SUM(refund_amount), 2) AS refund_amount FROM refunds WHERE refund_status = 'approved' AND refund_reason = '质量问题' LIMIT 200",
+    "final_sql": "SELECT ROUND(SUM(refund_amount), 2) AS refund_amount FROM refunds WHERE refund_status = 'approved' AND refund_reason = '质量问题' LIMIT 200",
+    "baseline_result": [
+      {
+        "refund_amount": 321952.17
+      }
+    ],
+    "final_result": [
+      {
+        "refund_amount": 321952.17
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "n": 551
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-091",
+    "question": "2026年第一季度的整体成交表现给我一个数，按有效订单统计。",
+    "ambiguous": true,
+    "missing_slot": "metric",
+    "decision": "proceed",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": false,
+    "pair": "both_right",
+    "baseline_latency_s": 1.754434,
+    "first_latency_s": 5.149599,
+    "total_latency_s": 5.149599,
+    "baseline_sql": "SELECT ROUND(SUM(paid_amount), 2) AS sales_amount FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') AND order_date >= '2026-01-01' AND order_date <= '2026-03-31' LIMIT 200",
+    "final_sql": "SELECT ROUND(SUM(paid_amount), 2) AS sales_amount FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') AND order_date >= '2026-01-01' AND order_date <= '2026-03-31' LIMIT 200",
+    "baseline_result": [
+      {
+        "sales_amount": 3654173.98
+      }
+    ],
+    "final_result": [
+      {
+        "sales_amount": 3654173.98
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "n": 3654173.98
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-092",
+    "question": "2026年8月各支付方式的交易表现，返回支付方式和一个指标值，只考虑有效订单。",
+    "ambiguous": true,
+    "missing_slot": "metric",
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": true,
+    "answer_used": false,
+    "baseline_correct": false,
+    "final_correct": false,
+    "strict_success": false,
+    "pair": "both_wrong",
+    "baseline_latency_s": 2.369979,
+    "first_latency_s": 4.391952,
+    "total_latency_s": 14.060713999999999,
+    "baseline_sql": "SELECT payment_method, ROUND(SUM(paid_amount), 2) AS metric_value FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') AND order_date >= '2026-08-01' AND order_date <= '2026-08-31' GROUP BY payment_method LIMIT 200",
+    "final_sql": "",
+    "baseline_result": [
+      {
+        "payment_method": "alipay",
+        "metric_value": 350322.07
+      },
+      {
+        "payment_method": "cash",
+        "metric_value": 466607.27
+      },
+      {
+        "payment_method": "card",
+        "metric_value": 445737.6
+      },
+      {
+        "payment_method": "wechat",
+        "metric_value": 473531.95
+      }
+    ],
+    "final_result": [],
+    "ground_truth_result": [
+      {
+        "payment_method": "alipay",
+        "n": 153
+      },
+      {
+        "payment_method": "cash",
+        "n": 167
+      },
+      {
+        "payment_method": "card",
+        "n": 163
+      },
+      {
+        "payment_method": "wechat",
+        "n": 160
+      }
+    ],
+    "final_status": "invalid_output"
+  },
+  {
+    "id": "scoped-093",
+    "question": "silver等级客户全部历史的购买活跃度给我一个数，只考虑有效订单。",
+    "ambiguous": true,
+    "missing_slot": "metric",
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": true,
+    "answer_used": true,
+    "baseline_correct": false,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "baseline_wrong_final_right",
+    "baseline_latency_s": 1.476142,
+    "first_latency_s": 4.09452,
+    "total_latency_s": 15.115578,
+    "baseline_sql": "SELECT COUNT(*) AS purchase_activity FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.user_level = 'silver' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "final_sql": "SELECT COUNT(DISTINCT o.user_id) AS user_count FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.user_level = 'silver' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "baseline_result": [
+      {
+        "purchase_activity": 2925
+      }
+    ],
+    "final_result": [
+      {
+        "user_count": 700
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "n": 700
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-094",
+    "question": "现金支付渠道全部历史的成交指标是多少？只返回一个数，按有效订单统计。",
+    "ambiguous": true,
+    "missing_slot": "metric",
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": true,
+    "answer_used": true,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 1.462187,
+    "first_latency_s": 4.071822,
+    "total_latency_s": 9.853156,
+    "baseline_sql": "SELECT ROUND(SUM(paid_amount), 2) AS sales_amount FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') AND payment_method = 'cash' LIMIT 200",
+    "final_sql": "SELECT ROUND(SUM(paid_amount), 2) AS sales_amount FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') AND payment_method = 'cash' LIMIT 200",
+    "baseline_result": [
+      {
+        "sales_amount": 6944100.86
+      }
+    ],
+    "final_result": [
+      {
+        "sales_amount": 6944100.86
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "n": 6944100.86
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-095",
+    "question": "VIP客户各支付方式的全部历史交易表现，返回支付方式和一个指标值，只考虑有效订单。",
+    "ambiguous": true,
+    "missing_slot": "metric",
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": true,
+    "answer_used": false,
+    "baseline_correct": false,
+    "final_correct": false,
+    "strict_success": false,
+    "pair": "both_wrong",
+    "baseline_latency_s": 2.127616,
+    "first_latency_s": 4.710769,
+    "total_latency_s": 15.141161,
+    "baseline_sql": "SELECT o.payment_method, ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.is_vip = 1 AND o.order_status IN ('paid', 'completed', 'shipped') GROUP BY o.payment_method LIMIT 200",
+    "final_sql": "",
+    "baseline_result": [
+      {
+        "payment_method": "alipay",
+        "sales_amount": 3168869.35
+      },
+      {
+        "payment_method": "card",
+        "sales_amount": 3512116.06
+      },
+      {
+        "payment_method": "wechat",
+        "sales_amount": 3497651.42
+      },
+      {
+        "payment_method": "cash",
+        "sales_amount": 3180705.45
+      }
+    ],
+    "final_result": [],
+    "ground_truth_result": [
+      {
+        "payment_method": "alipay",
+        "n": 442
+      },
+      {
+        "payment_method": "card",
+        "n": 444
+      },
+      {
+        "payment_method": "cash",
+        "n": 450
+      },
+      {
+        "payment_method": "wechat",
+        "n": 443
+      }
+    ],
+    "final_status": "invalid_output"
+  },
+  {
+    "id": "scoped-096",
+    "question": "当前在售商品的全部历史销售规模是多少？只返回一个数，按有效订单统计。",
+    "ambiguous": true,
+    "missing_slot": "metric",
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": true,
+    "answer_used": true,
+    "baseline_correct": false,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "baseline_wrong_final_right",
+    "baseline_latency_s": 1.958218,
+    "first_latency_s": 4.023152,
+    "total_latency_s": 15.309674,
+    "baseline_sql": "SELECT ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM products AS p JOIN order_items AS oi ON p.product_id = oi.product_id JOIN orders AS o ON oi.order_id = o.order_id WHERE p.is_active = 1 AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "final_sql": "SELECT SUM(oi.quantity) AS sales_quantity FROM products AS p JOIN order_items AS oi ON p.product_id = oi.product_id JOIN orders AS o ON oi.order_id = o.order_id WHERE p.is_active = 1 AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "baseline_result": [
+      {
+        "sales_amount": 28124721.11
+      }
+    ],
+    "final_result": [
+      {
+        "sales_quantity": 44389.0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "n": 44389.0
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-097",
+    "question": "当前下架商品过去累计销售表现是多少？只返回一个数，按有效订单统计。",
+    "ambiguous": true,
+    "missing_slot": "metric",
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": true,
+    "answer_used": true,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 1.849136,
+    "first_latency_s": 4.085295,
+    "total_latency_s": 10.241888,
+    "baseline_sql": "SELECT ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM products AS p JOIN order_items AS oi ON p.product_id = oi.product_id JOIN orders AS o ON oi.order_id = o.order_id WHERE p.is_active = 0 AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "final_sql": "SELECT ROUND(SUM(oi.item_amount), 2) AS sales_amount FROM products AS p JOIN order_items AS oi ON p.product_id = oi.product_id JOIN orders AS o ON oi.order_id = o.order_id WHERE p.is_active = 0 AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "baseline_result": [
+      {
+        "sales_amount": null
+      }
+    ],
+    "final_result": [
+      {
+        "sales_amount": null
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "n": null
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-098",
+    "question": "各商品类别全部历史已批准退款的规模，返回类别和一个指标值。",
+    "ambiguous": true,
+    "missing_slot": "metric",
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": true,
+    "answer_used": true,
+    "baseline_correct": false,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "baseline_wrong_final_right",
+    "baseline_latency_s": 2.499678,
+    "first_latency_s": 4.293573,
+    "total_latency_s": 10.176581,
+    "baseline_sql": "SELECT p.category, ROUND(SUM(r.refund_amount), 2) AS refund_amount FROM products AS p JOIN order_items AS oi ON p.product_id = oi.product_id JOIN orders AS o ON oi.order_id = o.order_id JOIN refunds AS r ON o.order_id = r.order_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND r.refund_status = 'approved' GROUP BY p.category LIMIT 200",
+    "final_sql": "SELECT p.category, COUNT(*) AS refund_count FROM refunds AS r JOIN order_items AS oi ON r.order_item_id = oi.order_item_id JOIN products AS p ON oi.product_id = p.product_id WHERE r.refund_status = 'approved' GROUP BY p.category LIMIT 200",
+    "baseline_result": [
+      {
+        "category": "运动户外",
+        "refund_amount": 431571.39
+      },
+      {
+        "category": "美妆个护",
+        "refund_amount": 590344.15
+      },
+      {
+        "category": "手机数码",
+        "refund_amount": 799940.52
+      },
+      {
+        "category": "服饰鞋包",
+        "refund_amount": 516435.97
+      },
+      {
+        "category": "家用电器",
+        "refund_amount": 1051461.17
+      },
+      {
+        "category": "母婴用品",
+        "refund_amount": 503057.79
+      },
+      {
+        "category": "食品生鲜",
+        "refund_amount": 373259.16
+      }
+    ],
+    "final_result": [
+      {
+        "category": "运动户外",
+        "refund_count": 250
+      },
+      {
+        "category": "手机数码",
+        "refund_count": 344
+      },
+      {
+        "category": "家用电器",
+        "refund_count": 339
+      },
+      {
+        "category": "母婴用品",
+        "refund_count": 339
+      },
+      {
+        "category": "美妆个护",
+        "refund_count": 601
+      },
+      {
+        "category": "食品生鲜",
+        "refund_count": 205
+      },
+      {
+        "category": "服饰鞋包",
+        "refund_count": 429
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "category": "运动户外",
+        "n": 250
+      },
+      {
+        "category": "手机数码",
+        "n": 344
+      },
+      {
+        "category": "家用电器",
+        "n": 339
+      },
+      {
+        "category": "母婴用品",
+        "n": 339
+      },
+      {
+        "category": "美妆个护",
+        "n": 601
+      },
+      {
+        "category": "食品生鲜",
+        "n": 205
+      },
+      {
+        "category": "服饰鞋包",
+        "n": 429
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-099",
+    "question": "非VIP客户的全部历史有效订单消费情况给我一个汇总数。",
+    "ambiguous": true,
+    "missing_slot": "metric",
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": true,
+    "answer_used": false,
+    "baseline_correct": false,
+    "final_correct": false,
+    "strict_success": false,
+    "pair": "both_wrong",
+    "baseline_latency_s": 1.909057,
+    "first_latency_s": 3.542216,
+    "total_latency_s": 12.889409,
+    "baseline_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.is_vip = 0 AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "final_sql": "",
+    "baseline_result": [
+      {
+        "sales_amount": 14765378.83
+      }
+    ],
+    "final_result": [],
+    "ground_truth_result": [
+      {
+        "n": 2613.8
+      }
+    ],
+    "final_status": "invalid_output"
+  },
+  {
+    "id": "scoped-100",
+    "question": "已批准的七天无理由退款，全部历史退款水平给我一个汇总数。",
+    "ambiguous": true,
+    "missing_slot": "metric",
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": true,
+    "answer_used": false,
+    "baseline_correct": false,
+    "final_correct": false,
+    "strict_success": false,
+    "pair": "both_wrong",
+    "baseline_latency_s": 1.246043,
+    "first_latency_s": 4.029683,
+    "total_latency_s": 14.182422,
+    "baseline_sql": "SELECT ROUND(SUM(refund_amount), 2) AS refund_amount FROM refunds WHERE refund_status = 'approved' AND refund_reason = '七天无理由' LIMIT 200",
+    "final_sql": "",
+    "baseline_result": [
+      {
+        "refund_amount": 293175.06
+      }
+    ],
+    "final_result": [],
+    "ground_truth_result": [
+      {
+        "n": 571.49
+      }
+    ],
+    "final_status": "invalid_output"
+  },
+  {
+    "id": "scoped-101",
+    "question": "按我们这次选定的支付方式，统计全部历史有效订单笔数，只要笔数。",
+    "ambiguous": true,
+    "missing_slot": "filter",
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": true,
+    "answer_used": true,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 1.141697,
+    "first_latency_s": 4.12101,
+    "total_latency_s": 15.134025,
+    "baseline_sql": "SELECT COUNT(*) AS order_count FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') AND payment_method = 'alipay' LIMIT 200",
+    "final_sql": "SELECT COUNT(*) AS order_count FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') AND payment_method = 'alipay' LIMIT 200",
+    "baseline_result": [
+      {
+        "order_count": 2654
+      }
+    ],
+    "final_result": [
+      {
+        "order_count": 2654
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "n": 2654
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-102",
+    "question": "选定客户等级的全部历史有效订单销售额是多少？只返回金额。",
+    "ambiguous": true,
+    "missing_slot": "filter",
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": true,
+    "answer_used": true,
+    "baseline_correct": false,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "baseline_wrong_final_right",
+    "baseline_latency_s": 1.626325,
+    "first_latency_s": 4.031683,
+    "total_latency_s": 9.746676,
+    "baseline_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "final_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.user_level = 'gold' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "baseline_result": [
+      {
+        "sales_amount": 28124721.11
+      }
+    ],
+    "final_result": [
+      {
+        "sales_amount": 7889415.23
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "n": 7889415.23
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-103",
+    "question": "本次选定的退款原因，累计批准退款金额是多少？只要金额。",
+    "ambiguous": true,
+    "missing_slot": "filter",
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": true,
+    "answer_used": false,
+    "baseline_correct": false,
+    "final_correct": false,
+    "strict_success": false,
+    "pair": "both_wrong",
+    "baseline_latency_s": 1.161102,
+    "first_latency_s": 5.041128,
+    "total_latency_s": 13.606494999999999,
+    "baseline_sql": "SELECT ROUND(SUM(refund_amount), 2) AS refund_amount FROM refunds WHERE refund_status = 'approved' AND refund_reason = '本次选定的退款原因' LIMIT 200",
+    "final_sql": "",
+    "baseline_result": [
+      {
+        "refund_amount": null
+      }
+    ],
+    "final_result": [],
+    "ground_truth_result": [
+      {
+        "n": 261226.13
+      }
+    ],
+    "final_status": "needs_rephrase"
+  },
+  {
+    "id": "scoped-104",
+    "question": "这次报表选定省份的客户总人数是多少？全部注册客户，只要人数。",
+    "ambiguous": true,
+    "missing_slot": "filter",
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": true,
+    "answer_used": true,
+    "baseline_correct": false,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "baseline_wrong_final_right",
+    "baseline_latency_s": 0.742375,
+    "first_latency_s": 2.617178,
+    "total_latency_s": 5.555967,
+    "baseline_sql": "SELECT COUNT(*) AS user_count FROM users WHERE province = '上海' LIMIT 200",
+    "final_sql": "SELECT COUNT(*) AS user_count FROM users WHERE province = '湖北' LIMIT 200",
+    "baseline_result": [
+      {
+        "user_count": 377
+      }
+    ],
+    "final_result": [
+      {
+        "user_count": 378
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "n": 378
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-105",
+    "question": "负责维护的那几座城市合计有多少VIP客户？只要人数。",
+    "ambiguous": true,
+    "missing_slot": "filter",
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": true,
+    "answer_used": true,
+    "baseline_correct": false,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "baseline_wrong_final_right",
+    "baseline_latency_s": 1.493976,
+    "first_latency_s": 4.668328,
+    "total_latency_s": 14.714747,
+    "baseline_sql": "SELECT COUNT(*) AS vip_user_count FROM users WHERE city IN ('上海市', '北京市', '南京市', '广州市', '成都市', '杭州市', '武汉市', '西安市') AND is_vip = 1 LIMIT 200",
+    "final_sql": "SELECT COUNT(*) AS vip_user_count FROM users WHERE city IN ('南京市', '武汉市') AND is_vip = 1 LIMIT 200",
+    "baseline_result": [
+      {
+        "vip_user_count": 468
+      }
+    ],
+    "final_result": [
+      {
+        "vip_user_count": 120
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "n": 120
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-106",
+    "question": "本次关注的商品类别里，现在有多少款已经下架？只返回数量。",
+    "ambiguous": true,
+    "missing_slot": "filter",
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": true,
+    "answer_used": true,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 1.610438,
+    "first_latency_s": 4.662067,
+    "total_latency_s": 10.004126,
+    "baseline_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category IN ('家用电器', '手机数码', '服饰鞋包', '母婴用品', '美妆个护', '运动户外', '食品生鲜') AND is_active = 0 LIMIT 200",
+    "final_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '母婴用品' AND is_active = 0 LIMIT 200",
+    "baseline_result": [
+      {
+        "product_count": 0
+      }
+    ],
+    "final_result": [
+      {
+        "product_count": 0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "n": 0
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-107",
+    "question": "在售商品中标价达到我们约定下限的有多少款？包含下限，只返回数量。",
+    "ambiguous": true,
+    "missing_slot": "filter",
+    "decision": "needs_rephrase",
+    "triggered": false,
+    "valid_question": false,
+    "answer_used": false,
+    "baseline_correct": false,
+    "final_correct": false,
+    "strict_success": false,
+    "pair": "both_wrong",
+    "baseline_latency_s": 1.028491,
+    "first_latency_s": 4.116106,
+    "total_latency_s": 4.116106,
+    "baseline_sql": "SELECT COUNT(*) AS product_count FROM products WHERE is_active = 1 AND list_price >= 100 LIMIT 200",
+    "final_sql": "",
+    "baseline_result": [
+      {
+        "product_count": 752
+      }
+    ],
+    "final_result": [],
+    "ground_truth_result": [
+      {
+        "n": 256
+      }
+    ],
+    "final_status": "needs_rephrase"
+  },
+  {
+    "id": "scoped-108",
+    "question": "优惠金额超过本次指定门槛的有效订单有几笔？全部历史，只要笔数。",
+    "ambiguous": true,
+    "missing_slot": "filter",
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": true,
+    "answer_used": true,
+    "baseline_correct": false,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "baseline_wrong_final_right",
+    "baseline_latency_s": 2.42777,
+    "first_latency_s": 3.559523,
+    "total_latency_s": 9.541445,
+    "baseline_sql": "SELECT COUNT(*) AS order_count FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') AND discount_amount > 0 LIMIT 200",
+    "final_sql": "SELECT COUNT(*) AS order_count FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') AND discount_amount > 80 LIMIT 200",
+    "baseline_result": [
+      {
+        "order_count": 10804
+      }
+    ],
+    "final_result": [
+      {
+        "order_count": 5939
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "n": 5939
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-109",
+    "question": "超过本次指定退款金额门槛的已批准退款有多少条？全部历史，只要条数。",
+    "ambiguous": true,
+    "missing_slot": "filter",
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": true,
+    "answer_used": true,
+    "baseline_correct": false,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "baseline_wrong_final_right",
+    "baseline_latency_s": 2.663928,
+    "first_latency_s": 3.700193,
+    "total_latency_s": 9.422399,
+    "baseline_sql": "SELECT COUNT(*) AS refund_count FROM refunds WHERE refund_status = 'approved' AND refund_amount > 100 LIMIT 200",
+    "final_sql": "SELECT COUNT(*) AS refund_count FROM refunds WHERE refund_status = 'approved' AND refund_amount > 200 LIMIT 200",
+    "baseline_result": [
+      {
+        "refund_count": 2039
+      }
+    ],
+    "final_result": [
+      {
+        "refund_count": 1491
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "n": 1491
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-110",
+    "question": "按这次指定的VIP身份范围，统计全部历史有效订单销售额，只返回金额。",
+    "ambiguous": true,
+    "missing_slot": "filter",
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": true,
+    "answer_used": true,
+    "baseline_correct": false,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "baseline_wrong_final_right",
+    "baseline_latency_s": 2.151165,
+    "first_latency_s": 5.361756,
+    "total_latency_s": 11.85915,
+    "baseline_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.is_vip = 1 LIMIT 200",
+    "final_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.is_vip = 0 LIMIT 200",
+    "baseline_result": [
+      {
+        "sales_amount": 13359342.28
+      }
+    ],
+    "final_result": [
+      {
+        "sales_amount": 14765378.83
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "n": 14765378.83
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-111",
+    "question": "指定订单状态的全部历史订单有多少笔？只返回笔数。",
+    "ambiguous": true,
+    "missing_slot": "filter",
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": true,
+    "answer_used": true,
+    "baseline_correct": false,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "baseline_wrong_final_right",
+    "baseline_latency_s": 2.699124,
+    "first_latency_s": 4.174764,
+    "total_latency_s": 14.365321999999999,
+    "baseline_sql": "SELECT COUNT(*) AS order_count FROM orders WHERE order_status = 'specified_status' LIMIT 200",
+    "final_sql": "SELECT COUNT(*) AS order_count FROM orders WHERE order_status = 'unpaid' LIMIT 200",
+    "baseline_result": [
+      {
+        "order_count": 0
+      }
+    ],
+    "final_result": [
+      {
+        "order_count": 467
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "n": 467
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-112",
+    "question": "请数一下本次选定状态的退款记录，一共多少条？全部历史。",
+    "ambiguous": true,
+    "missing_slot": "filter",
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": true,
+    "answer_used": false,
+    "baseline_correct": false,
+    "final_correct": false,
+    "strict_success": false,
+    "pair": "both_wrong",
+    "baseline_latency_s": 1.112043,
+    "first_latency_s": 3.838086,
+    "total_latency_s": 13.291511,
+    "baseline_sql": "SELECT COUNT(*) AS refund_count FROM refunds LIMIT 200",
+    "final_sql": "",
+    "baseline_result": [
+      {
+        "refund_count": 3080
+      }
+    ],
+    "final_result": [],
+    "ground_truth_result": [
+      {
+        "n": 265
+      }
+    ],
+    "final_status": "invalid_output"
+  },
+  {
+    "id": "scoped-113",
+    "question": "手机数码中标价不超过选定预算上限的在售商品有多少款？只返回数量。",
+    "ambiguous": true,
+    "missing_slot": "filter",
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": true,
+    "answer_used": true,
+    "baseline_correct": false,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "baseline_wrong_final_right",
+    "baseline_latency_s": 4.902522,
+    "first_latency_s": 4.295289,
+    "total_latency_s": 10.116497,
+    "baseline_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '手机数码' AND list_price <= 1000 AND is_active = 1 LIMIT 200",
+    "final_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '手机数码' AND list_price <= 1800 AND is_active = 1 LIMIT 200",
+    "baseline_result": [
+      {
+        "product_count": 32
+      }
+    ],
+    "final_result": [
+      {
+        "product_count": 82
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "n": 82
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-114",
+    "question": "全部历史有效订单中，实付金额落在本次指定金额区间的有多少笔？只返回笔数。",
+    "ambiguous": true,
+    "missing_slot": "filter",
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": true,
+    "answer_used": false,
+    "baseline_correct": false,
+    "final_correct": false,
+    "strict_success": false,
+    "pair": "both_wrong",
+    "baseline_latency_s": 2.631094,
+    "first_latency_s": 4.23637,
+    "total_latency_s": 14.871742999999999,
+    "baseline_sql": "SELECT COUNT(*) AS order_count FROM orders WHERE order_status IN ('paid', 'completed', 'shipped') AND paid_amount BETWEEN 0 AND 1000 LIMIT 200",
+    "final_sql": "",
+    "baseline_result": [
+      {
+        "order_count": 3769
+      }
+    ],
+    "final_result": [],
+    "ground_truth_result": [
+      {
+        "n": 2995
+      }
+    ],
+    "final_status": "invalid_output"
+  },
+  {
+    "id": "scoped-115",
+    "question": "家用电器中，本次指定原因的已批准退款合计多少元？全部历史，只返回金额。",
+    "ambiguous": true,
+    "missing_slot": "filter",
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": true,
+    "answer_used": true,
+    "baseline_correct": false,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "baseline_wrong_final_right",
+    "baseline_latency_s": 1.858036,
+    "first_latency_s": 4.396866,
+    "total_latency_s": 11.004779,
+    "baseline_sql": "SELECT ROUND(SUM(r.refund_amount), 2) AS refund_amount FROM refunds AS r JOIN order_items AS oi ON r.order_item_id = oi.order_item_id JOIN products AS p ON oi.product_id = p.product_id WHERE p.category = '家用电器' AND r.refund_status = 'approved' LIMIT 200",
+    "final_sql": "SELECT ROUND(SUM(r.refund_amount), 2) AS refund_amount FROM refunds AS r JOIN order_items AS oi ON r.order_item_id = oi.order_item_id JOIN products AS p ON oi.product_id = p.product_id WHERE r.refund_status = 'approved' AND r.refund_reason = '七天无理由' AND p.category = '家用电器' LIMIT 200",
+    "baseline_result": [
+      {
+        "refund_amount": 596236.7
+      }
+    ],
+    "final_result": [
+      {
+        "refund_amount": 101491.08
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "n": 101491.08
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-116",
+    "question": "指定城市客户以微信支付的有效订单总笔数是多少？全部历史，只要笔数。",
+    "ambiguous": true,
+    "missing_slot": "filter",
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": true,
+    "answer_used": true,
+    "baseline_correct": false,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "baseline_wrong_final_right",
+    "baseline_latency_s": 1.652344,
+    "first_latency_s": 4.18464,
+    "total_latency_s": 15.988917,
+    "baseline_sql": "SELECT COUNT(*) AS order_count FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND o.payment_method = 'wechat' AND u.city = '上海市' LIMIT 200",
+    "final_sql": "SELECT COUNT(*) AS order_count FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND o.payment_method = 'wechat' AND u.city = '成都市' LIMIT 200",
+    "baseline_result": [
+      {
+        "order_count": 346
+      }
+    ],
+    "final_result": [
+      {
+        "order_count": 344
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "n": 344
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-117",
+    "question": "指定的两种客户等级合起来有多少注册用户？只要人数。",
+    "ambiguous": true,
+    "missing_slot": "filter",
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": true,
+    "answer_used": true,
+    "baseline_correct": true,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "both_right",
+    "baseline_latency_s": 0.952306,
+    "first_latency_s": 3.887895,
+    "total_latency_s": 9.44227,
+    "baseline_sql": "SELECT COUNT(*) AS user_count FROM users WHERE user_level IN ('silver', 'gold') LIMIT 200",
+    "final_sql": "SELECT COUNT(*) AS user_count FROM users WHERE user_level IN ('silver', 'gold') LIMIT 200",
+    "baseline_result": [
+      {
+        "user_count": 1337
+      }
+    ],
+    "final_result": [
+      {
+        "user_count": 1337
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "n": 1337
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-118",
+    "question": "家用电器里按本次指定的上架状态统计商品数量，只返回款数。",
+    "ambiguous": true,
+    "missing_slot": "filter",
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": true,
+    "answer_used": true,
+    "baseline_correct": false,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "baseline_wrong_final_right",
+    "baseline_latency_s": 1.02876,
+    "first_latency_s": 4.611243,
+    "total_latency_s": 10.961601,
+    "baseline_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '家用电器' AND is_active = 1 LIMIT 200",
+    "final_sql": "SELECT COUNT(*) AS product_count FROM products WHERE category = '家用电器' AND is_active = 0 LIMIT 200",
+    "baseline_result": [
+      {
+        "product_count": 118
+      }
+    ],
+    "final_result": [
+      {
+        "product_count": 0
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "n": 0
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-119",
+    "question": "本次选定支付渠道的有效订单客单价是多少？全部历史，只返回金额。",
+    "ambiguous": true,
+    "missing_slot": "filter",
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": true,
+    "answer_used": true,
+    "baseline_correct": false,
+    "final_correct": false,
+    "strict_success": false,
+    "pair": "both_wrong",
+    "baseline_latency_s": 2.234609,
+    "first_latency_s": 3.995339,
+    "total_latency_s": 15.766998,
+    "baseline_sql": "SELECT ROUND(SUM(o.paid_amount) / COUNT(DISTINCT o.user_id), 2) AS avg_order_value FROM orders AS o WHERE o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+    "final_sql": "SELECT ROUND(SUM(o.paid_amount) / COUNT(DISTINCT o.user_id), 2) AS avg_order_value FROM orders AS o WHERE o.order_status IN ('paid', 'completed', 'shipped') AND o.payment_method = 'cash' LIMIT 200",
+    "baseline_result": [
+      {
+        "avg_order_value": 10279.5
+      }
+    ],
+    "final_result": [
+      {
+        "avg_order_value": 4392.22
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "n": 2529.73
+      }
+    ],
+    "final_status": "success"
+  },
+  {
+    "id": "scoped-120",
+    "question": "本次划定省份范围内客户的有效订单实付销售额总计多少？全部历史，只返回金额。",
+    "ambiguous": true,
+    "missing_slot": "filter",
+    "decision": "clarify",
+    "triggered": true,
+    "valid_question": true,
+    "answer_used": true,
+    "baseline_correct": false,
+    "final_correct": true,
+    "strict_success": true,
+    "pair": "baseline_wrong_final_right",
+    "baseline_latency_s": 2.901526,
+    "first_latency_s": 4.701947,
+    "total_latency_s": 11.157899,
+    "baseline_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.province IN ('上海', '北京', '江苏', '广东', '四川', '浙江', '湖北', '陕西') LIMIT 200",
+    "final_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.province IN ('江苏', '浙江') LIMIT 200",
+    "baseline_result": [
+      {
+        "sales_amount": 28124721.11
+      }
+    ],
+    "final_result": [
+      {
+        "sales_amount": 6669394.55
+      }
+    ],
+    "ground_truth_result": [
+      {
+        "n": 6669394.55
+      }
+    ],
+    "final_status": "success"
+  }
+]

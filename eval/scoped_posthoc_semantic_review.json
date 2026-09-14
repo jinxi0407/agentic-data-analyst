@@ -1,0 +1,218 @@
+{
+  "purpose": "Post-run human-style case analysis only; not an Agent verifier or rescore",
+  "reviewed": 35,
+  "already_scored_failures": 1,
+  "no_score_changes": true,
+  "cases": [
+    {
+      "id": "scoped-061",
+      "result_correct": true,
+      "additional_conflict_found": false,
+      "finding": "人工对照原问题、已询问的补充和实际SQL：指标、条件、日期界及输出粒度在当前快照与参考语义一致。"
+    },
+    {
+      "id": "scoped-062",
+      "result_correct": true,
+      "additional_conflict_found": false,
+      "finding": "人工对照原问题、已询问的补充和实际SQL：指标、条件、日期界及输出粒度在当前快照与参考语义一致。"
+    },
+    {
+      "id": "scoped-064",
+      "result_correct": true,
+      "additional_conflict_found": false,
+      "finding": "人工对照原问题、已询问的补充和实际SQL：指标、条件、日期界及输出粒度在当前快照与参考语义一致。"
+    },
+    {
+      "id": "scoped-066",
+      "result_correct": true,
+      "additional_conflict_found": false,
+      "finding": "人工对照原问题、已询问的补充和实际SQL：指标、条件、日期界及输出粒度在当前快照与参考语义一致。"
+    },
+    {
+      "id": "scoped-067",
+      "result_correct": true,
+      "additional_conflict_found": false,
+      "finding": "人工对照原问题、已询问的补充和实际SQL：指标、条件、日期界及输出粒度在当前快照与参考语义一致。"
+    },
+    {
+      "id": "scoped-068",
+      "result_correct": true,
+      "additional_conflict_found": false,
+      "finding": "人工对照原问题、已询问的补充和实际SQL：指标、条件、日期界及输出粒度在当前快照与参考语义一致。"
+    },
+    {
+      "id": "scoped-070",
+      "result_correct": true,
+      "additional_conflict_found": false,
+      "finding": "人工对照原问题、已询问的补充和实际SQL：指标、条件、日期界及输出粒度在当前快照与参考语义一致。"
+    },
+    {
+      "id": "scoped-071",
+      "result_correct": true,
+      "additional_conflict_found": false,
+      "finding": "人工对照原问题、已询问的补充和实际SQL：指标、条件、日期界及输出粒度在当前快照与参考语义一致。"
+    },
+    {
+      "id": "scoped-080",
+      "result_correct": true,
+      "additional_conflict_found": false,
+      "finding": "人工对照原问题、已询问的补充和实际SQL：指标、条件、日期界及输出粒度在当前快照与参考语义一致。"
+    },
+    {
+      "id": "scoped-082",
+      "result_correct": true,
+      "additional_conflict_found": false,
+      "finding": "人工对照原问题、已询问的补充和实际SQL：指标、条件、日期界及输出粒度在当前快照与参考语义一致。"
+    },
+    {
+      "id": "scoped-084",
+      "result_correct": true,
+      "additional_conflict_found": false,
+      "finding": "人工对照原问题、已询问的补充和实际SQL：指标、条件、日期界及输出粒度在当前快照与参考语义一致。"
+    },
+    {
+      "id": "scoped-085",
+      "result_correct": true,
+      "additional_conflict_found": false,
+      "finding": "人工对照原问题、已询问的补充和实际SQL：指标、条件、日期界及输出粒度在当前快照与参考语义一致。"
+    },
+    {
+      "id": "scoped-086",
+      "result_correct": true,
+      "additional_conflict_found": false,
+      "finding": "人工对照原问题、已询问的补充和实际SQL：指标、条件、日期界及输出粒度在当前快照与参考语义一致。"
+    },
+    {
+      "id": "scoped-087",
+      "result_correct": true,
+      "additional_conflict_found": false,
+      "finding": "人工对照原问题、已询问的补充和实际SQL：指标、条件、日期界及输出粒度在当前快照与参考语义一致。"
+    },
+    {
+      "id": "scoped-093",
+      "result_correct": true,
+      "additional_conflict_found": false,
+      "finding": "人工对照原问题、已询问的补充和实际SQL：指标、条件、日期界及输出粒度在当前快照与参考语义一致。"
+    },
+    {
+      "id": "scoped-094",
+      "result_correct": true,
+      "additional_conflict_found": false,
+      "finding": "人工对照原问题、已询问的补充和实际SQL：指标、条件、日期界及输出粒度在当前快照与参考语义一致。"
+    },
+    {
+      "id": "scoped-096",
+      "result_correct": true,
+      "additional_conflict_found": false,
+      "finding": "人工对照原问题、已询问的补充和实际SQL：指标、条件、日期界及输出粒度在当前快照与参考语义一致。"
+    },
+    {
+      "id": "scoped-097",
+      "result_correct": true,
+      "additional_conflict_found": false,
+      "finding": "人工对照原问题、已询问的补充和实际SQL：指标、条件、日期界及输出粒度在当前快照与参考语义一致。"
+    },
+    {
+      "id": "scoped-098",
+      "result_correct": true,
+      "additional_conflict_found": false,
+      "finding": "通过refunds.order_item_id到order_items再到products取类别，未展开其他一对多事实；当前快照结果一致。若未来存在缺失关联，此路径不保证与直接refunds.product_id路径完全等价。"
+    },
+    {
+      "id": "scoped-101",
+      "result_correct": true,
+      "additional_conflict_found": false,
+      "finding": "人工对照原问题、已询问的补充和实际SQL：指标、条件、日期界及输出粒度在当前快照与参考语义一致。"
+    },
+    {
+      "id": "scoped-102",
+      "result_correct": true,
+      "additional_conflict_found": false,
+      "finding": "人工对照原问题、已询问的补充和实际SQL：指标、条件、日期界及输出粒度在当前快照与参考语义一致。"
+    },
+    {
+      "id": "scoped-104",
+      "result_correct": true,
+      "additional_conflict_found": false,
+      "finding": "人工对照原问题、已询问的补充和实际SQL：指标、条件、日期界及输出粒度在当前快照与参考语义一致。"
+    },
+    {
+      "id": "scoped-105",
+      "result_correct": true,
+      "additional_conflict_found": false,
+      "finding": "人工对照原问题、已询问的补充和实际SQL：指标、条件、日期界及输出粒度在当前快照与参考语义一致。"
+    },
+    {
+      "id": "scoped-106",
+      "result_correct": true,
+      "additional_conflict_found": false,
+      "finding": "人工对照原问题、已询问的补充和实际SQL：指标、条件、日期界及输出粒度在当前快照与参考语义一致。"
+    },
+    {
+      "id": "scoped-108",
+      "result_correct": true,
+      "additional_conflict_found": false,
+      "finding": "人工对照原问题、已询问的补充和实际SQL：指标、条件、日期界及输出粒度在当前快照与参考语义一致。"
+    },
+    {
+      "id": "scoped-109",
+      "result_correct": true,
+      "additional_conflict_found": false,
+      "finding": "人工对照原问题、已询问的补充和实际SQL：指标、条件、日期界及输出粒度在当前快照与参考语义一致。"
+    },
+    {
+      "id": "scoped-110",
+      "result_correct": true,
+      "additional_conflict_found": false,
+      "finding": "人工对照原问题、已询问的补充和实际SQL：指标、条件、日期界及输出粒度在当前快照与参考语义一致。"
+    },
+    {
+      "id": "scoped-111",
+      "result_correct": true,
+      "additional_conflict_found": false,
+      "finding": "人工对照原问题、已询问的补充和实际SQL：指标、条件、日期界及输出粒度在当前快照与参考语义一致。"
+    },
+    {
+      "id": "scoped-113",
+      "result_correct": true,
+      "additional_conflict_found": false,
+      "finding": "人工对照原问题、已询问的补充和实际SQL：指标、条件、日期界及输出粒度在当前快照与参考语义一致。"
+    },
+    {
+      "id": "scoped-115",
+      "result_correct": true,
+      "additional_conflict_found": false,
+      "finding": "通过refunds.order_item_id到order_items再到products取类别，未展开其他一对多事实；当前快照结果一致。若未来存在缺失关联，此路径不保证与直接refunds.product_id路径完全等价。"
+    },
+    {
+      "id": "scoped-116",
+      "result_correct": true,
+      "additional_conflict_found": false,
+      "finding": "人工对照原问题、已询问的补充和实际SQL：指标、条件、日期界及输出粒度在当前快照与参考语义一致。"
+    },
+    {
+      "id": "scoped-117",
+      "result_correct": true,
+      "additional_conflict_found": false,
+      "finding": "人工对照原问题、已询问的补充和实际SQL：指标、条件、日期界及输出粒度在当前快照与参考语义一致。"
+    },
+    {
+      "id": "scoped-118",
+      "result_correct": true,
+      "additional_conflict_found": false,
+      "finding": "人工对照原问题、已询问的补充和实际SQL：指标、条件、日期界及输出粒度在当前快照与参考语义一致。"
+    },
+    {
+      "id": "scoped-119",
+      "result_correct": false,
+      "additional_conflict_found": true,
+      "finding": "用户cash渠道被正确使用，但客单价的分母误用COUNT(DISTINCT user_id)，应为有效订单COUNT(*)。原计分已经判错，不改分。"
+    },
+    {
+      "id": "scoped-120",
+      "result_correct": true,
+      "additional_conflict_found": false,
+      "finding": "人工对照原问题、已询问的补充和实际SQL：指标、条件、日期界及输出粒度在当前快照与参考语义一致。"
+    }
+  ]
+}

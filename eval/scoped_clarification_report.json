@@ -1,0 +1,159 @@
+{
+  "decision_accuracy": {
+    "n": 107,
+    "d": 120,
+    "percent": 89.17
+  },
+  "precision": {
+    "n": 54,
+    "d": 56,
+    "percent": 96.43
+  },
+  "recall": {
+    "n": 54,
+    "d": 60,
+    "percent": 90.0
+  },
+  "f1": {
+    "n": 108,
+    "d": 116,
+    "percent": 93.1
+  },
+  "unnecessary": {
+    "n": 2,
+    "d": 60,
+    "percent": 3.33
+  },
+  "missed": {
+    "n": 6,
+    "d": 60,
+    "percent": 10.0
+  },
+  "decision_counts": [
+    {
+      "label": "clear",
+      "decision": "proceed",
+      "count": 53
+    },
+    {
+      "label": "clear",
+      "decision": "invalid_output",
+      "count": 5
+    },
+    {
+      "label": "clear",
+      "decision": "clarify",
+      "count": 2
+    },
+    {
+      "label": "ambiguous",
+      "decision": "clarify",
+      "count": 54
+    },
+    {
+      "label": "ambiguous",
+      "decision": "needs_rephrase",
+      "count": 3
+    },
+    {
+      "label": "ambiguous",
+      "decision": "system_error",
+      "count": 1
+    },
+    {
+      "label": "ambiguous",
+      "decision": "proceed",
+      "count": 2
+    }
+  ],
+  "paired": {
+    "both_right": 62,
+    "baseline_right_final_wrong": 9,
+    "baseline_wrong_final_right": 26,
+    "both_wrong": 23
+  },
+  "baseline": {
+    "overall": {
+      "n": 71,
+      "d": 120,
+      "percent": 59.17
+    },
+    "clear": {
+      "n": 60,
+      "d": 60,
+      "percent": 100.0
+    },
+    "ambiguous": {
+      "n": 11,
+      "d": 60,
+      "percent": 18.33
+    },
+    "latency": {
+      "count": 120,
+      "missing": 0,
+      "mean_s": 1.793,
+      "p50_s": 1.744,
+      "p95_s": 2.664
+    },
+    "usage": {
+      "calls": 125,
+      "mean_calls": 1.042,
+      "input_tokens": 277331,
+      "output_tokens": 5520,
+      "missing_usage_calls": 0
+    }
+  },
+  "final": {
+    "overall": {
+      "n": 88,
+      "d": 120,
+      "percent": 73.33
+    },
+    "clear": {
+      "n": 53,
+      "d": 60,
+      "percent": 88.33
+    },
+    "ambiguous": {
+      "n": 35,
+      "d": 60,
+      "percent": 58.33
+    },
+    "latency": {
+      "count": 120,
+      "missing": 0,
+      "mean_s": 11.436,
+      "p50_s": 7.497,
+      "p95_s": 15.785
+    },
+    "usage": {
+      "calls": 299,
+      "mean_calls": 2.492,
+      "input_tokens": 658976,
+      "output_tokens": 34770,
+      "missing_usage_calls": 1
+    },
+    "first_latency": {
+      "count": 120,
+      "missing": 0,
+      "mean_s": 7.62,
+      "p50_s": 4.839,
+      "p95_s": 8.467
+    },
+    "strict_overall": {
+      "n": 87,
+      "d": 120,
+      "percent": 72.5
+    },
+    "strict_ambiguous": {
+      "n": 34,
+      "d": 60,
+      "percent": 56.67
+    },
+    "accepted_answer_subset": {
+      "n": 34,
+      "d": 35,
+      "percent": 97.14
+    }
+  }
+}

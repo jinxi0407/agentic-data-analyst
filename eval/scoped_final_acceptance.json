@@ -1,0 +1,22 @@
+{
+  "checked_at": "2026-09-14T14:07:38.943931+00:00",
+  "pytest_exit_code": 0,
+  "pytest_summary": "68 passed, 1 warning in 18.74s",
+  "api_health": 200,
+  "streamlit_health": 200,
+  "streamlit_page": 200,
+  "sdk_version": "1.27.5",
+  "pydantic_version": "2.13.5",
+  "fastapi_pid_owned": true,
+  "streamlit_pid_owned": true,
+  "mysql_health": "healthy",
+  "mysql_port": "127.0.0.1:3307",
+  "all_first_rounds_unchanged": true,
+  "all_120_cases_present": true,
+  "all_56_followups_complete": true,
+  "frozen_files_and_database_unchanged": true,
+  "historical_artifacts_unchanged": true,
+  "api_ui_code_unchanged_since_freeze": true,
+  "main_commit": "d9ba7eadb3a95f657ca391d2865a2b444dc99ae3",
+  "v1_0_0_commit": "d9ba7eadb3a95f657ca391d2865a2b444dc99ae3"
+}

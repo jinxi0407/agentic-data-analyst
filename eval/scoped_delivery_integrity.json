@@ -1,0 +1,21 @@
+{
+  "credential_scan": "passed (actual configured values, no values logged)",
+  "env_ignored": true,
+  "report_counts_verified": true,
+  "files": {
+    "eval/scoped_clarification_raw.json": "6c3c1e4d92f83b4dfb03b3badb3bc50e5f1cfc1da040390d75d9feb837929e21",
+    "tests/test_ui.py": "1c836b978e51028d9f33aa7bc70d48362f6d7169762aa4b3b677f86eaaab7995",
+    "FINAL_SCOPED_CLARIFICATION_EVALUATION.md": "4c7100e3b62c6f79de2df6363494de916120e3e96efced0d73e67f6e3be67d10",
+    "docs/CLARIFICATION_RESUME_FACTS.md": "c6930eec8f37f37c853f29739331180d659d2cc6006d18943f75335d49b973cd",
+    "eval/scoped_clarification_bad_cases.json": "af04c9f803f0a43154f60f99c6050000ded2116df177d1acb479168621da7e13",
+    "eval/scoped_clarification_per_case.json": "b6b78d43becba5d0426a3757f3eb6b7fcb48322f5d5f14b9f31d3bf4d9f675c7",
+    "eval/scoped_clarification_report.json": "1c98ed996a87b9579b3bf862f293780c2ab88e9388d407d4ecdc3aeb22fc2ae8",
+    "eval/scoped_final_acceptance.json": "516ad4dca592448aa54c4437f657d10a345d1b3acd28858789ce3d24706dec0c",
+    "eval/scoped_final_pytest.txt": "56a466986efed7b4d492d6c5418ff066d09ccf74207c32c49af86699e0ab5e74",
+    "eval/scoped_posthoc_semantic_review.json": "7b487b30b4bd77559162ad746ed66fc338e62b8c51ce9b452932acdb4b210d95",
+    "eval/write_scoped_report.py": "84f88e5060814cdd8fc48a40851c6caebb53b77363f4e85f47c6f057c2b69ba6",
+    "tests/test_scoped_evaluation.py": "ec0e641c82fd5299a14ff60b869dede3ae99d29dbe28d228c5e24c1065fc23a9"
+  },
+  "no_rescoring": true,
+  "no_benchmark_or_agent_changes_after_freeze": true
+}
