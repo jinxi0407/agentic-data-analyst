@@ -1,0 +1,390 @@
+[
+  {
+    "case_id": "holdout-0-0-a",
+    "asked_question": "上海最近新注册客户的时间范围是指：A) 最近7天 B) 最近30天 C) 本月 D) 其他（请说明）？",
+    "answerable": true,
+    "segments": [
+      "最近19天，不含今天"
+    ],
+    "review_reason": "仅摘取回答实际反问所需的原文片段；不补充未问到的时间、指标或其他条件。"
+  },
+  {
+    "case_id": "holdout-0-2-a",
+    "asked_question": "‘大额订单’指单笔订单实收金额超过多少元？例如：300元、500元、1000元，或其他标准？",
+    "answerable": true,
+    "segments": [
+      "单笔实付金额超过850元"
+    ],
+    "review_reason": "仅摘取回答实际反问所需的原文片段；不补充未问到的时间、指标或其他条件。"
+  },
+  {
+    "case_id": "holdout-0-3-a",
+    "asked_question": "‘便宜的’是指：① 全站价格最低的前10个；② 单价低于食品生鲜类平均价；③ 单价低于30元；④ 其他标准？",
+    "answerable": true,
+    "segments": [
+      "商品标价低于120元"
+    ],
+    "review_reason": "仅摘取回答实际反问所需的原文片段；不补充未问到的时间、指标或其他条件。"
+  },
+  {
+    "case_id": "holdout-0-4-a",
+    "asked_question": "客户‘表现最好’具体指哪项指标？选项：A) 总销售额（paid_amount） B) 总销售数量（quantity） C) 有效订单数 D) 近30天复购次数",
+    "answerable": true,
+    "segments": [
+      "有效订单笔数"
+    ],
+    "review_reason": "仅摘取回答实际反问所需的原文片段；不补充未问到的时间、指标或其他条件。"
+  },
+  {
+    "case_id": "holdout-0-5-a",
+    "asked_question": "‘近期’具体指最近几天？例如：3天、7天、15天或30天？",
+    "answerable": true,
+    "segments": [
+      "2026-08-24到2026-09-11，包含首尾日期"
+    ],
+    "review_reason": "仅摘取回答实际反问所需的原文片段；不补充未问到的时间、指标或其他条件。"
+  },
+  {
+    "case_id": "holdout-0-6-a",
+    "asked_question": "华东地区具体包含哪些省份？选项：A) 江苏、浙江、安徽、上海；B) 江苏、浙江、上海、山东；C) 江苏、浙江、安徽、上海、江西；D) 其他（请说明）",
+    "answerable": false,
+    "segments": [],
+    "review_reason": "反问要求省份集合，固定模拟回答仅给出城市级范围；严格同粒度模拟不推断省份、不把城市扩展到全省，记录无法回答。"
+  },
+  {
+    "case_id": "holdout-0-8-a",
+    "asked_question": "‘需要优先维护的客户’依据什么标准判定？例如：① VIP客户（is_vip=1）；② 近30天销售额前10%的客户；③ 有退款记录且退款率>10%的客户；④ 其他标准？",
+    "answerable": true,
+    "segments": [
+      "is_vip=1的VIP"
+    ],
+    "review_reason": "仅摘取回答实际反问所需的原文片段；不补充未问到的时间、指标或其他条件。"
+  },
+  {
+    "case_id": "holdout-0-9-a",
+    "asked_question": "食品生鲜的‘卖得怎么样’是指：A) 销售额（实收金额） B) 销售数量（销量） C) 有效订单数？",
+    "answerable": true,
+    "segments": [
+      "有效订单销售数量，单位是件"
+    ],
+    "review_reason": "反问只问销售指标，只给销售数量；保留未被询问的时间歧义。"
+  },
+  {
+    "case_id": "holdout-0-11-a",
+    "asked_question": "‘那段时间’具体指？A) 过去7天（2026-09-06至2026-09-12） B) 过去30天 C) 本月（2026-09-01至2026-09-12） D) 其他指定区间",
+    "answerable": true,
+    "segments": [
+      "2026年第二季度，即4月1日到6月30日"
+    ],
+    "review_reason": "仅摘取回答实际反问所需的原文片段；不补充未问到的时间、指标或其他条件。"
+  },
+  {
+    "case_id": "holdout-1-0-a",
+    "asked_question": "‘最近’指最近多少天？（例如：7天、15天、30天）",
+    "answerable": true,
+    "segments": [
+      "最近37天，不含今天"
+    ],
+    "review_reason": "仅摘取回答实际反问所需的原文片段；不补充未问到的时间、指标或其他条件。"
+  },
+  {
+    "case_id": "holdout-1-2-a",
+    "asked_question": "‘大额订单’指单笔订单实收金额超过多少元？例如：300元、500元，还是其他数值？",
+    "answerable": true,
+    "segments": [
+      "单笔实付金额超过1280元"
+    ],
+    "review_reason": "仅摘取回答实际反问所需的原文片段；不补充未问到的时间、指标或其他条件。"
+  },
+  {
+    "case_id": "holdout-1-3-a",
+    "asked_question": "便宜的指：A) list_price最低的前N个（请指定N） B) list_price低于某个数值（请指定阈值） C) cost_price最低的前N个 D) 其他标准？",
+    "answerable": true,
+    "segments": [
+      "商品标价低于200元"
+    ],
+    "review_reason": "仅摘取回答实际反问所需的原文片段；不补充未问到的时间、指标或其他条件。"
+  },
+  {
+    "case_id": "holdout-1-4-a",
+    "asked_question": "客户‘表现最好’具体指：A) 总销售额（paid_amount） B) 总订单数 C) 总购买商品数量 D) 近30天复购次数？",
+    "answerable": true,
+    "segments": [
+      "有效订单笔数"
+    ],
+    "review_reason": "仅摘取回答实际反问所需的原文片段；不补充未问到的时间、指标或其他条件。"
+  },
+  {
+    "case_id": "holdout-1-5-a",
+    "asked_question": "‘近期’指最近7天、15天还是30天？",
+    "answerable": true,
+    "segments": [
+      "2026-08-06到2026-09-11，包含首尾日期"
+    ],
+    "review_reason": "仅摘取回答实际反问所需的原文片段；不补充未问到的时间、指标或其他条件。"
+  },
+  {
+    "case_id": "holdout-1-6-a",
+    "asked_question": "请问‘北方地区’具体包含哪些省份？例如：A. 北京、天津、河北、山西、内蒙古、辽宁、吉林、黑龙江；B. 仅北京、天津、河北、山西、内蒙古；C. 其他自定义范围。",
+    "answerable": false,
+    "segments": [],
+    "review_reason": "反问要求省份集合，固定模拟回答仅给出城市级范围；严格同粒度模拟不推断省份、不把城市扩展到全省，记录无法回答。"
+  },
+  {
+    "case_id": "holdout-1-8-a",
+    "asked_question": "‘需要优先维护的客户’依据什么标准判定？例如：VIP用户、近30天销售额前10%、近30天退款率>15%、注册超1年未下单、或最近一次下单距今>90天？",
+    "answerable": true,
+    "segments": [
+      "is_vip=1的VIP"
+    ],
+    "review_reason": "仅摘取回答实际反问所需的原文片段；不补充未问到的时间、指标或其他条件。"
+  },
+  {
+    "case_id": "holdout-1-9-a",
+    "asked_question": "运动户外的销售汇总值应统计最近多少天？（选项：7天、15天、30天、90天）",
+    "answerable": true,
+    "segments": [
+      "最近37天、不含今天"
+    ],
+    "review_reason": "反问只问时间，只给期间；不泄露未被询问的销量指标。"
+  },
+  {
+    "case_id": "holdout-1-11-a",
+    "asked_question": "请问'那段时间'具体指哪一时间段？例如：近7天、近30天、本月、上月，还是其他自定义区间？",
+    "answerable": true,
+    "segments": [
+      "2026年第二季度，即4月1日到6月30日"
+    ],
+    "review_reason": "仅摘取回答实际反问所需的原文片段；不补充未问到的时间、指标或其他条件。"
+  },
+  {
+    "case_id": "holdout-2-0-a",
+    "asked_question": "广州最近新注册客户的时间范围是？选项：A) 过去7天  B) 过去30天  C) 本月至今  D) 本季度至今",
+    "answerable": true,
+    "segments": [
+      "最近53天，不含今天"
+    ],
+    "review_reason": "仅摘取回答实际反问所需的原文片段；不补充未问到的时间、指标或其他条件。"
+  },
+  {
+    "case_id": "holdout-2-2-a",
+    "asked_question": "‘大额订单’指单笔订单实收金额超过多少元？例如：300元、500元，还是其他数值？",
+    "answerable": true,
+    "segments": [
+      "单笔实付金额超过1710元"
+    ],
+    "review_reason": "仅摘取回答实际反问所需的原文片段；不补充未问到的时间、指标或其他条件。"
+  },
+  {
+    "case_id": "holdout-2-3-a",
+    "asked_question": "美妆个护在售商品中‘便宜’的定义是：A) 单价低于品类平均价，B) 单价低于100元，C) 单价处于该品类最低20%分位，D) 其他标准？",
+    "answerable": true,
+    "segments": [
+      "商品标价低于280元"
+    ],
+    "review_reason": "仅摘取回答实际反问所需的原文片段；不补充未问到的时间、指标或其他条件。"
+  },
+  {
+    "case_id": "holdout-2-4-a",
+    "asked_question": "客户‘表现最好’是指：A) 总销售额最高；B) 总订单数最多；C) 近30天复购次数最多；D) VIP等级最高（black > gold > silver > normal）？",
+    "answerable": true,
+    "segments": [
+      "有效订单笔数"
+    ],
+    "review_reason": "仅摘取回答实际反问所需的原文片段；不补充未问到的时间、指标或其他条件。"
+  },
+  {
+    "case_id": "holdout-2-5-a",
+    "asked_question": "‘近期’具体指最近几天？例如：7天、15天、30天？",
+    "answerable": true,
+    "segments": [
+      "2026-07-21到2026-09-11，包含首尾日期"
+    ],
+    "review_reason": "仅摘取回答实际反问所需的原文片段；不补充未问到的时间、指标或其他条件。"
+  },
+  {
+    "case_id": "holdout-2-6-a",
+    "asked_question": "华南地区具体包含哪些省份？（A）广东、广西、海南 （B）广东、广西、海南、福建 （C）仅广东省",
+    "answerable": false,
+    "segments": [],
+    "review_reason": "反问要求省份集合，固定模拟回答仅给出城市级范围；严格同粒度模拟不推断省份、不把城市扩展到全省，记录无法回答。"
+  },
+  {
+    "case_id": "holdout-2-8-a",
+    "asked_question": "‘需要优先维护的客户’具体指哪类客户？例如：1) VIP客户（is_vip=1）；2) 近30天有购买的客户；3) 历史成交额前10%的客户；4) 近期申请过退款的客户。",
+    "answerable": true,
+    "segments": [
+      "is_vip=1的VIP"
+    ],
+    "review_reason": "仅摘取回答实际反问所需的原文片段；不补充未问到的时间、指标或其他条件。"
+  },
+  {
+    "case_id": "holdout-2-9-a",
+    "asked_question": "‘最近’具体指多长时间？例如：最近7天、最近30天，还是最近一个自然月？",
+    "answerable": true,
+    "segments": [
+      "最近53天、不含今天"
+    ],
+    "review_reason": "反问只问时间，只给期间；不泄露未被询问的销量指标。"
+  },
+  {
+    "case_id": "holdout-2-11-a",
+    "asked_question": "‘那段时间’具体指？例如：① 2026-09-01至2026-09-12；② 2026-08-01至2026-08-31；③ 最近7天（2026-09-06至2026-09-12）；④ 其他，请说明。",
+    "answerable": true,
+    "segments": [
+      "2026年第二季度，即4月1日到6月30日"
+    ],
+    "review_reason": "仅摘取回答实际反问所需的原文片段；不补充未问到的时间、指标或其他条件。"
+  },
+  {
+    "case_id": "holdout-3-0-a",
+    "asked_question": "深圳新注册客户的时间范围是：A) 过去7天 B) 过去30天 C) 本月（2026-09-01至2026-09-12） D) 自参考日期起倒推1个月完整周期（2026-08-12至2026-09-11）？",
+    "answerable": true,
+    "segments": [
+      "最近71天，不含今天"
+    ],
+    "review_reason": "仅摘取回答实际反问所需的原文片段；不补充未问到的时间、指标或其他条件。"
+  },
+  {
+    "case_id": "holdout-3-2-a",
+    "asked_question": "‘大额订单’指订单实收金额超过多少元？例如：A. 500元；B. 1000元；C. 2000元；D. 其他自定义阈值",
+    "answerable": true,
+    "segments": [
+      "单笔实付金额超过2140元"
+    ],
+    "review_reason": "仅摘取回答实际反问所需的原文片段；不补充未问到的时间、指标或其他条件。"
+  },
+  {
+    "case_id": "holdout-3-3-a",
+    "asked_question": "“便宜的”是指：A) 价格最低的前10个，B) 单价低于50元，C) 单价低于该类目平均售价，D) 其他标准？",
+    "answerable": true,
+    "segments": [
+      "商品标价低于360元"
+    ],
+    "review_reason": "仅摘取回答实际反问所需的原文片段；不补充未问到的时间、指标或其他条件。"
+  },
+  {
+    "case_id": "holdout-3-4-a",
+    "asked_question": "客户‘表现最好’具体指哪项指标？选项：A) 总销售额（paid_amount） B) 总订单数 C) 购买天数 D) 近30天复购率",
+    "answerable": true,
+    "segments": [
+      "有效订单笔数"
+    ],
+    "review_reason": "仅摘取回答实际反问所需的原文片段；不补充未问到的时间、指标或其他条件。"
+  },
+  {
+    "case_id": "holdout-3-5-a",
+    "asked_question": "‘近期’具体指最近几天？例如：7天、15天、30天？",
+    "answerable": true,
+    "segments": [
+      "2026-07-03到2026-09-11，包含首尾日期"
+    ],
+    "review_reason": "仅摘取回答实际反问所需的原文片段；不补充未问到的时间、指标或其他条件。"
+  },
+  {
+    "case_id": "holdout-3-6-a",
+    "asked_question": "珠三角地区具体包含哪些城市？（例如：广州、深圳、佛山、东莞、中山、珠海、惠州、江门、肇庆）",
+    "answerable": true,
+    "segments": [
+      "只统计客户城市为深圳的记录，不包含其他城市"
+    ],
+    "review_reason": "仅摘取回答实际反问所需的原文片段；不补充未问到的时间、指标或其他条件。"
+  },
+  {
+    "case_id": "holdout-3-8-a",
+    "asked_question": "‘需要优先维护的客户’具体指哪类客户？例如：① VIP客户（is_vip=1）；② 近30天有订单的客户；③ 历史销售金额前10%的客户；④ 有未处理投诉或高退款率的客户。",
+    "answerable": true,
+    "segments": [
+      "is_vip=1的VIP"
+    ],
+    "review_reason": "仅摘取回答实际反问所需的原文片段；不补充未问到的时间、指标或其他条件。"
+  },
+  {
+    "case_id": "holdout-3-11-a",
+    "asked_question": "请问'那段时间'具体指？A) 过去7天 B) 过去30天 C) 本月 D) 上个月",
+    "answerable": true,
+    "segments": [
+      "2026年第二季度，即4月1日到6月30日"
+    ],
+    "review_reason": "仅摘取回答实际反问所需的原文片段；不补充未问到的时间、指标或其他条件。"
+  },
+  {
+    "case_id": "holdout-4-0-a",
+    "asked_question": "杭州最近新注册客户的时间范围是？（A）最近7天 （B）最近30天 （C）本周 （D）本月",
+    "answerable": true,
+    "segments": [
+      "最近89天，不含今天"
+    ],
+    "review_reason": "仅摘取回答实际反问所需的原文片段；不补充未问到的时间、指标或其他条件。"
+  },
+  {
+    "case_id": "holdout-4-2-a",
+    "asked_question": "‘大额订单’指单笔订单实收金额超过多少元？例如：300元、500元，还是其他数值？",
+    "answerable": true,
+    "segments": [
+      "单笔实付金额超过2570元"
+    ],
+    "review_reason": "仅摘取回答实际反问所需的原文片段；不补充未问到的时间、指标或其他条件。"
+  },
+  {
+    "case_id": "holdout-4-3-a",
+    "asked_question": "“便宜的”是指：A) 价格最低的前10个商品；B) 单价低于50元；C) 单价低于本类目平均售价；D) 其他标准？",
+    "answerable": true,
+    "segments": [
+      "商品标价低于440元"
+    ],
+    "review_reason": "仅摘取回答实际反问所需的原文片段；不补充未问到的时间、指标或其他条件。"
+  },
+  {
+    "case_id": "holdout-4-4-a",
+    "asked_question": "客户‘表现最好’是指：A) 总销售额最高；B) 总订单数最多；C) 近30天复购用户（至少2单）中销售额最高；D) VIP等级最高且销售额前8？",
+    "answerable": true,
+    "segments": [
+      "有效订单笔数"
+    ],
+    "review_reason": "仅摘取回答实际反问所需的原文片段；不补充未问到的时间、指标或其他条件。"
+  },
+  {
+    "case_id": "holdout-4-5-a",
+    "asked_question": "近期指最近几天？选项：3天、7天、30天。",
+    "answerable": true,
+    "segments": [
+      "2026-06-15到2026-09-11，包含首尾日期"
+    ],
+    "review_reason": "仅摘取回答实际反问所需的原文片段；不补充未问到的时间、指标或其他条件。"
+  },
+  {
+    "case_id": "holdout-4-6-a",
+    "asked_question": "长三角地区具体包含哪些省份？选项：A) 江苏、浙江、上海；B) 江苏、浙江、上海、安徽；C) 仅上海市；D) 其他自定义范围",
+    "answerable": false,
+    "segments": [],
+    "review_reason": "反问要求省份集合，固定模拟回答仅给出城市级范围；严格同粒度模拟不推断省份、不把城市扩展到全省，记录无法回答。"
+  },
+  {
+    "case_id": "holdout-4-8-a",
+    "asked_question": "‘需要优先维护的客户’具体指哪类客户？例如：① VIP客户（is_vip=1）；② 近30天有购买的客户；③ 历史销售金额前10%的客户；④ 退款率高于15%的客户。",
+    "answerable": true,
+    "segments": [
+      "is_vip=1的VIP"
+    ],
+    "review_reason": "仅摘取回答实际反问所需的原文片段；不补充未问到的时间、指标或其他条件。"
+  },
+  {
+    "case_id": "holdout-4-9-a",
+    "asked_question": "‘最近’具体指哪段时间？例如：最近7天、最近30天、本周、本月，还是其他？",
+    "answerable": true,
+    "segments": [
+      "最近89天、不含今天"
+    ],
+    "review_reason": "反问只问时间，只给期间；不泄露未被询问的销量指标。"
+  },
+  {
+    "case_id": "holdout-4-11-a",
+    "asked_question": "请问'那段时间'具体指？A) 近7天 B) 近30天 C) 2026年9月1日至9月12日 D) 其他指定区间",
+    "answerable": true,
+    "segments": [
+      "2026年第二季度，即4月1日到6月30日"
+    ],
+    "review_reason": "仅摘取回答实际反问所需的原文片段；不补充未问到的时间、指标或其他条件。"
+  }
+]

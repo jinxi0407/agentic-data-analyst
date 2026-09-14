@@ -1,0 +1,25 @@
+{
+  "data_commit": "e4e2e0109d01ec84a76e24d3f9d055209fdcc092",
+  "v1_0_commit": "d9ba7eadb3a95f657ca391d2865a2b444dc99ae3",
+  "v1_1_system_commit": "30e9a08",
+  "gate_freeze_commit": "2af21fc",
+  "files_sha256": {
+    "eval/clarification_holdout_corrected.json": "95c2380db2942e606ddfc81ce884a197d33caa57a99d90c41e19d1184d24f8b4",
+    "eval/clarification_dev_corrected.json": "bf4ce4aefa96a3f1816774e42c3bb1d0bf6f0baa989d556f3bdd8e074447a3dd",
+    "eval/clarification_city_audit.json": "bb0859f94dd46e122183a707c30cd714ad3b5a6b0d81b44e923b4db256f53b17",
+    "eval/clarification_city_semantic_review.json": "bbb5e4319d9864af9be6ebc82722e60a789bab6d687302591fd15505e9c379b7",
+    "eval/CLARIFICATION_CORRECTED_PROTOCOL.md": "8453c700587f62c40747f66b38656acb1d213b7db694a4b1eb3b4a67d181e143",
+    "eval/run_corrected_clarification.py": "a28b9e28e539aa2b2712b1ce18eff28b68b93da04286f4a490fe5f626b885bad",
+    "eval/summarize_corrected_clarification.py": "1eff83965b8583f08036ffa62162c0f78798b1ed2a651c44b920714540350c36",
+    "eval/audit_clarification_cities.py": "b25ccf173b031d4eabc5ae26dfdd9c1fd9fe9c06436bff1314aeab42db744cc8"
+  },
+  "reference_date": "2026-09-12",
+  "chat_model": "qwen-plus",
+  "base_url": "https://dashscope.aliyuncs.com/api/v1",
+  "embedding_model": "text-embedding-v4",
+  "embedding_calls": 0,
+  "gate_temperature": 0,
+  "sql_temperature": 0.05,
+  "workers": 2,
+  "model_calls_before_freeze": 0
+}
