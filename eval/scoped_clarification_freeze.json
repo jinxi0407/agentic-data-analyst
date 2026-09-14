@@ -1,0 +1,35 @@
+{
+  "code_commit": "7cb7afc98d9172846dda825ad6bce4ae9d9c75b3",
+  "reference_date": "2026-09-12",
+  "timezone": "Asia/Shanghai",
+  "chat_model": "qwen-plus",
+  "embedding_model": "text-embedding-v4",
+  "sql_temperature": 0.05,
+  "gate_temperature": 0,
+  "format": "json_schema_strict",
+  "execution_retry": 2,
+  "transport_retry": 0,
+  "workers": 1,
+  "database": {
+    "users": "b827470388b126a973c77491e8863f6e6e51e7cbfeb7f689923a1b48ac2d55dc",
+    "products": "1a33196738fb59c7ee3d88f68e5ab3c89c94c5ca14864d3976c65337f3aad43e",
+    "orders": "e08ce1622cc57a7ad81b115f96fe1a7012a37b18b49229ae69da3d4c9335dab3",
+    "order_items": "40c992219526ac2fe849d58990769f788d07e4c6b3a83645b8863f65314a8a3e",
+    "refunds": "e8c296d3b783f81b322bc103d5f9eb00823141234155a3250980828af242d6b2",
+    "core_table": "af48658b968e0d6f803c66aebc0e6d9bc7b83030634f6ff2ebd4abc9ab6353d1",
+    "core_field": "bb1c16e9bed8a8ab47c6204cfa55986378340eea6bbb54f92cdefe112b265fdd"
+  },
+  "hashes": {
+    "app/agent/scoped_clarification.py": "cd7b579fb27d7927ba8fb77a56cf2bf824f8b01a4160875c7927611e73866c5e",
+    "app/agent/entity_context.py": "ccb35b3dedf8b1d848ea62b4a2d8827bb5e9f30be346cd75ebd49ba891065319",
+    "app/tools/qwen.py": "c45cf5cd26f98940cd9bd56b115c08e7a3db62a5a10c9818eaaae398db26d133",
+    "eval/strong_baseline_v2.py": "d6765bc00740e42d40e06674622f37fbb27b63b3d38c62d2436804ed8b20adc0",
+    "eval/strong_baseline.py": "bc8e6abaadd142b4e0a7a0f89e15ce4b6909352268a0f2d45ab6bdade126b5c3",
+    "eval/scoring.py": "06f7e99378098fbecd650952dda4a82ea65481f8e197245a0d0e8546952ccac7",
+    "eval/run_scoped_clarification.py": "d0dff3b6549f61925588afd8346fb24d555f501ae152aec843f7bd6d63178b68",
+    "eval/SCOPED_CLARIFICATION_PROTOCOL.md": "5840c43698793239f688fe812afd3d6e5f5d43ef0822935b72ff0197bffeb679",
+    "eval/scoped_clarification_cases.json": "3913db8c6e6b2926c6fff3823ee51ea12490f057479cbff4a410b08d2c597f88",
+    "eval/scoped_reference_validation.json": "0b76d51cfdf93ef94d1598751d0e6770436f19eb9b97894a3f2f79c1129ea9e7",
+    "eval/SCOPED_DATA_REVIEW.md": "ed43f705df4057f5572b6609c2e9232fe5da4e7fccbc458ad03f5626f8011ed5"
+  }
+}

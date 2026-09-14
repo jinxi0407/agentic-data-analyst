@@ -1,0 +1,842 @@
+[
+  {
+    "id": "scoped-001",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 4,
+    "family": "channel_discount"
+  },
+  {
+    "id": "scoped-002",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 1,
+    "family": "tier_spending"
+  },
+  {
+    "id": "scoped-003",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 8,
+    "family": "brand_catalog"
+  },
+  {
+    "id": "scoped-004",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 1,
+    "family": "catalog_avg_price"
+  },
+  {
+    "id": "scoped-005",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 1,
+    "family": "city_payment"
+  },
+  {
+    "id": "scoped-006",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 5,
+    "family": "refund_reason_count"
+  },
+  {
+    "id": "scoped-007",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 2,
+    "family": "channel_top"
+  },
+  {
+    "id": "scoped-008",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 3,
+    "family": "brand_price_top"
+  },
+  {
+    "id": "scoped-009",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 4,
+    "family": "month_channel"
+  },
+  {
+    "id": "scoped-010",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 1,
+    "family": "reason_amount"
+  },
+  {
+    "id": "scoped-011",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 1,
+    "family": "vip_channel_buyers"
+  },
+  {
+    "id": "scoped-012",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 1,
+    "family": "tier_order_mean"
+  },
+  {
+    "id": "scoped-013",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 1,
+    "family": "catalog_inactive"
+  },
+  {
+    "id": "scoped-014",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 1,
+    "family": "zero_catalog"
+  },
+  {
+    "id": "scoped-015",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 0,
+    "family": "absent_city"
+  },
+  {
+    "id": "scoped-016",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 4,
+    "family": "order_day"
+  },
+  {
+    "id": "scoped-017",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 2,
+    "family": "refund_reason_rank"
+  },
+  {
+    "id": "scoped-018",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 3,
+    "family": "monthly_refund_count"
+  },
+  {
+    "id": "scoped-019",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 4,
+    "family": "category_channel_qty"
+  },
+  {
+    "id": "scoped-020",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 4,
+    "family": "city_tier_share"
+  },
+  {
+    "id": "scoped-021",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 4,
+    "family": "channel_discount"
+  },
+  {
+    "id": "scoped-022",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 1,
+    "family": "tier_spending"
+  },
+  {
+    "id": "scoped-023",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 8,
+    "family": "brand_catalog"
+  },
+  {
+    "id": "scoped-024",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 1,
+    "family": "catalog_avg_price"
+  },
+  {
+    "id": "scoped-025",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 1,
+    "family": "city_payment"
+  },
+  {
+    "id": "scoped-026",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 5,
+    "family": "refund_reason_count"
+  },
+  {
+    "id": "scoped-027",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 3,
+    "family": "channel_top"
+  },
+  {
+    "id": "scoped-028",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 4,
+    "family": "brand_price_top"
+  },
+  {
+    "id": "scoped-029",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 4,
+    "family": "month_channel"
+  },
+  {
+    "id": "scoped-030",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 1,
+    "family": "reason_amount"
+  },
+  {
+    "id": "scoped-031",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 1,
+    "family": "vip_channel_buyers"
+  },
+  {
+    "id": "scoped-032",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 1,
+    "family": "tier_order_mean"
+  },
+  {
+    "id": "scoped-033",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 1,
+    "family": "catalog_inactive"
+  },
+  {
+    "id": "scoped-034",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 1,
+    "family": "zero_catalog"
+  },
+  {
+    "id": "scoped-035",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 0,
+    "family": "absent_city"
+  },
+  {
+    "id": "scoped-036",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 4,
+    "family": "order_day"
+  },
+  {
+    "id": "scoped-037",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 3,
+    "family": "refund_reason_rank"
+  },
+  {
+    "id": "scoped-038",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 3,
+    "family": "monthly_refund_count"
+  },
+  {
+    "id": "scoped-039",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 4,
+    "family": "category_channel_qty"
+  },
+  {
+    "id": "scoped-040",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 4,
+    "family": "city_tier_share"
+  },
+  {
+    "id": "scoped-041",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 4,
+    "family": "channel_discount"
+  },
+  {
+    "id": "scoped-042",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 1,
+    "family": "tier_spending"
+  },
+  {
+    "id": "scoped-043",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 8,
+    "family": "brand_catalog"
+  },
+  {
+    "id": "scoped-044",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 1,
+    "family": "catalog_avg_price"
+  },
+  {
+    "id": "scoped-045",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 1,
+    "family": "city_payment"
+  },
+  {
+    "id": "scoped-046",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 5,
+    "family": "refund_reason_count"
+  },
+  {
+    "id": "scoped-047",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 4,
+    "family": "channel_top"
+  },
+  {
+    "id": "scoped-048",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 5,
+    "family": "brand_price_top"
+  },
+  {
+    "id": "scoped-049",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 4,
+    "family": "month_channel"
+  },
+  {
+    "id": "scoped-050",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 1,
+    "family": "reason_amount"
+  },
+  {
+    "id": "scoped-051",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 1,
+    "family": "vip_channel_buyers"
+  },
+  {
+    "id": "scoped-052",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 1,
+    "family": "tier_order_mean"
+  },
+  {
+    "id": "scoped-053",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 1,
+    "family": "catalog_inactive"
+  },
+  {
+    "id": "scoped-054",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 1,
+    "family": "zero_catalog"
+  },
+  {
+    "id": "scoped-055",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 0,
+    "family": "absent_city"
+  },
+  {
+    "id": "scoped-056",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 4,
+    "family": "order_day"
+  },
+  {
+    "id": "scoped-057",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 4,
+    "family": "refund_reason_rank"
+  },
+  {
+    "id": "scoped-058",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 3,
+    "family": "monthly_refund_count"
+  },
+  {
+    "id": "scoped-059",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 4,
+    "family": "category_channel_qty"
+  },
+  {
+    "id": "scoped-060",
+    "reference_executed": true,
+    "alternative_result_differs": null,
+    "row_count": 4,
+    "family": "city_tier_share"
+  },
+  {
+    "id": "scoped-061",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 4,
+    "family": "channel_period_count"
+  },
+  {
+    "id": "scoped-062",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 1,
+    "family": "period_discount"
+  },
+  {
+    "id": "scoped-063",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 1,
+    "family": "period_aov"
+  },
+  {
+    "id": "scoped-064",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 1,
+    "family": "period_vip_buyers"
+  },
+  {
+    "id": "scoped-065",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 2,
+    "family": "period_channel_rank"
+  },
+  {
+    "id": "scoped-066",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 8,
+    "family": "period_city_groups"
+  },
+  {
+    "id": "scoped-067",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 1,
+    "family": "period_reason_count"
+  },
+  {
+    "id": "scoped-068",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 5,
+    "family": "period_reason_groups"
+  },
+  {
+    "id": "scoped-069",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 1,
+    "family": "period_card_amount"
+  },
+  {
+    "id": "scoped-070",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 1,
+    "family": "period_gold_discount"
+  },
+  {
+    "id": "scoped-071",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 1,
+    "family": "period_silver_count"
+  },
+  {
+    "id": "scoped-072",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 1,
+    "family": "period_category_buyers"
+  },
+  {
+    "id": "scoped-073",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 1,
+    "family": "period_category_qty"
+  },
+  {
+    "id": "scoped-074",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 3,
+    "family": "period_top_customer_count"
+  },
+  {
+    "id": "scoped-075",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 1,
+    "family": "period_cancel_count"
+  },
+  {
+    "id": "scoped-076",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 1,
+    "family": "period_pending_refund"
+  },
+  {
+    "id": "scoped-077",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 1,
+    "family": "period_reason_avg"
+  },
+  {
+    "id": "scoped-078",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 4,
+    "family": "period_tier_groups"
+  },
+  {
+    "id": "scoped-079",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 1,
+    "family": "period_new_vip"
+  },
+  {
+    "id": "scoped-080",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 1,
+    "family": "period_catalog"
+  },
+  {
+    "id": "scoped-081",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 4,
+    "family": "channel_performance"
+  },
+  {
+    "id": "scoped-082",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 4,
+    "family": "tier_performance"
+  },
+  {
+    "id": "scoped-083",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 7,
+    "family": "category_performance"
+  },
+  {
+    "id": "scoped-084",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 5,
+    "family": "reason_performance"
+  },
+  {
+    "id": "scoped-085",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 1,
+    "family": "vip_performance"
+  },
+  {
+    "id": "scoped-086",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 1,
+    "family": "card_performance"
+  },
+  {
+    "id": "scoped-087",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 1,
+    "family": "wechat_customer"
+  },
+  {
+    "id": "scoped-088",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 1,
+    "family": "gold_performance"
+  },
+  {
+    "id": "scoped-089",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 8,
+    "family": "brand_performance"
+  },
+  {
+    "id": "scoped-090",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 1,
+    "family": "reason_quality"
+  },
+  {
+    "id": "scoped-091",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 1,
+    "family": "quarter_performance"
+  },
+  {
+    "id": "scoped-092",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 4,
+    "family": "month_performance"
+  },
+  {
+    "id": "scoped-093",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 1,
+    "family": "tier_buying"
+  },
+  {
+    "id": "scoped-094",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 1,
+    "family": "cash_performance"
+  },
+  {
+    "id": "scoped-095",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 4,
+    "family": "vip_channel_performance"
+  },
+  {
+    "id": "scoped-096",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 1,
+    "family": "active_product_performance"
+  },
+  {
+    "id": "scoped-097",
+    "reference_executed": true,
+    "alternative_result_differs": false,
+    "row_count": 1,
+    "family": "inactive_product_performance"
+  },
+  {
+    "id": "scoped-098",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 7,
+    "family": "refund_category_performance"
+  },
+  {
+    "id": "scoped-099",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 1,
+    "family": "nonvip_performance"
+  },
+  {
+    "id": "scoped-100",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 1,
+    "family": "refund_mean_performance"
+  },
+  {
+    "id": "scoped-101",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 1,
+    "family": "selected_channel"
+  },
+  {
+    "id": "scoped-102",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 1,
+    "family": "selected_tier"
+  },
+  {
+    "id": "scoped-103",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 1,
+    "family": "selected_refund_reason"
+  },
+  {
+    "id": "scoped-104",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 1,
+    "family": "selected_province"
+  },
+  {
+    "id": "scoped-105",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 1,
+    "family": "selected_city_set"
+  },
+  {
+    "id": "scoped-106",
+    "reference_executed": true,
+    "alternative_result_differs": false,
+    "row_count": 1,
+    "family": "selected_category"
+  },
+  {
+    "id": "scoped-107",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 1,
+    "family": "price_floor"
+  },
+  {
+    "id": "scoped-108",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 1,
+    "family": "discount_floor"
+  },
+  {
+    "id": "scoped-109",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 1,
+    "family": "refund_floor"
+  },
+  {
+    "id": "scoped-110",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 1,
+    "family": "chosen_vip"
+  },
+  {
+    "id": "scoped-111",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 1,
+    "family": "chosen_order_status"
+  },
+  {
+    "id": "scoped-112",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 1,
+    "family": "chosen_refund_status"
+  },
+  {
+    "id": "scoped-113",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 1,
+    "family": "catalog_price_cap"
+  },
+  {
+    "id": "scoped-114",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 1,
+    "family": "paid_band"
+  },
+  {
+    "id": "scoped-115",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 1,
+    "family": "reason_category"
+  },
+  {
+    "id": "scoped-116",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 1,
+    "family": "selected_city_channels"
+  },
+  {
+    "id": "scoped-117",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 1,
+    "family": "selected_two_tiers"
+  },
+  {
+    "id": "scoped-118",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 1,
+    "family": "selected_sale_state"
+  },
+  {
+    "id": "scoped-119",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 1,
+    "family": "selected_order_channel_avg"
+  },
+  {
+    "id": "scoped-120",
+    "reference_executed": true,
+    "alternative_result_differs": true,
+    "row_count": 1,
+    "family": "selected_province_sales"
+  }
+]

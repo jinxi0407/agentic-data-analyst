@@ -1,0 +1,3131 @@
+[
+  {
+    "id": "scoped-001",
+    "family": "channel_discount",
+    "question": "按支付方式汇总全部历史有效订单的优惠总额，返回支付方式和金额。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT o.payment_method,ROUND(SUM(o.discount_amount),2) total FROM orders o WHERE o.order_status IN ('paid','completed','shipped') GROUP BY o.payment_method",
+    "alternative_reference_sql": null,
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "payment_method": "cash",
+        "total": 567332.85
+      },
+      {
+        "payment_method": "wechat",
+        "total": 598592.99
+      },
+      {
+        "payment_method": "card",
+        "total": 579411.15
+      },
+      {
+        "payment_method": "alipay",
+        "total": 534283.7
+      }
+    ]
+  },
+  {
+    "id": "scoped-002",
+    "family": "tier_spending",
+    "question": "gold等级客户的全部历史有效订单销售额是多少？只要金额。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT ROUND(SUM(o.paid_amount),2) total FROM users u JOIN orders o ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.user_level='gold'",
+    "alternative_reference_sql": null,
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "total": 7889415.23
+      }
+    ]
+  },
+  {
+    "id": "scoped-003",
+    "family": "brand_catalog",
+    "question": "家用电器里每个品牌有多少款商品？包含上下架商品，返回品牌和款数。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT brand,COUNT(*) n FROM products WHERE category='家用电器' GROUP BY brand",
+    "alternative_reference_sql": null,
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "brand": "森活",
+        "n": 14
+      },
+      {
+        "brand": "青橙",
+        "n": 15
+      },
+      {
+        "brand": "优选",
+        "n": 18
+      },
+      {
+        "brand": "澜庭",
+        "n": 15
+      },
+      {
+        "brand": "星禾",
+        "n": 23
+      },
+      {
+        "brand": "松果",
+        "n": 13
+      },
+      {
+        "brand": "云栖",
+        "n": 12
+      },
+      {
+        "brand": "北辰",
+        "n": 8
+      }
+    ]
+  },
+  {
+    "id": "scoped-004",
+    "family": "catalog_avg_price",
+    "question": "帮我算一下家用电器在售商品的平均标价，只要金额，保留两位小数。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT ROUND(AVG(list_price),2) value FROM products WHERE category='家用电器' AND is_active=1",
+    "alternative_reference_sql": null,
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "value": 2230.14
+      }
+    ]
+  },
+  {
+    "id": "scoped-005",
+    "family": "city_payment",
+    "question": "南京客户用微信支付的全部历史有效订单有几笔？只要笔数。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT COUNT(*) n FROM users u JOIN orders o ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='南京市' AND o.payment_method='wechat'",
+    "alternative_reference_sql": null,
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 339
+      }
+    ]
+  },
+  {
+    "id": "scoped-006",
+    "family": "refund_reason_count",
+    "question": "已批准退款按退款原因分组，每种原因有几条退款记录？全部历史，返回原因和条数。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT refund_reason,COUNT(*) n FROM refunds WHERE refund_status='approved' GROUP BY refund_reason",
+    "alternative_reference_sql": null,
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "refund_reason": "七天无理由",
+        "n": 513
+      },
+      {
+        "refund_reason": "物流破损",
+        "n": 491
+      },
+      {
+        "refund_reason": "描述不符",
+        "n": 473
+      },
+      {
+        "refund_reason": "尺码不合适",
+        "n": 479
+      },
+      {
+        "refund_reason": "质量问题",
+        "n": 551
+      }
+    ]
+  },
+  {
+    "id": "scoped-007",
+    "family": "channel_top",
+    "question": "全部历史有效订单销售额最高的前2种支付方式是什么？返回支付方式和销售额，同额按支付方式升序。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT o.payment_method,ROUND(SUM(o.paid_amount),2) total FROM orders o WHERE o.order_status IN ('paid','completed','shipped') GROUP BY o.payment_method ORDER BY total DESC,o.payment_method ASC LIMIT 2",
+    "alternative_reference_sql": null,
+    "ordered": true,
+    "ground_truth_result": [
+      {
+        "payment_method": "wechat",
+        "total": 7265271.24
+      },
+      {
+        "payment_method": "card",
+        "total": 7212441.63
+      }
+    ]
+  },
+  {
+    "id": "scoped-008",
+    "family": "brand_price_top",
+    "question": "家用电器标价最高的前3款商品，返回商品ID和标价，同价按商品ID升序。包含上下架商品。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT product_id,list_price FROM products WHERE category='家用电器' ORDER BY list_price DESC,product_id ASC LIMIT 3",
+    "alternative_reference_sql": null,
+    "ordered": true,
+    "ground_truth_result": [
+      {
+        "product_id": 170,
+        "list_price": 3759.49
+      },
+      {
+        "product_id": 148,
+        "list_price": 3732.78
+      },
+      {
+        "product_id": 655,
+        "list_price": 3648.33
+      }
+    ]
+  },
+  {
+    "id": "scoped-009",
+    "family": "month_channel",
+    "question": "2026年5月每种支付方式的有效订单笔数，返回支付方式和笔数。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT o.payment_method,COUNT(*) n FROM orders o WHERE o.order_status IN ('paid','completed','shipped') AND o.order_date>='2026-05-01' AND o.order_date<'2026-06-01' GROUP BY o.payment_method",
+    "alternative_reference_sql": null,
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "payment_method": "card",
+        "n": 133
+      },
+      {
+        "payment_method": "cash",
+        "n": 99
+      },
+      {
+        "payment_method": "wechat",
+        "n": 94
+      },
+      {
+        "payment_method": "alipay",
+        "n": 107
+      }
+    ]
+  },
+  {
+    "id": "scoped-010",
+    "family": "reason_amount",
+    "question": "家用电器因质量问题产生的已批准退款总金额是多少？全部历史，只返回金额。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT ROUND(SUM(r.refund_amount),2) total FROM refunds r JOIN products p ON r.product_id=p.product_id WHERE r.refund_status='approved' AND r.refund_reason='质量问题' AND p.category='家用电器'",
+    "alternative_reference_sql": null,
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "total": 127098.9
+      }
+    ]
+  },
+  {
+    "id": "scoped-011",
+    "family": "vip_channel_buyers",
+    "question": "全部历史中使用银行卡支付过有效订单的VIP客户一共有多少人？去重，只返回人数。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT COUNT(DISTINCT u.user_id) n FROM users u JOIN orders o ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.is_vip=1 AND o.payment_method='card'",
+    "alternative_reference_sql": null,
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 444
+      }
+    ]
+  },
+  {
+    "id": "scoped-012",
+    "family": "tier_order_mean",
+    "question": "gold等级客户的有效订单客单价是多少？全部历史，只要金额。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT ROUND(SUM(o.paid_amount)/COUNT(*),2) total FROM users u JOIN orders o ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.user_level='gold'",
+    "alternative_reference_sql": null,
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "total": 2612.39
+      }
+    ]
+  },
+  {
+    "id": "scoped-013",
+    "family": "catalog_inactive",
+    "question": "统计家用电器已经下架的商品款数，只返回数量。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT COUNT(*) n FROM products WHERE category='家用电器' AND is_active=0",
+    "alternative_reference_sql": null,
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 0
+      }
+    ]
+  },
+  {
+    "id": "scoped-014",
+    "family": "zero_catalog",
+    "question": "家用电器商品里标价小于0元的有多少款？只要数量。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT COUNT(*) n FROM products WHERE category='家用电器' AND list_price<0",
+    "alternative_reference_sql": null,
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 0
+      }
+    ]
+  },
+  {
+    "id": "scoped-015",
+    "family": "absent_city",
+    "question": "拉萨客户中各等级分别有多少人？只返回等级和人数。没有记录也正常。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT user_level,COUNT(*) n FROM users WHERE city='拉萨' GROUP BY user_level",
+    "alternative_reference_sql": null,
+    "ordered": false,
+    "ground_truth_result": []
+  },
+  {
+    "id": "scoped-016",
+    "family": "order_day",
+    "question": "2026年08月10日各支付方式的有效订单销售额，返回支付方式和金额。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT o.payment_method,ROUND(SUM(o.paid_amount),2) total FROM orders o WHERE o.order_status IN ('paid','completed','shipped') AND o.order_date='2026-08-10' GROUP BY o.payment_method",
+    "alternative_reference_sql": null,
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "payment_method": "alipay",
+        "total": 7028.64
+      },
+      {
+        "payment_method": "card",
+        "total": 12329.18
+      },
+      {
+        "payment_method": "wechat",
+        "total": 5287.61
+      },
+      {
+        "payment_method": "cash",
+        "total": 1758.61
+      }
+    ]
+  },
+  {
+    "id": "scoped-017",
+    "family": "refund_reason_rank",
+    "question": "按已批准退款金额从高到低列出前2个退款原因及金额，同额按原因升序。全部历史。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT refund_reason,ROUND(SUM(refund_amount),2) total FROM refunds WHERE refund_status='approved' GROUP BY refund_reason ORDER BY total DESC,refund_reason ASC LIMIT 2",
+    "alternative_reference_sql": null,
+    "ordered": true,
+    "ground_truth_result": [
+      {
+        "refund_reason": "质量问题",
+        "total": 321952.17
+      },
+      {
+        "refund_reason": "物流破损",
+        "total": 307210.27
+      }
+    ]
+  },
+  {
+    "id": "scoped-018",
+    "family": "monthly_refund_count",
+    "question": "列出2026年第一季度每月已批准退款记录数，返回月份YYYY-MM和条数，按月份升序。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT DATE_FORMAT(refund_date,'%Y-%m') month,COUNT(*) n FROM refunds WHERE refund_status='approved' AND refund_date>='2026-01-01' AND refund_date<'2026-04-01' GROUP BY month ORDER BY month",
+    "alternative_reference_sql": null,
+    "ordered": true,
+    "ground_truth_result": [
+      {
+        "month": "2026-01",
+        "n": 99
+      },
+      {
+        "month": "2026-02",
+        "n": 110
+      },
+      {
+        "month": "2026-03",
+        "n": 107
+      }
+    ]
+  },
+  {
+    "id": "scoped-019",
+    "family": "category_channel_qty",
+    "question": "家用电器全部历史有效订单按支付方式分别卖了多少件？返回支付方式和销量。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT o.payment_method,SUM(i.quantity) n FROM order_items i JOIN orders o ON i.order_id=o.order_id JOIN products p ON i.product_id=p.product_id WHERE o.order_status IN ('paid','completed','shipped') AND p.category='家用电器' GROUP BY o.payment_method",
+    "alternative_reference_sql": null,
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "payment_method": "cash",
+        "n": 1772.0
+      },
+      {
+        "payment_method": "wechat",
+        "n": 1928.0
+      },
+      {
+        "payment_method": "card",
+        "n": 1934.0
+      },
+      {
+        "payment_method": "alipay",
+        "n": 1786.0
+      }
+    ]
+  },
+  {
+    "id": "scoped-020",
+    "family": "city_tier_share",
+    "question": "南京每个客户等级的VIP人数分别是多少？只统计VIP，返回等级和人数。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT user_level,COUNT(*) n FROM users WHERE city='南京市' AND is_vip=1 GROUP BY user_level",
+    "alternative_reference_sql": null,
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "user_level": "black",
+        "n": 13
+      },
+      {
+        "user_level": "silver",
+        "n": 14
+      },
+      {
+        "user_level": "gold",
+        "n": 25
+      },
+      {
+        "user_level": "normal",
+        "n": 5
+      }
+    ]
+  },
+  {
+    "id": "scoped-021",
+    "family": "channel_discount",
+    "question": "2026年5月按支付方式统计有效订单优惠总额，返回支付方式和金额。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT o.payment_method,ROUND(SUM(o.discount_amount),2) total FROM orders o WHERE o.order_status IN ('paid','completed','shipped') AND o.order_date>='2026-05-01' AND o.order_date<'2026-06-01' GROUP BY o.payment_method",
+    "alternative_reference_sql": null,
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "payment_method": "card",
+        "total": 25980.31
+      },
+      {
+        "payment_method": "cash",
+        "total": 23450.92
+      },
+      {
+        "payment_method": "wechat",
+        "total": 20723.56
+      },
+      {
+        "payment_method": "alipay",
+        "total": 19710.65
+      }
+    ]
+  },
+  {
+    "id": "scoped-022",
+    "family": "tier_spending",
+    "question": "silver等级客户的全部历史有效订单销售额是多少？只要金额。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT ROUND(SUM(o.paid_amount),2) total FROM users u JOIN orders o ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.user_level='silver'",
+    "alternative_reference_sql": null,
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "total": 7614010.46
+      }
+    ]
+  },
+  {
+    "id": "scoped-023",
+    "family": "brand_catalog",
+    "question": "手机数码里每个品牌有多少款商品？包含上下架商品，返回品牌和款数。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT brand,COUNT(*) n FROM products WHERE category='手机数码' GROUP BY brand",
+    "alternative_reference_sql": null,
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "brand": "森活",
+        "n": 8
+      },
+      {
+        "brand": "澜庭",
+        "n": 15
+      },
+      {
+        "brand": "优选",
+        "n": 20
+      },
+      {
+        "brand": "云栖",
+        "n": 16
+      },
+      {
+        "brand": "青橙",
+        "n": 11
+      },
+      {
+        "brand": "松果",
+        "n": 13
+      },
+      {
+        "brand": "星禾",
+        "n": 18
+      },
+      {
+        "brand": "北辰",
+        "n": 12
+      }
+    ]
+  },
+  {
+    "id": "scoped-024",
+    "family": "catalog_avg_price",
+    "question": "帮我算一下手机数码在售商品的平均标价，只要金额，保留两位小数。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT ROUND(AVG(list_price),2) value FROM products WHERE category='手机数码' AND is_active=1",
+    "alternative_reference_sql": null,
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "value": 1433.63
+      }
+    ]
+  },
+  {
+    "id": "scoped-025",
+    "family": "city_payment",
+    "question": "武汉客户用微信支付的全部历史有效订单有几笔？只要笔数。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT COUNT(*) n FROM users u JOIN orders o ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='武汉市' AND o.payment_method='wechat'",
+    "alternative_reference_sql": null,
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 339
+      }
+    ]
+  },
+  {
+    "id": "scoped-026",
+    "family": "refund_reason_count",
+    "question": "全部历史退款状态为pending的记录，按原因统计条数，返回原因和条数。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT refund_reason,COUNT(*) n FROM refunds WHERE refund_status='pending' GROUP BY refund_reason",
+    "alternative_reference_sql": null,
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "refund_reason": "物流破损",
+        "n": 59
+      },
+      {
+        "refund_reason": "质量问题",
+        "n": 65
+      },
+      {
+        "refund_reason": "七天无理由",
+        "n": 64
+      },
+      {
+        "refund_reason": "描述不符",
+        "n": 69
+      },
+      {
+        "refund_reason": "尺码不合适",
+        "n": 51
+      }
+    ]
+  },
+  {
+    "id": "scoped-027",
+    "family": "channel_top",
+    "question": "全部历史有效订单销售额最高的前3种支付方式是什么？返回支付方式和销售额，同额按支付方式升序。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT o.payment_method,ROUND(SUM(o.paid_amount),2) total FROM orders o WHERE o.order_status IN ('paid','completed','shipped') GROUP BY o.payment_method ORDER BY total DESC,o.payment_method ASC LIMIT 3",
+    "alternative_reference_sql": null,
+    "ordered": true,
+    "ground_truth_result": [
+      {
+        "payment_method": "wechat",
+        "total": 7265271.24
+      },
+      {
+        "payment_method": "card",
+        "total": 7212441.63
+      },
+      {
+        "payment_method": "cash",
+        "total": 6944100.86
+      }
+    ]
+  },
+  {
+    "id": "scoped-028",
+    "family": "brand_price_top",
+    "question": "手机数码标价最高的前4款商品，返回商品ID和标价，同价按商品ID升序。包含上下架商品。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT product_id,list_price FROM products WHERE category='手机数码' ORDER BY list_price DESC,product_id ASC LIMIT 4",
+    "alternative_reference_sql": null,
+    "ordered": true,
+    "ground_truth_result": [
+      {
+        "product_id": 150,
+        "list_price": 2509.1
+      },
+      {
+        "product_id": 714,
+        "list_price": 2505.4
+      },
+      {
+        "product_id": 61,
+        "list_price": 2461.37
+      },
+      {
+        "product_id": 284,
+        "list_price": 2372.63
+      }
+    ]
+  },
+  {
+    "id": "scoped-029",
+    "family": "month_channel",
+    "question": "2026年6月每种支付方式的有效订单笔数，返回支付方式和笔数。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT o.payment_method,COUNT(*) n FROM orders o WHERE o.order_status IN ('paid','completed','shipped') AND o.order_date>='2026-06-01' AND o.order_date<'2026-07-01' GROUP BY o.payment_method",
+    "alternative_reference_sql": null,
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "payment_method": "cash",
+        "n": 186
+      },
+      {
+        "payment_method": "card",
+        "n": 163
+      },
+      {
+        "payment_method": "wechat",
+        "n": 169
+      },
+      {
+        "payment_method": "alipay",
+        "n": 184
+      }
+    ]
+  },
+  {
+    "id": "scoped-030",
+    "family": "reason_amount",
+    "question": "手机数码因质量问题产生的已批准退款总金额是多少？全部历史，只返回金额。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT ROUND(SUM(r.refund_amount),2) total FROM refunds r JOIN products p ON r.product_id=p.product_id WHERE r.refund_status='approved' AND r.refund_reason='质量问题' AND p.category='手机数码'",
+    "alternative_reference_sql": null,
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "total": 90023.52
+      }
+    ]
+  },
+  {
+    "id": "scoped-031",
+    "family": "vip_channel_buyers",
+    "question": "全部历史中以cash支付过有效订单的VIP客户一共有多少人？只要去重人数。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT COUNT(DISTINCT u.user_id) n FROM users u JOIN orders o ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.is_vip=1 AND o.payment_method='cash'",
+    "alternative_reference_sql": null,
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 450
+      }
+    ]
+  },
+  {
+    "id": "scoped-032",
+    "family": "tier_order_mean",
+    "question": "silver等级客户的有效订单客单价是多少？全部历史，只要金额。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT ROUND(SUM(o.paid_amount)/COUNT(*),2) total FROM users u JOIN orders o ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.user_level='silver'",
+    "alternative_reference_sql": null,
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "total": 2603.08
+      }
+    ]
+  },
+  {
+    "id": "scoped-033",
+    "family": "catalog_inactive",
+    "question": "统计手机数码已经下架的商品款数，只返回数量。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT COUNT(*) n FROM products WHERE category='手机数码' AND is_active=0",
+    "alternative_reference_sql": null,
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 0
+      }
+    ]
+  },
+  {
+    "id": "scoped-034",
+    "family": "zero_catalog",
+    "question": "手机数码商品里标价小于0元的有多少款？只要数量。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT COUNT(*) n FROM products WHERE category='手机数码' AND list_price<0",
+    "alternative_reference_sql": null,
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 0
+      }
+    ]
+  },
+  {
+    "id": "scoped-035",
+    "family": "absent_city",
+    "question": "厦门客户各等级分别有多少人？只返回等级和人数。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT user_level,COUNT(*) n FROM users WHERE city='厦门' GROUP BY user_level",
+    "alternative_reference_sql": null,
+    "ordered": false,
+    "ground_truth_result": []
+  },
+  {
+    "id": "scoped-036",
+    "family": "order_day",
+    "question": "2026年08月11日各支付方式的有效订单销售额，返回支付方式和金额。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT o.payment_method,ROUND(SUM(o.paid_amount),2) total FROM orders o WHERE o.order_status IN ('paid','completed','shipped') AND o.order_date='2026-08-11' GROUP BY o.payment_method",
+    "alternative_reference_sql": null,
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "payment_method": "alipay",
+        "total": 18345.09
+      },
+      {
+        "payment_method": "card",
+        "total": 15017.14
+      },
+      {
+        "payment_method": "wechat",
+        "total": 7276.66
+      },
+      {
+        "payment_method": "cash",
+        "total": 10316.02
+      }
+    ]
+  },
+  {
+    "id": "scoped-037",
+    "family": "refund_reason_rank",
+    "question": "按已批准退款金额从高到低列出前3个退款原因及金额，同额按原因升序。全部历史。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT refund_reason,ROUND(SUM(refund_amount),2) total FROM refunds WHERE refund_status='approved' GROUP BY refund_reason ORDER BY total DESC,refund_reason ASC LIMIT 3",
+    "alternative_reference_sql": null,
+    "ordered": true,
+    "ground_truth_result": [
+      {
+        "refund_reason": "质量问题",
+        "total": 321952.17
+      },
+      {
+        "refund_reason": "物流破损",
+        "total": 307210.27
+      },
+      {
+        "refund_reason": "尺码不合适",
+        "total": 298048.6
+      }
+    ]
+  },
+  {
+    "id": "scoped-038",
+    "family": "monthly_refund_count",
+    "question": "列出2026年第2季度每月已批准退款记录数，返回月份YYYY-MM和条数，按月份升序。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT DATE_FORMAT(refund_date,'%Y-%m') month,COUNT(*) n FROM refunds WHERE refund_status='approved' AND refund_date>='2026-04-01' AND refund_date<'2026-07-01' GROUP BY month ORDER BY month",
+    "alternative_reference_sql": null,
+    "ordered": true,
+    "ground_truth_result": [
+      {
+        "month": "2026-04",
+        "n": 88
+      },
+      {
+        "month": "2026-05",
+        "n": 82
+      },
+      {
+        "month": "2026-06",
+        "n": 157
+      }
+    ]
+  },
+  {
+    "id": "scoped-039",
+    "family": "category_channel_qty",
+    "question": "手机数码全部历史有效订单按支付方式分别卖了多少件？返回支付方式和销量。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT o.payment_method,SUM(i.quantity) n FROM order_items i JOIN orders o ON i.order_id=o.order_id JOIN products p ON i.product_id=p.product_id WHERE o.order_status IN ('paid','completed','shipped') AND p.category='手机数码' GROUP BY o.payment_method",
+    "alternative_reference_sql": null,
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "payment_method": "cash",
+        "n": 1676.0
+      },
+      {
+        "payment_method": "wechat",
+        "n": 1688.0
+      },
+      {
+        "payment_method": "card",
+        "n": 1577.0
+      },
+      {
+        "payment_method": "alipay",
+        "n": 1586.0
+      }
+    ]
+  },
+  {
+    "id": "scoped-040",
+    "family": "city_tier_share",
+    "question": "武汉每个客户等级的VIP人数分别是多少？只统计VIP，返回等级和人数。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT user_level,COUNT(*) n FROM users WHERE city='武汉市' AND is_vip=1 GROUP BY user_level",
+    "alternative_reference_sql": null,
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "user_level": "silver",
+        "n": 20
+      },
+      {
+        "user_level": "black",
+        "n": 13
+      },
+      {
+        "user_level": "gold",
+        "n": 23
+      },
+      {
+        "user_level": "normal",
+        "n": 7
+      }
+    ]
+  },
+  {
+    "id": "scoped-041",
+    "family": "channel_discount",
+    "question": "2026年6月按支付方式统计有效订单优惠总额，返回支付方式和金额。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT o.payment_method,ROUND(SUM(o.discount_amount),2) total FROM orders o WHERE o.order_status IN ('paid','completed','shipped') AND o.order_date>='2026-06-01' AND o.order_date<'2026-07-01' GROUP BY o.payment_method",
+    "alternative_reference_sql": null,
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "payment_method": "cash",
+        "total": 36227.45
+      },
+      {
+        "payment_method": "card",
+        "total": 34258.85
+      },
+      {
+        "payment_method": "wechat",
+        "total": 32625.93
+      },
+      {
+        "payment_method": "alipay",
+        "total": 40534.46
+      }
+    ]
+  },
+  {
+    "id": "scoped-042",
+    "family": "tier_spending",
+    "question": "black等级客户的全部历史有效订单销售额是多少？只要金额。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT ROUND(SUM(o.paid_amount),2) total FROM users u JOIN orders o ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.user_level='black'",
+    "alternative_reference_sql": null,
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "total": 3177863.41
+      }
+    ]
+  },
+  {
+    "id": "scoped-043",
+    "family": "brand_catalog",
+    "question": "美妆个护里每个品牌有多少款商品？包含上下架商品，返回品牌和款数。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT brand,COUNT(*) n FROM products WHERE category='美妆个护' GROUP BY brand",
+    "alternative_reference_sql": null,
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "brand": "松果",
+        "n": 13
+      },
+      {
+        "brand": "北辰",
+        "n": 21
+      },
+      {
+        "brand": "青橙",
+        "n": 18
+      },
+      {
+        "brand": "澜庭",
+        "n": 15
+      },
+      {
+        "brand": "森活",
+        "n": 20
+      },
+      {
+        "brand": "云栖",
+        "n": 12
+      },
+      {
+        "brand": "星禾",
+        "n": 10
+      },
+      {
+        "brand": "优选",
+        "n": 14
+      }
+    ]
+  },
+  {
+    "id": "scoped-044",
+    "family": "catalog_avg_price",
+    "question": "帮我算一下美妆个护在售商品的平均标价，只要金额，保留两位小数。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT ROUND(AVG(list_price),2) value FROM products WHERE category='美妆个护' AND is_active=1",
+    "alternative_reference_sql": null,
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "value": 228.72
+      }
+    ]
+  },
+  {
+    "id": "scoped-045",
+    "family": "city_payment",
+    "question": "西安客户用微信支付的全部历史有效订单有几笔？只要笔数。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT COUNT(*) n FROM users u JOIN orders o ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='西安市' AND o.payment_method='wechat'",
+    "alternative_reference_sql": null,
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 353
+      }
+    ]
+  },
+  {
+    "id": "scoped-046",
+    "family": "refund_reason_count",
+    "question": "全部历史退款状态为rejected的记录，按原因统计条数，返回原因和条数。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT refund_reason,COUNT(*) n FROM refunds WHERE refund_status='rejected' GROUP BY refund_reason",
+    "alternative_reference_sql": null,
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "refund_reason": "尺码不合适",
+        "n": 47
+      },
+      {
+        "refund_reason": "七天无理由",
+        "n": 54
+      },
+      {
+        "refund_reason": "描述不符",
+        "n": 48
+      },
+      {
+        "refund_reason": "质量问题",
+        "n": 69
+      },
+      {
+        "refund_reason": "物流破损",
+        "n": 47
+      }
+    ]
+  },
+  {
+    "id": "scoped-047",
+    "family": "channel_top",
+    "question": "全部历史有效订单销售额最高的前4种支付方式是什么？返回支付方式和销售额，同额按支付方式升序。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT o.payment_method,ROUND(SUM(o.paid_amount),2) total FROM orders o WHERE o.order_status IN ('paid','completed','shipped') GROUP BY o.payment_method ORDER BY total DESC,o.payment_method ASC LIMIT 4",
+    "alternative_reference_sql": null,
+    "ordered": true,
+    "ground_truth_result": [
+      {
+        "payment_method": "wechat",
+        "total": 7265271.24
+      },
+      {
+        "payment_method": "card",
+        "total": 7212441.63
+      },
+      {
+        "payment_method": "cash",
+        "total": 6944100.86
+      },
+      {
+        "payment_method": "alipay",
+        "total": 6702907.38
+      }
+    ]
+  },
+  {
+    "id": "scoped-048",
+    "family": "brand_price_top",
+    "question": "美妆个护标价最高的前5款商品，返回商品ID和标价，同价按商品ID升序。包含上下架商品。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT product_id,list_price FROM products WHERE category='美妆个护' ORDER BY list_price DESC,product_id ASC LIMIT 5",
+    "alternative_reference_sql": null,
+    "ordered": true,
+    "ground_truth_result": [
+      {
+        "product_id": 258,
+        "list_price": 376.42
+      },
+      {
+        "product_id": 571,
+        "list_price": 371.35
+      },
+      {
+        "product_id": 124,
+        "list_price": 369.66
+      },
+      {
+        "product_id": 573,
+        "list_price": 366.52
+      },
+      {
+        "product_id": 581,
+        "list_price": 363.3
+      }
+    ]
+  },
+  {
+    "id": "scoped-049",
+    "family": "month_channel",
+    "question": "2026年7月每种支付方式的有效订单笔数，返回支付方式和笔数。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT o.payment_method,COUNT(*) n FROM orders o WHERE o.order_status IN ('paid','completed','shipped') AND o.order_date>='2026-07-01' AND o.order_date<'2026-08-01' GROUP BY o.payment_method",
+    "alternative_reference_sql": null,
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "payment_method": "card",
+        "n": 91
+      },
+      {
+        "payment_method": "alipay",
+        "n": 109
+      },
+      {
+        "payment_method": "wechat",
+        "n": 109
+      },
+      {
+        "payment_method": "cash",
+        "n": 100
+      }
+    ]
+  },
+  {
+    "id": "scoped-050",
+    "family": "reason_amount",
+    "question": "美妆个护因质量问题产生的已批准退款总金额是多少？全部历史，只返回金额。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT ROUND(SUM(r.refund_amount),2) total FROM refunds r JOIN products p ON r.product_id=p.product_id WHERE r.refund_status='approved' AND r.refund_reason='质量问题' AND p.category='美妆个护'",
+    "alternative_reference_sql": null,
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "total": 24632.71
+      }
+    ]
+  },
+  {
+    "id": "scoped-051",
+    "family": "vip_channel_buyers",
+    "question": "全部历史中以alipay支付过有效订单的VIP客户一共有多少人？只要去重人数。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT COUNT(DISTINCT u.user_id) n FROM users u JOIN orders o ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.is_vip=1 AND o.payment_method='alipay'",
+    "alternative_reference_sql": null,
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 442
+      }
+    ]
+  },
+  {
+    "id": "scoped-052",
+    "family": "tier_order_mean",
+    "question": "black等级客户的有效订单客单价是多少？全部历史，只要金额。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT ROUND(SUM(o.paid_amount)/COUNT(*),2) total FROM users u JOIN orders o ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.user_level='black'",
+    "alternative_reference_sql": null,
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "total": 2674.97
+      }
+    ]
+  },
+  {
+    "id": "scoped-053",
+    "family": "catalog_inactive",
+    "question": "统计美妆个护已经下架的商品款数，只返回数量。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT COUNT(*) n FROM products WHERE category='美妆个护' AND is_active=0",
+    "alternative_reference_sql": null,
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 0
+      }
+    ]
+  },
+  {
+    "id": "scoped-054",
+    "family": "zero_catalog",
+    "question": "美妆个护商品里标价小于0元的有多少款？只要数量。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT COUNT(*) n FROM products WHERE category='美妆个护' AND list_price<0",
+    "alternative_reference_sql": null,
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 0
+      }
+    ]
+  },
+  {
+    "id": "scoped-055",
+    "family": "absent_city",
+    "question": "青岛客户各等级分别有多少人？只返回等级和人数。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT user_level,COUNT(*) n FROM users WHERE city='青岛' GROUP BY user_level",
+    "alternative_reference_sql": null,
+    "ordered": false,
+    "ground_truth_result": []
+  },
+  {
+    "id": "scoped-056",
+    "family": "order_day",
+    "question": "2026年08月12日各支付方式的有效订单销售额，返回支付方式和金额。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT o.payment_method,ROUND(SUM(o.paid_amount),2) total FROM orders o WHERE o.order_status IN ('paid','completed','shipped') AND o.order_date='2026-08-12' GROUP BY o.payment_method",
+    "alternative_reference_sql": null,
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "payment_method": "cash",
+        "total": 11699.43
+      },
+      {
+        "payment_method": "wechat",
+        "total": 8720.6
+      },
+      {
+        "payment_method": "card",
+        "total": 32306.75
+      },
+      {
+        "payment_method": "alipay",
+        "total": 8205.13
+      }
+    ]
+  },
+  {
+    "id": "scoped-057",
+    "family": "refund_reason_rank",
+    "question": "按已批准退款金额从高到低列出前4个退款原因及金额，同额按原因升序。全部历史。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT refund_reason,ROUND(SUM(refund_amount),2) total FROM refunds WHERE refund_status='approved' GROUP BY refund_reason ORDER BY total DESC,refund_reason ASC LIMIT 4",
+    "alternative_reference_sql": null,
+    "ordered": true,
+    "ground_truth_result": [
+      {
+        "refund_reason": "质量问题",
+        "total": 321952.17
+      },
+      {
+        "refund_reason": "物流破损",
+        "total": 307210.27
+      },
+      {
+        "refund_reason": "尺码不合适",
+        "total": 298048.6
+      },
+      {
+        "refund_reason": "七天无理由",
+        "total": 293175.06
+      }
+    ]
+  },
+  {
+    "id": "scoped-058",
+    "family": "monthly_refund_count",
+    "question": "列出2026年第3季度每月已批准退款记录数，返回月份YYYY-MM和条数，按月份升序。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT DATE_FORMAT(refund_date,'%Y-%m') month,COUNT(*) n FROM refunds WHERE refund_status='approved' AND refund_date>='2026-07-01' AND refund_date<'2026-10-01' GROUP BY month ORDER BY month",
+    "alternative_reference_sql": null,
+    "ordered": true,
+    "ground_truth_result": [
+      {
+        "month": "2026-07",
+        "n": 132
+      },
+      {
+        "month": "2026-08",
+        "n": 143
+      },
+      {
+        "month": "2026-09",
+        "n": 85
+      }
+    ]
+  },
+  {
+    "id": "scoped-059",
+    "family": "category_channel_qty",
+    "question": "美妆个护全部历史有效订单按支付方式分别卖了多少件？返回支付方式和销量。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT o.payment_method,SUM(i.quantity) n FROM order_items i JOIN orders o ON i.order_id=o.order_id JOIN products p ON i.product_id=p.product_id WHERE o.order_status IN ('paid','completed','shipped') AND p.category='美妆个护' GROUP BY o.payment_method",
+    "alternative_reference_sql": null,
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "payment_method": "alipay",
+        "n": 1668.0
+      },
+      {
+        "payment_method": "wechat",
+        "n": 1863.0
+      },
+      {
+        "payment_method": "cash",
+        "n": 1843.0
+      },
+      {
+        "payment_method": "card",
+        "n": 1697.0
+      }
+    ]
+  },
+  {
+    "id": "scoped-060",
+    "family": "city_tier_share",
+    "question": "西安每个客户等级的VIP人数分别是多少？只统计VIP，返回等级和人数。",
+    "should_clarify": false,
+    "missing_slot": null,
+    "persona_answer": null,
+    "reference_sql": "SELECT user_level,COUNT(*) n FROM users WHERE city='西安市' AND is_vip=1 GROUP BY user_level",
+    "alternative_reference_sql": null,
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "user_level": "silver",
+        "n": 19
+      },
+      {
+        "user_level": "black",
+        "n": 14
+      },
+      {
+        "user_level": "gold",
+        "n": 26
+      },
+      {
+        "user_level": "normal",
+        "n": 3
+      }
+    ]
+  },
+  {
+    "id": "scoped-061",
+    "family": "channel_period_count",
+    "question": "报表这段时间里，每种支付方式的有效订单有几笔？返回支付方式和笔数。",
+    "should_clarify": true,
+    "missing_slot": "time",
+    "persona_answer": "从2026-02-01开始，包含当天，到2026-03-01之前，不包含结束日。",
+    "reference_sql": "SELECT o.payment_method,COUNT(*) n FROM orders o WHERE o.order_status IN ('paid','completed','shipped') AND o.order_date>='2026-02-01' AND o.order_date<'2026-03-01' GROUP BY o.payment_method",
+    "alternative_reference_sql": "SELECT o.payment_method,COUNT(*) n FROM orders o WHERE o.order_status IN ('paid','completed','shipped') AND o.order_date>='2026-02-01' AND o.order_date<'2026-04-01' GROUP BY o.payment_method",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "payment_method": "cash",
+        "n": 148
+      },
+      {
+        "payment_method": "wechat",
+        "n": 146
+      },
+      {
+        "payment_method": "card",
+        "n": 127
+      },
+      {
+        "payment_method": "alipay",
+        "n": 148
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "payment_method": "cash",
+        "n": 248
+      },
+      {
+        "payment_method": "wechat",
+        "n": 268
+      },
+      {
+        "payment_method": "card",
+        "n": 253
+      },
+      {
+        "payment_method": "alipay",
+        "n": 239
+      }
+    ]
+  },
+  {
+    "id": "scoped-062",
+    "family": "period_discount",
+    "question": "活动期间有效订单总共优惠了多少元？只要总额。",
+    "should_clarify": true,
+    "missing_slot": "time",
+    "persona_answer": "从2026-03-01开始，包含当天，到2026-04-01之前，不包含结束日。",
+    "reference_sql": "SELECT ROUND(SUM(o.discount_amount),2) n FROM orders o WHERE o.order_status IN ('paid','completed','shipped') AND o.order_date>='2026-03-01' AND o.order_date<'2026-04-01'",
+    "alternative_reference_sql": "SELECT ROUND(SUM(o.discount_amount),2) n FROM orders o WHERE o.order_status IN ('paid','completed','shipped') AND o.order_date>='2026-03-01' AND o.order_date<'2026-05-01'",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 93163.37
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "n": 173724.15
+      }
+    ]
+  },
+  {
+    "id": "scoped-063",
+    "family": "period_aov",
+    "question": "近期有效订单客单价是多少？只要金额。",
+    "should_clarify": true,
+    "missing_slot": "time",
+    "persona_answer": "从2026-04-01开始，包含当天，到2026-05-01之前，不包含结束日。",
+    "reference_sql": "SELECT ROUND(SUM(o.paid_amount)/COUNT(*),2) n FROM orders o WHERE o.order_status IN ('paid','completed','shipped') AND o.order_date>='2026-04-01' AND o.order_date<'2026-05-01'",
+    "alternative_reference_sql": "SELECT ROUND(SUM(o.paid_amount)/COUNT(*),2) n FROM orders o WHERE o.order_status IN ('paid','completed','shipped') AND o.order_date>='2026-04-01' AND o.order_date<'2026-06-01'",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 2625.94
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "n": 2527.77
+      }
+    ]
+  },
+  {
+    "id": "scoped-064",
+    "family": "period_vip_buyers",
+    "question": "这一期有多少VIP客户买过东西？按有效订单统计去重人数。",
+    "should_clarify": true,
+    "missing_slot": "time",
+    "persona_answer": "从2026-05-01开始，包含当天，到2026-06-01之前，不包含结束日。",
+    "reference_sql": "SELECT COUNT(DISTINCT u.user_id) n FROM users u JOIN orders o ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.is_vip=1 AND o.order_date>='2026-05-01' AND o.order_date<'2026-06-01'",
+    "alternative_reference_sql": "SELECT COUNT(DISTINCT u.user_id) n FROM users u JOIN orders o ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.is_vip=1 AND o.order_date>='2026-05-01' AND o.order_date<'2026-07-01'",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 172
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "n": 322
+      }
+    ]
+  },
+  {
+    "id": "scoped-065",
+    "family": "period_channel_rank",
+    "question": "最近销售额最高的两种支付方式，返回支付方式和有效订单销售额，同额按支付方式升序。",
+    "should_clarify": true,
+    "missing_slot": "time",
+    "persona_answer": "从2026-06-01开始，包含当天，到2026-07-01之前，不包含结束日。",
+    "reference_sql": "SELECT o.payment_method,ROUND(SUM(o.paid_amount),2) n FROM orders o WHERE o.order_status IN ('paid','completed','shipped') AND o.order_date>='2026-06-01' AND o.order_date<'2026-07-01' GROUP BY o.payment_method ORDER BY n DESC,o.payment_method LIMIT 2",
+    "alternative_reference_sql": "SELECT o.payment_method,ROUND(SUM(o.paid_amount),2) n FROM orders o WHERE o.order_status IN ('paid','completed','shipped') AND o.order_date>='2026-06-01' AND o.order_date<'2026-08-01' GROUP BY o.payment_method ORDER BY n DESC,o.payment_method LIMIT 2",
+    "ordered": true,
+    "ground_truth_result": [
+      {
+        "payment_method": "alipay",
+        "n": 524648.16
+      },
+      {
+        "payment_method": "card",
+        "n": 476972.47
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "payment_method": "alipay",
+        "n": 814241.42
+      },
+      {
+        "payment_method": "wechat",
+        "n": 737745.59
+      }
+    ]
+  },
+  {
+    "id": "scoped-066",
+    "family": "period_city_groups",
+    "question": "活动期各城市贡献的有效订单销售额，返回城市和金额。",
+    "should_clarify": true,
+    "missing_slot": "time",
+    "persona_answer": "从2026-02-01开始，包含当天，到2026-03-01之前，不包含结束日。",
+    "reference_sql": "SELECT u.city,ROUND(SUM(o.paid_amount),2) n FROM users u JOIN orders o ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND o.order_date>='2026-02-01' AND o.order_date<'2026-03-01' GROUP BY u.city",
+    "alternative_reference_sql": "SELECT u.city,ROUND(SUM(o.paid_amount),2) n FROM users u JOIN orders o ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND o.order_date>='2026-02-01' AND o.order_date<'2026-04-01' GROUP BY u.city",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "city": "武汉市",
+        "n": 173128.31
+      },
+      {
+        "city": "北京市",
+        "n": 150413.85
+      },
+      {
+        "city": "上海市",
+        "n": 189501.96
+      },
+      {
+        "city": "西安市",
+        "n": 211452.86
+      },
+      {
+        "city": "杭州市",
+        "n": 173947.73
+      },
+      {
+        "city": "成都市",
+        "n": 195807.55
+      },
+      {
+        "city": "广州市",
+        "n": 222116.91
+      },
+      {
+        "city": "南京市",
+        "n": 180971.42
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "city": "武汉市",
+        "n": 288859.01
+      },
+      {
+        "city": "北京市",
+        "n": 335903.91
+      },
+      {
+        "city": "上海市",
+        "n": 361554.78
+      },
+      {
+        "city": "西安市",
+        "n": 375726.88
+      },
+      {
+        "city": "杭州市",
+        "n": 359790.64
+      },
+      {
+        "city": "成都市",
+        "n": 323579.11
+      },
+      {
+        "city": "广州市",
+        "n": 316891.85
+      },
+      {
+        "city": "南京市",
+        "n": 303978.51
+      }
+    ]
+  },
+  {
+    "id": "scoped-067",
+    "family": "period_reason_count",
+    "question": "近期因物流破损批准退款的记录有几条？只要条数。",
+    "should_clarify": true,
+    "missing_slot": "time",
+    "persona_answer": "从2026-03-01开始，包含当天，到2026-04-01之前，不包含结束日。",
+    "reference_sql": "SELECT COUNT(*) n FROM refunds r WHERE r.refund_status='approved' AND r.refund_reason='物流破损' AND r.refund_date>='2026-03-01' AND r.refund_date<'2026-04-01'",
+    "alternative_reference_sql": "SELECT COUNT(*) n FROM refunds r WHERE r.refund_status='approved' AND r.refund_reason='物流破损' AND r.refund_date>='2026-03-01' AND r.refund_date<'2026-05-01'",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 16
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "n": 35
+      }
+    ]
+  },
+  {
+    "id": "scoped-068",
+    "family": "period_reason_groups",
+    "question": "报表期按原因统计已批准退款金额，返回原因和金额。",
+    "should_clarify": true,
+    "missing_slot": "time",
+    "persona_answer": "从2026-04-01开始，包含当天，到2026-05-01之前，不包含结束日。",
+    "reference_sql": "SELECT r.refund_reason,ROUND(SUM(r.refund_amount),2) n FROM refunds r WHERE r.refund_status='approved' AND r.refund_date>='2026-04-01' AND r.refund_date<'2026-05-01' GROUP BY r.refund_reason",
+    "alternative_reference_sql": "SELECT r.refund_reason,ROUND(SUM(r.refund_amount),2) n FROM refunds r WHERE r.refund_status='approved' AND r.refund_date>='2026-04-01' AND r.refund_date<'2026-06-01' GROUP BY r.refund_reason",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "refund_reason": "尺码不合适",
+        "n": 17473.89
+      },
+      {
+        "refund_reason": "质量问题",
+        "n": 8816.06
+      },
+      {
+        "refund_reason": "七天无理由",
+        "n": 16761.4
+      },
+      {
+        "refund_reason": "物流破损",
+        "n": 12935.42
+      },
+      {
+        "refund_reason": "描述不符",
+        "n": 10337.61
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "refund_reason": "尺码不合适",
+        "n": 29382.29
+      },
+      {
+        "refund_reason": "质量问题",
+        "n": 18387.17
+      },
+      {
+        "refund_reason": "七天无理由",
+        "n": 23177.52
+      },
+      {
+        "refund_reason": "物流破损",
+        "n": 20589.19
+      },
+      {
+        "refund_reason": "描述不符",
+        "n": 18303.41
+      }
+    ]
+  },
+  {
+    "id": "scoped-069",
+    "family": "period_card_amount",
+    "question": "近期银行卡支付的有效订单销售额是多少？只返回金额。",
+    "should_clarify": true,
+    "missing_slot": "time",
+    "persona_answer": "从2026-05-01开始，包含当天，到2026-06-01之前，不包含结束日。",
+    "reference_sql": "SELECT ROUND(SUM(o.paid_amount),2) n FROM orders o WHERE o.order_status IN ('paid','completed','shipped') AND o.payment_method='card' AND o.order_date>='2026-05-01' AND o.order_date<'2026-06-01'",
+    "alternative_reference_sql": "SELECT ROUND(SUM(o.paid_amount),2) n FROM orders o WHERE o.order_status IN ('paid','completed','shipped') AND o.payment_method='card' AND o.order_date>='2026-05-01' AND o.order_date<'2026-07-01'",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 333612.93
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "n": 810585.4
+      }
+    ]
+  },
+  {
+    "id": "scoped-070",
+    "family": "period_gold_discount",
+    "question": "这次活动期间gold客户的有效订单优惠总额是多少？只返回金额。",
+    "should_clarify": true,
+    "missing_slot": "time",
+    "persona_answer": "从2026-06-01开始，包含当天，到2026-07-01之前，不包含结束日。",
+    "reference_sql": "SELECT ROUND(SUM(o.discount_amount),2) n FROM users u JOIN orders o ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.user_level='gold' AND o.order_date>='2026-06-01' AND o.order_date<'2026-07-01'",
+    "alternative_reference_sql": "SELECT ROUND(SUM(o.discount_amount),2) n FROM users u JOIN orders o ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.user_level='gold' AND o.order_date>='2026-06-01' AND o.order_date<'2026-08-01'",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 42984.48
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "n": 67724.4
+      }
+    ]
+  },
+  {
+    "id": "scoped-071",
+    "family": "period_silver_count",
+    "question": "这段统计时间里silver客户下了多少笔有效订单？只返回笔数。",
+    "should_clarify": true,
+    "missing_slot": "time",
+    "persona_answer": "从2026-02-01开始，包含当天，到2026-03-01之前，不包含结束日。",
+    "reference_sql": "SELECT COUNT(*) n FROM users u JOIN orders o ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.user_level='silver' AND o.order_date>='2026-02-01' AND o.order_date<'2026-03-01'",
+    "alternative_reference_sql": "SELECT COUNT(*) n FROM users u JOIN orders o ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.user_level='silver' AND o.order_date>='2026-02-01' AND o.order_date<'2026-04-01'",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 170
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "n": 284
+      }
+    ]
+  },
+  {
+    "id": "scoped-072",
+    "family": "period_category_buyers",
+    "question": "近期购买手机数码的有效订单客户有多少人？去重，只返回人数。",
+    "should_clarify": true,
+    "missing_slot": "time",
+    "persona_answer": "从2026-03-01开始，包含当天，到2026-04-01之前，不包含结束日。",
+    "reference_sql": "SELECT COUNT(DISTINCT o.user_id) n FROM order_items i JOIN orders o ON i.order_id=o.order_id JOIN products p ON i.product_id=p.product_id WHERE o.order_status IN ('paid','completed','shipped') AND p.category='手机数码' AND o.order_date>='2026-03-01' AND o.order_date<'2026-04-01'",
+    "alternative_reference_sql": "SELECT COUNT(DISTINCT o.user_id) n FROM order_items i JOIN orders o ON i.order_id=o.order_id JOIN products p ON i.product_id=p.product_id WHERE o.order_status IN ('paid','completed','shipped') AND p.category='手机数码' AND o.order_date>='2026-03-01' AND o.order_date<'2026-05-01'",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 128
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "n": 229
+      }
+    ]
+  },
+  {
+    "id": "scoped-073",
+    "family": "period_category_qty",
+    "question": "促销那几天家用电器卖出了多少件？按有效订单销量统计，只要件数。",
+    "should_clarify": true,
+    "missing_slot": "time",
+    "persona_answer": "从2026-04-01开始，包含当天，到2026-05-01之前，不包含结束日。",
+    "reference_sql": "SELECT SUM(i.quantity) n FROM order_items i JOIN orders o ON i.order_id=o.order_id JOIN products p ON i.product_id=p.product_id WHERE o.order_status IN ('paid','completed','shipped') AND p.category='家用电器' AND o.order_date>='2026-04-01' AND o.order_date<'2026-05-01'",
+    "alternative_reference_sql": "SELECT SUM(i.quantity) n FROM order_items i JOIN orders o ON i.order_id=o.order_id JOIN products p ON i.product_id=p.product_id WHERE o.order_status IN ('paid','completed','shipped') AND p.category='家用电器' AND o.order_date>='2026-04-01' AND o.order_date<'2026-06-01'",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 273.0
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "n": 553.0
+      }
+    ]
+  },
+  {
+    "id": "scoped-074",
+    "family": "period_top_customer_count",
+    "question": "近期下单最多的3位客户，按有效订单笔数排名，返回用户ID和笔数，同数按用户ID升序。",
+    "should_clarify": true,
+    "missing_slot": "time",
+    "persona_answer": "从2026-05-01开始，包含当天，到2026-06-01之前，不包含结束日。",
+    "reference_sql": "SELECT o.user_id,COUNT(*) n FROM orders o WHERE o.order_status IN ('paid','completed','shipped') AND o.order_date>='2026-05-01' AND o.order_date<'2026-06-01' GROUP BY o.user_id ORDER BY n DESC,o.user_id LIMIT 3",
+    "alternative_reference_sql": "SELECT o.user_id,COUNT(*) n FROM orders o WHERE o.order_status IN ('paid','completed','shipped') AND o.order_date>='2026-05-01' AND o.order_date<'2026-07-01' GROUP BY o.user_id ORDER BY n DESC,o.user_id LIMIT 3",
+    "ordered": true,
+    "ground_truth_result": [
+      {
+        "user_id": 2844,
+        "n": 4
+      },
+      {
+        "user_id": 2277,
+        "n": 3
+      },
+      {
+        "user_id": 2386,
+        "n": 3
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "user_id": 2525,
+        "n": 5
+      },
+      {
+        "user_id": 171,
+        "n": 4
+      },
+      {
+        "user_id": 742,
+        "n": 4
+      }
+    ]
+  },
+  {
+    "id": "scoped-075",
+    "family": "period_cancel_count",
+    "question": "活动期取消的订单有多少笔？只返回笔数。",
+    "should_clarify": true,
+    "missing_slot": "time",
+    "persona_answer": "从2026-06-01开始，包含当天，到2026-07-01之前，不包含结束日。",
+    "reference_sql": "SELECT COUNT(*) n FROM orders o WHERE o.order_status='cancelled' AND o.order_date>='2026-06-01' AND o.order_date<'2026-07-01'",
+    "alternative_reference_sql": "SELECT COUNT(*) n FROM orders o WHERE o.order_status='cancelled' AND o.order_date>='2026-06-01' AND o.order_date<'2026-08-01'",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 41
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "n": 69
+      }
+    ]
+  },
+  {
+    "id": "scoped-076",
+    "family": "period_pending_refund",
+    "question": "最近新提交且状态仍为pending的退款申请有多少条？以refund_date为时间，只返回条数。",
+    "should_clarify": true,
+    "missing_slot": "time",
+    "persona_answer": "从2026-02-01开始，包含当天，到2026-03-01之前，不包含结束日。",
+    "reference_sql": "SELECT COUNT(*) n FROM refunds r WHERE r.refund_status='pending' AND r.refund_date>='2026-02-01' AND r.refund_date<'2026-03-01'",
+    "alternative_reference_sql": "SELECT COUNT(*) n FROM refunds r WHERE r.refund_status='pending' AND r.refund_date>='2026-02-01' AND r.refund_date<'2026-04-01'",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 18
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "n": 34
+      }
+    ]
+  },
+  {
+    "id": "scoped-077",
+    "family": "period_reason_avg",
+    "question": "这段时间已批准的质量问题退款平均每条多少元？只返回金额。",
+    "should_clarify": true,
+    "missing_slot": "time",
+    "persona_answer": "从2026-03-01开始，包含当天，到2026-04-01之前，不包含结束日。",
+    "reference_sql": "SELECT ROUND(AVG(r.refund_amount),2) n FROM refunds r WHERE r.refund_status='approved' AND r.refund_reason='质量问题' AND r.refund_date>='2026-03-01' AND r.refund_date<'2026-04-01'",
+    "alternative_reference_sql": "SELECT ROUND(AVG(r.refund_amount),2) n FROM refunds r WHERE r.refund_status='approved' AND r.refund_reason='质量问题' AND r.refund_date>='2026-03-01' AND r.refund_date<'2026-05-01'",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 878.37
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "n": 736.8
+      }
+    ]
+  },
+  {
+    "id": "scoped-078",
+    "family": "period_tier_groups",
+    "question": "报表期内各客户等级的有效订单笔数，返回等级和笔数。",
+    "should_clarify": true,
+    "missing_slot": "time",
+    "persona_answer": "从2026-04-01开始，包含当天，到2026-05-01之前，不包含结束日。",
+    "reference_sql": "SELECT u.user_level,COUNT(*) n FROM users u JOIN orders o ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND o.order_date>='2026-04-01' AND o.order_date<'2026-05-01' GROUP BY u.user_level",
+    "alternative_reference_sql": "SELECT u.user_level,COUNT(*) n FROM users u JOIN orders o ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND o.order_date>='2026-04-01' AND o.order_date<'2026-06-01' GROUP BY u.user_level",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "user_level": "gold",
+        "n": 114
+      },
+      {
+        "user_level": "normal",
+        "n": 127
+      },
+      {
+        "user_level": "silver",
+        "n": 107
+      },
+      {
+        "user_level": "black",
+        "n": 35
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "user_level": "gold",
+        "n": 232
+      },
+      {
+        "user_level": "normal",
+        "n": 268
+      },
+      {
+        "user_level": "silver",
+        "n": 238
+      },
+      {
+        "user_level": "black",
+        "n": 78
+      }
+    ]
+  },
+  {
+    "id": "scoped-079",
+    "family": "period_new_vip",
+    "question": "那段招募期间注册的VIP一共有多少人？只返回人数。",
+    "should_clarify": true,
+    "missing_slot": "time",
+    "persona_answer": "从2025-05-01开始，包含当天，到2025-06-01之前，不包含结束日。",
+    "reference_sql": "SELECT COUNT(*) n FROM users u WHERE u.is_vip=1 AND u.register_date>='2025-05-01' AND u.register_date<'2025-06-01'",
+    "alternative_reference_sql": "SELECT COUNT(*) n FROM users u WHERE u.is_vip=1 AND u.register_date>='2025-05-01' AND u.register_date<'2025-07-01'",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 15
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "n": 49
+      }
+    ]
+  },
+  {
+    "id": "scoped-080",
+    "family": "period_catalog",
+    "question": "活动期间上架的家用电器一共有多少款？包含现在下架的，只返回数量。",
+    "should_clarify": true,
+    "missing_slot": "time",
+    "persona_answer": "从2025-06-01开始，包含当天，到2025-07-01之前，不包含结束日。",
+    "reference_sql": "SELECT COUNT(*) n FROM products p WHERE p.category='家用电器' AND p.launch_date>='2025-06-01' AND p.launch_date<'2025-07-01'",
+    "alternative_reference_sql": "SELECT COUNT(*) n FROM products p WHERE p.category='家用电器' AND p.launch_date>='2025-06-01' AND p.launch_date<'2025-08-01'",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 8
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "n": 14
+      }
+    ]
+  },
+  {
+    "id": "scoped-081",
+    "family": "channel_performance",
+    "question": "全部历史按支付方式展示成交表现，返回支付方式和一个指标值。",
+    "should_clarify": true,
+    "missing_slot": "metric",
+    "persona_answer": "用有效订单实付销售金额。",
+    "reference_sql": "SELECT o.payment_method,ROUND(SUM(o.paid_amount),2) n FROM orders o WHERE o.order_status IN ('paid','completed','shipped') GROUP BY o.payment_method",
+    "alternative_reference_sql": "SELECT o.payment_method,COUNT(*) n FROM orders o WHERE o.order_status IN ('paid','completed','shipped') GROUP BY o.payment_method",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "payment_method": "cash",
+        "n": 6944100.86
+      },
+      {
+        "payment_method": "wechat",
+        "n": 7265271.24
+      },
+      {
+        "payment_method": "card",
+        "n": 7212441.63
+      },
+      {
+        "payment_method": "alipay",
+        "n": 6702907.38
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "payment_method": "cash",
+        "n": 2745
+      },
+      {
+        "payment_method": "wechat",
+        "n": 2750
+      },
+      {
+        "payment_method": "card",
+        "n": 2657
+      },
+      {
+        "payment_method": "alipay",
+        "n": 2654
+      }
+    ]
+  },
+  {
+    "id": "scoped-082",
+    "family": "tier_performance",
+    "question": "比较各客户等级的全部历史购买表现，返回等级和一个指标值。",
+    "should_clarify": true,
+    "missing_slot": "metric",
+    "persona_answer": "用有效订单笔数。",
+    "reference_sql": "SELECT u.user_level,COUNT(*) n FROM users u JOIN orders o ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') GROUP BY u.user_level",
+    "alternative_reference_sql": "SELECT u.user_level,ROUND(SUM(o.paid_amount),2) n FROM users u JOIN orders o ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') GROUP BY u.user_level",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "user_level": "normal",
+        "n": 3673
+      },
+      {
+        "user_level": "silver",
+        "n": 2925
+      },
+      {
+        "user_level": "gold",
+        "n": 3020
+      },
+      {
+        "user_level": "black",
+        "n": 1188
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "user_level": "normal",
+        "n": 9443432.01
+      },
+      {
+        "user_level": "silver",
+        "n": 7614010.46
+      },
+      {
+        "user_level": "gold",
+        "n": 7889415.23
+      },
+      {
+        "user_level": "black",
+        "n": 3177863.41
+      }
+    ]
+  },
+  {
+    "id": "scoped-083",
+    "family": "category_performance",
+    "question": "按商品类别汇总全部历史销售成绩，返回类别和一个指标值。",
+    "should_clarify": true,
+    "missing_slot": "metric",
+    "persona_answer": "用有效订单卖出的商品件数，也就是销量。",
+    "reference_sql": "SELECT p.category,SUM(i.quantity) n FROM order_items i JOIN orders o ON i.order_id=o.order_id JOIN products p ON i.product_id=p.product_id WHERE o.order_status IN ('paid','completed','shipped') GROUP BY p.category",
+    "alternative_reference_sql": "SELECT p.category,ROUND(SUM(i.item_amount),2) n FROM order_items i JOIN orders o ON i.order_id=o.order_id JOIN products p ON i.product_id=p.product_id WHERE o.order_status IN ('paid','completed','shipped') GROUP BY p.category",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "category": "手机数码",
+        "n": 6527.0
+      },
+      {
+        "category": "美妆个护",
+        "n": 7071.0
+      },
+      {
+        "category": "运动户外",
+        "n": 4826.0
+      },
+      {
+        "category": "母婴用品",
+        "n": 6566.0
+      },
+      {
+        "category": "服饰鞋包",
+        "n": 5592.0
+      },
+      {
+        "category": "食品生鲜",
+        "n": 6387.0
+      },
+      {
+        "category": "家用电器",
+        "n": 7420.0
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "category": "手机数码",
+        "n": 7437590.81
+      },
+      {
+        "category": "美妆个护",
+        "n": 1517768.82
+      },
+      {
+        "category": "运动户外",
+        "n": 2022921.66
+      },
+      {
+        "category": "母婴用品",
+        "n": 1627735.6
+      },
+      {
+        "category": "服饰鞋包",
+        "n": 1775094.12
+      },
+      {
+        "category": "食品生鲜",
+        "n": 657430.11
+      },
+      {
+        "category": "家用电器",
+        "n": 13086179.99
+      }
+    ]
+  },
+  {
+    "id": "scoped-084",
+    "family": "reason_performance",
+    "question": "全部历史已批准退款按原因看规模，返回原因和一个指标值。",
+    "should_clarify": true,
+    "missing_slot": "metric",
+    "persona_answer": "用已批准退款金额。",
+    "reference_sql": "SELECT r.refund_reason,ROUND(SUM(r.refund_amount),2) n FROM refunds r WHERE r.refund_status='approved' GROUP BY r.refund_reason",
+    "alternative_reference_sql": "SELECT r.refund_reason,COUNT(*) n FROM refunds r WHERE r.refund_status='approved' GROUP BY r.refund_reason",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "refund_reason": "七天无理由",
+        "n": 293175.06
+      },
+      {
+        "refund_reason": "物流破损",
+        "n": 307210.27
+      },
+      {
+        "refund_reason": "描述不符",
+        "n": 261226.13
+      },
+      {
+        "refund_reason": "尺码不合适",
+        "n": 298048.6
+      },
+      {
+        "refund_reason": "质量问题",
+        "n": 321952.17
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "refund_reason": "七天无理由",
+        "n": 513
+      },
+      {
+        "refund_reason": "物流破损",
+        "n": 491
+      },
+      {
+        "refund_reason": "描述不符",
+        "n": 473
+      },
+      {
+        "refund_reason": "尺码不合适",
+        "n": 479
+      },
+      {
+        "refund_reason": "质量问题",
+        "n": 551
+      }
+    ]
+  },
+  {
+    "id": "scoped-085",
+    "family": "vip_performance",
+    "question": "VIP客户全部历史的有效订单成交表现是多少？只返回一个数。",
+    "should_clarify": true,
+    "missing_slot": "metric",
+    "persona_answer": "用有效订单销售金额。",
+    "reference_sql": "SELECT ROUND(SUM(o.paid_amount),2) n FROM users u JOIN orders o ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.is_vip=1",
+    "alternative_reference_sql": "SELECT COUNT(*) n FROM users u JOIN orders o ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.is_vip=1",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 13359342.28
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "n": 5157
+      }
+    ]
+  },
+  {
+    "id": "scoped-086",
+    "family": "card_performance",
+    "question": "银行卡支付的全部历史有效订单，规模是多少？只返回一个数。",
+    "should_clarify": true,
+    "missing_slot": "metric",
+    "persona_answer": "用有效订单笔数。",
+    "reference_sql": "SELECT COUNT(*) n FROM orders o WHERE o.order_status IN ('paid','completed','shipped') AND o.payment_method='card'",
+    "alternative_reference_sql": "SELECT ROUND(SUM(o.paid_amount),2) n FROM orders o WHERE o.order_status IN ('paid','completed','shipped') AND o.payment_method='card'",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 2657
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "n": 7212441.63
+      }
+    ]
+  },
+  {
+    "id": "scoped-087",
+    "family": "wechat_customer",
+    "question": "微信渠道全部历史的客户成交情况给我一个汇总数。只考虑有效订单。",
+    "should_clarify": true,
+    "missing_slot": "metric",
+    "persona_answer": "用去重的付费客户人数。",
+    "reference_sql": "SELECT COUNT(DISTINCT o.user_id) n FROM orders o WHERE o.order_status IN ('paid','completed','shipped') AND o.payment_method='wechat'",
+    "alternative_reference_sql": "SELECT ROUND(SUM(o.paid_amount),2) n FROM orders o WHERE o.order_status IN ('paid','completed','shipped') AND o.payment_method='wechat'",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 1531
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "n": 7265271.24
+      }
+    ]
+  },
+  {
+    "id": "scoped-088",
+    "family": "gold_performance",
+    "question": "gold客户全部历史有效订单的消费水平给我一个数。",
+    "should_clarify": true,
+    "missing_slot": "metric",
+    "persona_answer": "用平均每笔有效订单的实付金额，即客单价。",
+    "reference_sql": "SELECT ROUND(AVG(o.paid_amount),2) n FROM users u JOIN orders o ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.user_level='gold'",
+    "alternative_reference_sql": "SELECT ROUND(SUM(o.paid_amount),2) n FROM users u JOIN orders o ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.user_level='gold'",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 2612.39
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "n": 7889415.23
+      }
+    ]
+  },
+  {
+    "id": "scoped-089",
+    "family": "brand_performance",
+    "question": "家用电器各品牌全部历史销售表现，返回品牌和一个指标值。",
+    "should_clarify": true,
+    "missing_slot": "metric",
+    "persona_answer": "用有效订单商品行实付销售金额。",
+    "reference_sql": "SELECT p.brand,ROUND(SUM(i.item_amount),2) n FROM order_items i JOIN orders o ON i.order_id=o.order_id JOIN products p ON i.product_id=p.product_id WHERE o.order_status IN ('paid','completed','shipped') AND p.category='家用电器' GROUP BY p.brand",
+    "alternative_reference_sql": "SELECT p.brand,SUM(i.quantity) n FROM order_items i JOIN orders o ON i.order_id=o.order_id JOIN products p ON i.product_id=p.product_id WHERE o.order_status IN ('paid','completed','shipped') AND p.category='家用电器' GROUP BY p.brand",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "brand": "森活",
+        "n": 1771764.47
+      },
+      {
+        "brand": "青橙",
+        "n": 2818913.96
+      },
+      {
+        "brand": "优选",
+        "n": 2499156.91
+      },
+      {
+        "brand": "澜庭",
+        "n": 1642836.26
+      },
+      {
+        "brand": "星禾",
+        "n": 1818097.64
+      },
+      {
+        "brand": "松果",
+        "n": 942873.49
+      },
+      {
+        "brand": "云栖",
+        "n": 930947.87
+      },
+      {
+        "brand": "北辰",
+        "n": 661589.39
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "brand": "森活",
+        "n": 1217.0
+      },
+      {
+        "brand": "青橙",
+        "n": 1610.0
+      },
+      {
+        "brand": "优选",
+        "n": 1335.0
+      },
+      {
+        "brand": "澜庭",
+        "n": 1161.0
+      },
+      {
+        "brand": "星禾",
+        "n": 861.0
+      },
+      {
+        "brand": "松果",
+        "n": 496.0
+      },
+      {
+        "brand": "云栖",
+        "n": 447.0
+      },
+      {
+        "brand": "北辰",
+        "n": 293.0
+      }
+    ]
+  },
+  {
+    "id": "scoped-090",
+    "family": "reason_quality",
+    "question": "全部历史因质量问题批准的退款规模是多少？只返回一个数。",
+    "should_clarify": true,
+    "missing_slot": "metric",
+    "persona_answer": "用已批准退款记录条数。",
+    "reference_sql": "SELECT COUNT(*) n FROM refunds r WHERE r.refund_status='approved' AND r.refund_reason='质量问题'",
+    "alternative_reference_sql": "SELECT ROUND(SUM(r.refund_amount),2) n FROM refunds r WHERE r.refund_status='approved' AND r.refund_reason='质量问题'",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 551
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "n": 321952.17
+      }
+    ]
+  },
+  {
+    "id": "scoped-091",
+    "family": "quarter_performance",
+    "question": "2026年第一季度的整体成交表现给我一个数，按有效订单统计。",
+    "should_clarify": true,
+    "missing_slot": "metric",
+    "persona_answer": "用销售金额。",
+    "reference_sql": "SELECT ROUND(SUM(o.paid_amount),2) n FROM orders o WHERE o.order_status IN ('paid','completed','shipped') AND o.order_date>='2026-01-01' AND o.order_date<'2026-04-01'",
+    "alternative_reference_sql": "SELECT COUNT(*) n FROM orders o WHERE o.order_status IN ('paid','completed','shipped') AND o.order_date>='2026-01-01' AND o.order_date<'2026-04-01'",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 3654173.98
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "n": 1391
+      }
+    ]
+  },
+  {
+    "id": "scoped-092",
+    "family": "month_performance",
+    "question": "2026年8月各支付方式的交易表现，返回支付方式和一个指标值，只考虑有效订单。",
+    "should_clarify": true,
+    "missing_slot": "metric",
+    "persona_answer": "用有效订单笔数。",
+    "reference_sql": "SELECT o.payment_method,COUNT(*) n FROM orders o WHERE o.order_status IN ('paid','completed','shipped') AND o.order_date>='2026-08-01' AND o.order_date<'2026-09-01' GROUP BY o.payment_method",
+    "alternative_reference_sql": "SELECT o.payment_method,ROUND(SUM(o.paid_amount),2) n FROM orders o WHERE o.order_status IN ('paid','completed','shipped') AND o.order_date>='2026-08-01' AND o.order_date<'2026-09-01' GROUP BY o.payment_method",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "payment_method": "alipay",
+        "n": 153
+      },
+      {
+        "payment_method": "cash",
+        "n": 167
+      },
+      {
+        "payment_method": "card",
+        "n": 163
+      },
+      {
+        "payment_method": "wechat",
+        "n": 160
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "payment_method": "alipay",
+        "n": 350322.07
+      },
+      {
+        "payment_method": "cash",
+        "n": 466607.27
+      },
+      {
+        "payment_method": "card",
+        "n": 445737.6
+      },
+      {
+        "payment_method": "wechat",
+        "n": 473531.95
+      }
+    ]
+  },
+  {
+    "id": "scoped-093",
+    "family": "tier_buying",
+    "question": "silver等级客户全部历史的购买活跃度给我一个数，只考虑有效订单。",
+    "should_clarify": true,
+    "missing_slot": "metric",
+    "persona_answer": "用有有效订单的去重客户人数。",
+    "reference_sql": "SELECT COUNT(DISTINCT u.user_id) n FROM users u JOIN orders o ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.user_level='silver'",
+    "alternative_reference_sql": "SELECT COUNT(*) n FROM users u JOIN orders o ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.user_level='silver'",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 700
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "n": 2925
+      }
+    ]
+  },
+  {
+    "id": "scoped-094",
+    "family": "cash_performance",
+    "question": "现金支付渠道全部历史的成交指标是多少？只返回一个数，按有效订单统计。",
+    "should_clarify": true,
+    "missing_slot": "metric",
+    "persona_answer": "用有效订单销售金额。",
+    "reference_sql": "SELECT ROUND(SUM(o.paid_amount),2) n FROM orders o WHERE o.order_status IN ('paid','completed','shipped') AND o.payment_method='cash'",
+    "alternative_reference_sql": "SELECT COUNT(*) n FROM orders o WHERE o.order_status IN ('paid','completed','shipped') AND o.payment_method='cash'",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 6944100.86
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "n": 2745
+      }
+    ]
+  },
+  {
+    "id": "scoped-095",
+    "family": "vip_channel_performance",
+    "question": "VIP客户各支付方式的全部历史交易表现，返回支付方式和一个指标值，只考虑有效订单。",
+    "should_clarify": true,
+    "missing_slot": "metric",
+    "persona_answer": "用每种支付方式下去重的付费客户人数。",
+    "reference_sql": "SELECT o.payment_method,COUNT(DISTINCT u.user_id) n FROM users u JOIN orders o ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.is_vip=1 GROUP BY o.payment_method",
+    "alternative_reference_sql": "SELECT o.payment_method,ROUND(SUM(o.paid_amount),2) n FROM users u JOIN orders o ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.is_vip=1 GROUP BY o.payment_method",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "payment_method": "alipay",
+        "n": 442
+      },
+      {
+        "payment_method": "card",
+        "n": 444
+      },
+      {
+        "payment_method": "cash",
+        "n": 450
+      },
+      {
+        "payment_method": "wechat",
+        "n": 443
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "payment_method": "alipay",
+        "n": 3168869.35
+      },
+      {
+        "payment_method": "card",
+        "n": 3512116.06
+      },
+      {
+        "payment_method": "wechat",
+        "n": 3497651.42
+      },
+      {
+        "payment_method": "cash",
+        "n": 3180705.45
+      }
+    ]
+  },
+  {
+    "id": "scoped-096",
+    "family": "active_product_performance",
+    "question": "当前在售商品的全部历史销售规模是多少？只返回一个数，按有效订单统计。",
+    "should_clarify": true,
+    "missing_slot": "metric",
+    "persona_answer": "用售出的商品件数，即销量。",
+    "reference_sql": "SELECT SUM(i.quantity) n FROM order_items i JOIN orders o ON i.order_id=o.order_id JOIN products p ON i.product_id=p.product_id WHERE o.order_status IN ('paid','completed','shipped') AND p.is_active=1",
+    "alternative_reference_sql": "SELECT ROUND(SUM(i.item_amount),2) n FROM order_items i JOIN orders o ON i.order_id=o.order_id JOIN products p ON i.product_id=p.product_id WHERE o.order_status IN ('paid','completed','shipped') AND p.is_active=1",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 44389.0
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "n": 28124721.11
+      }
+    ]
+  },
+  {
+    "id": "scoped-097",
+    "family": "inactive_product_performance",
+    "question": "当前下架商品过去累计销售表现是多少？只返回一个数，按有效订单统计。",
+    "should_clarify": true,
+    "missing_slot": "metric",
+    "persona_answer": "用商品行实付销售金额。",
+    "reference_sql": "SELECT ROUND(SUM(i.item_amount),2) n FROM order_items i JOIN orders o ON i.order_id=o.order_id JOIN products p ON i.product_id=p.product_id WHERE o.order_status IN ('paid','completed','shipped') AND p.is_active=0",
+    "alternative_reference_sql": "SELECT SUM(i.quantity) n FROM order_items i JOIN orders o ON i.order_id=o.order_id JOIN products p ON i.product_id=p.product_id WHERE o.order_status IN ('paid','completed','shipped') AND p.is_active=0",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": null
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "n": null
+      }
+    ]
+  },
+  {
+    "id": "scoped-098",
+    "family": "refund_category_performance",
+    "question": "各商品类别全部历史已批准退款的规模，返回类别和一个指标值。",
+    "should_clarify": true,
+    "missing_slot": "metric",
+    "persona_answer": "用已批准退款记录条数。",
+    "reference_sql": "SELECT p.category,COUNT(*) n FROM refunds r JOIN products p ON r.product_id=p.product_id WHERE r.refund_status='approved' GROUP BY p.category",
+    "alternative_reference_sql": "SELECT p.category,ROUND(SUM(r.refund_amount),2) n FROM refunds r JOIN products p ON r.product_id=p.product_id WHERE r.refund_status='approved' GROUP BY p.category",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "category": "运动户外",
+        "n": 250
+      },
+      {
+        "category": "手机数码",
+        "n": 344
+      },
+      {
+        "category": "家用电器",
+        "n": 339
+      },
+      {
+        "category": "母婴用品",
+        "n": 339
+      },
+      {
+        "category": "美妆个护",
+        "n": 601
+      },
+      {
+        "category": "食品生鲜",
+        "n": 205
+      },
+      {
+        "category": "服饰鞋包",
+        "n": 429
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "category": "运动户外",
+        "n": 101937.68
+      },
+      {
+        "category": "手机数码",
+        "n": 405389.2
+      },
+      {
+        "category": "家用电器",
+        "n": 596236.7
+      },
+      {
+        "category": "母婴用品",
+        "n": 88744.84
+      },
+      {
+        "category": "美妆个护",
+        "n": 128697.84
+      },
+      {
+        "category": "食品生鲜",
+        "n": 21555.37
+      },
+      {
+        "category": "服饰鞋包",
+        "n": 139050.6
+      }
+    ]
+  },
+  {
+    "id": "scoped-099",
+    "family": "nonvip_performance",
+    "question": "非VIP客户的全部历史有效订单消费情况给我一个汇总数。",
+    "should_clarify": true,
+    "missing_slot": "metric",
+    "persona_answer": "用有效订单客单价，即平均每笔实付金额。",
+    "reference_sql": "SELECT ROUND(AVG(o.paid_amount),2) n FROM users u JOIN orders o ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.is_vip=0",
+    "alternative_reference_sql": "SELECT ROUND(SUM(o.paid_amount),2) n FROM users u JOIN orders o ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.is_vip=0",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 2613.8
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "n": 14765378.83
+      }
+    ]
+  },
+  {
+    "id": "scoped-100",
+    "family": "refund_mean_performance",
+    "question": "已批准的七天无理由退款，全部历史退款水平给我一个汇总数。",
+    "should_clarify": true,
+    "missing_slot": "metric",
+    "persona_answer": "用每条已批准退款记录的平均退款金额。",
+    "reference_sql": "SELECT ROUND(AVG(r.refund_amount),2) n FROM refunds r WHERE r.refund_status='approved' AND r.refund_reason='七天无理由'",
+    "alternative_reference_sql": "SELECT ROUND(SUM(r.refund_amount),2) n FROM refunds r WHERE r.refund_status='approved' AND r.refund_reason='七天无理由'",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 571.49
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "n": 293175.06
+      }
+    ]
+  },
+  {
+    "id": "scoped-101",
+    "family": "selected_channel",
+    "question": "按我们这次选定的支付方式，统计全部历史有效订单笔数，只要笔数。",
+    "should_clarify": true,
+    "missing_slot": "filter",
+    "persona_answer": "支付方式是alipay，支付宝。",
+    "reference_sql": "SELECT COUNT(*) n FROM orders o WHERE o.order_status IN ('paid','completed','shipped') AND o.payment_method='alipay'",
+    "alternative_reference_sql": "SELECT COUNT(*) n FROM orders o WHERE o.order_status IN ('paid','completed','shipped') AND o.payment_method='card'",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 2654
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "n": 2657
+      }
+    ]
+  },
+  {
+    "id": "scoped-102",
+    "family": "selected_tier",
+    "question": "选定客户等级的全部历史有效订单销售额是多少？只返回金额。",
+    "should_clarify": true,
+    "missing_slot": "filter",
+    "persona_answer": "客户等级选gold。",
+    "reference_sql": "SELECT ROUND(SUM(o.paid_amount),2) n FROM users u JOIN orders o ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.user_level='gold'",
+    "alternative_reference_sql": "SELECT ROUND(SUM(o.paid_amount),2) n FROM users u JOIN orders o ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.user_level='silver'",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 7889415.23
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "n": 7614010.46
+      }
+    ]
+  },
+  {
+    "id": "scoped-103",
+    "family": "selected_refund_reason",
+    "question": "本次选定的退款原因，累计批准退款金额是多少？只要金额。",
+    "should_clarify": true,
+    "missing_slot": "filter",
+    "persona_answer": "退款原因是描述不符。",
+    "reference_sql": "SELECT ROUND(SUM(r.refund_amount),2) n FROM refunds r WHERE r.refund_status='approved' AND r.refund_reason='描述不符'",
+    "alternative_reference_sql": "SELECT ROUND(SUM(r.refund_amount),2) n FROM refunds r WHERE r.refund_status='approved' AND r.refund_reason='物流破损'",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 261226.13
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "n": 307210.27
+      }
+    ]
+  },
+  {
+    "id": "scoped-104",
+    "family": "selected_province",
+    "question": "这次报表选定省份的客户总人数是多少？全部注册客户，只要人数。",
+    "should_clarify": true,
+    "missing_slot": "filter",
+    "persona_answer": "省份选择湖北。",
+    "reference_sql": "SELECT COUNT(*) n FROM users u WHERE 1=1 AND u.province='湖北'",
+    "alternative_reference_sql": "SELECT COUNT(*) n FROM users u WHERE 1=1 AND u.province='江苏'",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 378
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "n": 363
+      }
+    ]
+  },
+  {
+    "id": "scoped-105",
+    "family": "selected_city_set",
+    "question": "负责维护的那几座城市合计有多少VIP客户？只要人数。",
+    "should_clarify": true,
+    "missing_slot": "filter",
+    "persona_answer": "城市范围是南京和武汉这两座城市。",
+    "reference_sql": "SELECT COUNT(*) n FROM users u WHERE u.is_vip=1 AND u.city IN ('南京市','武汉市')",
+    "alternative_reference_sql": "SELECT COUNT(*) n FROM users u WHERE u.is_vip=1 AND u.city IN ('北京市','成都市')",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 120
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "n": 122
+      }
+    ]
+  },
+  {
+    "id": "scoped-106",
+    "family": "selected_category",
+    "question": "本次关注的商品类别里，现在有多少款已经下架？只返回数量。",
+    "should_clarify": true,
+    "missing_slot": "filter",
+    "persona_answer": "商品类别是母婴用品。",
+    "reference_sql": "SELECT COUNT(*) n FROM products p WHERE p.is_active=0 AND p.category='母婴用品'",
+    "alternative_reference_sql": "SELECT COUNT(*) n FROM products p WHERE p.is_active=0 AND p.category='手机数码'",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 0
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "n": 0
+      }
+    ]
+  },
+  {
+    "id": "scoped-107",
+    "family": "price_floor",
+    "question": "在售商品中标价达到我们约定下限的有多少款？包含下限，只返回数量。",
+    "should_clarify": true,
+    "missing_slot": "filter",
+    "persona_answer": "标价下限是600元，包含600元。",
+    "reference_sql": "SELECT COUNT(*) n FROM products p WHERE p.is_active=1 AND p.list_price>=600",
+    "alternative_reference_sql": "SELECT COUNT(*) n FROM products p WHERE p.is_active=1 AND p.list_price>=1200",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 256
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "n": 168
+      }
+    ]
+  },
+  {
+    "id": "scoped-108",
+    "family": "discount_floor",
+    "question": "优惠金额超过本次指定门槛的有效订单有几笔？全部历史，只要笔数。",
+    "should_clarify": true,
+    "missing_slot": "filter",
+    "persona_answer": "优惠金额门槛为80元，严格大于80。",
+    "reference_sql": "SELECT COUNT(*) n FROM orders o WHERE o.order_status IN ('paid','completed','shipped') AND o.discount_amount>80",
+    "alternative_reference_sql": "SELECT COUNT(*) n FROM orders o WHERE o.order_status IN ('paid','completed','shipped') AND o.discount_amount>160",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 5939
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "n": 3907
+      }
+    ]
+  },
+  {
+    "id": "scoped-109",
+    "family": "refund_floor",
+    "question": "超过本次指定退款金额门槛的已批准退款有多少条？全部历史，只要条数。",
+    "should_clarify": true,
+    "missing_slot": "filter",
+    "persona_answer": "退款金额门槛是200元，严格大于。",
+    "reference_sql": "SELECT COUNT(*) n FROM refunds r WHERE r.refund_status='approved' AND r.refund_amount>200",
+    "alternative_reference_sql": "SELECT COUNT(*) n FROM refunds r WHERE r.refund_status='approved' AND r.refund_amount>500",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 1491
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "n": 761
+      }
+    ]
+  },
+  {
+    "id": "scoped-110",
+    "family": "chosen_vip",
+    "question": "按这次指定的VIP身份范围，统计全部历史有效订单销售额，只返回金额。",
+    "should_clarify": true,
+    "missing_slot": "filter",
+    "persona_answer": "只统计非VIP，is_vip=0。",
+    "reference_sql": "SELECT ROUND(SUM(o.paid_amount),2) n FROM users u JOIN orders o ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.is_vip=0",
+    "alternative_reference_sql": "SELECT ROUND(SUM(o.paid_amount),2) n FROM users u JOIN orders o ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.is_vip=1",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 14765378.83
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "n": 13359342.28
+      }
+    ]
+  },
+  {
+    "id": "scoped-111",
+    "family": "chosen_order_status",
+    "question": "指定订单状态的全部历史订单有多少笔？只返回笔数。",
+    "should_clarify": true,
+    "missing_slot": "filter",
+    "persona_answer": "订单状态是unpaid，未支付。",
+    "reference_sql": "SELECT COUNT(*) n FROM orders o WHERE 1=1 AND o.order_status='unpaid'",
+    "alternative_reference_sql": "SELECT COUNT(*) n FROM orders o WHERE 1=1 AND o.order_status='cancelled'",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 467
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "n": 727
+      }
+    ]
+  },
+  {
+    "id": "scoped-112",
+    "family": "chosen_refund_status",
+    "question": "请数一下本次选定状态的退款记录，一共多少条？全部历史。",
+    "should_clarify": true,
+    "missing_slot": "filter",
+    "persona_answer": "退款状态选rejected，已拒绝。",
+    "reference_sql": "SELECT COUNT(*) n FROM refunds r WHERE 1=1 AND r.refund_status='rejected'",
+    "alternative_reference_sql": "SELECT COUNT(*) n FROM refunds r WHERE 1=1 AND r.refund_status='pending'",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 265
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "n": 308
+      }
+    ]
+  },
+  {
+    "id": "scoped-113",
+    "family": "catalog_price_cap",
+    "question": "手机数码中标价不超过选定预算上限的在售商品有多少款？只返回数量。",
+    "should_clarify": true,
+    "missing_slot": "filter",
+    "persona_answer": "预算上限是1800元，含1800元。",
+    "reference_sql": "SELECT COUNT(*) n FROM products p WHERE p.category='手机数码' AND p.is_active=1 AND p.list_price<=1800",
+    "alternative_reference_sql": "SELECT COUNT(*) n FROM products p WHERE p.category='手机数码' AND p.is_active=1 AND p.list_price<=3500",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 82
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "n": 113
+      }
+    ]
+  },
+  {
+    "id": "scoped-114",
+    "family": "paid_band",
+    "question": "全部历史有效订单中，实付金额落在本次指定金额区间的有多少笔？只返回笔数。",
+    "should_clarify": true,
+    "missing_slot": "filter",
+    "persona_answer": "实付金额至少500元且小于1500元。",
+    "reference_sql": "SELECT COUNT(*) n FROM orders o WHERE o.order_status IN ('paid','completed','shipped') AND o.paid_amount>=500 AND o.paid_amount<1500",
+    "alternative_reference_sql": "SELECT COUNT(*) n FROM orders o WHERE o.order_status IN ('paid','completed','shipped') AND o.paid_amount>=1500 AND o.paid_amount<3000",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 2995
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "n": 2549
+      }
+    ]
+  },
+  {
+    "id": "scoped-115",
+    "family": "reason_category",
+    "question": "家用电器中，本次指定原因的已批准退款合计多少元？全部历史，只返回金额。",
+    "should_clarify": true,
+    "missing_slot": "filter",
+    "persona_answer": "原因指定七天无理由。",
+    "reference_sql": "SELECT ROUND(SUM(r.refund_amount),2) n FROM refunds r JOIN products p ON r.product_id=p.product_id WHERE r.refund_status='approved' AND p.category='家用电器' AND r.refund_reason='七天无理由'",
+    "alternative_reference_sql": "SELECT ROUND(SUM(r.refund_amount),2) n FROM refunds r JOIN products p ON r.product_id=p.product_id WHERE r.refund_status='approved' AND p.category='家用电器' AND r.refund_reason='质量问题'",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 101491.08
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "n": 127098.9
+      }
+    ]
+  },
+  {
+    "id": "scoped-116",
+    "family": "selected_city_channels",
+    "question": "指定城市客户以微信支付的有效订单总笔数是多少？全部历史，只要笔数。",
+    "should_clarify": true,
+    "missing_slot": "filter",
+    "persona_answer": "指定城市为成都。",
+    "reference_sql": "SELECT COUNT(*) n FROM users u JOIN orders o ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND o.payment_method='wechat' AND u.city='成都市'",
+    "alternative_reference_sql": "SELECT COUNT(*) n FROM users u JOIN orders o ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND o.payment_method='wechat' AND u.city='北京市'",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 344
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "n": 383
+      }
+    ]
+  },
+  {
+    "id": "scoped-117",
+    "family": "selected_two_tiers",
+    "question": "指定的两种客户等级合起来有多少注册用户？只要人数。",
+    "should_clarify": true,
+    "missing_slot": "filter",
+    "persona_answer": "等级范围为silver和gold。",
+    "reference_sql": "SELECT COUNT(*) n FROM users u WHERE 1=1 AND u.user_level IN ('silver','gold')",
+    "alternative_reference_sql": "SELECT COUNT(*) n FROM users u WHERE 1=1 AND u.user_level IN ('normal','black')",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 1337
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "n": 1663
+      }
+    ]
+  },
+  {
+    "id": "scoped-118",
+    "family": "selected_sale_state",
+    "question": "家用电器里按本次指定的上架状态统计商品数量，只返回款数。",
+    "should_clarify": true,
+    "missing_slot": "filter",
+    "persona_answer": "只要已下架商品，is_active=0。",
+    "reference_sql": "SELECT COUNT(*) n FROM products p WHERE p.category='家用电器' AND p.is_active=0",
+    "alternative_reference_sql": "SELECT COUNT(*) n FROM products p WHERE p.category='家用电器' AND p.is_active=1",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 0
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "n": 118
+      }
+    ]
+  },
+  {
+    "id": "scoped-119",
+    "family": "selected_order_channel_avg",
+    "question": "本次选定支付渠道的有效订单客单价是多少？全部历史，只返回金额。",
+    "should_clarify": true,
+    "missing_slot": "filter",
+    "persona_answer": "支付渠道是cash，现金。",
+    "reference_sql": "SELECT ROUND(AVG(o.paid_amount),2) n FROM orders o WHERE o.order_status IN ('paid','completed','shipped') AND o.payment_method='cash'",
+    "alternative_reference_sql": "SELECT ROUND(AVG(o.paid_amount),2) n FROM orders o WHERE o.order_status IN ('paid','completed','shipped') AND o.payment_method='wechat'",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 2529.73
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "n": 2641.92
+      }
+    ]
+  },
+  {
+    "id": "scoped-120",
+    "family": "selected_province_sales",
+    "question": "本次划定省份范围内客户的有效订单实付销售额总计多少？全部历史，只返回金额。",
+    "should_clarify": true,
+    "missing_slot": "filter",
+    "persona_answer": "省份范围仅江苏和浙江。",
+    "reference_sql": "SELECT ROUND(SUM(o.paid_amount),2) n FROM users u JOIN orders o ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.province IN ('江苏','浙江')",
+    "alternative_reference_sql": "SELECT ROUND(SUM(o.paid_amount),2) n FROM users u JOIN orders o ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.province IN ('湖北','四川')",
+    "ordered": false,
+    "ground_truth_result": [
+      {
+        "n": 6669394.55
+      }
+    ],
+    "alternative_ground_truth_result": [
+      {
+        "n": 6861639.31
+      }
+    ]
+  }
+]
