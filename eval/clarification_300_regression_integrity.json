@@ -1,0 +1,16 @@
+{
+  "production_commit": "2dc294fe43dc64658af7c85e7b60aae59a6be6a8",
+  "completed_by_mode": {
+    "off": 300,
+    "on": 300
+  },
+  "interrupted_cases": 0,
+  "off_gate_decisions": 0,
+  "user_followup_answers": 0,
+  "resolved_slots_used": 0,
+  "comparable_sql_input_pairs": 138,
+  "sql_input_mismatch_case_ids": [],
+  "model_call_statuses": {
+    "ok": 870
+  }
+}
