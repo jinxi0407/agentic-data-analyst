@@ -1,0 +1,338 @@
+[
+  {
+    "id": "scoped-035",
+    "original_question": "厦门客户各等级分别有多少人？只返回等级和人数。",
+    "actual_question": "请问‘厦门’是否指用户表中 city 字段的精确值 '厦门市'？（可选：是 / 否）",
+    "persona_answer": null
+  },
+  {
+    "id": "scoped-055",
+    "original_question": "青岛客户各等级分别有多少人？只返回等级和人数。",
+    "actual_question": "请问‘青岛’是否指用户表中 city 字段的精确值 '青岛市'？（注意：当前验证的城市列表中未包含青岛）",
+    "persona_answer": null
+  },
+  {
+    "id": "scoped-061",
+    "original_question": "报表这段时间里，每种支付方式的有效订单有几笔？返回支付方式和笔数。",
+    "actual_question": "请问‘这段时间’具体指哪一段日期范围？例如：最近7天、最近30天、2026年9月1日至9月12日，或其他自定义起止日期？",
+    "persona_answer": "从2026-02-01开始，包含当天，到2026-03-01之前，不包含结束日。"
+  },
+  {
+    "id": "scoped-062",
+    "original_question": "活动期间有效订单总共优惠了多少元？只要总额。",
+    "actual_question": "活动期间具体指哪段时间？请提供开始日期和结束日期。",
+    "persona_answer": "从2026-03-01开始，包含当天，到2026-04-01之前，不包含结束日。"
+  },
+  {
+    "id": "scoped-063",
+    "original_question": "近期有效订单客单价是多少？只要金额。",
+    "actual_question": "请问‘近期’具体指多长的时间范围？例如：最近7天、最近30天，还是其他天数？",
+    "persona_answer": "从2026-04-01开始，包含当天，到2026-05-01之前，不包含结束日。"
+  },
+  {
+    "id": "scoped-064",
+    "original_question": "这一期有多少VIP客户买过东西？按有效订单统计去重人数。",
+    "actual_question": "请问‘这一期’具体指哪个时间段？例如：最近7天、最近30天、2026年9月1日至9月12日，或其他自定义起止日期？",
+    "persona_answer": "从2026-05-01开始，包含当天，到2026-06-01之前，不包含结束日。"
+  },
+  {
+    "id": "scoped-065",
+    "original_question": "最近销售额最高的两种支付方式，返回支付方式和有效订单销售额，同额按支付方式升序。",
+    "actual_question": "请问‘最近’具体指过去多少天？例如：7天、30天，或指定起止日期？",
+    "persona_answer": "从2026-06-01开始，包含当天，到2026-07-01之前，不包含结束日。"
+  },
+  {
+    "id": "scoped-066",
+    "original_question": "活动期各城市贡献的有效订单销售额，返回城市和金额。",
+    "actual_question": "活动期具体指哪段时间？请提供开始日期和结束日期。",
+    "persona_answer": "从2026-02-01开始，包含当天，到2026-03-01之前，不包含结束日。"
+  },
+  {
+    "id": "scoped-067",
+    "original_question": "近期因物流破损批准退款的记录有几条？只要条数。",
+    "actual_question": "请问‘近期’具体指多长的时间范围？例如：最近7天、最近30天，或指定起止日期？",
+    "persona_answer": "从2026-03-01开始，包含当天，到2026-04-01之前，不包含结束日。"
+  },
+  {
+    "id": "scoped-068",
+    "original_question": "报表期按原因统计已批准退款金额，返回原因和金额。",
+    "actual_question": "请明确报表期的时间范围：是全部历史数据，还是以参考日期2026-09-12为基准的某段具体期间（例如最近7天、本月、上月、近3个月等）？",
+    "persona_answer": "从2026-04-01开始，包含当天，到2026-05-01之前，不包含结束日。"
+  },
+  {
+    "id": "scoped-069",
+    "original_question": "近期银行卡支付的有效订单销售额是多少？只返回金额。",
+    "actual_question": "请问‘近期’具体指最近多少天？例如：7天、30天，还是其他天数？",
+    "persona_answer": "从2026-05-01开始，包含当天，到2026-06-01之前，不包含结束日。"
+  },
+  {
+    "id": "scoped-070",
+    "original_question": "这次活动期间gold客户的有效订单优惠总额是多少？只返回金额。",
+    "actual_question": "活动期间具体指哪段时间？请提供开始日期和结束日期。",
+    "persona_answer": "从2026-06-01开始，包含当天，到2026-07-01之前，不包含结束日。"
+  },
+  {
+    "id": "scoped-071",
+    "original_question": "这段统计时间里silver客户下了多少笔有效订单？只返回笔数。",
+    "actual_question": "请问‘这段统计时间’具体指哪段时间？例如：最近7天、最近30天、今年至今、2026年9月1日至9月12日等。",
+    "persona_answer": "从2026-02-01开始，包含当天，到2026-03-01之前，不包含结束日。"
+  },
+  {
+    "id": "scoped-072",
+    "original_question": "近期购买手机数码的有效订单客户有多少人？去重，只返回人数。",
+    "actual_question": "请问‘近期’具体指过去多少天？例如：7天、30天，还是其他天数？",
+    "persona_answer": "从2026-03-01开始，包含当天，到2026-04-01之前，不包含结束日。"
+  },
+  {
+    "id": "scoped-073",
+    "original_question": "促销那几天家用电器卖出了多少件？按有效订单销量统计，只要件数。",
+    "actual_question": "促销那几天具体是哪几天？请提供开始日期和结束日期。",
+    "persona_answer": "从2026-04-01开始，包含当天，到2026-05-01之前，不包含结束日。"
+  },
+  {
+    "id": "scoped-076",
+    "original_question": "最近新提交且状态仍为pending的退款申请有多少条？以refund_date为时间，只返回条数。",
+    "actual_question": "请问“最近”具体指多少天？例如：最近7天、最近30天，或其他天数？",
+    "persona_answer": "从2026-02-01开始，包含当天，到2026-03-01之前，不包含结束日。"
+  },
+  {
+    "id": "scoped-077",
+    "original_question": "这段时间已批准的质量问题退款平均每条多少元？只返回金额。",
+    "actual_question": "请问‘这段时间’具体指哪一段起止日期？例如：最近7天、2026年9月1日至9月12日、或自系统上线以来？",
+    "persona_answer": "从2026-03-01开始，包含当天，到2026-04-01之前，不包含结束日。"
+  },
+  {
+    "id": "scoped-079",
+    "original_question": "那段招募期间注册的VIP一共有多少人？只返回人数。",
+    "actual_question": "请问‘那段招募期间’具体指哪一段起止日期？",
+    "persona_answer": "从2025-05-01开始，包含当天，到2025-06-01之前，不包含结束日。"
+  },
+  {
+    "id": "scoped-080",
+    "original_question": "活动期间上架的家用电器一共有多少款？包含现在下架的，只返回数量。",
+    "actual_question": "活动期间具体指哪段时间？请提供开始日期和结束日期。",
+    "persona_answer": "从2025-06-01开始，包含当天，到2025-07-01之前，不包含结束日。"
+  },
+  {
+    "id": "scoped-081",
+    "original_question": "全部历史按支付方式展示成交表现，返回支付方式和一个指标值。",
+    "actual_question": "请问‘成交表现’具体指哪个指标？例如：销售金额、订单数量、支付用户数、销售数量？",
+    "persona_answer": "用有效订单实付销售金额。"
+  },
+  {
+    "id": "scoped-082",
+    "original_question": "比较各客户等级的全部历史购买表现，返回等级和一个指标值。",
+    "actual_question": "请问‘购买表现’具体指哪个指标？例如：销售金额、购买用户数、订单数量、购买商品数量，或其他？",
+    "persona_answer": "用有效订单笔数。"
+  },
+  {
+    "id": "scoped-083",
+    "original_question": "按商品类别汇总全部历史销售成绩，返回类别和一个指标值。",
+    "actual_question": "请问‘销售成绩’具体指哪个指标？例如：销售金额、销售数量、订单数、支付用户数。",
+    "persona_answer": "用有效订单卖出的商品件数，也就是销量。"
+  },
+  {
+    "id": "scoped-084",
+    "original_question": "全部历史已批准退款按原因看规模，返回原因和一个指标值。",
+    "actual_question": "已批准退款按原因统计时，您希望返回的指标值是：退款金额总和、退款笔数，还是其他？",
+    "persona_answer": "用已批准退款金额。"
+  },
+  {
+    "id": "scoped-085",
+    "original_question": "VIP客户全部历史的有效订单成交表现是多少？只返回一个数。",
+    "actual_question": "请问‘成交表现’具体指哪个指标？例如：有效订单数、销售金额、销售数量、支付用户数，或其他？",
+    "persona_answer": "用有效订单销售金额。"
+  },
+  {
+    "id": "scoped-086",
+    "original_question": "银行卡支付的全部历史有效订单，规模是多少？只返回一个数。",
+    "actual_question": "‘规模’具体指什么？可选：有效订单数量、销售金额、销售数量、支付用户数。",
+    "persona_answer": "用有效订单笔数。"
+  },
+  {
+    "id": "scoped-087",
+    "original_question": "微信渠道全部历史的客户成交情况给我一个汇总数。只考虑有效订单。",
+    "actual_question": "请问‘客户成交情况’具体指哪个指标？例如：销售金额、订单数量、成交客户数（去重用户数）、销售数量，还是其他？",
+    "persona_answer": "用去重的付费客户人数。"
+  },
+  {
+    "id": "scoped-088",
+    "original_question": "gold客户全部历史有效订单的消费水平给我一个数。",
+    "actual_question": "请问‘消费水平’具体指什么？例如：全部历史有效订单的总销售金额（paid_amount之和）、平均订单金额、总购买件数，还是其他指标？",
+    "persona_answer": "用平均每笔有效订单的实付金额，即客单价。"
+  },
+  {
+    "id": "scoped-089",
+    "original_question": "家用电器各品牌全部历史销售表现，返回品牌和一个指标值。",
+    "actual_question": "请问‘销售表现’具体指哪个指标？例如：销售金额、销售数量、支付用户数、退款率等。",
+    "persona_answer": "用有效订单商品行实付销售金额。"
+  },
+  {
+    "id": "scoped-092",
+    "original_question": "2026年8月各支付方式的交易表现，返回支付方式和一个指标值，只考虑有效订单。",
+    "actual_question": "请问‘交易表现’具体指哪个指标？例如：销售金额、订单数量、支付用户数、销售数量。",
+    "persona_answer": "用有效订单笔数。"
+  },
+  {
+    "id": "scoped-093",
+    "original_question": "silver等级客户全部历史的购买活跃度给我一个数，只考虑有效订单。",
+    "actual_question": "购买活跃度具体指什么？例如：有效订单数、支付用户数、销售金额、销售数量，还是其他指标？",
+    "persona_answer": "用有有效订单的去重客户人数。"
+  },
+  {
+    "id": "scoped-094",
+    "original_question": "现金支付渠道全部历史的成交指标是多少？只返回一个数，按有效订单统计。",
+    "actual_question": "请问‘成交指标’具体指哪个业务指标？例如：有效订单的销售金额、销售数量、支付用户数，还是其他？",
+    "persona_answer": "用有效订单销售金额。"
+  },
+  {
+    "id": "scoped-095",
+    "original_question": "VIP客户各支付方式的全部历史交易表现，返回支付方式和一个指标值，只考虑有效订单。",
+    "actual_question": "请问‘交易表现’具体指哪个指标？例如：销售金额、订单数量、支付用户数、销售数量，或其他？",
+    "persona_answer": "用每种支付方式下去重的付费客户人数。"
+  },
+  {
+    "id": "scoped-096",
+    "original_question": "当前在售商品的全部历史销售规模是多少？只返回一个数，按有效订单统计。",
+    "actual_question": "请问‘销售规模’具体指销售额（paid_amount总和）、销售数量（quantity总和），还是其他指标？",
+    "persona_answer": "用售出的商品件数，即销量。"
+  },
+  {
+    "id": "scoped-097",
+    "original_question": "当前下架商品过去累计销售表现是多少？只返回一个数，按有效订单统计。",
+    "actual_question": "请问‘销售表现’具体指销售额（paid_amount总和）、销售数量（quantity总和）还是其他指标？",
+    "persona_answer": "用商品行实付销售金额。"
+  },
+  {
+    "id": "scoped-098",
+    "original_question": "各商品类别全部历史已批准退款的规模，返回类别和一个指标值。",
+    "actual_question": "请问‘规模’具体指已批准退款的金额总和，还是已批准退款的订单数量，或是其他指标？",
+    "persona_answer": "用已批准退款记录条数。"
+  },
+  {
+    "id": "scoped-099",
+    "original_question": "非VIP客户的全部历史有效订单消费情况给我一个汇总数。",
+    "actual_question": "请问‘消费情况’具体指哪个指标？例如：有效订单的总销售金额、总购买数量、有效订单数，还是其他指标？",
+    "persona_answer": "用有效订单客单价，即平均每笔实付金额。"
+  },
+  {
+    "id": "scoped-100",
+    "original_question": "已批准的七天无理由退款，全部历史退款水平给我一个汇总数。",
+    "actual_question": "请问‘全部历史退款水平’具体指哪个指标？例如：已批准的七天无理由退款总金额、退款笔数、涉及订单数、涉及商品数，还是其他？",
+    "persona_answer": "用每条已批准退款记录的平均退款金额。"
+  },
+  {
+    "id": "scoped-101",
+    "original_question": "按我们这次选定的支付方式，统计全部历史有效订单笔数，只要笔数。",
+    "actual_question": "请问‘我们这次选定的支付方式’具体是哪一种？可选：alipay、wechat、card、cash。",
+    "persona_answer": "支付方式是alipay，支付宝。"
+  },
+  {
+    "id": "scoped-102",
+    "original_question": "选定客户等级的全部历史有效订单销售额是多少？只返回金额。",
+    "actual_question": "请问客户等级具体是哪一个？例如：normal、silver、gold 或 black？",
+    "persona_answer": "客户等级选gold。"
+  },
+  {
+    "id": "scoped-103",
+    "original_question": "本次选定的退款原因，累计批准退款金额是多少？只要金额。",
+    "actual_question": "本次选定的退款原因具体是哪一个？是否限定时间范围（例如：全部历史、近30天、2026年至今等）？",
+    "persona_answer": "退款原因是描述不符。"
+  },
+  {
+    "id": "scoped-104",
+    "original_question": "这次报表选定省份的客户总人数是多少？全部注册客户，只要人数。",
+    "actual_question": "请问这次报表选定的是哪个省份？",
+    "persona_answer": "省份选择湖北。"
+  },
+  {
+    "id": "scoped-105",
+    "original_question": "负责维护的那几座城市合计有多少VIP客户？只要人数。",
+    "actual_question": "请问‘负责维护的那几座城市’具体指哪些城市？请直接列出城市名称（例如：上海、北京、南京）。",
+    "persona_answer": "城市范围是南京和武汉这两座城市。"
+  },
+  {
+    "id": "scoped-106",
+    "original_question": "本次关注的商品类别里，现在有多少款已经下架？只返回数量。",
+    "actual_question": "本次关注的商品类别具体是哪些？请提供明确的类别名称列表，例如【家用电器, 手机数码】。",
+    "persona_answer": "商品类别是母婴用品。"
+  },
+  {
+    "id": "scoped-108",
+    "original_question": "优惠金额超过本次指定门槛的有效订单有几笔？全部历史，只要笔数。",
+    "actual_question": "优惠金额超过本次指定门槛的有效订单有几笔？全部历史，只要笔数。请问这个‘指定门槛’具体是多少？",
+    "persona_answer": "优惠金额门槛为80元，严格大于80。"
+  },
+  {
+    "id": "scoped-109",
+    "original_question": "超过本次指定退款金额门槛的已批准退款有多少条？全部历史，只要条数。",
+    "actual_question": "请问‘本次指定退款金额门槛’具体是多少？",
+    "persona_answer": "退款金额门槛是200元，严格大于。"
+  },
+  {
+    "id": "scoped-110",
+    "original_question": "按这次指定的VIP身份范围，统计全部历史有效订单销售额，只返回金额。",
+    "actual_question": "本次指定的VIP身份范围具体指哪些？例如：全部VIP用户（is_vip=1）、仅黑卡VIP（user_level='black'）、或包含银卡/金卡/黑卡的多级VIP（如user_level IN ('silver','gold','black')）？",
+    "persona_answer": "只统计非VIP，is_vip=0。"
+  },
+  {
+    "id": "scoped-111",
+    "original_question": "指定订单状态的全部历史订单有多少笔？只返回笔数。",
+    "actual_question": "请指定订单状态（例如：paid、completed、shipped、cancelled、unpaid等）。",
+    "persona_answer": "订单状态是unpaid，未支付。"
+  },
+  {
+    "id": "scoped-112",
+    "original_question": "请数一下本次选定状态的退款记录，一共多少条？全部历史。",
+    "actual_question": "本次选定状态具体指哪些退款状态？请从以下选项中选择：'approved'、'rejected'、'pending'，或提供其他明确的状态值。",
+    "persona_answer": "退款状态选rejected，已拒绝。"
+  },
+  {
+    "id": "scoped-113",
+    "original_question": "手机数码中标价不超过选定预算上限的在售商品有多少款？只返回数量。",
+    "actual_question": "请提供选定的预算上限金额。",
+    "persona_answer": "预算上限是1800元，含1800元。"
+  },
+  {
+    "id": "scoped-114",
+    "original_question": "全部历史有效订单中，实付金额落在本次指定金额区间的有多少笔？只返回笔数。",
+    "actual_question": "请提供本次指定的金额区间（例如：100元至500元）？",
+    "persona_answer": "实付金额至少500元且小于1500元。"
+  },
+  {
+    "id": "scoped-115",
+    "original_question": "家用电器中，本次指定原因的已批准退款合计多少元？全部历史，只返回金额。",
+    "actual_question": "请问‘本次指定原因’具体指哪个退款原因？请从以下常见原因中选择，或直接提供确切的退款原因文本：质量问题、物流问题、客户不喜欢、重复下单、其他。",
+    "persona_answer": "原因指定七天无理由。"
+  },
+  {
+    "id": "scoped-116",
+    "original_question": "指定城市客户以微信支付的有效订单总笔数是多少？全部历史，只要笔数。",
+    "actual_question": "请问指定的是哪个城市？",
+    "persona_answer": "指定城市为成都。"
+  },
+  {
+    "id": "scoped-117",
+    "original_question": "指定的两种客户等级合起来有多少注册用户？只要人数。",
+    "actual_question": "请问是哪两种客户等级？",
+    "persona_answer": "等级范围为silver和gold。"
+  },
+  {
+    "id": "scoped-118",
+    "original_question": "家用电器里按本次指定的上架状态统计商品数量，只返回款数。",
+    "actual_question": "请问‘本次指定的上架状态’具体指什么？例如：是‘is_active = 1’（在售），还是‘is_active = 0’（已下架），或其他状态？",
+    "persona_answer": "只要已下架商品，is_active=0。"
+  },
+  {
+    "id": "scoped-119",
+    "original_question": "本次选定支付渠道的有效订单客单价是多少？全部历史，只返回金额。",
+    "actual_question": "本次选定支付渠道具体是哪一个？",
+    "persona_answer": "支付渠道是cash，现金。"
+  },
+  {
+    "id": "scoped-120",
+    "original_question": "本次划定省份范围内客户的有效订单实付销售额总计多少？全部历史，只返回金额。",
+    "actual_question": "请问本次划定的省份范围具体是哪些省份？",
+    "persona_answer": "省份范围仅江苏和浙江。"
+  }
+]

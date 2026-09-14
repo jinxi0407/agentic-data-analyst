@@ -1,0 +1,558 @@
+[
+  {
+    "id": "scoped-035",
+    "actual_question": "请问‘厦门’是否指用户表中 city 字段的精确值 '厦门市'？（可选：是 / 否）",
+    "valid_question": false,
+    "answer_segments": [],
+    "reason": "明确城市问题被要求确认数据库精确存储值；预设用户没有数据库存储知识，不猜测市后缀，不替换城市。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  },
+  {
+    "id": "scoped-055",
+    "actual_question": "请问‘青岛’是否指用户表中 city 字段的精确值 '青岛市'？（注意：当前验证的城市列表中未包含青岛）",
+    "valid_question": false,
+    "answer_segments": [],
+    "reason": "明确城市问题被要求确认数据库精确存储值；预设用户没有数据库存储知识，不猜测市后缀，不替换城市。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  },
+  {
+    "id": "scoped-061",
+    "actual_question": "请问‘这段时间’具体指哪一段日期范围？例如：最近7天、最近30天、2026年9月1日至9月12日，或其他自定义起止日期？",
+    "valid_question": true,
+    "answer_segments": [
+      "从2026-02-01开始，包含当天，到2026-03-01之前，不包含结束日。"
+    ],
+    "reason": "实际反问请求时间范围；仅提供预设起止日期和边界。日期区间与天数是同一时间槽的等价表达，不补其他条件。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  },
+  {
+    "id": "scoped-062",
+    "actual_question": "活动期间具体指哪段时间？请提供开始日期和结束日期。",
+    "valid_question": true,
+    "answer_segments": [
+      "从2026-03-01开始，包含当天，到2026-04-01之前，不包含结束日。"
+    ],
+    "reason": "实际反问请求时间范围；仅提供预设起止日期和边界。日期区间与天数是同一时间槽的等价表达，不补其他条件。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  },
+  {
+    "id": "scoped-063",
+    "actual_question": "请问‘近期’具体指多长的时间范围？例如：最近7天、最近30天，还是其他天数？",
+    "valid_question": true,
+    "answer_segments": [
+      "从2026-04-01开始，包含当天，到2026-05-01之前，不包含结束日。"
+    ],
+    "reason": "实际反问请求时间范围；仅提供预设起止日期和边界。日期区间与天数是同一时间槽的等价表达，不补其他条件。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  },
+  {
+    "id": "scoped-064",
+    "actual_question": "请问‘这一期’具体指哪个时间段？例如：最近7天、最近30天、2026年9月1日至9月12日，或其他自定义起止日期？",
+    "valid_question": true,
+    "answer_segments": [
+      "从2026-05-01开始，包含当天，到2026-06-01之前，不包含结束日。"
+    ],
+    "reason": "实际反问请求时间范围；仅提供预设起止日期和边界。日期区间与天数是同一时间槽的等价表达，不补其他条件。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  },
+  {
+    "id": "scoped-065",
+    "actual_question": "请问‘最近’具体指过去多少天？例如：7天、30天，或指定起止日期？",
+    "valid_question": true,
+    "answer_segments": [
+      "从2026-06-01开始，包含当天，到2026-07-01之前，不包含结束日。"
+    ],
+    "reason": "实际反问请求时间范围；仅提供预设起止日期和边界。日期区间与天数是同一时间槽的等价表达，不补其他条件。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  },
+  {
+    "id": "scoped-066",
+    "actual_question": "活动期具体指哪段时间？请提供开始日期和结束日期。",
+    "valid_question": true,
+    "answer_segments": [
+      "从2026-02-01开始，包含当天，到2026-03-01之前，不包含结束日。"
+    ],
+    "reason": "实际反问请求时间范围；仅提供预设起止日期和边界。日期区间与天数是同一时间槽的等价表达，不补其他条件。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  },
+  {
+    "id": "scoped-067",
+    "actual_question": "请问‘近期’具体指多长的时间范围？例如：最近7天、最近30天，或指定起止日期？",
+    "valid_question": true,
+    "answer_segments": [
+      "从2026-03-01开始，包含当天，到2026-04-01之前，不包含结束日。"
+    ],
+    "reason": "实际反问请求时间范围；仅提供预设起止日期和边界。日期区间与天数是同一时间槽的等价表达，不补其他条件。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  },
+  {
+    "id": "scoped-068",
+    "actual_question": "请明确报表期的时间范围：是全部历史数据，还是以参考日期2026-09-12为基准的某段具体期间（例如最近7天、本月、上月、近3个月等）？",
+    "valid_question": true,
+    "answer_segments": [
+      "从2026-04-01开始，包含当天，到2026-05-01之前，不包含结束日。"
+    ],
+    "reason": "实际反问请求时间范围；仅提供预设起止日期和边界。日期区间与天数是同一时间槽的等价表达，不补其他条件。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  },
+  {
+    "id": "scoped-069",
+    "actual_question": "请问‘近期’具体指最近多少天？例如：7天、30天，还是其他天数？",
+    "valid_question": true,
+    "answer_segments": [
+      "从2026-05-01开始，包含当天，到2026-06-01之前，不包含结束日。"
+    ],
+    "reason": "实际反问请求时间范围；仅提供预设起止日期和边界。日期区间与天数是同一时间槽的等价表达，不补其他条件。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  },
+  {
+    "id": "scoped-070",
+    "actual_question": "活动期间具体指哪段时间？请提供开始日期和结束日期。",
+    "valid_question": true,
+    "answer_segments": [
+      "从2026-06-01开始，包含当天，到2026-07-01之前，不包含结束日。"
+    ],
+    "reason": "实际反问请求时间范围；仅提供预设起止日期和边界。日期区间与天数是同一时间槽的等价表达，不补其他条件。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  },
+  {
+    "id": "scoped-071",
+    "actual_question": "请问‘这段统计时间’具体指哪段时间？例如：最近7天、最近30天、今年至今、2026年9月1日至9月12日等。",
+    "valid_question": true,
+    "answer_segments": [
+      "从2026-02-01开始，包含当天，到2026-03-01之前，不包含结束日。"
+    ],
+    "reason": "实际反问请求时间范围；仅提供预设起止日期和边界。日期区间与天数是同一时间槽的等价表达，不补其他条件。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  },
+  {
+    "id": "scoped-072",
+    "actual_question": "请问‘近期’具体指过去多少天？例如：7天、30天，还是其他天数？",
+    "valid_question": true,
+    "answer_segments": [
+      "从2026-03-01开始，包含当天，到2026-04-01之前，不包含结束日。"
+    ],
+    "reason": "实际反问请求时间范围；仅提供预设起止日期和边界。日期区间与天数是同一时间槽的等价表达，不补其他条件。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  },
+  {
+    "id": "scoped-073",
+    "actual_question": "促销那几天具体是哪几天？请提供开始日期和结束日期。",
+    "valid_question": true,
+    "answer_segments": [
+      "从2026-04-01开始，包含当天，到2026-05-01之前，不包含结束日。"
+    ],
+    "reason": "实际反问请求时间范围；仅提供预设起止日期和边界。日期区间与天数是同一时间槽的等价表达，不补其他条件。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  },
+  {
+    "id": "scoped-076",
+    "actual_question": "请问“最近”具体指多少天？例如：最近7天、最近30天，或其他天数？",
+    "valid_question": true,
+    "answer_segments": [
+      "从2026-02-01开始，包含当天，到2026-03-01之前，不包含结束日。"
+    ],
+    "reason": "实际反问请求时间范围；仅提供预设起止日期和边界。日期区间与天数是同一时间槽的等价表达，不补其他条件。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  },
+  {
+    "id": "scoped-077",
+    "actual_question": "请问‘这段时间’具体指哪一段起止日期？例如：最近7天、2026年9月1日至9月12日、或自系统上线以来？",
+    "valid_question": true,
+    "answer_segments": [
+      "从2026-03-01开始，包含当天，到2026-04-01之前，不包含结束日。"
+    ],
+    "reason": "实际反问请求时间范围；仅提供预设起止日期和边界。日期区间与天数是同一时间槽的等价表达，不补其他条件。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  },
+  {
+    "id": "scoped-079",
+    "actual_question": "请问‘那段招募期间’具体指哪一段起止日期？",
+    "valid_question": true,
+    "answer_segments": [
+      "从2025-05-01开始，包含当天，到2025-06-01之前，不包含结束日。"
+    ],
+    "reason": "实际反问请求时间范围；仅提供预设起止日期和边界。日期区间与天数是同一时间槽的等价表达，不补其他条件。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  },
+  {
+    "id": "scoped-080",
+    "actual_question": "活动期间具体指哪段时间？请提供开始日期和结束日期。",
+    "valid_question": true,
+    "answer_segments": [
+      "从2025-06-01开始，包含当天，到2025-07-01之前，不包含结束日。"
+    ],
+    "reason": "实际反问请求时间范围；仅提供预设起止日期和边界。日期区间与天数是同一时间槽的等价表达，不补其他条件。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  },
+  {
+    "id": "scoped-081",
+    "actual_question": "请问‘成交表现’具体指哪个指标？例如：销售金额、订单数量、支付用户数、销售数量？",
+    "valid_question": true,
+    "answer_segments": [
+      "用有效订单实付销售金额。"
+    ],
+    "reason": "实际反问请求业务指标；只提供预设指标口径，不追加时间、实体、排名或完整标准问题。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  },
+  {
+    "id": "scoped-082",
+    "actual_question": "请问‘购买表现’具体指哪个指标？例如：销售金额、购买用户数、订单数量、购买商品数量，或其他？",
+    "valid_question": true,
+    "answer_segments": [
+      "用有效订单笔数。"
+    ],
+    "reason": "实际反问请求业务指标；只提供预设指标口径，不追加时间、实体、排名或完整标准问题。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  },
+  {
+    "id": "scoped-083",
+    "actual_question": "请问‘销售成绩’具体指哪个指标？例如：销售金额、销售数量、订单数、支付用户数。",
+    "valid_question": true,
+    "answer_segments": [
+      "用有效订单卖出的商品件数，也就是销量。"
+    ],
+    "reason": "实际反问请求业务指标；只提供预设指标口径，不追加时间、实体、排名或完整标准问题。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  },
+  {
+    "id": "scoped-084",
+    "actual_question": "已批准退款按原因统计时，您希望返回的指标值是：退款金额总和、退款笔数，还是其他？",
+    "valid_question": true,
+    "answer_segments": [
+      "用已批准退款金额。"
+    ],
+    "reason": "实际反问请求业务指标；只提供预设指标口径，不追加时间、实体、排名或完整标准问题。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  },
+  {
+    "id": "scoped-085",
+    "actual_question": "请问‘成交表现’具体指哪个指标？例如：有效订单数、销售金额、销售数量、支付用户数，或其他？",
+    "valid_question": true,
+    "answer_segments": [
+      "用有效订单销售金额。"
+    ],
+    "reason": "实际反问请求业务指标；只提供预设指标口径，不追加时间、实体、排名或完整标准问题。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  },
+  {
+    "id": "scoped-086",
+    "actual_question": "‘规模’具体指什么？可选：有效订单数量、销售金额、销售数量、支付用户数。",
+    "valid_question": true,
+    "answer_segments": [
+      "用有效订单笔数。"
+    ],
+    "reason": "实际反问请求业务指标；只提供预设指标口径，不追加时间、实体、排名或完整标准问题。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  },
+  {
+    "id": "scoped-087",
+    "actual_question": "请问‘客户成交情况’具体指哪个指标？例如：销售金额、订单数量、成交客户数（去重用户数）、销售数量，还是其他？",
+    "valid_question": true,
+    "answer_segments": [
+      "用去重的付费客户人数。"
+    ],
+    "reason": "实际反问请求业务指标；只提供预设指标口径，不追加时间、实体、排名或完整标准问题。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  },
+  {
+    "id": "scoped-088",
+    "actual_question": "请问‘消费水平’具体指什么？例如：全部历史有效订单的总销售金额（paid_amount之和）、平均订单金额、总购买件数，还是其他指标？",
+    "valid_question": true,
+    "answer_segments": [
+      "用平均每笔有效订单的实付金额，即客单价。"
+    ],
+    "reason": "实际反问请求业务指标；只提供预设指标口径，不追加时间、实体、排名或完整标准问题。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  },
+  {
+    "id": "scoped-089",
+    "actual_question": "请问‘销售表现’具体指哪个指标？例如：销售金额、销售数量、支付用户数、退款率等。",
+    "valid_question": true,
+    "answer_segments": [
+      "用有效订单商品行实付销售金额。"
+    ],
+    "reason": "实际反问请求业务指标；只提供预设指标口径，不追加时间、实体、排名或完整标准问题。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  },
+  {
+    "id": "scoped-092",
+    "actual_question": "请问‘交易表现’具体指哪个指标？例如：销售金额、订单数量、支付用户数、销售数量。",
+    "valid_question": true,
+    "answer_segments": [
+      "用有效订单笔数。"
+    ],
+    "reason": "实际反问请求业务指标；只提供预设指标口径，不追加时间、实体、排名或完整标准问题。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  },
+  {
+    "id": "scoped-093",
+    "actual_question": "购买活跃度具体指什么？例如：有效订单数、支付用户数、销售金额、销售数量，还是其他指标？",
+    "valid_question": true,
+    "answer_segments": [
+      "用有有效订单的去重客户人数。"
+    ],
+    "reason": "实际反问请求业务指标；只提供预设指标口径，不追加时间、实体、排名或完整标准问题。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  },
+  {
+    "id": "scoped-094",
+    "actual_question": "请问‘成交指标’具体指哪个业务指标？例如：有效订单的销售金额、销售数量、支付用户数，还是其他？",
+    "valid_question": true,
+    "answer_segments": [
+      "用有效订单销售金额。"
+    ],
+    "reason": "实际反问请求业务指标；只提供预设指标口径，不追加时间、实体、排名或完整标准问题。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  },
+  {
+    "id": "scoped-095",
+    "actual_question": "请问‘交易表现’具体指哪个指标？例如：销售金额、订单数量、支付用户数、销售数量，或其他？",
+    "valid_question": true,
+    "answer_segments": [
+      "用每种支付方式下去重的付费客户人数。"
+    ],
+    "reason": "实际反问请求业务指标；只提供预设指标口径，不追加时间、实体、排名或完整标准问题。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  },
+  {
+    "id": "scoped-096",
+    "actual_question": "请问‘销售规模’具体指销售额（paid_amount总和）、销售数量（quantity总和），还是其他指标？",
+    "valid_question": true,
+    "answer_segments": [
+      "用售出的商品件数，即销量。"
+    ],
+    "reason": "实际反问请求业务指标；只提供预设指标口径，不追加时间、实体、排名或完整标准问题。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  },
+  {
+    "id": "scoped-097",
+    "actual_question": "请问‘销售表现’具体指销售额（paid_amount总和）、销售数量（quantity总和）还是其他指标？",
+    "valid_question": true,
+    "answer_segments": [
+      "用商品行实付销售金额。"
+    ],
+    "reason": "实际反问请求业务指标；只提供预设指标口径，不追加时间、实体、排名或完整标准问题。 反问允许其他指标，故可明确提供商品行金额、退款记录条数或平均金额，不被错误或不完整的示例限定。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  },
+  {
+    "id": "scoped-098",
+    "actual_question": "请问‘规模’具体指已批准退款的金额总和，还是已批准退款的订单数量，或是其他指标？",
+    "valid_question": true,
+    "answer_segments": [
+      "用已批准退款记录条数。"
+    ],
+    "reason": "实际反问请求业务指标；只提供预设指标口径，不追加时间、实体、排名或完整标准问题。 反问允许其他指标，故可明确提供商品行金额、退款记录条数或平均金额，不被错误或不完整的示例限定。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  },
+  {
+    "id": "scoped-099",
+    "actual_question": "请问‘消费情况’具体指哪个指标？例如：有效订单的总销售金额、总购买数量、有效订单数，还是其他指标？",
+    "valid_question": true,
+    "answer_segments": [
+      "用有效订单客单价，即平均每笔实付金额。"
+    ],
+    "reason": "实际反问请求业务指标；只提供预设指标口径，不追加时间、实体、排名或完整标准问题。 反问允许其他指标，故可明确提供商品行金额、退款记录条数或平均金额，不被错误或不完整的示例限定。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  },
+  {
+    "id": "scoped-100",
+    "actual_question": "请问‘全部历史退款水平’具体指哪个指标？例如：已批准的七天无理由退款总金额、退款笔数、涉及订单数、涉及商品数，还是其他？",
+    "valid_question": true,
+    "answer_segments": [
+      "用每条已批准退款记录的平均退款金额。"
+    ],
+    "reason": "实际反问请求业务指标；只提供预设指标口径，不追加时间、实体、排名或完整标准问题。 反问允许其他指标，故可明确提供商品行金额、退款记录条数或平均金额，不被错误或不完整的示例限定。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  },
+  {
+    "id": "scoped-101",
+    "actual_question": "请问‘我们这次选定的支付方式’具体是哪一种？可选：alipay、wechat、card、cash。",
+    "valid_question": true,
+    "answer_segments": [
+      "支付方式是alipay，支付宝。"
+    ],
+    "reason": "实际反问请求题面缺失的筛选或实体范围；仅提供相应预设值，不补其他条件。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  },
+  {
+    "id": "scoped-102",
+    "actual_question": "请问客户等级具体是哪一个？例如：normal、silver、gold 或 black？",
+    "valid_question": true,
+    "answer_segments": [
+      "客户等级选gold。"
+    ],
+    "reason": "实际反问请求题面缺失的筛选或实体范围；仅提供相应预设值，不补其他条件。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  },
+  {
+    "id": "scoped-103",
+    "actual_question": "本次选定的退款原因具体是哪一个？是否限定时间范围（例如：全部历史、近30天、2026年至今等）？",
+    "valid_question": true,
+    "answer_segments": [
+      "退款原因是描述不符。"
+    ],
+    "reason": "反问确实询问退款原因，另外询问是否限时间。只回复已知原因；原问题累计按既有全部历史口径，不编造日期。若系统仍要求新时间，完整性检查须失败。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  },
+  {
+    "id": "scoped-104",
+    "actual_question": "请问这次报表选定的是哪个省份？",
+    "valid_question": true,
+    "answer_segments": [
+      "省份选择湖北。"
+    ],
+    "reason": "实际反问请求题面缺失的筛选或实体范围；仅提供相应预设值，不补其他条件。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  },
+  {
+    "id": "scoped-105",
+    "actual_question": "请问‘负责维护的那几座城市’具体指哪些城市？请直接列出城市名称（例如：上海、北京、南京）。",
+    "valid_question": true,
+    "answer_segments": [
+      "城市范围是南京和武汉这两座城市。"
+    ],
+    "reason": "实际反问请求题面缺失的筛选或实体范围；仅提供相应预设值，不补其他条件。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  },
+  {
+    "id": "scoped-106",
+    "actual_question": "本次关注的商品类别具体是哪些？请提供明确的类别名称列表，例如【家用电器, 手机数码】。",
+    "valid_question": true,
+    "answer_segments": [
+      "商品类别是母婴用品。"
+    ],
+    "reason": "实际反问请求题面缺失的筛选或实体范围；仅提供相应预设值，不补其他条件。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  },
+  {
+    "id": "scoped-108",
+    "actual_question": "优惠金额超过本次指定门槛的有效订单有几笔？全部历史，只要笔数。请问这个‘指定门槛’具体是多少？",
+    "valid_question": true,
+    "answer_segments": [
+      "优惠金额门槛为80元，严格大于80。"
+    ],
+    "reason": "实际反问请求题面缺失的筛选或实体范围；仅提供相应预设值，不补其他条件。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  },
+  {
+    "id": "scoped-109",
+    "actual_question": "请问‘本次指定退款金额门槛’具体是多少？",
+    "valid_question": true,
+    "answer_segments": [
+      "退款金额门槛是200元，严格大于。"
+    ],
+    "reason": "实际反问请求题面缺失的筛选或实体范围；仅提供相应预设值，不补其他条件。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  },
+  {
+    "id": "scoped-110",
+    "actual_question": "本次指定的VIP身份范围具体指哪些？例如：全部VIP用户（is_vip=1）、仅黑卡VIP（user_level='black'）、或包含银卡/金卡/黑卡的多级VIP（如user_level IN ('silver','gold','black')）？",
+    "valid_question": true,
+    "answer_segments": [
+      "只统计非VIP，is_vip=0。"
+    ],
+    "reason": "实际询问VIP身份范围，示例偏向VIP等级但属于开放举例。只提供预设非VIP身份，不接受示例中未经验证的等级等价关系。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  },
+  {
+    "id": "scoped-111",
+    "actual_question": "请指定订单状态（例如：paid、completed、shipped、cancelled、unpaid等）。",
+    "valid_question": true,
+    "answer_segments": [
+      "订单状态是unpaid，未支付。"
+    ],
+    "reason": "实际反问请求题面缺失的筛选或实体范围；仅提供相应预设值，不补其他条件。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  },
+  {
+    "id": "scoped-112",
+    "actual_question": "本次选定状态具体指哪些退款状态？请从以下选项中选择：'approved'、'rejected'、'pending'，或提供其他明确的状态值。",
+    "valid_question": true,
+    "answer_segments": [
+      "退款状态选rejected，已拒绝。"
+    ],
+    "reason": "实际反问请求题面缺失的筛选或实体范围；仅提供相应预设值，不补其他条件。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  },
+  {
+    "id": "scoped-113",
+    "actual_question": "请提供选定的预算上限金额。",
+    "valid_question": true,
+    "answer_segments": [
+      "预算上限是1800元，含1800元。"
+    ],
+    "reason": "实际反问请求题面缺失的筛选或实体范围；仅提供相应预设值，不补其他条件。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  },
+  {
+    "id": "scoped-114",
+    "actual_question": "请提供本次指定的金额区间（例如：100元至500元）？",
+    "valid_question": true,
+    "answer_segments": [
+      "实付金额至少500元且小于1500元。"
+    ],
+    "reason": "实际反问请求题面缺失的筛选或实体范围；仅提供相应预设值，不补其他条件。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  },
+  {
+    "id": "scoped-115",
+    "actual_question": "请问‘本次指定原因’具体指哪个退款原因？请从以下常见原因中选择，或直接提供确切的退款原因文本：质量问题、物流问题、客户不喜欢、重复下单、其他。",
+    "valid_question": true,
+    "answer_segments": [
+      "原因指定七天无理由。"
+    ],
+    "reason": "反问中的部分退款原因举例不是实际存储值，但明确允许直接提供确切文本。只回复预设的七天无理由，不改为示例中的其他原因。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  },
+  {
+    "id": "scoped-116",
+    "actual_question": "请问指定的是哪个城市？",
+    "valid_question": true,
+    "answer_segments": [
+      "指定城市为成都。"
+    ],
+    "reason": "实际反问请求题面缺失的筛选或实体范围；仅提供相应预设值，不补其他条件。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  },
+  {
+    "id": "scoped-117",
+    "actual_question": "请问是哪两种客户等级？",
+    "valid_question": true,
+    "answer_segments": [
+      "等级范围为silver和gold。"
+    ],
+    "reason": "实际反问请求题面缺失的筛选或实体范围；仅提供相应预设值，不补其他条件。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  },
+  {
+    "id": "scoped-118",
+    "actual_question": "请问‘本次指定的上架状态’具体指什么？例如：是‘is_active = 1’（在售），还是‘is_active = 0’（已下架），或其他状态？",
+    "valid_question": true,
+    "answer_segments": [
+      "只要已下架商品，is_active=0。"
+    ],
+    "reason": "实际反问请求题面缺失的筛选或实体范围；仅提供相应预设值，不补其他条件。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  },
+  {
+    "id": "scoped-119",
+    "actual_question": "本次选定支付渠道具体是哪一个？",
+    "valid_question": true,
+    "answer_segments": [
+      "支付渠道是cash，现金。"
+    ],
+    "reason": "实际反问请求题面缺失的筛选或实体范围；仅提供相应预设值，不补其他条件。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  },
+  {
+    "id": "scoped-120",
+    "actual_question": "请问本次划定的省份范围具体是哪些省份？",
+    "valid_question": true,
+    "answer_segments": [
+      "省份范围仅江苏和浙江。"
+    ],
+    "reason": "实际反问请求题面缺失的筛选或实体范围；仅提供相应预设值，不补其他条件。",
+    "review_method": "manual question-only review; no SQL/GT/labels in packet"
+  }
+]

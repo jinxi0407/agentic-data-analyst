@@ -1,0 +1,13 @@
+{
+  "api_health": 200,
+  "ui": 200,
+  "direct_http": 200,
+  "direct_status": "success",
+  "first_http": 200,
+  "first_status": "needs_clarification",
+  "followup_http": 200,
+  "followup_status": "invalid_output",
+  "followup_preserves_original": false,
+  "guardrail_write_blocked": true,
+  "db_read_only_account": true
+}
