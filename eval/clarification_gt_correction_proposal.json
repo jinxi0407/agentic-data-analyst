@@ -1,0 +1,1474 @@
+[
+  {
+    "split": "dev",
+    "case_id": "dev-0-4-c",
+    "dataset_sha256": "95a1fac0f5031f31d1dbbe289e3718710b8dead1c5f0dce086720a79a21daf45",
+    "original_reference_sql": "SELECT COUNT(*) AS total FROM users u JOIN orders o ON u.user_id=o.user_id WHERE u.city='上海' AND o.order_status IN ('paid','completed','shipped')",
+    "proposed_reference_sql": "SELECT COUNT(*) AS total FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '上海市' AND o.order_status IN ('paid', 'completed', 'shipped')",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "上海",
+        "actual_city": "上海市"
+      }
+    ],
+    "original_ground_truth": [
+      {
+        "total": 0
+      }
+    ],
+    "proposed_ground_truth": [
+      {
+        "total": 1407
+      }
+    ]
+  },
+  {
+    "split": "dev",
+    "case_id": "dev-0-4-a",
+    "dataset_sha256": "95a1fac0f5031f31d1dbbe289e3718710b8dead1c5f0dce086720a79a21daf45",
+    "original_reference_sql": "SELECT COUNT(*) AS total FROM users u JOIN orders o ON u.user_id=o.user_id WHERE u.city='上海' AND o.order_status IN ('paid','completed','shipped')",
+    "proposed_reference_sql": "SELECT COUNT(*) AS total FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '上海市' AND o.order_status IN ('paid', 'completed', 'shipped')",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "上海",
+        "actual_city": "上海市"
+      }
+    ],
+    "original_ground_truth": [
+      {
+        "total": 0
+      }
+    ],
+    "proposed_ground_truth": [
+      {
+        "total": 1407
+      }
+    ]
+  },
+  {
+    "split": "dev",
+    "case_id": "dev-1-4-c",
+    "dataset_sha256": "95a1fac0f5031f31d1dbbe289e3718710b8dead1c5f0dce086720a79a21daf45",
+    "original_reference_sql": "SELECT COUNT(*) AS total FROM users u JOIN orders o ON u.user_id=o.user_id WHERE u.city='杭州' AND o.order_status IN ('paid','completed','shipped')",
+    "proposed_reference_sql": "SELECT COUNT(*) AS total FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '杭州市' AND o.order_status IN ('paid', 'completed', 'shipped')",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "杭州",
+        "actual_city": "杭州市"
+      }
+    ],
+    "original_ground_truth": [
+      {
+        "total": 0
+      }
+    ],
+    "proposed_ground_truth": [
+      {
+        "total": 1275
+      }
+    ]
+  },
+  {
+    "split": "dev",
+    "case_id": "dev-1-4-a",
+    "dataset_sha256": "95a1fac0f5031f31d1dbbe289e3718710b8dead1c5f0dce086720a79a21daf45",
+    "original_reference_sql": "SELECT COUNT(*) AS total FROM users u JOIN orders o ON u.user_id=o.user_id WHERE u.city='杭州' AND o.order_status IN ('paid','completed','shipped')",
+    "proposed_reference_sql": "SELECT COUNT(*) AS total FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '杭州市' AND o.order_status IN ('paid', 'completed', 'shipped')",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "杭州",
+        "actual_city": "杭州市"
+      }
+    ],
+    "original_ground_truth": [
+      {
+        "total": 0
+      }
+    ],
+    "proposed_ground_truth": [
+      {
+        "total": 1275
+      }
+    ]
+  },
+  {
+    "split": "dev",
+    "case_id": "dev-2-4-c",
+    "dataset_sha256": "95a1fac0f5031f31d1dbbe289e3718710b8dead1c5f0dce086720a79a21daf45",
+    "original_reference_sql": "SELECT COUNT(*) AS total FROM users u JOIN orders o ON u.user_id=o.user_id WHERE u.city='北京' AND o.order_status IN ('paid','completed','shipped')",
+    "proposed_reference_sql": "SELECT COUNT(*) AS total FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '北京市' AND o.order_status IN ('paid', 'completed', 'shipped')",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "北京",
+        "actual_city": "北京市"
+      }
+    ],
+    "original_ground_truth": [
+      {
+        "total": 0
+      }
+    ],
+    "proposed_ground_truth": [
+      {
+        "total": 1459
+      }
+    ]
+  },
+  {
+    "split": "dev",
+    "case_id": "dev-2-4-a",
+    "dataset_sha256": "95a1fac0f5031f31d1dbbe289e3718710b8dead1c5f0dce086720a79a21daf45",
+    "original_reference_sql": "SELECT COUNT(*) AS total FROM users u JOIN orders o ON u.user_id=o.user_id WHERE u.city='北京' AND o.order_status IN ('paid','completed','shipped')",
+    "proposed_reference_sql": "SELECT COUNT(*) AS total FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '北京市' AND o.order_status IN ('paid', 'completed', 'shipped')",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "北京",
+        "actual_city": "北京市"
+      }
+    ],
+    "original_ground_truth": [
+      {
+        "total": 0
+      }
+    ],
+    "proposed_ground_truth": [
+      {
+        "total": 1459
+      }
+    ]
+  },
+  {
+    "split": "dev",
+    "case_id": "dev-3-4-c",
+    "dataset_sha256": "95a1fac0f5031f31d1dbbe289e3718710b8dead1c5f0dce086720a79a21daf45",
+    "original_reference_sql": "SELECT COUNT(*) AS total FROM users u JOIN orders o ON u.user_id=o.user_id WHERE u.city='广州' AND o.order_status IN ('paid','completed','shipped')",
+    "proposed_reference_sql": "SELECT COUNT(*) AS total FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '广州市' AND o.order_status IN ('paid', 'completed', 'shipped')",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "广州",
+        "actual_city": "广州市"
+      }
+    ],
+    "original_ground_truth": [
+      {
+        "total": 0
+      }
+    ],
+    "proposed_ground_truth": [
+      {
+        "total": 1278
+      }
+    ]
+  },
+  {
+    "split": "dev",
+    "case_id": "dev-3-4-a",
+    "dataset_sha256": "95a1fac0f5031f31d1dbbe289e3718710b8dead1c5f0dce086720a79a21daf45",
+    "original_reference_sql": "SELECT COUNT(*) AS total FROM users u JOIN orders o ON u.user_id=o.user_id WHERE u.city='广州' AND o.order_status IN ('paid','completed','shipped')",
+    "proposed_reference_sql": "SELECT COUNT(*) AS total FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '广州市' AND o.order_status IN ('paid', 'completed', 'shipped')",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "广州",
+        "actual_city": "广州市"
+      }
+    ],
+    "original_ground_truth": [
+      {
+        "total": 0
+      }
+    ],
+    "proposed_ground_truth": [
+      {
+        "total": 1278
+      }
+    ]
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-0-0-c",
+    "dataset_sha256": "9d9cda96abbe978eb1126e1933bf2cefc0e30615419bcac9ff6fffac2dff8c10",
+    "original_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='上海' AND register_date>='2026-08-24' AND register_date<'2026-09-12'",
+    "proposed_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city = '上海市' AND register_date >= '2026-08-24' AND register_date < '2026-09-12'",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "上海",
+        "actual_city": "上海市"
+      }
+    ],
+    "original_ground_truth": [
+      {
+        "total": 0
+      }
+    ],
+    "proposed_ground_truth": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-0-0-a",
+    "dataset_sha256": "9d9cda96abbe978eb1126e1933bf2cefc0e30615419bcac9ff6fffac2dff8c10",
+    "original_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='上海' AND register_date>='2026-08-24' AND register_date<'2026-09-12'",
+    "proposed_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city = '上海市' AND register_date >= '2026-08-24' AND register_date < '2026-09-12'",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "上海",
+        "actual_city": "上海市"
+      }
+    ],
+    "original_ground_truth": [
+      {
+        "total": 0
+      }
+    ],
+    "proposed_ground_truth": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-0-2-c",
+    "dataset_sha256": "9d9cda96abbe978eb1126e1933bf2cefc0e30615419bcac9ff6fffac2dff8c10",
+    "original_reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='上海' AND o.paid_amount>850",
+    "proposed_reference_sql": "SELECT COUNT(*) AS total FROM orders AS o JOIN users AS u ON u.user_id = o.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.city = '上海市' AND o.paid_amount > 850",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "上海",
+        "actual_city": "上海市"
+      }
+    ],
+    "original_ground_truth": [
+      {
+        "total": 0
+      }
+    ],
+    "proposed_ground_truth": [
+      {
+        "total": 987
+      }
+    ]
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-0-2-a",
+    "dataset_sha256": "9d9cda96abbe978eb1126e1933bf2cefc0e30615419bcac9ff6fffac2dff8c10",
+    "original_reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='上海' AND o.paid_amount>850",
+    "proposed_reference_sql": "SELECT COUNT(*) AS total FROM orders AS o JOIN users AS u ON u.user_id = o.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.city = '上海市' AND o.paid_amount > 850",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "上海",
+        "actual_city": "上海市"
+      }
+    ],
+    "original_ground_truth": [
+      {
+        "total": 0
+      }
+    ],
+    "proposed_ground_truth": [
+      {
+        "total": 987
+      }
+    ]
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-0-4-c",
+    "dataset_sha256": "9d9cda96abbe978eb1126e1933bf2cefc0e30615419bcac9ff6fffac2dff8c10",
+    "original_reference_sql": "SELECT u.user_id,COUNT(*) AS total FROM users u JOIN orders o ON o.user_id=u.user_id WHERE u.city='上海' AND o.order_status IN ('paid','completed','shipped') GROUP BY u.user_id ORDER BY total DESC,u.user_id ASC LIMIT 4",
+    "proposed_reference_sql": "SELECT u.user_id, COUNT(*) AS total FROM users AS u JOIN orders AS o ON o.user_id = u.user_id WHERE u.city = '上海市' AND o.order_status IN ('paid', 'completed', 'shipped') GROUP BY u.user_id ORDER BY total DESC, u.user_id ASC LIMIT 4",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "上海",
+        "actual_city": "上海市"
+      }
+    ],
+    "original_ground_truth": [],
+    "proposed_ground_truth": [
+      {
+        "user_id": 1466,
+        "total": 21
+      },
+      {
+        "user_id": 1187,
+        "total": 19
+      },
+      {
+        "user_id": 313,
+        "total": 18
+      },
+      {
+        "user_id": 2141,
+        "total": 18
+      }
+    ]
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-0-4-a",
+    "dataset_sha256": "9d9cda96abbe978eb1126e1933bf2cefc0e30615419bcac9ff6fffac2dff8c10",
+    "original_reference_sql": "SELECT u.user_id,COUNT(*) AS total FROM users u JOIN orders o ON o.user_id=u.user_id WHERE u.city='上海' AND o.order_status IN ('paid','completed','shipped') GROUP BY u.user_id ORDER BY total DESC,u.user_id ASC LIMIT 4",
+    "proposed_reference_sql": "SELECT u.user_id, COUNT(*) AS total FROM users AS u JOIN orders AS o ON o.user_id = u.user_id WHERE u.city = '上海市' AND o.order_status IN ('paid', 'completed', 'shipped') GROUP BY u.user_id ORDER BY total DESC, u.user_id ASC LIMIT 4",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "上海",
+        "actual_city": "上海市"
+      }
+    ],
+    "original_ground_truth": [],
+    "proposed_ground_truth": [
+      {
+        "user_id": 1466,
+        "total": 21
+      },
+      {
+        "user_id": 1187,
+        "total": 19
+      },
+      {
+        "user_id": 313,
+        "total": 18
+      },
+      {
+        "user_id": 2141,
+        "total": 18
+      }
+    ]
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-0-6-c",
+    "dataset_sha256": "9d9cda96abbe978eb1126e1933bf2cefc0e30615419bcac9ff6fffac2dff8c10",
+    "original_reference_sql": "SELECT ROUND(SUM(o.paid_amount),2) AS amount FROM orders o JOIN users u ON o.user_id=u.user_id WHERE u.city='上海' AND o.order_status IN ('paid','completed','shipped')",
+    "proposed_reference_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS amount FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE u.city = '上海市' AND o.order_status IN ('paid', 'completed', 'shipped')",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "上海",
+        "actual_city": "上海市"
+      }
+    ],
+    "original_ground_truth": [
+      {
+        "amount": null
+      }
+    ],
+    "proposed_ground_truth": [
+      {
+        "amount": 3770523.65
+      }
+    ]
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-0-6-a",
+    "dataset_sha256": "9d9cda96abbe978eb1126e1933bf2cefc0e30615419bcac9ff6fffac2dff8c10",
+    "original_reference_sql": "SELECT ROUND(SUM(o.paid_amount),2) AS amount FROM orders o JOIN users u ON o.user_id=u.user_id WHERE u.city='上海' AND o.order_status IN ('paid','completed','shipped')",
+    "proposed_reference_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS amount FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE u.city = '上海市' AND o.order_status IN ('paid', 'completed', 'shipped')",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "上海",
+        "actual_city": "上海市"
+      }
+    ],
+    "original_ground_truth": [
+      {
+        "amount": null
+      }
+    ],
+    "proposed_ground_truth": [
+      {
+        "amount": 3770523.65
+      }
+    ]
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-0-8-c",
+    "dataset_sha256": "9d9cda96abbe978eb1126e1933bf2cefc0e30615419bcac9ff6fffac2dff8c10",
+    "original_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='上海' AND is_vip=1",
+    "proposed_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city = '上海市' AND is_vip = 1",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "上海",
+        "actual_city": "上海市"
+      }
+    ],
+    "original_ground_truth": [
+      {
+        "total": 0
+      }
+    ],
+    "proposed_ground_truth": [
+      {
+        "total": 65
+      }
+    ]
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-0-8-a",
+    "dataset_sha256": "9d9cda96abbe978eb1126e1933bf2cefc0e30615419bcac9ff6fffac2dff8c10",
+    "original_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='上海' AND is_vip=1",
+    "proposed_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city = '上海市' AND is_vip = 1",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "上海",
+        "actual_city": "上海市"
+      }
+    ],
+    "original_ground_truth": [
+      {
+        "total": 0
+      }
+    ],
+    "proposed_ground_truth": [
+      {
+        "total": 65
+      }
+    ]
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-0-10-c",
+    "dataset_sha256": "9d9cda96abbe978eb1126e1933bf2cefc0e30615419bcac9ff6fffac2dff8c10",
+    "original_reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='上海'",
+    "proposed_reference_sql": "SELECT COUNT(*) AS total FROM orders AS o JOIN users AS u ON u.user_id = o.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.city = '上海市'",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "上海",
+        "actual_city": "上海市"
+      }
+    ],
+    "original_ground_truth": [
+      {
+        "total": 0
+      }
+    ],
+    "proposed_ground_truth": [
+      {
+        "total": 1407
+      }
+    ]
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-0-10-a",
+    "dataset_sha256": "9d9cda96abbe978eb1126e1933bf2cefc0e30615419bcac9ff6fffac2dff8c10",
+    "original_reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='上海'",
+    "proposed_reference_sql": "SELECT COUNT(*) AS total FROM orders AS o JOIN users AS u ON u.user_id = o.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.city = '上海市'",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "上海",
+        "actual_city": "上海市"
+      }
+    ],
+    "original_ground_truth": [
+      {
+        "total": 0
+      }
+    ],
+    "proposed_ground_truth": [
+      {
+        "total": 1407
+      }
+    ]
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-1-0-c",
+    "dataset_sha256": "9d9cda96abbe978eb1126e1933bf2cefc0e30615419bcac9ff6fffac2dff8c10",
+    "original_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='北京' AND register_date>='2026-08-06' AND register_date<'2026-09-12'",
+    "proposed_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city = '北京市' AND register_date >= '2026-08-06' AND register_date < '2026-09-12'",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "北京",
+        "actual_city": "北京市"
+      }
+    ],
+    "original_ground_truth": [
+      {
+        "total": 0
+      }
+    ],
+    "proposed_ground_truth": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-1-0-a",
+    "dataset_sha256": "9d9cda96abbe978eb1126e1933bf2cefc0e30615419bcac9ff6fffac2dff8c10",
+    "original_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='北京' AND register_date>='2026-08-06' AND register_date<'2026-09-12'",
+    "proposed_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city = '北京市' AND register_date >= '2026-08-06' AND register_date < '2026-09-12'",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "北京",
+        "actual_city": "北京市"
+      }
+    ],
+    "original_ground_truth": [
+      {
+        "total": 0
+      }
+    ],
+    "proposed_ground_truth": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-1-2-c",
+    "dataset_sha256": "9d9cda96abbe978eb1126e1933bf2cefc0e30615419bcac9ff6fffac2dff8c10",
+    "original_reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='北京' AND o.paid_amount>1280",
+    "proposed_reference_sql": "SELECT COUNT(*) AS total FROM orders AS o JOIN users AS u ON u.user_id = o.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.city = '北京市' AND o.paid_amount > 1280",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "北京",
+        "actual_city": "北京市"
+      }
+    ],
+    "original_ground_truth": [
+      {
+        "total": 0
+      }
+    ],
+    "proposed_ground_truth": [
+      {
+        "total": 844
+      }
+    ]
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-1-2-a",
+    "dataset_sha256": "9d9cda96abbe978eb1126e1933bf2cefc0e30615419bcac9ff6fffac2dff8c10",
+    "original_reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='北京' AND o.paid_amount>1280",
+    "proposed_reference_sql": "SELECT COUNT(*) AS total FROM orders AS o JOIN users AS u ON u.user_id = o.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.city = '北京市' AND o.paid_amount > 1280",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "北京",
+        "actual_city": "北京市"
+      }
+    ],
+    "original_ground_truth": [
+      {
+        "total": 0
+      }
+    ],
+    "proposed_ground_truth": [
+      {
+        "total": 844
+      }
+    ]
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-1-4-c",
+    "dataset_sha256": "9d9cda96abbe978eb1126e1933bf2cefc0e30615419bcac9ff6fffac2dff8c10",
+    "original_reference_sql": "SELECT u.user_id,COUNT(*) AS total FROM users u JOIN orders o ON o.user_id=u.user_id WHERE u.city='北京' AND o.order_status IN ('paid','completed','shipped') GROUP BY u.user_id ORDER BY total DESC,u.user_id ASC LIMIT 5",
+    "proposed_reference_sql": "SELECT u.user_id, COUNT(*) AS total FROM users AS u JOIN orders AS o ON o.user_id = u.user_id WHERE u.city = '北京市' AND o.order_status IN ('paid', 'completed', 'shipped') GROUP BY u.user_id ORDER BY total DESC, u.user_id ASC LIMIT 5",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "北京",
+        "actual_city": "北京市"
+      }
+    ],
+    "original_ground_truth": [],
+    "proposed_ground_truth": [
+      {
+        "user_id": 2493,
+        "total": 20
+      },
+      {
+        "user_id": 1892,
+        "total": 18
+      },
+      {
+        "user_id": 1923,
+        "total": 18
+      },
+      {
+        "user_id": 1012,
+        "total": 17
+      },
+      {
+        "user_id": 2001,
+        "total": 17
+      }
+    ]
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-1-4-a",
+    "dataset_sha256": "9d9cda96abbe978eb1126e1933bf2cefc0e30615419bcac9ff6fffac2dff8c10",
+    "original_reference_sql": "SELECT u.user_id,COUNT(*) AS total FROM users u JOIN orders o ON o.user_id=u.user_id WHERE u.city='北京' AND o.order_status IN ('paid','completed','shipped') GROUP BY u.user_id ORDER BY total DESC,u.user_id ASC LIMIT 5",
+    "proposed_reference_sql": "SELECT u.user_id, COUNT(*) AS total FROM users AS u JOIN orders AS o ON o.user_id = u.user_id WHERE u.city = '北京市' AND o.order_status IN ('paid', 'completed', 'shipped') GROUP BY u.user_id ORDER BY total DESC, u.user_id ASC LIMIT 5",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "北京",
+        "actual_city": "北京市"
+      }
+    ],
+    "original_ground_truth": [],
+    "proposed_ground_truth": [
+      {
+        "user_id": 2493,
+        "total": 20
+      },
+      {
+        "user_id": 1892,
+        "total": 18
+      },
+      {
+        "user_id": 1923,
+        "total": 18
+      },
+      {
+        "user_id": 1012,
+        "total": 17
+      },
+      {
+        "user_id": 2001,
+        "total": 17
+      }
+    ]
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-1-6-c",
+    "dataset_sha256": "9d9cda96abbe978eb1126e1933bf2cefc0e30615419bcac9ff6fffac2dff8c10",
+    "original_reference_sql": "SELECT ROUND(SUM(o.paid_amount),2) AS amount FROM orders o JOIN users u ON o.user_id=u.user_id WHERE u.city='北京' AND o.order_status IN ('paid','completed','shipped')",
+    "proposed_reference_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS amount FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE u.city = '北京市' AND o.order_status IN ('paid', 'completed', 'shipped')",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "北京",
+        "actual_city": "北京市"
+      }
+    ],
+    "original_ground_truth": [
+      {
+        "amount": null
+      }
+    ],
+    "proposed_ground_truth": [
+      {
+        "amount": 3715837.07
+      }
+    ]
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-1-6-a",
+    "dataset_sha256": "9d9cda96abbe978eb1126e1933bf2cefc0e30615419bcac9ff6fffac2dff8c10",
+    "original_reference_sql": "SELECT ROUND(SUM(o.paid_amount),2) AS amount FROM orders o JOIN users u ON o.user_id=u.user_id WHERE u.city='北京' AND o.order_status IN ('paid','completed','shipped')",
+    "proposed_reference_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS amount FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE u.city = '北京市' AND o.order_status IN ('paid', 'completed', 'shipped')",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "北京",
+        "actual_city": "北京市"
+      }
+    ],
+    "original_ground_truth": [
+      {
+        "amount": null
+      }
+    ],
+    "proposed_ground_truth": [
+      {
+        "amount": 3715837.07
+      }
+    ]
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-1-8-c",
+    "dataset_sha256": "9d9cda96abbe978eb1126e1933bf2cefc0e30615419bcac9ff6fffac2dff8c10",
+    "original_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='北京' AND is_vip=1",
+    "proposed_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city = '北京市' AND is_vip = 1",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "北京",
+        "actual_city": "北京市"
+      }
+    ],
+    "original_ground_truth": [
+      {
+        "total": 0
+      }
+    ],
+    "proposed_ground_truth": [
+      {
+        "total": 66
+      }
+    ]
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-1-8-a",
+    "dataset_sha256": "9d9cda96abbe978eb1126e1933bf2cefc0e30615419bcac9ff6fffac2dff8c10",
+    "original_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='北京' AND is_vip=1",
+    "proposed_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city = '北京市' AND is_vip = 1",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "北京",
+        "actual_city": "北京市"
+      }
+    ],
+    "original_ground_truth": [
+      {
+        "total": 0
+      }
+    ],
+    "proposed_ground_truth": [
+      {
+        "total": 66
+      }
+    ]
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-1-10-c",
+    "dataset_sha256": "9d9cda96abbe978eb1126e1933bf2cefc0e30615419bcac9ff6fffac2dff8c10",
+    "original_reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='北京'",
+    "proposed_reference_sql": "SELECT COUNT(*) AS total FROM orders AS o JOIN users AS u ON u.user_id = o.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.city = '北京市'",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "北京",
+        "actual_city": "北京市"
+      }
+    ],
+    "original_ground_truth": [
+      {
+        "total": 0
+      }
+    ],
+    "proposed_ground_truth": [
+      {
+        "total": 1459
+      }
+    ]
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-1-10-a",
+    "dataset_sha256": "9d9cda96abbe978eb1126e1933bf2cefc0e30615419bcac9ff6fffac2dff8c10",
+    "original_reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='北京'",
+    "proposed_reference_sql": "SELECT COUNT(*) AS total FROM orders AS o JOIN users AS u ON u.user_id = o.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.city = '北京市'",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "北京",
+        "actual_city": "北京市"
+      }
+    ],
+    "original_ground_truth": [
+      {
+        "total": 0
+      }
+    ],
+    "proposed_ground_truth": [
+      {
+        "total": 1459
+      }
+    ]
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-2-0-c",
+    "dataset_sha256": "9d9cda96abbe978eb1126e1933bf2cefc0e30615419bcac9ff6fffac2dff8c10",
+    "original_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='广州' AND register_date>='2026-07-21' AND register_date<'2026-09-12'",
+    "proposed_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city = '广州市' AND register_date >= '2026-07-21' AND register_date < '2026-09-12'",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "广州",
+        "actual_city": "广州市"
+      }
+    ],
+    "original_ground_truth": [
+      {
+        "total": 0
+      }
+    ],
+    "proposed_ground_truth": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-2-0-a",
+    "dataset_sha256": "9d9cda96abbe978eb1126e1933bf2cefc0e30615419bcac9ff6fffac2dff8c10",
+    "original_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='广州' AND register_date>='2026-07-21' AND register_date<'2026-09-12'",
+    "proposed_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city = '广州市' AND register_date >= '2026-07-21' AND register_date < '2026-09-12'",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "广州",
+        "actual_city": "广州市"
+      }
+    ],
+    "original_ground_truth": [
+      {
+        "total": 0
+      }
+    ],
+    "proposed_ground_truth": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-2-2-c",
+    "dataset_sha256": "9d9cda96abbe978eb1126e1933bf2cefc0e30615419bcac9ff6fffac2dff8c10",
+    "original_reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='广州' AND o.paid_amount>1710",
+    "proposed_reference_sql": "SELECT COUNT(*) AS total FROM orders AS o JOIN users AS u ON u.user_id = o.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.city = '广州市' AND o.paid_amount > 1710",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "广州",
+        "actual_city": "广州市"
+      }
+    ],
+    "original_ground_truth": [
+      {
+        "total": 0
+      }
+    ],
+    "proposed_ground_truth": [
+      {
+        "total": 627
+      }
+    ]
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-2-2-a",
+    "dataset_sha256": "9d9cda96abbe978eb1126e1933bf2cefc0e30615419bcac9ff6fffac2dff8c10",
+    "original_reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='广州' AND o.paid_amount>1710",
+    "proposed_reference_sql": "SELECT COUNT(*) AS total FROM orders AS o JOIN users AS u ON u.user_id = o.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.city = '广州市' AND o.paid_amount > 1710",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "广州",
+        "actual_city": "广州市"
+      }
+    ],
+    "original_ground_truth": [
+      {
+        "total": 0
+      }
+    ],
+    "proposed_ground_truth": [
+      {
+        "total": 627
+      }
+    ]
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-2-4-c",
+    "dataset_sha256": "9d9cda96abbe978eb1126e1933bf2cefc0e30615419bcac9ff6fffac2dff8c10",
+    "original_reference_sql": "SELECT u.user_id,COUNT(*) AS total FROM users u JOIN orders o ON o.user_id=u.user_id WHERE u.city='广州' AND o.order_status IN ('paid','completed','shipped') GROUP BY u.user_id ORDER BY total DESC,u.user_id ASC LIMIT 6",
+    "proposed_reference_sql": "SELECT u.user_id, COUNT(*) AS total FROM users AS u JOIN orders AS o ON o.user_id = u.user_id WHERE u.city = '广州市' AND o.order_status IN ('paid', 'completed', 'shipped') GROUP BY u.user_id ORDER BY total DESC, u.user_id ASC LIMIT 6",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "广州",
+        "actual_city": "广州市"
+      }
+    ],
+    "original_ground_truth": [],
+    "proposed_ground_truth": [
+      {
+        "user_id": 2525,
+        "total": 19
+      },
+      {
+        "user_id": 1335,
+        "total": 18
+      },
+      {
+        "user_id": 2901,
+        "total": 18
+      },
+      {
+        "user_id": 336,
+        "total": 16
+      },
+      {
+        "user_id": 460,
+        "total": 16
+      },
+      {
+        "user_id": 2804,
+        "total": 16
+      }
+    ]
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-2-4-a",
+    "dataset_sha256": "9d9cda96abbe978eb1126e1933bf2cefc0e30615419bcac9ff6fffac2dff8c10",
+    "original_reference_sql": "SELECT u.user_id,COUNT(*) AS total FROM users u JOIN orders o ON o.user_id=u.user_id WHERE u.city='广州' AND o.order_status IN ('paid','completed','shipped') GROUP BY u.user_id ORDER BY total DESC,u.user_id ASC LIMIT 6",
+    "proposed_reference_sql": "SELECT u.user_id, COUNT(*) AS total FROM users AS u JOIN orders AS o ON o.user_id = u.user_id WHERE u.city = '广州市' AND o.order_status IN ('paid', 'completed', 'shipped') GROUP BY u.user_id ORDER BY total DESC, u.user_id ASC LIMIT 6",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "广州",
+        "actual_city": "广州市"
+      }
+    ],
+    "original_ground_truth": [],
+    "proposed_ground_truth": [
+      {
+        "user_id": 2525,
+        "total": 19
+      },
+      {
+        "user_id": 1335,
+        "total": 18
+      },
+      {
+        "user_id": 2901,
+        "total": 18
+      },
+      {
+        "user_id": 336,
+        "total": 16
+      },
+      {
+        "user_id": 460,
+        "total": 16
+      },
+      {
+        "user_id": 2804,
+        "total": 16
+      }
+    ]
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-2-6-c",
+    "dataset_sha256": "9d9cda96abbe978eb1126e1933bf2cefc0e30615419bcac9ff6fffac2dff8c10",
+    "original_reference_sql": "SELECT ROUND(SUM(o.paid_amount),2) AS amount FROM orders o JOIN users u ON o.user_id=u.user_id WHERE u.city='广州' AND o.order_status IN ('paid','completed','shipped')",
+    "proposed_reference_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS amount FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE u.city = '广州市' AND o.order_status IN ('paid', 'completed', 'shipped')",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "广州",
+        "actual_city": "广州市"
+      }
+    ],
+    "original_ground_truth": [
+      {
+        "amount": null
+      }
+    ],
+    "proposed_ground_truth": [
+      {
+        "amount": 3376417.86
+      }
+    ]
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-2-6-a",
+    "dataset_sha256": "9d9cda96abbe978eb1126e1933bf2cefc0e30615419bcac9ff6fffac2dff8c10",
+    "original_reference_sql": "SELECT ROUND(SUM(o.paid_amount),2) AS amount FROM orders o JOIN users u ON o.user_id=u.user_id WHERE u.city='广州' AND o.order_status IN ('paid','completed','shipped')",
+    "proposed_reference_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS amount FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE u.city = '广州市' AND o.order_status IN ('paid', 'completed', 'shipped')",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "广州",
+        "actual_city": "广州市"
+      }
+    ],
+    "original_ground_truth": [
+      {
+        "amount": null
+      }
+    ],
+    "proposed_ground_truth": [
+      {
+        "amount": 3376417.86
+      }
+    ]
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-2-8-c",
+    "dataset_sha256": "9d9cda96abbe978eb1126e1933bf2cefc0e30615419bcac9ff6fffac2dff8c10",
+    "original_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='广州' AND is_vip=1",
+    "proposed_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city = '广州市' AND is_vip = 1",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "广州",
+        "actual_city": "广州市"
+      }
+    ],
+    "original_ground_truth": [
+      {
+        "total": 0
+      }
+    ],
+    "proposed_ground_truth": [
+      {
+        "total": 47
+      }
+    ]
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-2-8-a",
+    "dataset_sha256": "9d9cda96abbe978eb1126e1933bf2cefc0e30615419bcac9ff6fffac2dff8c10",
+    "original_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='广州' AND is_vip=1",
+    "proposed_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city = '广州市' AND is_vip = 1",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "广州",
+        "actual_city": "广州市"
+      }
+    ],
+    "original_ground_truth": [
+      {
+        "total": 0
+      }
+    ],
+    "proposed_ground_truth": [
+      {
+        "total": 47
+      }
+    ]
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-2-10-c",
+    "dataset_sha256": "9d9cda96abbe978eb1126e1933bf2cefc0e30615419bcac9ff6fffac2dff8c10",
+    "original_reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='广州'",
+    "proposed_reference_sql": "SELECT COUNT(*) AS total FROM orders AS o JOIN users AS u ON u.user_id = o.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.city = '广州市'",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "广州",
+        "actual_city": "广州市"
+      }
+    ],
+    "original_ground_truth": [
+      {
+        "total": 0
+      }
+    ],
+    "proposed_ground_truth": [
+      {
+        "total": 1278
+      }
+    ]
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-2-10-a",
+    "dataset_sha256": "9d9cda96abbe978eb1126e1933bf2cefc0e30615419bcac9ff6fffac2dff8c10",
+    "original_reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='广州'",
+    "proposed_reference_sql": "SELECT COUNT(*) AS total FROM orders AS o JOIN users AS u ON u.user_id = o.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.city = '广州市'",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "广州",
+        "actual_city": "广州市"
+      }
+    ],
+    "original_ground_truth": [
+      {
+        "total": 0
+      }
+    ],
+    "proposed_ground_truth": [
+      {
+        "total": 1278
+      }
+    ]
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-4-0-c",
+    "dataset_sha256": "9d9cda96abbe978eb1126e1933bf2cefc0e30615419bcac9ff6fffac2dff8c10",
+    "original_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='杭州' AND register_date>='2026-06-15' AND register_date<'2026-09-12'",
+    "proposed_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city = '杭州市' AND register_date >= '2026-06-15' AND register_date < '2026-09-12'",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "杭州",
+        "actual_city": "杭州市"
+      }
+    ],
+    "original_ground_truth": [
+      {
+        "total": 0
+      }
+    ],
+    "proposed_ground_truth": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-4-0-a",
+    "dataset_sha256": "9d9cda96abbe978eb1126e1933bf2cefc0e30615419bcac9ff6fffac2dff8c10",
+    "original_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='杭州' AND register_date>='2026-06-15' AND register_date<'2026-09-12'",
+    "proposed_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city = '杭州市' AND register_date >= '2026-06-15' AND register_date < '2026-09-12'",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "杭州",
+        "actual_city": "杭州市"
+      }
+    ],
+    "original_ground_truth": [
+      {
+        "total": 0
+      }
+    ],
+    "proposed_ground_truth": [
+      {
+        "total": 0
+      }
+    ]
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-4-2-c",
+    "dataset_sha256": "9d9cda96abbe978eb1126e1933bf2cefc0e30615419bcac9ff6fffac2dff8c10",
+    "original_reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='杭州' AND o.paid_amount>2570",
+    "proposed_reference_sql": "SELECT COUNT(*) AS total FROM orders AS o JOIN users AS u ON u.user_id = o.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.city = '杭州市' AND o.paid_amount > 2570",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "杭州",
+        "actual_city": "杭州市"
+      }
+    ],
+    "original_ground_truth": [
+      {
+        "total": 0
+      }
+    ],
+    "proposed_ground_truth": [
+      {
+        "total": 443
+      }
+    ]
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-4-2-a",
+    "dataset_sha256": "9d9cda96abbe978eb1126e1933bf2cefc0e30615419bcac9ff6fffac2dff8c10",
+    "original_reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='杭州' AND o.paid_amount>2570",
+    "proposed_reference_sql": "SELECT COUNT(*) AS total FROM orders AS o JOIN users AS u ON u.user_id = o.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.city = '杭州市' AND o.paid_amount > 2570",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "杭州",
+        "actual_city": "杭州市"
+      }
+    ],
+    "original_ground_truth": [
+      {
+        "total": 0
+      }
+    ],
+    "proposed_ground_truth": [
+      {
+        "total": 443
+      }
+    ]
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-4-4-c",
+    "dataset_sha256": "9d9cda96abbe978eb1126e1933bf2cefc0e30615419bcac9ff6fffac2dff8c10",
+    "original_reference_sql": "SELECT u.user_id,COUNT(*) AS total FROM users u JOIN orders o ON o.user_id=u.user_id WHERE u.city='杭州' AND o.order_status IN ('paid','completed','shipped') GROUP BY u.user_id ORDER BY total DESC,u.user_id ASC LIMIT 8",
+    "proposed_reference_sql": "SELECT u.user_id, COUNT(*) AS total FROM users AS u JOIN orders AS o ON o.user_id = u.user_id WHERE u.city = '杭州市' AND o.order_status IN ('paid', 'completed', 'shipped') GROUP BY u.user_id ORDER BY total DESC, u.user_id ASC LIMIT 8",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "杭州",
+        "actual_city": "杭州市"
+      }
+    ],
+    "original_ground_truth": [],
+    "proposed_ground_truth": [
+      {
+        "user_id": 2341,
+        "total": 21
+      },
+      {
+        "user_id": 2424,
+        "total": 21
+      },
+      {
+        "user_id": 1152,
+        "total": 19
+      },
+      {
+        "user_id": 2166,
+        "total": 17
+      },
+      {
+        "user_id": 1378,
+        "total": 16
+      },
+      {
+        "user_id": 198,
+        "total": 15
+      },
+      {
+        "user_id": 1168,
+        "total": 15
+      },
+      {
+        "user_id": 1488,
+        "total": 15
+      }
+    ]
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-4-4-a",
+    "dataset_sha256": "9d9cda96abbe978eb1126e1933bf2cefc0e30615419bcac9ff6fffac2dff8c10",
+    "original_reference_sql": "SELECT u.user_id,COUNT(*) AS total FROM users u JOIN orders o ON o.user_id=u.user_id WHERE u.city='杭州' AND o.order_status IN ('paid','completed','shipped') GROUP BY u.user_id ORDER BY total DESC,u.user_id ASC LIMIT 8",
+    "proposed_reference_sql": "SELECT u.user_id, COUNT(*) AS total FROM users AS u JOIN orders AS o ON o.user_id = u.user_id WHERE u.city = '杭州市' AND o.order_status IN ('paid', 'completed', 'shipped') GROUP BY u.user_id ORDER BY total DESC, u.user_id ASC LIMIT 8",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "杭州",
+        "actual_city": "杭州市"
+      }
+    ],
+    "original_ground_truth": [],
+    "proposed_ground_truth": [
+      {
+        "user_id": 2341,
+        "total": 21
+      },
+      {
+        "user_id": 2424,
+        "total": 21
+      },
+      {
+        "user_id": 1152,
+        "total": 19
+      },
+      {
+        "user_id": 2166,
+        "total": 17
+      },
+      {
+        "user_id": 1378,
+        "total": 16
+      },
+      {
+        "user_id": 198,
+        "total": 15
+      },
+      {
+        "user_id": 1168,
+        "total": 15
+      },
+      {
+        "user_id": 1488,
+        "total": 15
+      }
+    ]
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-4-6-c",
+    "dataset_sha256": "9d9cda96abbe978eb1126e1933bf2cefc0e30615419bcac9ff6fffac2dff8c10",
+    "original_reference_sql": "SELECT ROUND(SUM(o.paid_amount),2) AS amount FROM orders o JOIN users u ON o.user_id=u.user_id WHERE u.city='杭州' AND o.order_status IN ('paid','completed','shipped')",
+    "proposed_reference_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS amount FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE u.city = '杭州市' AND o.order_status IN ('paid', 'completed', 'shipped')",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "杭州",
+        "actual_city": "杭州市"
+      }
+    ],
+    "original_ground_truth": [
+      {
+        "amount": null
+      }
+    ],
+    "proposed_ground_truth": [
+      {
+        "amount": 3287398.68
+      }
+    ]
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-4-6-a",
+    "dataset_sha256": "9d9cda96abbe978eb1126e1933bf2cefc0e30615419bcac9ff6fffac2dff8c10",
+    "original_reference_sql": "SELECT ROUND(SUM(o.paid_amount),2) AS amount FROM orders o JOIN users u ON o.user_id=u.user_id WHERE u.city='杭州' AND o.order_status IN ('paid','completed','shipped')",
+    "proposed_reference_sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS amount FROM orders AS o JOIN users AS u ON o.user_id = u.user_id WHERE u.city = '杭州市' AND o.order_status IN ('paid', 'completed', 'shipped')",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "杭州",
+        "actual_city": "杭州市"
+      }
+    ],
+    "original_ground_truth": [
+      {
+        "amount": null
+      }
+    ],
+    "proposed_ground_truth": [
+      {
+        "amount": 3287398.68
+      }
+    ]
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-4-8-c",
+    "dataset_sha256": "9d9cda96abbe978eb1126e1933bf2cefc0e30615419bcac9ff6fffac2dff8c10",
+    "original_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='杭州' AND is_vip=1",
+    "proposed_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city = '杭州市' AND is_vip = 1",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "杭州",
+        "actual_city": "杭州市"
+      }
+    ],
+    "original_ground_truth": [
+      {
+        "total": 0
+      }
+    ],
+    "proposed_ground_truth": [
+      {
+        "total": 52
+      }
+    ]
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-4-8-a",
+    "dataset_sha256": "9d9cda96abbe978eb1126e1933bf2cefc0e30615419bcac9ff6fffac2dff8c10",
+    "original_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city='杭州' AND is_vip=1",
+    "proposed_reference_sql": "SELECT COUNT(*) AS total FROM users WHERE city = '杭州市' AND is_vip = 1",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "杭州",
+        "actual_city": "杭州市"
+      }
+    ],
+    "original_ground_truth": [
+      {
+        "total": 0
+      }
+    ],
+    "proposed_ground_truth": [
+      {
+        "total": 52
+      }
+    ]
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-4-10-c",
+    "dataset_sha256": "9d9cda96abbe978eb1126e1933bf2cefc0e30615419bcac9ff6fffac2dff8c10",
+    "original_reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='杭州'",
+    "proposed_reference_sql": "SELECT COUNT(*) AS total FROM orders AS o JOIN users AS u ON u.user_id = o.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.city = '杭州市'",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "杭州",
+        "actual_city": "杭州市"
+      }
+    ],
+    "original_ground_truth": [
+      {
+        "total": 0
+      }
+    ],
+    "proposed_ground_truth": [
+      {
+        "total": 1275
+      }
+    ]
+  },
+  {
+    "split": "holdout",
+    "case_id": "holdout-4-10-a",
+    "dataset_sha256": "9d9cda96abbe978eb1126e1933bf2cefc0e30615419bcac9ff6fffac2dff8c10",
+    "original_reference_sql": "SELECT COUNT(*) AS total FROM orders o JOIN users u ON u.user_id=o.user_id WHERE o.order_status IN ('paid','completed','shipped') AND u.city='杭州'",
+    "proposed_reference_sql": "SELECT COUNT(*) AS total FROM orders AS o JOIN users AS u ON u.user_id = o.user_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND u.city = '杭州市'",
+    "reason": "City literal does not match actual database enum; no model results consulted.",
+    "changes": [
+      {
+        "original_city": "杭州",
+        "actual_city": "杭州市"
+      }
+    ],
+    "original_ground_truth": [
+      {
+        "total": 0
+      }
+    ],
+    "proposed_ground_truth": [
+      {
+        "total": 1275
+      }
+    ]
+  }
+]

@@ -15,6 +15,9 @@ htmlcov/
 
 # Virtual environments
 .venv/
+.venv
+.venv.nosync/
+.venv.icloud-backup/
 venv/
 env/
 
@@ -22,6 +25,7 @@ env/
 .DS_Store
 *.log
 logs/
+.run/
 cache/
 .idea/
 .vscode/
