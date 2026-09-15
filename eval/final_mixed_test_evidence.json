@@ -1,0 +1,13 @@
+{
+  "command": ".venv/bin/python -m pytest -q --junitxml=.run/final_mixed_pytest.xml",
+  "passed": 112,
+  "failures": 0,
+  "errors": 0,
+  "warnings": 2,
+  "elapsed_s": 21.36,
+  "warning_descriptions": [
+    "Existing Starlette TestClient anyio.abc.BlockingPortal deprecation",
+    "Existing DashScope Assistants API deprecation during SDK transport retry test"
+  ],
+  "production_changes_in_this_evaluation": false
+}

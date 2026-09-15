@@ -1,0 +1,234 @@
+[
+  {
+    "id": "final_mixed_141",
+    "actual_question": "请问‘最近一段时间’具体指多长的时间范围？例如：最近7天、最近30天，还是本月至今？",
+    "answerable": true,
+    "reason": "Asked for the recent period; the frozen start/end dates answer only that period.",
+    "packet_sha256": "6e40c63e9d9cd04fd3929210909247716bfda719c71a8448aa6e91be7f7bfdbf",
+    "review_method": "Local manual comparison of public question, actual follow-up and pre-frozen single-slot answer only"
+  },
+  {
+    "id": "final_mixed_143",
+    "actual_question": "请问‘那段时间’具体指哪一段日期范围？例如：开始日期和结束日期，或相对参考日（2026-09-12）的天数。",
+    "answerable": true,
+    "reason": "Asked what that time period means; the frozen explicit date interval supplies it.",
+    "packet_sha256": "6e40c63e9d9cd04fd3929210909247716bfda719c71a8448aa6e91be7f7bfdbf",
+    "review_method": "Local manual comparison of public question, actual follow-up and pre-frozen single-slot answer only"
+  },
+  {
+    "id": "final_mixed_147",
+    "actual_question": "“最近一段时间”具体指多长的时间范围？例如：过去7天、过去30天，还是本月至今？",
+    "answerable": true,
+    "reason": "Asked how long the recent period is; the frozen interval supplies exactly the date filter.",
+    "packet_sha256": "6e40c63e9d9cd04fd3929210909247716bfda719c71a8448aa6e91be7f7bfdbf",
+    "review_method": "Local manual comparison of public question, actual follow-up and pre-frozen single-slot answer only"
+  },
+  {
+    "id": "final_mixed_149",
+    "actual_question": "What time period does '这段时间' refer to? Please specify a date range (e.g., last 30 days, August 2026, or all time).",
+    "answerable": true,
+    "reason": "The English question asks for the date range; the frozen Chinese/numeric date interval directly answers it.",
+    "packet_sha256": "6e40c63e9d9cd04fd3929210909247716bfda719c71a8448aa6e91be7f7bfdbf",
+    "review_method": "Local manual comparison of public question, actual follow-up and pre-frozen single-slot answer only"
+  },
+  {
+    "id": "final_mixed_152",
+    "actual_question": "请问‘过去一段时间’具体指多长？例如：最近7天、最近30天、上个月，还是其他时间范围？",
+    "answerable": true,
+    "reason": "Asked for the refund period, including the option of a custom range; the frozen interval matches.",
+    "packet_sha256": "6e40c63e9d9cd04fd3929210909247716bfda719c71a8448aa6e91be7f7bfdbf",
+    "review_method": "Local manual comparison of public question, actual follow-up and pre-frozen single-slot answer only"
+  },
+  {
+    "id": "final_mixed_153",
+    "actual_question": "请问‘过去一段时间’具体指多长？例如：最近7天、最近30天、本月、上月，或其他自定义范围？",
+    "answerable": true,
+    "reason": "Asked only for the shared period; the frozen interval leaves both pre-existing date bases and status rules intact.",
+    "packet_sha256": "6e40c63e9d9cd04fd3929210909247716bfda719c71a8448aa6e91be7f7bfdbf",
+    "review_method": "Local manual comparison of public question, actual follow-up and pre-frozen single-slot answer only"
+  },
+  {
+    "id": "final_mixed_154",
+    "actual_question": "‘过去一段时间’具体指多长？例如：最近30天、本月至今、还是上个月整月？",
+    "answerable": true,
+    "reason": "Asked only for the sales/refund period; the frozen range does not add or change either business formula.",
+    "packet_sha256": "6e40c63e9d9cd04fd3929210909247716bfda719c71a8448aa6e91be7f7bfdbf",
+    "review_method": "Local manual comparison of public question, actual follow-up and pre-frozen single-slot answer only"
+  },
+  {
+    "id": "final_mixed_155",
+    "actual_question": "请问‘过去一段时间’具体指多长？例如：最近7天、最近30天、本月至今，还是上个月整月？",
+    "answerable": true,
+    "reason": "Asked how long the refund period is; the frozen interval is a direct answer.",
+    "packet_sha256": "6e40c63e9d9cd04fd3929210909247716bfda719c71a8448aa6e91be7f7bfdbf",
+    "review_method": "Local manual comparison of public question, actual follow-up and pre-frozen single-slot answer only"
+  },
+  {
+    "id": "final_mixed_156",
+    "actual_question": "请问‘过去一段时间’具体指多长？例如：最近7天、最近30天、本月至今，还是上个月整月？",
+    "answerable": true,
+    "reason": "Asked for the refund period; the fixed payment method and requested averages are untouched.",
+    "packet_sha256": "6e40c63e9d9cd04fd3929210909247716bfda719c71a8448aa6e91be7f7bfdbf",
+    "review_method": "Local manual comparison of public question, actual follow-up and pre-frozen single-slot answer only"
+  },
+  {
+    "id": "final_mixed_159",
+    "actual_question": "请问‘过去一段时间内’具体指多长的时间范围？例如：最近7天、最近30天、本月，还是其他指定区间？",
+    "answerable": true,
+    "reason": "Asked for the refund period; the frozen interval leaves the cash payment constraint unchanged.",
+    "packet_sha256": "6e40c63e9d9cd04fd3929210909247716bfda719c71a8448aa6e91be7f7bfdbf",
+    "review_method": "Local manual comparison of public question, actual follow-up and pre-frozen single-slot answer only"
+  },
+  {
+    "id": "final_mixed_171",
+    "actual_question": "报表要求的‘整体占比’是指：(1) 先汇总云栖品牌手机数码类所有商品的退款额和有效销售额，再相除；还是(2) 先逐商品计算退款率，再对这些商品退款率取简单平均？请明确计算逻辑。",
+    "answerable": true,
+    "reason": "Asked aggregate-first ratio versus mean of product ratios; the frozen answer selects aggregate-first only.",
+    "packet_sha256": "6e40c63e9d9cd04fd3929210909247716bfda719c71a8448aa6e91be7f7bfdbf",
+    "review_method": "Local manual comparison of public question, actual follow-up and pre-frozen single-slot answer only"
+  },
+  {
+    "id": "final_mixed_172",
+    "actual_question": "分母应为2026年9月南京市所有订单（含unpaid）总数，还是仅排除unpaid状态的订单总数？",
+    "answerable": true,
+    "reason": "Asked whether the denominator includes unpaid orders; the frozen answer includes every status. The filter tag denotes the same missing denominator choice.",
+    "packet_sha256": "6e40c63e9d9cd04fd3929210909247716bfda719c71a8448aa6e91be7f7bfdbf",
+    "review_method": "Local manual comparison of public question, actual follow-up and pre-frozen single-slot answer only"
+  },
+  {
+    "id": "final_mixed_173",
+    "actual_question": "消费强度是指平均每个符合条件的订单的实付金额，还是平均每个符合条件的购买用户的实付金额？",
+    "answerable": true,
+    "reason": "Asked mean per order versus per purchasing user; the frozen answer selects per-order average only.",
+    "packet_sha256": "6e40c63e9d9cd04fd3929210909247716bfda719c71a8448aa6e91be7f7bfdbf",
+    "review_method": "Local manual comparison of public question, actual follow-up and pre-frozen single-slot answer only"
+  },
+  {
+    "id": "final_mixed_174",
+    "actual_question": "请明确‘选定SKU集合’是指：1) 全部服饰鞋包类商品，还是 2) 截至2026年8月31日已上架且当前仍在售（is_active=1）的服饰鞋包类商品？",
+    "answerable": true,
+    "reason": "Asked which SKU population to use; the frozen answer selects the pre-August-end/currently-active population. Entity versus metric tagging does not change the actual question.",
+    "packet_sha256": "6e40c63e9d9cd04fd3929210909247716bfda719c71a8448aa6e91be7f7bfdbf",
+    "review_method": "Local manual comparison of public question, actual follow-up and pre-frozen single-slot answer only"
+  },
+  {
+    "id": "final_mixed_180",
+    "actual_question": "分母应使用‘优选品牌食品生鲜’在2026年9月1日至12日期间的全部商品销售额，还是其全历史销售额？",
+    "answerable": true,
+    "reason": "Asked same-period versus all-history denominator; the frozen answer selects the already-stated same period only.",
+    "packet_sha256": "6e40c63e9d9cd04fd3929210909247716bfda719c71a8448aa6e91be7f7bfdbf",
+    "review_method": "Local manual comparison of public question, actual follow-up and pre-frozen single-slot answer only"
+  },
+  {
+    "id": "final_mixed_181",
+    "actual_question": "请问‘目标城市’具体指哪一个城市？例如上海、北京、南京等。",
+    "answerable": true,
+    "reason": "Asked which target city; the frozen city name is the complete single missing value.",
+    "packet_sha256": "6e40c63e9d9cd04fd3929210909247716bfda719c71a8448aa6e91be7f7bfdbf",
+    "review_method": "Local manual comparison of public question, actual follow-up and pre-frozen single-slot answer only"
+  },
+  {
+    "id": "final_mixed_182",
+    "actual_question": "请问‘目标城市’具体是哪一个城市？例如上海、北京等。",
+    "answerable": true,
+    "reason": "Asked which target city; the frozen city name adds no date or order-state information.",
+    "packet_sha256": "6e40c63e9d9cd04fd3929210909247716bfda719c71a8448aa6e91be7f7bfdbf",
+    "review_method": "Local manual comparison of public question, actual follow-up and pre-frozen single-slot answer only"
+  },
+  {
+    "id": "final_mixed_183",
+    "actual_question": "请问‘目标城市’具体是哪座城市？例如上海、北京等。",
+    "answerable": true,
+    "reason": "Asked which target city; the frozen city name leaves gender and valid-order conditions intact.",
+    "packet_sha256": "6e40c63e9d9cd04fd3929210909247716bfda719c71a8448aa6e91be7f7bfdbf",
+    "review_method": "Local manual comparison of public question, actual follow-up and pre-frozen single-slot answer only"
+  },
+  {
+    "id": "final_mixed_184",
+    "actual_question": "请明确‘目标城市’具体指哪一个或哪些城市？例如：上海、北京等。",
+    "answerable": true,
+    "reason": "Asked which city or cities; one frozen city directly answers it. Filter versus entity tagging is not a semantic mismatch.",
+    "packet_sha256": "6e40c63e9d9cd04fd3929210909247716bfda719c71a8448aa6e91be7f7bfdbf",
+    "review_method": "Local manual comparison of public question, actual follow-up and pre-frozen single-slot answer only"
+  },
+  {
+    "id": "final_mixed_185",
+    "actual_question": "请问‘目标城市’具体是哪座城市？例如上海、北京等。",
+    "answerable": true,
+    "reason": "Asked which target city; the frozen city name leaves category and customer conditions unchanged.",
+    "packet_sha256": "6e40c63e9d9cd04fd3929210909247716bfda719c71a8448aa6e91be7f7bfdbf",
+    "review_method": "Local manual comparison of public question, actual follow-up and pre-frozen single-slot answer only"
+  },
+  {
+    "id": "final_mixed_186",
+    "actual_question": "请问‘目标城市’具体指哪一个城市？例如：上海市、北京市等。",
+    "answerable": true,
+    "reason": "Asked which target city; the frozen city name is sufficient despite the filter tag.",
+    "packet_sha256": "6e40c63e9d9cd04fd3929210909247716bfda719c71a8448aa6e91be7f7bfdbf",
+    "review_method": "Local manual comparison of public question, actual follow-up and pre-frozen single-slot answer only"
+  },
+  {
+    "id": "final_mixed_187",
+    "actual_question": "请明确‘目标城市’具体是哪一个城市？例如：上海、杭州、北京等。",
+    "answerable": true,
+    "reason": "Asked which target city; the frozen city name leaves the brand and latest-qualifying-order query unchanged.",
+    "packet_sha256": "6e40c63e9d9cd04fd3929210909247716bfda719c71a8448aa6e91be7f7bfdbf",
+    "review_method": "Local manual comparison of public question, actual follow-up and pre-frozen single-slot answer only"
+  },
+  {
+    "id": "final_mixed_188",
+    "actual_question": "请问‘目标城市’具体是哪座城市？例如上海、北京等。",
+    "answerable": true,
+    "reason": "Asked which target city; the frozen city name adds no order threshold or date information.",
+    "packet_sha256": "6e40c63e9d9cd04fd3929210909247716bfda719c71a8448aa6e91be7f7bfdbf",
+    "review_method": "Local manual comparison of public question, actual follow-up and pre-frozen single-slot answer only"
+  },
+  {
+    "id": "final_mixed_190",
+    "actual_question": "请问‘目标城市’具体是哪座城市？例如上海、北京等。",
+    "answerable": true,
+    "reason": "Asked which target city; the frozen city name leaves the refund cohort and payment grain unchanged.",
+    "packet_sha256": "6e40c63e9d9cd04fd3929210909247716bfda719c71a8448aa6e91be7f7bfdbf",
+    "review_method": "Local manual comparison of public question, actual follow-up and pre-frozen single-slot answer only"
+  },
+  {
+    "id": "final_mixed_191",
+    "actual_question": "请明确‘指定原因’具体指哪些退款原因（例如：质量问题、发错货、物流超时等）？",
+    "answerable": true,
+    "reason": "Asked which refund reason. Some illustrative reasons are not actual stored metadata, but the question is open-ended; the frozen valid reason directly answers it without adopting those examples.",
+    "packet_sha256": "6e40c63e9d9cd04fd3929210909247716bfda719c71a8448aa6e91be7f7bfdbf",
+    "review_method": "Local manual comparison of public question, actual follow-up and pre-frozen single-slot answer only"
+  },
+  {
+    "id": "final_mixed_192",
+    "actual_question": "请问‘指定品类’具体是哪一个品类？例如：家用电器、手机数码、服饰鞋包等。",
+    "answerable": true,
+    "reason": "Asked which product category; the frozen category supplies exactly that filter.",
+    "packet_sha256": "6e40c63e9d9cd04fd3929210909247716bfda719c71a8448aa6e91be7f7bfdbf",
+    "review_method": "Local manual comparison of public question, actual follow-up and pre-frozen single-slot answer only"
+  },
+  {
+    "id": "final_mixed_193",
+    "actual_question": "请问‘指定品类’具体指哪一个商品类别？例如：家用电器、手机数码、服饰鞋包等。",
+    "answerable": true,
+    "reason": "Asked which product category; the frozen category does not modify the existing launch/on-sale/absence conditions.",
+    "packet_sha256": "6e40c63e9d9cd04fd3929210909247716bfda719c71a8448aa6e91be7f7bfdbf",
+    "review_method": "Local manual comparison of public question, actual follow-up and pre-frozen single-slot answer only"
+  },
+  {
+    "id": "final_mixed_194",
+    "actual_question": "请明确‘指定品类’具体指哪一个商品类别（例如：家用电器、手机数码、服饰鞋包等）？",
+    "answerable": true,
+    "reason": "Asked which product category; the frozen category supplies only the missing product filter.",
+    "packet_sha256": "6e40c63e9d9cd04fd3929210909247716bfda719c71a8448aa6e91be7f7bfdbf",
+    "review_method": "Local manual comparison of public question, actual follow-up and pre-frozen single-slot answer only"
+  },
+  {
+    "id": "final_mixed_196",
+    "actual_question": "请明确‘指定品类’具体指哪一个或哪些商品类别（例如：手机数码、家用电器、服饰鞋包等）？",
+    "answerable": true,
+    "reason": "Asked which category or categories; the single frozen category is a valid direct response.",
+    "packet_sha256": "6e40c63e9d9cd04fd3929210909247716bfda719c71a8448aa6e91be7f7bfdbf",
+    "review_method": "Local manual comparison of public question, actual follow-up and pre-frozen single-slot answer only"
+  }
+]
