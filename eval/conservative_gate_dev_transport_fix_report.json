@@ -1,0 +1,47 @@
+{
+  "n": 300,
+  "completed": 300,
+  "complete": true,
+  "trigger_count": 0,
+  "trigger_rate": {
+    "n": 0,
+    "d": 300,
+    "percent": 0.0
+  },
+  "first_turn_accuracy": {
+    "n": 228,
+    "d": 300,
+    "percent": 76.0
+  },
+  "correct": 228,
+  "off_correct_on_incomplete": 0,
+  "off_correct_on_wrong_or_incomplete": 4,
+  "status_counts": {
+    "failed": 4,
+    "success": 296
+  },
+  "old_trigger_count": 122,
+  "old_off_correct_on_incomplete": 130,
+  "paired": {
+    "off_wrong_on_wrong_or_incomplete": 68,
+    "off_correct_on_correct": 228,
+    "off_correct_on_wrong": 4
+  },
+  "average_model_calls": 2.08,
+  "infrastructure_failure_count": 0,
+  "failures": [],
+  "off_reused": true,
+  "off_accuracy": {
+    "n": 232,
+    "d": 300,
+    "percent": 77.33
+  },
+  "no_user_answers": true,
+  "latency": {
+    "observed": 300,
+    "missing": 0,
+    "mean_s": 4.028097,
+    "p50_s": 3.407051,
+    "p95_s": 8.288846
+  }
+}

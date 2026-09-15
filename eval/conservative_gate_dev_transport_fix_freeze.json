@@ -1,0 +1,41 @@
+{
+  "gate_sha256": "edd1dd2e8081fad314ad87f7f08268eae6f99937dfc701df82a4231686b7cefe",
+  "qwen_wrapper_sha256": "b103b655da78c813376edcdf9d9b14fed63c5b75507e758607fd33c5efd2869b",
+  "runner_sha256": "17021203243ab34cbd4abd87aa409ac2f47febafd0149d8abfa811e45a690d85",
+  "database": {
+    "users": "b827470388b126a973c77491e8863f6e6e51e7cbfeb7f689923a1b48ac2d55dc",
+    "products": "1a33196738fb59c7ee3d88f68e5ab3c89c94c5ca14864d3976c65337f3aad43e",
+    "orders": "e08ce1622cc57a7ad81b115f96fe1a7012a37b18b49229ae69da3d4c9335dab3",
+    "order_items": "40c992219526ac2fe849d58990769f788d07e4c6b3a83645b8863f65314a8a3e",
+    "refunds": "e8c296d3b783f81b322bc103d5f9eb00823141234155a3250980828af242d6b2",
+    "core_table": "af48658b968e0d6f803c66aebc0e6d9bc7b83030634f6ff2ebd4abc9ab6353d1",
+    "core_field": "bb1c16e9bed8a8ab47c6204cfa55986378340eea6bbb54f92cdefe112b265fdd"
+  },
+  "cases_sha256": "6a362ad722c5f4fcca593fcd626076b0c43a93a142e190f23c09187de4a61687",
+  "config": {
+    "chat_model": "qwen-plus",
+    "embedding_model": "text-embedding-v4",
+    "sql_temperature": 0.05,
+    "gate_temperature": 0,
+    "execution_retry_limit": 2,
+    "gate_format_retry_limit": 1,
+    "sql_max_rows": 200,
+    "workers_per_mode": 1,
+    "batch_size": 1,
+    "sdk_version": "1.27.5",
+    "sdk_default_timeout_seconds": 300,
+    "timeout_policy": "Gate connect/read 5/30 seconds; SQL engine retains SDK defaults",
+    "model_calls_definition": "Calls recorded by existing capture_usage, including API/transport errors; internal SDK wire retries are not separately counted",
+    "schedule": "Fresh ON serial only; historical OFF is development diagnostic reference",
+    "second_user_turn": false,
+    "embedding_calls": 0,
+    "gate_request_timeout_seconds": [
+      5,
+      30
+    ],
+    "gate_response_format": "json_object"
+  },
+  "off_source_sha256": "09810a185b252293876c6aa597c68a3ef4ed1967508027af88e02bfe7845bd92",
+  "off_reuse_note": "Original OFF re-scored unchanged: 232/300. Same SQL inputs, engine, model parameters, scorer and database. Historical OFF used four workers; current ON is serial, so latency is descriptive, not a controlled concurrency comparison.",
+  "purpose": "Revealed development regression. Fresh ON, historical unchanged-engine OFF retained only as diagnostic paired reference."
+}

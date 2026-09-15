@@ -9,6 +9,9 @@ import fcntl
 import json
 from pathlib import Path
 import time
+from unittest.mock import patch
+
+from app.tools import qwen
 
 from app.agent.entity_context import entity_context
 from app.tools.database import fetch_all
@@ -111,6 +114,20 @@ def audit():
 
 def development():
     frozen = verify_engine()
+    for name in ('app/agent/scoped_clarification.py','app/tools/qwen.py'):
+        assert (ROOT/name).read_text() == original.git('show','8fb1e3a:'+name) + '\n'
+    current_config = original.public_config()
+    for key in ('chat_model','embedding_model','sql_temperature','execution_retry_limit',
+                'sql_max_rows','sdk_version','sdk_default_timeout_seconds'):
+        assert current_config[key] == frozen['config'][key], f'OFF configuration changed: {key}'
+    cases = original.read(original.DATA)
+    old = {r['id']:r for r in original.read(Path(str(original.PREFIX)+'_per_case.json'))}
+    saved = original.records()
+    for case in cases:
+        assert old[case['id']]['question'] == case['question']
+        assert old[case['id']]['ground_truth_result'] == case['ground_truth_result']
+        assert original.score(case,saved[(case['id'],'off')]) == old[case['id']]['off']
+    assert sum(r['off']['correct'] for r in old.values()) == 232
     freeze_path = Path(str(PREFIX) + '_freeze.json')
     record_path = Path(str(PREFIX) + '_events.jsonl')
     public = original.public_config()
@@ -122,6 +139,8 @@ def development():
               'qwen_wrapper_sha256': original.sha(ROOT / 'app/tools/qwen.py'),
               'runner_sha256': original.sha(Path(__file__)), 'database': frozen['database'],
               'cases_sha256': frozen['cases_file_sha256'], 'config': public,
+              'off_source_sha256':original.sha(original.RAW),
+              'off_reuse_note':'Original OFF re-scored unchanged: 232/300. Same SQL inputs, engine, model parameters, scorer and database. Historical OFF used four workers; current ON is serial, so latency is descriptive, not a controlled concurrency comparison.',
               'purpose': 'Revealed development regression. Fresh ON, historical unchanged-engine OFF retained only as diagnostic paired reference.'}
     if freeze_path.exists():
         assert original.read(freeze_path) == config
@@ -136,7 +155,8 @@ def development():
             records[r['id']] = r
     if any(r['state'] != 'complete' for r in records.values()):
         raise RuntimeError('Uncertain started calls; inspect before any resume. Never duplicate API calls.')
-    cases = original.read(original.DATA)
+    if any(r.get('failures') for r in records.values()):
+        raise RuntimeError('Previously recorded infrastructure failure; do not auto-resume')
     entity_context()
     def append(r):
         with record_path.open('a') as f:
@@ -151,25 +171,79 @@ def development():
                 if c['id'] in records:
                     continue
                 append({'id': c['id'], 'state': 'started', 'time': time.time()})
-                pending[pool.submit(original.measured_call, c['question'], date.fromisoformat(c['reference_date']), 'on')] = c['id']
+                pending[pool.submit(measured_on, c['question'], date.fromisoformat(c['reference_date']))] = c['id']
             for future in as_completed(pending):
                 r = {'id': pending[future], **future.result()}
                 append(r)
                 records[r['id']] = r
-                if any(u['status'] == 'transport_error' for u in (r.get('usage') or [])):
-                    raise RuntimeError('Transport failure saved; halt before scheduling another case')
+                if r['failures'] or r['payload'].get('status') == 'system_error':
+                    summarize(cases,records,old)
+                    print(json.dumps({'halted':True,'case_id':r['id'],'elapsed_s':r['elapsed_s'],
+                                      'failures':r['failures'],'status':r['payload'].get('status')},ensure_ascii=False),flush=True)
+                    return
             if offset % 20 == 0:
                 print(f'Development ON persisted {len(records)}/300', flush=True)
     verify_engine()
-    old = {r['id']: r for r in original.read(Path(str(original.PREFIX)+'_per_case.json'))}
+    summarize(cases,records,old)
+
+
+def measured_on(question, reference):
+    sdk = qwen._require_dashscope()
+    call = sdk.Generation.call
+    failures = []
+    def observe(**kwargs):
+        stage = 'gate' if kwargs.get('response_format') else 'sql_generation'
+        started = time.perf_counter()
+        try:
+            response = call(**kwargs)
+        except Exception as exc:
+            failures.append({'stage':stage,'error_type':type(exc).__name__,
+                             'elapsed_s':round(time.perf_counter()-started,6)})
+            raise
+        if response.status_code != 200:
+            failures.append({'stage':stage,'error_type':'api_error',
+                             'http_status':response.status_code,'api_code':response.get('code'),
+                             'elapsed_s':round(time.perf_counter()-started,6)})
+        return response
+    with patch.object(sdk.Generation,'call',observe):
+        result = original.measured_call(question,reference,'on')
+    result['failures'] = failures
+    return result
+
+
+def paired_label(off,on):
+    if off['correct']:
+        if on['correct']:
+            return 'off_correct_on_correct'
+        return 'off_correct_on_wrong' if on['first_turn_completed'] else 'off_correct_on_incomplete'
+    return 'off_wrong_on_correct' if on['correct'] else 'off_wrong_on_wrong_or_incomplete'
+
+
+def summarize(cases,records,old):
     rows = [{'id':c['id'], 'question':c['question'], 'off':old[c['id']]['off'],
-             'old_on':old[c['id']]['on'], 'on':original.score(c, records[c['id']])} for c in cases]
-    stats = {'n':300, 'trigger_count':sum(r['on']['triggered'] for r in rows),
+             'old_on':old[c['id']]['on'], 'on':original.score(c, records[c['id']])} for c in cases
+            if c['id'] in records and records[c['id']]['state']=='complete']
+    for row in rows:
+        row['pair'] = paired_label(row['off'],row['on'])
+    complete = len(rows)==300
+    failures = [{'case_id':r['id'],'elapsed_s':r['elapsed_s'],'failures':r.get('failures',[]),
+                 'status':r['payload'].get('status')} for r in records.values()
+                if r.get('failures') or r.get('payload',{}).get('status')=='system_error']
+    trigger = sum(r['on']['triggered'] for r in rows)
+    correct = sum(r['on']['correct'] for r in rows)
+    stats = {'n':300, 'completed':len(rows),'complete':complete,
+             'trigger_count':trigger,'trigger_rate':original.ratio(trigger,300) if complete else None,
+             'first_turn_accuracy':original.ratio(correct,300) if complete else None,
              'correct':sum(r['on']['correct'] for r in rows),
              'off_correct_on_incomplete':sum(r['off']['correct'] and not r['on']['first_turn_completed'] for r in rows),
              'off_correct_on_wrong_or_incomplete':sum(r['off']['correct'] and not r['on']['correct'] for r in rows),
              'status_counts':dict(Counter(r['on']['status'] for r in rows)),
              'old_trigger_count':122, 'old_off_correct_on_incomplete':130,
+             'paired':dict(Counter(r['pair'] for r in rows)),
+             'average_model_calls':sum(r['on']['model_calls'] for r in rows)/len(rows) if rows else None,
+             'infrastructure_failure_count':len(failures),'failures':failures,
+             'off_reused':True,'off_accuracy':original.ratio(232,300),
+             'no_user_answers':True,
              'latency':original.latency([r['on']['elapsed_s'] for r in rows])}
     write_json(Path(str(PREFIX)+'_per_case.json'), rows)
     write_json(Path(str(PREFIX)+'_report.json'), stats)

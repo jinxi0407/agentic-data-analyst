@@ -103,14 +103,13 @@ def build():
         else:
             request = {'allowed_inputs':packet, 'kind':kind, 'count':10,
                        'previous_signatures':[x['semantic_signature'] for x in all_cases]}
-            messages = [{'role':'system','content':INSTRUCTION},
+            messages = [{'role':'system','content':INSTRUCTION+'\nResponse JSON Schema:\n'+json.dumps(Batch.model_json_schema(),ensure_ascii=False)},
                         {'role':'user','content':json.dumps(request,ensure_ascii=False)}]
             request_file = OUT / f'batch_{i:02d}_request.json'
             assert not request_file.exists(), 'Interrupted authoring request: inspect, do not duplicate'
             write_json(request_file, messages)
-            raw = generate_text(messages, temperature=.7, response_format={
-                'type':'json_schema','json_schema':{'name':'business_benchmark','strict':True,
-                                                  'schema':Batch.model_json_schema()}})
+            raw = generate_text(messages, temperature=.7,
+                response_format={'type':'json_object'},request_timeout=(5,120))
             write_json(OUT / f'batch_{i:02d}_raw.json', {'raw':raw})
             items = Batch.model_validate_json(raw).cases
             assert len(items) == 10 and all(x.kind == kind for x in items)
@@ -119,6 +118,7 @@ def build():
                     x.answer_slot in ({'entity','filter'} if kind == 'entity_filter' else {kind})
                     and bool(x.simulated_answer.strip()))
             write_json(result_file, [x.model_dump() for x in items])
+        assert len(items) == 10 and all(x.kind == kind for x in items)
         for item in items:
             all_cases.append({'id':f'final_mixed_{len(all_cases)+1:03d}',
                               'reference_date':'2026-09-12',**item.model_dump()})

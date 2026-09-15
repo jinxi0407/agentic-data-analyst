@@ -1,6 +1,43 @@
 # Final Mixed Clarification Evaluation
 
-**Status: INCOMPLETE. Gate is not frozen. No new mixed cases have been created or run.**
+**Status: the transport-fixed 300-case regression is complete. Mixed evaluation is NOT RUN.**
+
+## Resumed Serial Regression
+
+The current Gate and transport implementation are unchanged from `8fb1e3a`.
+The original 300 cases, Ground Truth, reference date and database fingerprint are unchanged.
+Historical OFF was independently re-scored: 232/300 (77.33%). Its engine, direct-path
+inputs, shared context and public model parameters are identical, so no OFF calls were repeated.
+Historical OFF used four workers; fresh ON used one. Latency comparisons are descriptive,
+not controlled estimates of Gate overhead. Floating provider model versions and request dates
+also limit reproducibility.
+
+| Measure | Historical ON | Current ON |
+|---|---:|---:|
+| Completed evaluation records | 300/300 | 300/300 |
+| Clarification trigger | 122/300 (40.67%) | 0/300 (0.00%) |
+| First-turn result accuracy | 99/300 (33.00%) | 228/300 (76.00%) |
+| OFF correct to ON incomplete | 130 | 0 |
+
+Current paired cells: OFF correct to ON correct **228**; OFF correct to ON wrong
+**4**; OFF correct to ON incomplete **0**; OFF wrong to ON correct **0**;
+OFF wrong to ON wrong/incomplete **68**. Accuracy versus reused OFF is **-1.33pp**.
+All 300 Gate decisions were proceed; 296 SQL workflows succeeded and four failed.
+There were **0 observed transport/API infrastructure failures** and no user answers.
+Proceed-subset accuracy is 228/300; first-turn completion is 296/300 (98.67%).
+No new unnecessary-clarification label is asserted for this previously unlabeled set.
+Zero triggers on revealed development data do not establish ambiguity recall.
+
+ON average/P50/P95 latency: **4.028097 / 3.407051 / 8.288846 seconds**.
+OFF average/P50/P95: **2.759772 / 2.196696 / 6.876529 seconds**.
+Average model calls: OFF **1.08**, ON **2.08**. Embedding calls: zero.
+Usage counts wrapper calls, not invisible SDK-internal wire retries.
+Evidence: `eval/conservative_gate_dev_transport_fix_{freeze,events,per_case,report}`.
+Tests: **95 passed, 2 warnings**, 22.89 seconds. Gate and production engine were not
+modified in this evaluation turn. No further Gate tuning is permitted.
+
+The remaining sections below preserve the earlier interrupted-run history. Their
+"not frozen/not available" statements describe that earlier checkpoint, not this resumed run.
 
 ## Completed Work
 
