@@ -1,0 +1,10 @@
+{
+  "code_commit": "b8ffbe2c3b09bd82605086bbfbb24faca4a8771d",
+  "generator_sha256": "f2aac16acf5abbd5c115d27a245d50570edcfa5c35d05e096ed0af8bafb90580",
+  "allowed_inputs_digest": "032fea86dddb3f22c7298698564965be39cb75f9965c544585d57926ed484ce3",
+  "draft_sha256": "ac725afa8f08aa2c13b3819ccd94564a545ee6369fd4488cd121278b593b370e",
+  "generation_model": "qwen-plus",
+  "gate_or_failure_inputs": false,
+  "candidate_runs": 0,
+  "status": "DRAFT: reference and novelty review still required"
+}

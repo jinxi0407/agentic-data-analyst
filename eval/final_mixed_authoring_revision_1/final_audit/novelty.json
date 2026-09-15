@@ -1,0 +1,17 @@
+{
+  "draft_sha256": "a2d148045b37cfb9ad0367bb11a6cabc205656f761406a943eaed58fa2b63841",
+  "sources": {
+    "eval/final_release_holdout_300.json": "6a362ad722c5f4fcca593fcd626076b0c43a93a142e190f23c09187de4a61687",
+    "eval/scoped_clarification_cases.json": "3913db8c6e6b2926c6fff3823ee51ea12490f057479cbff4a410b08d2c597f88",
+    "eval/clarification_holdout.json": "ee7d9746ec7c6c06c0ae588611dcaa40f0da07d75b015f3edf38293886a8d30c",
+    "eval/clarification_dev.json": "2bb43866da00f98307b7606f0365152b15d75082b2bfad4edd7fba42c3a2f1cc",
+    "agent-v4-generalization-release:eval/final_cases.json": "88fa6d20c686a9d407a19fd2bce488f41ab599ff62cc3d7988bb1779916eef90",
+    "agent-v4-generalization-release:eval/final_blind_v4_cases.json": "6a3d7ae04ede9d9fb7b02b7b650e003db8c355ddc3090b33a029a62aad04bebf",
+    "agent-v3-generalization:eval/holdout_cases.json": "0ca3ce26606c4bbd2bfca65178901f7d0d5f36228a29769e17a85e5b13bb8ba2",
+    "agent-v3-generalization:eval/final_blind_cases.json": "d8f553eff6729ec6f36d78d17db8db762d94b5b469fa59644f4faf975b16013d"
+  },
+  "historical_questions_checked": 1500,
+  "duplicates": [],
+  "semantic_review_pending": true,
+  "limitation": "Alias/literal-masked SQL equivalence screens duplicates but cannot prove semantic novelty."
+}

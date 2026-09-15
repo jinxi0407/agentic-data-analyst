@@ -1,0 +1,172 @@
+[
+  {
+    "question": "请列出所有在南京市注册的VIP用户姓名和注册日期，按注册日期升序排列，最多100行。",
+    "category": "filtering",
+    "difficulty": "easy",
+    "kind": "entity_filter",
+    "intended_meaning": "查询 users 表中 city = '南京市' 且 is_vip = 1 的用户，返回 user_name 和 register_date，按 register_date ASC 排序，LIMIT 100。",
+    "simulated_answer": "南京市",
+    "answer_slot": "entity",
+    "ambiguity_explanation": "问题中明确要求‘在南京市注册的VIP用户’，但‘南京市’未在 cities 列表中作为标准城市名出现；cities 列表中存在的是'南京市'（province: '江苏'），而用户可能误指'南京'（无‘市’字）、或混淆为同音城市如'南京市'与'南京市'（冗余）；更关键的是，'南京市'是否应匹配 users.city 字段的完整精确值（含‘市’）？还是允许前缀匹配/标准化别名？该实体值未显式限定，存在唯一歧义。",
+    "ambiguity_alternatives": [
+      "南京市",
+      "南京"
+    ],
+    "semantic_signature": "users.city_is_vip:user_name_register_date:order_by_register_date_asc_limit100",
+    "reference_sql": "SELECT user_name, register_date FROM users WHERE city = '南京市' AND is_vip = 1 ORDER BY register_date ASC LIMIT 100;",
+    "ordered": true
+  },
+  {
+    "question": "请统计2026年9月12日前注册、且最近一次下单在2026年8月的成都市用户人数，按用户等级升序排列。",
+    "category": "aggregation",
+    "difficulty": "medium",
+    "kind": "entity_filter",
+    "intended_meaning": "需关联 users 和 orders 表：筛选 users.register_date < '2026-09-12' 且 orders.order_date 在 2026年8月（即 '2026-08-01' <= order_date <= '2026-08-31'）的用户，且其 city = '成都市'；对每个 user_level 统计 COUNT(DISTINCT users.user_id)，按 user_level ASC 排序。",
+    "simulated_answer": "成都市",
+    "answer_slot": "entity",
+    "ambiguity_explanation": "问题中‘成都市用户’的‘成都市’是否严格对应 users.city 字段的完整值？cities 列表中确有'成都市'（province: '四川'），但用户可能意指‘成都’（无‘市’字）、或误写为‘成都市’（重复字）；此外，是否存在历史数据中 city 值为'成都'而非'成都市'的合法记录？该城市实体的精确字符串形式未指定，构成唯一歧义。",
+    "ambiguity_alternatives": [
+      "成都市",
+      "成都"
+    ],
+    "semantic_signature": "users.city_register_before_20260912_orders_in_aug2026:count_by_user_level_order_by_user_level_asc",
+    "reference_sql": "SELECT u.user_level, COUNT(DISTINCT u.user_id) AS cnt FROM users u INNER JOIN orders o ON u.user_id = o.user_id WHERE u.city = '成都市' AND u.register_date < '2026-09-12' AND o.order_date >= '2026-08-01' AND o.order_date <= '2026-08-31' GROUP BY u.user_level ORDER BY u.user_level ASC;",
+    "ordered": true
+  },
+  {
+    "question": "请列出所有在杭州市完成过有效订单的女性用户的用户名、用户等级和首次下单日期，按首次下单日期升序排列，最多100行。",
+    "category": "filtering",
+    "difficulty": "easy",
+    "kind": "entity_filter",
+    "intended_meaning": "关联 users 和 orders 表，筛选 gender = '女' 且 city = '杭州市' 且 order_status ∈ ('paid','completed','shipped') 的用户；对每个用户取 MIN(orders.order_date) 作为首次下单日期；返回 user_name、user_level 和该最小日期；按该日期 ASC 排序，LIMIT 100。",
+    "simulated_answer": "杭州市",
+    "answer_slot": "entity",
+    "ambiguity_explanation": "‘杭州市’是否必须完全匹配 users.city 字段值？cities 列表中为'杭州市'（province: '浙江'），但业务中可能存在简写为'杭州'、或带空格/标点的变体；同时，'杭州'作为地级市，其下辖区县（如西湖区）是否也应被纳入？问题未说明是否支持模糊地理归属，仅‘杭州市’字符串形式存在唯一歧义。",
+    "ambiguity_alternatives": [
+      "杭州市",
+      "杭州"
+    ],
+    "semantic_signature": "users.city_gender_female_valid_orders:user_name_user_level_first_order_date:order_by_first_order_date_asc_limit100",
+    "reference_sql": "SELECT u.user_name, u.user_level, MIN(o.order_date) AS first_order_date FROM users u INNER JOIN orders o ON u.user_id = o.user_id WHERE u.city = '杭州市' AND u.gender = '女' AND o.order_status IN ('paid','completed','shipped') GROUP BY u.user_id, u.user_name, u.user_level ORDER BY first_order_date ASC LIMIT 100;",
+    "ordered": true
+  },
+  {
+    "question": "请统计在西安市注册、用户等级为gold或black、且2026年9月12日前有过退款的用户数，按用户等级升序排列。",
+    "category": "aggregation",
+    "difficulty": "medium",
+    "kind": "entity_filter",
+    "intended_meaning": "需三表关联：users（city = '西安市'、user_level IN ('gold','black')、register_date < '2026-09-12'）、orders（valid status）、refunds（refund_status = 'approved'）；COUNT(DISTINCT users.user_id) 分 user_level 组，ORDER BY user_level ASC。",
+    "simulated_answer": "西安市",
+    "answer_slot": "entity",
+    "ambiguity_explanation": "‘西安市’是否等价于 users.city 字段的标准值？cities 列表中为'西安市'（province: '陕西'），但常见简称为‘西安’；且存在拼音近似城市（如‘西咸新区’）或历史曾用名干扰；问题未明确是否接受子区域泛化或标准化映射，仅城市名称字符串存在唯一歧义。",
+    "ambiguity_alternatives": [
+      "西安市",
+      "西安"
+    ],
+    "semantic_signature": "users.city_user_level_gold_black_refunded:count_by_user_level_order_by_user_level_asc",
+    "reference_sql": "SELECT u.user_level, COUNT(DISTINCT u.user_id) AS cnt FROM users u INNER JOIN orders o ON u.user_id = o.user_id INNER JOIN refunds r ON o.order_id = r.order_id WHERE u.city = '西安市' AND u.user_level IN ('gold','black') AND u.register_date < '2026-09-12' AND r.refund_status = 'approved' GROUP BY u.user_level ORDER BY u.user_level ASC;",
+    "ordered": true
+  },
+  {
+    "question": "请列出所有在广州市注册、且购买过‘家用电器’类商品的用户姓名、城市和注册日期，按注册日期降序排列，最多100行。",
+    "category": "join",
+    "difficulty": "medium",
+    "kind": "entity_filter",
+    "intended_meaning": "四表关联：users（city = '广州市'）、orders（valid）、order_items、products（category = '家用电器'）；返回 DISTINCT users.user_name、users.city、users.register_date；按 register_date DESC 排序，LIMIT 100。",
+    "simulated_answer": "广州市",
+    "answer_slot": "entity",
+    "ambiguity_explanation": "‘广州市’是否必须严格等于 users.city 值？cities 列表中为'广州市'（province: '广东'），但口语/数据录入中常省略‘市’字；另存在‘广州南沙区’等下级行政单位是否应归入？问题未定义地理匹配粒度，仅城市名称的规范形式存在唯一歧义。",
+    "ambiguity_alternatives": [
+      "广州市",
+      "广州"
+    ],
+    "semantic_signature": "users.city_products_category_home_appliance:user_name_city_register_date:order_by_register_date_desc_limit100",
+    "reference_sql": "SELECT DISTINCT u.user_name, u.city, u.register_date FROM users u INNER JOIN orders o ON u.user_id = o.user_id INNER JOIN order_items oi ON o.order_id = oi.order_id INNER JOIN products p ON oi.product_id = p.product_id WHERE u.city = '广州市' AND p.category = '家用电器' AND o.order_status IN ('paid','completed','shipped') ORDER BY u.register_date DESC LIMIT 100;",
+    "ordered": true
+  },
+  {
+    "question": "请统计在武汉市注册、用户等级为silver、且2026年9月12日前下单总金额超过5000元的用户数，按用户等级升序排列。",
+    "category": "aggregation",
+    "difficulty": "medium",
+    "kind": "entity_filter",
+    "intended_meaning": "关联 users 和 orders，筛选 city = '武汉市'、user_level = 'silver'、register_date < '2026-09-12'；对每个用户 SUM(orders.paid_amount)，HAVING > 5000；COUNT(DISTINCT user_id)；结果按 user_level ASC 排序（仅一值）。",
+    "simulated_answer": "武汉市",
+    "answer_slot": "entity",
+    "ambiguity_explanation": "‘武汉市’是否为 users.city 字段的权威值？cities 列表中为'武汉市'（province: '湖北'），但存在‘武汉’简称、‘大武汉’等非标表述；且数据库中可能存在大小写/空格差异（如'武汉市 '）；问题未声明标准化规则，仅该城市标识字符串存在唯一歧义。",
+    "ambiguity_alternatives": [
+      "武汉市",
+      "武汉"
+    ],
+    "semantic_signature": "users.city_user_level_silver_high_value_orders:count_by_user_level_order_by_user_level_asc",
+    "reference_sql": "SELECT u.user_level, COUNT(DISTINCT u.user_id) AS cnt FROM users u INNER JOIN orders o ON u.user_id = o.user_id WHERE u.city = '武汉市' AND u.user_level = 'silver' AND u.register_date < '2026-09-12' GROUP BY u.user_id, u.user_level HAVING SUM(o.paid_amount) > 5000 ORDER BY u.user_level ASC;",
+    "ordered": true
+  },
+  {
+    "question": "请列出所有在成都市注册、且订单中包含‘云栖’品牌商品的用户姓名、用户等级和最近一次下单日期，按最近一次下单日期降序排列，最多100行。",
+    "category": "join",
+    "difficulty": "medium",
+    "kind": "entity_filter",
+    "intended_meaning": "四表关联：users（city = '成都市'）、orders、order_items、products（brand = '云栖'）；对每个用户取 MAX(orders.order_date) 为最近下单日；返回 user_name、user_level、该最大日期；按该日期 DESC 排序，LIMIT 100。",
+    "simulated_answer": "成都市",
+    "answer_slot": "entity",
+    "ambiguity_explanation": "‘成都市’是否必须完全匹配字段值？cities 列表中为'成都市'，但用户可能输入‘成都’或‘CHENGDU’；且‘成都市’与‘成华区’等下辖区划关系未定义；问题未说明地理字段匹配是否支持前缀、模糊或层级归并，仅城市名称的精确字符串存在唯一歧义。",
+    "ambiguity_alternatives": [
+      "成都市",
+      "成都"
+    ],
+    "semantic_signature": "users.city_products_brand_yunqi:user_name_user_level_last_order_date:order_by_last_order_date_desc_limit100",
+    "reference_sql": "SELECT u.user_name, u.user_level, MAX(o.order_date) AS last_order_date FROM users u INNER JOIN orders o ON u.user_id = o.user_id INNER JOIN order_items oi ON o.order_id = oi.order_id INNER JOIN products p ON oi.product_id = p.product_id WHERE u.city = '成都市' AND p.brand = '云栖' GROUP BY u.user_id, u.user_name, u.user_level ORDER BY last_order_date DESC LIMIT 100;",
+    "ordered": true
+  },
+  {
+    "question": "请统计在南京市注册、性别为男性、且2026年9月12日前完成过至少3笔有效订单的用户数，按用户等级升序排列。",
+    "category": "aggregation",
+    "difficulty": "medium",
+    "kind": "entity_filter",
+    "intended_meaning": "关联 users 和 orders，筛选 city = '南京市'、gender = '男'、register_date < '2026-09-12'、order_status ∈ ('paid','completed','shipped')；对每个用户 COUNT(orders.order_id) ≥ 3；按 user_level GROUP BY 后 COUNT(DISTINCT user_id)；ORDER BY user_level ASC。",
+    "simulated_answer": "南京市",
+    "answer_slot": "entity",
+    "ambiguity_explanation": "‘南京市’是否为 users.city 的标准值？cities 列表中为'南京市'（province: '江苏'），但实际数据可能存在‘南京’、‘NJ’、‘Nanjing’等变体；且‘南京市’作为副省级市，其行政区划代码是否影响匹配逻辑？问题未明确定义城市字段的比对方式，仅该实体字符串存在唯一歧义。",
+    "ambiguity_alternatives": [
+      "南京市",
+      "南京"
+    ],
+    "semantic_signature": "users.city_gender_male_multi_orders:count_by_user_level_order_by_user_level_asc",
+    "reference_sql": "SELECT u.user_level, COUNT(DISTINCT u.user_id) AS cnt FROM users u INNER JOIN orders o ON u.user_id = o.user_id WHERE u.city = '南京市' AND u.gender = '男' AND u.register_date < '2026-09-12' AND o.order_status IN ('paid','completed','shipped') GROUP BY u.user_id, u.user_level HAVING COUNT(o.order_id) >= 3 ORDER BY u.user_level ASC;",
+    "ordered": true
+  },
+  {
+    "question": "请列出所有在杭州市注册、用户等级为gold、且购买过‘美妆个护’类商品的用户姓名、城市和首次下单日期，按首次下单日期升序排列，最多100行。",
+    "category": "join",
+    "difficulty": "medium",
+    "kind": "entity_filter",
+    "intended_meaning": "四表关联：users（city = '杭州市'、user_level = 'gold'）、orders、order_items、products（category = '美妆个护'）；对每个用户取 MIN(orders.order_date) 为首次下单日；返回 user_name、city、该日期；按该日期 ASC 排序，LIMIT 100。",
+    "simulated_answer": "杭州市",
+    "answer_slot": "entity",
+    "ambiguity_explanation": "‘杭州市’是否必须精确匹配 users.city？cities 列表中为'杭州市'，但业务系统可能存储为'杭州'或'HZ'；且‘杭州’与‘杭州市’在民政部标准中为同一实体，但数据库字段是否已做归一化未知；问题未说明是否启用地理标准化服务，仅城市名称文本存在唯一歧义。",
+    "ambiguity_alternatives": [
+      "杭州市",
+      "杭州"
+    ],
+    "semantic_signature": "users.city_user_level_gold_products_category_beauty:user_name_city_first_order_date:order_by_first_order_date_asc_limit100",
+    "reference_sql": "SELECT u.user_name, u.city, MIN(o.order_date) AS first_order_date FROM users u INNER JOIN orders o ON u.user_id = o.user_id INNER JOIN order_items oi ON o.order_id = oi.order_id INNER JOIN products p ON oi.product_id = p.product_id WHERE u.city = '杭州市' AND u.user_level = 'gold' AND p.category = '美妆个护' GROUP BY u.user_id, u.user_name, u.city ORDER BY first_order_date ASC LIMIT 100;",
+    "ordered": true
+  },
+  {
+    "question": "请统计在西安市注册、用户等级为black、且2026年9月12日前有退款记录的用户中，平均订单支付金额（保留2位小数），按用户等级升序排列。",
+    "category": "aggregation",
+    "difficulty": "medium",
+    "kind": "entity_filter",
+    "intended_meaning": "三表关联：users（city = '西安市'、user_level = 'black'）、orders（valid）、refunds（approved）；对满足条件的用户，计算 AVG(orders.paid_amount)，结果保留2位小数；按 user_level ASC 排序（仅一值）。",
+    "simulated_answer": "西安市",
+    "answer_slot": "entity",
+    "ambiguity_explanation": "‘西安市’是否为 users.city 的规范值？cities 列表中为'西安市'，但可能存在‘西安’、‘XIAN’、‘Shaanxi Xi’an’等写法；且‘西安市’与‘西咸新区’在行政上存在交叉管理，是否应合并统计？问题未定义地理实体边界和标准化策略，仅城市名称字符串存在唯一歧义。",
+    "ambiguity_alternatives": [
+      "西安市",
+      "西安"
+    ],
+    "semantic_signature": "users.city_user_level_black_refunded_avg_paid_amount:metric_def_2d_order_by_user_level_asc",
+    "reference_sql": "SELECT u.user_level, ROUND(AVG(o.paid_amount), 2) AS avg_paid_amount FROM users u INNER JOIN orders o ON u.user_id = o.user_id INNER JOIN refunds r ON o.order_id = r.order_id WHERE u.city = '西安市' AND u.user_level = 'black' AND r.refund_status = 'approved' GROUP BY u.user_level ORDER BY u.user_level ASC;",
+    "ordered": true
+  }
+]

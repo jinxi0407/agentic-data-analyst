@@ -1,0 +1,5 @@
+{
+  "reason": "Duplicate logical task/template. Create distinct tasks within coverage_focus; do not copy previous_signatures.",
+  "candidate_calls": 0,
+  "stage": "pre-benchmark authoring format validation"
+}

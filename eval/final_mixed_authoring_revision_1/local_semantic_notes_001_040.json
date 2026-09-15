@@ -1,0 +1,25 @@
+{
+  "stage": "Pre-freeze local reference review; no candidate outputs exist",
+  "review_inputs": ["new draft questions and SQL", "database schema and stored enums", "business contract", "evaluation protocol"],
+  "not_inputs": ["Gate prompt", "Gate failures", "historical system results"],
+  "provisionally_consistent": [1, 2, 4, 7, 8, 9, 10, 11, 12, 13, 16, 17, 18, 21, 23, 24, 25, 26, 27, 28, 29, 34, 35, 38, 40],
+  "issues": [
+    {"id": 3, "reason": "Gender storage literals are male/female/unknown, not Chinese 男/女. Correct question's explicit storage-value annotation and reference predicates without changing the intended genders."},
+    {"id": 5, "reason": "Registration-date ordering has ties. Specify a stable user-name tie-break in question and reference before the dataset is frozen."},
+    {"id": 6, "reason": "Reference uses 男/女 instead of actual male/female storage enums."},
+    {"id": 14, "reason": "Explicit gender storage annotations and predicates are incorrect; male/female/unknown are the real enums."},
+    {"id": 15, "reason": "MySQL rejects ORDER BY/LIMIT operands without parentheses around each UNION operand. Also specify a stable name tie-break for choosing the earliest/latest five and final ordering."},
+    {"id": 19, "reason": "当月1号 may mean the current reference month. Make clear that this means the first day of each user's own registration month; do not alter the reference date."},
+    {"id": 20, "reason": "Gender predicate and explicit value annotation must use male rather than 男. Keep the original date interval even if it legitimately returns no rows."},
+    {"id": 22, "reason": "Clarify that both price averages and the minimum product-count condition apply to active products; current wording can apply active-only to the count condition."},
+    {"id": 30, "reason": "1.3倍以上 is inclusive; SQL must use >= 1.3, not > 1.3."},
+    {"id": 31, "reason": "Top 100 truncates ties among launch year/month. Add brand and category tie-breaks to both question and SQL, retaining the same four requested output columns."},
+    {"id": 32, "reason": "SQL rounds mean launch year/quarter to integers although question asks means without such rounding; remove the unrequested integer rounding."},
+    {"id": 33, "reason": "Top 100 year/quarter ordering is not stable; specify brand/category tie-breaks in question and SQL without adding projected columns."},
+    {"id": 36, "reason": "Specify that the quarterly margin statistic is the simple average of each product's stated margin formula, not a ratio of aggregate averages."},
+    {"id": 37, "reason": "Specify separate year and month output columns plus count, average price and average cost to match the five reference projections."},
+    {"id": 39, "reason": "Reference selects launch_date outside a subquery that exposes only year_val and calculates standard deviation on median rows rather than the full category. The question also embeds SQL implementation instructions; rewrite the same business statistics in ordinary language and compute median and full-population standard deviation independently."}
+  ],
+  "global_pending": ["Historical template and semantic novelty review", "Stable ordering and ties", "Actual stored enum validation", "Reference execution after corrections"],
+  "no_ground_truth_filtering": "Empty, zero and NULL results are valid and are not grounds to replace or discard a case."
+}

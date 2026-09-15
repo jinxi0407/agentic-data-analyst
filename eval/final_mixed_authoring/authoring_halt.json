@@ -1,0 +1,10 @@
+{
+  "status": "REJECTED DRAFT; not a benchmark; no Ground Truth frozen and no candidate calls",
+  "reason": "Repeated logical intents and SQL templates across batches; pre-candidate novelty failure",
+  "accepted_format_only": 120,
+  "distinct_literal_masked_templates": 43,
+  "duplicate_template_instances": 77,
+  "unobserved_request": "batch_12_request.json",
+  "unobserved_request_will_not_be_repeated": true,
+  "created_unix": 1789437766.6635892
+}

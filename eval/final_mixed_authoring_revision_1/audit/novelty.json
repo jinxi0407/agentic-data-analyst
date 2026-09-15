@@ -1,0 +1,126 @@
+{
+  "draft_sha256": "547001152334de32e81734814c1b6736400946974e68dd0de4bed0d2cd764119",
+  "sources": {
+    "eval/final_release_holdout_300.json": "6a362ad722c5f4fcca593fcd626076b0c43a93a142e190f23c09187de4a61687",
+    "eval/scoped_clarification_cases.json": "3913db8c6e6b2926c6fff3823ee51ea12490f057479cbff4a410b08d2c597f88",
+    "eval/clarification_holdout.json": "ee7d9746ec7c6c06c0ae588611dcaa40f0da07d75b015f3edf38293886a8d30c",
+    "eval/clarification_dev.json": "2bb43866da00f98307b7606f0365152b15d75082b2bfad4edd7fba42c3a2f1cc",
+    "agent-v4-generalization-release:eval/final_cases.json": "88fa6d20c686a9d407a19fd2bce488f41ab599ff62cc3d7988bb1779916eef90",
+    "agent-v4-generalization-release:eval/final_blind_v4_cases.json": "6a3d7ae04ede9d9fb7b02b7b650e003db8c355ddc3090b33a029a62aad04bebf",
+    "agent-v3-generalization:eval/holdout_cases.json": "0ca3ce26606c4bbd2bfca65178901f7d0d5f36228a29769e17a85e5b13bb8ba2",
+    "agent-v3-generalization:eval/final_blind_cases.json": "d8f553eff6729ec6f36d78d17db8db762d94b5b469fa59644f4faf975b16013d"
+  },
+  "historical_questions_checked": 1500,
+  "duplicates": [
+    {
+      "id": "final_mixed_041",
+      "matches": [
+        {
+          "source": "agent-v4-generalization-release:eval/final_cases.json",
+          "id": "main_021"
+        },
+        {
+          "source": "agent-v4-generalization-release:eval/final_cases.json",
+          "id": "main_026"
+        },
+        {
+          "source": "agent-v4-generalization-release:eval/final_cases.json",
+          "id": "main_031"
+        },
+        {
+          "source": "agent-v4-generalization-release:eval/final_cases.json",
+          "id": "main_036"
+        },
+        {
+          "source": "agent-v4-generalization-release:eval/final_cases.json",
+          "id": "main_041"
+        },
+        {
+          "source": "agent-v4-generalization-release:eval/final_blind_v4_cases.json",
+          "id": "blind_017"
+        },
+        {
+          "source": "agent-v4-generalization-release:eval/final_blind_v4_cases.json",
+          "id": "blind_022"
+        },
+        {
+          "source": "agent-v4-generalization-release:eval/final_blind_v4_cases.json",
+          "id": "blind_027"
+        },
+        {
+          "source": "agent-v4-generalization-release:eval/final_blind_v4_cases.json",
+          "id": "blind_032"
+        },
+        {
+          "source": "agent-v3-generalization:eval/holdout_cases.json",
+          "id": "holdout_014"
+        },
+        {
+          "source": "agent-v3-generalization:eval/holdout_cases.json",
+          "id": "holdout_056"
+        },
+        {
+          "source": "agent-v3-generalization:eval/holdout_cases.json",
+          "id": "holdout_098"
+        },
+        {
+          "source": "agent-v3-generalization:eval/final_blind_cases.json",
+          "id": "blind_012"
+        }
+      ],
+      "kind": "literal-masked SQL template"
+    },
+    {
+      "id": "final_mixed_098",
+      "matches": [
+        {
+          "source": "agent-v3-generalization:eval/holdout_cases.json",
+          "id": "holdout_033"
+        },
+        {
+          "source": "agent-v3-generalization:eval/holdout_cases.json",
+          "id": "holdout_075"
+        },
+        {
+          "source": "agent-v3-generalization:eval/holdout_cases.json",
+          "id": "holdout_117"
+        },
+        {
+          "source": "agent-v3-generalization:eval/holdout_cases.json",
+          "id": "holdout_para_126"
+        },
+        {
+          "source": "agent-v3-generalization:eval/holdout_cases.json",
+          "id": "holdout_para_136"
+        },
+        {
+          "source": "agent-v3-generalization:eval/holdout_cases.json",
+          "id": "holdout_para_146"
+        },
+        {
+          "source": "agent-v3-generalization:eval/final_blind_cases.json",
+          "id": "blind_166"
+        },
+        {
+          "source": "agent-v3-generalization:eval/final_blind_cases.json",
+          "id": "blind_174"
+        },
+        {
+          "source": "agent-v3-generalization:eval/final_blind_cases.json",
+          "id": "blind_182"
+        },
+        {
+          "source": "agent-v3-generalization:eval/final_blind_cases.json",
+          "id": "blind_190"
+        },
+        {
+          "source": "agent-v3-generalization:eval/final_blind_cases.json",
+          "id": "blind_198"
+        }
+      ],
+      "kind": "literal-masked SQL template"
+    }
+  ],
+  "semantic_review_pending": true,
+  "limitation": "Alias/literal-masked SQL equivalence screens duplicates but cannot prove semantic novelty."
+}

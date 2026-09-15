@@ -1,0 +1,31 @@
+{
+  "stage": "Pre-freeze local reference audit; no candidate results exist",
+  "provisionally_consistent": [41,42,43,45,46,48,49,51,52,53,54,55,56,57,58,59,60,71,72,74,76,80,82,83,85,88,90,91,93,94,95,96,97,98,99,100],
+  "issues": [
+    {"ids":[44,47],"reason":"Daily output exceeds the declared 100-row cap; explicitly bound the report in question and reference before freeze."},
+    {"ids":[50],"reason":"AVG(DATE) coerces YYYYMMDD numerically. A mean calendar date requires TO_DAYS, averaging, defined whole-day rounding and FROM_DAYS."},
+    {"ids":[61],"reason":"LEFT JOIN COUNT(*) counts an unmatched user as one order. Use COUNT(order_id). Make first/last and payment scope explicitly valid orders."},
+    {"ids":[62,64,68,70],"reason":"AVG of NULL joined counts excludes zero-order customers. The stated customer population requires COALESCE(count,0) before AVG; clarify payment counts also refer to valid orders."},
+    {"ids":[63,65,69],"reason":"A registration-date Top-100 needs an explicit ID tie-break. Case65 also omits the question's order-date < reference-date filter."},
+    {"ids":[66],"reason":"Reference uses reference-date minus first-order date instead of last-order minus first-order; ratio-of-sums instead of per-customer mean; excludes zero-order customers; ambiguous registration-day inclusion. Rewrite reference and make authored denominator convention explicit."},
+    {"ids":[67,69,81,84,105,107,109],"reason":"Six projected columns violate the predeclared maximum of five. Resolve the draft projection before freeze, preserving the business task and logging the change."},
+    {"ids":[71,72,73,74,75,77,78,79,80,81,82,83,84,85,86,87,88,89,90,94,97,99,101,103,104,105,107,109,110],"reason":"Check and explicitly expose a stable dimension/ID tie-break where a sorted limit or rounded ranking metric has ties. Do not rely on hidden order in scoring."},
+    {"ids":[73,77],"reason":"Question must specify ordering by the displayed rounded rate if the reference orders on its rounded alias, rather than an unrounded rate with different tie membership."},
+    {"ids":[75],"reason":"Specify population standard deviation; unqualified standard deviation could mean sample or population."},
+    {"ids":[79],"reason":"PERCENT_RANK >= 0.5 chooses an upper-middle observation and returns NULL for a singleton, not an ordinary median. Remove implementation hints and compute a real median using both middle ranks; retain full-group MIN/MAX."},
+    {"ids":[81,85],"reason":"The question says before 2026-09-12; the draft SQL uses <=. Align the boundary without changing reference date."},
+    {"ids":[86],"reason":"Sales quantity is for valid orders under the contract. Both concentration CTEs omit the orders join/status filter."},
+    {"ids":[87],"reason":"A direct product/item join weights catalogue average price by item frequency. Define and separately aggregate product-grain mean catalogue price and line-grain mean quantity for valid orders. Preserve the >5 mean-quantity threshold even if the result is empty."},
+    {"ids":[89],"reason":"The reference omits the question's active-product filter. Bound the relative interval with the fixed reference date."},
+    {"ids":[92],"reason":"State the authored inclusive 30-calendar-day interval explicitly as 2026-08-14 through 2026-09-12; distinguish it from the default DATE_SUB(reference,30 DAY) wording."},
+    {"ids":[98],"reason":"Make all refund statuses explicit for the authored all-record reason counts; no approved-only condition should be invented."},
+    {"ids":[101,104,106,108,110],"reason":"Refund order count is COUNT(DISTINCT order_id), not refund-record count. Monetary sums remain record-grain approved refunds."},
+    {"ids":[101],"reason":"Make approved-refund-order population explicit for both counts and amounts."},
+    {"ids":[102],"reason":"Refund join duplicates order paid amounts and order counts. Pre-aggregate refunds per order; specify the refunded-valid-order cohort, per-record average refund and one paid amount per order."},
+    {"ids":[103],"reason":"Unqualified last30days follows the existing DATE_SUB(reference,30 DAY) rule; the raw reference starts one day later. Use the contract boundary, not a revised business rule."},
+    {"ids":[104],"reason":"Denominator is all approved refund money as worded, not only approved refunds attached to valid orders; use an independent denominator subquery."},
+    {"ids":[108],"reason":"State that WeChat/Alipay are combined into a single group, not two separately projected counts."}
+  ],
+  "empty_result_policy":"Do not remove, change thresholds, or reject questions just because their reference result is zero/empty/NULL. Case71's quantity >10 and case87's mean quantity >5 are retained as authored.",
+  "final_review_pending":true
+}

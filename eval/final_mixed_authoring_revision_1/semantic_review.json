@@ -1,0 +1,2038 @@
+{
+  "candidate_calls": 0,
+  "cases": [
+    {
+      "id": "final_mixed_001",
+      "public_question_sha256": "e11174cfeeb72ef6a0e815752604c245f1e7fe4009c26a48712083c873e8b2f4",
+      "reference_sql_sha256": "05d1364f4d317da7252dc6d7a86edd33b6c7b78971d36320d0566349a95cc3cc",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_002",
+      "public_question_sha256": "db2bcfce52e51054ed478faef17d81584a1dbe43ad85d42a59564a1a59bfaa0f",
+      "reference_sql_sha256": "9f7d8116acafef96e5b0fda9fefef20633aa1ee5d00b4edd575a8dc95e81700d",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_003",
+      "public_question_sha256": "025392354c56deb6dc9a3ba0136ae20a89bba016afb842429191226b0ffbacea",
+      "reference_sql_sha256": "4ae9471c58d7e7eaa0d70df9e12a62994b29f77fa6171747ffd34ab4549884ce",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_004",
+      "public_question_sha256": "1527cda31c42b84748dacfe2f9869e3b33574baff93cc06cc4d6438bdefc880e",
+      "reference_sql_sha256": "1597743b4bb37446ea307f32952c89d2194e8572f380b110a63d53ef8d95d973",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_005",
+      "public_question_sha256": "91c7710b79107abdefc3dd1689afc1aacd1933ba9a9f0c9559f0026b14866910",
+      "reference_sql_sha256": "a542ff74d858421c7a8cfcaa4a56f74984a66ecfb80ccfa25b5fe8d820bd1b2e",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_006",
+      "public_question_sha256": "32628b2dbc89f6878b4ffb4fe32fa84a884e6fc4d25c69d1c8af8216b064abc3",
+      "reference_sql_sha256": "3001c815f7baa61ef117a9ea7a6115a0111edd51f47a69d968bb813687af33f4",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_007",
+      "public_question_sha256": "05b943ef3eeb51aba41f9d571ce9095bee25b358826d10acfe2476f5af52607f",
+      "reference_sql_sha256": "97e9bb2a74b2d6610453b8991e18bb66a2feaafe358c350c41cb96cd99ff9cb0",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_008",
+      "public_question_sha256": "c9dce4d61983330ad2179b6a45dbe1ac1962e08bf69e596e2a1effa465f9472a",
+      "reference_sql_sha256": "0ea0a10c2962e48577b6a83dfdc48e02af40ad5325d751828fdd448fad2c2dae",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_009",
+      "public_question_sha256": "3e6bb8b8aedbbde551dafd6f526514d39406bbf096a8a7a3e9856e53291a6f53",
+      "reference_sql_sha256": "2a225951a0a657796793b867f924d88c653ebbde12fb3ba3e58f3438935943fb",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_010",
+      "public_question_sha256": "1bb749cd92446c32a4fce7200bf3fb6fb96b502c9a99eb9547617465f1387d06",
+      "reference_sql_sha256": "4355c89d36dbaea323385c3f214e314169a0db7d2b0ae91d857407303592af6d",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_011",
+      "public_question_sha256": "fbbc7e623f23cd788db6b40ad035b807719b398761dc9304a2391b6cdf17f5ae",
+      "reference_sql_sha256": "607f16c6e1b7eabca7e38bef2cf7ddb789ae29248243e7035fbd984e263d5798",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_012",
+      "public_question_sha256": "acb663453a923a10bbe0150107b5937573fb713d67cf06dec5d6b2ad6889da23",
+      "reference_sql_sha256": "2ceb961d7cc96d40ea2a2a525da383952828d085ff9de294c9b9b8606767c120",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_013",
+      "public_question_sha256": "9215245251d4a2973a3edc8afbb72f2d5076312a8515d60333a139ac54374388",
+      "reference_sql_sha256": "d9e9a483ec3598dc0e396ef8429f2a0f587e9e9e8fe5332781772540e46245d9",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_014",
+      "public_question_sha256": "ffaa8cdc84d4a652db3d85ad5b91bf2ebd49edbb141727d0b8512e23c1bb539c",
+      "reference_sql_sha256": "4ecc70661051979d16ded69e890ca0ff1013cee37f6ecd5999f0054eb92b81ab",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_015",
+      "public_question_sha256": "f876fff8ec53de2c740ca116c27b8e9081a2e2593a53678ba64c0177b2c4a89d",
+      "reference_sql_sha256": "88ccddc343f5ea15c9c98df05274a0db577e73e450f87a6adc3ff6afd8d1dfca",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_016",
+      "public_question_sha256": "2c988337526e0561deca84cad95fc5effdd9d1902ae6e6e7d4854aa74b4d3bf8",
+      "reference_sql_sha256": "43be8fe7c508def4ea390832b171578a55edbc81594bb5d0754c458b849154b5",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_017",
+      "public_question_sha256": "ca733d2aeb0525fdbd7b2cb6c85c36ae91bed43eaacd39fa5990b4790e8fa304",
+      "reference_sql_sha256": "750f92dcafb9155cc3ed71b886ee0d9dea6ed94526578bc488305148e91aefbd",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_018",
+      "public_question_sha256": "f0a32646612cd502e5f86c302222d590731f0797a778014d3f11390be32597bb",
+      "reference_sql_sha256": "d05c817a4f811db8d4a6bfe9f0fa762fb9c417657276493bc1f2cab583d6c64c",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_019",
+      "public_question_sha256": "51ada5a30d42ac2a0b7b67b0b44821f51905510a137c91668d30b2a97e6a628d",
+      "reference_sql_sha256": "2fa240bfd6a97fd028c3e791995a437d421724af33b286e52e13249da148a32d",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_020",
+      "public_question_sha256": "518166ccf213a0d66c98e1b70b7b8d5125d0a69e8d387e38a3e00ae56fa0ad0d",
+      "reference_sql_sha256": "aceecd6b827d00d5353d39136db5c47c8e00ff7b3296fcad953bce9be637abdf",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_021",
+      "public_question_sha256": "64cb07b83aad41b1577936faf97f283949688520093fe9a17ee948adb325bd96",
+      "reference_sql_sha256": "4a626519e89a032d53e80a207968dbcb7fa1b93e60c9ceaef24ea26b1f4085d3",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_022",
+      "public_question_sha256": "a6843838c8bfb981581118a940f0ebc7deabad5f8420f62dfaf09cfed3c4d6b5",
+      "reference_sql_sha256": "94aa6e4a79f740cf6e1fa496d123b06f060adb1b6950f98a685652ac079f611a",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_023",
+      "public_question_sha256": "babdcc907c17a7ea19b7183a210dbe1a3c2476b56e9f97f804d65f62ebf37492",
+      "reference_sql_sha256": "328f37fb8f43ba8f1c4ea1bf732abe670a06dcb165bd7cb8d2824766532ab991",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_024",
+      "public_question_sha256": "e9aeaad86e10d6059eefbfd0280a42f9bf1a3910b6d11aca3e2ead7ddfbe081f",
+      "reference_sql_sha256": "a5a3a86f16f18b748c6809d9ee0d0fe48a02712d634ec3cc2fc30e3ad9b74751",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_025",
+      "public_question_sha256": "a1333c5669420f82ca2e84a05afdab3cf0ed55a2f47e8f53c9b5df9c814f1b65",
+      "reference_sql_sha256": "a48725124f579676532349a36a1e03aaeee2716856f32357fb03fc2206f16730",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_026",
+      "public_question_sha256": "33941517329372683bf4c3349b634f4a103c23ef27a73a4d30f19df8a62a015c",
+      "reference_sql_sha256": "87b975c91c604396ab3bfabb3a38de74ae91718d36809bc4ccb543296b884269",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_027",
+      "public_question_sha256": "9683ddcac724489b11c9579ee666a3effe27beba2f412274974b0ce66127361c",
+      "reference_sql_sha256": "11ddd78871cca07c0b52f7cc1b2f72ed9c5f6a3d4e3e76fff021ffcfa071ff2c",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_028",
+      "public_question_sha256": "cbe14e3364ba5b9ff3fa7152a4a5ac69a377c35010cca4fa085dda4538b8c4d8",
+      "reference_sql_sha256": "09d398be55a0268fe7e10182dde27a0e2226caab5c988986536a34a7c8ce09a8",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_029",
+      "public_question_sha256": "0d63bd1ce7f30f75b9d7ae658197053a43569535a890a26c80c3a470b950a32b",
+      "reference_sql_sha256": "827dc5e179d911d479c85b0e96cceec9c6597424b818849d044bff72425d4977",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_030",
+      "public_question_sha256": "7223d8961a06ade69f3e16ddbfa147279051e59f9474e5dfcae305aad846a213",
+      "reference_sql_sha256": "3d469b4956d10a82b15966ab6e5f035fe13046a241e1a4816c3f25e6fc41e043",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_031",
+      "public_question_sha256": "74e61aee9d15d2a7f1fcc1f5ae4c81e806b7fbdd8e34dbc99f47247adcb90162",
+      "reference_sql_sha256": "2893d4aef0a9e7b33a10fdbcafdd5d37cd1b79f4efe189e9e8d8793b356e4886",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_032",
+      "public_question_sha256": "30403debedf409082903b12dd5534e71400a85f17f656d03a8de35dc126a5fa2",
+      "reference_sql_sha256": "3f72545da5b62f6dd7ef1555986c0a05f4e6e1b95d62931e34e7b0b12426e2a3",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_033",
+      "public_question_sha256": "adbfe6954439b97e88d4e034f11b61053414ae32692e5de1f2335fe35ae69c79",
+      "reference_sql_sha256": "7d39a454ccb1f87b6abb0fa102bfc4d85b89dfed3c057cdbbcd7ff71c25fd41c",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_034",
+      "public_question_sha256": "0a0f93c4160553ae708c5ccf8f7548daf8054bdcb35871a3fd689085a1b6df14",
+      "reference_sql_sha256": "bde279e372322f28fe9dc82ddf7e42ba621faa04d37762dbb0132929252f21f5",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_035",
+      "public_question_sha256": "1b851cdd8ce17cda75000ab82c1d58cdf3c1b962f08f5553e648a8f8ef3e8365",
+      "reference_sql_sha256": "afad4224e15c3155410da97f070350935406f8d934392326f03ef640f0b8f7e9",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_036",
+      "public_question_sha256": "94b617831c9a0b462387ec1df21a00fb9da6959aa45bdb25ca0fbd88afb1e400",
+      "reference_sql_sha256": "10dee5cfe4dc270ce769cf57cf41d617ed79f139176e321534f99f5562527a6b",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_037",
+      "public_question_sha256": "60455bba8f9a7aee8cf5650ab4af5dd24ec770a1181d2907dd2b192d58861c00",
+      "reference_sql_sha256": "6ba8b85507bef87adf215b7381dcca4311665e1b829354dfa86e1a19298ee73c",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_038",
+      "public_question_sha256": "8e0bb9bc1493c2dfcede6592d4d0acb83804ce8d5e22e66927c21ded27b18cda",
+      "reference_sql_sha256": "e6797bc79aa254320d460e5b1d3c7569c639f83f0be03128699e3bfcb390c844",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_039",
+      "public_question_sha256": "340dba516684b75b491277e7a12ac395b4bc9ec086e356a66833861ce1f40982",
+      "reference_sql_sha256": "bd172cafdab7341ecede9fa925270bd4619d31dd45fddf9c1ff2a30ecc65359d",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_040",
+      "public_question_sha256": "b7af4368dc1f31463a5c3e8f65b4f860c0a769f219671e81cf9fd2067ed7eeba",
+      "reference_sql_sha256": "f1de6e763215c7a31ba356d1110f3e6d796ba66826bf00840c81f2406b9747b5",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_041",
+      "public_question_sha256": "2d256b698f36d3887a3b9b85db5e997203f8675c153a026c6956b1320a2c6a1b",
+      "reference_sql_sha256": "9dca22772f365d75c768d67307203ce450bc14fe050bda23031b7be0710eebee",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_042",
+      "public_question_sha256": "b6e9f9bafdb864c1df8f4e39a73dd4236a392e9952af2b7d18544e905f5c9313",
+      "reference_sql_sha256": "754874cfbfb6d3bef06ff28c630e42b6bbb372a9ddd6ed61fdadcc7133ef8105",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_043",
+      "public_question_sha256": "acaaccba5c76f0c6bb264227df48df4bd380de1d2dffe9780827d2d0c18f9df2",
+      "reference_sql_sha256": "45f19b26cfe686f78b6b5440021ecd9eb568c3110bfbe027f07f142fafb78f32",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_044",
+      "public_question_sha256": "6a419b4ac04c134d8a9e4af9aa2d09d92aab1b5aeb85da4134ee19da47de4afc",
+      "reference_sql_sha256": "507ea0417d9f1b1aa2a322481623ac7aa29b0ed22cab14b0a4a96dca58da6084",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_045",
+      "public_question_sha256": "fbf758c0995894ffa1c4e820a9b8e2b66ddd2615839c5e29c21865d516c53e68",
+      "reference_sql_sha256": "9a84879c55db2a6f9f1b1f3fa4d3cd84c2d5fd357cf5494dcb43020055714861",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_046",
+      "public_question_sha256": "4f8167a7f2cfa68c9c262116efccb06c79a44b720990bc8fe4dbb103afe910e3",
+      "reference_sql_sha256": "80584f6f84cce30d91fa5fa781764a7dfe82a375249d27d78e1293d14e0d1e82",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_047",
+      "public_question_sha256": "6ea02d6d3691226d37f31ab6c0ba3ee9a219f0275e5e81d12cb1919d77435461",
+      "reference_sql_sha256": "23e39b07160a1be45cf442c9807a8b1870accc26e01d8ea4c15a592ea04ffa34",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_048",
+      "public_question_sha256": "8ffbae4bf88b3ebf2cbc3884f24b518cf44554157bdc52f8eb0046ab51160473",
+      "reference_sql_sha256": "116016f13ba6b3beccd4ea89aecd6974d6846f18e3823ecf2fa2fda4465a26a7",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_049",
+      "public_question_sha256": "53e83a912e350a51dcfd2358d66de5847bed1d3eba05747ace01e64f5cbae51c",
+      "reference_sql_sha256": "a4cdb65ca39ba9e45677ccc47dd312692d2bb821804d8dd06e3f7883e5d9072c",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_050",
+      "public_question_sha256": "5975ebc6414a4c64eef30e53af5aec186a39701ec92d705bb1b8ed721232ac9f",
+      "reference_sql_sha256": "cfa5715a69ca5e943eb67e5b4ae23ac6cda168b275556a37f702ad20748159bf",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_051",
+      "public_question_sha256": "98c00d0055a82bd5ee688e056402fd982c18dadf283f7b54f01747e1c959d46d",
+      "reference_sql_sha256": "8992d5b9600940fde86686c9f351cd1dd4d28183c3c96fd3ca5fd0c98d10c082",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_052",
+      "public_question_sha256": "eb3af018969c31caaa6ace56b674327522724977ba278b9a2f86c703409a5049",
+      "reference_sql_sha256": "547efbae666f676ec0d3738fc8433e91fa8c7390de23f4a36f3404ed803cd041",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_053",
+      "public_question_sha256": "8e5ba89ded83ec9cfaef62987d1702c980d742767c2c09c1d55b21379b12c6b4",
+      "reference_sql_sha256": "5b7ce0bf1c7a0ad0b83fc437d5f910fee8a818a58c700585a68a34f07a850552",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_054",
+      "public_question_sha256": "73bd14c2955109f2c4390fc4a07cd700dee2edcf691f891568a717bf3814ef6e",
+      "reference_sql_sha256": "2fffbe9ca2b066d48beb786064c26d3457fa6d8e21639c4f717fa99f3dc931d1",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_055",
+      "public_question_sha256": "6530d9f729fa4e8e2965b9735d10d624b969d2fbc655bea6ae93b6a64bc4298b",
+      "reference_sql_sha256": "36f0f397eeeb252fb7cd882b02a551b99641a1db48e8876566c4432de3aeff72",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_056",
+      "public_question_sha256": "d537be0c381026a438297efb751709647200604a95edd4a941bc23aabc005fb7",
+      "reference_sql_sha256": "8f2020c41e9128797dc3a927929eeac34b4413455044c1506121d690d3310304",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_057",
+      "public_question_sha256": "f51c64b9c5ba95d83fb7767bfaf19e5661873bc62c6186b5216812a3f7fcdcef",
+      "reference_sql_sha256": "a614cbef2ea1388616786837e9eb3944adb3db33015ae04106f7d3a8585905a0",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_058",
+      "public_question_sha256": "09a20eb40a02a09f9234ba8130559ffb7a161f36e6fe8c11e9305e00dddf9e4b",
+      "reference_sql_sha256": "f4d08e90bb44b430359360c87ccb7dcd7d8e6e6618d6f843b005110cc1f6a9f5",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_059",
+      "public_question_sha256": "acfabf40ee9ea2a8cc4ce5cc19f1b0ce694dcb756660728689dece19f194717a",
+      "reference_sql_sha256": "e3879d1db2c049c33df12438f752021b3c477c4602d516ea74bf5313715add38",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_060",
+      "public_question_sha256": "69bb0305d5b2dccf1d450f599a06a479a41f81cea606fb4319c469eb0253621e",
+      "reference_sql_sha256": "cfc79888d9b4c9cc179d2ecedb01241230a93576beb63d0482b24331e6d5537f",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_061",
+      "public_question_sha256": "4c9890fbdcf05052608b89e471ec2fe84d77afb08b11ee46e8d4634ced4b1f40",
+      "reference_sql_sha256": "5f344b14fec692dba7c1343f55aea831b1a5efdbd9ed5d70ced609ec72afaa14",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_062",
+      "public_question_sha256": "d11b84a5d4bce566f7a0d54cea7c378b9c73bd6bba81b68110a384f6f5037ee9",
+      "reference_sql_sha256": "a34124ab5896cf279ccc76450e6339d44cfdf3d264b2d334a724f80a85fdbb8d",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_063",
+      "public_question_sha256": "551c8f44a48effb037f43c1cc00dfe8da9b82f2f3c5abe2bc0731c7bc3229ba4",
+      "reference_sql_sha256": "26e5634f1d3bf0137e311ff624c4ca69ef2c1afd2a8a440754a734997b76ec3a",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_064",
+      "public_question_sha256": "43121843ae23ea8821b7aeff5ad31c56be9daef16b406fead39edcc13113778e",
+      "reference_sql_sha256": "7b090eabcdc3c180429ccbc1ebbb50f0c7e27dd9840f6f00a748b21817ea8dc7",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_065",
+      "public_question_sha256": "7b583cb982bf34a7b19dc9f08d654d8b9633cb15489afa8919283ded5ad446e8",
+      "reference_sql_sha256": "1ddb670809adbb0a704b00704ed5ee3819b98cd3a024b9dfeca46d89d057d72d",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_066",
+      "public_question_sha256": "203a96bbefc0622f48c5e6926cec9b8e984892649f632248ebe3de93005eebbc",
+      "reference_sql_sha256": "54b9486029012388392599ca499d97b6b4429d741ca361917cc4d1487d6d5af6",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_067",
+      "public_question_sha256": "69a2520c28a1686b4ffb3220199393cdb4c585fba6686c34a2af5bf4e662b05a",
+      "reference_sql_sha256": "cbaca478ec2c99a5004c15341776d30b5f6e14a8ebb79979c7cdf6b623817ef4",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_068",
+      "public_question_sha256": "dc39cd35f93286ca8c3b12eb629a31b0418bf4ce18acb6f9e2b4d55e4621952c",
+      "reference_sql_sha256": "5d10ff8c2f9d203fb10de45e8765cf121ea6a6fab2ee80e026dccb74921438cf",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_069",
+      "public_question_sha256": "96a701f8cce5043c6f7c8fad4f5d845d5f7056f4c25133d7883a3c77b8e50b7f",
+      "reference_sql_sha256": "6b5aad7b00c87c3ad4a2685453cb4f92e86ac1e7254307b27e2624f54e23fc09",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_070",
+      "public_question_sha256": "8a93f4862f569fbb8c02a904b97a742cc4d22ff8ba6119b4ace7c98ffe936133",
+      "reference_sql_sha256": "8538fd85a0194212401f3baf283041f8b91a80d667d38262575744016c4843a3",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_071",
+      "public_question_sha256": "1474619f1e8f79e29fd24f2b3a70d42e9bd95e7dbe4f644ffffb53f7b0365046",
+      "reference_sql_sha256": "34244af99d20a011229ec4f8ea346561c6599c72619a486a6e949485780d155d",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_072",
+      "public_question_sha256": "31116506be47be81258789b4631485b929a6cc0b3a0aff50f84b3415741a0dd3",
+      "reference_sql_sha256": "035d64e4c75a14309a6a464ec0e38ba15cf62dde352cefe9d6dd5f49468e48f5",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_073",
+      "public_question_sha256": "38551de1b01d2d879fb128f5d47741df6db58c0d8f4d0fbcbffe81b119af45fb",
+      "reference_sql_sha256": "c964762457343a87f99e6a31b0bea87455a639f1e1f8c667644cba4a7469be9a",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_074",
+      "public_question_sha256": "7ed70ee3140917ba415287bc109b5cedfb83ffdb3cbdadd154a892d1ce106664",
+      "reference_sql_sha256": "8d28f538b6da13ce120bf10a7b581b1d42c7c4207005ef013ca43021683bfb78",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_075",
+      "public_question_sha256": "d8630293780b8749349d4a1502c6beb67bdb5ba11855927200875fae1ca06639",
+      "reference_sql_sha256": "ef655b7ea35eb71901adc676c8603f46165b35f42a136856ce10bdf60d6dea8d",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_076",
+      "public_question_sha256": "7212d50060e35202f86352f5d89e25aa07754a7e69e3ace908da9054944c0052",
+      "reference_sql_sha256": "f9155333a3d46dc3f14b7c3566b3b2cf77220a568e2350a4d24fe245a5cb3902",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_077",
+      "public_question_sha256": "35c7574eed6638149c8f6fc20b575395ec52af436346bbbcbeb8a54ef38eb1df",
+      "reference_sql_sha256": "393c68338c835b4e9ba4b7c2f4a4e6960edbb3fb96ce02fbdcda7f71525d172d",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_078",
+      "public_question_sha256": "e094331c649c5b4f56f635194786bc4536139cccbdf0765649d8bb89ec6c4416",
+      "reference_sql_sha256": "e10baeae9251cfc19ea9d2efddb282f9ee28e3693e98e20e7d1517b0a5aaba09",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_079",
+      "public_question_sha256": "0b3da360b1093ebe8a3d3c282101f95ceabb3589d49c82c639cdf5fc10c0eba7",
+      "reference_sql_sha256": "f3ef7336c3e49ed7e964d78e8502ac72e9bc98a40a22344263a4776e11ded9e2",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_080",
+      "public_question_sha256": "df90cb2c1a93ffc6ef27bf73ec1739d1c30856206b91321d84f9d50d64439653",
+      "reference_sql_sha256": "ca5afbb96f4febfda169c7fdfa7d0384327d14761f2649de48c571908dd9db71",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_081",
+      "public_question_sha256": "f5738d1e06cb5c57e056bba7163714430d3f81f2b44edd5b5f51f58db63cc0cb",
+      "reference_sql_sha256": "4119fa8ce24e1533ca18448f1fd3f1f233075f6264d83211f495c5a5732ded99",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_082",
+      "public_question_sha256": "867bff541795a56879830ed19b3188b9ba9ca83e773afcb21487237bedc7101b",
+      "reference_sql_sha256": "e8852557beff23c7196a76c00050c243c6baed991ebeb52316190be5abc0f4b7",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_083",
+      "public_question_sha256": "871b7d6b6a676a9fef495444d724ff4d8e1ed5bd253737f79a7d66c057f2190f",
+      "reference_sql_sha256": "e99da65a6498c377dc44299e33e88262c20910d022c69dfea9004a3917836592",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_084",
+      "public_question_sha256": "ba98168ab3317a40fff220d19647cf833f76e9cd4954320a5fc6d371511c2ed9",
+      "reference_sql_sha256": "5a4c672ee369df7ed1cc76220a63db1e6a29a8a393d772f5d8f8906bf770f2e6",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_085",
+      "public_question_sha256": "f53386425d6eba48ab6dd749f6b8b9e650d1d6d132535a84277ccde7f38929ff",
+      "reference_sql_sha256": "753b758e8c2d76b9de681bb7f4fa6fc53dec4df425db3643786d09379d15c798",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_086",
+      "public_question_sha256": "9ff594be91e10470075a58e8cac662f727bd1e14706d90717e622d679705ac07",
+      "reference_sql_sha256": "e867aee7b4df1455167d0374f2d4bcb5bfe26b4f31bc9a41dce25479523a628b",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_087",
+      "public_question_sha256": "dfc110c6d0abbca9f6be126de4302f1216958fa937948b26837ffe00abb8b735",
+      "reference_sql_sha256": "8743ff2220b1435d15b32899f5b22052ce27993fee96f2ad755077ccc5d9af7b",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_088",
+      "public_question_sha256": "c430088d479802b479f6150a6fd106bab61846bc38535d002efd3c7def5e98d4",
+      "reference_sql_sha256": "38e0a1233a8094ee22edb80a252a9732ccc52437d343407ffb37190a3bdf0bb5",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_089",
+      "public_question_sha256": "05817c9d039698886100d0bda6b4b018fb94f0e5999ec94f804b121e66e612ce",
+      "reference_sql_sha256": "4a13ed4f9e6d975273eff3e8a0ca9a471ae86fb0ab960b3297c6a33652a493be",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_090",
+      "public_question_sha256": "49d0da6148645bb77e780198a03f10b1c27fea0e2e34de30cfd54c7c11b8bef7",
+      "reference_sql_sha256": "248bf2155eb8307d481282631de8a2a25267dc4abcde6a242d1eadaae3834ddf",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_091",
+      "public_question_sha256": "81536b946a12ae23d1e4c10ffd2ac43ef8371dcf529cf056ed4bf4be0e1dbd40",
+      "reference_sql_sha256": "93ce45bd4ed751fcfe57c5e9c5d15a086ec820486f4bd92a4adfd024905bcb06",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_092",
+      "public_question_sha256": "1a785d4a456a5e2f6a2b6a1c20867a5a980de06bebb8cebf2990c7e6e9072c88",
+      "reference_sql_sha256": "55ab1f7795c2e9353c591ea63b544bd068638ceb5045dfab0f5e3b951c19bf82",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_093",
+      "public_question_sha256": "8d308c6f6e989d75181b6f357ea083876f1a5f83bca47d1d510bf83ad2b5a232",
+      "reference_sql_sha256": "13a759f45c99a6f0d97b3e0d6fee7c267954c97a7ba2efce944b7d9834b296c8",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_094",
+      "public_question_sha256": "c9a1db515767b5298beece52dac995e120c55a5b3febb869df55f7c9ef50284d",
+      "reference_sql_sha256": "48a87427252c1b954f89de57f6efd6ae8b3ae946ec1e464e033472f8d250dab8",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_095",
+      "public_question_sha256": "b6951994ada4e828060d54354a8a9fe33e6d3421946ebfac9556a77971f50295",
+      "reference_sql_sha256": "b2fe331e976996efad11a26a2b47051471ba4cc1fd92a0c4550a34a9599b87ef",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_096",
+      "public_question_sha256": "d8af367ee471d79e877054e7aaefb15637928c3fbfd1f81ede243d571c48b994",
+      "reference_sql_sha256": "fb5ce80b7cb3b5dd46575475694145060af4e88c1c8eddbc7bc75b531137dd67",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_097",
+      "public_question_sha256": "496597eaceb11d37fa3c30e6b431224271c0a8ee05aa0df1d5fcef0d0033896a",
+      "reference_sql_sha256": "d03ef60457ba46d5ea0a2db80be1d1c4a40b74a8f2e8f759d5641844f30c9420",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_098",
+      "public_question_sha256": "7473c34f95e00e024b499dc2a8cc5cbc854b1febffa4d0aadc1ebd6a1a889f84",
+      "reference_sql_sha256": "e64efe4aef11921f4d37fe97640c617a234f8ddcd66f8d4181ef59e2b8815da6",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_099",
+      "public_question_sha256": "3a1a658b420b8866679bcdd33b0c846c998d879e961637efe55090cf14366ab4",
+      "reference_sql_sha256": "e942bbff1d1f3b86147d5852b3b425c18b3185d1571df1f990188a26f68d9fdd",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_100",
+      "public_question_sha256": "ddfc6fdbf5361d47795a4836352ffcad69e1e18e299e3c0fbfe2d6e76801fcad",
+      "reference_sql_sha256": "00cb3da73aaf25231788bf781df2b9c011bbc9171ea17e4c58fc4e4736e5a00c",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_101",
+      "public_question_sha256": "5ded3b9e4e33e2ec5e9fc4f770ff2b62b4d5e999b65c170de41eee52e70a048a",
+      "reference_sql_sha256": "28b743ab6e121f3997d4b264ff53b8348e4ba36498cc2065fa79f25ae73a7919",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_102",
+      "public_question_sha256": "0eab3f14cd75ba9e3d5822da4652797d38e86b1cb0e17ada6faa7546624ff603",
+      "reference_sql_sha256": "ba5cb39c604ee1246a2e203b4897f992bc25cf44db3329b7a0cb6fe7478fedc6",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_103",
+      "public_question_sha256": "4d7627fb515914001678e411c0f13227e194c9ceaabd089c57b18c598e949c4e",
+      "reference_sql_sha256": "1f7afe29c336eba20c62d1497bf6a19969aa7c77a795ea7d7d517ecd7105cdd6",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_104",
+      "public_question_sha256": "14f90b1d1600c79d69df979cb14ea70c27060b8ddeb70298ec6cd1a91edd02fb",
+      "reference_sql_sha256": "5d2d6a9cb5704506a59b6c4640e960d73d1e5a977fb892eeedb08fa4d0f23901",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_105",
+      "public_question_sha256": "20d5bf70a16a5b55f048ac4c40b26b5051b174586ef50367c5f91c4b08012498",
+      "reference_sql_sha256": "463d4b7ac0fe2ceb8dc67d9f071c9f2de9eaecca7b28c85808e05f14d208967b",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_106",
+      "public_question_sha256": "cca623257ac0343d129ee7d0dc5e9fbdfffa84568d9c0d4bf3ecdc26c343c579",
+      "reference_sql_sha256": "ef986443c623a10ad9df04418adf006cbc3d61abce972585fa8b509424c6287d",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_107",
+      "public_question_sha256": "ce64125ef04278e028d372947170d0a975498f8aa132d603d863201a1e496b84",
+      "reference_sql_sha256": "94c3373632d4c20d17f698f58eb90e368dd6d5742462e440bd7d3ba35f1c7197",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_108",
+      "public_question_sha256": "c9205692a22c26ea801fcd80973df377df1a8f1ba68e3b9cfe7f77a693fb7f53",
+      "reference_sql_sha256": "fe84046a841029a17f938e26f034ca811b60e65b955c62886526ecddda81d938",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_109",
+      "public_question_sha256": "a5a9ad575864ee0d3800f8bd39ed4ea14185ce214c842e22d9e9cac608d3be83",
+      "reference_sql_sha256": "acf043af617b59da5c2321c7900bc187e49c3abf3721f4d98a87e4529771bcf7",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_110",
+      "public_question_sha256": "a49cb21adc0b19de1b922353174c1c2c53fc37e03270c0f3166926036e08a5dd",
+      "reference_sql_sha256": "1594427b7978e0a4683466346cce2deca445004565294afe701246a15e36696e",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_111",
+      "public_question_sha256": "755ac2f4e9e5fd576a16e1c94da8e1ffaecf88cd8a2ca64a1d0e8a1d07b14867",
+      "reference_sql_sha256": "4f0fdba1c24ad028a2307d842a29121e70e2ad596bc10b81629b9812e57d63fd",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_112",
+      "public_question_sha256": "c40337f995f29c1058c9567866f43a2b9c6f1f7f899b1768e6f9dd4f0af8f2e6",
+      "reference_sql_sha256": "581d7ad8ceea6bdcbe03b174eba60644969ffa6ef166a512004187f5c1d453b1",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_113",
+      "public_question_sha256": "755f3d31df34da6e6eb7d159bdb04473146673aad9b4ce65d3c1bc680a8a35e9",
+      "reference_sql_sha256": "8f6d72fe8422677194ae2bb72489f7c5cbfcdfba3777d29bb53c38fd9e60d9fe",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_114",
+      "public_question_sha256": "7f2595e4186390a2a2d57475ffd4d1ae75e0c7ddb78e9cd0c441621f79c0ec07",
+      "reference_sql_sha256": "0283f1059866c5112999fd41f103c2c8f24dbbd4d3b6bf5403cc0c515a80e14a",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_115",
+      "public_question_sha256": "852666fe293840bbd2405b8298438a31db43968a4e754a589f6f701b20540486",
+      "reference_sql_sha256": "d00e2cfdbd399064d84da510485a9170932011249417ed3d2bb481c4c5d0e5cf",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_116",
+      "public_question_sha256": "d7f535043ca853cce054758eefa6633f4abe25700b5e31d9a22b35314112e6fd",
+      "reference_sql_sha256": "075aec64ada6687a9366fa199e03228e7d4feaabe5852e154c0ba3d1923a787b",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_117",
+      "public_question_sha256": "6581417e7ddfba200de364825c1eb7455170d9d4d9dbcc2b1767ffd47f12eb8b",
+      "reference_sql_sha256": "d2b907d544c542d124f6079e88ee18a1c0efa967f7e7bf564a4be814e2746096",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_118",
+      "public_question_sha256": "bbaa3922bb682f82d27542af3936581d100159645dd96fa105bec5805e424a8e",
+      "reference_sql_sha256": "46c5439e3cf6d1a46b64e68903c8383ee59c61838f4d357138d3654e3b5a1e50",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_119",
+      "public_question_sha256": "ac66521438eb3db744e0d95870403ddc0628cfdc1be7267ca780fa5c88fd2799",
+      "reference_sql_sha256": "a9e17fbaadb85d9affe8f67b9f3447932ec3a4b1c6190a44c446ce4b9daa3048",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_120",
+      "public_question_sha256": "79423a14ca5bf34e4b39a7b9c44486a8370c1332cf958da2e4defcbe1d476e5c",
+      "reference_sql_sha256": "ed192a142337fd69d29e4f18c9ffc4db8c20c604abfa701484ef201d138cb8e4",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_121",
+      "public_question_sha256": "26bf76e60c17cf9b2d751ff29be8de8a700d97819d4e71fabec903888208fb7c",
+      "reference_sql_sha256": "db0227ffdb432a889bac03ce47e1520b3a00b66630afda380cc162847490db80",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_122",
+      "public_question_sha256": "c2754611053bd0229b7098df91da5e29169f95e505528743f0bf5abf224576ce",
+      "reference_sql_sha256": "1f040b23216163bb2d588552ad7b0660600a213a3291ed24002e66f400f81533",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_123",
+      "public_question_sha256": "87c24f2a6922ba7a7ffb443e6a782ef627cff96dbfc5a6d93ec3f1dfe8757817",
+      "reference_sql_sha256": "7e6406466acc10c0111f5bb31f590b2efdf3c4e6dafdd412057f2c71ff078a0c",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_124",
+      "public_question_sha256": "fad5c51bd9f5c0d68b0e01083839aa52ce69f1e2b85b99cea1bc4da363e4dffa",
+      "reference_sql_sha256": "0fb00f485c77cedad51263c3157679c04d283e7a7797c1e80d83268ee7d178c9",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_125",
+      "public_question_sha256": "f7ad133d01aaba8f1ed407b855fb0af965ffc76b4a3ab5e8a6cee9661df8fc2f",
+      "reference_sql_sha256": "4a4972d2a1eef1a50581e3178ee8d508844252884cfb089f73f8d47706f6eb8f",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_126",
+      "public_question_sha256": "2331d6bd7f6db9506d01fac0f3418743ccc5281e2253fb45ab84f0bd08013bd4",
+      "reference_sql_sha256": "ee9a3d33c93a34c068bbd0ca29930da4c4ead81f08e3525db665aa9fd4272713",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_127",
+      "public_question_sha256": "7a18881bfbefb13104afd311b9395841838f9c6f86ac8f304433bf5610c98548",
+      "reference_sql_sha256": "8ee264509859d13e672c8a0f1675785fcb911213a494ca0423d4a80352be3229",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_128",
+      "public_question_sha256": "59d988e0941346664d8f5a19d33d5d96d60de13c1eb83e043253802d374ec0a4",
+      "reference_sql_sha256": "6a61ff1f9223ff348d0f770166c2e7f26889d3302e195176531c60a0f0b7883f",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_129",
+      "public_question_sha256": "f114659064e777769712766295676785b5db104e2c69972e50cfd5f33adc4d43",
+      "reference_sql_sha256": "4a6faf4bed6bf2cc56f0985e142605ea59cb3ad83c44477acdc6c8b83bb21d02",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_130",
+      "public_question_sha256": "be6bd7def5544e45793428793310a1164cf4a0421e6b89fb8f3e6744165b4911",
+      "reference_sql_sha256": "ba7488c7ceb747782e9e83acf6a13e180ec82e083e062f4631f89936e2b39067",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_131",
+      "public_question_sha256": "7cacaa50546f2fc4499f4695fcf0fd9b73292d109c43c7705c0886b20d50ad24",
+      "reference_sql_sha256": "4cdd80095deac5983c9a2630fb28eb7ae9db659aa1b9580650a130d013b0e5eb",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_132",
+      "public_question_sha256": "178595e1c39d743f3f53fe72551d296bbbf6d61a4c995d2433ea96ab8b72c29a",
+      "reference_sql_sha256": "b79bd3abb89747fdc138b69598a01f7610f07736f23a8b038df41aa7d6bfcd00",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_133",
+      "public_question_sha256": "93d509687f080ba75638d5991e7d8ff809abcc85be67a0d3fb9cced3e1c31a8a",
+      "reference_sql_sha256": "86a6d431ef4755f70fc2e8b074bbbb6c619cb6bacf74abee8d65c38403fd4f93",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_134",
+      "public_question_sha256": "9c4ae775236f262d17b4ac7cb1a770e79db95648f10f9af7f73aa12515a9ee75",
+      "reference_sql_sha256": "a27684a823a9a4321aa7130d30e106f67673fd84db2402bd237d9c8a7263a456",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_135",
+      "public_question_sha256": "433204d01fb2ca46c9b1e3aa18a68e82f06ff068a08e1d710077c931de53f16f",
+      "reference_sql_sha256": "17e8e715b442d0e5bae8a37ee95392f31c95e049d5e3e64ea44bcff08a658e54",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_136",
+      "public_question_sha256": "182522e2d7161d9e3e9dac9c76d16a2d9a18ace41c1761707c35eb1d3ab9db89",
+      "reference_sql_sha256": "46b818e6ac65f470f058ddce8d1fdfe7c1c3c6fe8601e7c51686371bd878a69e",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_137",
+      "public_question_sha256": "dcec5ee6e8d21fe2051eb6dbd6cee5a6251517fbb9da2e54adcac024e2b5b1f0",
+      "reference_sql_sha256": "c17cd54917ab5e96c1dc2423b56c0ff69b97e05c57d711096f1e50d7d4257350",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_138",
+      "public_question_sha256": "921e4e554968f457ba5c52b1148f512b5ceadb867013a80515f38cdf389bfb52",
+      "reference_sql_sha256": "3d59a793b3d879cdbf4e4d3278576265c9477ba8cef4278ec5c37fa3d2a7118a",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_139",
+      "public_question_sha256": "4220702f49fd097bf0261d94b4441773bfba03a27539dd2430ce23f19e3ce640",
+      "reference_sql_sha256": "07673993d27ecee703f149fbc0480ae88d34d18556fd50458b9c285805a120a5",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_140",
+      "public_question_sha256": "7e279c65d54c48fdfb6fb1f6731ee9024eafe1f058f052c6195ad01132c85d94",
+      "reference_sql_sha256": "82686a728850303a0c891afaa152fc83144aaec330b23a10e23f05569d50e6e3",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "none",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_141",
+      "public_question_sha256": "7a907d27be352c5408e16d65aaedd66f7805689342b95406990b5335e14a34cf",
+      "reference_sql_sha256": "8abba0b0e236dd854b07db307366147799ff6bccf8045591414a85c80f54043b",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "time",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_142",
+      "public_question_sha256": "22dddcacf427c82f6aefd38e89111faaef36cd44f5d8d9950ca6bcd9ed83b378",
+      "reference_sql_sha256": "8f8ac2f19c7075e59f21f892c3ccc18443b46c643ec5745272b599d8ba0e36d2",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "time",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_143",
+      "public_question_sha256": "e60ea57bc75d48beb2a87c63887c331e333883bc133697f898cfa350fbcdbb4a",
+      "reference_sql_sha256": "ab1134b9a18b0c9beae569d7d25404dce0c9bc558d9495d985d2484a34fd0b81",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "time",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_144",
+      "public_question_sha256": "787da0488f72e8b6c761673a10e50ce2807143f281e1c18c24dac5e1579d6528",
+      "reference_sql_sha256": "075311c7184d1de98625bbc60615153eae2bb1f98000e054b19c2e2f2c961522",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "time",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_145",
+      "public_question_sha256": "d68e64082679a90e5fb0d3015fb122eb39db2828d5801e80fb356b2611ac3736",
+      "reference_sql_sha256": "397dc7680b8d19f045259d61684fd7e9e18352073e7f1a7e8cef43a2cdea431e",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "time",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_146",
+      "public_question_sha256": "7e8baf6c382aa435dc72b8447e09fb638cfe6f50917fc6390d622dcdf979c76b",
+      "reference_sql_sha256": "b4372445e095c49b264b7c01814066734b971f382d201cb80c74e0732e7f87bc",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "time",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_147",
+      "public_question_sha256": "1076472d27ea1fd626a525bc4a917b8a482df1d920b2996c4348e9e5941a35d1",
+      "reference_sql_sha256": "e8e40fc960c36d0244d7fcbb7886def2ac25374effe776e4e913e4ead390d313",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "time",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_148",
+      "public_question_sha256": "c6d3bfe0e9de10f7f0fba29f72b3c852a171ab1a667890d040c260cf4e600890",
+      "reference_sql_sha256": "8d88fba720080fa1403710686c8d3430326dd76b3fd8fe75b9ae2b667eb1768f",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "time",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_149",
+      "public_question_sha256": "0c48766c3f1bbe20eb2a4568d489c3311a438d7a4df4fe086b443b252a22c2f5",
+      "reference_sql_sha256": "eadf10c0c444bcfb92b6b36f927687c76941d309ac23f516cd41f547f9429242",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "time",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_150",
+      "public_question_sha256": "d42a1661efa7001d3a15abd6127f90011352b88e330200789e0cb30cb120936f",
+      "reference_sql_sha256": "f3eebf3d3d45e4517f5d39b76b1ebf9a991a099986d56a3f2fdffcec9d95c5be",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "time",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_151",
+      "public_question_sha256": "10bea6c7c5987712d7d3d12fcbea25b98306aee0d555835de26750a4894c0d11",
+      "reference_sql_sha256": "df57a8c5fa7e0bb62cbecdb73d8e87ca6ce35f1eba94b4b93a8890abd608252e",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "time",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_152",
+      "public_question_sha256": "3b0c1641e55442eb5096a317ced6fd24ff78404b97e3b48eee85d5fe08d4264e",
+      "reference_sql_sha256": "929240dcd40e8de71ff39147809b00931c911ae7673c79b106c7e35ed72ef7b5",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "time",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_153",
+      "public_question_sha256": "c9eb8d95fef338a1043f0536dcf83e32de941b5800e2b01f455f9d38a661e5a6",
+      "reference_sql_sha256": "7a760ae1dd92b5df1b3a16dbafd8ffae1df2a79d6f79528fdfe823e4ef65d852",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "time",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_154",
+      "public_question_sha256": "712f31c6bb6e699b9a6fe47c8c9a72c9e9fc28c81b90e9712f899b2fdaf61c78",
+      "reference_sql_sha256": "9fc6071305cac4426f6d2c91e8acd40b6c29ec956240759b4e8bbea147a53eaa",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "time",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_155",
+      "public_question_sha256": "fd77f839b3bfdccaa655b754119ddcbeec7895302e603d723fedee147dfa02ac",
+      "reference_sql_sha256": "355069edb26897ff54e22322f7e15004a064a99af79794389528e4b05e3924bd",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "time",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_156",
+      "public_question_sha256": "3900d9f7fedc3dc87b9f43e9e2070498cbcbb0b7196163e13f37c0af1d041326",
+      "reference_sql_sha256": "b8cb8009a5dc46246f7aa2bea23a4915913b70a930e6571027e5de766e31de07",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "time",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_157",
+      "public_question_sha256": "0cef830c716808155da3e4a11e2bc3b148a7f25c88f1c5cbfdc3f9fee5ecfd88",
+      "reference_sql_sha256": "a75bc99eb691770a7d1d1872b70473a1ea99e1868263bab30e149670baa5548d",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "time",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_158",
+      "public_question_sha256": "f8204284eb5759ba6bf29178e648d985a802897a0f9240a3cfb554e9d9e881ef",
+      "reference_sql_sha256": "3145a67f27e7dcbe4f438072fac053e07a8523a35f381cd73c14b3dbf87e64e2",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "time",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_159",
+      "public_question_sha256": "5e67bb333abf16dd89b4784be899e5788c833c28f62778e15869b5c1525ebea2",
+      "reference_sql_sha256": "f05059f91a5acd0950f507ad094e7d7e7291fa39f80767d32d58dafc4583155e",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "time",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_160",
+      "public_question_sha256": "0a89a8c1ad74357ca7c280c3e07dac454a8b801cee90f96e94dda615238805b4",
+      "reference_sql_sha256": "d9cce6ee7fe6dc5ddf9fbe94dfdf53cc4fc9b7dadc9c8d407daaade2cf87c88e",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "time",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_161",
+      "public_question_sha256": "3fa2954793824317776ea5797916a1258489ad629d0aacf9024c60b1a59cc384",
+      "reference_sql_sha256": "a819b1f15ee38a433a6f4853df3a1e1317b251edce2b77c51e802593c1c03769",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "metric",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_162",
+      "public_question_sha256": "0afb91638bd78d0176f32adb21b255bc41a4f552c153ef126617d0b1861e575e",
+      "reference_sql_sha256": "eb4a6d97a70d3e31b1637a13b026295094a5c49f97bc137b3fd0048658dbd2c0",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "metric",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_163",
+      "public_question_sha256": "269477e69d45c1d79a717e584dbc91378a8c34128f00c18b38519bd72d9c65a2",
+      "reference_sql_sha256": "1c192b80e6e077f3f74f6cba88de6a0b4273e727853656246e1d03045a594b20",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "metric",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_164",
+      "public_question_sha256": "b5f0649f46187a4331e1d9219ef1555b0833a29abec939d367a0af387459b4ba",
+      "reference_sql_sha256": "676619e709d8dfc223bd4e7a325f33734bacbaa0ac7e1713233fc22c5a0b4e25",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "metric",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_165",
+      "public_question_sha256": "8dd494b8c2696b94a73aa99b8875e9ffae86680a5b51faf09d4c5c786ad60cd2",
+      "reference_sql_sha256": "0bd7d4825652d6efd848e003b8276311161b6749ccd5523f91efac961d4b92b3",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "metric",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_166",
+      "public_question_sha256": "13931f24b4361827c03b66af194d8022b46457d52d46afb455dc0e2938c73645",
+      "reference_sql_sha256": "3e8169a5125f0d6278478c22f54e413381a847d205fdb605d7eeef8cc12404b1",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "metric",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_167",
+      "public_question_sha256": "ea60272e4e833ccbe73a036dc3cd4ef4162bc6011ed46aae0a545b97d1108b6b",
+      "reference_sql_sha256": "3bf4fc585e14c1ac92794da6a96294c02924fc70843953d6cb988a8902ebbe2e",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "metric",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_168",
+      "public_question_sha256": "94c44e249bd95af1c61ec0f861bf1156fb88eee7efa37fa8e0f8842b9989fcfb",
+      "reference_sql_sha256": "2f67f19d8532920b6af2922c924ec1ec2d82cbbe6a3aad9ba6ec626aa2684502",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "metric",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_169",
+      "public_question_sha256": "8e44ad27e4e374beebf18df76326001e1d523b1c4cc1ab48ab37f982e1e062cd",
+      "reference_sql_sha256": "70e133270263b8d8e8448719d03e6748eb7184663df45eadc9aefa0aa2a04861",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "metric",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_170",
+      "public_question_sha256": "ffe1aabe07a1acdea40be3a80fe4c623773b2bad9f342adcddc351c260df17d6",
+      "reference_sql_sha256": "d0da7d4c9759a81b488e39ac5c4c6f66732ba8a931b35cf45c2e9807e552905e",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "metric",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_171",
+      "public_question_sha256": "dac1fcc2b7ffa94c35ec045512448b858d180b4fe949ef24388e469ffcd3fcea",
+      "reference_sql_sha256": "7bc521ccdde005a389712b7820f66c776edb27e158068c252f1e41df9430c716",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "metric",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_172",
+      "public_question_sha256": "8832fc7fba340d4585febdc455fede8f4a4011d2d380b5ad82534e420008cf25",
+      "reference_sql_sha256": "08e6333840095b65b9235f8c7f228ed93f752340034066c2383d111ff1a2dba4",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "metric",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_173",
+      "public_question_sha256": "d9a28033169d82a8c5875ed1d45d218adb86f00f3ea8a2eb01a2889a828b186f",
+      "reference_sql_sha256": "9ffa98aaf1a8cf0dc973c4c411c293a8ce04c11015293c8013e85239c2c30dad",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "metric",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_174",
+      "public_question_sha256": "7f319a343693e66e47e43e254a9b07a0c5dd9b7ebe7d242a74192d5c255ecc99",
+      "reference_sql_sha256": "ecca3a96db8a21668591fc2d04a3f0a8f0df1abcaca84dede39b62bcf74eee84",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "metric",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_175",
+      "public_question_sha256": "ab2cfab9c8141835e436495b9171a4da41fa5b4926febf8ded136c2f2f6be4b0",
+      "reference_sql_sha256": "ce36b74cebe00e27ffedd8c125e8f6c546124e1231e3c4b4a5b5c210b413edc5",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "metric",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_176",
+      "public_question_sha256": "3a8d349d28428af3ff7c642c79aa01548d6e07a501accee64c5b63e10bf7c709",
+      "reference_sql_sha256": "df14655d5b9e107884a7e0e190dc3ebd994a9404e394b7a5e1174e79e3ba4c04",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "metric",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_177",
+      "public_question_sha256": "b4f88486194c86ce0e740ab6456900ed0fdcd5ded1a97c42d1a443fa506dea32",
+      "reference_sql_sha256": "4d3cc4a2248a1af2c25e3768d5132e9748d244584ed065a7329fda189e37a360",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "metric",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_178",
+      "public_question_sha256": "c35475ca254b344867f7f23bc2dff4ee2ebcc0c0ed5de8f340af0df7a4c98d38",
+      "reference_sql_sha256": "4703bc9d1962edf93c0125e9ad25df2324f97aae3d7273c76b1defe86c7cd72d",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "metric",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_179",
+      "public_question_sha256": "a68eeffb80ae61ea398fcf8130d705b79b12d382fd7df5af71085157aaf1c682",
+      "reference_sql_sha256": "a1e6fc6e7b6ecd28aa057764aad49c62fdef455134cfd17fb9c602f465ea2d75",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "metric",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_180",
+      "public_question_sha256": "88c92e7e533e8728c7336d91e73b7c7b0458eb23c23cd30226c255115af9f3e0",
+      "reference_sql_sha256": "90ea1532f6212393c089d7fcbd503409ada6fb890fd94cebf6fd950562569cf7",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "metric",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_181",
+      "public_question_sha256": "d5a78ffd48d9f4df9e068bc4ed6757202cf20e0c000d415b4e86540279405ac3",
+      "reference_sql_sha256": "4860ed39f56bf65ee9c9340acb01e9aa61fbbdeb7ac9be610594cd3d35642899",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "entity",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_182",
+      "public_question_sha256": "9281310baff4efe76001aa7805cef8c985ce429f26730cac041d2a7a057f4eb5",
+      "reference_sql_sha256": "b565598a133c809d9141d75ba24da333abeb8cbfc435a72b7e6ed32474cea161",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "entity",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_183",
+      "public_question_sha256": "e2b72d0f90f281c0c0528b4ff800f6169eced84c5d1c2c28c2447bf9dc17c6f7",
+      "reference_sql_sha256": "26b8076b80022976b5c8f34d5493c60af9684420f961c01bf91bae7976270f9d",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "entity",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_184",
+      "public_question_sha256": "cae3834704ba6cedd8a0a74f878f0e473a5f922130e4f66ac3a7bd42791ead5e",
+      "reference_sql_sha256": "b9cf7bead02211f49d4069e0964b97850c67a4939b735048fb7bb0e80737b28c",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "entity",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_185",
+      "public_question_sha256": "e6b7b5287a066c6b1fb3126c1ff7e1dfa071ebc2bb55abc969fa9f4bb6442a82",
+      "reference_sql_sha256": "6e8bb7332cd4c8d28508d719f7ce45308a856ef2e5625278aa0abb65c41d5119",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "entity",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_186",
+      "public_question_sha256": "771fa55092a09541d3858aca46f9431f8641037659fb2cc88f0a9e10655abadd",
+      "reference_sql_sha256": "49cfb3d77fb02502fd8d2e4b50a37ce192c1886da82b5095af64f18b8c083083",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "entity",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_187",
+      "public_question_sha256": "df6c10f9ae3d793d97fe933e5e7a7c7c449f099dad898dd3a88509ed7cc5dc8d",
+      "reference_sql_sha256": "b50df8da210ee7b5ed8c97c630d00df0492519249ddba3ba9e910708ee80130e",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "entity",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_188",
+      "public_question_sha256": "d4acda486340be2b52e71769c04a9ac41ba5aad430f35ebd64ad4a800a5d58ed",
+      "reference_sql_sha256": "b977f89da879df6588b57638001042c56b1cddce5eb808d9e0670b1936bec45a",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "entity",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_189",
+      "public_question_sha256": "8317581b96baa47e2ad4629986fbc6030c132cbf735957d566f0c0e6a5b3bb5b",
+      "reference_sql_sha256": "498b6da1a61b4d8bc59079b9d6fca26022ee4cb64d5b1863e3bb5af9d29f4ba7",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "entity",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_190",
+      "public_question_sha256": "aa4c62871bb9ae3bd557e2190bcd66f1b00006736bdbaa4deda9cb524568723c",
+      "reference_sql_sha256": "30de60bab956422ddde326652693e4d7fc9afcb48f5f873ac56d13d24e017f0e",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "entity",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_191",
+      "public_question_sha256": "4c79a3b3964a0b7974ac0c2971ae7317a121ddf3de20c637de19da4472900ec2",
+      "reference_sql_sha256": "298e6a6c10cfa6850e023f291f203f7b84c17c6ac2cb3b3aed623e49a0d7bcc6",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "filter",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_192",
+      "public_question_sha256": "e8101997ab8e6f79aee247bfa70e9ad343feeb2b80e740a186736311c5074fbc",
+      "reference_sql_sha256": "7f9e6e949d1eae6153ddfa264813891a6cf613fffcb8573c9ae9ad95f4680268",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "entity",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_193",
+      "public_question_sha256": "7f3165ae16931ffe9800eec6d48cd98ebada29acfee6912a83bf0bd1e510db61",
+      "reference_sql_sha256": "2b320060bba5c79a2eb019cbb2eab222881c7c48b72b4c0170bea852f19a957a",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "entity",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_194",
+      "public_question_sha256": "b5d017b23db2042b5dd754dae7e2870fcda24ecdf894d750a3560591c184c3f8",
+      "reference_sql_sha256": "24740228be61eb38137f03cdf2fcfbcf9c0984f573cc8adbaecc74b91c063a01",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "entity",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_195",
+      "public_question_sha256": "6b09b8b2aefbdf31782a7b8c92a2ce51b2178565aeb60a6949fc9b6f9c07397f",
+      "reference_sql_sha256": "3c49c9a3e747fc5f3e9ab665b213f83d534c240b1ad656df97c4d7102587e568",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "entity",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_196",
+      "public_question_sha256": "aed3c9522b1b2151cd5b8dd1e467347dceeb857983062bbe27cef6700d6dc83c",
+      "reference_sql_sha256": "ebf04d5c770662565d4a241179d679038faecfb32c00d09e685226f70cbe988c",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "entity",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_197",
+      "public_question_sha256": "7910da6987fcd79cda549ed8174af820916036db578f1f1740523ef233d4338c",
+      "reference_sql_sha256": "74eea2d0989f1d41dd88063d7f4c42e155e13461f11e9f17c49a46103e04b563",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "entity",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_198",
+      "public_question_sha256": "b2369b82fb0b55a32d40f40636cd33074f5306f31d120f3e519149b29656d0dc",
+      "reference_sql_sha256": "e8f5c3a7e27e184964dfb92ccf82c1f4d784fa883e690507efa94cbacfcc9c5d",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "entity",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_199",
+      "public_question_sha256": "da220714f128ddfe9120edcaedb0a2bb9f9e09257dce64892f0b6812cc4f077d",
+      "reference_sql_sha256": "4b166fb4b353bbc819ca4a24a13c86e36f0d1cdff239479238c4dfba65801b5c",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "entity",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    },
+    {
+      "id": "final_mixed_200",
+      "public_question_sha256": "aa8b4f7c545291b4928c8cf2ed798fdeb01df8c998fe24e1ef44bedc7e207e08",
+      "reference_sql_sha256": "4509c0575ddc54f3885cc33cf3b188a76905c8660420f6e6a729b333c52ae7e9",
+      "scope": "Local contract/schema review before any candidate output; not an external blind adjudicator",
+      "single_missing_slot": "entity",
+      "reference_executed": true,
+      "notes": "Explicit output columns, date scope, status population and grain reviewed; legitimate empty results retained",
+      "source_audit": "curation_changes.json + final_reference_review_changes.json"
+    }
+  ],
+  "pre_freeze_amendments": [
+    {
+      "id": "final_mixed_091",
+      "before": {
+        "question": "列出所有退款原因及其对应的已批准退款金额总和，按金额从高到低排序，仅返回退款原因和金额两列。 以上排序相同时，再按退款原因升序。",
+        "reference_sql": "SELECT refund_reason, SUM(refund_amount) AS sum_refund_amount FROM refunds WHERE refund_status = 'approved' GROUP BY refund_reason ORDER BY sum_refund_amount DESC, refund_reason"
+      },
+      "after": {
+        "question": "不限时间，按退款原因统计已批准退款的总金额、最大单笔金额和最大单笔金额占该原因总额的比例。返回原因及上述三项指标，比率保留4位，按比率降序、原因升序。",
+        "reference_sql": "SELECT refund_reason,SUM(refund_amount) total_amount,MAX(refund_amount) max_amount,ROUND(MAX(refund_amount)/NULLIF(SUM(refund_amount),0),4) max_share FROM refunds WHERE refund_status='approved' GROUP BY refund_reason ORDER BY max_share DESC,refund_reason"
+      },
+      "reason": "Order/limit/round-insensitive audit found a historical sum-only duplicate. Before any candidate call, replace with a refund concentration question; retain rejected draft."
+    }
+  ],
+  "historical_questions_screened": 1500,
+  "sources": {
+    "eval/final_release_holdout_300.json": "6a362ad722c5f4fcca593fcd626076b0c43a93a142e190f23c09187de4a61687",
+    "eval/scoped_clarification_cases.json": "3913db8c6e6b2926c6fff3823ee51ea12490f057479cbff4a410b08d2c597f88",
+    "eval/clarification_holdout.json": "ee7d9746ec7c6c06c0ae588611dcaa40f0da07d75b015f3edf38293886a8d30c",
+    "eval/clarification_dev.json": "2bb43866da00f98307b7606f0365152b15d75082b2bfad4edd7fba42c3a2f1cc",
+    "agent-v4-generalization-release:eval/final_cases.json": "88fa6d20c686a9d407a19fd2bce488f41ab599ff62cc3d7988bb1779916eef90",
+    "agent-v4-generalization-release:eval/final_blind_v4_cases.json": "6a3d7ae04ede9d9fb7b02b7b650e003db8c355ddc3090b33a029a62aad04bebf",
+    "agent-v3-generalization:eval/holdout_cases.json": "0ca3ce26606c4bbd2bfca65178901f7d0d5f36228a29769e17a85e5b13bb8ba2",
+    "agent-v3-generalization:eval/final_blind_cases.json": "d8f553eff6729ec6f36d78d17db8db762d94b5b469fa59644f4faf975b16013d"
+  },
+  "semantic_shape_matches": [],
+  "method": "Local question/reference review plus alias/literal normalization and order/limit/round-insensitive structural screening",
+  "limitations": "Structural checks cannot prove novel meaning. Basic SQL operators and business metrics necessarily recur. This is internally authored synthetic evaluation, not an independently collected user sample.",
+  "metadata_corrections": [
+    "178 observable refund date terminology",
+    "180 product-grain denominator terminology",
+    "104 explicit valid-parent numerator scope"
+  ]
+}

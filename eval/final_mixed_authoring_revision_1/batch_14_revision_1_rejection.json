@@ -1,0 +1,5 @@
+{
+  "reason": "Ambiguous cases need one slot answer",
+  "candidate_calls": 0,
+  "stage": "pre-benchmark authoring format validation"
+}

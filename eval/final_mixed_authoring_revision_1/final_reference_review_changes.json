@@ -1,0 +1,807 @@
+{
+  "candidate_calls": 0,
+  "source_sha256": "547001152334de32e81734814c1b6736400946974e68dd0de4bed0d2cd764119",
+  "target_sha256": "a2d148045b37cfb9ad0367bb11a6cabc205656f761406a943eaed58fa2b63841",
+  "reviewer_source_sha256": "e578f4e3b1772a8451c88606a1ad8d256290ce32b32bb40fc3fca3c628b81335",
+  "changes": [
+    {
+      "id": "final_mixed_175",
+      "field": "reference_sql",
+      "before": "WITH lines AS (SELECT oi.order_item_id,oi.order_id FROM order_items oi JOIN orders o ON o.order_id=oi.order_id JOIN products p ON p.product_id=oi.product_id WHERE p.brand='北辰' AND p.category='美妆个护' AND o.order_status IN('paid','completed','shipped')) SELECT ROUND((SELECT COUNT(DISTINCT l.order_item_id) FROM lines l JOIN refunds r ON r.order_item_id=l.order_item_id WHERE r.refund_status='approved')/NULLIF((SELECT COUNT(DISTINCT order_id) FROM lines),0),4) return_rate",
+      "after": "WITH qualified_items AS (SELECT oi.order_item_id,oi.order_id FROM order_items oi JOIN orders o ON o.order_id=oi.order_id JOIN products p ON p.product_id=oi.product_id WHERE p.brand='北辰' AND p.category='美妆个护' AND o.order_status IN('paid','completed','shipped')) SELECT ROUND((SELECT COUNT(DISTINCT l.order_item_id) FROM qualified_items l JOIN refunds r ON r.order_item_id=l.order_item_id WHERE r.refund_status='approved')/NULLIF((SELECT COUNT(DISTINCT order_id) FROM qualified_items),0),4) return_rate",
+      "reason": "MySQL reserves LINES; rename CTE without altering its query"
+    },
+    {
+      "id": "final_mixed_041",
+      "field": "question",
+      "before": "统计所有订单状态（order_status）的分布次数，按次数降序排列，仅返回 order_status 和计数两列。",
+      "after": "按订单状态汇总全历史订单：返回状态、订单数、使用现金支付的订单占比（保留4位小数），按订单数降序、状态升序。",
+      "reason": "Reject historical count-only template before freeze; add a substantive payment-mix measure"
+    },
+    {
+      "id": "final_mixed_041",
+      "field": "reference_sql",
+      "before": "SELECT order_status, COUNT(*) AS count FROM orders GROUP BY order_status ORDER BY count DESC;",
+      "after": "SELECT order_status,COUNT(*) n,ROUND(AVG(CASE WHEN payment_method='cash' THEN 1 ELSE 0 END),4) cash_share FROM orders GROUP BY order_status ORDER BY n DESC,order_status",
+      "reason": "Match the distinct payment-mix question"
+    },
+    {
+      "id": "final_mixed_098",
+      "field": "question",
+      "before": "统计全部状态退款记录的原因中出现次数最多的前3个原因及其对应退款笔数，仅返回退款原因和笔数两列，按笔数降序排列。",
+      "after": "不限时间，退款申请原因中，拒绝笔数最多的前3个原因是什么？返回原因、拒绝笔数、该原因全部状态退款记录数，按拒绝笔数降序、原因升序。",
+      "reason": "Reject the historical all-record count ranking; evaluate rejected workload and its population together"
+    },
+    {
+      "id": "final_mixed_098",
+      "field": "reference_sql",
+      "before": "SELECT refund_reason, COUNT(*) AS count_refunds FROM refunds GROUP BY refund_reason ORDER BY count_refunds DESC LIMIT 3;",
+      "after": "SELECT refund_reason,SUM(CASE WHEN refund_status='rejected' THEN 1 ELSE 0 END) rejected_count,COUNT(*) all_count FROM refunds GROUP BY refund_reason ORDER BY rejected_count DESC,refund_reason LIMIT 3",
+      "reason": "Both conditional and unconditional counts share the same reason population"
+    },
+    {
+      "id": "final_mixed_148",
+      "field": "question",
+      "before": "最近发生且已批准的退款，按原因各退了多少钱？只返回原因和总金额，金额保留2位，按原因升序，最多100行。",
+      "after": "最近发生且已批准的退款，按原因各有多少笔，平均每笔多少钱？只返回原因、笔数、平均金额，金额保留2位，按原因升序。",
+      "reason": "Separate this task from the sum-only reason ranking in 151; no mere date substitution"
+    },
+    {
+      "id": "final_mixed_148",
+      "field": "reference_sql",
+      "before": "SELECT refund_reason, ROUND(SUM(refund_amount), 2) AS approved_refund_amount FROM refunds WHERE refund_date BETWEEN '2026-09-01' AND '2026-09-12' AND refund_status = 'approved' GROUP BY refund_reason ORDER BY refund_reason ASC LIMIT 100;",
+      "after": "SELECT refund_reason,COUNT(*) n,ROUND(AVG(refund_amount),2) avg_amount FROM refunds WHERE refund_date BETWEEN '2026-09-01' AND '2026-09-12' AND refund_status='approved' GROUP BY refund_reason ORDER BY refund_reason",
+      "reason": "Freeze the same missing date slot but a different observable business summary"
+    },
+    {
+      "id": "final_mixed_059",
+      "field": "question",
+      "before": "请返回全部历史订单中，订单状态为'cancelled'或'unpaid'的两类无效订单各自的总毛额、总折扣额和总实收金额，按订单状态升序排列。",
+      "after": "按下单月份和订单状态，统计全历史cancelled、unpaid订单的总毛额、总折扣额和总实收金额。返回月份（YYYY-MM）、状态和上述三项金额，按月份、状态升序，最多100行。",
+      "reason": "Avoid a status-literal-only copy of case 57; examine the monthly outstanding-order profile"
+    },
+    {
+      "id": "final_mixed_059",
+      "field": "reference_sql",
+      "before": "SELECT order_status, SUM(gross_amount) AS gross_amount, SUM(discount_amount) AS discount_amount, SUM(paid_amount) AS paid_amount FROM orders WHERE order_status IN ('cancelled', 'unpaid') GROUP BY order_status ORDER BY order_status ASC;",
+      "after": "SELECT DATE_FORMAT(order_date,'%Y-%m') month,order_status,SUM(gross_amount) gross,SUM(discount_amount) discount,SUM(paid_amount) paid FROM orders WHERE order_status IN('cancelled','unpaid') GROUP BY month,order_status ORDER BY month,order_status LIMIT 100",
+      "reason": "New monthly grain is explicit in the public question"
+    },
+    {
+      "id": "final_mixed_096",
+      "field": "question",
+      "before": "查询退款日期在2026年9月1日至2026年9月12日之间（含首尾）的所有已批准退款，按退款日期分组统计每日退款金额总和，仅返回日期和金额两列，并按日期升序排列。",
+      "after": "看2026年9月1日至12日已批准退款的日金额和该期间截至当日的累计金额，只列有退款的日期。返回日期、当日金额、期间累计金额，按日期升序。",
+      "reason": "Distinguish the cumulative cash-outflow task from a date-only substitution of historical daily sums"
+    },
+    {
+      "id": "final_mixed_096",
+      "field": "reference_sql",
+      "before": "SELECT refund_date, SUM(refund_amount) AS sum_refund_amount FROM refunds WHERE refund_status = 'approved' AND refund_date BETWEEN '2026-09-01' AND '2026-09-12' GROUP BY refund_date ORDER BY refund_date ASC;",
+      "after": "WITH daily AS (SELECT refund_date,SUM(refund_amount) amount FROM refunds WHERE refund_status='approved' AND refund_date BETWEEN '2026-09-01' AND '2026-09-12' GROUP BY refund_date) SELECT refund_date,amount,SUM(amount) OVER(ORDER BY refund_date ROWS UNBOUNDED PRECEDING) cumulative_amount FROM daily ORDER BY refund_date",
+      "reason": "Period running total, not an all-history running total"
+    },
+    {
+      "id": "final_mixed_126",
+      "field": "question",
+      "before": "找出所有在2026年9月12日前注册但从未下单、也从未被退款关联过的用户，返回user_id、user_name、register_date，按register_date降序排列，最多100行。 主排序值相同时，再按用户ID升序。",
+      "after": "列出2026年9月12日前注册、有订单但所有订单都为cancelled或unpaid的用户。只返回用户ID、姓名、注册日期，按注册日期降序、用户ID升序，最多100人。",
+      "reason": "The original no-order plus no-refund predicate was redundant with case 121; distinguish unsuccessful-order customers from never-order customers"
+    },
+    {
+      "id": "final_mixed_126",
+      "field": "reference_sql",
+      "before": "SELECT u.user_id, u.user_name, u.register_date FROM users AS u WHERE u.register_date < '2026-09-12' AND NOT EXISTS(SELECT 1 FROM orders AS o WHERE o.user_id = u.user_id) AND NOT EXISTS(SELECT 1 FROM orders AS o2 INNER JOIN refunds AS r ON o2.order_id = r.order_id WHERE o2.user_id = u.user_id) ORDER BY u.register_date DESC, u.user_id LIMIT 100",
+      "after": "SELECT u.user_id,u.user_name,u.register_date FROM users u WHERE u.register_date<'2026-09-12' AND EXISTS(SELECT 1 FROM orders o WHERE o.user_id=u.user_id) AND NOT EXISTS(SELECT 1 FROM orders o WHERE o.user_id=u.user_id AND o.order_status NOT IN('cancelled','unpaid')) ORDER BY u.register_date DESC,u.user_id LIMIT 100",
+      "reason": "Require at least one order, and no other order status"
+    },
+    {
+      "id": "final_mixed_134",
+      "field": "question",
+      "before": "帮我找出2026年9月12日以前注册、到现在却一条订单记录也没有的用户。只列姓名和注册日期，先注册的在前，最多100条。 主排序值相同时，再按用户姓名升序。",
+      "after": "帮我按城市看看，2026年9月12日以前注册的用户里，到现在一条订单记录都没有的占多少？只给我城市和占比，保留四位小数，按城市升序。",
+      "reason": "Normal operational paraphrase with a distinct population-share task, not another no-order user listing"
+    },
+    {
+      "id": "final_mixed_134",
+      "field": "reference_sql",
+      "before": "SELECT user_name, register_date FROM users WHERE register_date < '2026-09-12' AND NOT user_id IN (SELECT DISTINCT user_id FROM orders WHERE NOT user_id IS NULL) ORDER BY register_date ASC, user_name LIMIT 100",
+      "after": "SELECT u.city,ROUND(AVG(CASE WHEN NOT EXISTS(SELECT 1 FROM orders o WHERE o.user_id=u.user_id) THEN 1 ELSE 0 END),4) no_order_share FROM users u WHERE u.register_date<'2026-09-12' GROUP BY u.city ORDER BY u.city",
+      "reason": "Denominator includes all registered users in each city, including those with orders"
+    },
+    {
+      "id": "final_mixed_018",
+      "field": "question",
+      "before": "请列出所有用户中，注册间隔（相邻用户按register_date升序排列的差值，单位：天）大于30天的全部间隔值（即LAG(register_date)与当前register_date之差），返回该差值（正整数）和对应后一用户的user_name，最多100行，按差值降序排列。",
+      "after": "把用户按注册日期、用户ID升序排好，找出相邻两人注册日相差超过30天的位置。返回天数差和后一人的姓名，按天数差降序、后一人用户ID升序，最多100行。",
+      "reason": "The LAG tie-break determines which customer follows a gap; state it before execution"
+    },
+    {
+      "id": "final_mixed_018",
+      "field": "reference_sql",
+      "before": "SELECT DATEDIFF(register_date, prev_date) AS gap_days, user_name FROM (SELECT user_name, register_date, LAG(register_date) OVER (ORDER BY register_date ASC) AS prev_date FROM users) t WHERE DATEDIFF(register_date, prev_date) > 30 ORDER BY gap_days DESC LIMIT 100;",
+      "after": "SELECT DATEDIFF(register_date,prev_date) gap_days,user_name FROM (SELECT user_id,user_name,register_date,LAG(register_date) OVER(ORDER BY register_date,user_id) prev_date FROM users) t WHERE DATEDIFF(register_date,prev_date)>30 ORDER BY gap_days DESC,user_id LIMIT 100",
+      "reason": "Stable window and output ordering"
+    },
+    {
+      "id": "final_mixed_125",
+      "field": "question",
+      "before": "列出所有VIP用户中从未使用过微信支付的用户，返回user_id、user_name、city、is_vip，按city升序、user_id升序排列，最多100行。",
+      "after": "列出所有VIP用户中从未有任何状态微信支付方式订单记录的用户，返回user_id、user_name、city、is_vip，按city升序、user_id升序排列，最多100行。",
+      "reason": "Do not infer actual completed payment from an unpaid order record"
+    },
+    {
+      "id": "final_mixed_140",
+      "field": "question",
+      "before": "2026年9月12日因为描述不符申请、并且已经批准的退款有哪些？给我退款单号、退款金额、退款日期和原订单实付金额，金额保留两位，退款金额大的在前，最多100条。 主排序值相同时，再按退款单号升序。",
+      "after": "2026年9月12日记录的、原因为描述不符且已经批准的退款有哪些？给我退款单号、退款金额、退款日期和原订单实付金额，金额保留两位，退款金额大的在前，最多100条。 主排序值相同时，再按退款单号升序。",
+      "reason": "Do not invent a separate application timestamp"
+    },
+    {
+      "id": "final_mixed_083",
+      "field": "reference_sql",
+      "before": "SELECT p.brand, p.category, ROUND(COUNT(DISTINCT o.order_id) * 1.0 / (SELECT COUNT(*) FROM orders WHERE order_status IN ('paid', 'completed', 'shipped')), 4) AS coverage_rate FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.is_active = 1 GROUP BY p.brand, p.category HAVING coverage_rate > 0.005 ORDER BY coverage_rate DESC, p.brand, p.category LIMIT 100",
+      "after": "SELECT p.brand, p.category, ROUND(COUNT(DISTINCT o.order_id) * 1.0 / (SELECT COUNT(*) FROM orders WHERE order_status IN ('paid', 'completed', 'shipped')), 4) AS coverage_rate FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.order_status IN ('paid', 'completed', 'shipped') AND p.is_active = 1 GROUP BY p.brand, p.category HAVING COUNT(DISTINCT o.order_id)*1.0/(SELECT COUNT(*) FROM orders WHERE order_status IN ('paid','completed','shipped')) > 0.005 ORDER BY coverage_rate DESC, p.brand, p.category LIMIT 100",
+      "reason": "Threshold applies to the exact coverage, not its rounded display"
+    },
+    {
+      "id": "final_mixed_088",
+      "field": "reference_sql",
+      "before": "SELECT brand, category, ROUND(AVG(list_price) - AVG(cost_price), 2) AS unit_profit, COUNT(*) AS product_count FROM products WHERE is_active = 1 GROUP BY brand, category HAVING unit_profit BETWEEN 50 AND 200 AND COUNT(*) >= 15 ORDER BY unit_profit DESC, brand, category LIMIT 100",
+      "after": "SELECT brand, category, ROUND(AVG(list_price) - AVG(cost_price), 2) AS unit_profit, COUNT(*) AS product_count FROM products WHERE is_active = 1 GROUP BY brand, category HAVING AVG(list_price)-AVG(cost_price) BETWEEN 50 AND 200 AND COUNT(*) >= 15 ORDER BY unit_profit DESC, brand, category LIMIT 100",
+      "reason": "Threshold applies to the exact mean difference"
+    },
+    {
+      "id": "final_mixed_090",
+      "field": "question",
+      "before": "请列出所有品牌与品类组合中，其在售商品的销售价格分布偏态（Skewness）估算值（使用三阶中心矩公式：N·Σ(x_i−x̄)³/((N−1)(N−2)·s³)，保留4位小数），仅包含商品数不少于20个的组合，按偏态绝对值升序排列，最多返回100行。 主排序值相同时，再按品牌、品类升序。",
+      "after": "请列出所有品牌与品类组合中，其在售商品的销售价格分布偏态（Skewness）估算值（使用三阶中心矩公式：N·Σ(x_i−x̄)³/((N−1)(N−2)·s³)，保留4位小数），仅包含商品数不少于20个的组合，按偏态绝对值升序排列，最多返回100行。 主排序值相同时，再按品牌、品类升序。 x为商品标价，s为样本标准差；只纳入样本标准差大于0的组合。",
+      "reason": "Make the stated skewness formula and zero-variance treatment fully determined"
+    },
+    {
+      "id": "final_mixed_001",
+      "field": "reference_sql",
+      "before": "SELECT gender, COUNT(*) AS count FROM users GROUP BY gender ORDER BY count DESC LIMIT 100;",
+      "after": "SELECT gender, COUNT(*) AS count FROM users GROUP BY gender ORDER BY count DESC, gender LIMIT 100",
+      "reason": "Public stable tie-break, no scoring modification"
+    },
+    {
+      "id": "final_mixed_001",
+      "field": "question",
+      "before": "列出所有用户性别（gender）的取值及其对应的人数，按人数降序排列，最多返回100行。",
+      "after": "列出所有用户性别（gender）的取值及其对应的人数，按人数降序排列，最多返回100行。 以上排序相同时，再按性别升序。",
+      "reason": "Expose tie-break to both candidates"
+    },
+    {
+      "id": "final_mixed_004",
+      "field": "reference_sql",
+      "before": "SELECT province, COUNT(*) AS total_users, ROUND(COUNT(CASE WHEN is_vip = 1 THEN 1 END) * 1.0 / COUNT(*), 4) AS vip_rate FROM users GROUP BY province ORDER BY total_users DESC LIMIT 100;",
+      "after": "SELECT province, COUNT(*) AS total_users, ROUND(COUNT(CASE WHEN is_vip = 1 THEN 1 END) * 1.0 / COUNT(*), 4) AS vip_rate FROM users GROUP BY province ORDER BY total_users DESC, province LIMIT 100",
+      "reason": "Public stable tie-break, no scoring modification"
+    },
+    {
+      "id": "final_mixed_004",
+      "field": "question",
+      "before": "统计每个省份（province）的用户总数，并计算其中 VIP 用户（is_vip=1）占比（保留4位小数），只返回 province、用户总数、VIP占比三列，按用户总数降序排列，最多100行。",
+      "after": "统计每个省份（province）的用户总数，并计算其中 VIP 用户（is_vip=1）占比（保留4位小数），只返回 province、用户总数、VIP占比三列，按用户总数降序排列，最多100行。 以上排序相同时，再按省份升序。",
+      "reason": "Expose tie-break to both candidates"
+    },
+    {
+      "id": "final_mixed_006",
+      "field": "reference_sql",
+      "before": "SELECT user_level, ROUND(COUNT(CASE WHEN gender = 'male' THEN 1 END) * 1.0 / COUNT(CASE WHEN gender = 'female' THEN 1 END), 4) AS male_to_female_ratio FROM users GROUP BY user_level HAVING COUNT(CASE WHEN gender = 'female' THEN 1 END) > 0 ORDER BY male_to_female_ratio DESC LIMIT 100;",
+      "after": "SELECT user_level, ROUND(COUNT(CASE WHEN gender = 'male' THEN 1 END) * 1.0 / COUNT(CASE WHEN gender = 'female' THEN 1 END), 4) AS male_to_female_ratio FROM users GROUP BY user_level HAVING COUNT(CASE WHEN gender = 'female' THEN 1 END) > 0 ORDER BY male_to_female_ratio DESC, user_level LIMIT 100",
+      "reason": "Public stable tie-break, no scoring modification"
+    },
+    {
+      "id": "final_mixed_006",
+      "field": "question",
+      "before": "统计每个用户等级（user_level）下，男性与女性用户的数量比（男性数/女性数，保留4位小数），只返回 user_level 和该比值两列，要求女性数大于0，按比值降序排列，最多100行。",
+      "after": "统计每个用户等级（user_level）下，男性与女性用户的数量比（男性数/女性数，保留4位小数），只返回 user_level 和该比值两列，要求女性数大于0，按比值降序排列，最多100行。 以上排序相同时，再按等级升序。",
+      "reason": "Expose tie-break to both candidates"
+    },
+    {
+      "id": "final_mixed_007",
+      "field": "reference_sql",
+      "before": "SELECT user_level, gender, COUNT(*) AS count FROM users GROUP BY user_level, gender ORDER BY count DESC, user_level ASC LIMIT 100;",
+      "after": "SELECT user_level, gender, COUNT(*) AS count FROM users GROUP BY user_level, gender ORDER BY count DESC, user_level ASC, gender LIMIT 100",
+      "reason": "Public stable tie-break, no scoring modification"
+    },
+    {
+      "id": "final_mixed_007",
+      "field": "question",
+      "before": "列出所有用户等级（user_level）和性别（gender）的组合，以及对应用户数，只返回 user_level、gender、用户数三列，按用户数降序、再按 user_level 升序排列，最多100行。",
+      "after": "列出所有用户等级（user_level）和性别（gender）的组合，以及对应用户数，只返回 user_level、gender、用户数三列，按用户数降序、再按 user_level 升序排列，最多100行。 以上排序相同时，再按性别升序。",
+      "reason": "Expose tie-break to both candidates"
+    },
+    {
+      "id": "final_mixed_008",
+      "field": "reference_sql",
+      "before": "SELECT city, ROUND(COUNT(CASE WHEN is_vip = 0 THEN 1 END) * 1.0 / COUNT(*), 4) AS non_vip_rate FROM users GROUP BY city ORDER BY non_vip_rate DESC LIMIT 100;",
+      "after": "SELECT city, ROUND(COUNT(CASE WHEN is_vip = 0 THEN 1 END) * 1.0 / COUNT(*), 4) AS non_vip_rate FROM users GROUP BY city ORDER BY non_vip_rate DESC, city LIMIT 100",
+      "reason": "Public stable tie-break, no scoring modification"
+    },
+    {
+      "id": "final_mixed_008",
+      "field": "question",
+      "before": "统计每个城市（city）中，非 VIP 用户（is_vip=0）占该城市总用户的比例（保留4位小数），只返回 city 和该比例两列，按比例降序排列，最多100行。",
+      "after": "统计每个城市（city）中，非 VIP 用户（is_vip=0）占该城市总用户的比例（保留4位小数），只返回 city 和该比例两列，按比例降序排列，最多100行。 以上排序相同时，再按城市升序。",
+      "reason": "Expose tie-break to both candidates"
+    },
+    {
+      "id": "final_mixed_009",
+      "field": "reference_sql",
+      "before": "SELECT user_level, COUNT(*) AS count FROM users WHERE register_date > '2025-12-31' GROUP BY user_level ORDER BY count DESC LIMIT 100;",
+      "after": "SELECT user_level, COUNT(*) AS count FROM users WHERE register_date > '2025-12-31' GROUP BY user_level ORDER BY count DESC, user_level LIMIT 100",
+      "reason": "Public stable tie-break, no scoring modification"
+    },
+    {
+      "id": "final_mixed_009",
+      "field": "question",
+      "before": "列出所有用户等级（user_level）中，注册日期在2025年之后（register_date > '2025-12-31'）的用户数，只返回 user_level 和该数量两列，按数量降序排列，最多100行。",
+      "after": "列出所有用户等级（user_level）中，注册日期在2025年之后（register_date > '2025-12-31'）的用户数，只返回 user_level 和该数量两列，按数量降序排列，最多100行。 以上排序相同时，再按等级升序。",
+      "reason": "Expose tie-break to both candidates"
+    },
+    {
+      "id": "final_mixed_021",
+      "field": "reference_sql",
+      "before": "SELECT product_name, list_price, cost_price, is_active FROM products WHERE brand = '云栖' AND category = '家用电器' ORDER BY list_price DESC LIMIT 100;",
+      "after": "SELECT product_name, list_price, cost_price, is_active FROM products WHERE brand = '云栖' AND category = '家用电器' ORDER BY list_price DESC, product_id LIMIT 100",
+      "reason": "Public stable tie-break, no scoring modification"
+    },
+    {
+      "id": "final_mixed_021",
+      "field": "question",
+      "before": "列出所有品牌为'云栖'且类别为'家用电器'的商品，返回商品名称、标价、成本价和是否在售状态，按标价从高到低排序，最多100行。",
+      "after": "列出所有品牌为'云栖'且类别为'家用电器'的商品，返回商品名称、标价、成本价和是否在售状态，按标价从高到低排序，最多100行。 以上排序相同时，再按商品ID升序。",
+      "reason": "Expose tie-break to both candidates"
+    },
+    {
+      "id": "final_mixed_022",
+      "field": "reference_sql",
+      "before": "SELECT brand, ROUND(AVG(list_price - cost_price), 2) AS price_cost_diff FROM products WHERE category = '手机数码' AND is_active = 1 GROUP BY brand HAVING COUNT(*) >= 5 ORDER BY price_cost_diff DESC LIMIT 100;",
+      "after": "SELECT brand, ROUND(AVG(list_price - cost_price), 2) AS price_cost_diff FROM products WHERE category = '手机数码' AND is_active = 1 GROUP BY brand HAVING COUNT(*) >= 5 ORDER BY price_cost_diff DESC, brand LIMIT 100",
+      "reason": "Public stable tie-break, no scoring modification"
+    },
+    {
+      "id": "final_mixed_022",
+      "field": "question",
+      "before": "统计每个品牌下'手机数码'类在售商品的平均标价与平均成本价之差（保留2位小数），仅包含至少有5款在售商品的品牌，按差额从大到小排序，返回品牌、差额两列，最多100行。",
+      "after": "统计每个品牌下'手机数码'类在售商品的平均标价与平均成本价之差（保留2位小数），仅包含至少有5款在售商品的品牌，按差额从大到小排序，返回品牌、差额两列，最多100行。 以上排序相同时，再按品牌升序。",
+      "reason": "Expose tie-break to both candidates"
+    },
+    {
+      "id": "final_mixed_023",
+      "field": "reference_sql",
+      "before": "SELECT product_id, product_name, list_price, cost_price FROM products WHERE category = '食品生鲜' AND list_price BETWEEN 30 AND 150 AND is_active = 1 ORDER BY cost_price ASC LIMIT 100;",
+      "after": "SELECT product_id, product_name, list_price, cost_price FROM products WHERE category = '食品生鲜' AND list_price BETWEEN 30 AND 150 AND is_active = 1 ORDER BY cost_price ASC, product_id LIMIT 100",
+      "reason": "Public stable tie-break, no scoring modification"
+    },
+    {
+      "id": "final_mixed_023",
+      "field": "question",
+      "before": "列出所有'食品生鲜'类且标价在30元至150元之间的在售商品，返回商品ID、商品名称、标价、成本价，按成本价升序排列，最多100行。",
+      "after": "列出所有'食品生鲜'类且标价在30元至150元之间的在售商品，返回商品ID、商品名称、标价、成本价，按成本价升序排列，最多100行。 以上排序相同时，再按商品ID升序。",
+      "reason": "Expose tie-break to both candidates"
+    },
+    {
+      "id": "final_mixed_024",
+      "field": "reference_sql",
+      "before": "SELECT category, COUNT(*) AS count, ROUND(AVG(list_price), 2) AS avg_list_price, ROUND(AVG(cost_price), 2) AS avg_cost_price FROM products WHERE is_active = 1 GROUP BY category HAVING COUNT(*) > 10 ORDER BY count DESC LIMIT 100;",
+      "after": "SELECT category, COUNT(*) AS count, ROUND(AVG(list_price), 2) AS avg_list_price, ROUND(AVG(cost_price), 2) AS avg_cost_price FROM products WHERE is_active = 1 GROUP BY category HAVING COUNT(*) > 10 ORDER BY count DESC, category LIMIT 100",
+      "reason": "Public stable tie-break, no scoring modification"
+    },
+    {
+      "id": "final_mixed_024",
+      "field": "question",
+      "before": "统计各品类下在售商品数量、平均标价（保留2位小数）、平均成本价（保留2位小数），仅展示商品数超过10个的品类，按商品数降序排列，返回品类、数量、平均标价、平均成本价四列，最多100行。",
+      "after": "统计各品类下在售商品数量、平均标价（保留2位小数）、平均成本价（保留2位小数），仅展示商品数超过10个的品类，按商品数降序排列，返回品类、数量、平均标价、平均成本价四列，最多100行。 以上排序相同时，再按品类升序。",
+      "reason": "Expose tie-break to both candidates"
+    },
+    {
+      "id": "final_mixed_025",
+      "field": "reference_sql",
+      "before": "SELECT product_name, list_price, cost_price, ROUND(list_price - cost_price, 2) AS price_cost_diff FROM products WHERE (brand = '优选' OR brand = '北辰') AND category = '美妆个护' AND is_active = 1 ORDER BY price_cost_diff DESC LIMIT 100;",
+      "after": "SELECT product_name, list_price, cost_price, ROUND(list_price - cost_price, 2) AS price_cost_diff FROM products WHERE (brand = '优选' OR brand = '北辰') AND category = '美妆个护' AND is_active = 1 ORDER BY price_cost_diff DESC, product_id LIMIT 100",
+      "reason": "Public stable tie-break, no scoring modification"
+    },
+    {
+      "id": "final_mixed_025",
+      "field": "question",
+      "before": "列出所有品牌为'优选'或'北辰'的'美妆个护'类在售商品，返回商品名称、标价、成本价、标价与成本价之差（保留2位小数），按差额从高到低排序，最多100行。",
+      "after": "列出所有品牌为'优选'或'北辰'的'美妆个护'类在售商品，返回商品名称、标价、成本价、标价与成本价之差（保留2位小数），按差额从高到低排序，最多100行。 以上排序相同时，再按商品ID升序。",
+      "reason": "Expose tie-break to both candidates"
+    },
+    {
+      "id": "final_mixed_026",
+      "field": "reference_sql",
+      "before": "SELECT product_id, product_name, list_price, cost_price, (list_price - cost_price) AS price_diff FROM products WHERE category = '运动户外' AND is_active = 1 AND list_price - cost_price >= 80 ORDER BY price_diff DESC LIMIT 100;",
+      "after": "SELECT product_id, product_name, list_price, cost_price, (list_price - cost_price) AS price_diff FROM products WHERE category = '运动户外' AND is_active = 1 AND list_price - cost_price >= 80 ORDER BY price_diff DESC, product_id LIMIT 100",
+      "reason": "Public stable tie-break, no scoring modification"
+    },
+    {
+      "id": "final_mixed_026",
+      "field": "question",
+      "before": "找出所有标价高于成本价至少80元且属于'运动户外'类的在售商品，返回商品ID、商品名称、标价、成本价、价差，按价差降序排列，最多100行。",
+      "after": "找出所有标价高于成本价至少80元且属于'运动户外'类的在售商品，返回商品ID、商品名称、标价、成本价、价差，按价差降序排列，最多100行。 以上排序相同时，再按商品ID升序。",
+      "reason": "Expose tie-break to both candidates"
+    },
+    {
+      "id": "final_mixed_027",
+      "field": "reference_sql",
+      "before": "SELECT brand, ROUND(MAX(list_price) - MIN(list_price), 2) AS price_range FROM products WHERE category = '服饰鞋包' AND is_active = 1 GROUP BY brand HAVING MAX(list_price) - MIN(list_price) > 200 ORDER BY price_range DESC LIMIT 100;",
+      "after": "SELECT brand, ROUND(MAX(list_price) - MIN(list_price), 2) AS price_range FROM products WHERE category = '服饰鞋包' AND is_active = 1 GROUP BY brand HAVING MAX(list_price) - MIN(list_price) > 200 ORDER BY price_range DESC, brand LIMIT 100",
+      "reason": "Public stable tie-break, no scoring modification"
+    },
+    {
+      "id": "final_mixed_027",
+      "field": "question",
+      "before": "统计每个品牌在'服饰鞋包'类下的在售商品中，标价最高与最低之差（保留2位小数），仅包含差额大于200元的品牌，按差额降序排列，返回品牌、价差两列，最多100行。",
+      "after": "统计每个品牌在'服饰鞋包'类下的在售商品中，标价最高与最低之差（保留2位小数），仅包含差额大于200元的品牌，按差额降序排列，返回品牌、价差两列，最多100行。 以上排序相同时，再按品牌升序。",
+      "reason": "Expose tie-break to both candidates"
+    },
+    {
+      "id": "final_mixed_028",
+      "field": "reference_sql",
+      "before": "SELECT product_name, list_price, cost_price, ROUND(list_price / cost_price, 4) AS markup_ratio FROM products WHERE category = '母婴用品' AND cost_price < 50 AND list_price > 200 AND is_active = 1 ORDER BY markup_ratio DESC LIMIT 100;",
+      "after": "SELECT product_name, list_price, cost_price, ROUND(list_price / cost_price, 4) AS markup_ratio FROM products WHERE category = '母婴用品' AND cost_price < 50 AND list_price > 200 AND is_active = 1 ORDER BY markup_ratio DESC, product_id LIMIT 100",
+      "reason": "Public stable tie-break, no scoring modification"
+    },
+    {
+      "id": "final_mixed_028",
+      "field": "question",
+      "before": "列出所有'母婴用品'类中成本价低于50元且标价高于200元的在售商品，返回商品名称、标价、成本价、标价/成本价比值（保留4位小数），按比值从高到低排序，最多100行。",
+      "after": "列出所有'母婴用品'类中成本价低于50元且标价高于200元的在售商品，返回商品名称、标价、成本价、标价/成本价比值（保留4位小数），按比值从高到低排序，最多100行。 以上排序相同时，再按商品ID升序。",
+      "reason": "Expose tie-break to both candidates"
+    },
+    {
+      "id": "final_mixed_029",
+      "field": "reference_sql",
+      "before": "WITH ranked AS (SELECT brand, list_price, cost_price, ROW_NUMBER() OVER (PARTITION BY brand ORDER BY list_price) AS rn_p, ROW_NUMBER() OVER (PARTITION BY brand ORDER BY cost_price) AS rn_c, COUNT(*) OVER (PARTITION BY brand) AS cnt FROM products WHERE category = '家用电器' AND is_active = 1) SELECT brand, ROUND(AVG(CASE WHEN rn_p IN (FLOOR((cnt+1)/2), CEIL((cnt+1)/2)) THEN list_price END), 2) AS median_list_price, ROUND(AVG(CASE WHEN rn_c IN (FLOOR((cnt+1)/2), CEIL((cnt+1)/2)) THEN cost_price END), 2) AS median_cost_price FROM ranked GROUP BY brand HAVING COUNT(*) >= 3 ORDER BY median_list_price DESC LIMIT 100;",
+      "after": "WITH ranked AS (SELECT brand, list_price, cost_price, ROW_NUMBER() OVER (PARTITION BY brand ORDER BY list_price) AS rn_p, ROW_NUMBER() OVER (PARTITION BY brand ORDER BY cost_price) AS rn_c, COUNT(*) OVER (PARTITION BY brand) AS cnt FROM products WHERE category = '家用电器' AND is_active = 1) SELECT brand, ROUND(AVG(CASE WHEN rn_p IN (FLOOR((cnt + 1) / 2), CEIL((cnt + 1) / 2)) THEN list_price END), 2) AS median_list_price, ROUND(AVG(CASE WHEN rn_c IN (FLOOR((cnt + 1) / 2), CEIL((cnt + 1) / 2)) THEN cost_price END), 2) AS median_cost_price FROM ranked GROUP BY brand HAVING COUNT(*) >= 3 ORDER BY median_list_price DESC, brand LIMIT 100",
+      "reason": "Public stable tie-break, no scoring modification"
+    },
+    {
+      "id": "final_mixed_029",
+      "field": "question",
+      "before": "统计各品牌下'家用电器'类在售商品的标价中位数（保留2位小数）和成本价中位数（保留2位小数），仅展示商品数不少于3款的品牌，按标价中位数降序排列，返回品牌、标价中位数、成本价中位数三列，最多100行。",
+      "after": "统计各品牌下'家用电器'类在售商品的标价中位数（保留2位小数）和成本价中位数（保留2位小数），仅展示商品数不少于3款的品牌，按标价中位数降序排列，返回品牌、标价中位数、成本价中位数三列，最多100行。 以上排序相同时，再按品牌升序。",
+      "reason": "Expose tie-break to both candidates"
+    },
+    {
+      "id": "final_mixed_030",
+      "field": "reference_sql",
+      "before": "SELECT product_name, cost_price, list_price, ROUND(list_price / cost_price, 4) AS ratio FROM products WHERE category = '手机数码' AND cost_price BETWEEN 1000 AND 5000 AND list_price / cost_price >= 1.3 AND is_active = 1 ORDER BY ratio ASC LIMIT 100;",
+      "after": "SELECT product_name, cost_price, list_price, ROUND(list_price / cost_price, 4) AS ratio FROM products WHERE category = '手机数码' AND cost_price BETWEEN 1000 AND 5000 AND list_price / cost_price >= 1.3 AND is_active = 1 ORDER BY ratio ASC, product_id LIMIT 100",
+      "reason": "Public stable tie-break, no scoring modification"
+    },
+    {
+      "id": "final_mixed_030",
+      "field": "question",
+      "before": "列出所有'手机数码'类中成本价在1000元至5000元之间、且标价是成本价1.3倍以上的在售商品，返回商品名称、成本价、标价、标价/成本价比值（保留4位小数），按比值升序排列，最多100行。",
+      "after": "列出所有'手机数码'类中成本价在1000元至5000元之间、且标价是成本价1.3倍以上的在售商品，返回商品名称、成本价、标价、标价/成本价比值（保留4位小数），按比值升序排列，最多100行。 以上排序相同时，再按商品ID升序。",
+      "reason": "Expose tie-break to both candidates"
+    },
+    {
+      "id": "final_mixed_035",
+      "field": "reference_sql",
+      "before": "SELECT product_name, category, brand, MONTH(launch_date) AS launch_month, list_price FROM products WHERE is_active = 1 AND YEAR(launch_date) = 2025 ORDER BY launch_month ASC, list_price DESC LIMIT 100;",
+      "after": "SELECT product_name, category, brand, MONTH(launch_date) AS launch_month, list_price FROM products WHERE is_active = 1 AND YEAR(launch_date) = 2025 ORDER BY launch_month ASC, list_price DESC, product_id LIMIT 100",
+      "reason": "Public stable tie-break, no scoring modification"
+    },
+    {
+      "id": "final_mixed_035",
+      "field": "question",
+      "before": "列出所有已上架产品（is_active=1）中，上市年份为2025年的产品名称、品类、品牌、上市月份和销售单价（list_price），按上市月份升序、list_price降序排列，最多返回100行。",
+      "after": "列出所有已上架产品（is_active=1）中，上市年份为2025年的产品名称、品类、品牌、上市月份和销售单价（list_price），按上市月份升序、list_price降序排列，最多返回100行。 以上排序相同时，再按商品ID升序。",
+      "reason": "Expose tie-break to both candidates"
+    },
+    {
+      "id": "final_mixed_038",
+      "field": "reference_sql",
+      "before": "SELECT product_id, category, brand, launch_date, list_price FROM products WHERE is_active = 1 AND YEAR(launch_date) IN (2024, 2025) ORDER BY launch_date ASC, list_price ASC LIMIT 100;",
+      "after": "SELECT product_id, category, brand, launch_date, list_price FROM products WHERE is_active = 1 AND YEAR(launch_date) IN (2024, 2025) ORDER BY launch_date ASC, list_price ASC, product_id LIMIT 100",
+      "reason": "Public stable tie-break, no scoring modification"
+    },
+    {
+      "id": "final_mixed_038",
+      "field": "question",
+      "before": "列出所有已上架产品（is_active=1）中，上市年份为2024年或2025年的产品ID、品类、品牌、上市日期（launch_date）和售价（list_price），按上市日期升序、售价升序排列，最多返回100行。",
+      "after": "列出所有已上架产品（is_active=1）中，上市年份为2024年或2025年的产品ID、品类、品牌、上市日期（launch_date）和售价（list_price），按上市日期升序、售价升序排列，最多返回100行。 以上排序相同时，再按商品ID升序。",
+      "reason": "Expose tie-break to both candidates"
+    },
+    {
+      "id": "final_mixed_040",
+      "field": "reference_sql",
+      "before": "SELECT product_name, category, brand, QUARTER(launch_date) AS launch_quarter, cost_price FROM products WHERE is_active = 1 AND YEAR(launch_date) = 2026 ORDER BY launch_quarter ASC, cost_price DESC LIMIT 100;",
+      "after": "SELECT product_name, category, brand, QUARTER(launch_date) AS launch_quarter, cost_price FROM products WHERE is_active = 1 AND YEAR(launch_date) = 2026 ORDER BY launch_quarter ASC, cost_price DESC, product_id LIMIT 100",
+      "reason": "Public stable tie-break, no scoring modification"
+    },
+    {
+      "id": "final_mixed_040",
+      "field": "question",
+      "before": "列出所有已上架产品（is_active=1）中，上市年份为2026年的产品名称、品类、品牌、上市季度和成本价（cost_price），按上市季度升序、成本价降序排列，最多返回100行。",
+      "after": "列出所有已上架产品（is_active=1）中，上市年份为2026年的产品名称、品类、品牌、上市季度和成本价（cost_price），按上市季度升序、成本价降序排列，最多返回100行。 以上排序相同时，再按商品ID升序。",
+      "reason": "Expose tie-break to both candidates"
+    },
+    {
+      "id": "final_mixed_046",
+      "field": "reference_sql",
+      "before": "SELECT payment_method, order_status, COUNT(*) AS count FROM orders GROUP BY payment_method, order_status ORDER BY payment_method ASC, count DESC;",
+      "after": "SELECT payment_method, order_status, COUNT(*) AS count FROM orders GROUP BY payment_method, order_status ORDER BY payment_method ASC, count DESC, order_status",
+      "reason": "Public stable tie-break, no scoring modification"
+    },
+    {
+      "id": "final_mixed_046",
+      "field": "question",
+      "before": "统计每个支付方式下，各订单状态的出现次数，仅返回 payment_method、order_status 和计数三列，并按 payment_method 升序、计数降序排列。",
+      "after": "统计每个支付方式下，各订单状态的出现次数，仅返回 payment_method、order_status 和计数三列，并按 payment_method 升序、计数降序排列。 以上排序相同时，再按订单状态升序。",
+      "reason": "Expose tie-break to both candidates"
+    },
+    {
+      "id": "final_mixed_049",
+      "field": "reference_sql",
+      "before": "SELECT order_status, ROUND(COUNT(CASE WHEN order_date BETWEEN '2026-09-01' AND '2026-09-30' THEN 1 END) * 1.0 / COUNT(*), 4) AS rate FROM orders GROUP BY order_status ORDER BY rate DESC;",
+      "after": "SELECT order_status, ROUND(COUNT(CASE WHEN order_date BETWEEN '2026-09-01' AND '2026-09-30' THEN 1 END) * 1.0 / COUNT(*), 4) AS rate FROM orders GROUP BY order_status ORDER BY rate DESC, order_status",
+      "reason": "Public stable tie-break, no scoring modification"
+    },
+    {
+      "id": "final_mixed_049",
+      "field": "question",
+      "before": "统计每个订单状态中，订单日期在2026年9月12日当月（2026-09-01 至 2026-09-30）的订单占比（小数点后4位），仅返回 order_status 和占比两列，并按占比降序排列。",
+      "after": "统计每个订单状态中，订单日期在2026年9月12日当月（2026-09-01 至 2026-09-30）的订单占比（小数点后4位），仅返回 order_status 和占比两列，并按占比降序排列。 以上排序相同时，再按订单状态升序。",
+      "reason": "Expose tie-break to both candidates"
+    },
+    {
+      "id": "final_mixed_054",
+      "field": "reference_sql",
+      "before": "SELECT order_status, SUM(gross_amount) AS gross_amount, SUM(discount_amount) AS discount_amount, SUM(paid_amount) AS paid_amount FROM orders GROUP BY order_status HAVING SUM(discount_amount) / NULLIF(SUM(gross_amount), 0) > 0.15 ORDER BY SUM(discount_amount) / NULLIF(SUM(gross_amount), 0) DESC;",
+      "after": "SELECT order_status, SUM(gross_amount) AS gross_amount, SUM(discount_amount) AS discount_amount, SUM(paid_amount) AS paid_amount FROM orders GROUP BY order_status HAVING SUM(discount_amount) / NULLIF(SUM(gross_amount), 0) > 0.15 ORDER BY SUM(discount_amount) / NULLIF(SUM(gross_amount), 0) DESC, order_status",
+      "reason": "Public stable tie-break, no scoring modification"
+    },
+    {
+      "id": "final_mixed_054",
+      "field": "question",
+      "before": "请列出所有订单状态中，总折扣额占总毛额比例超过15%的那些状态，及其对应的总毛额、总折扣额、总实收金额，按折扣占比降序排列。",
+      "after": "请列出所有订单状态中，总折扣额占总毛额比例超过15%的那些状态，及其对应的总毛额、总折扣额、总实收金额，按折扣占比降序排列。 以上排序相同时，再按订单状态升序。",
+      "reason": "Expose tie-break to both candidates"
+    },
+    {
+      "id": "final_mixed_056",
+      "field": "reference_sql",
+      "before": "WITH total AS (SELECT SUM(paid_amount) AS total_paid FROM orders) SELECT o.order_status, ROUND(SUM(o.paid_amount) / NULLIF(t.total_paid, 0), 4) AS paid_contribution_rate FROM orders o CROSS JOIN total t GROUP BY o.order_status, t.total_paid ORDER BY paid_contribution_rate DESC;",
+      "after": "WITH total AS (SELECT SUM(paid_amount) AS total_paid FROM orders) SELECT o.order_status, ROUND(SUM(o.paid_amount) / NULLIF(t.total_paid, 0), 4) AS paid_contribution_rate FROM orders AS o CROSS JOIN total AS t GROUP BY o.order_status, t.total_paid ORDER BY paid_contribution_rate DESC, o.order_status",
+      "reason": "Public stable tie-break, no scoring modification"
+    },
+    {
+      "id": "final_mixed_056",
+      "field": "question",
+      "before": "请返回全部历史订单中，各订单状态的总实收金额占全部历史订单总实收金额的比例（即状态贡献率，保留4位小数），并按该比例降序排列。",
+      "after": "请返回全部历史订单中，各订单状态的总实收金额占全部历史订单总实收金额的比例（即状态贡献率，保留4位小数），并按该比例降序排列。 以上排序相同时，再按订单状态升序。",
+      "reason": "Expose tie-break to both candidates"
+    },
+    {
+      "id": "final_mixed_091",
+      "field": "reference_sql",
+      "before": "SELECT refund_reason, SUM(refund_amount) AS sum_refund_amount FROM refunds WHERE refund_status = 'approved' GROUP BY refund_reason ORDER BY sum_refund_amount DESC;",
+      "after": "SELECT refund_reason, SUM(refund_amount) AS sum_refund_amount FROM refunds WHERE refund_status = 'approved' GROUP BY refund_reason ORDER BY sum_refund_amount DESC, refund_reason",
+      "reason": "Public stable tie-break, no scoring modification"
+    },
+    {
+      "id": "final_mixed_091",
+      "field": "question",
+      "before": "列出所有退款原因及其对应的已批准退款金额总和，按金额从高到低排序，仅返回退款原因和金额两列。",
+      "after": "列出所有退款原因及其对应的已批准退款金额总和，按金额从高到低排序，仅返回退款原因和金额两列。 以上排序相同时，再按退款原因升序。",
+      "reason": "Expose tie-break to both candidates"
+    },
+    {
+      "id": "final_mixed_093",
+      "field": "reference_sql",
+      "before": "SELECT refund_reason, ROUND(SUM(refund_amount) / (SELECT SUM(refund_amount) FROM refunds WHERE refund_status = 'approved'), 4) AS rate FROM refunds WHERE refund_status = 'approved' GROUP BY refund_reason ORDER BY rate DESC;",
+      "after": "SELECT refund_reason, ROUND(SUM(refund_amount) / (SELECT SUM(refund_amount) FROM refunds WHERE refund_status = 'approved'), 4) AS rate FROM refunds WHERE refund_status = 'approved' GROUP BY refund_reason ORDER BY rate DESC, refund_reason",
+      "reason": "Public stable tie-break, no scoring modification"
+    },
+    {
+      "id": "final_mixed_093",
+      "field": "question",
+      "before": "查询退款状态为‘已批准’的退款中，各退款原因的退款金额占比（占全部已批准退款总额的比例），保留四位小数，按占比从高到低排序，仅返回退款原因和占比两列。",
+      "after": "查询退款状态为‘已批准’的退款中，各退款原因的退款金额占比（占全部已批准退款总额的比例），保留四位小数，按占比从高到低排序，仅返回退款原因和占比两列。 以上排序相同时，再按退款原因升序。",
+      "reason": "Expose tie-break to both candidates"
+    },
+    {
+      "id": "final_mixed_135",
+      "field": "reference_sql",
+      "before": "SELECT r.refund_reason, ROUND(SUM(r.refund_amount), 2) AS sum_refund_amount FROM users u JOIN orders o ON u.user_id = o.user_id JOIN refunds r ON o.order_id = r.order_id WHERE u.city = '成都市' AND r.refund_date BETWEEN '2026-09-11' AND '2026-09-12' AND r.refund_status = 'approved' GROUP BY r.refund_reason ORDER BY sum_refund_amount DESC;",
+      "after": "SELECT r.refund_reason, ROUND(SUM(r.refund_amount), 2) AS sum_refund_amount FROM users AS u JOIN orders AS o ON u.user_id = o.user_id JOIN refunds AS r ON o.order_id = r.order_id WHERE u.city = '成都市' AND r.refund_date BETWEEN '2026-09-11' AND '2026-09-12' AND r.refund_status = 'approved' GROUP BY r.refund_reason ORDER BY sum_refund_amount DESC, r.refund_reason",
+      "reason": "Public stable tie-break, no scoring modification"
+    },
+    {
+      "id": "final_mixed_135",
+      "field": "question",
+      "before": "成都市用户在2026年9月11日和12日这两天的已批准退款，各个退款原因分别退了多少钱？给我原因和总金额，金额保留两位，退得多的排前面。",
+      "after": "成都市用户在2026年9月11日和12日这两天的已批准退款，各个退款原因分别退了多少钱？给我原因和总金额，金额保留两位，退得多的排前面。 以上排序相同时，再按退款原因升序。",
+      "reason": "Expose tie-break to both candidates"
+    },
+    {
+      "id": "final_mixed_136",
+      "field": "reference_sql",
+      "before": "SELECT product_name, brand, launch_date, list_price FROM products WHERE category = '食品生鲜' AND launch_date < '2026-09-12' AND is_active = 1 ORDER BY launch_date ASC, list_price DESC LIMIT 100;",
+      "after": "SELECT product_name, brand, launch_date, list_price FROM products WHERE category = '食品生鲜' AND launch_date < '2026-09-12' AND is_active = 1 ORDER BY launch_date ASC, list_price DESC, product_id LIMIT 100",
+      "reason": "Public stable tie-break, no scoring modification"
+    },
+    {
+      "id": "final_mixed_136",
+      "field": "question",
+      "before": "食品生鲜里，2026年9月12日以前上架而且现在还在卖的商品有哪些？列商品名、品牌、上架日期和标价，先按上架日期从早到晚，同日标价从高到低，最多100条。",
+      "after": "食品生鲜里，2026年9月12日以前上架而且现在还在卖的商品有哪些？列商品名、品牌、上架日期和标价，先按上架日期从早到晚，同日标价从高到低，最多100条。 以上排序相同时，再按商品ID升序。",
+      "reason": "Expose tie-break to both candidates"
+    },
+    {
+      "id": "final_mixed_001",
+      "field": "intended_meaning",
+      "before": "列出所有用户性别（gender）的取值及其对应的人数，按人数降序排列，最多返回100行。",
+      "after": "列出所有用户性别（gender）的取值及其对应的人数，按人数降序排列，最多返回100行。 以上排序相同时，再按性别升序。",
+      "reason": "Synchronize authoring intent before freeze"
+    },
+    {
+      "id": "final_mixed_004",
+      "field": "intended_meaning",
+      "before": "统计每个省份（province）的用户总数，并计算其中 VIP 用户（is_vip=1）占比（保留4位小数），只返回 province、用户总数、VIP占比三列，按用户总数降序排列，最多100行。",
+      "after": "统计每个省份（province）的用户总数，并计算其中 VIP 用户（is_vip=1）占比（保留4位小数），只返回 province、用户总数、VIP占比三列，按用户总数降序排列，最多100行。 以上排序相同时，再按省份升序。",
+      "reason": "Synchronize authoring intent before freeze"
+    },
+    {
+      "id": "final_mixed_006",
+      "field": "intended_meaning",
+      "before": "统计每个用户等级（user_level）下，男性与女性用户的数量比（男性数/女性数，保留4位小数），只返回 user_level 和该比值两列，要求女性数大于0，按比值降序排列，最多100行。",
+      "after": "统计每个用户等级（user_level）下，男性与女性用户的数量比（男性数/女性数，保留4位小数），只返回 user_level 和该比值两列，要求女性数大于0，按比值降序排列，最多100行。 以上排序相同时，再按等级升序。",
+      "reason": "Synchronize authoring intent before freeze"
+    },
+    {
+      "id": "final_mixed_007",
+      "field": "intended_meaning",
+      "before": "列出所有用户等级（user_level）和性别（gender）的组合，以及对应用户数，只返回 user_level、gender、用户数三列，按用户数降序、再按 user_level 升序排列，最多100行。",
+      "after": "列出所有用户等级（user_level）和性别（gender）的组合，以及对应用户数，只返回 user_level、gender、用户数三列，按用户数降序、再按 user_level 升序排列，最多100行。 以上排序相同时，再按性别升序。",
+      "reason": "Synchronize authoring intent before freeze"
+    },
+    {
+      "id": "final_mixed_008",
+      "field": "intended_meaning",
+      "before": "统计每个城市（city）中，非 VIP 用户（is_vip=0）占该城市总用户的比例（保留4位小数），只返回 city 和该比例两列，按比例降序排列，最多100行。",
+      "after": "统计每个城市（city）中，非 VIP 用户（is_vip=0）占该城市总用户的比例（保留4位小数），只返回 city 和该比例两列，按比例降序排列，最多100行。 以上排序相同时，再按城市升序。",
+      "reason": "Synchronize authoring intent before freeze"
+    },
+    {
+      "id": "final_mixed_009",
+      "field": "intended_meaning",
+      "before": "列出所有用户等级（user_level）中，注册日期在2025年之后（register_date > '2025-12-31'）的用户数，只返回 user_level 和该数量两列，按数量降序排列，最多100行。",
+      "after": "列出所有用户等级（user_level）中，注册日期在2025年之后（register_date > '2025-12-31'）的用户数，只返回 user_level 和该数量两列，按数量降序排列，最多100行。 以上排序相同时，再按等级升序。",
+      "reason": "Synchronize authoring intent before freeze"
+    },
+    {
+      "id": "final_mixed_018",
+      "field": "intended_meaning",
+      "before": "请列出所有用户中，注册间隔（相邻用户按register_date升序排列的差值，单位：天）大于30天的全部间隔值（即LAG(register_date)与当前register_date之差），返回该差值（正整数）和对应后一用户的user_name，最多100行，按差值降序排列。",
+      "after": "把用户按注册日期、用户ID升序排好，找出相邻两人注册日相差超过30天的位置。返回天数差和后一人的姓名，按天数差降序、后一人用户ID升序，最多100行。",
+      "reason": "Synchronize authoring intent before freeze"
+    },
+    {
+      "id": "final_mixed_021",
+      "field": "intended_meaning",
+      "before": "列出所有品牌为'云栖'且类别为'家用电器'的商品，返回商品名称、标价、成本价和是否在售状态，按标价从高到低排序，最多100行。",
+      "after": "列出所有品牌为'云栖'且类别为'家用电器'的商品，返回商品名称、标价、成本价和是否在售状态，按标价从高到低排序，最多100行。 以上排序相同时，再按商品ID升序。",
+      "reason": "Synchronize authoring intent before freeze"
+    },
+    {
+      "id": "final_mixed_022",
+      "field": "intended_meaning",
+      "before": "统计每个品牌下'手机数码'类在售商品的平均标价与平均成本价之差（保留2位小数），仅包含至少有5款在售商品的品牌，按差额从大到小排序，返回品牌、差额两列，最多100行。",
+      "after": "统计每个品牌下'手机数码'类在售商品的平均标价与平均成本价之差（保留2位小数），仅包含至少有5款在售商品的品牌，按差额从大到小排序，返回品牌、差额两列，最多100行。 以上排序相同时，再按品牌升序。",
+      "reason": "Synchronize authoring intent before freeze"
+    },
+    {
+      "id": "final_mixed_023",
+      "field": "intended_meaning",
+      "before": "列出所有'食品生鲜'类且标价在30元至150元之间的在售商品，返回商品ID、商品名称、标价、成本价，按成本价升序排列，最多100行。",
+      "after": "列出所有'食品生鲜'类且标价在30元至150元之间的在售商品，返回商品ID、商品名称、标价、成本价，按成本价升序排列，最多100行。 以上排序相同时，再按商品ID升序。",
+      "reason": "Synchronize authoring intent before freeze"
+    },
+    {
+      "id": "final_mixed_024",
+      "field": "intended_meaning",
+      "before": "统计各品类下在售商品数量、平均标价（保留2位小数）、平均成本价（保留2位小数），仅展示商品数超过10个的品类，按商品数降序排列，返回品类、数量、平均标价、平均成本价四列，最多100行。",
+      "after": "统计各品类下在售商品数量、平均标价（保留2位小数）、平均成本价（保留2位小数），仅展示商品数超过10个的品类，按商品数降序排列，返回品类、数量、平均标价、平均成本价四列，最多100行。 以上排序相同时，再按品类升序。",
+      "reason": "Synchronize authoring intent before freeze"
+    },
+    {
+      "id": "final_mixed_025",
+      "field": "intended_meaning",
+      "before": "列出所有品牌为'优选'或'北辰'的'美妆个护'类在售商品，返回商品名称、标价、成本价、标价与成本价之差（保留2位小数），按差额从高到低排序，最多100行。",
+      "after": "列出所有品牌为'优选'或'北辰'的'美妆个护'类在售商品，返回商品名称、标价、成本价、标价与成本价之差（保留2位小数），按差额从高到低排序，最多100行。 以上排序相同时，再按商品ID升序。",
+      "reason": "Synchronize authoring intent before freeze"
+    },
+    {
+      "id": "final_mixed_026",
+      "field": "intended_meaning",
+      "before": "找出所有标价高于成本价至少80元且属于'运动户外'类的在售商品，返回商品ID、商品名称、标价、成本价、价差，按价差降序排列，最多100行。",
+      "after": "找出所有标价高于成本价至少80元且属于'运动户外'类的在售商品，返回商品ID、商品名称、标价、成本价、价差，按价差降序排列，最多100行。 以上排序相同时，再按商品ID升序。",
+      "reason": "Synchronize authoring intent before freeze"
+    },
+    {
+      "id": "final_mixed_027",
+      "field": "intended_meaning",
+      "before": "统计每个品牌在'服饰鞋包'类下的在售商品中，标价最高与最低之差（保留2位小数），仅包含差额大于200元的品牌，按差额降序排列，返回品牌、价差两列，最多100行。",
+      "after": "统计每个品牌在'服饰鞋包'类下的在售商品中，标价最高与最低之差（保留2位小数），仅包含差额大于200元的品牌，按差额降序排列，返回品牌、价差两列，最多100行。 以上排序相同时，再按品牌升序。",
+      "reason": "Synchronize authoring intent before freeze"
+    },
+    {
+      "id": "final_mixed_028",
+      "field": "intended_meaning",
+      "before": "列出所有'母婴用品'类中成本价低于50元且标价高于200元的在售商品，返回商品名称、标价、成本价、标价/成本价比值（保留4位小数），按比值从高到低排序，最多100行。",
+      "after": "列出所有'母婴用品'类中成本价低于50元且标价高于200元的在售商品，返回商品名称、标价、成本价、标价/成本价比值（保留4位小数），按比值从高到低排序，最多100行。 以上排序相同时，再按商品ID升序。",
+      "reason": "Synchronize authoring intent before freeze"
+    },
+    {
+      "id": "final_mixed_029",
+      "field": "intended_meaning",
+      "before": "统计各品牌下'家用电器'类在售商品的标价中位数（保留2位小数）和成本价中位数（保留2位小数），仅展示商品数不少于3款的品牌，按标价中位数降序排列，返回品牌、标价中位数、成本价中位数三列，最多100行。",
+      "after": "统计各品牌下'家用电器'类在售商品的标价中位数（保留2位小数）和成本价中位数（保留2位小数），仅展示商品数不少于3款的品牌，按标价中位数降序排列，返回品牌、标价中位数、成本价中位数三列，最多100行。 以上排序相同时，再按品牌升序。",
+      "reason": "Synchronize authoring intent before freeze"
+    },
+    {
+      "id": "final_mixed_030",
+      "field": "intended_meaning",
+      "before": "列出所有'手机数码'类中成本价在1000元至5000元之间、且标价是成本价1.3倍以上的在售商品，返回商品名称、成本价、标价、标价/成本价比值（保留4位小数），按比值升序排列，最多100行。",
+      "after": "列出所有'手机数码'类中成本价在1000元至5000元之间、且标价是成本价1.3倍以上的在售商品，返回商品名称、成本价、标价、标价/成本价比值（保留4位小数），按比值升序排列，最多100行。 以上排序相同时，再按商品ID升序。",
+      "reason": "Synchronize authoring intent before freeze"
+    },
+    {
+      "id": "final_mixed_035",
+      "field": "intended_meaning",
+      "before": "列出所有已上架产品（is_active=1）中，上市年份为2025年的产品名称、品类、品牌、上市月份和销售单价（list_price），按上市月份升序、list_price降序排列，最多返回100行。",
+      "after": "列出所有已上架产品（is_active=1）中，上市年份为2025年的产品名称、品类、品牌、上市月份和销售单价（list_price），按上市月份升序、list_price降序排列，最多返回100行。 以上排序相同时，再按商品ID升序。",
+      "reason": "Synchronize authoring intent before freeze"
+    },
+    {
+      "id": "final_mixed_038",
+      "field": "intended_meaning",
+      "before": "列出所有已上架产品（is_active=1）中，上市年份为2024年或2025年的产品ID、品类、品牌、上市日期（launch_date）和售价（list_price），按上市日期升序、售价升序排列，最多返回100行。",
+      "after": "列出所有已上架产品（is_active=1）中，上市年份为2024年或2025年的产品ID、品类、品牌、上市日期（launch_date）和售价（list_price），按上市日期升序、售价升序排列，最多返回100行。 以上排序相同时，再按商品ID升序。",
+      "reason": "Synchronize authoring intent before freeze"
+    },
+    {
+      "id": "final_mixed_040",
+      "field": "intended_meaning",
+      "before": "列出所有已上架产品（is_active=1）中，上市年份为2026年的产品名称、品类、品牌、上市季度和成本价（cost_price），按上市季度升序、成本价降序排列，最多返回100行。",
+      "after": "列出所有已上架产品（is_active=1）中，上市年份为2026年的产品名称、品类、品牌、上市季度和成本价（cost_price），按上市季度升序、成本价降序排列，最多返回100行。 以上排序相同时，再按商品ID升序。",
+      "reason": "Synchronize authoring intent before freeze"
+    },
+    {
+      "id": "final_mixed_041",
+      "field": "intended_meaning",
+      "before": "统计所有订单状态（order_status）的分布次数，按次数降序排列，仅返回 order_status 和计数两列。",
+      "after": "按订单状态汇总全历史订单：返回状态、订单数、使用现金支付的订单占比（保留4位小数），按订单数降序、状态升序。",
+      "reason": "Synchronize authoring intent before freeze"
+    },
+    {
+      "id": "final_mixed_046",
+      "field": "intended_meaning",
+      "before": "统计每个支付方式下，各订单状态的出现次数，仅返回 payment_method、order_status 和计数三列，并按 payment_method 升序、计数降序排列。",
+      "after": "统计每个支付方式下，各订单状态的出现次数，仅返回 payment_method、order_status 和计数三列，并按 payment_method 升序、计数降序排列。 以上排序相同时，再按订单状态升序。",
+      "reason": "Synchronize authoring intent before freeze"
+    },
+    {
+      "id": "final_mixed_049",
+      "field": "intended_meaning",
+      "before": "统计每个订单状态中，订单日期在2026年9月12日当月（2026-09-01 至 2026-09-30）的订单占比（小数点后4位），仅返回 order_status 和占比两列，并按占比降序排列。",
+      "after": "统计每个订单状态中，订单日期在2026年9月12日当月（2026-09-01 至 2026-09-30）的订单占比（小数点后4位），仅返回 order_status 和占比两列，并按占比降序排列。 以上排序相同时，再按订单状态升序。",
+      "reason": "Synchronize authoring intent before freeze"
+    },
+    {
+      "id": "final_mixed_054",
+      "field": "intended_meaning",
+      "before": "请列出所有订单状态中，总折扣额占总毛额比例超过15%的那些状态，及其对应的总毛额、总折扣额、总实收金额，按折扣占比降序排列。",
+      "after": "请列出所有订单状态中，总折扣额占总毛额比例超过15%的那些状态，及其对应的总毛额、总折扣额、总实收金额，按折扣占比降序排列。 以上排序相同时，再按订单状态升序。",
+      "reason": "Synchronize authoring intent before freeze"
+    },
+    {
+      "id": "final_mixed_056",
+      "field": "intended_meaning",
+      "before": "请返回全部历史订单中，各订单状态的总实收金额占全部历史订单总实收金额的比例（即状态贡献率，保留4位小数），并按该比例降序排列。",
+      "after": "请返回全部历史订单中，各订单状态的总实收金额占全部历史订单总实收金额的比例（即状态贡献率，保留4位小数），并按该比例降序排列。 以上排序相同时，再按订单状态升序。",
+      "reason": "Synchronize authoring intent before freeze"
+    },
+    {
+      "id": "final_mixed_059",
+      "field": "intended_meaning",
+      "before": "请返回全部历史订单中，订单状态为'cancelled'或'unpaid'的两类无效订单各自的总毛额、总折扣额和总实收金额，按订单状态升序排列。",
+      "after": "按下单月份和订单状态，统计全历史cancelled、unpaid订单的总毛额、总折扣额和总实收金额。返回月份（YYYY-MM）、状态和上述三项金额，按月份、状态升序，最多100行。",
+      "reason": "Synchronize authoring intent before freeze"
+    },
+    {
+      "id": "final_mixed_090",
+      "field": "intended_meaning",
+      "before": "请列出所有品牌与品类组合中，其在售商品的销售价格分布偏态（Skewness）估算值（使用三阶中心矩公式：N·Σ(x_i−x̄)³/((N−1)(N−2)·s³)，保留4位小数），仅包含商品数不少于20个的组合，按偏态绝对值升序排列，最多返回100行。 主排序值相同时，再按品牌、品类升序。",
+      "after": "请列出所有品牌与品类组合中，其在售商品的销售价格分布偏态（Skewness）估算值（使用三阶中心矩公式：N·Σ(x_i−x̄)³/((N−1)(N−2)·s³)，保留4位小数），仅包含商品数不少于20个的组合，按偏态绝对值升序排列，最多返回100行。 主排序值相同时，再按品牌、品类升序。 x为商品标价，s为样本标准差；只纳入样本标准差大于0的组合。",
+      "reason": "Synchronize authoring intent before freeze"
+    },
+    {
+      "id": "final_mixed_091",
+      "field": "intended_meaning",
+      "before": "列出所有退款原因及其对应的已批准退款金额总和，按金额从高到低排序，仅返回退款原因和金额两列。",
+      "after": "列出所有退款原因及其对应的已批准退款金额总和，按金额从高到低排序，仅返回退款原因和金额两列。 以上排序相同时，再按退款原因升序。",
+      "reason": "Synchronize authoring intent before freeze"
+    },
+    {
+      "id": "final_mixed_093",
+      "field": "intended_meaning",
+      "before": "查询退款状态为‘已批准’的退款中，各退款原因的退款金额占比（占全部已批准退款总额的比例），保留四位小数，按占比从高到低排序，仅返回退款原因和占比两列。",
+      "after": "查询退款状态为‘已批准’的退款中，各退款原因的退款金额占比（占全部已批准退款总额的比例），保留四位小数，按占比从高到低排序，仅返回退款原因和占比两列。 以上排序相同时，再按退款原因升序。",
+      "reason": "Synchronize authoring intent before freeze"
+    },
+    {
+      "id": "final_mixed_096",
+      "field": "intended_meaning",
+      "before": "查询退款日期在2026年9月1日至2026年9月12日之间（含首尾）的所有已批准退款，按退款日期分组统计每日退款金额总和，仅返回日期和金额两列，并按日期升序排列。",
+      "after": "看2026年9月1日至12日已批准退款的日金额和该期间截至当日的累计金额，只列有退款的日期。返回日期、当日金额、期间累计金额，按日期升序。",
+      "reason": "Synchronize authoring intent before freeze"
+    },
+    {
+      "id": "final_mixed_098",
+      "field": "intended_meaning",
+      "before": "统计全部状态退款记录的原因中出现次数最多的前3个原因及其对应退款笔数，仅返回退款原因和笔数两列，按笔数降序排列。",
+      "after": "不限时间，退款申请原因中，拒绝笔数最多的前3个原因是什么？返回原因、拒绝笔数、该原因全部状态退款记录数，按拒绝笔数降序、原因升序。",
+      "reason": "Synchronize authoring intent before freeze"
+    },
+    {
+      "id": "final_mixed_125",
+      "field": "intended_meaning",
+      "before": "列出所有VIP用户中从未使用过微信支付的用户，返回user_id、user_name、city、is_vip，按city升序、user_id升序排列，最多100行。",
+      "after": "列出所有VIP用户中从未有任何状态微信支付方式订单记录的用户，返回user_id、user_name、city、is_vip，按city升序、user_id升序排列，最多100行。",
+      "reason": "Synchronize authoring intent before freeze"
+    },
+    {
+      "id": "final_mixed_126",
+      "field": "intended_meaning",
+      "before": "找出所有在2026年9月12日前注册但从未下单、也从未被退款关联过的用户，返回user_id、user_name、register_date，按register_date降序排列，最多100行。 主排序值相同时，再按用户ID升序。",
+      "after": "列出2026年9月12日前注册、有订单但所有订单都为cancelled或unpaid的用户。只返回用户ID、姓名、注册日期，按注册日期降序、用户ID升序，最多100人。",
+      "reason": "Synchronize authoring intent before freeze"
+    },
+    {
+      "id": "final_mixed_134",
+      "field": "intended_meaning",
+      "before": "帮我找出2026年9月12日以前注册、到现在却一条订单记录也没有的用户。只列姓名和注册日期，先注册的在前，最多100条。 主排序值相同时，再按用户姓名升序。",
+      "after": "帮我按城市看看，2026年9月12日以前注册的用户里，到现在一条订单记录都没有的占多少？只给我城市和占比，保留四位小数，按城市升序。",
+      "reason": "Synchronize authoring intent before freeze"
+    },
+    {
+      "id": "final_mixed_135",
+      "field": "intended_meaning",
+      "before": "成都市用户在2026年9月11日和12日这两天的已批准退款，各个退款原因分别退了多少钱？给我原因和总金额，金额保留两位，退得多的排前面。",
+      "after": "成都市用户在2026年9月11日和12日这两天的已批准退款，各个退款原因分别退了多少钱？给我原因和总金额，金额保留两位，退得多的排前面。 以上排序相同时，再按退款原因升序。",
+      "reason": "Synchronize authoring intent before freeze"
+    },
+    {
+      "id": "final_mixed_136",
+      "field": "intended_meaning",
+      "before": "食品生鲜里，2026年9月12日以前上架而且现在还在卖的商品有哪些？列商品名、品牌、上架日期和标价，先按上架日期从早到晚，同日标价从高到低，最多100条。",
+      "after": "食品生鲜里，2026年9月12日以前上架而且现在还在卖的商品有哪些？列商品名、品牌、上架日期和标价，先按上架日期从早到晚，同日标价从高到低，最多100条。 以上排序相同时，再按商品ID升序。",
+      "reason": "Synchronize authoring intent before freeze"
+    },
+    {
+      "id": "final_mixed_140",
+      "field": "intended_meaning",
+      "before": "2026年9月12日因为描述不符申请、并且已经批准的退款有哪些？给我退款单号、退款金额、退款日期和原订单实付金额，金额保留两位，退款金额大的在前，最多100条。 主排序值相同时，再按退款单号升序。",
+      "after": "2026年9月12日记录的、原因为描述不符且已经批准的退款有哪些？给我退款单号、退款金额、退款日期和原订单实付金额，金额保留两位，退款金额大的在前，最多100条。 主排序值相同时，再按退款单号升序。",
+      "reason": "Synchronize authoring intent before freeze"
+    },
+    {
+      "id": "final_mixed_148",
+      "field": "intended_meaning",
+      "before": "最近发生且已批准的退款，按原因各退了多少钱？只返回原因和总金额，金额保留2位，按原因升序，最多100行。\n预设单slot补充：2026-09-01 至 2026-09-12",
+      "after": "最近发生且已批准的退款，按原因各有多少笔，平均每笔多少钱？只返回原因、笔数、平均金额，金额保留2位，按原因升序。\n预设单slot补充：2026-09-01 至 2026-09-12",
+      "reason": "Synchronize authoring intent before freeze"
+    }
+  ],
+  "status": "Awaiting final reference execution and novelty review"
+}

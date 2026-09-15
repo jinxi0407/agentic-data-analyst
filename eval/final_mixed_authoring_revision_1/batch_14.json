@@ -1,0 +1,172 @@
+[
+  {
+    "question": "统计各城市用户注册人数，按城市升序排列，返回城市和注册人数两列，最多100行。",
+    "category": "aggregation",
+    "difficulty": "easy",
+    "kind": "time",
+    "intended_meaning": "统计在某个未明示的时间范围内（需澄清）完成注册的用户按城市分组的人数，结果按城市升序排列，仅返回城市和注册人数两列，上限100行。",
+    "simulated_answer": "2026-09-01 至 2026-09-12",
+    "answer_slot": "time",
+    "ambiguity_explanation": "问题未指定注册时间范围，'各城市用户注册人数'可理解为全部历史注册、最近30天、或参考日当月等不同合理区间；该缺失时间范围是唯一未定要素。",
+    "ambiguity_alternatives": [
+      "全部历史注册（自建库起至今）",
+      "最近30天（2026-08-14 至 2026-09-12）"
+    ],
+    "semantic_signature": "users.register_date:count_by_city:order_by_city_asc_limit100",
+    "reference_sql": "SELECT city, COUNT(*) AS register_count FROM users WHERE register_date BETWEEN '2026-09-01' AND '2026-09-12' GROUP BY city ORDER BY city ASC LIMIT 100;",
+    "ordered": true
+  },
+  {
+    "question": "列出所有上架商品中，按类别分组的平均售价与平均成本价，返回类别、平均售价、平均成本价三列，最多100行。",
+    "category": "aggregation",
+    "difficulty": "medium",
+    "kind": "time",
+    "intended_meaning": "统计在某个未明示的上架时间范围内（需澄清）且当前仍为活跃状态的商品，按类别分组计算其平均售价和平均成本价，结果按类别升序排列，仅返回三列，上限100行。",
+    "simulated_answer": "2026-01-01 至 2026-09-12",
+    "answer_slot": "time",
+    "ambiguity_explanation": "问题未限定商品上架时间范围，'所有上架商品'可指全部已上架过的商品（含已下架）、仅当前活跃且上架于本年度的商品、或上架于参考日前N个月内的商品；该时间范围是唯一未定要素。",
+    "ambiguity_alternatives": [
+      "全部已上架商品（launch_date ≤ '2026-09-12'，不限起始）",
+      "2026年1月1日至今上架且is_active=1的商品"
+    ],
+    "semantic_signature": "products.launch_date_category_active_avg_price_cost:order_by_category_asc_limit100",
+    "reference_sql": "SELECT category, ROUND(AVG(list_price), 2) AS avg_list_price, ROUND(AVG(cost_price), 2) AS avg_cost_price FROM products WHERE launch_date BETWEEN '2026-01-01' AND '2026-09-12' AND is_active = 1 GROUP BY category ORDER BY category ASC LIMIT 100;",
+    "ordered": true
+  },
+  {
+    "question": "统计每日有效订单数量，返回日期和订单数量两列，最多100行。",
+    "category": "aggregation",
+    "difficulty": "easy",
+    "kind": "time",
+    "intended_meaning": "统计在某个未明示的时间窗口内（需澄清）每天产生的有效订单（order_status ∈ ('paid','completed','shipped')）数量，结果按日期升序排列，仅返回日期和订单数量两列，上限100行。",
+    "simulated_answer": "2026-08-28 至 2026-09-12",
+    "answer_slot": "time",
+    "ambiguity_explanation": "问题未指定统计日期范围，'每日有效订单数量'可理解为最近15天、整个月份、或参考日所在自然周等不同合理区间；该日期跨度是唯一未定要素。",
+    "ambiguity_alternatives": [
+      "最近15天（2026-08-28 至 2026-09-11）",
+      "2026年9月1日至2026年9月12日"
+    ],
+    "semantic_signature": "orders.order_date:count_valid_daily:order_by_date_asc_limit100",
+    "reference_sql": "SELECT order_date, COUNT(*) AS valid_order_count FROM orders WHERE order_date BETWEEN '2026-08-28' AND '2026-09-12' AND order_status IN ('paid','completed','shipped') GROUP BY order_date ORDER BY order_date ASC LIMIT 100;",
+    "ordered": true
+  },
+  {
+    "question": "分析支付方式构成，统计各支付方式对应的有效订单数量，返回支付方式和订单数量两列，最多100行。",
+    "category": "aggregation",
+    "difficulty": "easy",
+    "kind": "time",
+    "intended_meaning": "统计在某个未明示的时间范围内（需澄清）使用各支付方式产生的有效订单数量，结果按支付方式升序排列，仅返回支付方式和订单数量两列，上限100行。",
+    "simulated_answer": "2026-09-01 至 2026-09-12",
+    "answer_slot": "time",
+    "ambiguity_explanation": "问题未限定时间范围，'支付方式构成'可指全量历史、本月、或最近7天等不同业务常用口径；该时间区间是唯一未定要素。",
+    "ambiguity_alternatives": [
+      "全部历史有效订单（无时间过滤）",
+      "2026年9月1日至2026年9月12日的有效订单"
+    ],
+    "semantic_signature": "orders.payment_method:count_valid_orders_by_time:order_by_payment_method_asc_limit100",
+    "reference_sql": "SELECT payment_method, COUNT(*) AS valid_order_count FROM orders WHERE order_date BETWEEN '2026-09-01' AND '2026-09-12' AND order_status IN ('paid','completed','shipped') GROUP BY payment_method ORDER BY payment_method ASC LIMIT 100;",
+    "ordered": true
+  },
+  {
+    "question": "统计各VIP等级用户的地域分布，返回城市、用户等级和用户数量三列，最多100行。",
+    "category": "aggregation",
+    "difficulty": "medium",
+    "kind": "time",
+    "intended_meaning": "统计在某个未明示的注册时间范围内（需澄清）注册并成为VIP的用户，按城市与用户等级组合分组计数，结果按城市升序、用户等级升序排列，仅返回三列，上限100行。",
+    "simulated_answer": "2025-09-12 至 2026-09-12",
+    "answer_slot": "time",
+    "ambiguity_explanation": "问题未说明VIP用户的注册时间范围，'各VIP等级用户的地域分布'可指全部VIP用户、近一年新注册VIP、或参考日当月新增VIP；该注册时间段是唯一未定要素。",
+    "ambiguity_alternatives": [
+      "全部已注册VIP用户（register_date ≤ '2026-09-12'）",
+      "2025年9月12日至2026年9月12日期间注册的VIP用户"
+    ],
+    "semantic_signature": "users.register_date_is_vip_city_user_level:count:order_by_city_asc_user_level_asc_limit100",
+    "reference_sql": "SELECT city, user_level, COUNT(*) AS user_count FROM users WHERE is_vip = 1 AND register_date BETWEEN '2025-09-12' AND '2026-09-12' GROUP BY city, user_level ORDER BY city ASC, user_level ASC LIMIT 100;",
+    "ordered": true
+  },
+  {
+    "question": "统计各品牌在不同品类中的SKU数量，返回品牌、品类和SKU数量三列，最多100行。",
+    "category": "aggregation",
+    "difficulty": "medium",
+    "kind": "time",
+    "intended_meaning": "统计在某个未明示的上架时间范围内（需澄清）且当前活跃的品牌-品类组合所覆盖的SKU数量（即product_id数量），结果按品牌升序、品类升序排列，仅返回三列，上限100行。",
+    "simulated_answer": "2026-01-01 至 2026-09-12",
+    "answer_slot": "time",
+    "ambiguity_explanation": "问题未限定商品上架时间，'各品牌在不同品类中的SKU数量'可指全部历史SKU、本年度上架SKU、或近半年上架SKU；该上架时间范围是唯一未定要素。",
+    "ambiguity_alternatives": [
+      "全部已上架且is_active=1的SKU",
+      "2026年1月1日之后上架且is_active=1的SKU"
+    ],
+    "semantic_signature": "products.brand_category_launch_date_active_count:order_by_brand_asc_category_asc_limit100",
+    "reference_sql": "SELECT brand, category, COUNT(*) AS sku_count FROM products WHERE launch_date BETWEEN '2026-01-01' AND '2026-09-12' AND is_active = 1 GROUP BY brand, category ORDER BY brand ASC, category ASC LIMIT 100;",
+    "ordered": true
+  },
+  {
+    "question": "统计各城市付费用户数，返回城市和付费用户数两列，最多100行。",
+    "category": "aggregation",
+    "difficulty": "easy",
+    "kind": "time",
+    "intended_meaning": "统计在某个未明示的时间范围内（需澄清）产生过有效订单的城市级付费用户数（COUNT(DISTINCT user_id)），结果按城市升序排列，仅返回城市和付费用户数两列，上限100行。",
+    "simulated_answer": "2026-08-01 至 2026-09-12",
+    "answer_slot": "time",
+    "ambiguity_explanation": "问题未说明付费行为发生的时间范围，'各城市付费用户数'可指全部历史付费用户、最近30天、或8月1日以来等不同合理业务口径；该订单时间区间是唯一未定要素。",
+    "ambiguity_alternatives": [
+      "全部历史有效订单对应的付费用户",
+      "2026年8月1日至2026年9月12日期间下单的付费用户"
+    ],
+    "semantic_signature": "orders.user_id_city:count_distinct_paying_users_by_time:order_by_city_asc_limit100",
+    "reference_sql": "SELECT u.city, COUNT(DISTINCT o.user_id) AS paying_user_count FROM users u INNER JOIN orders o ON u.user_id = o.user_id WHERE o.order_date BETWEEN '2026-08-01' AND '2026-09-12' AND o.order_status IN ('paid','completed','shipped') GROUP BY u.city ORDER BY u.city ASC LIMIT 100;",
+    "ordered": true
+  },
+  {
+    "question": "统计各退款原因对应的批准退款金额，返回退款原因和批准退款金额两列，最多100行。",
+    "category": "aggregation",
+    "difficulty": "easy",
+    "kind": "time",
+    "intended_meaning": "统计在某个未明示的时间范围内（需澄清）发生的、状态为'approved'的退款，按退款原因分组汇总退款金额，结果按退款原因升序排列，仅返回退款原因和批准退款金额两列，上限100行。",
+    "simulated_answer": "2026-09-01 至 2026-09-12",
+    "answer_slot": "time",
+    "ambiguity_explanation": "问题未限定退款发生时间，'各退款原因对应的批准退款金额'可指全部历史批准退款、本月批准退款、或最近7天批准退款；该refund_date区间是唯一未定要素。",
+    "ambiguity_alternatives": [
+      "全部历史已批准退款（refund_date ≤ '2026-09-12'）",
+      "2026年9月1日至2026年9月12日期间批准的退款"
+    ],
+    "semantic_signature": "refunds.refund_reason:sum_approved_by_time:order_by_refund_reason_asc_limit100",
+    "reference_sql": "SELECT refund_reason, ROUND(SUM(refund_amount), 2) AS approved_refund_amount FROM refunds WHERE refund_date BETWEEN '2026-09-01' AND '2026-09-12' AND refund_status = 'approved' GROUP BY refund_reason ORDER BY refund_reason ASC LIMIT 100;",
+    "ordered": true
+  },
+  {
+    "question": "统计各品类商品的销售数量，返回品类和销售数量两列，最多100行。",
+    "category": "aggregation",
+    "difficulty": "medium",
+    "kind": "time",
+    "intended_meaning": "统计在某个未明示的时间范围内（需澄清）产生有效订单的商品行中，按品类分组的总销售数量（SUM(quantity)），结果按品类升序排列，仅返回品类和销售数量两列，上限100行。",
+    "simulated_answer": "2026-08-25 至 2026-09-12",
+    "answer_slot": "time",
+    "ambiguity_explanation": "问题未说明销售行为发生时间，'各品类商品的销售数量'可指全部历史销量、最近14天销量、或参考日所在自然周销量；该order_date区间是唯一未定要素。",
+    "ambiguity_alternatives": [
+      "全部历史有效订单中的销售数量",
+      "2026年8月25日至2026年9月12日期间的销售数量"
+    ],
+    "semantic_signature": "order_items.product_id_category:sum_quantity_by_time:order_by_category_asc_limit100",
+    "reference_sql": "SELECT p.category, SUM(oi.quantity) AS total_quantity FROM order_items oi INNER JOIN orders o ON oi.order_id = o.order_id INNER JOIN products p ON oi.product_id = p.product_id WHERE o.order_date BETWEEN '2026-08-25' AND '2026-09-12' AND o.order_status IN ('paid','completed','shipped') GROUP BY p.category ORDER BY p.category ASC LIMIT 100;",
+    "ordered": true
+  },
+  {
+    "question": "统计各城市订单平均支付金额，返回城市和平均支付金额两列，最多100行。",
+    "category": "aggregation",
+    "difficulty": "medium",
+    "kind": "time",
+    "intended_meaning": "统计在某个未明示的时间范围内（需澄清）各城市产生的有效订单的平均支付金额（AVG(paid_amount)），结果按城市升序排列，仅返回城市和平均支付金额两列，上限100行。",
+    "simulated_answer": "2026-09-05 至 2026-09-12",
+    "answer_slot": "time",
+    "ambiguity_explanation": "问题未限定订单时间范围，'各城市订单平均支付金额'可指全部历史均值、本周均值、或最近8天均值；该order_date区间是唯一未定要素。",
+    "ambiguity_alternatives": [
+      "全部历史有效订单的平均支付金额",
+      "2026年9月5日至2026年9月12日期间有效订单的平均支付金额"
+    ],
+    "semantic_signature": "orders.user_id_city:avg_paid_amount_by_time:order_by_city_asc_limit100",
+    "reference_sql": "SELECT u.city, ROUND(AVG(o.paid_amount), 2) AS avg_paid_amount FROM users u INNER JOIN orders o ON u.user_id = o.user_id WHERE o.order_date BETWEEN '2026-09-05' AND '2026-09-12' AND o.order_status IN ('paid','completed','shipped') GROUP BY u.city ORDER BY u.city ASC LIMIT 100;",
+    "ordered": true
+  }
+]

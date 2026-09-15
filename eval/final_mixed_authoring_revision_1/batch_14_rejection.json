@@ -1,0 +1,5 @@
+{
+  "reason": "1 validation error for Batch\ncases.6.category\n  Input should be 'filtering', 'aggregation', 'top_k', 'time', 'product', 'customer', 'refund', 'join' or 'paraphrase' [type=literal_error, input_value='order', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error",
+  "candidate_calls": 0,
+  "stage": "pre-benchmark authoring format validation"
+}

@@ -1,0 +1,23 @@
+[
+  {
+    "id": "final_mixed_091",
+    "matches": [
+      {
+        "source": "eval/scoped_clarification_cases.json",
+        "id": "scoped-017"
+      },
+      {
+        "source": "eval/scoped_clarification_cases.json",
+        "id": "scoped-037"
+      },
+      {
+        "source": "eval/scoped_clarification_cases.json",
+        "id": "scoped-057"
+      },
+      {
+        "source": "new_mixed",
+        "id": "final_mixed_091"
+      }
+    ]
+  }
+]
