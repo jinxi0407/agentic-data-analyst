@@ -24,9 +24,9 @@ API_HOST = os.getenv("API_HOST", "127.0.0.1")
 API_PORT = int(os.getenv("API_PORT", "8002"))
 API_URL = f"http://{API_HOST}:{API_PORT}"
 
-st.set_page_config(page_title="QueryMate", layout="wide")
-st.title("QueryMate")
-st.caption("支持主动澄清的智能问数系统")
+st.set_page_config(page_title="QueryMate｜问数通", layout="wide")
+st.title("QueryMate｜问数通")
+st.caption("面向业务数据的智能问数与主动澄清系统")
 
 
 def clear_pending():
