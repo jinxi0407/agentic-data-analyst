@@ -4,7 +4,15 @@ from __future__ import annotations
 
 import os
 import json
+from pathlib import Path
+import sys
 from uuid import uuid4
+
+# Streamlit prepends ui/, whose app.py must not shadow the project package.
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) in sys.path:
+    sys.path.remove(str(ROOT))
+sys.path.insert(0, str(ROOT))
 
 import pandas as pd
 import requests
