@@ -8,6 +8,11 @@ from app.agent import entity_context as entities
 
 
 def decision(kind="proceed", slots=None, resolved=None):
+    if resolved is None and kind != "needs_rephrase":
+        return dict(decision=kind, ambiguity_type="none" if kind == "proceed" else "time",
+                    critical_missing_slots=slots or [],
+                    alternatives=["最近7天", "最近30天"] if kind == "clarify" else [],
+                    clarification_question="请给出时间范围" if kind == "clarify" else "")
     return dict(decision=kind, ambiguity_type="none" if kind == "proceed" else "time",
                 known_constraints=[], missing_slots=slots or [],
                 clarification_question="请给出时间范围" if kind == "clarify" else "",
@@ -84,3 +89,32 @@ def test_scoped_api_roundtrip_and_mode(monkeypatch):
     assert client.post("/api/scoped-query",json=request).json()["status"]=="success"
     request["mode"]="direct"
     assert client.post("/api/scoped-query",json=request).status_code==422
+
+
+@pytest.mark.parametrize("changes", [
+    {"critical_missing_slots": []}, {"alternatives": []},
+    {"alternatives": ["最近7天", " 最近7天 "]},
+    {"clarification_question": "  "}, {"ambiguity_type": "none"},
+])
+def test_insufficient_proof_proceeds_unchanged(monkeypatch, changes):
+    value = decision("clarify", ["time"])
+    value.update(changes)
+    monkeypatch.setattr(gate, "generate_text", lambda *a, **kw: json.dumps(value))
+    original = "2026年8月上海市销售额前4名，保留既有筛选"
+    result = gate.run_interactive(original)
+    assert result["status"] == "success"
+    assert result["question"] == original
+    assert result["gate_decision"]["critical_missing_slots"] == []
+    assert result["submitted"].endswith(original)
+
+
+def test_initial_schema_never_rewrites_question(monkeypatch):
+    seen = []
+    def generate(messages, **kwargs):
+        assert "JSON" in messages[0]["content"]
+        seen.append(kwargs["response_format"]["json_schema"]["schema"])
+        return json.dumps(decision())
+    monkeypatch.setattr(gate, "generate_text", generate)
+    gate.run_interactive("问题原文")
+    assert set(seen[0]["properties"]) == {"decision", "critical_missing_slots",
+        "ambiguity_type", "alternatives", "clarification_question"}

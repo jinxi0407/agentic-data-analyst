@@ -1,0 +1,22 @@
+{
+  "purpose": "Self-built synthetic mixed interactive evaluation, not an estimate of live request distribution",
+  "total": 200,
+  "clear": 140,
+  "single_ambiguity": {"time": 20, "metric": 20, "entity_filter": 20},
+  "reference_date": "2026-09-12",
+  "categories": ["filtering", "aggregation", "top_k", "time", "product", "customer", "refund", "join", "paraphrase"],
+  "generation_boundary": "Only after Gate freeze commit. Independent model messages contain this protocol, database schema, existing production business contract and metadata. No Gate code/prompt, diagnostic records or historical failure examples. Preserve input packets and raw generation output.",
+  "novelty": "Before candidate execution, separately compare template and semantic signatures against historical questions. Literal substitutions alone are not new problems. Never use candidate outputs to alter cases.",
+  "clear_policy": "All necessary choices determined by question plus shared business/schema context. Expected action proceed. Unqualified totals may mean all history.",
+  "ambiguity_policy": "Exactly one unresolved material choice; concrete intended value and a short one-slot simulated answer frozen before execution. Explicit known constraints remain unchanged. No riddles or adversarial wording.",
+  "ground_truth": "Independently reviewed read-only reference SQL executed on the unchanged MySQL snapshot. Preserve valid empty results. Freeze questions, answers, SQL, labels, difficulty, results and hashes before either candidate runs.",
+  "candidate_inputs": "Question and reference date only. ON may receive the frozen single-slot answer only after asking for that slot. No reference SQL, intended meaning, ground truth or should_clarify label in candidate requests. No answer for clear cases or unrelated questions.",
+  "comparison": "Same current production engine, database, model configuration, SQL temperature, retry, metadata, scorer and four-worker concurrency. OFF bypasses Gate; ON adds Gate and at most one answer turn. This compares interactive task completion, not equal-information model ability.",
+  "run_policy": "Run each mode once; immutable start/completion logs, no repeated completed cases, no post-result changes. Interrupted in-flight calls require explicit accounting rather than silent rerun.",
+  "strict_interactive_success": "Among all 60 ambiguous cases: correct slot clarification, eligible frozen answer actually supplied, final status success and SQL result equals ground truth. Denominator remains 60.",
+  "unnecessary_clarification": "Clear cases with actual clarification / 140",
+  "missed_clarification": "Ambiguous cases without actual clarification / 60; separately report service/validation errors",
+  "latency": "Wall-clock system time across all performed turns, including actual Gate and SQL repair calls, excluding synthetic user thinking and queue wait. Report mean, median, nearest-rank P95.",
+  "model_calls": "Existing capture_usage count including format retries and execution retries; SDK internal wire retries not separately visible",
+  "release": "Local freeze commit only; no new tag, no resume metric changes, no push without confirmation"
+}

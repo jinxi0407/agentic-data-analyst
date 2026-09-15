@@ -1,0 +1,12 @@
+{"id": "final_release_300_001", "state": "started", "time": 1789404121.352776}
+{"id": "final_release_300_002", "state": "started", "time": 1789404121.353108}
+{"id": "final_release_300_003", "state": "started", "time": 1789404121.353287}
+{"id": "final_release_300_004", "state": "started", "time": 1789404121.353465}
+{"id": "final_release_300_002", "state": "complete", "payload": {"question": "以 2026-09-12 为今天，2026年1月下半月一共有多少成交额？", "sql": "", "result": [], "trace": [], "retry_count": 0, "needs_clarification": false, "status": "system_error", "error": "澄清服务未完成，未执行查询。", "latency_ms": 300234.95}, "usage": [{"input_tokens": null, "output_tokens": null, "status": "transport_error"}], "elapsed_s": 300.235344}
+{"id": "final_release_300_003", "state": "complete", "payload": {"question": "以 2026-09-12 为今天，北辰现在卖的商品里，最贵的4款是什么？同价按商品ID排。", "sql": "", "result": [], "trace": [], "retry_count": 0, "needs_clarification": false, "status": "system_error", "error": "澄清服务未完成，未执行查询。", "latency_ms": 300235.43}, "usage": [{"input_tokens": null, "output_tokens": null, "status": "transport_error"}], "elapsed_s": 300.235452}
+{"id": "final_release_300_004", "state": "complete", "payload": {"question": "以 2026-09-12 为今天，北辰品牌在售商品中最近上架的前3种是什么？返回商品名称和指标，同值按商品ID升序。", "sql": "", "result": [], "trace": [], "retry_count": 0, "needs_clarification": false, "status": "system_error", "error": "澄清服务未完成，未执行查询。", "latency_ms": 300229.49}, "usage": [{"input_tokens": null, "output_tokens": null, "status": "transport_error"}], "elapsed_s": 300.235446}
+{"id": "final_release_300_001", "state": "complete", "payload": {"question": "以 2026-09-12 为今天，最近168天按自然周统计优惠率，只统计有效订单；返回周和指标，按周升序。", "sql": "", "result": [], "trace": [], "retry_count": 0, "needs_clarification": false, "status": "system_error", "error": "澄清服务未完成，未执行查询。", "latency_ms": 300371.02}, "usage": [{"input_tokens": null, "output_tokens": null, "status": "transport_error"}], "elapsed_s": 300.371153}
+{"id": "final_release_300_005", "state": "started", "time": 1789404421.732641}
+{"id": "final_release_300_006", "state": "started", "time": 1789404421.7336771}
+{"id": "final_release_300_007", "state": "started", "time": 1789404421.735268}
+{"id": "final_release_300_008", "state": "started", "time": 1789404421.736065}

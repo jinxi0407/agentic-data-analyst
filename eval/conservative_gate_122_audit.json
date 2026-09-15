@@ -1,0 +1,4911 @@
+{
+  "counts": {
+    "B": 116,
+    "C": 4,
+    "A": 2
+  },
+  "review": "Offline human-style contract review, no new LLM calls, no Ground Truth used to decide ambiguity. C is output evidence failure; these four original cases themselves are resolvable. Classification is reviewer judgment, not new frozen labels.",
+  "separate_non_trigger_errors": {
+    "invalid_output": 37,
+    "needs_rephrase": 3
+  },
+  "source_sha256": "09810a185b252293876c6aa597c68a3ef4ed1967508027af88e02bfe7845bd92",
+  "cases": [
+    {
+      "case_id": "final_release_300_002",
+      "question": "以 2026-09-12 为今天，2026年1月下半月一共有多少成交额？",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "2026年1月下半月"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "2026年1月下半月具体指哪段时间？请明确起止日期（例如：2026-01-16 至 2026-01-31）。",
+        "options": [
+          "2026-01-16 至 2026-01-31",
+          "2026-01-15 至 2026-01-31"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "已明确年月和上/下半月，通常日历含义可确定边界；未表达自定义账期，不应制造15/16日之争。"
+    },
+    {
+      "case_id": "final_release_300_003",
+      "question": "以 2026-09-12 为今天，北辰现在卖的商品里，最贵的4款是什么？同价按商品ID排。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "entity",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "metric",
+            "quote": "最贵的4款"
+          },
+          {
+            "slot": "ranking",
+            "quote": "同价按商品ID排"
+          }
+        ],
+        "missing_slots": [
+          "entity"
+        ],
+        "clarification_question": "请问‘北辰’是指哪个城市？当前数据中已验证的城市包括：上海、北京、南京、广州、成都、杭州、武汉、西安。",
+        "options": [
+          "上海",
+          "北京",
+          "南京",
+          "广州",
+          "成都",
+          "杭州",
+          "武汉",
+          "西安"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "商品目录上下文支持按原文品牌字面值过滤；不应强行改问城市或换实体。数据库无匹配也是合法空结果；最近上架Top-K指定了排序而非额外时间窗口。"
+    },
+    {
+      "case_id": "final_release_300_004",
+      "question": "以 2026-09-12 为今天，北辰品牌在售商品中最近上架的前3种是什么？返回商品名称和指标，同值按商品ID升序。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "metric",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "filter",
+            "quote": "北辰品牌"
+          },
+          {
+            "slot": "filter",
+            "quote": "在售商品"
+          },
+          {
+            "slot": "ranking",
+            "quote": "最近上架的前3种"
+          },
+          {
+            "slot": "metric",
+            "quote": "返回商品名称和指标"
+          },
+          {
+            "slot": "ranking",
+            "quote": "同值按商品ID升序"
+          }
+        ],
+        "missing_slots": [
+          "metric"
+        ],
+        "clarification_question": "请问‘指标’具体指什么？例如：上架日期、商品ID、销量、销售额、库存量等。",
+        "options": [
+          "上架日期",
+          "商品ID",
+          "销量",
+          "销售额",
+          "库存量"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "最近上架前K已通过launch_date指定排序和所返回指标；不应再索要额外最近N天或换成销量。"
+    },
+    {
+      "case_id": "final_release_300_005",
+      "question": "以 2026-09-12 为今天，武汉市的最近一次用户注册日期是多少？",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "2026-09-12"
+          },
+          {
+            "slot": "entity",
+            "quote": "武汉市"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "请问‘最近一次’是指：A) 所有历史中距今最近的一次（即最大 register_date）；B) 过去7天内最近的一次；C) 过去30天内最近的一次；D) 其他具体时间范围？",
+        "options": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "最近一次注册日期是register_date的最大值，不是缺少滚动时间窗口。"
+    },
+    {
+      "case_id": "final_release_300_007",
+      "question": "以 2026-09-12 为今天，星禾现在卖的商品里，最贵的4款是什么？同价按商品ID排。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "metric",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "filter",
+            "quote": "星禾现在卖的商品里"
+          },
+          {
+            "slot": "metric",
+            "quote": "最贵的4款"
+          },
+          {
+            "slot": "ranking",
+            "quote": "同价按商品ID排"
+          }
+        ],
+        "missing_slots": [
+          "metric"
+        ],
+        "clarification_question": "问题中‘最贵的’是指商品的标价（list_price）、成本价（cost_price）还是当前在售的最高成交单价？请明确具体指标。",
+        "options": [
+          "list_price",
+          "cost_price",
+          "最高成交单价（即 order_items.unit_price 的最大值）"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "在售商品目录中的价格由list_price显示价格语义确定；成本价或交易行价格不是同一请求的合理替代。"
+    },
+    {
+      "case_id": "final_release_300_008",
+      "question": "以 2026-09-12 为今天，最近123天付费用户数最多的用户等级前3名是什么？只统计有效订单，返回维度和指标，同值按维度升序。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近123天"
+          },
+          {
+            "slot": "metric",
+            "quote": "付费用户数"
+          },
+          {
+            "slot": "dimension",
+            "quote": "用户等级"
+          },
+          {
+            "slot": "limit",
+            "quote": "前3名"
+          },
+          {
+            "slot": "filter",
+            "quote": "只统计有效订单"
+          },
+          {
+            "slot": "ranking",
+            "quote": "同值按维度升序"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "‘最近123天’是指从2026-09-12起向前推123个自然日（即2026-05-12至2026-09-12），还是其他定义？",
+        "options": [
+          "2026-05-12至2026-09-12",
+          "其他范围"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "问题已给出最近N天或近半年及参考日，可按现有DATE_SUB日/月规则处理；不应另造营业日、订单活跃日或完整自然月解释。"
+    },
+    {
+      "case_id": "final_release_300_009",
+      "question": "以 2026-09-12 为今天，最近63天按商品品类统计全部订单明细的数量、明细金额和平均成交单价。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近63天"
+          },
+          {
+            "slot": "dimension",
+            "quote": "按商品品类统计"
+          },
+          {
+            "slot": "metric",
+            "quote": "全部订单明细的数量、明细金额和平均成交单价"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "最近63天是指从2026-09-12起向前推63个自然日（即2026-07-11至2026-09-12），还是指最近完成的63个订单日（按order_date去重后倒序取63天）？",
+        "options": [
+          "自然日区间（2026-07-11至2026-09-12）",
+          "订单日去重后最近63天"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "问题已给出最近N天或近半年及参考日，可按现有DATE_SUB日/月规则处理；不应另造营业日、订单活跃日或完整自然月解释。"
+    },
+    {
+      "case_id": "final_release_300_010",
+      "question": "以 2026-09-12 为今天，南京市的最近一次用户注册日期是多少？",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "2026-09-12"
+          },
+          {
+            "slot": "entity",
+            "quote": "南京市"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "请问‘最近一次’是指：A) 最近7天内注册的用户中最早的注册日期；B) 所有南京市用户中最新的注册日期；C) 其他具体时间范围（请说明）？",
+        "options": [
+          "A",
+          "B",
+          "C"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "最近一次注册日期是register_date的最大值，不是缺少滚动时间窗口。"
+    },
+    {
+      "case_id": "final_release_300_018",
+      "question": "以 2026-09-12 为今天，手机数码的在售商品平均标价毛利率是多少？",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "metric",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "2026-09-12"
+          },
+          {
+            "slot": "entity",
+            "quote": "手机数码"
+          },
+          {
+            "slot": "filter",
+            "quote": "在售商品"
+          }
+        ],
+        "missing_slots": [
+          "metric"
+        ],
+        "clarification_question": "请问‘毛利率’是指（list_price - cost_price）/ list_price 还是（list_price - cost_price）/ cost_price？",
+        "options": [
+          "（list_price - cost_price）/ list_price",
+          "（list_price - cost_price）/ cost_price"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "平均商品标价毛利率指按商品的标价减成本占标价再求平均；成本利润率或整体加权口径不是原文要求。此判断基于通常指标含义，不宣称生产字典显式定义了该指标。"
+    },
+    {
+      "case_id": "final_release_300_021",
+      "question": "以 2026-09-12 为今天，最近24天按订单支付方式统计approved退款订单数和退款金额。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近24天"
+          },
+          {
+            "slot": "dimension",
+            "quote": "按订单支付方式统计"
+          },
+          {
+            "slot": "metric",
+            "quote": "approved退款订单数和退款金额"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "最近24天是指从2026-09-12往前推24天（含首尾）的完整日历区间，即2026-08-20至2026-09-12，还是其他定义？",
+        "options": [
+          "2026-08-20至2026-09-12（含）",
+          "2026-08-19至2026-09-11（含）",
+          "其他，请明确起止日期"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "问题已给出最近N天或近半年及参考日，可按现有DATE_SUB日/月规则处理；不应另造营业日、订单活跃日或完整自然月解释。"
+    },
+    {
+      "case_id": "final_release_300_024",
+      "question": "以 2026-09-12 为今天，最近231天按商品品类统计全部订单明细的数量、明细金额和平均成交单价。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近231天"
+          },
+          {
+            "slot": "dimension",
+            "quote": "按商品品类统计"
+          },
+          {
+            "slot": "metric",
+            "quote": "全部订单明细的数量、明细金额和平均成交单价"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "请问‘最近231天’是指从2026-09-12起向前推231个自然日（即起始日为2026-01-15），还是指包含2026-09-12在内的最近231个日历日（即起始日为2026-01-16）？",
+        "options": [
+          "2026-01-15 至 2026-09-12",
+          "2026-01-16 至 2026-09-12"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "问题已给出最近N天或近半年及参考日，可按现有DATE_SUB日/月规则处理；不应另造营业日、订单活跃日或完整自然月解释。"
+    },
+    {
+      "case_id": "final_release_300_029",
+      "question": "以 2026-09-12 为今天，最近24天按城市统计使用过的支付方式数和有效订单平均实付金额。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近24天"
+          },
+          {
+            "slot": "dimension",
+            "quote": "按城市统计"
+          },
+          {
+            "slot": "metric",
+            "quote": "使用过的支付方式数"
+          },
+          {
+            "slot": "metric",
+            "quote": "有效订单平均实付金额"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "最近24天是指从2026-09-12往前推24天（即2026-08-20至2026-09-12），还是指过去完整的24个自然日（即2026-08-19至2026-09-11）？",
+        "options": [
+          "2026-08-20 至 2026-09-12（含首尾，共24天）",
+          "2026-08-19 至 2026-09-11（过去24个自然日）"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "问题已给出最近N天或近半年及参考日，可按现有DATE_SUB日/月规则处理；不应另造营业日、订单活跃日或完整自然月解释。"
+    },
+    {
+      "case_id": "final_release_300_032",
+      "question": "以 2026-09-12 为今天，近半年手机数码通过的退款都是什么原因，各多少笔多少钱？",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "近半年"
+          },
+          {
+            "slot": "filter",
+            "quote": "手机数码"
+          },
+          {
+            "slot": "filter",
+            "quote": "通过的退款"
+          },
+          {
+            "slot": "metric",
+            "quote": "都是什么原因，各多少笔多少钱"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "近半年是指从2026-09-12起向前推180天（即2026-03-16至2026-09-12），还是指最近完整的6个日历月（即2026-03-01至2026-08-31）？",
+        "options": [
+          "180天（2026-03-16至2026-09-12）",
+          "最近6个完整日历月（2026-03-01至2026-08-31）"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "问题已给出最近N天或近半年及参考日，可按现有DATE_SUB日/月规则处理；不应另造营业日、订单活跃日或完整自然月解释。"
+    },
+    {
+      "case_id": "final_release_300_034",
+      "question": "以 2026-09-12 为今天，最近111天按城市统计使用过的支付方式数和有效订单平均实付金额。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近111天"
+          },
+          {
+            "slot": "dimension",
+            "quote": "按城市统计"
+          },
+          {
+            "slot": "metric",
+            "quote": "使用过的支付方式数"
+          },
+          {
+            "slot": "metric",
+            "quote": "有效订单平均实付金额"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "最近111天是指从2026-09-12起向前推111个自然日（即2026-05-24至2026-09-12），还是其他定义？",
+        "options": [
+          "2026-05-24至2026-09-12",
+          "其他起止日期"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "问题已给出最近N天或近半年及参考日，可按现有DATE_SUB日/月规则处理；不应另造营业日、订单活跃日或完整自然月解释。"
+    },
+    {
+      "case_id": "final_release_300_039",
+      "question": "以 2026-09-12 为今天，最近303天按品牌统计approved退款笔数、退款金额和涉及商品数。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近303天"
+          },
+          {
+            "slot": "dimension",
+            "quote": "按品牌统计"
+          },
+          {
+            "slot": "metric",
+            "quote": "approved退款笔数"
+          },
+          {
+            "slot": "metric",
+            "quote": "退款金额"
+          },
+          {
+            "slot": "metric",
+            "quote": "涉及商品数"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "‘最近303天’是指从参考日期2026-09-12起向前推303个自然日（即2025-11-14至2026-09-12），还是另有起止日期？",
+        "options": [
+          "2025-11-14至2026-09-12",
+          "其他指定起止日期"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "问题已给出最近N天或近半年及参考日，可按现有DATE_SUB日/月规则处理；不应另造营业日、订单活跃日或完整自然月解释。"
+    },
+    {
+      "case_id": "final_release_300_044",
+      "question": "以 2026-09-12 为今天，松果品牌在售商品中最近上架的前3种是什么？返回商品名称和指标，同值按商品ID升序。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "metric",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "filter",
+            "quote": "松果品牌"
+          },
+          {
+            "slot": "filter",
+            "quote": "在售商品"
+          },
+          {
+            "slot": "ranking",
+            "quote": "最近上架的前3种"
+          },
+          {
+            "slot": "dimension",
+            "quote": "返回商品名称和指标"
+          },
+          {
+            "slot": "ranking",
+            "quote": "同值按商品ID升序"
+          }
+        ],
+        "missing_slots": [
+          "metric"
+        ],
+        "clarification_question": "请问‘指标’具体指什么？例如：上架日期、商品ID、销量、销售额、库存量等。",
+        "options": [
+          "上架日期",
+          "商品ID",
+          "销量",
+          "销售额",
+          "库存量"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "最近上架前K已通过launch_date指定排序和所返回指标；不应再索要额外最近N天或换成销量。"
+    },
+    {
+      "case_id": "final_release_300_045",
+      "question": "以 2026-09-12 为今天，最近120天西安市各用户等级的付费用户数、有效订单数和销售额是多少？",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近120天"
+          },
+          {
+            "slot": "entity",
+            "quote": "西安市"
+          },
+          {
+            "slot": "dimension",
+            "quote": "各用户等级"
+          },
+          {
+            "slot": "metric",
+            "quote": "付费用户数"
+          },
+          {
+            "slot": "metric",
+            "quote": "有效订单数"
+          },
+          {
+            "slot": "metric",
+            "quote": "销售额"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "‘最近120天’是指从2026-09-12起向前推120个自然日（即2026-05-16至2026-09-12），还是指包含2026-09-12在内的最近120个完整日历日（需确认起止日期）？",
+        "options": [
+          "2026-05-16 至 2026-09-12（含）",
+          "其他明确起止日期"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "问题已给出最近N天或近半年及参考日，可按现有DATE_SUB日/月规则处理；不应另造营业日、订单活跃日或完整自然月解释。"
+    },
+    {
+      "case_id": "final_release_300_049",
+      "question": "以 2026-09-12 为今天，最近183天按城市统计使用过的支付方式数和有效订单平均实付金额。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近183天"
+          },
+          {
+            "slot": "dimension",
+            "quote": "按城市统计"
+          },
+          {
+            "slot": "metric",
+            "quote": "使用过的支付方式数"
+          },
+          {
+            "slot": "metric",
+            "quote": "有效订单平均实付金额"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "最近183天是指从2026-09-12起向前推183个自然日（即2026-03-14至2026-09-12），还是指包含2026-09-12在内的最近183个日历日（即2026-03-13至2026-09-12）？",
+        "options": [
+          "2026-03-14 至 2026-09-12",
+          "2026-03-13 至 2026-09-12"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "问题已给出最近N天或近半年及参考日，可按现有DATE_SUB日/月规则处理；不应另造营业日、订单活跃日或完整自然月解释。"
+    },
+    {
+      "case_id": "final_release_300_050",
+      "question": "以 2026-09-12 为今天，2026年2月使用alipay支付的优惠金额占原始金额比例是多少？包含所有订单状态。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "2026年2月"
+          },
+          {
+            "slot": "filter",
+            "quote": "使用alipay支付"
+          },
+          {
+            "slot": "metric",
+            "quote": "优惠金额占原始金额比例"
+          },
+          {
+            "slot": "filter",
+            "quote": "包含所有订单状态"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "请问‘2026年2月’是指2026年2月1日至2026年2月29日（完整日历月），还是其他起止范围？",
+        "options": [
+          "2026-02-01 至 2026-02-29",
+          "其他，请说明"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "C",
+      "reason": "Gate提出2026-02-29这个不存在的日期。原问题的2026年2月本可按自然月处理。"
+    },
+    {
+      "case_id": "final_release_300_057",
+      "question": "以 2026-09-12 为今天，西安市的最近一次用户注册日期是多少？",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "entity",
+            "quote": "西安市"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "请问‘最近一次’是指：A) 所有历史中距今最近的一次（即最大 register_date）；B) 过去7天内最近的一次；C) 过去30天内最近的一次；D) 其他明确时间范围？",
+        "options": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "最近一次注册日期是register_date的最大值，不是缺少滚动时间窗口。"
+    },
+    {
+      "case_id": "final_release_300_058",
+      "question": "以 2026-09-12 为今天，青橙现在卖的商品里，最贵的4款是什么？同价按商品ID排。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "metric",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "filter",
+            "quote": "青橙现在卖的商品里"
+          },
+          {
+            "slot": "limit",
+            "quote": "最贵的4款"
+          },
+          {
+            "slot": "ranking",
+            "quote": "同价按商品ID排"
+          }
+        ],
+        "missing_slots": [
+          "metric"
+        ],
+        "clarification_question": "最贵是指商品的哪个价格？可选：标价（list_price）、成本价（cost_price）、最近成交单价（unit_price）。",
+        "options": [
+          "list_price",
+          "cost_price",
+          "unit_price"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "在售商品目录中的价格由list_price显示价格语义确定；成本价或交易行价格不是同一请求的合理替代。"
+    },
+    {
+      "case_id": "final_release_300_059",
+      "question": "以 2026-09-12 为今天，成都市的最近一次用户注册日期是多少？",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "entity",
+            "quote": "成都市"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "请问‘最近一次’是指：A) 所有历史中距离2026-09-12最近的一次（即最大register_date ≤ '2026-09-12'）；B) 仅过去7天内？",
+        "options": [
+          "A",
+          "B"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "最近一次注册日期是register_date的最大值，不是缺少滚动时间窗口。"
+    },
+    {
+      "case_id": "final_release_300_060",
+      "question": "以 2026-09-12 为今天，云栖品牌在售商品中单件标价毛利最大的前6种是什么？返回商品名称和指标，同值按商品ID升序。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "metric",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "filter",
+            "quote": "云栖品牌"
+          },
+          {
+            "slot": "filter",
+            "quote": "在售商品"
+          },
+          {
+            "slot": "limit",
+            "quote": "前6种"
+          },
+          {
+            "slot": "dimension",
+            "quote": "商品名称和指标"
+          },
+          {
+            "slot": "ranking",
+            "quote": "同值按商品ID升序"
+          }
+        ],
+        "missing_slots": [
+          "metric"
+        ],
+        "clarification_question": "‘单件标价毛利’是指（list_price - cost_price）还是其他定义？",
+        "options": [
+          "list_price - cost_price",
+          "其他定义"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "单件标价毛利明确指list_price-cost_price；仅问是否如此并未证明关键slot缺失。"
+    },
+    {
+      "case_id": "final_release_300_064",
+      "question": "以 2026-09-12 为今天，最近108天按用户等级同时统计有效订单销售额、approved退款金额和净收入；订单与退款先按用户独立汇总。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近108天"
+          },
+          {
+            "slot": "dimension",
+            "quote": "按用户等级"
+          },
+          {
+            "slot": "metric",
+            "quote": "有效订单销售额"
+          },
+          {
+            "slot": "metric",
+            "quote": "approved退款金额"
+          },
+          {
+            "slot": "metric",
+            "quote": "净收入"
+          },
+          {
+            "slot": "entity",
+            "quote": "订单与退款先按用户独立汇总"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "最近108天是指从2026-09-12起向前推108个自然日（即2026-05-27至2026-09-12），还是指包含2026-09-12在内的最近108个日历日？",
+        "options": [
+          "从2026-09-12起向前推108个自然日（含首尾）",
+          "从2026-09-12起向前推107个自然日（即2026-05-27至2026-09-12）"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "问题已给出最近N天或近半年及参考日，可按现有DATE_SUB日/月规则处理；不应另造营业日、订单活跃日或完整自然月解释。"
+    },
+    {
+      "case_id": "final_release_300_066",
+      "question": "以 2026-09-12 为今天，最近144天先汇总每位用户的有效订单消费，再找出消费高于所在省份用户平均值且至少有3笔订单的用户；返回省份、用户名称、订单数和消费额。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近144天"
+          },
+          {
+            "slot": "metric",
+            "quote": "每位用户的有效订单消费"
+          },
+          {
+            "slot": "filter",
+            "quote": "消费高于所在省份用户平均值"
+          },
+          {
+            "slot": "filter",
+            "quote": "至少有3笔订单"
+          },
+          {
+            "slot": "dimension",
+            "quote": "返回省份、用户名称、订单数和消费额"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "最近144天是指从2026-09-12起向前推144个自然日（即2026-04-22至2026-09-12），还是指最近144个营业日（需排除周末/节假日）？",
+        "options": [
+          "144个自然日",
+          "144个营业日"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "问题已给出最近N天或近半年及参考日，可按现有DATE_SUB日/月规则处理；不应另造营业日、订单活跃日或完整自然月解释。"
+    },
+    {
+      "case_id": "final_release_300_067",
+      "question": "以 2026-09-12 为今天，最近272天找出每个品牌中有效订单明细销售额最高的商品，返回品牌、商品名称和销售额；并列按商品ID升序。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近272天"
+          },
+          {
+            "slot": "metric",
+            "quote": "每个品牌中有效订单明细销售额最高的商品"
+          },
+          {
+            "slot": "dimension",
+            "quote": "返回品牌、商品名称和销售额"
+          },
+          {
+            "slot": "ranking",
+            "quote": "并列按商品ID升序"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "‘最近272天’是指从2026-09-12起向前推272个自然日（即2026-09-12至2025-12-15），还是指包含2026-09-12在内的最近272个日历日（即2025-12-14至2026-09-12）？",
+        "options": [
+          "2025-12-15 至 2026-09-12",
+          "2025-12-14 至 2026-09-12"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "问题已给出最近N天或近半年及参考日，可按现有DATE_SUB日/月规则处理；不应另造营业日、订单活跃日或完整自然月解释。"
+    },
+    {
+      "case_id": "final_release_300_068",
+      "question": "以 2026-09-12 为今天，美妆个护各品牌的商品数、在售商品数和在售率是多少？",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "metric",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "filter",
+            "quote": "美妆个护"
+          },
+          {
+            "slot": "dimension",
+            "quote": "各品牌"
+          }
+        ],
+        "missing_slots": [
+          "metric"
+        ],
+        "clarification_question": "请问‘商品数’、‘在售商品数’和‘在售率’是否分别指：美妆个护类目下各品牌的总产品数、is_active=1的产品数、以及（is_active=1的产品数 / 总产品数）？",
+        "options": [
+          "是",
+          "否"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "商品总数、is_active在售数及两者比例已由商品粒度和schema确定；无须重复确认。"
+    },
+    {
+      "case_id": "final_release_300_069",
+      "question": "以 2026-09-12 为今天，最近303天按订单支付方式统计approved退款订单数和退款金额。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近303天"
+          },
+          {
+            "slot": "dimension",
+            "quote": "按订单支付方式统计"
+          },
+          {
+            "slot": "metric",
+            "quote": "approved退款订单数和退款金额"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "请问‘最近303天’是指从2026-09-12起向前推303个自然日（即2025-11-14至2026-09-12），还是另有指定的起止日期？",
+        "options": [
+          "2025-11-14至2026-09-12",
+          "其他起止日期"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "问题已给出最近N天或近半年及参考日，可按现有DATE_SUB日/月规则处理；不应另造营业日、订单活跃日或完整自然月解释。"
+    },
+    {
+      "case_id": "final_release_300_073",
+      "question": "以 2026-09-12 为今天，最近63天按城市统计使用过的支付方式数和有效订单平均实付金额。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近63天"
+          },
+          {
+            "slot": "dimension",
+            "quote": "按城市统计"
+          },
+          {
+            "slot": "metric",
+            "quote": "使用过的支付方式数"
+          },
+          {
+            "slot": "metric",
+            "quote": "有效订单平均实付金额"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "最近63天是指从2026-09-12起向前推63个自然日（即2026-07-11至2026-09-12），还是指最近完成的63个日历日（可能含空日）？请明确起止日期。",
+        "options": [
+          "2026-07-11至2026-09-12",
+          "其他明确起止日期"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "问题已给出最近N天或近半年及参考日，可按现有DATE_SUB日/月规则处理；不应另造营业日、订单活跃日或完整自然月解释。"
+    },
+    {
+      "case_id": "final_release_300_077",
+      "question": "以 2026-09-12 为今天，最近96天先汇总每位用户的有效订单消费，再找出消费高于所在省份用户平均值且至少有3笔订单的用户；返回省份、用户名称、订单数和消费额。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近96天"
+          },
+          {
+            "slot": "metric",
+            "quote": "每位用户的有效订单消费"
+          },
+          {
+            "slot": "filter",
+            "quote": "消费高于所在省份用户平均值"
+          },
+          {
+            "slot": "filter",
+            "quote": "至少有3笔订单"
+          },
+          {
+            "slot": "dimension",
+            "quote": "返回省份、用户名称、订单数和消费额"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "‘最近96天’是指从2026-09-12起向前推96个自然日（即2026-06-09至2026-09-12），还是指包含2026-09-12在内的最近96个完整日历日（即2026-06-08至2026-09-12）？",
+        "options": [
+          "2026-06-09 至 2026-09-12（含）",
+          "2026-06-08 至 2026-09-12（含）"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "问题已给出最近N天或近半年及参考日，可按现有DATE_SUB日/月规则处理；不应另造营业日、订单活跃日或完整自然月解释。"
+    },
+    {
+      "case_id": "final_release_300_078",
+      "question": "以 2026-09-12 为今天，杭州市的最近一次用户注册日期是多少？",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "2026-09-12"
+          },
+          {
+            "slot": "entity",
+            "quote": "杭州市"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "“最近一次”是指：A) 最近7天内注册的用户中最早的注册日期；B) 所有历史注册用户中最新的注册日期；C) 其他具体时间范围（请说明）？",
+        "options": [
+          "A",
+          "B",
+          "C"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "最近一次注册日期是register_date的最大值，不是缺少滚动时间窗口。"
+    },
+    {
+      "case_id": "final_release_300_080",
+      "question": "以 2026-09-12 为今天，2026年1月上半月一共有多少成交额？",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "2026年1月上半月"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "请问‘2026年1月上半月’具体指哪段时间？例如：1月1日至1月15日，还是1月1日至1月16日？",
+        "options": [
+          "1月1日至1月15日",
+          "1月1日至1月16日"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "已明确年月和上/下半月，通常日历含义可确定边界；未表达自定义账期，不应制造15/16日之争。"
+    },
+    {
+      "case_id": "final_release_300_083",
+      "question": "以 2026-09-12 为今天，最近108天按商品品类分别统计有效订单明细销售额和approved退款金额；两个指标必须先独立聚合再连接。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近108天"
+          },
+          {
+            "slot": "dimension",
+            "quote": "按商品品类分别统计"
+          },
+          {
+            "slot": "metric",
+            "quote": "有效订单明细销售额"
+          },
+          {
+            "slot": "metric",
+            "quote": "approved退款金额"
+          },
+          {
+            "slot": "metric",
+            "quote": "两个指标必须先独立聚合再连接"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "请问‘最近108天’是指从2026-09-12起向前推108个自然日（即2026-05-27至2026-09-12），还是其他起止范围？",
+        "options": [
+          "2026-05-27至2026-09-12",
+          "其他，请说明"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "问题已给出最近N天或近半年及参考日，可按现有DATE_SUB日/月规则处理；不应另造营业日、订单活跃日或完整自然月解释。"
+    },
+    {
+      "case_id": "final_release_300_085",
+      "question": "以 2026-09-12 为今天，广州市的最近一次用户注册日期是多少？",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "entity",
+            "quote": "广州市"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "请问‘最近一次’是指：A) 所有历史中距今最近的一次（即最大 register_date）；B) 从参考日 2026-09-12 往前推的某个具体天数（如最近7天、30天）？",
+        "options": [
+          "A) 所有历史中距今最近的一次",
+          "B) 从参考日 2026-09-12 往前推的某个具体天数"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "最近一次注册日期是register_date的最大值，不是缺少滚动时间窗口。"
+    },
+    {
+      "case_id": "final_release_300_086",
+      "question": "以 2026-09-12 为今天，最近70天按自然周统计优惠率，只统计有效订单；返回周和指标，按周升序。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "metric",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近70天"
+          },
+          {
+            "slot": "time",
+            "quote": "按自然周统计"
+          },
+          {
+            "slot": "filter",
+            "quote": "只统计有效订单"
+          },
+          {
+            "slot": "dimension",
+            "quote": "返回周和指标"
+          },
+          {
+            "slot": "dimension",
+            "quote": "按周升序"
+          }
+        ],
+        "missing_slots": [
+          "metric"
+        ],
+        "clarification_question": "优惠率具体指什么？例如：(1) 订单折扣金额 / 订单总金额（gross_amount）；(2) 订单折扣金额 / 订单实付金额（paid_amount）；(3) 其他定义？",
+        "options": [
+          "订单折扣金额 / 订单总金额（gross_amount）",
+          "订单折扣金额 / 订单实付金额（paid_amount）"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "A",
+      "reason": "优惠率未在当前生产契约中定义；优惠/原价与优惠/实付会产生不同结果。186的反问虽然问错时间，但问题本身仍有未定义的比例口径。"
+    },
+    {
+      "case_id": "final_release_300_087",
+      "question": "以 2026-09-12 为今天，2026年1月使用wechat支付的平均原始金额是多少？包含所有订单状态。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "2026年1月"
+          },
+          {
+            "slot": "filter",
+            "quote": "使用wechat支付"
+          },
+          {
+            "slot": "metric",
+            "quote": "平均原始金额"
+          },
+          {
+            "slot": "filter",
+            "quote": "包含所有订单状态"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "请问‘2026年1月’是指2026-01-01至2026-01-31这个完整日历月，还是其他起止日期？",
+        "options": [
+          "2026-01-01至2026-01-31",
+          "其他（请明确起止日期）"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "已明确自然月或年底截止点，日历边界可确定，不需要重新索要起止日期。"
+    },
+    {
+      "case_id": "final_release_300_092",
+      "question": "以 2026-09-12 为今天，2026年3月使用card支付的优惠金额占原始金额比例是多少？包含所有订单状态。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "metric",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "2026-09-12"
+          },
+          {
+            "slot": "time",
+            "quote": "2026年3月"
+          },
+          {
+            "slot": "filter",
+            "quote": "card支付"
+          },
+          {
+            "slot": "filter",
+            "quote": "包含所有订单状态"
+          }
+        ],
+        "missing_slots": [
+          "metric"
+        ],
+        "clarification_question": "请问‘优惠金额占原始金额比例’具体指哪个字段除以哪个字段？例如：orders.discount_amount / orders.gross_amount，还是其他组合？",
+        "options": [
+          "orders.discount_amount / orders.gross_amount",
+          "SUM(order_items.discount_amount) / SUM(order_items.unit_price * order_items.quantity)",
+          "其他（请说明）"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "全部订单状态与支付方式限定订单粒度，优惠占原始金额明确discount_amount/gross_amount；无需改问商品明细粒度。"
+    },
+    {
+      "case_id": "final_release_300_093",
+      "question": "以 2026-09-12 为今天，澜庭品牌在售商品中标价成本倍数最高的前5种是什么？返回商品名称和指标，同值按商品ID升序。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "metric",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "2026-09-12"
+          },
+          {
+            "slot": "filter",
+            "quote": "澜庭品牌"
+          },
+          {
+            "slot": "filter",
+            "quote": "在售商品"
+          },
+          {
+            "slot": "limit",
+            "quote": "前5种"
+          },
+          {
+            "slot": "dimension",
+            "quote": "商品名称和指标"
+          },
+          {
+            "slot": "ranking",
+            "quote": "同值按商品ID升序"
+          }
+        ],
+        "missing_slots": [
+          "metric"
+        ],
+        "clarification_question": "‘标价成本倍数’是指 list_price / cost_price 吗？",
+        "options": [
+          "是，即 list_price / cost_price",
+          "否，指其他定义"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "标价成本倍数已用文字指定list_price/cost_price，不是缺失指标。"
+    },
+    {
+      "case_id": "final_release_300_097",
+      "question": "以 2026-09-12 为今天，星禾品牌在售商品中最近上架的前3种是什么？返回商品名称和指标，同值按商品ID升序。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "metric",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "filter",
+            "quote": "星禾品牌"
+          },
+          {
+            "slot": "filter",
+            "quote": "在售商品"
+          },
+          {
+            "slot": "ranking",
+            "quote": "最近上架的前3种"
+          },
+          {
+            "slot": "dimension",
+            "quote": "返回商品名称和指标"
+          },
+          {
+            "slot": "ranking",
+            "quote": "同值按商品ID升序"
+          }
+        ],
+        "missing_slots": [
+          "metric"
+        ],
+        "clarification_question": "请问‘最近上架’是指按商品上架日期（launch_date）降序排列吗？",
+        "options": [
+          "launch_date DESC",
+          "created_at DESC"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "最近上架前K已通过launch_date指定排序和所返回指标；不应再索要额外最近N天或换成销量。"
+    },
+    {
+      "case_id": "final_release_300_100",
+      "question": "以 2026-09-12 为今天，澜庭现在卖的商品里，最贵的4款是什么？同价按商品ID排。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "entity",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "limit",
+            "quote": "最贵的4款"
+          },
+          {
+            "slot": "ranking",
+            "quote": "同价按商品ID排"
+          }
+        ],
+        "missing_slots": [
+          "entity"
+        ],
+        "clarification_question": "‘澜庭’是指哪个城市？请从以下选项中选择：上海、北京、南京、广州、成都、杭州、武汉、西安，或提供其他具体城市名称。",
+        "options": [
+          "上海",
+          "北京",
+          "南京",
+          "广州",
+          "成都",
+          "杭州",
+          "武汉",
+          "西安"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "商品目录上下文支持按原文品牌字面值过滤；不应强行改问城市或换实体。数据库无匹配也是合法空结果；最近上架Top-K指定了排序而非额外时间窗口。"
+    },
+    {
+      "case_id": "final_release_300_104",
+      "question": "以 2026-09-12 为今天，最近147天按城市统计使用过的支付方式数和有效订单平均实付金额。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近147天"
+          },
+          {
+            "slot": "dimension",
+            "quote": "按城市统计"
+          },
+          {
+            "slot": "metric",
+            "quote": "使用过的支付方式数"
+          },
+          {
+            "slot": "metric",
+            "quote": "有效订单平均实付金额"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "‘最近147天’是指从2026-09-12起向前推147个自然日（即2026-04-19至2026-09-12），还是另有起止日期？",
+        "options": [
+          "2026-04-19至2026-09-12",
+          "其他起止日期"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "问题已给出最近N天或近半年及参考日，可按现有DATE_SUB日/月规则处理；不应另造营业日、订单活跃日或完整自然月解释。"
+    },
+    {
+      "case_id": "final_release_300_106",
+      "question": "以 2026-09-12 为今天，最近189天付费用户数最多的用户等级前3名是什么？只统计有效订单，返回维度和指标，同值按维度升序。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近189天"
+          },
+          {
+            "slot": "metric",
+            "quote": "付费用户数"
+          },
+          {
+            "slot": "dimension",
+            "quote": "用户等级"
+          },
+          {
+            "slot": "limit",
+            "quote": "前3名"
+          },
+          {
+            "slot": "filter",
+            "quote": "只统计有效订单"
+          },
+          {
+            "slot": "ranking",
+            "quote": "同值按维度升序"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "最近189天的具体起止日期是什么？例如：从2026-03-08到2026-09-12，或仅需起始日期/天数。",
+        "options": [
+          "从2026-03-08到2026-09-12",
+          "其他指定起止日期"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "问题已给出最近N天或近半年及参考日，可按现有DATE_SUB日/月规则处理；不应另造营业日、订单活跃日或完整自然月解释。"
+    },
+    {
+      "case_id": "final_release_300_113",
+      "question": "以 2026-09-12 为今天，最近123天累计优惠最多的用户前6名是什么？只统计有效订单，返回维度和指标，同值按维度升序。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "metric",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近123天"
+          },
+          {
+            "slot": "ranking",
+            "quote": "累计优惠最多的用户前6名"
+          },
+          {
+            "slot": "filter",
+            "quote": "只统计有效订单"
+          },
+          {
+            "slot": "dimension",
+            "quote": "返回维度和指标"
+          },
+          {
+            "slot": "ranking",
+            "quote": "同值按维度升序"
+          }
+        ],
+        "missing_slots": [
+          "metric"
+        ],
+        "clarification_question": "‘累计优惠最多’是指订单级 discount_amount 总和，还是订单项级 discount_amount 总和？",
+        "options": [
+          "订单级 discount_amount 总和",
+          "订单项级 discount_amount 总和"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "按用户累计有效订单优惠属于订单粒度，orders.discount_amount由schema确定；不应任意切换到商品明细。"
+    },
+    {
+      "case_id": "final_release_300_115",
+      "question": "以 2026-09-12 为今天，优选品牌在售商品中成本价最低的前5种是什么？返回商品名称和指标，同值按商品ID升序。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "multiple",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "metric",
+            "quote": "优选品牌在售商品中成本价最低的前5种"
+          },
+          {
+            "slot": "dimension",
+            "quote": "返回商品名称和指标"
+          },
+          {
+            "slot": "ranking",
+            "quote": "同值按商品ID升序"
+          }
+        ],
+        "missing_slots": [
+          "filter"
+        ],
+        "clarification_question": "请问‘优选品牌’具体指哪些品牌？请提供品牌名称列表或明确筛选条件。",
+        "options": [],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "商品目录上下文支持按原文品牌字面值过滤；不应强行改问城市或换实体。数据库无匹配也是合法空结果；最近上架Top-K指定了排序而非额外时间窗口。"
+    },
+    {
+      "case_id": "final_release_300_118",
+      "question": "以 2026-09-12 为今天，云栖品牌在售商品中最近上架的前3种是什么？返回商品名称和指标，同值按商品ID升序。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "metric",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "filter",
+            "quote": "云栖品牌"
+          },
+          {
+            "slot": "filter",
+            "quote": "在售商品"
+          },
+          {
+            "slot": "ranking",
+            "quote": "最近上架的前3种"
+          },
+          {
+            "slot": "metric",
+            "quote": "返回商品名称和指标"
+          },
+          {
+            "slot": "ranking",
+            "quote": "同值按商品ID升序"
+          }
+        ],
+        "missing_slots": [
+          "metric"
+        ],
+        "clarification_question": "请问‘指标’具体指什么？例如：上架时间、商品ID、销量、销售额、库存量等。",
+        "options": [
+          "上架时间",
+          "商品ID",
+          "销量",
+          "销售额",
+          "库存量"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "最近上架前K已通过launch_date指定排序和所返回指标；不应再索要额外最近N天或换成销量。"
+    },
+    {
+      "case_id": "final_release_300_120",
+      "question": "以 2026-09-12 为今天，近半年家用电器通过的退款都是什么原因，各多少笔多少钱？",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "2026-09-12"
+          },
+          {
+            "slot": "time",
+            "quote": "近半年"
+          },
+          {
+            "slot": "filter",
+            "quote": "家用电器"
+          },
+          {
+            "slot": "filter",
+            "quote": "通过的退款"
+          },
+          {
+            "slot": "dimension",
+            "quote": "原因"
+          },
+          {
+            "slot": "metric",
+            "quote": "各多少笔多少钱"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "‘近半年’是指从2026-09-12起向前推180天（即2026-03-16至2026-09-12），还是指最近6个完整日历月（即2026-03-01至2026-08-31）？",
+        "options": [
+          "180天：2026-03-16至2026-09-12",
+          "6个完整日历月：2026-03-01至2026-08-31"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "问题已给出最近N天或近半年及参考日，可按现有DATE_SUB日/月规则处理；不应另造营业日、订单活跃日或完整自然月解释。"
+    },
+    {
+      "case_id": "final_release_300_121",
+      "question": "以 2026-09-12 为今天，2026年5月使用wechat支付的优惠金额占原始金额比例是多少？包含所有订单状态。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "metric",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "2026-09-12"
+          },
+          {
+            "slot": "time",
+            "quote": "2026年5月"
+          },
+          {
+            "slot": "filter",
+            "quote": "wechat支付"
+          },
+          {
+            "slot": "filter",
+            "quote": "包含所有订单状态"
+          }
+        ],
+        "missing_slots": [
+          "metric"
+        ],
+        "clarification_question": "请问‘优惠金额占原始金额比例’具体指：A) 订单级 discount_amount / gross_amount，B) 商品行级 discount_amount / (unit_price * quantity)，还是 C) 其他定义？",
+        "options": [
+          "A",
+          "B",
+          "C"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "全部订单状态与支付方式限定订单粒度，优惠占原始金额明确discount_amount/gross_amount；无需改问商品明细粒度。"
+    },
+    {
+      "case_id": "final_release_300_123",
+      "question": "以 2026-09-12 为今天，最近64天先汇总每位用户的有效订单消费，再找出消费高于所在省份用户平均值且至少有3笔订单的用户；返回省份、用户名称、订单数和消费额。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近64天"
+          },
+          {
+            "slot": "metric",
+            "quote": "每位用户的有效订单消费"
+          },
+          {
+            "slot": "filter",
+            "quote": "消费高于所在省份用户平均值"
+          },
+          {
+            "slot": "filter",
+            "quote": "至少有3笔订单"
+          },
+          {
+            "slot": "dimension",
+            "quote": "返回省份、用户名称、订单数和消费额"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "‘最近64天’是指从2026-09-12起向前推64个自然日（即2026-07-10至2026-09-12），还是指包含2026-09-12在内的最近64个完整日历日（即2026-07-11至2026-09-12）？",
+        "options": [
+          "2026-07-10 至 2026-09-12",
+          "2026-07-11 至 2026-09-12"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "问题已给出最近N天或近半年及参考日，可按现有DATE_SUB日/月规则处理；不应另造营业日、订单活跃日或完整自然月解释。"
+    },
+    {
+      "case_id": "final_release_300_124",
+      "question": "以 2026-09-12 为今天，最近57天累计优惠最多的用户前6名是什么？只统计有效订单，返回维度和指标，同值按维度升序。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "metric",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近57天"
+          },
+          {
+            "slot": "filter",
+            "quote": "有效订单"
+          },
+          {
+            "slot": "limit",
+            "quote": "前6名"
+          },
+          {
+            "slot": "ranking",
+            "quote": "同值按维度升序"
+          }
+        ],
+        "missing_slots": [
+          "metric"
+        ],
+        "clarification_question": "‘累计优惠最多’是指订单层级的 discount_amount 总和，还是商品行层级的 discount_amount 总和？",
+        "options": [
+          "订单层级 discount_amount 总和",
+          "商品行层级 discount_amount 总和"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "按用户累计有效订单优惠属于订单粒度，orders.discount_amount由schema确定；不应任意切换到商品明细。"
+    },
+    {
+      "case_id": "final_release_300_127",
+      "question": "以 2026-09-12 为今天，最近303天按用户等级和支付方式统计有效订单数与销售额。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近303天"
+          },
+          {
+            "slot": "dimension",
+            "quote": "按用户等级和支付方式统计"
+          },
+          {
+            "slot": "metric",
+            "quote": "有效订单数与销售额"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "请问‘最近303天’是指从2026-09-12起向前推303个自然日（即2025-11-14至2026-09-12），还是另有指定起止日期？",
+        "options": [
+          "2025-11-14至2026-09-12",
+          "其他起止日期"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "问题已给出最近N天或近半年及参考日，可按现有DATE_SUB日/月规则处理；不应另造营业日、订单活跃日或完整自然月解释。"
+    },
+    {
+      "case_id": "final_release_300_131",
+      "question": "以 2026-09-12 为今天，近半年服饰鞋包通过的退款都是什么原因，各多少笔多少钱？",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "近半年"
+          },
+          {
+            "slot": "filter",
+            "quote": "服饰鞋包"
+          },
+          {
+            "slot": "filter",
+            "quote": "通过的退款"
+          },
+          {
+            "slot": "metric",
+            "quote": "都是什么原因，各多少笔多少钱"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "近半年是指从2026-09-12起向前推180天（即2026-03-16至2026-09-12），还是指最近6个完整日历月（即2026-03-01至2026-08-31）？",
+        "options": [
+          "180天区间（2026-03-16至2026-09-12）",
+          "最近6个完整日历月（2026-03-01至2026-08-31）"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "问题已给出最近N天或近半年及参考日，可按现有DATE_SUB日/月规则处理；不应另造营业日、订单活跃日或完整自然月解释。"
+    },
+    {
+      "case_id": "final_release_300_134",
+      "question": "以 2026-09-12 为今天，松果品牌在售商品中单件标价毛利最大的前6种是什么？返回商品名称和指标，同值按商品ID升序。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "metric",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "2026-09-12"
+          },
+          {
+            "slot": "filter",
+            "quote": "松果品牌"
+          },
+          {
+            "slot": "filter",
+            "quote": "在售商品"
+          },
+          {
+            "slot": "limit",
+            "quote": "前6种"
+          },
+          {
+            "slot": "dimension",
+            "quote": "商品名称和指标"
+          },
+          {
+            "slot": "ranking",
+            "quote": "同值按商品ID升序"
+          }
+        ],
+        "missing_slots": [
+          "metric"
+        ],
+        "clarification_question": "请问‘单件标价毛利’是指（list_price - cost_price）还是其他定义？",
+        "options": [
+          "list_price - cost_price",
+          "其他定义"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "单件标价毛利明确指list_price-cost_price；仅问是否如此并未证明关键slot缺失。"
+    },
+    {
+      "case_id": "final_release_300_135",
+      "question": "以 2026-09-12 为今天，森活品牌在售商品中最近上架的前3种是什么？返回商品名称和指标，同值按商品ID升序。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "multiple",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "filter",
+            "quote": "森活品牌"
+          },
+          {
+            "slot": "filter",
+            "quote": "在售商品"
+          },
+          {
+            "slot": "limit",
+            "quote": "前3种"
+          },
+          {
+            "slot": "dimension",
+            "quote": "商品名称"
+          },
+          {
+            "slot": "ranking",
+            "quote": "同值按商品ID升序"
+          }
+        ],
+        "missing_slots": [
+          "time",
+          "metric"
+        ],
+        "clarification_question": "请明确：1. '最近上架'是指过去多少天内？2. '指标'具体指哪个业务指标（如销售金额、销量、退款率等）？",
+        "options": [
+          "过去7天",
+          "过去30天",
+          "过去90天",
+          "所有历史"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "最近上架前K已通过launch_date指定排序和所返回指标；不应再索要额外最近N天或换成销量。"
+    },
+    {
+      "case_id": "final_release_300_137",
+      "question": "以 2026-09-12 为今天，最近288天按商品品类分别统计有效订单明细销售额和approved退款金额；两个指标必须先独立聚合再连接。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近288天"
+          },
+          {
+            "slot": "dimension",
+            "quote": "按商品品类分别统计"
+          },
+          {
+            "slot": "metric",
+            "quote": "有效订单明细销售额"
+          },
+          {
+            "slot": "metric",
+            "quote": "approved退款金额"
+          },
+          {
+            "slot": "metric",
+            "quote": "两个指标必须先独立聚合再连接"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "最近288天的起始日期是哪一天？（例如：2026-09-12往前推288个自然日）",
+        "options": [],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "问题已给出最近N天或近半年及参考日，可按现有DATE_SUB日/月规则处理；不应另造营业日、订单活跃日或完整自然月解释。"
+    },
+    {
+      "case_id": "final_release_300_138",
+      "question": "以 2026-09-12 为今天，最近87天按商品品类统计全部订单明细的数量、明细金额和平均成交单价。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近87天"
+          },
+          {
+            "slot": "dimension",
+            "quote": "按商品品类统计"
+          },
+          {
+            "slot": "metric",
+            "quote": "全部订单明细的数量、明细金额和平均成交单价"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "‘最近87天’是指从2026-09-12起向前推87个自然日（即2026-06-18至2026-09-12），还是指包含2026-09-12在内的最近87个日历日（即2026-06-18至2026-09-12）？两者时间范围相同，但需确认是否含首尾边界。",
+        "options": [
+          "含2026-06-18和2026-09-12的完整87天区间",
+          "其他自定义起止日期"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "C",
+      "reason": "Gate给出两个相同的日期区间却称为不同解释，属于输出证据错误。"
+    },
+    {
+      "case_id": "final_release_300_139",
+      "question": "以 2026-09-12 为今天，2026年1月使用wechat支付的优惠金额占原始金额比例是多少？包含所有订单状态。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "metric",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "2026年1月"
+          },
+          {
+            "slot": "filter",
+            "quote": "使用wechat支付"
+          },
+          {
+            "slot": "filter",
+            "quote": "包含所有订单状态"
+          }
+        ],
+        "missing_slots": [
+          "metric"
+        ],
+        "clarification_question": "问题中‘优惠金额占原始金额比例’具体指哪个比率？请从以下选项中选择：1) 订单级：SUM(orders.discount_amount) / SUM(orders.gross_amount)；2) 商品行级：SUM(order_items.discount_amount) / SUM(order_items.unit_price * order_items.quantity)。",
+        "options": [
+          "1) 订单级：SUM(orders.discount_amount) / SUM(orders.gross_amount)",
+          "2) 商品行级：SUM(order_items.discount_amount) / SUM(order_items.unit_price * order_items.quantity)"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "全部订单状态与支付方式限定订单粒度，优惠占原始金额明确discount_amount/gross_amount；无需改问商品明细粒度。"
+    },
+    {
+      "case_id": "final_release_300_141",
+      "question": "以 2026-09-12 为今天，优选品牌在售商品中单件标价毛利最大的前6种是什么？返回商品名称和指标，同值按商品ID升序。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "metric",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "2026-09-12"
+          },
+          {
+            "slot": "filter",
+            "quote": "优选品牌"
+          },
+          {
+            "slot": "filter",
+            "quote": "在售商品"
+          },
+          {
+            "slot": "metric",
+            "quote": "单件标价毛利"
+          },
+          {
+            "slot": "limit",
+            "quote": "最大的前6种"
+          },
+          {
+            "slot": "dimension",
+            "quote": "商品名称和指标"
+          },
+          {
+            "slot": "ranking",
+            "quote": "同值按商品ID升序"
+          }
+        ],
+        "missing_slots": [
+          "metric"
+        ],
+        "clarification_question": "‘单件标价毛利’是指（list_price - cost_price）还是其他定义？",
+        "options": [
+          "list_price - cost_price",
+          "其他定义"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "单件标价毛利明确指list_price-cost_price；仅问是否如此并未证明关键slot缺失。"
+    },
+    {
+      "case_id": "final_release_300_144",
+      "question": "以 2026-09-12 为今天，2026年4月使用cash支付的优惠金额占原始金额比例是多少？包含所有订单状态。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "metric",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "2026年4月"
+          },
+          {
+            "slot": "filter",
+            "quote": "使用cash支付"
+          },
+          {
+            "slot": "filter",
+            "quote": "包含所有订单状态"
+          }
+        ],
+        "missing_slots": [
+          "metric"
+        ],
+        "clarification_question": "请问‘优惠金额占原始金额比例’具体指哪个层级的计算？可选：1) 订单级（所有cash支付订单的discount_amount总和 / gross_amount总和）；2) 订单行级（所有cash支付订单中order_items.discount_amount总和 / order_items.unit_price×quantity总和）。",
+        "options": [
+          "订单级（所有cash支付订单的discount_amount总和 / gross_amount总和）",
+          "订单行级（所有cash支付订单中order_items.discount_amount总和 / order_items.unit_price×quantity总和）"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "全部订单状态与支付方式限定订单粒度，优惠占原始金额明确discount_amount/gross_amount；无需改问商品明细粒度。"
+    },
+    {
+      "case_id": "final_release_300_147",
+      "question": "以 2026-09-12 为今天，北京市的最近一次用户注册日期是多少？",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "entity",
+            "quote": "北京市"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "请问‘最近一次’是指：A) 所有历史中最新的一次注册日期，B) 参考日期（2026-09-12）前最近的某一天（如昨天），C) 参考日期前最近N天（请指定N），D) 其他明确时间范围？",
+        "options": [
+          "A) 所有历史中最新的一次注册日期",
+          "B) 参考日期（2026-09-12）前最近的某一天（如昨天）",
+          "C) 参考日期前最近N天（请指定N）",
+          "D) 其他明确时间范围"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "最近一次注册日期是register_date的最大值，不是缺少滚动时间窗口。"
+    },
+    {
+      "case_id": "final_release_300_156",
+      "question": "以 2026-09-12 为今天，最近111天按品牌统计approved退款笔数、退款金额和涉及商品数。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近111天"
+          },
+          {
+            "slot": "dimension",
+            "quote": "按品牌统计"
+          },
+          {
+            "slot": "metric",
+            "quote": "approved退款笔数、退款金额和涉及商品数"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "最近111天是指从2026-09-12起向前推111个自然日（即2026-05-24至2026-09-12），还是其他起止范围？",
+        "options": [
+          "2026-05-24至2026-09-12",
+          "其他起止日期"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "问题已给出最近N天或近半年及参考日，可按现有DATE_SUB日/月规则处理；不应另造营业日、订单活跃日或完整自然月解释。"
+    },
+    {
+      "case_id": "final_release_300_159",
+      "question": "以 2026-09-12 为今天，最近156天按用户等级同时统计有效订单销售额、approved退款金额和净收入；订单与退款先按用户独立汇总。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "multiple",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近156天"
+          },
+          {
+            "slot": "dimension",
+            "quote": "按用户等级"
+          },
+          {
+            "slot": "metric",
+            "quote": "有效订单销售额"
+          },
+          {
+            "slot": "metric",
+            "quote": "approved退款金额"
+          },
+          {
+            "slot": "metric",
+            "quote": "净收入"
+          },
+          {
+            "slot": "entity",
+            "quote": "订单与退款先按用户独立汇总"
+          }
+        ],
+        "missing_slots": [
+          "time",
+          "dimension",
+          "metric"
+        ],
+        "clarification_question": "请明确：1）‘最近156天’是指从2026-09-12起向前推156个自然日（即2026-04-10至2026-09-12），还是其他定义？2）‘用户等级’具体指users.user_level的哪些取值（如normal/silver/gold/black，或需包含全部）？3）‘净收入’是否定义为‘有效订单销售额 − approved退款金额’？",
+        "options": [
+          "156天=2026-04-10至2026-09-12",
+          "user_level ∈ ('normal','silver','gold','black')",
+          "净收入 = 销售额 − approved退款金额"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "已有时间、分组与成交口径；成交金额按订单paid_amount、成交单数按有效订单，不能把业务契约当成待确认项。"
+    },
+    {
+      "case_id": "final_release_300_160",
+      "question": "以 2026-09-12 为今天，近39天各等级、各支付渠道成交了多少单和多少钱？",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "multiple",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "近39天"
+          },
+          {
+            "slot": "dimension",
+            "quote": "各等级"
+          },
+          {
+            "slot": "dimension",
+            "quote": "各支付渠道"
+          },
+          {
+            "slot": "metric",
+            "quote": "成交了多少单和多少钱"
+          }
+        ],
+        "missing_slots": [
+          "time",
+          "metric"
+        ],
+        "clarification_question": "请问‘近39天’是指从2026-09-12起向前推39天（即2026-08-05至2026-09-12），还是指最近完整39个自然日（即2026-08-04至2026-09-11）？另外，‘成交了多少单和多少钱’中，‘单’是否指有效订单数（order_status ∈ ('paid','completed','shipped')），‘钱’是否指这些订单的paid_amount总和？",
+        "options": [
+          "从2026-09-12起向前推39天（含首尾）",
+          "最近完整的39个自然日（不含今日）"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "已有时间、分组与成交口径；成交金额按订单paid_amount、成交单数按有效订单，不能把业务契约当成待确认项。"
+    },
+    {
+      "case_id": "final_release_300_161",
+      "question": "以 2026-09-12 为今天，最近288天按用户等级同时统计有效订单销售额、approved退款金额和净收入；订单与退款先按用户独立汇总。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近288天"
+          },
+          {
+            "slot": "dimension",
+            "quote": "按用户等级"
+          },
+          {
+            "slot": "metric",
+            "quote": "有效订单销售额"
+          },
+          {
+            "slot": "metric",
+            "quote": "approved退款金额"
+          },
+          {
+            "slot": "metric",
+            "quote": "净收入"
+          },
+          {
+            "slot": "entity",
+            "quote": "订单与退款先按用户独立汇总"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "请问‘最近288天’是指从2026-09-12起向前推288个自然日（即起始日为2025-12-19），还是其他定义？",
+        "options": [
+          "从2026-09-12起向前推288个自然日（含）",
+          "其他定义，请说明"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "问题已给出最近N天或近半年及参考日，可按现有DATE_SUB日/月规则处理；不应另造营业日、订单活跃日或完整自然月解释。"
+    },
+    {
+      "case_id": "final_release_300_162",
+      "question": "以 2026-09-12 为今天，近87天各等级、各支付渠道成交了多少单和多少钱？",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "metric",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "近87天"
+          },
+          {
+            "slot": "dimension",
+            "quote": "各等级"
+          },
+          {
+            "slot": "dimension",
+            "quote": "各支付渠道"
+          }
+        ],
+        "missing_slots": [
+          "metric"
+        ],
+        "clarification_question": "请问‘成交了多少单和多少钱’中的‘多少单’是指订单数量（COUNT）还是有效订单数量（order_status IN ('paid','completed','shipped')）？‘多少钱’是指订单级 paid_amount 总和，还是商品行级 item_amount 总和？",
+        "options": [
+          "订单数量 + 订单 paid_amount 总和",
+          "有效订单数量 + 有效订单 paid_amount 总和",
+          "有效订单数量 + 对应 order_items.item_amount 总和"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "已有时间、分组与成交口径；成交金额按订单paid_amount、成交单数按有效订单，不能把业务契约当成待确认项。"
+    },
+    {
+      "case_id": "final_release_300_163",
+      "question": "以 2026-09-12 为今天，服饰鞋包各品牌的商品数、在售商品数和在售率是多少？",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "metric",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "filter",
+            "quote": "服饰鞋包"
+          },
+          {
+            "slot": "dimension",
+            "quote": "各品牌的"
+          }
+        ],
+        "missing_slots": [
+          "metric"
+        ],
+        "clarification_question": "请问‘商品数’、‘在售商品数’和‘在售率’是否分别指：服饰鞋包类目下各品牌的总产品数、is_active=1的产品数、以及（is_active=1的产品数 / 总产品数）？",
+        "options": [
+          "是",
+          "否"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "商品总数、is_active在售数及两者比例已由商品粒度和schema确定；无须重复确认。"
+    },
+    {
+      "case_id": "final_release_300_170",
+      "question": "以 2026-09-12 为今天，松果现在卖的商品里，最贵的4款是什么？同价按商品ID排。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "metric",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "filter",
+            "quote": "松果现在卖的商品里"
+          },
+          {
+            "slot": "metric",
+            "quote": "最贵的4款"
+          },
+          {
+            "slot": "ranking",
+            "quote": "同价按商品ID排"
+          }
+        ],
+        "missing_slots": [
+          "metric"
+        ],
+        "clarification_question": "请问‘最贵’是指商品的标价（list_price）、成本价（cost_price）还是当前在售的最高成交单价（unit_price）？",
+        "options": [
+          "list_price",
+          "cost_price",
+          "unit_price"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "在售商品目录中的价格由list_price显示价格语义确定；成本价或交易行价格不是同一请求的合理替代。"
+    },
+    {
+      "case_id": "final_release_300_172",
+      "question": "以 2026-09-12 为今天，森活品牌在售商品中标价成本倍数最高的前5种是什么？返回商品名称和指标，同值按商品ID升序。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "metric",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "filter",
+            "quote": "森活品牌"
+          },
+          {
+            "slot": "filter",
+            "quote": "在售商品"
+          },
+          {
+            "slot": "metric",
+            "quote": "标价成本倍数最高的前5种"
+          },
+          {
+            "slot": "dimension",
+            "quote": "返回商品名称和指标"
+          },
+          {
+            "slot": "ranking",
+            "quote": "同值按商品ID升序"
+          }
+        ],
+        "missing_slots": [
+          "metric"
+        ],
+        "clarification_question": "标价成本倍数是指 list_price / cost_price 吗？",
+        "options": [
+          "list_price / cost_price",
+          "其他定义"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "标价成本倍数已用文字指定list_price/cost_price，不是缺失指标。"
+    },
+    {
+      "case_id": "final_release_300_175",
+      "question": "以 2026-09-12 为今天，最近208天先汇总每位用户的有效订单消费，再找出消费高于所在省份用户平均值且至少有3笔订单的用户；返回省份、用户名称、订单数和消费额。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近208天"
+          },
+          {
+            "slot": "metric",
+            "quote": "每位用户的有效订单消费"
+          },
+          {
+            "slot": "filter",
+            "quote": "消费高于所在省份用户平均值"
+          },
+          {
+            "slot": "filter",
+            "quote": "至少有3笔订单"
+          },
+          {
+            "slot": "dimension",
+            "quote": "返回省份、用户名称、订单数和消费额"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "‘最近208天’是指从2026-09-12起向前推208个自然日（即2026-02-17至2026-09-12），还是指包含2026-09-12在内的最近208个日历日（即2026-02-18至2026-09-12）？",
+        "options": [
+          "2026-02-17 至 2026-09-12",
+          "2026-02-18 至 2026-09-12"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "问题已给出最近N天或近半年及参考日，可按现有DATE_SUB日/月规则处理；不应另造营业日、订单活跃日或完整自然月解释。"
+    },
+    {
+      "case_id": "final_release_300_176",
+      "question": "以 2026-09-12 为今天，最近147天按商品品类统计全部订单明细的数量、明细金额和平均成交单价。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近147天"
+          },
+          {
+            "slot": "dimension",
+            "quote": "按商品品类统计"
+          },
+          {
+            "slot": "metric",
+            "quote": "全部订单明细的数量、明细金额和平均成交单价"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "请问‘最近147天’是指从2026-09-12起向前推147个自然日（即2026-04-19至2026-09-12），还是其他定义？",
+        "options": [
+          "从2026-09-12起向前推147个自然日（含首尾）",
+          "其他定义，请说明"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "问题已给出最近N天或近半年及参考日，可按现有DATE_SUB日/月规则处理；不应另造营业日、订单活跃日或完整自然月解释。"
+    },
+    {
+      "case_id": "final_release_300_177",
+      "question": "以 2026-09-12 为今天，最近24天按商品品类统计全部订单明细的数量、明细金额和平均成交单价。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近24天"
+          },
+          {
+            "slot": "dimension",
+            "quote": "按商品品类统计"
+          },
+          {
+            "slot": "metric",
+            "quote": "全部订单明细的数量、明细金额和平均成交单价"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "最近24天是指从2026-09-12往前推24天（即2026-08-20至2026-09-12），还是指最近完成的24个自然日（含今天）？请明确起止日期或选择：① 2026-08-20 至 2026-09-12（含）；② 其他具体日期范围。",
+        "options": [
+          "2026-08-20 至 2026-09-12（含）",
+          "其他具体日期范围"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "问题已给出最近N天或近半年及参考日，可按现有DATE_SUB日/月规则处理；不应另造营业日、订单活跃日或完整自然月解释。"
+    },
+    {
+      "case_id": "final_release_300_181",
+      "question": "以 2026-09-12 为今天，森活现在卖的商品里，最贵的4款是什么？同价按商品ID排。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "metric",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "2026-09-12"
+          },
+          {
+            "slot": "limit",
+            "quote": "最贵的4款"
+          },
+          {
+            "slot": "ranking",
+            "quote": "同价按商品ID排"
+          }
+        ],
+        "missing_slots": [
+          "metric"
+        ],
+        "clarification_question": "最贵是指商品的列表价（list_price）还是当前在售的最高成交单价（unit_price）？",
+        "options": [
+          "list_price",
+          "unit_price"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "在售商品目录中的价格由list_price显示价格语义确定；成本价或交易行价格不是同一请求的合理替代。"
+    },
+    {
+      "case_id": "final_release_300_183",
+      "question": "以 2026-09-12 为今天，食品生鲜的在售商品平均标价毛利率是多少？",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "metric",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "2026-09-12"
+          },
+          {
+            "slot": "filter",
+            "quote": "食品生鲜"
+          },
+          {
+            "slot": "filter",
+            "quote": "在售商品"
+          }
+        ],
+        "missing_slots": [
+          "metric"
+        ],
+        "clarification_question": "请问‘标价毛利率’是指（list_price - cost_price）/ list_price，还是其他定义？",
+        "options": [
+          "(list_price - cost_price) / list_price",
+          "其他定义"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "平均商品标价毛利率指按商品的标价减成本占标价再求平均；成本利润率或整体加权口径不是原文要求。此判断基于通常指标含义，不宣称生产字典显式定义了该指标。"
+    },
+    {
+      "case_id": "final_release_300_184",
+      "question": "以 2026-09-12 为今天，最近303天按商品品类统计全部订单明细的数量、明细金额和平均成交单价。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近303天"
+          },
+          {
+            "slot": "dimension",
+            "quote": "按商品品类统计"
+          },
+          {
+            "slot": "metric",
+            "quote": "全部订单明细的数量、明细金额和平均成交单价"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "‘最近303天’是指从2026-09-12起向前推303个自然日（即2025-11-14至2026-09-12），还是指包含2026-09-12在内的最近303个日历日（即2025-11-13至2026-09-12）？",
+        "options": [
+          "2025-11-14 至 2026-09-12",
+          "2025-11-13 至 2026-09-12"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "问题已给出最近N天或近半年及参考日，可按现有DATE_SUB日/月规则处理；不应另造营业日、订单活跃日或完整自然月解释。"
+    },
+    {
+      "case_id": "final_release_300_186",
+      "question": "以 2026-09-12 为今天，最近224天按自然周统计优惠率，只统计有效订单；返回周和指标，按周升序。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近224天"
+          },
+          {
+            "slot": "time",
+            "quote": "按自然周统计"
+          },
+          {
+            "slot": "metric",
+            "quote": "优惠率"
+          },
+          {
+            "slot": "filter",
+            "quote": "只统计有效订单"
+          },
+          {
+            "slot": "dimension",
+            "quote": "返回周和指标"
+          },
+          {
+            "slot": "dimension",
+            "quote": "按周升序"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "最近224天的起始日期是否为2026-09-12往前推224个自然日（即2026-02-11）？",
+        "options": [
+          "是，起始日为2026-02-11",
+          "否，起始日另有定义"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "A",
+      "reason": "优惠率未在当前生产契约中定义；优惠/原价与优惠/实付会产生不同结果。186的反问虽然问错时间，但问题本身仍有未定义的比例口径。"
+    },
+    {
+      "case_id": "final_release_300_189",
+      "question": "以 2026-09-12 为今天，近63天各等级、各支付渠道成交了多少单和多少钱？",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "metric",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "近63天"
+          },
+          {
+            "slot": "dimension",
+            "quote": "各等级"
+          },
+          {
+            "slot": "dimension",
+            "quote": "各支付渠道"
+          }
+        ],
+        "missing_slots": [
+          "metric"
+        ],
+        "clarification_question": "请问‘成交了多少单和多少钱’中的‘钱’是指订单的支付金额（paid_amount）还是商品行的销售金额（item_amount）？",
+        "options": [
+          "订单支付金额（paid_amount）",
+          "商品行销售金额（item_amount）"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "已有时间、分组与成交口径；成交金额按订单paid_amount、成交单数按有效订单，不能把业务契约当成待确认项。"
+    },
+    {
+      "case_id": "final_release_300_191",
+      "question": "以 2026-09-12 为今天，最近147天按用户等级和支付方式统计有效订单数与销售额。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近147天"
+          },
+          {
+            "slot": "dimension",
+            "quote": "按用户等级和支付方式统计"
+          },
+          {
+            "slot": "metric",
+            "quote": "有效订单数与销售额"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "请问‘最近147天’是指从2026-09-12起向前推147个自然日（即2026-04-19至2026-09-12），还是其他定义？",
+        "options": [
+          "从2026-09-12起向前推147个自然日（含首尾）",
+          "其他定义，请说明"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "问题已给出最近N天或近半年及参考日，可按现有DATE_SUB日/月规则处理；不应另造营业日、订单活跃日或完整自然月解释。"
+    },
+    {
+      "case_id": "final_release_300_194",
+      "question": "以 2026-09-12 为今天，最近147天按订单支付方式统计approved退款订单数和退款金额。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近147天"
+          },
+          {
+            "slot": "dimension",
+            "quote": "按订单支付方式统计"
+          },
+          {
+            "slot": "metric",
+            "quote": "approved退款订单数和退款金额"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "请问‘最近147天’是指从2026-09-12起向前推147个自然日（即2026-04-19至2026-09-12），还是其他定义？",
+        "options": [
+          "从2026-09-12起向前推147个自然日（含首尾）",
+          "其他定义，请明确起止日期"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "问题已给出最近N天或近半年及参考日，可按现有DATE_SUB日/月规则处理；不应另造营业日、订单活跃日或完整自然月解释。"
+    },
+    {
+      "case_id": "final_release_300_197",
+      "question": "以 2026-09-12 为今天，最近231天按城市统计使用过的支付方式数和有效订单平均实付金额。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近231天"
+          },
+          {
+            "slot": "dimension",
+            "quote": "按城市统计"
+          },
+          {
+            "slot": "metric",
+            "quote": "使用过的支付方式数"
+          },
+          {
+            "slot": "metric",
+            "quote": "有效订单平均实付金额"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "最近231天是指从2026-09-12往前推231个自然日（即起始日为2026-02-24）？请确认。",
+        "options": [
+          "是，2026-02-24 至 2026-09-12",
+          "否，指其他起止范围"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "C",
+      "reason": "Gate把最近231天换算为错误的起始日期；原问题可按现有DATE_SUB规则处理。"
+    },
+    {
+      "case_id": "final_release_300_198",
+      "question": "以 2026-09-12 为今天，近96天每个品牌里成交额最高的商品是哪款？并列时按商品ID。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "近96天"
+          },
+          {
+            "slot": "metric",
+            "quote": "每个品牌里成交额最高的商品"
+          },
+          {
+            "slot": "ranking",
+            "quote": "并列时按商品ID"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "‘近96天’是指从2026-09-12起向前推96个自然日（即2026-06-09至2026-09-12），还是指最近完成的96个日历日（可能含空日）？请明确起止日期或确认是否为连续日历区间。",
+        "options": [
+          "2026-06-09 至 2026-09-12（含）",
+          "其他指定起止日期"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "问题已给出最近N天或近半年及参考日，可按现有DATE_SUB日/月规则处理；不应另造营业日、订单活跃日或完整自然月解释。"
+    },
+    {
+      "case_id": "final_release_300_199",
+      "question": "以 2026-09-12 为今天，最近81天累计优惠最多的用户前6名是什么？只统计有效订单，返回维度和指标，同值按维度升序。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "metric",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近81天"
+          },
+          {
+            "slot": "filter",
+            "quote": "有效订单"
+          },
+          {
+            "slot": "limit",
+            "quote": "前6名"
+          },
+          {
+            "slot": "ranking",
+            "quote": "同值按维度升序"
+          }
+        ],
+        "missing_slots": [
+          "metric"
+        ],
+        "clarification_question": "‘累计优惠最多’具体指哪个指标？可选：订单总折扣金额（orders.discount_amount）、订单行总折扣金额（order_items.discount_amount）、还是其他？",
+        "options": [
+          "orders.discount_amount",
+          "order_items.discount_amount"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "按用户累计有效订单优惠属于订单粒度，orders.discount_amount由schema确定；不应任意切换到商品明细。"
+    },
+    {
+      "case_id": "final_release_300_200",
+      "question": "以 2026-09-12 为今天，运动户外的在售商品平均标价毛利率是多少？",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "metric",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "filter",
+            "quote": "运动户外"
+          },
+          {
+            "slot": "filter",
+            "quote": "在售商品"
+          },
+          {
+            "slot": "metric",
+            "quote": "平均标价毛利率"
+          }
+        ],
+        "missing_slots": [
+          "metric"
+        ],
+        "clarification_question": "请问‘平均标价毛利率’是指（1）所有在售运动户外商品的（list_price - cost_price）/ list_price 的平均值，还是（2）其他定义？",
+        "options": [
+          "(1) （list_price - cost_price）/ list_price 的平均值",
+          "(2) 其他定义"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "平均商品标价毛利率指按商品的标价减成本占标价再求平均；成本利润率或整体加权口径不是原文要求。此判断基于通常指标含义，不宣称生产字典显式定义了该指标。"
+    },
+    {
+      "case_id": "final_release_300_202",
+      "question": "以 2026-09-12 为今天，最近303天按城市统计使用过的支付方式数和有效订单平均实付金额。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近303天"
+          },
+          {
+            "slot": "dimension",
+            "quote": "按城市统计"
+          },
+          {
+            "slot": "metric",
+            "quote": "使用过的支付方式数"
+          },
+          {
+            "slot": "metric",
+            "quote": "有效订单平均实付金额"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "最近303天是指从2026-09-12往前推303天（即起始日为2025-11-14）的完整区间，还是另有指定起止日期？",
+        "options": [
+          "从2025-11-14到2026-09-12（含）",
+          "其他起止日期"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "问题已给出最近N天或近半年及参考日，可按现有DATE_SUB日/月规则处理；不应另造营业日、订单活跃日或完整自然月解释。"
+    },
+    {
+      "case_id": "final_release_300_205",
+      "question": "以 2026-09-12 为今天，最近183天按商品品类统计全部订单明细的数量、明细金额和平均成交单价。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近183天"
+          },
+          {
+            "slot": "dimension",
+            "quote": "按商品品类统计"
+          },
+          {
+            "slot": "metric",
+            "quote": "全部订单明细的数量、明细金额和平均成交单价"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "‘最近183天’是指从参考日期2026-09-12起向前推183个自然日（即2026-03-14至2026-09-12），还是指包含2026-09-12在内的最近183个日历日（即2026-03-13至2026-09-12）？",
+        "options": [
+          "2026-03-14 至 2026-09-12",
+          "2026-03-13 至 2026-09-12"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "问题已给出最近N天或近半年及参考日，可按现有DATE_SUB日/月规则处理；不应另造营业日、订单活跃日或完整自然月解释。"
+    },
+    {
+      "case_id": "final_release_300_206",
+      "question": "以 2026-09-12 为今天，最近231天按订单支付方式统计approved退款订单数和退款金额。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近231天"
+          },
+          {
+            "slot": "dimension",
+            "quote": "按订单支付方式统计"
+          },
+          {
+            "slot": "metric",
+            "quote": "approved退款订单数和退款金额"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "请问‘最近231天’是指从2026-09-12起向前推231个自然日（即起始日为2026-03-05），还是另有指定的起止日期？",
+        "options": [
+          "2026-03-05 至 2026-09-12",
+          "其他起止日期"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "C",
+      "reason": "Gate把最近231天换算为错误的起始日期；原问题可按现有DATE_SUB规则处理。"
+    },
+    {
+      "case_id": "final_release_300_208",
+      "question": "以 2026-09-12 为今天，云栖现在卖的商品里，最贵的4款是什么？同价按商品ID排。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "entity",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "entity",
+            "quote": "云栖"
+          },
+          {
+            "slot": "metric",
+            "quote": "最贵的4款"
+          },
+          {
+            "slot": "ranking",
+            "quote": "同价按商品ID排"
+          }
+        ],
+        "missing_slots": [
+          "entity"
+        ],
+        "clarification_question": "请问‘云栖’是指哪个城市？请从以下选项中选择，或提供其他具体城市名称：上海、北京、南京、广州、成都、杭州、武汉、西安。",
+        "options": [
+          "上海",
+          "北京",
+          "南京",
+          "广州",
+          "成都",
+          "杭州",
+          "武汉",
+          "西安"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "商品目录上下文支持按原文品牌字面值过滤；不应强行改问城市或换实体。数据库无匹配也是合法空结果；最近上架Top-K指定了排序而非额外时间窗口。"
+    },
+    {
+      "case_id": "final_release_300_210",
+      "question": "以 2026-09-12 为今天，森活品牌在售商品中单件标价毛利最大的前6种是什么？返回商品名称和指标，同值按商品ID升序。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "metric",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "filter",
+            "quote": "森活品牌"
+          },
+          {
+            "slot": "filter",
+            "quote": "在售商品"
+          },
+          {
+            "slot": "metric",
+            "quote": "单件标价毛利最大的前6种"
+          },
+          {
+            "slot": "dimension",
+            "quote": "返回商品名称和指标"
+          },
+          {
+            "slot": "ranking",
+            "quote": "同值按商品ID升序"
+          }
+        ],
+        "missing_slots": [
+          "metric"
+        ],
+        "clarification_question": "‘单件标价毛利’是指（list_price - cost_price）还是其他定义？",
+        "options": [
+          "list_price - cost_price",
+          "其他定义"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "单件标价毛利明确指list_price-cost_price；仅问是否如此并未证明关键slot缺失。"
+    },
+    {
+      "case_id": "final_release_300_215",
+      "question": "以 2026-09-12 为今天，近64天每个品牌里成交额最高的商品是哪款？并列时按商品ID。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "近64天"
+          },
+          {
+            "slot": "metric",
+            "quote": "每个品牌里成交额最高的商品"
+          },
+          {
+            "slot": "ranking",
+            "quote": "并列时按商品ID"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "近64天是指从2026-09-12往前推64个自然日（即2026-07-10至2026-09-12），还是指最近完成的64个日历日（可能不连续）？",
+        "options": [
+          "2026-07-10至2026-09-12（含）",
+          "其他明确起止日期"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "问题已给出最近N天或近半年及参考日，可按现有DATE_SUB日/月规则处理；不应另造营业日、订单活跃日或完整自然月解释。"
+    },
+    {
+      "case_id": "final_release_300_222",
+      "question": "以 2026-09-12 为今天，最近81天平均订单实付最高的城市前5名是什么？只统计有效订单，返回维度和指标，同值按维度升序。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近81天"
+          },
+          {
+            "slot": "metric",
+            "quote": "平均订单实付"
+          },
+          {
+            "slot": "ranking",
+            "quote": "最高的城市前5名"
+          },
+          {
+            "slot": "filter",
+            "quote": "只统计有效订单"
+          },
+          {
+            "slot": "dimension",
+            "quote": "返回维度和指标"
+          },
+          {
+            "slot": "ranking",
+            "quote": "同值按维度升序"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "最近81天是指从2026-09-12起向前推81个自然日（即2026-06-24至2026-09-12），还是指最近81个完整日历日（不含今天）？",
+        "options": [
+          "2026-06-24至2026-09-12（含）",
+          "2026-06-23至2026-09-11（含）"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "问题已给出最近N天或近半年及参考日，可按现有DATE_SUB日/月规则处理；不应另造营业日、订单活跃日或完整自然月解释。"
+    },
+    {
+      "case_id": "final_release_300_224",
+      "question": "以 2026-09-12 为今天，澜庭品牌在售商品中最近上架的前3种是什么？返回商品名称和指标，同值按商品ID升序。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "metric",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "filter",
+            "quote": "澜庭品牌"
+          },
+          {
+            "slot": "filter",
+            "quote": "在售商品中"
+          },
+          {
+            "slot": "ranking",
+            "quote": "最近上架的前3种"
+          },
+          {
+            "slot": "metric",
+            "quote": "返回商品名称和指标"
+          },
+          {
+            "slot": "ranking",
+            "quote": "同值按商品ID升序"
+          }
+        ],
+        "missing_slots": [
+          "metric"
+        ],
+        "clarification_question": "请问‘指标’具体指什么？例如：上架日期、商品ID、销售数量、销售额等。",
+        "options": [
+          "上架日期",
+          "商品ID",
+          "销售数量",
+          "销售额",
+          "退款率",
+          "其他（请说明）"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "最近上架前K已通过launch_date指定排序和所返回指标；不应再索要额外最近N天或换成销量。"
+    },
+    {
+      "case_id": "final_release_300_226",
+      "question": "以 2026-09-12 为今天，优选现在卖的商品里，最贵的4款是什么？同价按商品ID排。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "metric",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "filter",
+            "quote": "优选现在卖的商品里"
+          },
+          {
+            "slot": "limit",
+            "quote": "最贵的4款"
+          },
+          {
+            "slot": "ranking",
+            "quote": "同价按商品ID排"
+          }
+        ],
+        "missing_slots": [
+          "metric"
+        ],
+        "clarification_question": "‘最贵的’是指商品的标价（list_price）还是成本价（cost_price）？",
+        "options": [
+          "list_price",
+          "cost_price"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "在售商品目录中的价格由list_price显示价格语义确定；成本价或交易行价格不是同一请求的合理替代。"
+    },
+    {
+      "case_id": "final_release_300_227",
+      "question": "以 2026-09-12 为今天，服饰鞋包的在售商品平均标价毛利率是多少？",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "metric",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "entity",
+            "quote": "服饰鞋包"
+          },
+          {
+            "slot": "filter",
+            "quote": "在售商品"
+          }
+        ],
+        "missing_slots": [
+          "metric"
+        ],
+        "clarification_question": "请问‘平均标价毛利率’是指（1）所有在售服饰鞋包商品的（list_price - cost_price）/ list_price 的平均值，还是（2）其他定义？",
+        "options": [
+          "（1）（list_price - cost_price）/ list_price 的平均值",
+          "（2）其他定义"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "平均商品标价毛利率指按商品的标价减成本占标价再求平均；成本利润率或整体加权口径不是原文要求。此判断基于通常指标含义，不宣称生产字典显式定义了该指标。"
+    },
+    {
+      "case_id": "final_release_300_229",
+      "question": "以 2026-09-12 为今天，最近87天按城市统计使用过的支付方式数和有效订单平均实付金额。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近87天"
+          },
+          {
+            "slot": "dimension",
+            "quote": "按城市统计"
+          },
+          {
+            "slot": "metric",
+            "quote": "使用过的支付方式数"
+          },
+          {
+            "slot": "metric",
+            "quote": "有效订单平均实付金额"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "最近87天是指从2026-09-12起向前推87个自然日（即2026-06-18至2026-09-12），还是指包含2026-09-12在内的最近87个完整日历日？",
+        "options": [
+          "从2026-09-12起向前推87个自然日（含首尾）",
+          "从2026-09-12起向前推86个自然日（即87天区间，含2026-09-12）"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "问题已给出最近N天或近半年及参考日，可按现有DATE_SUB日/月规则处理；不应另造营业日、订单活跃日或完整自然月解释。"
+    },
+    {
+      "case_id": "final_release_300_230",
+      "question": "以 2026-09-12 为今天，最近39天按城市统计使用过的支付方式数和有效订单平均实付金额。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近39天"
+          },
+          {
+            "slot": "dimension",
+            "quote": "按城市统计"
+          },
+          {
+            "slot": "metric",
+            "quote": "使用过的支付方式数"
+          },
+          {
+            "slot": "metric",
+            "quote": "有效订单平均实付金额"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "请问‘最近39天’是指从2026-09-12起向前推39个自然日（即2026-08-05至2026-09-12），还是其他起止范围？",
+        "options": [
+          "2026-08-05至2026-09-12（含）",
+          "其他，请明确起止日期"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "问题已给出最近N天或近半年及参考日，可按现有DATE_SUB日/月规则处理；不应另造营业日、订单活跃日或完整自然月解释。"
+    },
+    {
+      "case_id": "final_release_300_231",
+      "question": "以 2026-09-12 为今天，最近39天按商品品类统计全部订单明细的数量、明细金额和平均成交单价。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近39天"
+          },
+          {
+            "slot": "dimension",
+            "quote": "按商品品类统计"
+          },
+          {
+            "slot": "metric",
+            "quote": "全部订单明细的数量、明细金额和平均成交单价"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "请问‘最近39天’是指从2026-09-12起向前推39个自然日（即2026-08-05至2026-09-12），还是其他起止范围？",
+        "options": [
+          "2026-08-05 至 2026-09-12（含）",
+          "其他，请说明起止日期"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "问题已给出最近N天或近半年及参考日，可按现有DATE_SUB日/月规则处理；不应另造营业日、订单活跃日或完整自然月解释。"
+    },
+    {
+      "case_id": "final_release_300_232",
+      "question": "以 2026-09-12 为今天，最近111天按订单支付方式统计approved退款订单数和退款金额。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近111天"
+          },
+          {
+            "slot": "dimension",
+            "quote": "按订单支付方式统计"
+          },
+          {
+            "slot": "metric",
+            "quote": "approved退款订单数和退款金额"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "请问‘最近111天’是指从2026-09-12起向前推111个自然日（即2026-05-25至2026-09-12），还是其他起止范围？",
+        "options": [
+          "2026-05-25至2026-09-12",
+          "其他起止日期"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "问题已给出最近N天或近半年及参考日，可按现有DATE_SUB日/月规则处理；不应另造营业日、订单活跃日或完整自然月解释。"
+    },
+    {
+      "case_id": "final_release_300_234",
+      "question": "以 2026-09-12 为今天，青橙品牌在售商品中单件标价毛利最大的前6种是什么？返回商品名称和指标，同值按商品ID升序。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "metric",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "filter",
+            "quote": "青橙品牌"
+          },
+          {
+            "slot": "filter",
+            "quote": "在售商品"
+          },
+          {
+            "slot": "ranking",
+            "quote": "单件标价毛利最大的前6种"
+          },
+          {
+            "slot": "dimension",
+            "quote": "返回商品名称和指标"
+          },
+          {
+            "slot": "ranking",
+            "quote": "同值按商品ID升序"
+          }
+        ],
+        "missing_slots": [
+          "metric"
+        ],
+        "clarification_question": "单件标价毛利是指（list_price - cost_price）还是其他定义？",
+        "options": [
+          "list_price - cost_price",
+          "其他定义"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "单件标价毛利明确指list_price-cost_price；仅问是否如此并未证明关键slot缺失。"
+    },
+    {
+      "case_id": "final_release_300_235",
+      "question": "以 2026-09-12 为今天，成都市的2024年底前注册用户数是多少？",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "entity",
+            "quote": "成都市"
+          },
+          {
+            "slot": "time",
+            "quote": "2024年底前注册用户数"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "请问‘2024年底前’是指注册日期 ≤ '2024-12-31'，还是需要指定其他截止时间？",
+        "options": [
+          "≤ 2024-12-31",
+          "其他（请说明）"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "已明确自然月或年底截止点，日历边界可确定，不需要重新索要起止日期。"
+    },
+    {
+      "case_id": "final_release_300_242",
+      "question": "以 2026-09-12 为今天，母婴用品的在售商品平均标价毛利率是多少？",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "metric",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "2026-09-12"
+          },
+          {
+            "slot": "entity",
+            "quote": "母婴用品"
+          }
+        ],
+        "missing_slots": [
+          "metric"
+        ],
+        "clarification_question": "请问‘毛利率’是指（list_price - cost_price) / list_price 还是 (list_price - cost_price) / cost_price？",
+        "options": [
+          "(list_price - cost_price) / list_price",
+          "(list_price - cost_price) / cost_price"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "平均商品标价毛利率指按商品的标价减成本占标价再求平均；成本利润率或整体加权口径不是原文要求。此判断基于通常指标含义，不宣称生产字典显式定义了该指标。"
+    },
+    {
+      "case_id": "final_release_300_245",
+      "question": "以 2026-09-12 为今天，家用电器的在售商品平均标价毛利率是多少？",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "metric",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "2026-09-12"
+          },
+          {
+            "slot": "filter",
+            "quote": "家用电器"
+          }
+        ],
+        "missing_slots": [
+          "metric"
+        ],
+        "clarification_question": "请问‘毛利率’是指（list_price - cost_price）/ list_price 还是其他定义？",
+        "options": [
+          "（list_price - cost_price）/ list_price",
+          "（list_price - cost_price）/ cost_price",
+          "其他定义"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "平均商品标价毛利率指按商品的标价减成本占标价再求平均；成本利润率或整体加权口径不是原文要求。此判断基于通常指标含义，不宣称生产字典显式定义了该指标。"
+    },
+    {
+      "case_id": "final_release_300_247",
+      "question": "以 2026-09-12 为今天，最近87天按订单支付方式统计approved退款订单数和退款金额。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近87天"
+          },
+          {
+            "slot": "dimension",
+            "quote": "按订单支付方式统计"
+          },
+          {
+            "slot": "metric",
+            "quote": "approved退款订单数和退款金额"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "请问‘最近87天’是指从2026-09-12起向前推87个自然日（即2026-06-18至2026-09-12），还是另有指定起止日期？",
+        "options": [
+          "2026-06-18至2026-09-12",
+          "其他起止日期"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "问题已给出最近N天或近半年及参考日，可按现有DATE_SUB日/月规则处理；不应另造营业日、订单活跃日或完整自然月解释。"
+    },
+    {
+      "case_id": "final_release_300_249",
+      "question": "以 2026-09-12 为今天，最近189天累计优惠最多的用户前6名是什么？只统计有效订单，返回维度和指标，同值按维度升序。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "metric",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近189天"
+          },
+          {
+            "slot": "ranking",
+            "quote": "累计优惠最多的用户前6名"
+          },
+          {
+            "slot": "filter",
+            "quote": "只统计有效订单"
+          },
+          {
+            "slot": "dimension",
+            "quote": "返回维度和指标"
+          },
+          {
+            "slot": "ranking",
+            "quote": "同值按维度升序"
+          }
+        ],
+        "missing_slots": [
+          "metric"
+        ],
+        "clarification_question": "‘累计优惠最多’具体指哪个指标？可选：订单总折扣金额（orders.discount_amount）、商品行折扣金额总和（order_items.discount_amount）、其他明确指标。",
+        "options": [
+          "orders.discount_amount",
+          "order_items.discount_amount"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "按用户累计有效订单优惠属于订单粒度，orders.discount_amount由schema确定；不应任意切换到商品明细。"
+    },
+    {
+      "case_id": "final_release_300_253",
+      "question": "以 2026-09-12 为今天，最近189天平均订单实付最高的城市前5名是什么？只统计有效订单，返回维度和指标，同值按维度升序。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近189天"
+          },
+          {
+            "slot": "metric",
+            "quote": "平均订单实付最高的城市前5名"
+          },
+          {
+            "slot": "filter",
+            "quote": "只统计有效订单"
+          },
+          {
+            "slot": "dimension",
+            "quote": "返回维度和指标"
+          },
+          {
+            "slot": "ranking",
+            "quote": "同值按维度升序"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "请问‘最近189天’是指从2026-09-12起向前推189个自然日（即2026-03-17至2026-09-12），还是其他定义？",
+        "options": [
+          "2026-03-17至2026-09-12",
+          "其他起止日期"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "问题已给出最近N天或近半年及参考日，可按现有DATE_SUB日/月规则处理；不应另造营业日、订单活跃日或完整自然月解释。"
+    },
+    {
+      "case_id": "final_release_300_256",
+      "question": "以 2026-09-12 为今天，上海市的最近一次用户注册日期是多少？",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "entity",
+            "quote": "上海市"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "“最近一次”是指注册日期在2026-09-12之前（不含）的最新日期，还是包含2026-09-12当天？",
+        "options": [
+          "仅限2026-09-12之前",
+          "包含2026-09-12当天"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "最近一次注册日期是register_date的最大值，不是缺少滚动时间窗口。"
+    },
+    {
+      "case_id": "final_release_300_258",
+      "question": "以 2026-09-12 为今天，2026年1月下半月的付费用户数是多少？",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "2026-09-12"
+          },
+          {
+            "slot": "time",
+            "quote": "2026年1月下半月"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "2026年1月下半月的具体日期范围是哪几天？（例如：2026-01-16至2026-01-31）",
+        "options": [
+          "2026-01-16至2026-01-31",
+          "2026-01-15至2026-01-31",
+          "2026-01-16至2026-01-30"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "已明确年月和上/下半月，通常日历含义可确定边界；未表达自定义账期，不应制造15/16日之争。"
+    },
+    {
+      "case_id": "final_release_300_259",
+      "question": "以 2026-09-12 为今天，最近87天按品牌统计approved退款笔数、退款金额和涉及商品数。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近87天"
+          },
+          {
+            "slot": "dimension",
+            "quote": "按品牌统计"
+          },
+          {
+            "slot": "metric",
+            "quote": "approved退款笔数"
+          },
+          {
+            "slot": "metric",
+            "quote": "退款金额"
+          },
+          {
+            "slot": "metric",
+            "quote": "涉及商品数"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "请问‘最近87天’是指从2026-09-12起向前推87个自然日（即2026-06-18至2026-09-12），还是其他定义？",
+        "options": [
+          "2026-06-18至2026-09-12",
+          "其他范围，请明确起止日期"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "问题已给出最近N天或近半年及参考日，可按现有DATE_SUB日/月规则处理；不应另造营业日、订单活跃日或完整自然月解释。"
+    },
+    {
+      "case_id": "final_release_300_262",
+      "question": "以 2026-09-12 为今天，最近33天累计优惠最多的用户前6名是什么？只统计有效订单，返回维度和指标，同值按维度升序。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "metric",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近33天"
+          },
+          {
+            "slot": "ranking",
+            "quote": "累计优惠最多的用户前6名"
+          },
+          {
+            "slot": "filter",
+            "quote": "只统计有效订单"
+          },
+          {
+            "slot": "dimension",
+            "quote": "返回维度和指标"
+          },
+          {
+            "slot": "ranking",
+            "quote": "同值按维度升序"
+          }
+        ],
+        "missing_slots": [
+          "metric"
+        ],
+        "clarification_question": "‘累计优惠’具体指哪个字段？可选：订单级 discount_amount 总和、商品行级 discount_amount 总和。",
+        "options": [
+          "订单级 discount_amount 总和",
+          "商品行级 discount_amount 总和"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "按用户累计有效订单优惠属于订单粒度，orders.discount_amount由schema确定；不应任意切换到商品明细。"
+    },
+    {
+      "case_id": "final_release_300_263",
+      "question": "以 2026-09-12 为今天，最近183天按订单支付方式统计approved退款订单数和退款金额。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近183天"
+          },
+          {
+            "slot": "dimension",
+            "quote": "按订单支付方式统计"
+          },
+          {
+            "slot": "metric",
+            "quote": "approved退款订单数和退款金额"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "‘最近183天’是指从2026-09-12起向前推183个自然日（即2026-03-14至2026-09-12），还是其他定义？",
+        "options": [
+          "2026-03-14至2026-09-12",
+          "其他起止日期"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "问题已给出最近N天或近半年及参考日，可按现有DATE_SUB日/月规则处理；不应另造营业日、订单活跃日或完整自然月解释。"
+    },
+    {
+      "case_id": "final_release_300_267",
+      "question": "以 2026-09-12 为今天，美妆个护的在售商品平均标价毛利率是多少？",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "metric",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "2026-09-12"
+          },
+          {
+            "slot": "filter",
+            "quote": "美妆个护"
+          },
+          {
+            "slot": "filter",
+            "quote": "在售商品"
+          }
+        ],
+        "missing_slots": [
+          "metric"
+        ],
+        "clarification_question": "请问‘平均标价毛利率’是指（1）所有在售美妆个护商品的（list_price - cost_price）/ list_price 的算术平均值，还是（2）所有在售美妆个护商品的（总list_price - 总cost_price）/ 总list_price？",
+        "options": [
+          "（1）单商品毛利率算术平均",
+          "（2）整体加权毛利率"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "平均商品标价毛利率指按商品的标价减成本占标价再求平均；成本利润率或整体加权口径不是原文要求。此判断基于通常指标含义，不宣称生产字典显式定义了该指标。"
+    },
+    {
+      "case_id": "final_release_300_270",
+      "question": "以 2026-09-12 为今天，澜庭品牌在售商品中单件标价毛利最大的前6种是什么？返回商品名称和指标，同值按商品ID升序。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "metric",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "filter",
+            "quote": "澜庭品牌"
+          },
+          {
+            "slot": "filter",
+            "quote": "在售商品"
+          },
+          {
+            "slot": "metric",
+            "quote": "单件标价毛利最大的前6种"
+          },
+          {
+            "slot": "dimension",
+            "quote": "返回商品名称和指标"
+          },
+          {
+            "slot": "ranking",
+            "quote": "同值按商品ID升序"
+          }
+        ],
+        "missing_slots": [
+          "metric"
+        ],
+        "clarification_question": "请问‘单件标价毛利’是指（list_price - cost_price）还是其他定义？",
+        "options": [
+          "list_price - cost_price",
+          "其他定义"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "单件标价毛利明确指list_price-cost_price；仅问是否如此并未证明关键slot缺失。"
+    },
+    {
+      "case_id": "final_release_300_271",
+      "question": "以 2026-09-12 为今天，最近231天按用户等级和支付方式统计有效订单数与销售额。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "2026-09-12"
+          },
+          {
+            "slot": "time",
+            "quote": "最近231天"
+          },
+          {
+            "slot": "dimension",
+            "quote": "用户等级"
+          },
+          {
+            "slot": "dimension",
+            "quote": "支付方式"
+          },
+          {
+            "slot": "metric",
+            "quote": "有效订单数"
+          },
+          {
+            "slot": "metric",
+            "quote": "销售额"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "最近231天是指从2026-09-12起向前推231个自然日（即2026-01-15至2026-09-12），还是指包含2026-09-12在内的最近231个日历日？",
+        "options": [
+          "从2026-09-12起向前推231个自然日（含首尾）",
+          "其他明确起止日期"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "问题已给出最近N天或近半年及参考日，可按现有DATE_SUB日/月规则处理；不应另造营业日、订单活跃日或完整自然月解释。"
+    },
+    {
+      "case_id": "final_release_300_273",
+      "question": "以 2026-09-12 为今天，2026年1月上半月的付费用户数是多少？",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "2026年1月上半月"
+          },
+          {
+            "slot": "metric",
+            "quote": "付费用户数"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "2026年1月上半月具体指哪段时间？请明确起止日期（例如：2026-01-01 至 2026-01-15）。",
+        "options": [
+          "2026-01-01 至 2026-01-15",
+          "2026-01-01 至 2026-01-16"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "已明确年月和上/下半月，通常日历含义可确定边界；未表达自定义账期，不应制造15/16日之争。"
+    },
+    {
+      "case_id": "final_release_300_274",
+      "question": "以 2026-09-12 为今天，最近183天按品牌统计approved退款笔数、退款金额和涉及商品数。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "2026-09-12"
+          },
+          {
+            "slot": "time",
+            "quote": "最近183天"
+          },
+          {
+            "slot": "dimension",
+            "quote": "按品牌统计"
+          },
+          {
+            "slot": "metric",
+            "quote": "approved退款笔数"
+          },
+          {
+            "slot": "metric",
+            "quote": "退款金额"
+          },
+          {
+            "slot": "metric",
+            "quote": "涉及商品数"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "最近183天是指从2026-09-12起向前推183个自然日（即2026-03-14至2026-09-12），还是指最近完成的183个日历日？",
+        "options": [
+          "从2026-09-12起向前推183个自然日（含）",
+          "最近连续183个日历日（不含今日）"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "问题已给出最近N天或近半年及参考日，可按现有DATE_SUB日/月规则处理；不应另造营业日、订单活跃日或完整自然月解释。"
+    },
+    {
+      "case_id": "final_release_300_275",
+      "question": "以 2026-09-12 为今天，优选品牌在售商品中最近上架的前3种是什么？返回商品名称和指标，同值按商品ID升序。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "multiple",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "filter",
+            "quote": "优选品牌在售商品中"
+          },
+          {
+            "slot": "ranking",
+            "quote": "最近上架的前3种"
+          },
+          {
+            "slot": "metric",
+            "quote": "返回商品名称和指标"
+          },
+          {
+            "slot": "ranking",
+            "quote": "同值按商品ID升序"
+          }
+        ],
+        "missing_slots": [
+          "filter",
+          "time"
+        ],
+        "clarification_question": "请明确：1. '优选品牌'具体指哪些品牌（可列举或说明筛选规则）；2. '最近上架'的时间范围（例如最近7天、30天，或仅按launch_date降序取前3）？",
+        "options": [
+          "优选品牌=华为、苹果、小米",
+          "优选品牌=平台官方认证品牌列表",
+          "最近上架=launch_date ≤ '2026-09-12'且倒序取前3",
+          "最近上架=过去30天内上架"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "商品目录上下文支持按原文品牌字面值过滤；不应强行改问城市或换实体。数据库无匹配也是合法空结果；最近上架Top-K指定了排序而非额外时间窗口。"
+    },
+    {
+      "case_id": "final_release_300_280",
+      "question": "以 2026-09-12 为今天，最近180天美妆个护各退款原因的approved退款笔数和退款金额是多少？",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近180天"
+          },
+          {
+            "slot": "filter",
+            "quote": "美妆个护"
+          },
+          {
+            "slot": "dimension",
+            "quote": "各退款原因"
+          },
+          {
+            "slot": "metric",
+            "quote": "approved退款笔数"
+          },
+          {
+            "slot": "metric",
+            "quote": "退款金额"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "最近180天是指从2026-09-12起向前推180个自然日（即2026-03-16至2026-09-12），还是其他起止日期？",
+        "options": [
+          "2026-03-16至2026-09-12",
+          "其他起止日期，请明确"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "问题已给出最近N天或近半年及参考日，可按现有DATE_SUB日/月规则处理；不应另造营业日、订单活跃日或完整自然月解释。"
+    },
+    {
+      "case_id": "final_release_300_281",
+      "question": "以 2026-09-12 为今天，最近24天按品牌统计approved退款笔数、退款金额和涉及商品数。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近24天"
+          },
+          {
+            "slot": "dimension",
+            "quote": "按品牌统计"
+          },
+          {
+            "slot": "metric",
+            "quote": "approved退款笔数、退款金额和涉及商品数"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "请问‘最近24天’是指从2026-09-12起向前推24天（即2026-08-20至2026-09-12），还是其他起止范围？",
+        "options": [
+          "2026-08-20至2026-09-12",
+          "2026-08-19至2026-09-11",
+          "其他起止日期"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "问题已给出最近N天或近半年及参考日，可按现有DATE_SUB日/月规则处理；不应另造营业日、订单活跃日或完整自然月解释。"
+    },
+    {
+      "case_id": "final_release_300_282",
+      "question": "以 2026-09-12 为今天，近24天各等级、各支付渠道成交了多少单和多少钱？",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "近24天"
+          },
+          {
+            "slot": "dimension",
+            "quote": "各等级"
+          },
+          {
+            "slot": "dimension",
+            "quote": "各支付渠道"
+          },
+          {
+            "slot": "metric",
+            "quote": "成交了多少单和多少钱"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "近24天是指从2026-09-12往前推24天（即2026-08-20至2026-09-12），还是指最近完整24个自然日（即2026-08-19至2026-09-11）？",
+        "options": [
+          "2026-08-20 至 2026-09-12",
+          "2026-08-19 至 2026-09-11"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "问题已给出最近N天或近半年及参考日，可按现有DATE_SUB日/月规则处理；不应另造营业日、订单活跃日或完整自然月解释。"
+    },
+    {
+      "case_id": "final_release_300_283",
+      "question": "以 2026-09-12 为今天，最近111天按商品品类统计全部订单明细的数量、明细金额和平均成交单价。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近111天"
+          },
+          {
+            "slot": "dimension",
+            "quote": "按商品品类统计"
+          },
+          {
+            "slot": "metric",
+            "quote": "全部订单明细的数量、明细金额和平均成交单价"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "请问‘最近111天’是指从2026-09-12起向前推111个自然日（即2026-05-24至2026-09-12），还是包含其他定义？",
+        "options": [
+          "2026-05-24至2026-09-12（含）",
+          "其他起止日期"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "问题已给出最近N天或近半年及参考日，可按现有DATE_SUB日/月规则处理；不应另造营业日、订单活跃日或完整自然月解释。"
+    },
+    {
+      "case_id": "final_release_300_284",
+      "question": "以 2026-09-12 为今天，最近72天按用户等级同时统计有效订单销售额、approved退款金额和净收入；订单与退款先按用户独立汇总。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近72天"
+          },
+          {
+            "slot": "dimension",
+            "quote": "按用户等级"
+          },
+          {
+            "slot": "metric",
+            "quote": "有效订单销售额"
+          },
+          {
+            "slot": "metric",
+            "quote": "approved退款金额"
+          },
+          {
+            "slot": "metric",
+            "quote": "净收入"
+          },
+          {
+            "slot": "entity",
+            "quote": "订单与退款先按用户独立汇总"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "请问‘最近72天’是指从2026-09-12起向前推72个自然日（即2026-07-03至2026-09-12），还是其他起止日期？",
+        "options": [
+          "2026-07-03至2026-09-12",
+          "其他，请明确起止日期"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "问题已给出最近N天或近半年及参考日，可按现有DATE_SUB日/月规则处理；不应另造营业日、订单活跃日或完整自然月解释。"
+    },
+    {
+      "case_id": "final_release_300_285",
+      "question": "以 2026-09-12 为今天，最近57天付费用户数最多的用户等级前3名是什么？只统计有效订单，返回维度和指标，同值按维度升序。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近57天"
+          },
+          {
+            "slot": "metric",
+            "quote": "付费用户数"
+          },
+          {
+            "slot": "dimension",
+            "quote": "用户等级"
+          },
+          {
+            "slot": "limit",
+            "quote": "前3名"
+          },
+          {
+            "slot": "filter",
+            "quote": "只统计有效订单"
+          },
+          {
+            "slot": "ranking",
+            "quote": "同值按维度升序"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "最近57天是指从2026-09-12往前推57个自然日（即2026-07-17至2026-09-12），还是指最近连续的57个有订单数据的日期？",
+        "options": [
+          "自然日区间（含首尾）",
+          "有订单的活跃日区间"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "问题已给出最近N天或近半年及参考日，可按现有DATE_SUB日/月规则处理；不应另造营业日、订单活跃日或完整自然月解释。"
+    },
+    {
+      "case_id": "final_release_300_288",
+      "question": "以 2026-09-12 为今天，星禾品牌在售商品中单件标价毛利最大的前6种是什么？返回商品名称和指标，同值按商品ID升序。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "metric",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "2026-09-12"
+          },
+          {
+            "slot": "filter",
+            "quote": "星禾品牌"
+          },
+          {
+            "slot": "filter",
+            "quote": "在售商品"
+          },
+          {
+            "slot": "metric",
+            "quote": "单件标价毛利"
+          },
+          {
+            "slot": "limit",
+            "quote": "最大的前6种"
+          },
+          {
+            "slot": "dimension",
+            "quote": "商品名称"
+          },
+          {
+            "slot": "ranking",
+            "quote": "同值按商品ID升序"
+          }
+        ],
+        "missing_slots": [
+          "metric"
+        ],
+        "clarification_question": "单件标价毛利是指 list_price - cost_price 吗？",
+        "options": [
+          "是，list_price - cost_price",
+          "否，其他定义"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "单件标价毛利明确指list_price-cost_price；仅问是否如此并未证明关键slot缺失。"
+    },
+    {
+      "case_id": "final_release_300_290",
+      "question": "以 2026-09-12 为今天，最近120天成都市各用户等级的付费用户数、有效订单数和销售额是多少？",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "time",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "time",
+            "quote": "最近120天"
+          },
+          {
+            "slot": "entity",
+            "quote": "成都市"
+          },
+          {
+            "slot": "dimension",
+            "quote": "各用户等级"
+          },
+          {
+            "slot": "metric",
+            "quote": "付费用户数、有效订单数和销售额"
+          }
+        ],
+        "missing_slots": [
+          "time"
+        ],
+        "clarification_question": "请问‘最近120天’是指从2026-09-12起向前推120个自然日（即2026-05-16至2026-09-12），还是指其他起止日期？",
+        "options": [
+          "2026-05-16至2026-09-12",
+          "其他起止日期"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "问题已给出最近N天或近半年及参考日，可按现有DATE_SUB日/月规则处理；不应另造营业日、订单活跃日或完整自然月解释。"
+    },
+    {
+      "case_id": "final_release_300_294",
+      "question": "以 2026-09-12 为今天，青橙品牌在售商品中最近上架的前3种是什么？返回商品名称和指标，同值按商品ID升序。",
+      "gate_output": {
+        "decision": "clarify",
+        "ambiguity_type": "metric",
+        "known_constraints": [
+          {
+            "slot": "time",
+            "quote": "以 2026-09-12 为今天"
+          },
+          {
+            "slot": "filter",
+            "quote": "青橙品牌"
+          },
+          {
+            "slot": "filter",
+            "quote": "在售商品"
+          },
+          {
+            "slot": "ranking",
+            "quote": "最近上架的前3种"
+          },
+          {
+            "slot": "metric",
+            "quote": "返回商品名称和指标"
+          },
+          {
+            "slot": "ranking",
+            "quote": "同值按商品ID升序"
+          }
+        ],
+        "missing_slots": [
+          "metric"
+        ],
+        "clarification_question": "请问‘指标’具体指什么？例如：上架天数、上架日期、商品ID、售价、成本价、销量、销售额等。",
+        "options": [
+          "上架日期",
+          "上架天数（距2026-09-12的天数）",
+          "商品ID",
+          "售价",
+          "成本价",
+          "销量",
+          "销售额"
+        ],
+        "resolved_slots": []
+      },
+      "classification": "B",
+      "reason": "最近上架前K已通过launch_date指定排序和所返回指标；不应再索要额外最近N天或换成销量。"
+    }
+  ]
+}

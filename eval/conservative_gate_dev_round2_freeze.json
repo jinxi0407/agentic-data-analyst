@@ -1,0 +1,33 @@
+{
+  "gate_sha256": "0046574183410e8434c6231c6f20ad09c9ad6cfcf5177025a7b48a3d5dbeb0c5",
+  "runner_sha256": "77dd2f45e08491c8b4da132580a7fd0292afd4830555b7143eab310b9886f054",
+  "database": {
+    "users": "b827470388b126a973c77491e8863f6e6e51e7cbfeb7f689923a1b48ac2d55dc",
+    "products": "1a33196738fb59c7ee3d88f68e5ab3c89c94c5ca14864d3976c65337f3aad43e",
+    "orders": "e08ce1622cc57a7ad81b115f96fe1a7012a37b18b49229ae69da3d4c9335dab3",
+    "order_items": "40c992219526ac2fe849d58990769f788d07e4c6b3a83645b8863f65314a8a3e",
+    "refunds": "e8c296d3b783f81b322bc103d5f9eb00823141234155a3250980828af242d6b2",
+    "core_table": "af48658b968e0d6f803c66aebc0e6d9bc7b83030634f6ff2ebd4abc9ab6353d1",
+    "core_field": "bb1c16e9bed8a8ab47c6204cfa55986378340eea6bbb54f92cdefe112b265fdd"
+  },
+  "cases_sha256": "6a362ad722c5f4fcca593fcd626076b0c43a93a142e190f23c09187de4a61687",
+  "config": {
+    "chat_model": "qwen-plus",
+    "embedding_model": "text-embedding-v4",
+    "sql_temperature": 0.05,
+    "gate_temperature": 0,
+    "execution_retry_limit": 2,
+    "gate_format_retry_limit": 1,
+    "sql_max_rows": 200,
+    "workers_per_mode": 4,
+    "batch_size": 20,
+    "sdk_version": "1.27.5",
+    "sdk_default_timeout_seconds": 300,
+    "timeout_policy": "Unmodified SDK defaults for both modes; no outer timeout or evaluation retry",
+    "model_calls_definition": "Calls recorded by existing capture_usage, including API/transport errors; internal SDK wire retries are not separately counted",
+    "schedule": "Original case order, batches of 20; OFF then ON in even batches, ON then OFF in odd batches; same shared 4-worker pool",
+    "second_user_turn": false,
+    "embedding_calls": 0
+  },
+  "purpose": "Revealed development regression. Fresh ON, historical unchanged-engine OFF retained only as diagnostic paired reference."
+}
