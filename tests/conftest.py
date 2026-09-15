@@ -4,10 +4,12 @@ import pytest
 import requests
 
 from app.tools import database, qwen
+from app.agent import diagnostics
 
 
 @pytest.fixture(autouse=True)
-def block_unmocked_external_calls(monkeypatch):
+def block_unmocked_external_calls(monkeypatch, tmp_path):
+    monkeypatch.setattr(diagnostics, "LOG_DIR", tmp_path / "diagnostics")
     def blocked(*args, **kwargs):
         pytest.fail("Unmocked external call: use a test double; run live checks separately")
     monkeypatch.setattr(qwen, "_require_dashscope", blocked)

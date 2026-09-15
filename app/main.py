@@ -5,15 +5,37 @@ from __future__ import annotations
 from fastapi import FastAPI
 from pydantic import BaseModel, Field, model_validator
 from typing import Literal
+from uuid import UUID, uuid4
 
 from app.agent.production import run_interactive
 from app.agent.clarification import ClarificationContext
 from app.config import settings
 from app.tools.database import ping
 from app.agent import scoped_clarification as scoped
+from app.agent import diagnostics as diag
 
 
 app = FastAPI(title="Agentic Data Analyst", version="1.1.0")
+
+
+@app.middleware("http")
+async def request_diagnostics(request, call_next):
+    if not request.url.path.startswith("/api/"):
+        return await call_next(request)
+    try:
+        rid = str(UUID(request.headers.get("X-Request-ID", "")))
+    except ValueError:
+        rid = str(uuid4())
+    token = diag.request_id.set(rid)
+    try:
+        diag.event("api_received", endpoint=request.url.path,
+                   parent_request_id=request.headers.get("X-Parent-Request-ID", "")[:36])
+        response = await call_next(request)
+        response.headers["X-Request-ID"] = rid
+        diag.event("api_completed", http_status=response.status_code)
+        return response
+    finally:
+        diag.request_id.reset(token)
 
 
 class QueryRequest(BaseModel):
@@ -80,12 +102,20 @@ class ScopedQueryRequest(BaseModel):
 
 @app.post("/api/scoped-query")
 def scoped_query(request: ScopedQueryRequest):
+    diag.event("query_received", mode=request.mode, gate_enabled=request.mode == "clarify",
+               question=request.question, answer=request.clarification_answer,
+               context=request.clarification_context.model_dump(mode="json") if request.clarification_context else None)
     try:
         if request.mode == "clarify":
             result = scoped.run_interactive(request.question, request.clarification_answer,
                                            request.clarification_context)
         else:
             result = scoped.direct(request.question)
-        return {"engine": "Production NL2SQL Engine", **result, "question": request.question}
-    except Exception:
-        return {"status": "system_error", "error": "查询服务未完成，请稍后重试。", "result": [], "sql": ""}
+        diag.event("query_completed", status=result.get("status"), sql=result.get("sql"),
+                   result_rows=len(result.get("result", [])), trace=result.get("trace"))
+        return {"engine": "Production NL2SQL Engine", **result, "question": request.question,
+                "request_id": diag.request_id.get(), "mode": request.mode}
+    except Exception as exc:
+        diag.event("query_failed", error_type=type(exc).__name__, location="app.main.scoped_query")
+        return {"status": "system_error", "error": "查询服务未完成，请稍后重试。", "result": [], "sql": "",
+                "error_code": "query_service_error", "request_id": diag.request_id.get(), "mode": request.mode}

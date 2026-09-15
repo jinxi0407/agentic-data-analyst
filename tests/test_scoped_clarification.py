@@ -13,10 +13,7 @@ def decision(kind="proceed", slots=None, resolved=None):
                     critical_missing_slots=slots or [],
                     alternatives=["最近7天", "最近30天"] if kind == "clarify" else [],
                     clarification_question="请给出时间范围" if kind == "clarify" else "")
-    return dict(decision=kind, ambiguity_type="none" if kind == "proceed" else "time",
-                known_constraints=[], missing_slots=slots or [],
-                clarification_question="请给出时间范围" if kind == "clarify" else "",
-                options=[], resolved_slots=resolved or [])
+    return dict(decision=kind, missing_slots=slots or [], resolved_slots=resolved or [])
 
 
 @pytest.fixture(autouse=True)
@@ -60,9 +57,9 @@ def test_format_has_one_retry_and_no_execution(monkeypatch):
 
 
 def test_fabricated_or_unasked_evidence_rejected():
-    d = gate.Decision.model_validate(decision(resolved=[{"slot": "metric", "quote": "销量"}]))
     context = gate.Context(original_question="销售额", known_constraints=[], missing_slots=["time"],
                            clarification_question="时间？", reference_date=date.today())
+    d = gate.FollowupDecision.model_validate(decision(resolved=[{"slot": "metric", "quote": "销量"}])).for_interaction(context)
     with pytest.raises(ValueError):
         gate.validate_evidence(d, "销售额", context, "销量")
 
@@ -96,16 +93,16 @@ def test_scoped_api_roundtrip_and_mode(monkeypatch):
     {"alternatives": ["最近7天", " 最近7天 "]},
     {"clarification_question": "  "}, {"ambiguity_type": "none"},
 ])
-def test_insufficient_proof_proceeds_unchanged(monkeypatch, changes):
+def test_insufficient_proof_stops_without_execution(monkeypatch, changes):
     value = decision("clarify", ["time"])
     value.update(changes)
     monkeypatch.setattr(gate, "generate_text", lambda *a, **kw: json.dumps(value))
     original = "2026年8月上海市销售额前4名，保留既有筛选"
     result = gate.run_interactive(original)
-    assert result["status"] == "success"
+    assert result["status"] == "invalid_output"
     assert result["question"] == original
-    assert result["gate_decision"]["critical_missing_slots"] == []
-    assert result["submitted"].endswith(original)
+    assert result["error_code"] == "gate_validation_failed"
+    assert "submitted" not in result and result["sql"] == ""
 
 
 def test_initial_schema_never_rewrites_question(monkeypatch):
