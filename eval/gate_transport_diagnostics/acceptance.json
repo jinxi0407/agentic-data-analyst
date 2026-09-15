@@ -1,0 +1,38 @@
+{
+  "checkpoint": "f780857",
+  "gate_policy_ast_unchanged": true,
+  "sql_engine_unchanged": true,
+  "database": {
+    "users": "b827470388b126a973c77491e8863f6e6e51e7cbfeb7f689923a1b48ac2d55dc",
+    "products": "1a33196738fb59c7ee3d88f68e5ab3c89c94c5ca14864d3976c65337f3aad43e",
+    "orders": "e08ce1622cc57a7ad81b115f96fe1a7012a37b18b49229ae69da3d4c9335dab3",
+    "order_items": "40c992219526ac2fe849d58990769f788d07e4c6b3a83645b8863f65314a8a3e",
+    "refunds": "e8c296d3b783f81b322bc103d5f9eb00823141234155a3250980828af242d6b2",
+    "core_table": "af48658b968e0d6f803c66aebc0e6d9bc7b83030634f6ff2ebd4abc9ab6353d1",
+    "core_field": "bb1c16e9bed8a8ab47c6204cfa55986378340eea6bbb54f92cdefe112b265fdd"
+  },
+  "cases_sha256": "6a362ad722c5f4fcca593fcd626076b0c43a93a142e190f23c09187de4a61687",
+  "completed": 10,
+  "clear_proceed": 5,
+  "ambiguous_clarify": 5,
+  "mean_s": 2.6973966000000003,
+  "minimum_s": 1.281093,
+  "maximum_s": 4.1998,
+  "model_calls": 10,
+  "http_requests": 10,
+  "connections": 1,
+  "files": {
+    "eval/gate_transport_diagnostics/01_minimal.json": "76a9486d7d2592cf98a03993a9895c082043a05c1d980772c047e9fac18b39c1",
+    "eval/gate_transport_diagnostics/02_clear.json": "bf3e953776f0fa8087756268b30c836df504e2ec78d634124f744c37c6de1a48",
+    "eval/gate_transport_diagnostics/03_ambiguous.json": "4d2d1acded268d4d1c14d4e979a4ba7f54e6500b937de8f48887edca96acc91f",
+    "eval/gate_transport_diagnostics/04_clear_json_object.json": "c055121444312e93c4ce4729cb9633c58cd9083b704cd916ba0391a8ed277956",
+    "eval/gate_transport_diagnostics/05_clear_json_object_schema.json": "0146db4505fa0a5e4c160bd1283f557f2bc7667d72ec9bc967ee76d755eea381",
+    "eval/gate_transport_diagnostics/06_ambiguous_json_object_schema.json": "0ead49e8f6626d01476cc331ae7517ec30fcdce0a2c53003b85021acffcc34d3",
+    "eval/gate_transport_diagnostics/07_strict_control.json": "facded39a5c91e95785e5e3c8c22f052e9a58d7d641017464d0736651a90fb97",
+    "eval/gate_transport_diagnostics/08_fixed_serial_10.json": "04a8c83c1d2d572c897b9a8ab9120690d5c03e30db1108889d7a0cae052f686f",
+    "eval/gate_transport_diagnostics/09_json_object_serial_10.json": "c04b6dd7904227d1a1ba3e5b3fa1e5feb59643dd6c8c4ec7b2c5ac1da312b9e6"
+  },
+  "large_evaluation_run": false,
+  "new_mixed_cases_generated": false,
+  "scope": "Transport smoke on two explicit diagnostic questions, not accuracy or load validation"
+}

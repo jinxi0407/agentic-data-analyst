@@ -13,6 +13,7 @@ from eval.strong_baseline import BUSINESS_CONTEXT, schema_context
 from eval.strong_baseline_v2 import STATIC_SCHEMA_METADATA, run_question
 
 Slot = Literal["time", "metric", "entity", "filter", "dimension", "ranking", "limit"]
+GATE_REQUEST_TIMEOUT = (5, 30)
 
 
 class Constraint(BaseModel):
@@ -187,11 +188,14 @@ def decide(question, reference_date, context=None, answer=None):
                "return proceed with exact answer quotes in resolved_slots; otherwise needs_rephrase."},
         ])
     output_type = Decision if context else InitialDecision
-    fmt = {"type": "json_schema", "json_schema": {"name": "clarification_decision",
-           "strict": True, "schema": output_type.model_json_schema()}}
+    fmt = {"type": "json_object"}
+    # The API guarantees JSON; the unchanged Pydantic model enforces its shape.
+    messages[0]["content"] += "\nResponse JSON Schema:\n" + json.dumps(
+        output_type.model_json_schema(), ensure_ascii=False)
     for attempt in range(2):
         try:
-            raw = generate_text(messages, temperature=0, response_format=fmt)
+            raw = generate_text(messages, temperature=0, response_format=fmt,
+                                request_timeout=GATE_REQUEST_TIMEOUT)
         except Exception:
             raise GateError("system_error") from None
         try:

@@ -1,0 +1,81 @@
+{
+  "step": "clear",
+  "variant": "schema_in_message",
+  "concurrency": 1,
+  "sdk_version": "1.27.5",
+  "qwen_wrapper_sha256": "c45cf5cd26f98940cd9bd56b115c08e7a3db62a5a10c9818eaaae398db26d133",
+  "gate_sha256": "0046574183410e8434c6231c6f20ad09c9ad6cfcf5177025a7b48a3d5dbeb0c5",
+  "proxy_env_present": {
+    "HTTP_PROXY": false,
+    "HTTPS_PROXY": false,
+    "ALL_PROXY": false,
+    "http_proxy": false,
+    "https_proxy": false,
+    "all_proxy": false
+  },
+  "requests": [
+    {
+      "kind": "clear",
+      "index": 1,
+      "variant": "schema_in_message",
+      "connections": [
+        {
+          "dns_tcp_tls_s": 0.190502
+        }
+      ],
+      "http_requests": [
+        {
+          "model": "qwen-plus",
+          "body_bytes": 11088,
+          "message_count": 2,
+          "message_characters": 9241,
+          "token_estimate_range": [
+            2310,
+            9241
+          ],
+          "token_estimate_note": "Rough mixed-language bounds, not tokenizer counts; actual usage recorded separately",
+          "structured_output_mode": "json_schema",
+          "parameter_names": [
+            "response_format",
+            "result_format",
+            "temperature"
+          ],
+          "max_tokens": "server default",
+          "stream_parameter": false,
+          "schema_context_occurrences": 1,
+          "business_context_occurrences": 1,
+          "static_metadata_occurrences": 1,
+          "body_sha256": "573e3995221be20b2a55230658ecf376b7b886ccbf00f81b32827db9202992f7",
+          "timeout": [
+            5,
+            30
+          ],
+          "stream": false,
+          "headers_after_s": 1.638956,
+          "http_status": 200,
+          "requests_headers_elapsed_s": 1.639476,
+          "total_http_s": 1.639752
+        }
+      ],
+      "model_calls": [
+        {
+          "input_tokens": 2225,
+          "output_tokens": 40,
+          "status": "ok"
+        }
+      ],
+      "outputs": [
+        {
+          "characters": 141,
+          "whitespace_fraction": 0.14893617021276595,
+          "finish_reason": "stop"
+        }
+      ],
+      "decision": "proceed",
+      "missing_slots": [],
+      "success": true,
+      "total_s": 1.704156,
+      "first_response_note": "headers_after_s measures first response headers, not first streamed token; actual mode is non-streaming"
+    }
+  ]
+}

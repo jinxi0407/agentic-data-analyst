@@ -1,0 +1,72 @@
+{
+  "step": "ambiguous",
+  "variant": "bounded",
+  "concurrency": 1,
+  "sdk_version": "1.27.5",
+  "qwen_wrapper_sha256": "c45cf5cd26f98940cd9bd56b115c08e7a3db62a5a10c9818eaaae398db26d133",
+  "gate_sha256": "0046574183410e8434c6231c6f20ad09c9ad6cfcf5177025a7b48a3d5dbeb0c5",
+  "proxy_env_present": {
+    "HTTP_PROXY": false,
+    "HTTPS_PROXY": false,
+    "ALL_PROXY": false,
+    "http_proxy": false,
+    "https_proxy": false,
+    "all_proxy": false
+  },
+  "requests": [
+    {
+      "kind": "ambiguous",
+      "index": 1,
+      "variant": "bounded",
+      "connections": [
+        {
+          "dns_tcp_tls_s": 0.221299
+        }
+      ],
+      "http_requests": [
+        {
+          "model": "qwen-plus",
+          "body_bytes": 10130,
+          "message_count": 2,
+          "message_characters": 8413,
+          "token_estimate_range": [
+            2103,
+            8413
+          ],
+          "token_estimate_note": "Rough mixed-language bounds, not tokenizer counts; actual usage recorded separately",
+          "structured_output_mode": "json_schema",
+          "parameter_names": [
+            "response_format",
+            "result_format",
+            "temperature"
+          ],
+          "max_tokens": "server default",
+          "stream_parameter": false,
+          "schema_context_occurrences": 1,
+          "business_context_occurrences": 1,
+          "static_metadata_occurrences": 1,
+          "body_sha256": "147ebb082534f4915f02a0ac83cee4303d29f455fabdb62c2dbc9326c09e57a3",
+          "timeout": [
+            5,
+            30
+          ],
+          "stream": false,
+          "transport_exception": "ReadTimeoutError",
+          "exception": "ReadTimeout",
+          "total_http_s": 30.225124
+        }
+      ],
+      "model_calls": [
+        {
+          "input_tokens": null,
+          "output_tokens": null,
+          "status": "transport_error"
+        }
+      ],
+      "success": false,
+      "error_type": "GateError",
+      "total_s": 30.278594,
+      "first_response_note": "headers_after_s measures first response headers, not first streamed token; actual mode is non-streaming"
+    }
+  ]
+}

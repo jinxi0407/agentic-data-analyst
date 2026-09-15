@@ -45,13 +45,16 @@ def _require_dashscope():
 
 
 def generate_text(messages: List[Dict[str, str]], temperature: float = 0.1,
-                  response_format: dict | None = None) -> str:
+                  response_format: dict | None = None, *,
+                  request_timeout: tuple[float, float] | None = None) -> str:
     dashscope = _require_dashscope()
     records = _usage.get()
     record = {"input_tokens": None, "output_tokens": None, "status": "transport_error"}
     if records is not None:
         records.append(record)
     kwargs = {"response_format": response_format} if response_format is not None else {}
+    if request_timeout is not None:
+        kwargs["request_timeout"] = request_timeout
     response = dashscope.Generation.call(
         model=settings.qwen_chat_model,
         messages=messages,

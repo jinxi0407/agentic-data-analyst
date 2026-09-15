@@ -56,7 +56,7 @@ def test_format_has_one_retry_and_no_execution(monkeypatch):
     calls = []
     monkeypatch.setattr(gate, "generate_text", lambda *a, **kw: calls.append(kw) or "{}")
     assert gate.run_interactive("q")["status"] == "invalid_output"
-    assert len(calls) == 2 and calls[0]["response_format"]["json_schema"]["strict"]
+    assert len(calls) == 2 and calls[0]["response_format"] == {"type": "json_object"}
 
 
 def test_fabricated_or_unasked_evidence_rejected():
@@ -112,7 +112,11 @@ def test_initial_schema_never_rewrites_question(monkeypatch):
     seen = []
     def generate(messages, **kwargs):
         assert "JSON" in messages[0]["content"]
-        seen.append(kwargs["response_format"]["json_schema"]["schema"])
+        schema = json.loads(messages[0]["content"].split("\nResponse JSON Schema:\n")[1])
+        assert schema == gate.InitialDecision.model_json_schema()
+        assert kwargs["response_format"] == {"type": "json_object"}
+        assert kwargs["request_timeout"] == (5, 30)
+        seen.append(schema)
         return json.dumps(decision())
     monkeypatch.setattr(gate, "generate_text", generate)
     gate.run_interactive("问题原文")

@@ -16,7 +16,8 @@ from eval import run_300_clarification_regression as original
 from eval.scoring import fingerprint, write_json
 
 ROOT = original.ROOT
-PREFIX = ROOT / "eval/conservative_gate_dev_round2"
+PREFIX = ROOT / "eval/conservative_gate_dev_transport_fix"
+WORKERS = 1
 
 
 def verify_engine():
@@ -25,7 +26,24 @@ def verify_engine():
                  if k.startswith(('app/', 'ui/')) or k in
                  ('eval/strong_baseline.py', 'eval/strong_baseline_v2.py', 'eval/scoring.py')}
     protected.pop('app/agent/scoped_clarification.py')
+    protected.pop('app/tools/qwen.py')
     original.verify_files(protected)
+    # Timeout passthrough is opt-in. Existing engine calls must remain identical.
+    old_wrapper = original.git('show', original.BASE + ':app/tools/qwen.py')
+    current_wrapper = (ROOT / 'app/tools/qwen.py').read_text()
+    old_nodes = {n.name: ast.dump(n) for n in ast.parse(old_wrapper).body if isinstance(n,ast.FunctionDef)}
+    new_nodes = {n.name: ast.dump(n) for n in ast.parse(current_wrapper).body if isinstance(n,ast.FunctionDef)}
+    assert all(new_nodes[k] == v for k,v in old_nodes.items() if k != 'generate_text')
+    before = next(n for n in ast.parse(old_wrapper).body if isinstance(n,ast.FunctionDef) and n.name=='generate_text')
+    after = next(n for n in ast.parse(current_wrapper).body if isinstance(n,ast.FunctionDef) and n.name=='generate_text')
+    assert [a.arg for a in after.args.kwonlyargs] == ['request_timeout']
+    assert ast.dump(after.args.kw_defaults[0]) == ast.dump(ast.Constant(None))
+    after.args.kwonlyargs, after.args.kw_defaults = [], []
+    addition = ast.parse("if request_timeout is not None:\n    kwargs['request_timeout'] = request_timeout").body[0]
+    matches = [n for n in after.body if ast.dump(n)==ast.dump(addition)]
+    assert len(matches) == 1
+    after.body.remove(matches[0])
+    assert ast.dump(before) == ast.dump(after), 'Unapproved shared wrapper change'
     old = original.git('show', original.BASE + ':app/agent/scoped_clarification.py')
     now = (ROOT / 'app/agent/scoped_clarification.py').read_text()
     def direct(source):
@@ -95,9 +113,15 @@ def development():
     frozen = verify_engine()
     freeze_path = Path(str(PREFIX) + '_freeze.json')
     record_path = Path(str(PREFIX) + '_events.jsonl')
+    public = original.public_config()
+    public.update(workers_per_mode=WORKERS,batch_size=WORKERS,
+                  schedule='Fresh ON serial only; historical OFF is development diagnostic reference',
+                  timeout_policy='Gate connect/read 5/30 seconds; SQL engine retains SDK defaults',
+                  gate_request_timeout_seconds=[5,30], gate_response_format='json_object')
     config = {'gate_sha256': original.sha(ROOT / 'app/agent/scoped_clarification.py'),
+              'qwen_wrapper_sha256': original.sha(ROOT / 'app/tools/qwen.py'),
               'runner_sha256': original.sha(Path(__file__)), 'database': frozen['database'],
-              'cases_sha256': frozen['cases_file_sha256'], 'config': original.public_config(),
+              'cases_sha256': frozen['cases_file_sha256'], 'config': public,
               'purpose': 'Revealed development regression. Fresh ON, historical unchanged-engine OFF retained only as diagnostic paired reference.'}
     if freeze_path.exists():
         assert original.read(freeze_path) == config
@@ -120,10 +144,10 @@ def development():
             f.flush()
             import os
             os.fsync(f.fileno())
-    with ThreadPoolExecutor(max_workers=4) as pool:
-        for offset in range(0,300,4):
+    with ThreadPoolExecutor(max_workers=WORKERS) as pool:
+        for offset in range(0,300,WORKERS):
             pending = {}
-            for c in cases[offset:offset+4]:
+            for c in cases[offset:offset+WORKERS]:
                 if c['id'] in records:
                     continue
                 append({'id': c['id'], 'state': 'started', 'time': time.time()})
@@ -132,6 +156,8 @@ def development():
                 r = {'id': pending[future], **future.result()}
                 append(r)
                 records[r['id']] = r
+                if any(u['status'] == 'transport_error' for u in (r.get('usage') or [])):
+                    raise RuntimeError('Transport failure saved; halt before scheduling another case')
             if offset % 20 == 0:
                 print(f'Development ON persisted {len(records)}/300', flush=True)
     verify_engine()

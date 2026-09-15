@@ -1,0 +1,612 @@
+{
+  "step": "serial",
+  "variant": "production",
+  "concurrency": 1,
+  "sdk_version": "1.27.5",
+  "qwen_wrapper_sha256": "b103b655da78c813376edcdf9d9b14fed63c5b75507e758607fd33c5efd2869b",
+  "gate_sha256": "27805f48a6c212a0f36a07149548981b1cf03639dc5c7e2f338563a763840b15",
+  "proxy_env_present": {
+    "HTTP_PROXY": false,
+    "HTTPS_PROXY": false,
+    "ALL_PROXY": false,
+    "http_proxy": false,
+    "https_proxy": false,
+    "all_proxy": false
+  },
+  "requests": [
+    {
+      "kind": "clear",
+      "index": 1,
+      "variant": "production",
+      "connections": [
+        {
+          "dns_tcp_tls_s": 0.156793
+        }
+      ],
+      "http_requests": [
+        {
+          "model": "qwen-plus",
+          "body_bytes": 11088,
+          "message_count": 2,
+          "message_characters": 9241,
+          "token_estimate_range": [
+            2310,
+            9241
+          ],
+          "token_estimate_note": "Rough mixed-language bounds, not tokenizer counts; actual usage recorded separately",
+          "structured_output_mode": "json_schema",
+          "parameter_names": [
+            "response_format",
+            "result_format",
+            "temperature"
+          ],
+          "max_tokens": "server default",
+          "stream_parameter": false,
+          "schema_context_occurrences": 1,
+          "business_context_occurrences": 1,
+          "static_metadata_occurrences": 1,
+          "body_sha256": "573e3995221be20b2a55230658ecf376b7b886ccbf00f81b32827db9202992f7",
+          "timeout": [
+            5,
+            30
+          ],
+          "stream": false,
+          "headers_after_s": 1.704272,
+          "http_status": 200,
+          "requests_headers_elapsed_s": 1.704804,
+          "total_http_s": 1.705142
+        }
+      ],
+      "model_calls": [
+        {
+          "input_tokens": 2225,
+          "output_tokens": 40,
+          "status": "ok"
+        }
+      ],
+      "outputs": [
+        {
+          "characters": 141,
+          "whitespace_fraction": 0.14893617021276595,
+          "finish_reason": "stop"
+        }
+      ],
+      "decision": "proceed",
+      "missing_slots": [],
+      "success": true,
+      "total_s": 1.766216,
+      "first_response_note": "headers_after_s measures first response headers, not first streamed token; actual mode is non-streaming"
+    },
+    {
+      "kind": "ambiguous",
+      "index": 2,
+      "variant": "production",
+      "connections": [],
+      "http_requests": [
+        {
+          "model": "qwen-plus",
+          "body_bytes": 11080,
+          "message_count": 2,
+          "message_characters": 9237,
+          "token_estimate_range": [
+            2309,
+            9237
+          ],
+          "token_estimate_note": "Rough mixed-language bounds, not tokenizer counts; actual usage recorded separately",
+          "structured_output_mode": "json_schema",
+          "parameter_names": [
+            "response_format",
+            "result_format",
+            "temperature"
+          ],
+          "max_tokens": "server default",
+          "stream_parameter": false,
+          "schema_context_occurrences": 1,
+          "business_context_occurrences": 1,
+          "static_metadata_occurrences": 1,
+          "body_sha256": "bd352f21ac1224047ef90f774966201f88fc8d5bd94e13545360ad84cc663741",
+          "timeout": [
+            5,
+            30
+          ],
+          "stream": false,
+          "headers_after_s": 1.55292,
+          "http_status": 200,
+          "requests_headers_elapsed_s": 1.553387,
+          "total_http_s": 1.553547
+        }
+      ],
+      "model_calls": [
+        {
+          "input_tokens": 2222,
+          "output_tokens": 40,
+          "status": "ok"
+        }
+      ],
+      "outputs": [
+        {
+          "characters": 141,
+          "whitespace_fraction": 0.14893617021276595,
+          "finish_reason": "stop"
+        }
+      ],
+      "decision": "proceed",
+      "missing_slots": [],
+      "success": true,
+      "total_s": 1.606579,
+      "first_response_note": "headers_after_s measures first response headers, not first streamed token; actual mode is non-streaming"
+    },
+    {
+      "kind": "clear",
+      "index": 3,
+      "variant": "production",
+      "connections": [],
+      "http_requests": [
+        {
+          "model": "qwen-plus",
+          "body_bytes": 11088,
+          "message_count": 2,
+          "message_characters": 9241,
+          "token_estimate_range": [
+            2310,
+            9241
+          ],
+          "token_estimate_note": "Rough mixed-language bounds, not tokenizer counts; actual usage recorded separately",
+          "structured_output_mode": "json_schema",
+          "parameter_names": [
+            "response_format",
+            "result_format",
+            "temperature"
+          ],
+          "max_tokens": "server default",
+          "stream_parameter": false,
+          "schema_context_occurrences": 1,
+          "business_context_occurrences": 1,
+          "static_metadata_occurrences": 1,
+          "body_sha256": "573e3995221be20b2a55230658ecf376b7b886ccbf00f81b32827db9202992f7",
+          "timeout": [
+            5,
+            30
+          ],
+          "stream": false,
+          "headers_after_s": 1.663104,
+          "http_status": 200,
+          "requests_headers_elapsed_s": 1.663465,
+          "total_http_s": 1.663664
+        }
+      ],
+      "model_calls": [
+        {
+          "input_tokens": 2225,
+          "output_tokens": 40,
+          "status": "ok"
+        }
+      ],
+      "outputs": [
+        {
+          "characters": 141,
+          "whitespace_fraction": 0.14893617021276595,
+          "finish_reason": "stop"
+        }
+      ],
+      "decision": "proceed",
+      "missing_slots": [],
+      "success": true,
+      "total_s": 1.708935,
+      "first_response_note": "headers_after_s measures first response headers, not first streamed token; actual mode is non-streaming"
+    },
+    {
+      "kind": "ambiguous",
+      "index": 4,
+      "variant": "production",
+      "connections": [],
+      "http_requests": [
+        {
+          "model": "qwen-plus",
+          "body_bytes": 11080,
+          "message_count": 2,
+          "message_characters": 9237,
+          "token_estimate_range": [
+            2309,
+            9237
+          ],
+          "token_estimate_note": "Rough mixed-language bounds, not tokenizer counts; actual usage recorded separately",
+          "structured_output_mode": "json_schema",
+          "parameter_names": [
+            "response_format",
+            "result_format",
+            "temperature"
+          ],
+          "max_tokens": "server default",
+          "stream_parameter": false,
+          "schema_context_occurrences": 1,
+          "business_context_occurrences": 1,
+          "static_metadata_occurrences": 1,
+          "body_sha256": "bd352f21ac1224047ef90f774966201f88fc8d5bd94e13545360ad84cc663741",
+          "timeout": [
+            5,
+            30
+          ],
+          "stream": false,
+          "headers_after_s": 1.410105,
+          "http_status": 200,
+          "requests_headers_elapsed_s": 1.410516,
+          "total_http_s": 1.410748
+        }
+      ],
+      "model_calls": [
+        {
+          "input_tokens": 2222,
+          "output_tokens": 40,
+          "status": "ok"
+        }
+      ],
+      "outputs": [
+        {
+          "characters": 141,
+          "whitespace_fraction": 0.14893617021276595,
+          "finish_reason": "stop"
+        }
+      ],
+      "decision": "proceed",
+      "missing_slots": [],
+      "success": true,
+      "total_s": 1.468677,
+      "first_response_note": "headers_after_s measures first response headers, not first streamed token; actual mode is non-streaming"
+    },
+    {
+      "kind": "clear",
+      "index": 5,
+      "variant": "production",
+      "connections": [],
+      "http_requests": [
+        {
+          "model": "qwen-plus",
+          "body_bytes": 11088,
+          "message_count": 2,
+          "message_characters": 9241,
+          "token_estimate_range": [
+            2310,
+            9241
+          ],
+          "token_estimate_note": "Rough mixed-language bounds, not tokenizer counts; actual usage recorded separately",
+          "structured_output_mode": "json_schema",
+          "parameter_names": [
+            "response_format",
+            "result_format",
+            "temperature"
+          ],
+          "max_tokens": "server default",
+          "stream_parameter": false,
+          "schema_context_occurrences": 1,
+          "business_context_occurrences": 1,
+          "static_metadata_occurrences": 1,
+          "body_sha256": "573e3995221be20b2a55230658ecf376b7b886ccbf00f81b32827db9202992f7",
+          "timeout": [
+            5,
+            30
+          ],
+          "stream": false,
+          "headers_after_s": 1.666029,
+          "http_status": 200,
+          "requests_headers_elapsed_s": 1.666408,
+          "total_http_s": 1.666488
+        }
+      ],
+      "model_calls": [
+        {
+          "input_tokens": 2225,
+          "output_tokens": 40,
+          "status": "ok"
+        }
+      ],
+      "outputs": [
+        {
+          "characters": 141,
+          "whitespace_fraction": 0.14893617021276595,
+          "finish_reason": "stop"
+        }
+      ],
+      "decision": "proceed",
+      "missing_slots": [],
+      "success": true,
+      "total_s": 1.722597,
+      "first_response_note": "headers_after_s measures first response headers, not first streamed token; actual mode is non-streaming"
+    },
+    {
+      "kind": "ambiguous",
+      "index": 6,
+      "variant": "production",
+      "connections": [],
+      "http_requests": [
+        {
+          "model": "qwen-plus",
+          "body_bytes": 11080,
+          "message_count": 2,
+          "message_characters": 9237,
+          "token_estimate_range": [
+            2309,
+            9237
+          ],
+          "token_estimate_note": "Rough mixed-language bounds, not tokenizer counts; actual usage recorded separately",
+          "structured_output_mode": "json_schema",
+          "parameter_names": [
+            "response_format",
+            "result_format",
+            "temperature"
+          ],
+          "max_tokens": "server default",
+          "stream_parameter": false,
+          "schema_context_occurrences": 1,
+          "business_context_occurrences": 1,
+          "static_metadata_occurrences": 1,
+          "body_sha256": "bd352f21ac1224047ef90f774966201f88fc8d5bd94e13545360ad84cc663741",
+          "timeout": [
+            5,
+            30
+          ],
+          "stream": false,
+          "headers_after_s": 1.309607,
+          "http_status": 200,
+          "requests_headers_elapsed_s": 1.309847,
+          "total_http_s": 1.30991
+        }
+      ],
+      "model_calls": [
+        {
+          "input_tokens": 2222,
+          "output_tokens": 35,
+          "status": "ok"
+        }
+      ],
+      "outputs": [
+        {
+          "characters": 129,
+          "whitespace_fraction": 0.06976744186046512,
+          "finish_reason": "stop"
+        }
+      ],
+      "decision": "proceed",
+      "missing_slots": [],
+      "success": true,
+      "total_s": 1.341568,
+      "first_response_note": "headers_after_s measures first response headers, not first streamed token; actual mode is non-streaming"
+    },
+    {
+      "kind": "clear",
+      "index": 7,
+      "variant": "production",
+      "connections": [],
+      "http_requests": [
+        {
+          "model": "qwen-plus",
+          "body_bytes": 11088,
+          "message_count": 2,
+          "message_characters": 9241,
+          "token_estimate_range": [
+            2310,
+            9241
+          ],
+          "token_estimate_note": "Rough mixed-language bounds, not tokenizer counts; actual usage recorded separately",
+          "structured_output_mode": "json_schema",
+          "parameter_names": [
+            "response_format",
+            "result_format",
+            "temperature"
+          ],
+          "max_tokens": "server default",
+          "stream_parameter": false,
+          "schema_context_occurrences": 1,
+          "business_context_occurrences": 1,
+          "static_metadata_occurrences": 1,
+          "body_sha256": "573e3995221be20b2a55230658ecf376b7b886ccbf00f81b32827db9202992f7",
+          "timeout": [
+            5,
+            30
+          ],
+          "stream": false,
+          "headers_after_s": 1.863443,
+          "http_status": 200,
+          "requests_headers_elapsed_s": 1.863835,
+          "total_http_s": 1.864731
+        }
+      ],
+      "model_calls": [
+        {
+          "input_tokens": 2225,
+          "output_tokens": 40,
+          "status": "ok"
+        }
+      ],
+      "outputs": [
+        {
+          "characters": 141,
+          "whitespace_fraction": 0.14893617021276595,
+          "finish_reason": "stop"
+        }
+      ],
+      "decision": "proceed",
+      "missing_slots": [],
+      "success": true,
+      "total_s": 1.900785,
+      "first_response_note": "headers_after_s measures first response headers, not first streamed token; actual mode is non-streaming"
+    },
+    {
+      "kind": "ambiguous",
+      "index": 8,
+      "variant": "production",
+      "connections": [],
+      "http_requests": [
+        {
+          "model": "qwen-plus",
+          "body_bytes": 11080,
+          "message_count": 2,
+          "message_characters": 9237,
+          "token_estimate_range": [
+            2309,
+            9237
+          ],
+          "token_estimate_note": "Rough mixed-language bounds, not tokenizer counts; actual usage recorded separately",
+          "structured_output_mode": "json_schema",
+          "parameter_names": [
+            "response_format",
+            "result_format",
+            "temperature"
+          ],
+          "max_tokens": "server default",
+          "stream_parameter": false,
+          "schema_context_occurrences": 1,
+          "business_context_occurrences": 1,
+          "static_metadata_occurrences": 1,
+          "body_sha256": "bd352f21ac1224047ef90f774966201f88fc8d5bd94e13545360ad84cc663741",
+          "timeout": [
+            5,
+            30
+          ],
+          "stream": false,
+          "headers_after_s": 1.549618,
+          "http_status": 200,
+          "requests_headers_elapsed_s": 1.550139,
+          "total_http_s": 1.550603
+        }
+      ],
+      "model_calls": [
+        {
+          "input_tokens": 2222,
+          "output_tokens": 40,
+          "status": "ok"
+        }
+      ],
+      "outputs": [
+        {
+          "characters": 141,
+          "whitespace_fraction": 0.14893617021276595,
+          "finish_reason": "stop"
+        }
+      ],
+      "decision": "proceed",
+      "missing_slots": [],
+      "success": true,
+      "total_s": 1.607035,
+      "first_response_note": "headers_after_s measures first response headers, not first streamed token; actual mode is non-streaming"
+    },
+    {
+      "kind": "clear",
+      "index": 9,
+      "variant": "production",
+      "connections": [],
+      "http_requests": [
+        {
+          "model": "qwen-plus",
+          "body_bytes": 11088,
+          "message_count": 2,
+          "message_characters": 9241,
+          "token_estimate_range": [
+            2310,
+            9241
+          ],
+          "token_estimate_note": "Rough mixed-language bounds, not tokenizer counts; actual usage recorded separately",
+          "structured_output_mode": "json_schema",
+          "parameter_names": [
+            "response_format",
+            "result_format",
+            "temperature"
+          ],
+          "max_tokens": "server default",
+          "stream_parameter": false,
+          "schema_context_occurrences": 1,
+          "business_context_occurrences": 1,
+          "static_metadata_occurrences": 1,
+          "body_sha256": "573e3995221be20b2a55230658ecf376b7b886ccbf00f81b32827db9202992f7",
+          "timeout": [
+            5,
+            30
+          ],
+          "stream": false,
+          "headers_after_s": 1.520457,
+          "http_status": 200,
+          "requests_headers_elapsed_s": 1.520902,
+          "total_http_s": 1.521121
+        }
+      ],
+      "model_calls": [
+        {
+          "input_tokens": 2225,
+          "output_tokens": 40,
+          "status": "ok"
+        }
+      ],
+      "outputs": [
+        {
+          "characters": 141,
+          "whitespace_fraction": 0.14893617021276595,
+          "finish_reason": "stop"
+        }
+      ],
+      "decision": "proceed",
+      "missing_slots": [],
+      "success": true,
+      "total_s": 1.578062,
+      "first_response_note": "headers_after_s measures first response headers, not first streamed token; actual mode is non-streaming"
+    },
+    {
+      "kind": "ambiguous",
+      "index": 10,
+      "variant": "production",
+      "connections": [],
+      "http_requests": [
+        {
+          "model": "qwen-plus",
+          "body_bytes": 11080,
+          "message_count": 2,
+          "message_characters": 9237,
+          "token_estimate_range": [
+            2309,
+            9237
+          ],
+          "token_estimate_note": "Rough mixed-language bounds, not tokenizer counts; actual usage recorded separately",
+          "structured_output_mode": "json_schema",
+          "parameter_names": [
+            "response_format",
+            "result_format",
+            "temperature"
+          ],
+          "max_tokens": "server default",
+          "stream_parameter": false,
+          "schema_context_occurrences": 1,
+          "business_context_occurrences": 1,
+          "static_metadata_occurrences": 1,
+          "body_sha256": "bd352f21ac1224047ef90f774966201f88fc8d5bd94e13545360ad84cc663741",
+          "timeout": [
+            5,
+            30
+          ],
+          "stream": false,
+          "headers_after_s": 1.30874,
+          "http_status": 200,
+          "requests_headers_elapsed_s": 1.309184,
+          "total_http_s": 1.309423
+        }
+      ],
+      "model_calls": [
+        {
+          "input_tokens": 2222,
+          "output_tokens": 40,
+          "status": "ok"
+        }
+      ],
+      "outputs": [
+        {
+          "characters": 141,
+          "whitespace_fraction": 0.14893617021276595,
+          "finish_reason": "stop"
+        }
+      ],
+      "decision": "proceed",
+      "missing_slots": [],
+      "success": true,
+      "total_s": 1.357585,
+      "first_response_note": "headers_after_s measures first response headers, not first streamed token; actual mode is non-streaming"
+    }
+  ]
+}
