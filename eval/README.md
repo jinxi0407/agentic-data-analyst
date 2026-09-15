@@ -1,5 +1,16 @@
 # 评测与生产依赖入口
 
+## 最终修复版回归
+
+当前结果见根目录 `FINAL_MIXED_CLARIFICATION_REGRESSION.md`，OFF 142/200，ON 155/200。
+这是已揭晓200题上的回归，不是新盲测。功能冻结269a441；两边串行、同模型、同库、同评分。
+`final_mixed_regression_` 前缀保存独立freeze、run_freeze、events、reply_packet/review/freeze、
+per_case、report、bad_cases、supplement。`run_final_mixed_regression.py`复用原评分，
+`render_final_mixed_regression.py`从保存结果生成报告。不要删除检查点后重新调用已完成题目。
+本次400个首轮和32次补充均完整保存。用户人工浏览器验收PASS，pytest 133 passed、2 warnings。
+
+## 以下为历史证据说明
+
 版本提示：后续澄清交互修复改变了 Gate 和第二轮 Schema。下面200题仍是原冻结版本证据，
 不代表修复版成绩。原冻结哈希不修改；`querymate_release_audit offline` 只应在其对应旧版本使用。
 本轮固定12题两次会话协议为 `clarification_interaction_regression.json`，

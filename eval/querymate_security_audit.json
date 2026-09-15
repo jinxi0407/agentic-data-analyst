@@ -1,0 +1,59 @@
+{
+  "pending_commits": [
+    "0bb12e462054b9dbeaac3b8578edbde2b961c4ea",
+    "597d5f28d6c6727e28950373ad416903ea28909b",
+    "b8ffbe2c3b09bd82605086bbfbb24faca4a8771d",
+    "8fb1e3a3631074b04868d458604d34373fcde907",
+    "f780857d6ca7946557a927eb36a7426ba6223219"
+  ],
+  "scope_counts": {
+    "worktree": 328,
+    "pending_history": 370
+  },
+  "issues": [
+    {
+      "scope": "worktree",
+      "path": ".env.example",
+      "types": [
+        "exact_local_secret"
+      ]
+    },
+    {
+      "scope": "worktree",
+      "path": "app/config.py",
+      "types": [
+        "credential_uri"
+      ]
+    },
+    {
+      "scope": "pending_history",
+      "path": "0bb12e462054b9dbeaac3b8578edbde2b961c4ea:.env.example",
+      "types": [
+        "exact_local_secret"
+      ]
+    },
+    {
+      "scope": "pending_history",
+      "path": "0bb12e462054b9dbeaac3b8578edbde2b961c4ea:app/config.py",
+      "types": [
+        "credential_uri"
+      ]
+    }
+  ],
+  "result": "PASS_AFTER_REVIEW",
+  "method": "All current tracked/unignored files, staged added/modified blobs, and unique file blobs in every commit origin/main..HEAD; local secret exact matching plus token/private-key/credential patterns. No secret values recorded.",
+  "coverage_sha256": "c336a47bfea1da976a3eda9d37ea53952bc977b2e5867024a4504f7d525b9c3d",
+  "review": [
+    {
+      "path": ".env.example",
+      "classification": "false_positive",
+      "reason": "Matches originated only from the example file itself; none equals live .env credentials. Example values were incorrectly included in the initial scanner secret set."
+    },
+    {
+      "path": "app/config.py:70",
+      "classification": "false_positive",
+      "reason": "mysql_url_safe is a formatted string containing a literal masked password (three asterisks), not a credential."
+    }
+  ],
+  "limitations": "Pattern scanning is not a proof that every possible credential format is absent. New release edits remain uncommitted; recheck the final index and exact outgoing commit range before any future push."
+}

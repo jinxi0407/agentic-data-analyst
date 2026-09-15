@@ -1,0 +1,13 @@
+{
+  "identity": {
+    "code_commit": "269a44121c56d0579f6c76303a0a43d96f746ca1",
+    "manifest_sha256": "e0200b6d023a9dada0c9946df6d0282ad445f64012ae08352a1a72c3e1e939a8",
+    "runner_sha256": "8b78fb11488f7d43f1021d6b92f5a745002acdb758c15a45a220a61ec6cf1bfa",
+    "workers": {
+      "off": 1,
+      "on": 1
+    },
+    "evaluation": "disclosed benchmark regression"
+  },
+  "created_unix": 1789461612.1662312
+}

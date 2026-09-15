@@ -1,0 +1,258 @@
+{
+  "protocol_sha256": "3fe867a041e420154990724c6fb210aa9dd5485ba7436134da9553aad621b9be",
+  "actual_browser_acceptance": "pending; API tests are not browser acceptance",
+  "attempts": [
+    {
+      "name": "clear_on",
+      "request": {
+        "question": "上海市的累计有效订单销售额是多少？只返回金额。",
+        "mode": "clarify"
+      },
+      "state": "completed",
+      "http_status": 200,
+      "response": {
+        "engine": "Production NL2SQL Engine",
+        "question": "上海市的累计有效订单销售额是多少？只返回金额。",
+        "sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '上海市' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+        "result": [
+          {
+            "sales_amount": 3770523.65
+          }
+        ],
+        "trace": [
+          {
+            "stage": "clarification",
+            "status": "proceed"
+          },
+          {
+            "stage": "execute",
+            "status": "success"
+          }
+        ],
+        "retry_count": 0,
+        "needs_clarification": false,
+        "gate_decision": {
+          "decision": "proceed",
+          "ambiguity_type": "none",
+          "known_constraints": [],
+          "missing_slots": [],
+          "clarification_question": "",
+          "options": [],
+          "resolved_slots": [],
+          "critical_missing_slots": [],
+          "alternatives": []
+        },
+        "normalized_question": "Reference date: 2026-09-15; timezone: Asia/Shanghai. An explicit reference date in the question takes precedence.\nVerified city storage values and same-city suffix aliases (not region mappings):\n[{\"field\": \"users.city\", \"value\": \"上海市\", \"province\": \"上海\", \"verified_aliases\": [\"上海\"]}, {\"field\": \"users.city\", \"value\": \"北京市\", \"province\": \"北京\", \"verified_aliases\": [\"北京\"]}, {\"field\": \"users.city\", \"value\": \"南京市\", \"province\": \"江苏\", \"verified_aliases\": [\"南京\"]}, {\"field\": \"users.city\", \"value\": \"广州市\", \"province\": \"广东\", \"verified_aliases\": [\"广州\"]}, {\"field\": \"users.city\", \"value\": \"成都市\", \"province\": \"四川\", \"verified_aliases\": [\"成都\"]}, {\"field\": \"users.city\", \"value\": \"杭州市\", \"province\": \"浙江\", \"verified_aliases\": [\"杭州\"]}, {\"field\": \"users.city\", \"value\": \"武汉市\", \"province\": \"湖北\", \"verified_aliases\": [\"武汉\"]}, {\"field\": \"users.city\", \"value\": \"西安市\", \"province\": \"陕西\", \"verified_aliases\": [\"西安\"]}]\nOnly normalize a city to its uniquely verified same-city value. Do not infer a city from a province/region. An absent named city remains that city; empty results are valid. Do not replace it with an existing city or ask merely because no rows exist.\nOriginal question (preserve all constraints):\n上海市的累计有效订单销售额是多少？只返回金额。",
+        "error": "",
+        "status": "success",
+        "latency_ms": 3886.33,
+        "engine_input": "Reference date: 2026-09-15; timezone: Asia/Shanghai. An explicit reference date in the question takes precedence.\nVerified city storage values and same-city suffix aliases (not region mappings):\n[{\"field\": \"users.city\", \"value\": \"上海市\", \"province\": \"上海\", \"verified_aliases\": [\"上海\"]}, {\"field\": \"users.city\", \"value\": \"北京市\", \"province\": \"北京\", \"verified_aliases\": [\"北京\"]}, {\"field\": \"users.city\", \"value\": \"南京市\", \"province\": \"江苏\", \"verified_aliases\": [\"南京\"]}, {\"field\": \"users.city\", \"value\": \"广州市\", \"province\": \"广东\", \"verified_aliases\": [\"广州\"]}, {\"field\": \"users.city\", \"value\": \"成都市\", \"province\": \"四川\", \"verified_aliases\": [\"成都\"]}, {\"field\": \"users.city\", \"value\": \"杭州市\", \"province\": \"浙江\", \"verified_aliases\": [\"杭州\"]}, {\"field\": \"users.city\", \"value\": \"武汉市\", \"province\": \"湖北\", \"verified_aliases\": [\"武汉\"]}, {\"field\": \"users.city\", \"value\": \"西安市\", \"province\": \"陕西\", \"verified_aliases\": [\"西安\"]}]\nOnly normalize a city to its uniquely verified same-city value. Do not infer a city from a province/region. An absent named city remains that city; empty results are valid. Do not replace it with an existing city or ask merely because no rows exist.\nOriginal question (preserve all constraints):\n上海市的累计有效订单销售额是多少？只返回金额。",
+        "interaction": {
+          "original_question": "上海市的累计有效订单销售额是多少？只返回金额。",
+          "known_constraints": [],
+          "clarification_question": null,
+          "clarification_answer": null,
+          "resolved_slots": []
+        }
+      },
+      "elapsed_s": 3.894225041003665
+    },
+    {
+      "name": "ambiguous_on",
+      "request": {
+        "question": "指定城市的累计有效订单销售额是多少？不限时间，只返回金额。",
+        "mode": "clarify"
+      },
+      "state": "completed",
+      "http_status": 200,
+      "response": {
+        "engine": "Production NL2SQL Engine",
+        "question": "指定城市的累计有效订单销售额是多少？不限时间，只返回金额。",
+        "sql": "",
+        "result": [],
+        "trace": [
+          {
+            "stage": "clarification",
+            "status": "clarify"
+          }
+        ],
+        "retry_count": 0,
+        "needs_clarification": true,
+        "gate_decision": {
+          "decision": "clarify",
+          "ambiguity_type": "entity",
+          "known_constraints": [],
+          "missing_slots": [
+            "entity"
+          ],
+          "clarification_question": "请问指定的城市是哪一个？例如上海、北京、南京等。",
+          "options": [
+            "上海市",
+            "北京市",
+            "南京市",
+            "广州市",
+            "成都市",
+            "杭州市",
+            "武汉市",
+            "西安市"
+          ],
+          "resolved_slots": [],
+          "critical_missing_slots": [
+            "entity"
+          ],
+          "alternatives": [
+            "上海市",
+            "北京市",
+            "南京市",
+            "广州市",
+            "成都市",
+            "杭州市",
+            "武汉市",
+            "西安市"
+          ]
+        },
+        "status": "needs_clarification",
+        "clarification_question": "请问指定的城市是哪一个？例如上海、北京、南京等。",
+        "options": [
+          "上海市",
+          "北京市",
+          "南京市",
+          "广州市",
+          "成都市",
+          "杭州市",
+          "武汉市",
+          "西安市"
+        ],
+        "clarification_context": {
+          "original_question": "指定城市的累计有效订单销售额是多少？不限时间，只返回金额。",
+          "known_constraints": [],
+          "missing_slots": [
+            "entity"
+          ],
+          "clarification_question": "请问指定的城市是哪一个？例如上海、北京、南京等。",
+          "reference_date": "2026-09-15",
+          "timezone": "Asia/Shanghai",
+          "rounds": 1
+        },
+        "latency_ms": 2501.06
+      },
+      "elapsed_s": 2.505426624993561
+    },
+    {
+      "name": "valid_followup",
+      "request": {
+        "question": "指定城市的累计有效订单销售额是多少？不限时间，只返回金额。",
+        "mode": "clarify",
+        "clarification_context": {
+          "original_question": "指定城市的累计有效订单销售额是多少？不限时间，只返回金额。",
+          "known_constraints": [],
+          "missing_slots": [
+            "entity"
+          ],
+          "clarification_question": "请问指定的城市是哪一个？例如上海、北京、南京等。",
+          "reference_date": "2026-09-15",
+          "timezone": "Asia/Shanghai",
+          "rounds": 1
+        },
+        "clarification_answer": "南京市"
+      },
+      "state": "completed",
+      "http_status": 200,
+      "response": {
+        "engine": "Production NL2SQL Engine",
+        "question": "指定城市的累计有效订单销售额是多少？不限时间，只返回金额。",
+        "sql": "",
+        "result": [],
+        "trace": [],
+        "retry_count": 0,
+        "needs_clarification": false,
+        "status": "invalid_output",
+        "error": "澄清服务未完成，未执行查询。",
+        "latency_ms": 5620.98
+      },
+      "elapsed_s": 5.625639040998067
+    },
+    {
+      "name": "invalid_followup",
+      "request": {
+        "question": "指定城市的累计有效订单销售额是多少？不限时间，只返回金额。",
+        "mode": "clarify",
+        "clarification_context": {
+          "original_question": "指定城市的累计有效订单销售额是多少？不限时间，只返回金额。",
+          "known_constraints": [],
+          "missing_slots": [
+            "entity"
+          ],
+          "clarification_question": "请问指定的城市是哪一个？例如上海、北京、南京等。",
+          "reference_date": "2026-09-15",
+          "timezone": "Asia/Shanghai",
+          "rounds": 1
+        },
+        "clarification_answer": "我暂时无法提供该信息"
+      },
+      "state": "completed",
+      "http_status": 200,
+      "response": {
+        "engine": "Production NL2SQL Engine",
+        "question": "指定城市的累计有效订单销售额是多少？不限时间，只返回金额。",
+        "sql": "",
+        "result": [],
+        "trace": [
+          {
+            "stage": "clarification",
+            "status": "needs_rephrase"
+          }
+        ],
+        "retry_count": 0,
+        "needs_clarification": false,
+        "gate_decision": {
+          "decision": "needs_rephrase",
+          "ambiguity_type": "entity",
+          "known_constraints": [],
+          "missing_slots": [
+            "entity"
+          ],
+          "clarification_question": "请问指定的城市是哪一个？例如上海、北京、南京等。",
+          "options": [],
+          "resolved_slots": []
+        },
+        "status": "needs_rephrase",
+        "error": "请重新提交完整明确的问题。",
+        "latency_ms": 2238.43
+      },
+      "elapsed_s": 2.243659458006732
+    },
+    {
+      "name": "clear_off",
+      "request": {
+        "question": "上海市的累计有效订单销售额是多少？只返回金额。",
+        "mode": "direct"
+      },
+      "state": "completed",
+      "http_status": 200,
+      "response": {
+        "engine": "Production NL2SQL Engine",
+        "question": "上海市的累计有效订单销售额是多少？只返回金额。",
+        "normalized_question": "Reference date: 2026-09-15; timezone: Asia/Shanghai. An explicit reference date in the question takes precedence.\nVerified city storage values and same-city suffix aliases (not region mappings):\n[{\"field\": \"users.city\", \"value\": \"上海市\", \"province\": \"上海\", \"verified_aliases\": [\"上海\"]}, {\"field\": \"users.city\", \"value\": \"北京市\", \"province\": \"北京\", \"verified_aliases\": [\"北京\"]}, {\"field\": \"users.city\", \"value\": \"南京市\", \"province\": \"江苏\", \"verified_aliases\": [\"南京\"]}, {\"field\": \"users.city\", \"value\": \"广州市\", \"province\": \"广东\", \"verified_aliases\": [\"广州\"]}, {\"field\": \"users.city\", \"value\": \"成都市\", \"province\": \"四川\", \"verified_aliases\": [\"成都\"]}, {\"field\": \"users.city\", \"value\": \"杭州市\", \"province\": \"浙江\", \"verified_aliases\": [\"杭州\"]}, {\"field\": \"users.city\", \"value\": \"武汉市\", \"province\": \"湖北\", \"verified_aliases\": [\"武汉\"]}, {\"field\": \"users.city\", \"value\": \"西安市\", \"province\": \"陕西\", \"verified_aliases\": [\"西安\"]}]\nOnly normalize a city to its uniquely verified same-city value. Do not infer a city from a province/region. An absent named city remains that city; empty results are valid. Do not replace it with an existing city or ask merely because no rows exist.\nOriginal question (preserve all constraints):\n上海市的累计有效订单销售额是多少？只返回金额。",
+        "sql": "SELECT ROUND(SUM(o.paid_amount), 2) AS sales_amount FROM users AS u JOIN orders AS o ON u.user_id = o.user_id WHERE u.city = '上海市' AND o.order_status IN ('paid', 'completed', 'shipped') LIMIT 200",
+        "result": [
+          {
+            "sales_amount": 3770523.65
+          }
+        ],
+        "error": "",
+        "retry_count": 0,
+        "status": "success",
+        "trace": [
+          {
+            "stage": "execute",
+            "status": "success"
+          }
+        ],
+        "latency_ms": 2238.96
+      },
+      "elapsed_s": 2.2432664170046337
+    }
+  ],
+  "state": "finished"
+}

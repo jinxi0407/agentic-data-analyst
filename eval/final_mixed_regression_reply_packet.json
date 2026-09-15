@@ -1,0 +1,354 @@
+[
+  {
+    "id": "final_mixed_141",
+    "original_question": "统计最近一段时间各城市新注册的人数，按城市升序，只返回城市和人数，最多100行。",
+    "actual_question": "请问‘最近一段时间’具体指多长的时间范围？例如：最近7天、最近30天、本月至今，还是上个月整月？",
+    "asked_slots": [
+      "time"
+    ],
+    "slot_eligible": true,
+    "exact_slot_match": true,
+    "frozen_answer": "2026-09-01 至 2026-09-12"
+  },
+  {
+    "id": "final_mixed_143",
+    "original_question": "帮我统计那段时间每天的有效订单数，只返回有订单的日期和单数，按日期从早到晚，最多100行。",
+    "actual_question": "请问‘那段时间’具体指哪一段日期范围？例如：最近7天、最近30天、2026年9月1日至9月10日等。",
+    "asked_slots": [
+      "time"
+    ],
+    "slot_eligible": true,
+    "exact_slot_match": true,
+    "frozen_answer": "2026-08-28 至 2026-09-12"
+  },
+  {
+    "id": "final_mixed_147",
+    "original_question": "最近一段时间各城市有多少付费用户？只返回城市和付费人数，按城市升序，最多100行。",
+    "actual_question": "“最近一段时间”具体指多长的时间范围？例如：最近7天、最近30天、本月至今，还是上个月？",
+    "asked_slots": [
+      "time"
+    ],
+    "slot_eligible": true,
+    "exact_slot_match": true,
+    "frozen_answer": "2026-08-01 至 2026-09-12"
+  },
+  {
+    "id": "final_mixed_149",
+    "original_question": "这段时间各品类在有效订单中卖出了多少件商品？只返回品类和件数，按品类升序，最多100行。",
+    "actual_question": "What time period does '这段时间' refer to? Please specify a date range (e.g., last 7 days, this month, or a custom interval).",
+    "asked_slots": [
+      "time"
+    ],
+    "slot_eligible": true,
+    "exact_slot_match": true,
+    "frozen_answer": "2026-08-25 至 2026-09-12"
+  },
+  {
+    "id": "final_mixed_152",
+    "original_question": "列出过去一段时间内，各支付方式对应的已批准退款笔数及总退款金额，按退款笔数降序排列，只返回支付方式、笔数、总金额三列。 主排序值相同时，再按支付方式升序。",
+    "actual_question": "请问‘过去一段时间’具体指多长的时间范围？例如：最近7天、最近30天、上个月，还是其他时间段？",
+    "asked_slots": [
+      "time"
+    ],
+    "slot_eligible": true,
+    "exact_slot_match": true,
+    "frozen_answer": "2026-08-25 至 2026-09-12"
+  },
+  {
+    "id": "final_mixed_153",
+    "original_question": "统计过去一段时间内，各有效订单状态的有效订单数、已批准退款记录数，以及退款记录数/有效订单数（保留4位）。订单按下单日期、退款按退款日期分别落入该期间统计，退款仅取父单当前为有效状态的记录；只列有有效订单的状态。返回状态、两项数量、比率四列，按比率升序。 主排序值相同时，再按订单状态升序。",
+    "actual_question": "请问‘过去一段时间’具体指多长的时间范围？例如：最近7天、最近30天、本月、上月，或其他自定义区间？",
+    "asked_slots": [
+      "time"
+    ],
+    "slot_eligible": true,
+    "exact_slot_match": true,
+    "frozen_answer": "2026-09-05 至 2026-09-12"
+  },
+  {
+    "id": "final_mixed_154",
+    "original_question": "统计过去一段时间各品类的已批准退款金额、有效订单销售金额和两者比值（品类退款率）。退款按退款日期、销售按订单日期分别限制到该期间，只显示销售金额大于0的品类。返回品类、退款额、销售额、比率四列，金额保留2位、比率4位，按比率降序。 主排序值相同时，再按品类升序。",
+    "actual_question": "请问‘过去一段时间’具体指多长？例如：最近30天、本月至今，还是上个月整月？",
+    "asked_slots": [
+      "time"
+    ],
+    "slot_eligible": true,
+    "exact_slot_match": true,
+    "frozen_answer": "2026-08-15 至 2026-09-12"
+  },
+  {
+    "id": "final_mixed_155",
+    "original_question": "请统计过去一段时间内，各城市用户的已批准退款总金额，并按金额降序排列，只返回城市和总金额两列。 主排序值相同时，再按城市升序。",
+    "actual_question": "请问‘过去一段时间’具体指多长？例如：最近7天、最近30天、本月至今，还是上个月整月？",
+    "asked_slots": [
+      "time"
+    ],
+    "slot_eligible": true,
+    "exact_slot_match": true,
+    "frozen_answer": "2026-09-03 至 2026-09-12"
+  },
+  {
+    "id": "final_mixed_156",
+    "original_question": "请列出过去一段时间内，各退款原因中，使用微信支付且已批准的退款笔数及平均退款金额，按平均金额降序排列，只返回退款原因、笔数、平均金额三列。 主排序值相同时，再按退款原因升序。",
+    "actual_question": "请问‘过去一段时间’具体指多长的时间范围？例如：最近7天、最近30天、最近90天，还是本年度至今？",
+    "asked_slots": [
+      "time"
+    ],
+    "slot_eligible": true,
+    "exact_slot_match": true,
+    "frozen_answer": "2026-08-28 至 2026-09-12"
+  },
+  {
+    "id": "final_mixed_158",
+    "original_question": "请列出过去一段时间内，各退款原因中，退款金额占对应订单实付金额超50%的退款记录，包括退款单号、订单单号、退款金额、订单实付金额，按退款金额降序排列，最多返回100行。 这里只统计已批准退款。 主排序值相同时，再按退款单号升序。",
+    "actual_question": "‘过去一段时间’具体指多长的时间范围？例如：最近7天、最近30天，还是其他时间段？",
+    "asked_slots": [
+      "time"
+    ],
+    "slot_eligible": true,
+    "exact_slot_match": true,
+    "frozen_answer": "2026-08-20 至 2026-09-12"
+  },
+  {
+    "id": "final_mixed_159",
+    "original_question": "请统计过去一段时间内，各退款原因中，使用现金支付且已批准的退款总金额，按金额降序排列，只返回退款原因和总金额两列。 主排序值相同时，再按退款原因升序。",
+    "actual_question": "请问‘过去一段时间’具体指多长的时间范围？例如：最近7天、最近30天、最近90天，还是其他指定区间？",
+    "asked_slots": [
+      "time"
+    ],
+    "slot_eligible": true,
+    "exact_slot_match": true,
+    "frozen_answer": "2026-09-02 至 2026-09-12"
+  },
+  {
+    "id": "final_mixed_171",
+    "original_question": "这份临时售后汇总要看云栖品牌手机数码的一个整体占比，不限时间。报表尚未说明是先汇总退款额和有效销售额再相除，还是逐商品计算退款率后取简单平均。请给出一个比率，保留4位小数。",
+    "actual_question": "报表要求的‘整体占比’是指：(1) 先汇总云栖品牌在手机数码类目的全部批准退款额和全部有效销售金额，再相除得到整体退款率；还是(2) 先计算每个云栖品牌手机数码商品的退款率，再对这些商品退款率取简单算术平均？请明确计算逻辑。",
+    "asked_slots": [
+      "metric"
+    ],
+    "slot_eligible": true,
+    "exact_slot_match": true,
+    "frozen_answer": "先把已批准退款金额和有效销售金额分别汇总，再用两项总额相除。"
+  },
+  {
+    "id": "final_mixed_172",
+    "original_question": "南京市用户2026年9月订单的临时支付统计，分子已确定为当前状态有效的订单数，但成功率分母还未注明。请算一个成功率，保留4位小数；分母可能是全部状态订单，也可能排除unpaid状态订单。",
+    "actual_question": "成功率的分母应为：(1) 所有订单（含所有order_status），还是(2) 排除order_status='unpaid'的订单？",
+    "asked_slots": [
+      "filter"
+    ],
+    "slot_eligible": true,
+    "exact_slot_match": false,
+    "frozen_answer": "分母包含这些用户在这个月创建的全部订单，不排除任何状态。"
+  },
+  {
+    "id": "final_mixed_173",
+    "original_question": "不限时间，统计至少买过一件松果品牌食品生鲜商品的有效订单，想看消费强度，但报表没说明按每单还是每位购买用户计算。只返回一个平均金额，保留2位小数；金额按符合条件订单整单实付计一次。",
+    "actual_question": "消费强度是指平均每个有效订单的实付金额，还是平均每位购买用户的实付金额？",
+    "asked_slots": [
+      "metric"
+    ],
+    "slot_eligible": true,
+    "exact_slot_match": true,
+    "frozen_answer": "按每笔有效订单算平均实付金额。"
+  },
+  {
+    "id": "final_mixed_174",
+    "original_question": "计算2026年8月服饰鞋包的动销覆盖比，分子是选定SKU集合中该月在有效订单里卖出过的去重SKU数，分母是该集合的全部SKU数。集合还未说明是全部商品，还是8月底已上架且目前仍在售的商品，只返回一个比率，保留4位小数。",
+    "actual_question": "请明确SKU集合的定义：是指全量商品（所有product_id），还是仅指2026年8月31日当天已上架且is_active=1的商品？",
+    "asked_slots": [
+      "entity"
+    ],
+    "slot_eligible": true,
+    "exact_slot_match": false,
+    "frozen_answer": "用8月31日及以前已上架、目前仍在售的SKU集合。"
+  },
+  {
+    "id": "final_mixed_176",
+    "original_question": "不限时间，星禾品牌运动户外商品有效订单明细的折扣深度要怎么算？分子确定为明细优惠总额，但分母未说明用商品标价乘数量的总额，还是商品行实付总额。只返回一个比率，保留4位小数。",
+    "actual_question": "折扣深度的分母应为商品标价乘以数量的总额（list_price × quantity），还是该商品行的实付总额（item_amount）？",
+    "asked_slots": [
+      "metric"
+    ],
+    "slot_eligible": true,
+    "exact_slot_match": true,
+    "frozen_answer": "用商品标价乘数量的合计作分母。"
+  },
+  {
+    "id": "final_mixed_177",
+    "original_question": "不限时间，青橙品牌家用电器的重复购买客户占比是多少？分子确定为至少有两笔该品牌品类有效订单的客户数，但分母没说明是所有注册客户，还是至少买过一次的客户。只返回一个比率，保留4位小数。",
+    "actual_question": "分母应为所有注册客户，还是至少购买过一次的有效客户？",
+    "asked_slots": [
+      "filter"
+    ],
+    "slot_eligible": true,
+    "exact_slot_match": false,
+    "frozen_answer": "分母只算在这个品牌品类至少有一笔有效订单的客户。"
+  },
+  {
+    "id": "final_mixed_180",
+    "original_question": "优选品牌食品生鲜的新商品贡献比是多少？这里新品明确指2026年9月1日至12日上架的商品，分子是这些新品在同期间有效订单中的商品行销售额。分母尚未注明用该品牌品类同期间全部商品销售额，还是全历史销售额。只返回一个比率，保留4位小数。",
+    "actual_question": "分母应使用‘优选品牌食品生鲜’在2026年9月1日至12日期间的全部商品销售额，还是该品牌品类全历史的全部商品销售额？",
+    "asked_slots": [
+      "filter"
+    ],
+    "slot_eligible": true,
+    "exact_slot_match": false,
+    "frozen_answer": "分母用同一期间该品牌品类全部商品的有效销售额。"
+  },
+  {
+    "id": "final_mixed_181",
+    "original_question": "目标城市的VIP用户有哪些？返回姓名、注册日期，按注册日期升序，同日按用户ID升序，最多100人。",
+    "actual_question": "请问‘目标城市’具体指哪一个城市？例如上海、北京、南京等。",
+    "asked_slots": [
+      "entity"
+    ],
+    "slot_eligible": true,
+    "exact_slot_match": true,
+    "frozen_answer": "南京市。"
+  },
+  {
+    "id": "final_mixed_182",
+    "original_question": "目标城市在2026年9月12日前注册、最近一笔订单发生在2026年8月的用户，按用户等级统计人数。订单不限状态，按等级升序。",
+    "actual_question": "请明确‘目标城市’具体是哪一个城市？",
+    "asked_slots": [
+      "entity"
+    ],
+    "slot_eligible": true,
+    "exact_slot_match": true,
+    "frozen_answer": "成都市。"
+  },
+  {
+    "id": "final_mixed_183",
+    "original_question": "目标城市的女性付费用户首次有效订单日期是什么时候？返回姓名、等级、首次日期，按首次日期和用户ID升序，最多100人。",
+    "actual_question": "请问‘目标城市’具体是哪座城市？例如上海、北京等。",
+    "asked_slots": [
+      "entity"
+    ],
+    "slot_eligible": true,
+    "exact_slot_match": true,
+    "frozen_answer": "杭州市。"
+  },
+  {
+    "id": "final_mixed_184",
+    "original_question": "目标城市gold和black等级中，在2026年9月12日前有已批准退款记录的用户各有多少？按等级升序返回等级和去重人数。",
+    "actual_question": "请问‘目标城市’具体是哪一个城市？例如上海、北京等。",
+    "asked_slots": [
+      "entity"
+    ],
+    "slot_eligible": true,
+    "exact_slot_match": true,
+    "frozen_answer": "西安市。"
+  },
+  {
+    "id": "final_mixed_186",
+    "original_question": "目标城市silver用户中，2026年9月12日前有效订单累计实付超过5000元的有多少人？返回用户等级和人数。",
+    "actual_question": "请问‘目标城市’具体指哪一个城市？例如：上海、北京等。",
+    "asked_slots": [
+      "entity"
+    ],
+    "slot_eligible": true,
+    "exact_slot_match": true,
+    "frozen_answer": "武汉市。"
+  },
+  {
+    "id": "final_mixed_187",
+    "original_question": "目标城市下过含云栖品牌商品订单的用户，最近一笔含该品牌商品的订单日期是什么？不限订单状态和时间，返回姓名、等级、最近日期，按日期降序、用户ID升序，最多100人。",
+    "actual_question": "请提供具体的目标城市名称（例如：上海、杭州、北京等）？",
+    "asked_slots": [
+      "entity"
+    ],
+    "slot_eligible": true,
+    "exact_slot_match": true,
+    "frozen_answer": "成都市。"
+  },
+  {
+    "id": "final_mixed_188",
+    "original_question": "目标城市男性用户中，2026年9月12日前至少有3笔有效订单的各等级人数是多少？按等级升序返回等级和人数。",
+    "actual_question": "请问‘目标城市’具体是哪座城市？例如上海、北京等。",
+    "asked_slots": [
+      "entity"
+    ],
+    "slot_eligible": true,
+    "exact_slot_match": true,
+    "frozen_answer": "南京市。"
+  },
+  {
+    "id": "final_mixed_189",
+    "original_question": "目标城市gold用户首次有效购买美妆个护商品是什么时候？不限时间，返回姓名、城市、首次日期，按日期升序、用户ID升序，最多100人。",
+    "actual_question": "请明确指定‘目标城市’的具体名称（例如：上海、北京、南京等）？",
+    "asked_slots": [
+      "entity"
+    ],
+    "slot_eligible": true,
+    "exact_slot_match": true,
+    "frozen_answer": "杭州市。"
+  },
+  {
+    "id": "final_mixed_190",
+    "original_question": "目标城市black用户中，2026年9月12日前有已批准退款的人，其全历史有效订单平均实付金额是多少？每笔有效订单计一次，不限于退款订单。返回等级、平均金额，金额保留2位小数。",
+    "actual_question": "请明确‘目标城市’具体是哪一个城市？例如：上海、北京等。",
+    "asked_slots": [
+      "entity"
+    ],
+    "slot_eligible": true,
+    "exact_slot_match": true,
+    "frozen_answer": "西安市。"
+  },
+  {
+    "id": "final_mixed_191",
+    "original_question": "以2026年9月12日为参考，近30天因指定原因发生已批准退款的商品有哪些？返回商品名、品牌、品类，去重，按商品名和商品ID升序，最多100件。",
+    "actual_question": "请问‘指定原因’具体指哪一个退款原因？例如：商品质量问题、物流问题、客户个人原因，或其他？",
+    "asked_slots": [
+      "filter"
+    ],
+    "slot_eligible": true,
+    "exact_slot_match": true,
+    "frozen_answer": "七天无理由。"
+  },
+  {
+    "id": "final_mixed_192",
+    "original_question": "2026年8月指定品类中有有效销售的商品有哪些？返回商品名、品牌、上架日期，去重，按上架日期降序、商品ID升序，最多100件。",
+    "actual_question": "请问‘指定品类’具体是哪一个品类？例如：家用电器、手机数码、服饰鞋包等。",
+    "asked_slots": [
+      "filter"
+    ],
+    "slot_eligible": true,
+    "exact_slot_match": false,
+    "frozen_answer": "家用电器。"
+  },
+  {
+    "id": "final_mixed_194",
+    "original_question": "列出2026年9月11日创建、当前为有效状态的订单中指定品类的商品明细，返回订单号、商品名、数量，一行一条商品明细，按数量降序、订单项ID升序，最多100行。",
+    "actual_question": "请问‘指定品类’具体是哪一个品类？例如：家用电器、手机数码、服饰鞋包等。",
+    "asked_slots": [
+      "filter"
+    ],
+    "slot_eligible": true,
+    "exact_slot_match": false,
+    "frozen_answer": "服饰鞋包。"
+  },
+  {
+    "id": "final_mixed_196",
+    "original_question": "2026年9月12日创建的有效订单里，指定品类有哪些商品？返回商品名、品牌、成本价，去重，按成本价降序、商品ID升序，最多100件。",
+    "actual_question": "请问‘指定品类’具体指哪一个品类？例如：家用电器、手机数码、服饰鞋包等。",
+    "asked_slots": [
+      "filter"
+    ],
+    "slot_eligible": true,
+    "exact_slot_match": false,
+    "frozen_answer": "母婴用品。"
+  },
+  {
+    "id": "final_mixed_198",
+    "original_question": "南京市用户2026年9月11日创建、当前状态为shipped的订单中，指定品类商品明细有哪些？返回订单号、用户姓名、商品名、数量，按数量和订单项ID升序，最多100行。",
+    "actual_question": "What is the specific product category (e.g., '手机数码', '家用电器') for the '指定品类' filter?",
+    "asked_slots": [
+      "filter"
+    ],
+    "slot_eligible": true,
+    "exact_slot_match": false,
+    "frozen_answer": "食品生鲜。"
+  }
+]

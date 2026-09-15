@@ -1,0 +1,42 @@
+{
+  "trigger_rate": {
+    "n": 32,
+    "d": 200,
+    "percent": 16.0
+  },
+  "overall_strict_success": {
+    "n": 145,
+    "d": 200,
+    "percent": 72.5
+  },
+  "status_counts": {
+    "off": {
+      "success": 195,
+      "failed": 5
+    },
+    "on": {
+      "success": 194,
+      "failed": 4,
+      "invalid_output": 2
+    }
+  },
+  "usage": {
+    "off": {
+      "calls": 215,
+      "complete_token_records": 215,
+      "observed_input_tokens": 497908,
+      "observed_output_tokens": 22662
+    },
+    "on": {
+      "calls": 445,
+      "complete_token_records": 445,
+      "observed_input_tokens": 1045044,
+      "observed_output_tokens": 33500
+    }
+  },
+  "model_calls_total": {
+    "off": 215,
+    "on": 445
+  },
+  "completed_stages": 432
+}

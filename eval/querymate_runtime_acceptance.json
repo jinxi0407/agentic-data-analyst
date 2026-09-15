@@ -1,0 +1,26 @@
+{
+  "services": [
+    {
+      "service": "fastapi",
+      "pid": 11321,
+      "owns": true,
+      "current_runtime_fingerprint": true,
+      "http_status": 200
+    },
+    {
+      "service": "streamlit",
+      "pid": 11346,
+      "owns": true,
+      "current_runtime_fingerprint": true,
+      "http_status": 200
+    }
+  ],
+  "source": "current feature worktree; not final main",
+  "repeat_start_reused_pids": [
+    10958,
+    10961
+  ],
+  "stop_start_passed": true,
+  "docker": "agentic-data-analyst-mysql healthy; 127.0.0.1:3307->3306; no other resources touched",
+  "browser_acceptance": "pending; browser list empty"
+}

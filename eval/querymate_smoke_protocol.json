@@ -1,0 +1,12 @@
+{
+  "purpose": "Small fixed release integration checks, not a new benchmark",
+  "endpoint": "http://127.0.0.1:8002/api/scoped-query",
+  "clear_question": "上海市的累计有效订单销售额是多少？只返回金额。",
+  "ambiguous_question": "指定城市的累计有效订单销售额是多少？不限时间，只返回金额。",
+  "valid_answer": "南京市",
+  "invalid_answer": "我暂时无法提供该信息",
+  "order": ["clear_on", "ambiguous_on", "valid_followup", "invalid_followup", "clear_off"],
+  "followup_policy": "Use the returned original context only if the Gate asks for the missing city; test valid and invalid answers as separate branches of the same frozen pending context.",
+  "retry_policy": "No automatic retry or replacement questions. Preserve every response and failure.",
+  "scope": "API checks only; actual browser acceptance is separate. No Ground Truth is supplied to the engine."
+}

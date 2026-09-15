@@ -1,0 +1,36 @@
+{
+  "mode": "OFFLINE ONLY; zero Qwen calls; no benchmark rerun",
+  "counts": {
+    "off": 138,
+    "off_clear": 123,
+    "on": 147,
+    "on_clear": 125,
+    "off_time": 3,
+    "on_time": 11,
+    "off_metric": 10,
+    "on_metric": 8,
+    "off_entity_filter": 2,
+    "on_entity_filter": 3
+  },
+  "distribution": {
+    "clear": 140,
+    "time": 20,
+    "metric": 20,
+    "entity_filter": 20
+  },
+  "off_accuracy": 69.0,
+  "on_accuracy": 73.5,
+  "delta_pp": 4.5,
+  "on_clear_accuracy": 89.28571428571429,
+  "unique_completed_stages": 429,
+  "frozen_non_ui_hashes_unchanged": true,
+  "allowed_wiring_change": [
+    "ui/app.py"
+  ],
+  "ui_sha256": "469dde4a2e1b0c7c49e6bc5590eeba098b816b0ff6edc5935239df8c6c81ea5c",
+  "source_hashes": {
+    "eval/final_mixed_cases.json": "e97dc9038520993a080f0a9329c2730a9fdf47992bb98174a909535c8cd93167",
+    "eval/final_mixed_events.jsonl": "b623d12877d20a364fa834e5baf17a55c06a114abe717033e1f385914b2fa142",
+    "eval/scoring.py": "06f7e99378098fbecd650952dda4a82ea65481f8e197245a0d0e8546952ccac7"
+  }
+}

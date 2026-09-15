@@ -1,0 +1,28 @@
+{
+  "code_commit": "269a44121c56d0579f6c76303a0a43d96f746ca1",
+  "freeze_sha256": "e0200b6d023a9dada0c9946df6d0282ad445f64012ae08352a1a72c3e1e939a8",
+  "dataset_sha256": "e97dc9038520993a080f0a9329c2730a9fdf47992bb98174a909535c8cd93167",
+  "database_fingerprint_unchanged": true,
+  "production_and_tests_unchanged_since_freeze": true,
+  "historical_report_and_gt_unchanged": true,
+  "scanned_files": 351,
+  "forbidden_paths": [],
+  "potential_secret_paths": [],
+  "pytest": {
+    "passed": 133,
+    "warnings": 2,
+    "seconds": 17.39
+  },
+  "browser": "PASS — manually verified by user; not automated",
+  "runtime": {
+    "stop_local": "PASS",
+    "start_local": "PASS",
+    "streamlit_root": 200,
+    "fastapi_docs": 200,
+    "fastapi_health": 200,
+    "owned_current_code": true
+  },
+  "new_evidence_deletions": 0,
+  "previous_archived_rejected_drafts": 42,
+  "created_unix": 1789464284.5565639
+}

@@ -2,10 +2,12 @@
 
 ## 当前入口
 
-- [本地澄清交互修复与24会话回归](CLARIFICATION_INTERACTION_REPAIR.md)：不是新的总体准确率，尚未发布。
+- [最终200题回归](../FINAL_MIXED_CLARIFICATION_REGRESSION.md)：当前代码的新结果，非新盲测。
+- [v1.2验收](QUERYMATE_V1_2_RELEASE_ACCEPTANCE.md)：包含用户人工浏览器PASS、测试及启停记录。
+- [澄清交互修复与24会话回归](CLARIFICATION_INTERACTION_REPAIR.md)：保留当时的诊断与失败，不是总体准确率。
 
 - [项目说明与启停](../README.md)
-- [200题完整评测及失败分析](../FINAL_MIXED_CLARIFICATION_EVALUATION.md)
+- [原200题历史评测](../FINAL_MIXED_CLARIFICATION_EVALUATION.md)
 - [评测目录与复现边界](../eval/README.md)
 - [当前简历事实](CLARIFICATION_RESUME_FACTS.md)
 - [发布验收记录](QUERYMATE_RELEASE_ACCEPTANCE.md)

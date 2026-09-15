@@ -1,0 +1,103 @@
+{
+  "total": 200,
+  "clear": 140,
+  "ambiguous": 60,
+  "off": {
+    "overall": {
+      "n": 142,
+      "d": 200,
+      "percent": 71.0
+    },
+    "clear": {
+      "n": 125,
+      "d": 140,
+      "percent": 89.29
+    },
+    "ambiguous": {
+      "n": 17,
+      "d": 60,
+      "percent": 28.33
+    },
+    "latency": {
+      "observed": 200,
+      "missing": 0,
+      "mean_s": 4.153012,
+      "p50_s": 2.795912,
+      "p95_s": 8.320561
+    },
+    "average_model_calls": 1.075
+  },
+  "on": {
+    "overall": {
+      "n": 155,
+      "d": 200,
+      "percent": 77.5
+    },
+    "clear": {
+      "n": 123,
+      "d": 140,
+      "percent": 87.86
+    },
+    "ambiguous": {
+      "n": 32,
+      "d": 60,
+      "percent": 53.33
+    },
+    "latency": {
+      "observed": 200,
+      "missing": 0,
+      "mean_s": 5.660183,
+      "p50_s": 4.768726,
+      "p95_s": 9.747128
+    },
+    "average_model_calls": 2.225
+  },
+  "clarification_accuracy": {
+    "n": 172,
+    "d": 200,
+    "percent": 86.0
+  },
+  "precision": {
+    "n": 32,
+    "d": 32,
+    "percent": 100.0
+  },
+  "recall": {
+    "n": 32,
+    "d": 60,
+    "percent": 53.33
+  },
+  "f1": {
+    "n": 64,
+    "d": 92,
+    "percent": 69.57
+  },
+  "unnecessary": {
+    "n": 0,
+    "d": 140,
+    "percent": 0.0
+  },
+  "missed": {
+    "n": 28,
+    "d": 60,
+    "percent": 46.67
+  },
+  "strict_ambiguous_success": {
+    "n": 22,
+    "d": 60,
+    "percent": 36.67
+  },
+  "paired": {
+    "off_correct_on_correct": 138,
+    "off_correct_on_wrong": 4,
+    "off_wrong_on_wrong": 41,
+    "off_wrong_on_correct": 17
+  },
+  "decision_counts": {
+    "proceed": 166,
+    "clarify": 32,
+    "invalid_output": 2
+  },
+  "infrastructure_failures": 0,
+  "delta_pp": 6.5
+}
