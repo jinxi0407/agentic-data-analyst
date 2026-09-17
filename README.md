@@ -6,8 +6,6 @@
 再生成 MySQL SQL，经过安全校验和只读执行后展示结果。
 当前发布目标为 **v1.2.0**，功能冻结于 `269a441`。人工浏览器两轮交互已由用户验收通过。
 本次在原冻结200题上重新完整运行 OFF/ON，结果为 **71.00% → 77.50%，+6.50pp**。
-这是已揭晓测试集上的回归，不是新盲测。详见[最终回归报告](FINAL_MIXED_CLARIFICATION_REGRESSION.md)
-和[本次验收记录](docs/QUERYMATE_V1_2_RELEASE_ACCEPTANCE.md)。
 
 ## 主量化指标
 
@@ -50,29 +48,6 @@ Gate 使用 JSON Object、原 Schema 和 Pydantic 校验，不恢复旧 strict J
 Chat 使用配置中的 `qwen-plus`；`text-embedding-v4` 配置保留，当前静态 Schema 路径不调用 embedding。
 入口为 `app/main.py`，公共流程位于 `app/agent/scoped_clarification.py`；
 `eval/strong_baseline.py` 和 `eval/strong_baseline_v2.py` 仍是生产依赖，不能按文件名称删除。
-
-## 日常启动与停止
-
-要求 Docker Desktop 已运行，本项目数据库已初始化，`.venv` 与 `.env` 已配置。
-
-```bash
-cd agentic-data-analyst
-bash scripts/start_local.sh
-```
-
-- 页面：<http://127.0.0.1:8502/>
-- API：<http://127.0.0.1:8002/docs>；健康检查：`GET /health`
-- MySQL：`127.0.0.1:3307` → 本项目容器 `3306`
-
-脚本核对 PID 身份、项目路径、命令与运行文件指纹。健康且未改变的本项目服务复用；
-未知进程占用端口时停止提示，不自动杀进程。`.run` 和 `logs` 只在本机使用。
-
-```bash
-bash scripts/stop_local.sh
-```
-
-停止只作用于本项目管理的 FastAPI/Streamlit，MySQL 保持运行。
-不会重新 seed、清空数据库、重启 Docker Desktop 或操作金融/EduRAG 项目。
 
 ### 首次配置
 
@@ -159,8 +134,4 @@ SQLGlot 限制单条只读 SELECT/WITH SELECT、返回行数，业务 MySQL 账�
 
 ## 开源来源与许可证
 
-基于 [woshixiaojunle/NL2SQL-Demo](https://github.com/woshixiaojunle/NL2SQL-Demo) 二次开发，
-保留原 [Apache License 2.0](LICENSE) 与[归属说明](ATTRIBUTION.md)。
-正式私有仓库为 `jinxi0407/agentic-data-analyst`；origin 指向自己的仓库，upstream 仅标识原作者。
-QueryMate 只改变产品显示名，不改仓库 URL、本地路径、包名或 Docker 资源名。
-代码、文档、测试和正式证据可同步；密钥、虚拟环境、日志、PID 和数据库物理文件不上传。
+本项目基于开源项目 NL2SQL-Demo 进行扩展开发，保留原 Apache License 2.0 及相关归属信息
